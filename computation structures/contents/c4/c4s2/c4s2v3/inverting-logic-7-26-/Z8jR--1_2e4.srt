@@ -1,0 +1,501 @@
+1
+00:00:00,969 --> 00:00:05,490
+Now would be a good time to take a moment
+to look at the documentation for the library
+
+2
+00:00:05,490 --> 00:00:09,450
+of logic gates we'll use for our designs.
+
+3
+00:00:09,450 --> 00:00:14,560
+Look for "The Standard Cell Library" handout
+in the Updates & Handouts tab, which is next
+
+4
+00:00:14,560 --> 00:00:16,620
+to the Courseware tab.
+
+5
+00:00:16,620 --> 00:00:20,470
+The information on this slide is taken from
+there.
+
+6
+00:00:20,470 --> 00:00:25,839
+The library has both inverting gates (such
+as inverters, NANDs and NORs) and non-inverting
+
+7
+00:00:25,839 --> 00:00:29,609
+gates (such as buffers, ANDs and ORs).
+
+8
+00:00:29,609 --> 00:00:32,180
+Why bother to include both types of gates?
+
+9
+00:00:32,180 --> 00:00:36,900
+Didn't we just learn we can build any circuit
+using only NAND or NOR?
+
+10
+00:00:36,900 --> 00:00:37,900
+Good questions!
+
+11
+00:00:37,900 --> 00:00:43,250
+We get some insight into the answers if we
+look at these three implementations for a
+
+12
+00:00:43,250 --> 00:00:45,540
+4-input AND function.
+
+13
+00:00:45,540 --> 00:00:50,280
+The upper circuit is a direct implementation
+using the 4-input AND gate available in the
+
+14
+00:00:50,280 --> 00:00:51,750
+library.
+
+15
+00:00:51,750 --> 00:00:57,780
+The tPD of the gate is 160 picoseconds and
+its size is 20 square microns.
+
+16
+00:00:57,780 --> 00:01:02,579
+Don't worry too much about the actual numbers,
+what matters on this slide is how the numbers
+
+17
+00:01:02,579 --> 00:01:05,960
+compare between designs.
+
+18
+00:01:05,960 --> 00:01:11,170
+The middle circuit implements the same function,
+this time using a 4-INPUT NAND gate hooked
+
+19
+00:01:11,170 --> 00:01:15,670
+to an inverter to produce the AND functionality
+we want.
+
+20
+00:01:15,670 --> 00:01:21,610
+The tPD of this circuit is 90 picoseconds,
+considerably faster than the single gate above.
+
+21
+00:01:21,610 --> 00:01:25,539
+The tradeoff is that the size is somewhat
+larger.
+
+22
+00:01:25,539 --> 00:01:26,890
+How can this be?
+
+23
+00:01:26,890 --> 00:01:31,560
+Especially since we know the AND gate implementation
+is the NAND/INVERTER pair shown in the middle
+
+24
+00:01:31,560 --> 00:01:33,200
+circuit.
+
+25
+00:01:33,200 --> 00:01:38,549
+The answer is that the creators of the library
+decided to make the non-inverting gates small
+
+26
+00:01:38,549 --> 00:01:44,410
+but slow by using MOSFETs with much smaller
+widths than used in the inverting logic gates,
+
+27
+00:01:44,410 --> 00:01:47,299
+which were designed to be fast.
+
+28
+00:01:47,299 --> 00:01:49,920
+Why would we ever want to use a slow gate?
+
+29
+00:01:49,920 --> 00:01:54,840
+Remember that the propagation delay of a circuit
+is set by the longest path in terms of delay
+
+30
+00:01:54,840 --> 00:01:56,590
+from inputs to outputs.
+
+31
+00:01:56,590 --> 00:02:02,200
+In a complex circuit, there are many input/output
+paths, but it's only the components on the
+
+32
+00:02:02,200 --> 00:02:08,919
+longest path that need to be fast in order
+to achieve the best possible overall tPD.
+
+33
+00:02:08,919 --> 00:02:13,160
+The components on the other, shorter paths,
+can potentially be a bit slower.
+
+34
+00:02:13,160 --> 00:02:18,280
+And the components on short input/output paths
+can be very slow indeed.
+
+35
+00:02:18,280 --> 00:02:22,660
+So for the portions of the circuit that aren't
+speed sensitive, it's a good tradeoff to use
+
+36
+00:02:22,660 --> 00:02:24,660
+slower but smaller gates.
+
+37
+00:02:24,660 --> 00:02:30,480
+The overall performance isn't affected, but
+the total size is improved.
+
+38
+00:02:30,480 --> 00:02:35,260
+So for faster performance we'll design with
+inverting gates, and for smallest size we'll
+
+39
+00:02:35,260 --> 00:02:37,450
+design with non-inverting gates.
+
+40
+00:02:37,450 --> 00:02:42,510
+The creators of the gate library designed
+the available gates with this tradeoff in
+
+41
+00:02:42,510 --> 00:02:43,510
+mind.
+
+42
+00:02:43,510 --> 00:02:47,500
+The 4-input inverting gates are also designed
+with this tradeoff in mind.
+
+43
+00:02:47,500 --> 00:02:52,340
+For the ultimate in performance, we want to
+use a tree circuit of 2-input gates, as shown
+
+44
+00:02:52,340 --> 00:02:53,760
+in the lower circuit.
+
+45
+00:02:53,760 --> 00:02:58,700
+This implementation shaves 10 picoseconds
+off the tPD, while costing us a bit more in
+
+46
+00:02:58,700 --> 00:03:00,440
+size.
+
+47
+00:03:00,440 --> 00:03:03,070
+Take a closer look at the lower circuit.
+
+48
+00:03:03,070 --> 00:03:08,209
+This tree circuit uses two NAND gates whose
+outputs are combined with a NOR gate.
+
+49
+00:03:08,209 --> 00:03:12,530
+Does this really compute the AND of A, B,
+C, and D?
+
+50
+00:03:12,530 --> 00:03:17,280
+Yup, as you can verify by building the truth
+table for this combinational system using
+
+51
+00:03:17,280 --> 00:03:19,940
+the truth tables for NAND and NOR.
+
+52
+00:03:19,940 --> 00:03:25,470
+This circuit is a good example of the application
+of a particular Boolean identity known as
+
+53
+00:03:25,470 --> 00:03:27,170
+Demorgan's Law.
+
+54
+00:03:27,170 --> 00:03:31,420
+There are two forms of Demorgan's law, both
+of which are shown here.
+
+55
+00:03:31,420 --> 00:03:35,810
+The top form is the one we're interested in
+for analyzing the lower circuit.
+
+56
+00:03:35,810 --> 00:03:42,220
+It tells us that the NOR of A with B is equivalent
+to the AND of (NOT A) with (NOT B).
+
+57
+00:03:42,220 --> 00:03:48,410
+So the 2-input NOR gate can be thought of
+as a 2-input AND gate with inverting inputs.
+
+58
+00:03:48,410 --> 00:03:50,370
+How does this help?
+
+59
+00:03:50,370 --> 00:03:56,090
+We can now see that the lower circuit is actually
+a tree of AND gates, where the inverting outputs
+
+60
+00:03:56,090 --> 00:04:01,269
+of the first layer match up with the inverting
+inputs of the second layer.
+
+61
+00:04:01,269 --> 00:04:04,900
+It's a little confusing the first time you
+see it, but with practice you'll be comfortable
+
+62
+00:04:04,900 --> 00:04:11,370
+using Demorgan's law when building trees or
+chains of inverting logic.
+
+63
+00:04:11,370 --> 00:04:15,920
+Using Demorgan's Law we can answer the question
+of how to build NANDs and NORs with large
+
+64
+00:04:15,920 --> 00:04:17,548
+numbers of inputs.
+
+65
+00:04:17,548 --> 00:04:21,529
+Our gate library includes inverting gates
+with up to 4 inputs.
+
+66
+00:04:21,529 --> 00:04:22,870
+Why stop there?
+
+67
+00:04:22,870 --> 00:04:28,940
+Well, the pulldown chain of a 4-input NAND
+gate has 4 NFETs in series and the resistance
+
+68
+00:04:28,940 --> 00:04:32,380
+of the conducting channels is starting to
+add up.
+
+69
+00:04:32,380 --> 00:04:37,280
+We could make the NFETs wider to compensate,
+but then the gate gets much larger and the
+
+70
+00:04:37,280 --> 00:04:42,460
+wider NFETs impose a higher capacitive load
+on the input signals.
+
+71
+00:04:42,460 --> 00:04:47,080
+The number of possible tradeoffs between size
+and speed grows rapidly with the number of
+
+72
+00:04:47,080 --> 00:04:52,130
+inputs, so it's usually just best for the
+library designer to stop at 4-input gates
+
+73
+00:04:52,130 --> 00:04:54,990
+and let the circuit designer take it from
+there.
+
+74
+00:04:54,990 --> 00:05:00,460
+Happily, Demorgan's law shows us how build
+trees of alternating NANDs and NORs to build
+
+75
+00:05:00,460 --> 00:05:04,060
+inverting logic with a large number of inputs.
+
+76
+00:05:04,060 --> 00:05:08,490
+Here we see schematics for an 8-input NAND
+and an 8-input NOR gate.
+
+77
+00:05:08,490 --> 00:05:13,290
+Think of the middle layer of NOR gates in
+the left circuit as AND gates with inverting
+
+78
+00:05:13,290 --> 00:05:18,240
+inputs and then it's easy to see that the
+circuit is a tree of ANDs with an inverting
+
+79
+00:05:18,240 --> 00:05:19,610
+output.
+
+80
+00:05:19,610 --> 00:05:24,710
+Similarly, think of the middle layer of NAND
+gates in the right circuit as OR gates with
+
+81
+00:05:24,710 --> 00:05:30,910
+inverting inputs and see that we really have
+a tree of OR gates with an inverting output.
+
+82
+00:05:30,910 --> 00:05:35,990
+Now let's see how to build sum-of-products
+circuits using inverting logic.
+
+83
+00:05:35,990 --> 00:05:40,500
+The two circuits shown here implement the
+same sum-of-products logic function.
+
+84
+00:05:40,500 --> 00:05:45,350
+The one on the top uses two layers of NAND
+gates, the one on the bottom, two layers of
+
+85
+00:05:45,350 --> 00:05:47,250
+NOR gates.
+
+86
+00:05:47,250 --> 00:05:50,890
+Let's visualize Demorgan's Law in action on
+the top circuit.
+
+87
+00:05:50,890 --> 00:05:56,360
+The NAND gate with Y on its output can be
+transformed by Demorgan's Law into an OR gate
+
+88
+00:05:56,360 --> 00:05:58,479
+with inverting inputs.
+
+89
+00:05:58,479 --> 00:06:03,350
+So we can redraw the circuit on the top left
+as the circuit shown on the top right.
+
+90
+00:06:03,350 --> 00:06:08,000
+Now, notice that the inverting outputs of
+the first layer are cancelled by the inverting
+
+91
+00:06:08,000 --> 00:06:13,800
+inputs of the second layer, a step we can
+show visually by removing matching inversions.
+
+92
+00:06:13,800 --> 00:06:19,729
+And, voila, we see the NAND/NAND circuit in
+sum-of-products form: a layer of inverters,
+
+93
+00:06:19,729 --> 00:06:23,810
+a layer of AND gates, and an OR gate to combine
+the product terms.
+
+94
+00:06:23,810 --> 00:06:28,890
+We can use a similar visualization to transform
+the output gate of the bottom circuit, giving
+
+95
+00:06:28,890 --> 00:06:32,250
+us the circuit on the bottom right.
+
+96
+00:06:32,250 --> 00:06:37,620
+Match up the bubbles and we see that we have
+the same logic function as above.
+
+97
+00:06:37,620 --> 00:06:43,110
+Looking at the NOR/NOR circuit on the bottom
+left, we see it has 4 inverters, whereas the
+
+98
+00:06:43,110 --> 00:06:46,260
+NAND/NAND circuit only has one.
+
+99
+00:06:46,260 --> 00:06:49,480
+Why would we ever use the NOR/NOR implementation?
+
+100
+00:06:49,480 --> 00:06:51,880
+It has to do with the loading on the inputs.
+
+101
+00:06:51,880 --> 00:06:57,009
+In the top circuit, the input A connects to
+a total of four MOSFET switches.
+
+102
+00:06:57,009 --> 00:07:01,750
+In the bottom circuit, it connects to only
+the two MOSFET switches in the inverter.
+
+103
+00:07:01,750 --> 00:07:06,810
+So, the bottom circuit imposes half the capacitive
+load on the A signal.
+
+104
+00:07:06,810 --> 00:07:12,130
+This might be significant if the signal A
+connected to many such circuits.
+
+105
+00:07:12,130 --> 00:07:17,509
+The bottom line: when you find yourself needing
+a fast implementation for the AND/OR circuitry
+
+106
+00:07:17,509 --> 00:07:22,389
+for a sum-of-products expression, try using
+the NAND/NAND implementation.
+
+107
+00:07:22,389 --> 00:07:25,189
+It'll be noticeably faster than using AND/OR.

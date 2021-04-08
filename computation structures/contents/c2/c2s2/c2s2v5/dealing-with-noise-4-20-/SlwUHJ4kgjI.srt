@@ -1,0 +1,253 @@
+1
+00:00:01,449 --> 00:00:06,799
+There's one more issue we need to deal with
+before finalizing our signaling specification.
+
+2
+00:00:06,799 --> 00:00:11,250
+Consider the following combinational system
+where the upstream combinational device on
+
+3
+00:00:11,250 --> 00:00:17,770
+the left is trying to send a digital 0 to
+the downstream combinational device on right.
+
+4
+00:00:17,770 --> 00:00:23,540
+The upstream device is generating an output
+voltage just slightly below V_L, which, according
+
+5
+00:00:23,540 --> 00:00:30,420
+to our proposed signaling specification, qualifies
+as the representation for a digital 0.
+
+6
+00:00:30,420 --> 00:00:35,150
+Now suppose some electrical noise slightly
+changes the voltage on the wire so that the
+
+7
+00:00:35,150 --> 00:00:39,960
+voltage detected on the input of the downstream
+device is slightly above V_L,
+
+8
+00:00:39,960 --> 00:00:46,940
+i.e., the received signal no longer qualifies
+as a valid digital input and the combinational
+
+9
+00:00:46,940 --> 00:00:51,150
+behavior of the downstream device is no longer
+guaranteed.
+
+10
+00:00:51,150 --> 00:00:58,230
+Oops, our system is behaving incorrectly because
+of some small amount of electrical noise.
+
+11
+00:00:58,230 --> 00:01:05,330
+Just the sort of flaky behavior we are hoping
+to avoid by adopting a digital systems architecture.
+
+12
+00:01:05,330 --> 00:01:10,310
+One way to address the problem is to adjust
+the signaling specification so that outputs
+
+13
+00:01:10,310 --> 00:01:16,189
+have to obey tighter bounds than the inputs,
+the idea being to ensure that valid output
+
+14
+00:01:16,189 --> 00:01:22,289
+signals can be affected by noise without becoming
+invalid input signals.
+
+15
+00:01:22,289 --> 00:01:25,959
+Can we avoid the problem altogether by somehow
+avoiding noise?
+
+16
+00:01:25,959 --> 00:01:30,939
+A nice thought, but not a goal that we can
+achieve if we're planning to use electrical
+
+17
+00:01:30,939 --> 00:01:32,259
+components.
+
+18
+00:01:32,259 --> 00:01:37,229
+Voltage noise, which we'll define as variations
+away from nominal voltage values, comes from
+
+19
+00:01:37,229 --> 00:01:40,359
+a variety of sources.
+
+20
+00:01:40,359 --> 00:01:45,020
+Noise can be caused by electrical effects
+such as IR drops in conductors due to Ohm's
+
+21
+00:01:45,020 --> 00:01:51,590
+law, capacitive coupling between conductors,
+and L(dI/dt) effects caused by inductance
+
+22
+00:01:51,590 --> 00:01:56,200
+in the component's leads and changing currents.
+
+23
+00:01:56,200 --> 00:02:00,399
+Voltage deviations can be caused manufacturing
+variations in component parameters from their
+
+24
+00:02:00,399 --> 00:02:04,850
+nominal values that lead to small differences
+in electrical behavior device-to-device.
+
+25
+00:02:04,850 --> 00:02:12,150
+Voltages can be effected by environmental
+factors such as thermal noise or voltage effects
+
+26
+00:02:12,150 --> 00:02:14,210
+from external electromagnetic fields.
+
+27
+00:02:14,210 --> 00:02:17,890
+The list goes on!
+
+28
+00:02:17,890 --> 00:02:22,640
+Note that in many cases, noise is caused by
+normal operation of the circuit or is an inherent
+
+29
+00:02:22,640 --> 00:02:28,280
+property of the materials and processes used
+to make the circuits, and so is unavoidable.
+
+30
+00:02:28,280 --> 00:02:33,930
+However, we can predict the magnitude of the
+noise and adjust our signaling specification
+
+31
+00:02:33,930 --> 00:02:34,930
+appropriately.
+
+32
+00:02:34,930 --> 00:02:37,349
+Let's see how this would work.
+
+33
+00:02:37,349 --> 00:02:41,610
+Our proposed fix to the noise problem is to
+provide separate signaling specifications
+
+34
+00:02:41,610 --> 00:02:44,860
+for digital inputs and digital outputs.
+
+35
+00:02:44,860 --> 00:02:50,329
+To send a 0, digital outputs must produce
+a voltage less than or equal to V_OL and to
+
+36
+00:02:50,329 --> 00:02:54,780
+send a 1, produce a voltage greater than or
+equal to V_OH.
+
+37
+00:02:54,780 --> 00:02:59,730
+So far this doesn't seem very different than
+our previous signaling specification.
+
+38
+00:02:59,730 --> 00:03:04,629
+The difference is that digital inputs must
+obey a different signaling specification.
+
+39
+00:03:04,629 --> 00:03:10,349
+Input voltages less than or equal to V_IL
+must be interpreted as a digital 0 and input
+
+40
+00:03:10,349 --> 00:03:16,060
+voltages greater than or equal to V_IH must
+be interpreted as a digital 1.
+
+41
+00:03:16,060 --> 00:03:21,840
+The values of these four signaling thresholds
+are chosen to satisfy the constraints shown
+
+42
+00:03:21,840 --> 00:03:23,440
+here.
+
+43
+00:03:23,440 --> 00:03:30,769
+Note that V_IL is strictly greater than V_OL
+and V_IH is strictly less than V_OH.
+
+44
+00:03:30,769 --> 00:03:36,239
+The gaps between the input and output voltage
+thresholds are called the "noise margins."
+
+45
+00:03:36,239 --> 00:03:41,310
+The noise margins tell us how much noise can
+be added to a valid 0 or a valid 1 output
+
+46
+00:03:41,310 --> 00:03:48,040
+signal and still have the result interpreted
+correctly at the inputs to which it is connected.
+
+47
+00:03:48,040 --> 00:03:53,290
+The smaller of the two noise margins is called
+the "noise immunity" of the signaling specification.
+
+48
+00:03:53,290 --> 00:03:58,180
+Our goal as digital engineers is to design
+our signaling specifications to provide as
+
+49
+00:03:58,180 --> 00:04:02,689
+much noise immunity as possible.
+
+50
+00:04:02,689 --> 00:04:06,540
+Combinational devices that obey this signaling
+specification work to remove the noise on
+
+51
+00:04:06,540 --> 00:04:11,760
+their inputs before it has a chance to accumulate
+and eventually cause signaling errors.
+
+52
+00:04:11,760 --> 00:04:17,089
+The bottom line: digital signaling doesn't
+suffer from the problems we saw in our earlier
+
+53
+00:04:17,089 --> 00:04:18,570
+analog signaling example!

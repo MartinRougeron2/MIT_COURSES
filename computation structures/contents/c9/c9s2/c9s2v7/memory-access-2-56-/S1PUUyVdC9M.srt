@@ -1,0 +1,193 @@
+1
+00:00:01,520 --> 00:00:06,080
+Now let's turn our attention to the second
+class of instructions: load (LD) and store
+
+2
+00:00:06,080 --> 00:00:09,880
+(ST), which allow the CPU to access values
+in memory.
+
+3
+00:00:09,880 --> 00:00:15,770
+Note that since the Beta is a load-store architecture
+these instructions are the *only* mechanism
+
+4
+00:00:15,770 --> 00:00:18,530
+for accessing memory values.
+
+5
+00:00:18,530 --> 00:00:24,610
+The LD and ST instructions use the same instruction
+template as the ALU-with-constant instructions.
+
+6
+00:00:24,610 --> 00:00:29,680
+To access memory, we'll need a memory address,
+which is computed by adding the value of the
+
+7
+00:00:29,680 --> 00:00:35,550
+"ra" register to the sign-extended 16-bit
+constant from the low-order 16 bits of the
+
+8
+00:00:35,550 --> 00:00:37,190
+instruction.
+
+9
+00:00:37,190 --> 00:00:41,829
+This computation is exactly the one performed
+by the ADDC instruction - so we'll reuse that
+
+10
+00:00:41,829 --> 00:00:47,790
+hardware - and the sum is sent to main memory
+as the byte address of the location to be
+
+11
+00:00:47,790 --> 00:00:48,790
+accessed.
+
+12
+00:00:48,790 --> 00:00:54,540
+For the LD instruction, the data returned
+by main memory is written to the "rc" register.
+
+13
+00:00:54,540 --> 00:00:59,130
+The store instruction (ST) performs the same
+address calculation as LD, then reads the
+
+14
+00:00:59,130 --> 00:01:04,780
+data value from the "rc" register and sends
+both to main memory.
+
+15
+00:01:04,780 --> 00:01:09,679
+The ST instruction is special in several ways:
+it's the only instruction that needs to read
+
+16
+00:01:09,679 --> 00:01:14,060
+the value of the "rc" register, so we'll need
+to adjust the datapath hardware slightly to
+
+17
+00:01:14,060 --> 00:01:15,250
+accommodate that need.
+
+18
+00:01:15,250 --> 00:01:21,060
+And since "rc" is serving as a source operand,
+it appears as the first operand in the symbolic
+
+19
+00:01:21,060 --> 00:01:26,249
+form of the instruction, followed by "const"
+and "ra" which are specifying the destination
+
+20
+00:01:26,249 --> 00:01:27,249
+address.
+
+21
+00:01:27,249 --> 00:01:32,348
+ST is the only instruction that does *not*
+write a result into the register file at end
+
+22
+00:01:32,348 --> 00:01:34,590
+of the instruction.
+
+23
+00:01:34,590 --> 00:01:39,069
+Here's the example we saw earlier, where we
+needed to load the value of the variable x
+
+24
+00:01:39,069 --> 00:01:44,509
+from memory, multiply it by 37 and write the
+result back to the memory location that holds
+
+25
+00:01:44,509 --> 00:01:47,229
+the value of the variable y.
+
+26
+00:01:47,229 --> 00:01:51,529
+Now that we have actual Beta instructions,
+we've expressed the computation as a sequence
+
+27
+00:01:51,529 --> 00:01:53,310
+of three instructions.
+
+28
+00:01:53,310 --> 00:01:58,649
+To access the value of variable x, the LD
+instruction adds the contents of R31 to the
+
+29
+00:01:58,649 --> 00:02:05,020
+constant 0x1008, which sums to 0x1008, the
+address we need to access.
+
+30
+00:02:05,020 --> 00:02:09,500
+The ST instruction specifies a similar address
+calculation to write into the location for
+
+31
+00:02:09,500 --> 00:02:12,580
+the variable y.
+
+32
+00:02:12,580 --> 00:02:16,810
+The address calculation performed by LD and
+ST works well when the locations we need to
+
+33
+00:02:16,810 --> 00:02:21,920
+access have addresses that fit into the 16-bit
+constant field.
+
+34
+00:02:21,920 --> 00:02:28,170
+What happens when we need to access locations
+at addresses higher than 0x7FFF?
+
+35
+00:02:28,170 --> 00:02:32,380
+Then we need to treat those addresses as we
+would any large constant, and store those
+
+36
+00:02:32,380 --> 00:02:36,890
+large addresses in main memory so they can
+be loaded into a register to be used by LD
+
+37
+00:02:36,890 --> 00:02:38,160
+and ST.
+
+38
+00:02:38,160 --> 00:02:43,250
+Okay, but what if the number of large constants
+we need to store is greater than will fit
+
+39
+00:02:43,250 --> 00:02:48,060
+in low memory, i.e., the addresses we can
+access directly?
+
+40
+00:02:48,060 --> 00:02:53,390
+To solve this problem, the Beta includes a
+"load relative" (LDR) instruction, which we'll
+
+41
+00:02:53,390 --> 00:02:55,660
+see in the lecture on the Beta implementation.

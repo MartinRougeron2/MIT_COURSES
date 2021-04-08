@@ -1,0 +1,930 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>Final Projects | Video Playlist | Instructor Insights | Algorithmic Lower Bounds: Fun with Hardness Proofs | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-890-algorithmic-lower-bounds-fun-with-hardness-proofs-fall-2014" name="WT.cg_n">
+    <meta content="Final Projects" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Demaine, Erik" name="Author">
+    <meta content="6.890,NP-completeness,3SAT,3-partition,Hamiltonicity,PSPACE,EXPTIME,EXPSPACE,games,puzzles,computation,Tetris,Nintendo,Super Mario Bros.,The Legend of Zelda,Metroid,Pokémon,constraint logic,Sudoku,Nikoli,Chess,Go,Othello,board games,inapproximability,PCP theorem,OPT-preserving reduction,APX-hardness,vertex cover,Set-cover hardness,Group Steiner tree,k-dense subgraph,label cover,Unique Games Conjecture,independent set,fixed-parameter intractability,parameter-preserving reduction,W hierarchy,clique-hardness,3SUM-hardness,exponential time hypothesis,counting problems,solution uniqueness,game theory,Existential theory of the reals,undecidability,Algorithms and Data Structures,Theory of Computation" name="keywords">
+    <meta content="6.890 Algorithmic Lower Bounds: Fun with Hardness Proofs | Final Projects" name="Search_Display">
+    <meta content="Algorithms and Data Structures" itemprop="about">
+    <meta content="Theory of Computation" itemprop="about">
+    <meta content="Computation" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/courses_new.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/jquery.jscrollpane.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../common/styles/media_tabs.css">
+	<link href="../../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-890-algorithmic-lower-bounds-fun-with-hardness-proofs-fall-2014/instructor-insights/video-playlist/final-projects/">
+	<link rel="apple-touch-icon" href="../../../../common/images/apple-touch-icon.png">
+	
+	
+      
+	
+	<script type="text/javascript" src="../../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../../common/scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../../common/scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="../../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="../../../../common/scripts/bubble-popup-offline.js"></script>
+	
+	
+	
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#tabs").tabs();
+        IpadScroller();
+      });
+    </script>
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center_media">
+      	<div id="grid">
+      		<div id="left">
+        		<nav id="breadcrumb_media" aria-label="Breadcrumb">
+                	<p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../contents/index.htm">Algorithmic Lower Bounds: Fun with Hardness Proofs</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../contents/instructor-insights/index.htm">Instructor Insights</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../contents/instructor-insights/video-playlist/index.htm">Video Playlist</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            Final Projects
+         
+    
+</p>
+
+            	</nav>
+            	<div class="clear"></div>
+        		<div id="media_title">
+        		<h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            Final Projects
+        </span>
+    </h1>
+        		</div>
+           		<div class="clear"></div>
+           		<div id="course_wrapper_media">
+           			<nav id="course_nav" aria-label="Course">
+           				<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../../contents/instructor-insights/video-playlist/index.htm" class="selected">Video Playlist</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../contents/lecture-videos/index.htm">
+		                  Lecture Videos  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../contents/lecture-notes/index.htm">
+		                  Lecture Notes  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../contents/assignments/index.htm">
+		                  Assignments  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../contents/projects/index.htm">
+		                  Projects  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+           			</nav>
+           			<main id="course_inner_media" aria-labelledby="media_title">
+      					 
+        <div class="" id="parent-fieldname-text">
+            
+            
+        </div>
+    
+      					     
+    
+    
+
+
+
+<script type="text/javascript">var caption_embed_1 ={'English - US': '/courses/electrical-engineering-and-computer-science/6-890-algorithmic-lower-bounds-fun-with-hardness-proofs-fall-2014/instructor-insights/video-playlist/final-projects/KdN2mQ594t0.srt'}</script>     
+     <div id="media-embed">
+         <div class="attention_message" id="embed_1">
+<p>Flash and JavaScript are required for this feature.</p>
+<p>Download the video from <a href="https://itunes.apple.com/us/itunes-u/id993001813">iTunes U</a> or the <a href="https://archive.org/download/MIT6.890F14/MIT6_890F14_final_projects_300k.mp4">Internet Archive</a>.</p>
+</div>
+     </div>
+    
+     <script type="text/javascript">ocw_embed_chapter_media('embed_1', 'https://www.youtube.com/v/KdN2mQ594t0', 'youtube', '/courses/electrical-engineering-and-computer-science/6-890-algorithmic-lower-bounds-fun-with-hardness-proofs-fall-2014/instructor-insights/video-playlist/final-projects', 'https://img.youtube.com/vi/KdN2mQ594t0/0.jpg',0,0, 'https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-890-algorithmic-lower-bounds-fun-with-hardness-proofs-fall-2014/instructor-insights/video-playlist/final-projects/KdN2mQ594t0.srt')</script>
+	 
+	 
+	 		
+	 		<div id="transcript1"></div>
+				 <script type="text/javascript">createThreePlayParams(2, 956044, "embed_1", 0, 0)</script>
+			 
+	
+
+     <div id="media_resource_next_prev_nav" style="margin-top: 1em;">
+        <p>
+        
+            <a href="../../../../contents/instructor-insights/video-playlist/students-scribing-lecture-notes/index.htm">
+                <img src="../../../../common/images/btn_previous_resource.png" style="margin: 0 30px 0 50px;" alt="Previous track" title="Previous track"></a>
+     	
+     	
+        
+            <a href="../../../../contents/instructor-insights/video-playlist/using-a-survey-to-get-to-know-students/index.htm"> 
+                <img src="../../../../common/images/btn_next_resource.png" alt="Next track" title="Next track"></a>
+       
+       </p>
+     </div>
+ 
+
+
+<script type="text/javascript">
+		window.onload=function(){
+		init();
+		
+		}
+		var tabLinks = new Array();
+		var contentDivs = new Array();
+		function init() {
+		  // Grab the tab links and content divs from the page
+		  var tabListItems = document.getElementById('tabs').childNodes;
+		  for ( var i = 0; i < tabListItems.length; i++ ) {
+			if ( tabListItems[i].nodeName == "LI" ) {
+			  var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
+			  var id = getHash( tabLink.getAttribute('href') );
+			  tabLinks[id] = tabLink;
+			  contentDivs[id] = document.getElementById( id );
+			}
+		  }
+		  // Assign onclick events to the tab links, and
+		  // highlight the first tab
+		  var i = 0;
+		  for ( var id in tabLinks ) {
+			tabLinks[id].onclick = showTab;
+			tabLinks[id].onfocus = function() { this.blur() };
+			if ( i == 0 ) tabLinks[id].className = 'selected';
+			i++;
+		  }
+		  // Hide all content divs except the first
+		  var i = 0;
+		  for ( var id in contentDivs ) {
+			if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
+			i++;
+		  }
+		}
+		function showTab() {
+		  var selectedId = getHash( this.getAttribute('href') );
+		  // Highlight the selected tab, and dim all others.
+		  // Also show the selected content div, and hide all others.
+		  for ( var id in contentDivs ) {
+			if ( id == selectedId ) {
+			  tabLinks[id].className = 'selected';
+			  contentDivs[id].className = 'tabContent';
+			} else {
+			  tabLinks[id].className = '';
+			  contentDivs[id].className = 'tabContent hide';
+			}
+		  }
+		  // Stop the browser following the link
+		  return false;
+		}
+		function getFirstChildWithTagName( element, tagName ) {
+		  for ( var i = 0; i < element.childNodes.length; i++ ) {
+			if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
+		  }
+		}
+		function getHash( url ) {
+		  var hashPos = url.lastIndexOf ( '#' );
+		  return url.substring( hashPos + 1 );
+		}
+ </script>	
+ 
+
+  <div id="media_tabs">
+     
+        <ul id="tabs">
+            <li class="first">
+                <a href="#vid_about" class="selected">Playlist</a>
+            </li>
+            <li class="">
+                <a href="#vid_index" class="">Transcript</a>
+            </li>
+            <li class="">
+                <a href="#vid_playlist" class="">Download this Video</a>
+            </li>
+        </ul>
+   
+        <div id="vid_about" itemprop="description" class="tabContent">
+<div class="related-media-thumbnail">
+<a href="../../../../contents/instructor-insights/video-playlist/inspiration-for-developing-the-course/index.htm">
+<img src="https://img.youtube.com/vi/5GEKCOhiqro/default.jpg" title="Inspiration for Developing the Course" alt="Inspiration for Developing the Course">
+<p>Inspiration for Developing ...</p></a>
+</div>
+<div class="related-media-thumbnail">
+<a href="../../../../contents/instructor-insights/video-playlist/the-role-of-fun-in-research-teaching-and-learning/index.htm">
+<img src="https://img.youtube.com/vi/Lm8WHM0glHE/default.jpg" title="The Role of Fun in Research, Teaching, and Learning" alt="The Role of Fun in Research, Teaching, and Learning">
+<p>The Role of Fun in Research...</p></a>
+</div>
+<div class="related-media-thumbnail">
+<a href="../../../../contents/instructor-insights/video-playlist/inviting-students-to-solve-open-problems/index.htm">
+<img src="https://img.youtube.com/vi/rLOVwqMKlBc/default.jpg" title="Inviting Students to Solve Open Problems" alt="Inviting Students to Solve Open Problems">
+<p>Inviting Students to Solve ...</p></a>
+</div>
+<div class="related-media-thumbnail">
+<a href="../../../../contents/instructor-insights/video-playlist/collaboration-as-a-problem-solving-approach/index.htm">
+<img src="https://img.youtube.com/vi/EMyRV3H4Vf4/default.jpg" title="Collaboration as a Problem-Solving Approach" alt="Collaboration as a Problem-Solving Approach">
+<p>Collaboration as a Problem-...</p></a>
+</div>
+<div class="related-media-thumbnail">
+<a href="../../../../contents/instructor-insights/video-playlist/students-scribing-lecture-notes/index.htm">
+<img src="https://img.youtube.com/vi/c5Myaxq44mI/default.jpg" title="Students Scribing Lecture Notes" alt="Students Scribing Lecture Notes">
+<p>Students Scribing Lecture N...</p></a>
+</div>
+<div class="related-media-thumbnail-nolink">
+<div class="now-playing-resource">Now Playing</div>
+<img src="https://img.youtube.com/vi/KdN2mQ594t0/default.jpg" title="Final Projects" alt="Final Projects">
+<p>Final Projects</p>
+</div>
+<div class="related-media-thumbnail">
+<a href="../../../../contents/instructor-insights/video-playlist/using-a-survey-to-get-to-know-students/index.htm">
+<img src="https://img.youtube.com/vi/iDNpHHO_O6w/default.jpg" title="Using a Survey to Get to Know Students" alt="Using a Survey to Get to Know Students">
+<p>Using a Survey to Get to Kn...</p></a>
+</div>
+<div class="related-media-thumbnail">
+<a href="../../../../contents/instructor-insights/video-playlist/course-iteration/index.htm">
+<img src="https://img.youtube.com/vi/tkU8_LJGCvE/default.jpg" title="Course Iteration" alt="Course Iteration">
+<p>Course Iteration</p></a>
+</div>
+</div>
+        <div id="vid_index" itemprop="description" class="tabContent hide">
+<ul><li><a class="transcript-link" title="Open in a new window." alt="Open in a new window." style="text-decoration: none; font-size: 1.0em;" target="_blank" text-decoration: none font-size: href="../../../../contents/instructor-insights/video-playlist/final-projects/KdN2mQ594t0.pdf"> Download English-US transcript (PDF)</a></li></ul>
+<p><span m="5100">ERIK DEMAINE: So</span> <span m="5820">with</span> <span m="6120">every</span> <span m="6920">sort</span> <span m="7190">of</span> <span m="7290">advanced</span> <span m="8670">class</span> <span m="9080">that</span> <span m="9210">I</span> <span m="9300">teach</span> <span m="9680">there's</span> <span m="9870">a</span> <span m="9970">final</span> <span m="10380">project.</span> <span m="11640">And</span> <span m="11910">the</span> <span m="12230">goal of</span> <span m="12460">the</span> <span m="12540">final</span> <span m="12840">project</span> <span m="13250">is</span> <span m="13390">for</span> <span m="14010">students</span> <span m="14390">to</span> <span m="14560">somehow</span> <span m="14930">get</span> <span m="15190">their</span> <span m="15320">feet</span> <span m="15660">wet</span> <span m="15840">with</span> <span m="15990">the</span> <span m="16059">material</span> <span m="16620">and sort</span> <span m="16990">of</span> <span m="17260">experience</span> <span m="17830">it</span> <span m="18030">at</span> <span m="18220">a</span> <span m="18850">more</span> <span m="19210">researchy</span> <span m="19750">level.</span> <span m="21490">In</span> <span m="21750">general,</span> <span m="22190">this</span> <span m="22380">can</span> <span m="22530">be</span> <span m="22770">things</span> <span m="23020">like</span> <span m="23250">surveying</span> <span m="23860">papers</span> <span m="24300">that</span> <span m="24430">I</span> <span m="24480">didn't</span> <span m="24750">cover</span> <span m="24990">in</span> <span m="25070">the</span> <span m="25150">class</span> <span m="25500">because</span> <span m="25620">there's</span> <span m="25750">only</span> <span m="25960">so</span> <span m="26110">much</span> <span m="26610">you</span> <span m="26760">can</span> <span m="26890">fit</span> <span m="27080">in</span> <span m="27190">one</span> <span m="27370">semester.</span> <span m="28290">So</span> <span m="28550">they'll go</span> <span m="28780">and</span> <span m="28870">read</span> <span m="29240">other</span> <span m="29530">material</span> <span m="30160">and</span> <span m="30360">kind</span> <span m="30550">of</span> <span m="31070">aim</span> <span m="31250">to</span> <span m="31390">teach</span> <span m="31720">that</span> <span m="32070">to</span> <span m="32210">the</span> <span m="32290">students.</span> <span m="33760">So</span> <span m="34340">there's</span> <span m="34560">a</span> <span m="34660">written</span> <span m="35060">project</span> <span m="35960">part,</span> <span m="36270">and</span> <span m="36400">then</span> <span m="36520">there's</span> <span m="36680">also</span> <span m="36980">a</span> <span m="37040">presentation</span> <span m="37660">in</span> <span m="37810">class.</span> <span m="38780">So</span> <span m="39050">this</span> <span m="39170">is</span> <span m="39280">an</span> <span m="39360">opportunity</span> <span m="39950">for</span> <span m="40110">students</span> <span m="40510">to</span> <span m="41410">learn</span> <span m="41650">more.</span></p>
+<p><span m="42700">But</span> <span m="42750">actually</span> <span m="43000">most</span> <span m="43380">students</span> <span m="44250">in</span> <span m="44560">this</span> <span m="44770">class</span> <span m="45890">aim</span> <span m="46150">for</span> <span m="46340">a</span> <span m="46440">particular</span> <span m="46780">type</span> <span m="46980">of</span> <span m="47080">project,</span> <span m="47440">which</span> <span m="47640">is</span> <span m="47810">to</span> <span m="48360">solve</span> <span m="48690">an</span> <span m="48780">open</span> <span m="49020">problem.</span> <span m="50310">So</span> <span m="50590">actually</span> <span m="50940">advance</span> <span m="51340">the</span> <span m="51430">field</span> <span m="51950">and</span> <span m="52140">then</span> <span m="52520">present</span> <span m="52870">their</span> <span m="52990">solution.</span> <span m="54100">Now,</span> <span m="54270">of</span> <span m="54360">course,</span> <span m="54670">not</span> <span m="54750">everyone</span> <span m="55120">succeeded.</span> <span m="56930">And</span> <span m="57190">that's</span> <span m="57420">fine</span> <span m="57780">for a</span> <span m="57940">project.</span> <span m="58300">You</span> <span m="58390">don't</span> <span m="58530">have</span> <span m="58790">to</span> <span m="59350">solve</span> <span m="59630">the</span> <span m="59700">problem</span> <span m="60050">that you</span> <span m="60220">set</span> <span m="60420">out</span> <span m="60630">to</span> <span m="60750">solve.</span> <span m="61520">But</span> <span m="61650">at</span> <span m="61740">least</span> <span m="61990">you</span> <span m="62320">try</span> <span m="62630">different</span> <span m="62900">approaches</span> <span m="63410">and</span> <span m="63540">see</span> <span m="63780">what</span> <span m="63970">doesn't</span> <span m="64220">work.</span></p>
+<p><span m="65300">But</span> <span m="65500">actually</span> <span m="65770">most</span> <span m="66030">students</span> <span m="66480">actually</span> <span m="66760">solved</span> <span m="67020">their</span> <span m="67140">problem.</span> <span m="68020">Often</span> <span m="68320">in</span> <span m="68450">groups.</span> <span m="68900">So</span> <span m="69190">the</span> <span m="69310">group</span> <span m="70030">size</span> <span m="70290">is</span> <span m="70380">unlimited.</span> <span m="70930">So sometimes</span> <span m="71560">2,</span> <span m="71840">or</span> <span m="71930">3,</span> <span m="72380">or</span> <span m="72510">maybe</span> <span m="72830">more,</span> <span m="74110">I think</span> <span m="74230">maximum</span> <span m="74600">4</span> <span m="75130">students</span> <span m="76890">got</span> <span m="77080">together</span> <span m="77530">and</span> <span m="77620">solved</span> <span m="77870">their</span> <span m="77970">problem</span> <span m="78330">jointly</span> <span m="79170">and</span> <span m="79390">then</span> <span m="79610">present</span> <span m="80090">their</span> <span m="80220">solution.</span> <span m="81740">So</span> <span m="84390">I</span> <span m="84620">think,</span> <span m="85250">I</span> <span m="85350">mean</span> <span m="85520">it's</span> <span m="85630">really</span> <span m="85820">exciting</span> <span m="86170">for</span> <span m="86300">me</span> <span m="86470">to</span> <span m="86530">show</span> <span m="86790">that they</span> <span m="87130">engaged</span> <span m="87460">with</span> <span m="87550">the</span> <span m="87620">material</span> <span m="87980">so</span> <span m="88120">much</span> <span m="88380">they</span> <span m="88490">can</span> <span m="88640">actually</span> <span m="89450">add</span> <span m="89740">new</span> <span m="89880">material.</span> <span m="91480">But</span> <span m="91550">it's</span> <span m="91740">also,</span> <span m="92460">I</span> <span m="92690">think,</span> <span m="92910">really</span> <span m="93990">exciting</span> <span m="94370">for</span> <span m="94470">the</span> <span m="94580">students</span> <span m="95030">to</span> <span m="95120">show,</span> <span m="95350">hey,</span> <span m="95600">I</span> <span m="95660">can</span> <span m="95810">actually</span> <span m="96060">solve</span> <span m="96300">these</span> <span m="96450">problems.</span></p>
+<p><span m="96880">Many</span> <span m="97050">of</span> <span m="97090">the</span> <span m="97170">students</span> <span m="97480">were</span> <span m="97610">not</span> <span m="98010">theoretical</span> <span m="98440">computer</span> <span m="98760">science</span> <span m="99070">students.</span> <span m="99450">This</span> <span m="99580">is</span> <span m="99700">not</span> <span m="99960">their</span> <span m="100150">kind</span> <span m="100330">of</span> <span m="100400">main</span> <span m="100670">area.</span> <span m="101540">But</span> <span m="102200">they</span> <span m="103300">were</span> <span m="103510">able</span> <span m="103750">to</span> <span m="103830">conquer</span> <span m="104160">it</span> <span m="104220">anyway</span> <span m="105110">and</span> <span m="105500">have</span> <span m="105730">fun</span> <span m="105940">doing</span> <span m="106260">it.</span> <span m="106800">So</span> <span m="107120">I</span> <span m="107280">think</span> <span m="108990">it's</span> <span m="109240">a</span> <span m="109280">nice</span> <span m="109670">confidence</span> <span m="110130">builder</span> <span m="110470">that</span> <span m="110700">actually--</span> <span m="111565">you know,</span> <span m="112020">it</span> <span m="112410">sounds</span> <span m="112780">hard.</span> <span m="113460">The</span> <span m="113590">field</span> <span m="114050">is</span> <span m="114150">called</span> <span m="114410">hardness.</span> <span m="115230">But</span> <span m="115510">actually</span> <span m="115920">it's</span> <span m="116470">pretty</span> <span m="116670">accessible.</span> <span m="117740">And</span> <span m="118770">I</span> <span m="118890">think</span> <span m="119330">it</span> <span m="119610">gives</span> <span m="119830">them</span> <span m="120060">the</span> <span m="120220">confidence</span> <span m="120720">that</span> <span m="120840">they</span> <span m="120950">can</span> <span m="121100">go</span> <span m="121250">back</span> <span m="121600">to</span> <span m="121720">their</span> <span m="121920">research</span> <span m="122290">fields</span> <span m="123130">and</span> <span m="123310">say,</span> <span m="123480">hey,</span> <span m="124010">how can</span> <span m="124120">we</span> <span m="124260">prove</span> <span m="124490">that</span> <span m="124610">our</span> <span m="124780">problems</span> <span m="125130">are</span> <span m="125230">hard.</span> <span m="125910">And</span> <span m="126090">justify</span> <span m="126640">why</span> <span m="126900">we're</span> <span m="127400">using</span> <span m="127630">heuristics</span> <span m="128340">or</span> <span m="129229">why</span> <span m="129479">we're</span> <span m="129660">using</span> <span m="130169">exhaustive</span> <span m="130630">search.</span> <span m="131330">Maybe</span> <span m="131760">there's</span> <span m="131910">something</span> <span m="132180">better?</span> <span m="132540">Actually,</span> <span m="132880">no.</span> <span m="133160">We</span> <span m="133260">can</span> <span m="133400">show</span> <span m="134060">that's</span> <span m="134300">the</span> <span m="134420">limit.</span></p>
+<p><span m="135590">We</span> <span m="136110">encouraged,</span> <span m="136690">for</span> <span m="136970">all</span> <span m="137120">the</span> <span m="137220">projects,</span> <span m="137710">not</span> <span m="137890">only</span> <span m="138070">to</span> <span m="138150">collaborate</span> <span m="138580">with</span> <span m="138740">other</span> <span m="138960">students</span> <span m="139420">but</span> <span m="139570">to</span> <span m="139650">collaborate</span> <span m="140360">with</span> <span m="140570">us,</span> <span m="141600">the</span> <span m="141890">teaching</span> <span m="142210">staff,</span> <span m="142490">the</span> <span m="142580">TAs,</span> <span m="143050">and myself.</span> <span m="144510">So</span> <span m="144640">we</span> <span m="144780">would</span> <span m="145720">give</span> <span m="145910">them</span> <span m="146090">advice,</span> <span m="146860">especially</span> <span m="147330">in</span> <span m="147400">the</span> <span m="147490">beginning.</span> <span m="148090">So</span> <span m="148110">there's</span> <span m="148290">like</span> <span m="148460">a</span> <span m="148530">project</span> <span m="148910">proposal</span> <span m="149360">stage,</span> <span m="150300">we</span> <span m="150460">would</span> <span m="151010">confirm</span> <span m="151610">that,</span> <span m="151870">to</span> <span m="152010">our</span> <span m="152130">knowledge,</span> <span m="152500">this</span> <span m="152610">problem</span> <span m="152860">had not</span> <span m="153140">been</span> <span m="153280">solved</span> <span m="153570">before.</span> <span m="154870">And</span> <span m="155080">then</span> <span m="155230">we</span> <span m="155330">would</span> <span m="155490">give</span> <span m="155670">them</span> <span m="155800">lots</span> <span m="156020">of</span> <span m="156110">pointers</span> <span m="156560">for,</span> <span m="157050">you know,</span> <span m="157300">you</span> <span m="157640">might</span> <span m="157820">try</span> <span m="157960">this</span> <span m="158150">technique.</span> <span m="158690">You</span> <span m="158780">should</span> <span m="159060">rewatch</span> <span m="159990">lecture</span> <span m="160360">seven</span> <span m="160790">video</span> <span m="161440">and</span> <span m="161830">see</span> <span m="162710">how</span> <span m="163090">those</span> <span m="163290">techniques</span> <span m="163670">apply.</span> <span m="164230">Or</span> <span m="164360">maybe</span> <span m="164840">you</span> <span m="164940">could</span> <span m="165070">reduce</span> <span m="165370">from this</span> <span m="165880">or</span> <span m="165980">reduce</span> <span m="166250">from</span> <span m="166360">that.</span> <span m="167500">Lots</span> <span m="167770">of</span> <span m="167940">different</span> <span m="168220">ideas</span> <span m="168650">for</span> <span m="168800">how</span> <span m="170930">they</span> <span m="171030">might</span> <span m="171370">solve</span> <span m="171590">their</span> <span m="171700">problem.</span></p>
+<p><span m="172210">And</span> <span m="172380">then</span> <span m="172970">some</span> <span m="173220">of</span> <span m="173270">them</span> <span m="173460">came</span> <span m="173700">to</span> <span m="173790">us</span> <span m="173950">afterwards</span> <span m="174380">like,</span> <span m="174540">well,</span> <span m="175020">I've</span> <span m="175150">gotten</span> <span m="175430">this</span> <span m="175670">far</span> <span m="176620">but</span> <span m="176810">I'm</span> <span m="176930">stuck</span> <span m="177270">again.</span> <span m="178050">Any</span> <span m="178320">ideas?</span> <span m="178860">And</span> <span m="178980">so</span> <span m="179950">I</span> <span m="180080">think</span> <span m="180250">the</span> <span m="180330">more</span> <span m="180720">you</span> <span m="180850">can</span> <span m="181010">talk</span> <span m="181250">to</span> <span m="181350">people</span> <span m="181710">about</span> <span m="183060">where</span> <span m="183290">you're</span> <span m="183460">stuck</span> <span m="184370">the</span> <span m="184760">less</span> <span m="184980">stuck</span> <span m="185310">you</span> <span m="185430">will</span> <span m="185560">get.</span> <span m="186550">And</span> <span m="186740">so</span> <span m="186850">that</span> <span m="187450">helped</span> <span m="187700">a</span> <span m="187740">lot,</span> <span m="188730">I think</span> <span m="188770">people</span> <span m="189840">generally</span> <span m="190250">found</span> <span m="190440">the</span> <span m="190530">solution.</span> <span m="191550">Some</span> <span m="191690">people</span> <span m="191940">brought</span> <span m="192180">their</span> <span m="192450">problems</span> <span m="192980">to</span> <span m="193130">the</span> <span m="193270">open</span> <span m="193500">problem</span> <span m="193780">session</span> <span m="194270">and</span> <span m="194380">had</span> <span m="194580">all</span> <span m="194750">the</span> <span m="194830">students</span> <span m="195230">look</span> <span m="195390">at</span> <span m="195560">it.</span> <span m="197080">So</span> <span m="197420">there</span> <span m="197890">were</span> <span m="198060">lots</span> <span m="198290">of</span> <span m="198350">ways</span> <span m="198550">to</span> <span m="198640">do</span> <span m="198800">it.</span> <span m="198890">But</span> <span m="199010">generally,</span> <span m="199320">collaboration</span> <span m="199970">was</span> <span m="200170">the</span> <span m="200280">answer.</span></p>
+<p><span m="202540">So</span> <span m="202670">the</span> <span m="202770">last</span> <span m="203050">part</span> <span m="203200">of</span> <span m="203250">the</span> <span m="203350">project</span> <span m="203800">is</span> <span m="204000">for</span> <span m="204190">students</span> <span m="204620">to</span> <span m="204830">present</span> <span m="205350">their</span> <span m="205510">work</span> <span m="205950">in</span> <span m="206180">class.</span> <span m="207560">Usually</span> <span m="207910">it's</span> <span m="208300">a</span> <span m="208360">whole</span> <span m="208620">bunch</span> <span m="208900">of</span> <span m="209020">student</span> <span m="209370">presentations,</span> <span m="209980">one</span> <span m="210290">after</span> <span m="210370">the</span> <span m="210500">other.</span> <span m="211270">So</span> <span m="211420">each</span> <span m="211600">presentation</span> <span m="212140">is</span> <span m="212240">relatively</span> <span m="213060">short.</span> <span m="214320">I</span> <span m="214790">forget if it</span> <span m="214840">was</span> <span m="215010">like</span> <span m="215150">10</span> <span m="215390">or</span> <span m="215440">15</span> <span m="215790">minutes.</span> <span m="216870">But</span> <span m="217110">I</span> <span m="217260">think</span> <span m="217440">it's</span> <span m="217570">really</span> <span m="217790">valuable</span> <span m="218730">experience.</span> <span m="219710">Presenting</span> <span m="220210">is</span> <span m="220320">also</span> <span m="220610">hard.</span> <span m="222230">And</span> <span m="222550">the</span> <span m="222640">way</span> <span m="222780">to</span> <span m="222860">get</span> <span m="223200">good</span> <span m="223420">at</span> <span m="223500">presenting</span> <span m="223990">your</span> <span m="224120">work</span> <span m="224440">is</span> <span m="224730">to</span> <span m="224850">do</span> <span m="225030">it</span> <span m="225080">a</span> <span m="225130">lot.</span> <span m="225760">And</span> <span m="226070">so,</span> <span m="227510">generally,</span> <span m="227950">I</span> <span m="228050">find</span> <span m="228380">MIT</span> <span m="228740">students</span> <span m="229050">are</span> <span m="229160">quite</span> <span m="229680">good</span> <span m="229890">at</span> <span m="230000">this.</span> <span m="230260">They've</span> <span m="230410">had,</span> <span m="230810">I</span> <span m="230930">think,</span> <span m="231090">a</span> <span m="231140">lot</span> <span m="231290">of</span> <span m="231380">experience</span> <span m="231810">presenting</span> <span m="232250">their</span> <span m="232360">work.</span></p>
+<p><span m="233500">But</span> <span m="233660">one</span> <span m="233800">of</span> <span m="233880">the</span> <span m="233980">things</span> <span m="234240">I</span> <span m="234520">like</span> <span m="234740">to</span> <span m="234860">stress</span> <span m="235360">in</span> <span m="235650">my</span> <span m="235800">classes</span> <span m="236310">is,</span> <span m="237590">because</span> <span m="237780">most</span> <span m="238960">of</span> <span m="239030">the</span> <span m="239130">projects</span> <span m="239720">were</span> <span m="240120">joint</span> <span m="240480">with</span> <span m="240650">multiple</span> <span m="241000">students,</span> <span m="241940">how</span> <span m="242250">to</span> <span m="242460">navigate</span> <span m="243470">a</span> <span m="243560">joint</span> <span m="243890">talk</span> <span m="244390">where</span> <span m="245090">one</span> <span m="245210">person</span> <span m="245460">talks</span> <span m="245700">for</span> <span m="245770">a</span> <span m="245820">few</span> <span m="245970">minutes</span> <span m="246270">or</span> <span m="246350">one</span> <span m="246530">slide</span> <span m="246910">and</span> <span m="247010">then</span> <span m="247110">they</span> <span m="247220">switch</span> <span m="247540">back</span> <span m="247730">and</span> <span m="247840">forth.</span> <span m="249100">And</span> <span m="249250">I</span> <span m="249310">give</span> <span m="249610">general</span> <span m="249990">advice</span> <span m="250310">about</span> <span m="250470">how</span> <span m="250630">to</span> <span m="250730">do</span> <span m="250850">this</span> <span m="251130">but</span> <span m="251300">for</span> <span m="251390">the</span> <span m="251490">most</span> <span m="251760">part</span> <span m="251970">the</span> <span m="252050">students</span> <span m="252500">just</span> <span m="252710">kind</span> <span m="252850">of</span> <span m="252920">figure</span> <span m="253190">it</span> <span m="253260">out.</span> <span m="253500">And</span> <span m="253810">by</span> <span m="253950">practicing</span> <span m="254560">they</span> <span m="254720">find</span> <span m="255690">a</span> <span m="256100">good</span> <span m="256260">way</span> <span m="256620">to</span> <span m="256750">do</span> <span m="256910">it.</span></p>
+<p><span m="258310">There</span> <span m="258450">are</span> <span m="258470">no</span> <span m="258610">videos</span> <span m="259089">of</span> <span m="259260">the</span> <span m="259730">student</span> <span m="260100">presentations</span> <span m="260790">because</span> <span m="261010">I</span> <span m="261480">think</span> <span m="261640">that</span> <span m="261779">would</span> <span m="261880">be</span> <span m="262029">a</span> <span m="262070">little</span> <span m="262320">bit</span> <span m="263000">too</span> <span m="263190">intimidating.</span> <span m="263840">It</span> <span m="263960">takes</span> <span m="264220">a</span> <span m="264290">lot</span> <span m="264450">of</span> <span m="264540">practice</span> <span m="265020">before</span> <span m="265290">you're</span> <span m="265400">comfortable</span> <span m="265830">being</span> <span m="266380">video</span> <span m="266620">recorded</span> <span m="267100">like</span> <span m="267310">this</span> <span m="269300">and</span> <span m="269400">in</span> <span m="269470">your</span> <span m="269620">lectures.</span> <span m="270110">But</span> <span m="271580">they</span> <span m="272140">are</span> <span m="272230">totally</span> <span m="272840">of</span> <span m="272920">video</span> <span m="273320">quality,</span> <span m="274460">so</span> <span m="274690">it's</span> <span m="274910">a</span> <span m="274960">shame</span> <span m="275270">we</span> <span m="275370">can't</span> <span m="275570">share</span> <span m="275790">them.</span> <span m="276010">But</span> <span m="276940">it's</span> <span m="277030">a</span> <span m="277250">chicken and egg</span> <span m="277690">problem,</span> <span m="277930">I</span> <span m="278100">guess.</span></p>
+<p><span m="279260">And</span> <span m="279370">so</span> <span m="279540">at</span> <span m="279660">the</span> <span m="279770">end</span> <span m="279930">of</span> <span m="279980">the</span> <span m="280080">class</span> <span m="281540">the</span> <span m="281680">TAs</span> <span m="282020">and</span> <span m="282150">I</span> <span m="282300">each</span> <span m="282600">write</span> <span m="283000">a</span> <span m="283110">bunch</span> <span m="283360">of</span> <span m="283450">bullet</span> <span m="283730">points</span> <span m="284120">about</span> <span m="284510">their</span> <span m="284670">written</span> <span m="284870">project,</span> <span m="285440">and</span> <span m="285520">the</span> <span m="285610">work</span> <span m="285830">that</span> <span m="285940">they</span> <span m="286060">did,</span> <span m="286400">and</span> <span m="286760">their</span> <span m="287480">presentation.</span> <span m="288870">And</span> <span m="289050">I</span> <span m="289200">pay</span> <span m="289520">particular</span> <span m="289960">attention</span> <span m="290380">to</span> <span m="290500">like</span> <span m="290730">how</span> <span m="290920">strong</span> <span m="291270">their</span> <span m="291380">voice is,</span> <span m="292090">do</span> <span m="292570">they</span> <span m="292690">have</span> <span m="292910">good</span> <span m="293070">presence,</span> <span m="293620">and</span> <span m="293680">that</span> <span m="293800">kind</span> <span m="293940">of</span> <span m="294050">thing.</span> <span m="294280">And</span> <span m="294390">try</span> <span m="294590">to</span> <span m="295330">give</span> <span m="295500">them</span> <span m="295620">that</span> <span m="295800">feedback</span> <span m="296230">so</span> <span m="296390">they</span> <span m="296530">know</span> <span m="296880">where</span> <span m="297080">they</span> <span m="297210">need</span> <span m="297380">to</span> <span m="297470">improve,</span> <span m="298380">or</span> <span m="298790">where</span> <span m="299020">they're</span> <span m="299270">especially</span> <span m="299780">good,</span> <span m="301170">or that</span> <span m="301230">the</span> <span m="301360">slides</span> <span m="301820">needed</span> <span m="302060">more</span> <span m="302220">figures.</span> <span m="303050">That's</span> <span m="303410">my</span> <span m="303570">number</span> <span m="303880">one</span> <span m="304070">comment.</span> <span m="304620">Usually</span> <span m="305010">the</span> <span m="305130">answer</span> <span m="305320">is</span> <span m="305410">yes.</span> <span m="306520">Can never</span> <span m="307020">hurt to</span> <span m="307070">have</span> <span m="307190">more</span> <span m="307390">figures.</span></p>
+<p><span m="308860">And</span> <span m="310100">also,</span> <span m="310560">on</span> <span m="310710">the</span> <span m="310810">research</span> <span m="311170">side,</span> <span m="311540">we</span> <span m="311660">think--</span> <span m="312180">we</span> <span m="312520">look</span> <span m="312720">at</span> <span m="312790">their</span> <span m="312910">results,</span> <span m="313810">tell</span> <span m="314000">them</span> <span m="314090">whether</span> <span m="314260">we</span> <span m="314390">found</span> <span m="314620">any</span> <span m="314770">bugs.</span> <span m="315190">But</span> <span m="315360">for</span> <span m="315450">the</span> <span m="315550">most</span> <span m="315810">part</span> <span m="316030">we're</span> <span m="316190">thinking</span> <span m="317410">what</span> <span m="317640">would</span> <span m="317750">be</span> <span m="317850">the</span> <span m="317960">next</span> <span m="318200">step?</span> <span m="318560">Like,</span> <span m="318880">oh,</span> <span m="319000">here's</span> <span m="319270">another</span> <span m="319710">open</span> <span m="319940">problem</span> <span m="320250">that</span> <span m="320380">would</span> <span m="320520">advance</span> <span m="320920">your</span> <span m="321090">problem</span> <span m="321450">a</span> <span m="321490">little</span> <span m="321740">farther.</span> <span m="323080">And</span> <span m="323180">here's</span> <span m="323430">some</span> <span m="323580">ideas</span> <span m="323950">for</span> <span m="324070">solving</span> <span m="324470">it.</span> <span m="324630">And</span> <span m="324740">that</span> <span m="324910">often</span> <span m="325170">leads</span> <span m="325450">to</span> <span m="326100">papers</span> <span m="326570">that</span> <span m="326700">we</span> <span m="326830">publish.</span></p>
+<p><span m="328660">And</span> <span m="329720">some</span> <span m="329910">final</span> <span m="330160">projects</span> <span m="330540">are</span> <span m="330600">basically</span> <span m="331170">done.</span> <span m="331480">Their</span> <span m="332190">papers are</span> <span m="332590">ready to</span> <span m="332840">submit.</span> <span m="333360">And</span> <span m="333490">then</span> <span m="333660">we</span> <span m="333780">give</span> <span m="333980">them</span> <span m="334100">feedback</span> <span m="334570">on</span> <span m="334840">where</span> <span m="335040">they</span> <span m="335160">should</span> <span m="335380">submit</span> <span m="335660">it,</span> <span m="335830">what would</span> <span m="336050">be</span> <span m="336170">a</span> <span m="336230">good</span> <span m="336400">conference,</span> <span m="336890">a</span> <span m="336940">good</span> <span m="337090">journal,</span> <span m="338320">we</span> <span m="338520">can</span> <span m="338920">basically</span> <span m="339200">help</span> <span m="339450">them</span> <span m="339740">publish</span> <span m="340120">it.</span> <span m="341360">So</span> <span m="341600">that's</span> <span m="342610">part</span> <span m="342860">of</span> <span m="343000">the</span> <span m="343660">full</span> <span m="343920">service.</span></p>
+</div>
+        <div id="vid_playlist" itemprop="description" class="tabContent hide">
+<h2 class="subhead">Free Downloads</h2>
+<h3 class="subsubhead">Video</h3>
+<ul>
+<li>iTunes U (<a href="https://itunes.apple.com/us/itunes-u/id993001813">MP4 - 16MB</a>)</li>
+<li>Internet Archive (<a href="https://archive.org/download/MIT6.890F14/MIT6_890F14_final_projects_300k.mp4">MP4 - 16MB</a>)</li>
+</ul>
+<br>
+<h3 class="subsubhead">Caption</h3>
+<ul>
+<li>English-US (<a href="../../../../contents/instructor-insights/video-playlist/final-projects/KdN2mQ594t0.srt">SRT</a>)</li>
+</ul>
+</div>
+    
+   </div>  
+
+
+
+
+      					 
+        <div class="" id="parent-fieldname-bottom_html_area">
+            
+            
+        </div>
+    
+               </main><!--Course_inner_media tag close -->
+           		</div>
+<!--Course_wrapper tag close -->
+            </div>
+<!--left tag close -->
+            <aside id="right">
+                <!--Begin Right Portion -->
+                    <div>
+    
+
+
+
+</div>
+
+                	<div>
+    
+
+
+
+</div>
+
+
+        <div class="" id="parent-fieldname-rsi_top_html_area">
+            
+            
+        </div>
+    
+
+<!-- RSI google ad space-->
+
+
+
+<div id="google_ads">    
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script type="text/javascript">var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];</script>
+    <script type="text/javascript">
+googletag.cmd.push(function() {googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_A_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_A_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_B_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_B_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_C_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_C_DL').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+ googletag.enableServices();
+});</script>
+    <script language="javascript" type="text/javascript">
+googletag.cmd.push(function() {googletag.pubads().set("TYPE","HOUSE");googletag.pubads().set("DEPARTMENT","6");googletag.pubads().set("CRS_BEG2","89");googletag.pubads().set("CRS_END","0");googletag.pubads().set("SESSION","F");googletag.pubads().set("YEAR","14");})
+</script>
+    
+    <div id="VIDEO_INDIVIDUAL_SLOT_A_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_A_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_B_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_B_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_C_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_C_DL'); });</script>
+    </div>
+</div>
+
+<!-- End RSI ads--> 
+
+
+<div>
+    
+
+
+
+</div>
+
+            </aside><!--Right div close -->
+            <div class="clear"></div>
+        </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

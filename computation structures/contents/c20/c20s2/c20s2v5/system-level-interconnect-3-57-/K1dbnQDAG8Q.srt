@@ -1,0 +1,395 @@
+1
+00:00:00,500 --> 00:00:03,570
+Serial point-to-point links
+are the modern replacement
+
+2
+00:00:03,570 --> 00:00:05,670
+for the parallel
+communications bus
+
+3
+00:00:05,670 --> 00:00:08,070
+with all its electrical
+and timing issues.
+
+4
+00:00:08,070 --> 00:00:10,730
+0..08 Each link is
+unidirectional and has only
+
+5
+00:00:10,730 --> 00:00:14,480
+a single driver and the receiver
+recovers the clock signal from
+
+6
+00:00:14,480 --> 00:00:17,290
+the data stream, so there are
+no complications from sharing
+
+7
+00:00:17,290 --> 00:00:20,760
+the channel, clock skew,
+and electrical problems.
+
+8
+00:00:20,760 --> 00:00:24,170
+The very controlled electrical
+environment enables very high
+
+9
+00:00:24,170 --> 00:00:27,360
+signaling rates, well up into
+the gigahertz range using
+
+10
+00:00:27,360 --> 00:00:29,210
+today’s technologies.
+
+11
+00:00:29,210 --> 00:00:30,790
+If more throughput
+is needed, you
+
+12
+00:00:30,790 --> 00:00:33,980
+can use multiple serial
+links in parallel.
+
+13
+00:00:33,980 --> 00:00:36,770
+Extra logic is needed to
+reassemble the original data
+
+14
+00:00:36,770 --> 00:00:40,250
+from multiple packets sent in
+parallel over multiple links,
+
+15
+00:00:40,250 --> 00:00:42,600
+but the cost of the
+required logic gates
+
+16
+00:00:42,600 --> 00:00:46,270
+is very modest in
+current technologies.
+
+17
+00:00:46,270 --> 00:00:49,080
+Note that the expansion
+strategy of modern systems
+
+18
+00:00:49,080 --> 00:00:51,470
+still uses the notion
+of an add-in card that
+
+19
+00:00:51,470 --> 00:00:53,330
+plugs into the motherboard.
+
+20
+00:00:53,330 --> 00:00:55,770
+But instead of connecting
+to a parallel bus,
+
+21
+00:00:55,770 --> 00:00:58,300
+the add-in card
+connects to one or more
+
+22
+00:00:58,300 --> 00:01:00,700
+point-to-point
+communication links.
+
+23
+00:01:00,700 --> 00:01:02,880
+Here’s the system-level
+communications diagram
+
+24
+00:01:02,880 --> 00:01:07,840
+for a recent system based on
+an Intel Core i7 CPU chip.
+
+25
+00:01:07,840 --> 00:01:10,280
+The CPU is connected
+directly to the memories
+
+26
+00:01:10,280 --> 00:01:13,090
+for the highest-possible
+memory bandwidth,
+
+27
+00:01:13,090 --> 00:01:15,280
+but talks to all
+the other components
+
+28
+00:01:15,280 --> 00:01:17,400
+over the QuickPath
+Interconnect (QPI),
+
+29
+00:01:17,400 --> 00:01:19,500
+which has 20
+differential signaling
+
+30
+00:01:19,500 --> 00:01:21,470
+paths in each direction.
+
+31
+00:01:21,470 --> 00:01:25,560
+QPI supports up to 6.4
+billion 20-bit transfers
+
+32
+00:01:25,560 --> 00:01:28,450
+in each direction every second.
+
+33
+00:01:28,450 --> 00:01:30,370
+All the other
+communication channels
+
+34
+00:01:30,370 --> 00:01:35,600
+(USB, PCIe, networks,
+Serial ATA, Audio, etc.)
+
+35
+00:01:35,600 --> 00:01:39,290
+are also serial links,
+providing various communication
+
+36
+00:01:39,290 --> 00:01:42,420
+bandwidths depending
+on the application.
+
+37
+00:01:42,420 --> 00:01:45,110
+Reading about the QPI
+channel used by the CPU
+
+38
+00:01:45,110 --> 00:01:48,220
+reminded me a lot
+of the one ring
+
+39
+00:01:48,220 --> 00:01:49,840
+that could be used
+to control all
+
+40
+00:01:49,840 --> 00:01:53,560
+of Middle Earth in the Tolkien
+trilogy Lord of the Rings.
+
+41
+00:01:53,560 --> 00:01:56,320
+Why mess around with a lot
+of specialized communication
+
+42
+00:01:56,320 --> 00:01:59,770
+channels when you have a single
+solution that’s powerful enough
+
+43
+00:01:59,770 --> 00:02:02,540
+to solve all your
+communication needs?
+
+44
+00:02:02,540 --> 00:02:05,730
+PCI Express (PCIe) is often
+used as the communication
+
+45
+00:02:05,730 --> 00:02:08,840
+link between components
+on the system motherboard.
+
+46
+00:02:08,840 --> 00:02:14,040
+A single PCIe version 2 “lane”
+transmits data at 5 Gb/sec
+
+47
+00:02:14,040 --> 00:02:17,640
+using low-voltage differential
+signaling (LVDS) over wires
+
+48
+00:02:17,640 --> 00:02:21,690
+designed to have a 100-Ohm
+characteristic impedance.
+
+49
+00:02:21,690 --> 00:02:23,740
+The PCIe lane is
+under the control
+
+50
+00:02:23,740 --> 00:02:27,460
+of the same sort of network
+stack as described earlier.
+
+51
+00:02:27,460 --> 00:02:31,200
+The physical layer transmits
+packet data through the wire.
+
+52
+00:02:31,200 --> 00:02:33,140
+Each packet starts with
+a training sequence
+
+53
+00:02:33,140 --> 00:02:36,450
+to synchronize the receiver’s
+clock-recovery circuitry,
+
+54
+00:02:36,450 --> 00:02:38,710
+followed by a unique
+start sequence,
+
+55
+00:02:38,710 --> 00:02:42,230
+then the packet’s data payload,
+and ends with a unique end
+
+56
+00:02:42,230 --> 00:02:44,430
+sequence.
+
+57
+00:02:44,430 --> 00:02:47,700
+The physical layer payload is
+organized as a sequence number,
+
+58
+00:02:47,700 --> 00:02:51,390
+a transaction-layer payload
+and a cyclical redundancy check
+
+59
+00:02:51,390 --> 00:02:54,230
+sequence that’s used
+to validate the data.
+
+60
+00:02:54,230 --> 00:02:56,490
+Using the sequence number,
+the data link layer
+
+61
+00:02:56,490 --> 00:02:58,770
+can tell when a packet
+has been dropped
+
+62
+00:02:58,770 --> 00:03:01,480
+and request the transmitter
+restart transmission
+
+63
+00:03:01,480 --> 00:03:03,360
+at the missing packet.
+
+64
+00:03:03,360 --> 00:03:06,120
+It also deals with
+flow control issues.
+
+65
+00:03:06,120 --> 00:03:08,710
+Finally, the transaction
+layer reassembles the message
+
+66
+00:03:08,710 --> 00:03:12,260
+from the transaction layer
+payloads from all the lanes
+
+67
+00:03:12,260 --> 00:03:15,610
+and uses the header to identify
+the intended recipient at the
+
+68
+00:03:15,610 --> 00:03:17,410
+receive end.
+
+69
+00:03:17,410 --> 00:03:20,420
+Altogether, a significant amount
+of logic is needed to send
+
+70
+00:03:20,420 --> 00:03:23,390
+and receive messages
+on multiple PCIe lanes,
+
+71
+00:03:23,390 --> 00:03:26,770
+but the cost is quite acceptable
+when using today’s integrated
+
+72
+00:03:26,770 --> 00:03:29,150
+circuit technologies.
+
+73
+00:03:29,150 --> 00:03:33,340
+Using 8 lanes, the maximum
+transfer rate is 4 GB/sec,
+
+74
+00:03:33,340 --> 00:03:36,640
+capable of satisfying the needs
+of high-performance peripherals
+
+75
+00:03:36,640 --> 00:03:38,130
+such as graphics cards.
+
+76
+00:03:38,130 --> 00:03:40,290
+So knowledge from
+the networking world
+
+77
+00:03:40,290 --> 00:03:43,620
+has reshaped how components
+communicate on the motherboard,
+
+78
+00:03:43,620 --> 00:03:46,420
+driving the transition
+from parallel buses
+
+79
+00:03:46,420 --> 00:03:49,770
+to a handful of serial
+point-to-point links.
+
+80
+00:03:49,770 --> 00:03:53,460
+As a result today’s systems
+are faster, more reliable,
+
+81
+00:03:53,460 --> 00:03:57,350
+more energy-efficient and
+smaller than ever before.

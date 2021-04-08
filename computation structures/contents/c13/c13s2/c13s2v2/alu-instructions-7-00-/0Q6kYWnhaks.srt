@@ -1,0 +1,455 @@
+1
+00:00:00,459 --> 00:00:05,640
+Our first task is to work on the datapath
+logic needed to execute ALU instructions with
+
+2
+00:00:05,640 --> 00:00:08,029
+two register operands.
+
+3
+00:00:08,029 --> 00:00:10,960
+Each instruction requires the same processing
+steps:
+
+4
+00:00:10,960 --> 00:00:15,840
+Fetch, where the 32-bit encoded instruction
+is read from main memory from the location
+
+5
+00:00:15,840 --> 00:00:18,519
+specified by the program counter (PC).
+
+6
+00:00:18,519 --> 00:00:25,470
+Decode, where the opcode field (instruction
+bits [31:26]) is used to determine the values
+
+7
+00:00:25,470 --> 00:00:27,929
+for the datapath control signals.
+
+8
+00:00:27,929 --> 00:00:34,180
+Read, where the contents of the registers
+specified by the RA and RB fields (instruction
+
+9
+00:00:34,180 --> 00:00:39,329
+bits [20:16] and [15:11]) are read from the
+register file.
+
+10
+00:00:39,329 --> 00:00:44,100
+Execute, where the requested operation is
+performed on the two operand values.
+
+11
+00:00:44,100 --> 00:00:48,010
+We'll also need to compute the next value
+for the PC.
+
+12
+00:00:48,010 --> 00:00:53,240
+And Write-back, where the result of the operation
+is written to the register file in the register
+
+13
+00:00:53,240 --> 00:00:58,900
+specified by the RC field (instruction bits
+[25:21]).
+
+14
+00:00:58,900 --> 00:01:03,539
+The system's clock signal is connected to
+the register file and the PC register.
+
+15
+00:01:03,539 --> 00:01:08,890
+At the rising edge of the clock, the new values
+computed during the Execute phase are written
+
+16
+00:01:08,890 --> 00:01:11,110
+to these registers.
+
+17
+00:01:11,110 --> 00:01:16,110
+The rising clock edge thus marks the end of
+execution for the current instruction and
+
+18
+00:01:16,110 --> 00:01:19,250
+the beginning of execution for the next instruction.
+
+19
+00:01:19,250 --> 00:01:24,090
+The period of the clock, i.e., the time between
+rising clock edges, needs to be long enough
+
+20
+00:01:24,090 --> 00:01:29,939
+to accommodate the cumulative propagation
+delay of the logic that implements the 5 steps
+
+21
+00:01:29,939 --> 00:01:32,280
+described here.
+
+22
+00:01:32,280 --> 00:01:36,850
+Since one instruction is executed each clock
+cycle, the frequency of the clock tells us
+
+23
+00:01:36,850 --> 00:01:39,890
+the rate at which instructions are executed.
+
+24
+00:01:39,890 --> 00:01:46,908
+If the clock period was 10ns, the clock frequency
+would be 100 MHz and our Beta would be executing
+
+25
+00:01:46,908 --> 00:01:50,289
+instructions at 100 MIPS!
+
+26
+00:01:50,289 --> 00:01:54,820
+Here's a sketch showing the hardware needed
+for the Fetch and Decode steps.
+
+27
+00:01:54,820 --> 00:01:59,841
+The current value of the PC register is routed
+to main memory as the address of the instruction
+
+28
+00:01:59,841 --> 00:02:01,990
+to be fetched.
+
+29
+00:02:01,990 --> 00:02:06,570
+For ALU instructions, the address of the next
+instruction is simply the address of the current
+
+30
+00:02:06,570 --> 00:02:08,449
+instruction plus 4.
+
+31
+00:02:08,449 --> 00:02:14,110
+There's an adder dedicated to performing the
+"PC+4" computation and that value is routed
+
+32
+00:02:14,110 --> 00:02:18,110
+back to be used as the next value of the PC.
+
+33
+00:02:18,110 --> 00:02:23,770
+We've also included a MUX used to select the
+initial value for the PC when the RESET signal
+
+34
+00:02:23,770 --> 00:02:25,530
+is 1.
+
+35
+00:02:25,530 --> 00:02:32,000
+After the memory propagation delay, the instruction
+bits (ID[31:0]) are available and the processing
+
+36
+00:02:32,000 --> 00:02:34,300
+steps can begin.
+
+37
+00:02:34,300 --> 00:02:37,590
+Some of the instruction fields can be used
+directly as-is.
+
+38
+00:02:37,590 --> 00:02:41,720
+To determine the values for other control
+signals, we'll need some logic that computes
+
+39
+00:02:41,720 --> 00:02:45,230
+their values from the bits of the opcode field.
+
+40
+00:02:45,230 --> 00:02:50,610
+Now let's fill in the datapath logic needed
+to execute ALU instructions with two register
+
+41
+00:02:50,610 --> 00:02:51,900
+operands.
+
+42
+00:02:51,900 --> 00:02:57,480
+The instruction bits for the 5-bit RA, RB
+and RC fields can be connected directly to
+
+43
+00:02:57,480 --> 00:03:00,980
+the appropriate address inputs of the register
+file.
+
+44
+00:03:00,980 --> 00:03:06,700
+The RA and RB fields supply the addresses
+for the two read ports and the RC field supplies
+
+45
+00:03:06,700 --> 00:03:09,060
+the address for the write port.
+
+46
+00:03:09,060 --> 00:03:13,820
+The outputs of the read data ports are routed
+to the inputs of the ALU to serve as the two
+
+47
+00:03:13,820 --> 00:03:15,360
+operands.
+
+48
+00:03:15,360 --> 00:03:19,980
+The ALUFN control signals tell the ALU what
+operation to perform.
+
+49
+00:03:19,980 --> 00:03:25,050
+These control signals are determined by the
+control logic from the 6-bit opcode field.
+
+50
+00:03:25,050 --> 00:03:31,000
+For specificity, let's assume that the control
+logic is implemented using a read-only memory
+
+51
+00:03:31,000 --> 00:03:36,780
+(ROM), where the opcode bits are used as the
+ROM's address and the ROM's outputs are the
+
+52
+00:03:36,780 --> 00:03:38,450
+control signals.
+
+53
+00:03:38,450 --> 00:03:44,760
+Since there are 6 opcode bits, we'll need
+2^6 = 64 locations in the ROM.
+
+54
+00:03:44,760 --> 00:03:50,180
+We'll program the contents of the ROM to supply
+the correct control signal values for each
+
+55
+00:03:50,180 --> 00:03:54,120
+of the 64 possible opcodes.
+
+56
+00:03:54,120 --> 00:03:59,050
+The output of the ALU is routed back to the
+write data port of the register file, to be
+
+57
+00:03:59,050 --> 00:04:02,890
+written into the RC register at the end of
+the cycle.
+
+58
+00:04:02,890 --> 00:04:08,760
+We'll need another control signal, WERF ("write-enable
+register file"), that should have the value
+
+59
+00:04:08,760 --> 00:04:12,280
+1 when we want to write into the RC register.
+
+60
+00:04:12,280 --> 00:04:17,379
+Let me introduce you to Werf, the 6.004 mascot,
+who, of course, is named after her favorite
+
+61
+00:04:17,379 --> 00:04:20,978
+control signal, which she's constantly mentioning.
+
+62
+00:04:20,978 --> 00:04:25,919
+Let's follow the flow of data as we execute
+the ALU instruction.
+
+63
+00:04:25,919 --> 00:04:31,620
+After the instruction has been fetched, supplying
+the RA and RB instruction fields, the RA and
+
+64
+00:04:31,620 --> 00:04:36,820
+RB register values appear on the read data
+ports of the register file.
+
+65
+00:04:36,820 --> 00:04:41,900
+The control logic has decoded the opcode bits
+and supplied the appropriate ALU function
+
+66
+00:04:41,900 --> 00:04:42,930
+code.
+
+67
+00:04:42,930 --> 00:04:47,860
+You can find a listing of the possible function
+codes in the upper right-hand corner of the
+
+68
+00:04:47,860 --> 00:04:49,870
+Beta Diagram handout.
+
+69
+00:04:49,870 --> 00:04:54,490
+The result of the ALU's computation is sent
+back to the register file to be written into
+
+70
+00:04:54,490 --> 00:04:55,830
+the RC register.
+
+71
+00:04:55,830 --> 00:05:00,020
+Of course, we'll need to set WERF to 1 to
+enable the write.
+
+72
+00:05:00,020 --> 00:05:06,229
+5.oo Here we see one of the major advantages
+of a reduced-instruction set computer architecture:
+
+73
+00:05:06,229 --> 00:05:10,889
+the datapath logic required for execution
+is very straightforward!
+
+74
+00:05:10,889 --> 00:05:16,240
+The other form of ALU instructions uses a
+constant as the second ALU operand.
+
+75
+00:05:16,240 --> 00:05:21,759
+The 32-bit operand is formed by sign-extending
+the 16-bit two's complement constant stored
+
+76
+00:05:21,759 --> 00:05:26,849
+in the literal field (bits [15:0]) of the
+instruction.
+
+77
+00:05:26,849 --> 00:05:31,949
+In order to select the sign-extended constant
+as the second operand, we added a MUX to the
+
+78
+00:05:31,949 --> 00:05:33,539
+datapath.
+
+79
+00:05:33,539 --> 00:05:39,320
+When its BSEL control signal is 0, the output
+of the register file is selected as the operand.
+
+80
+00:05:39,320 --> 00:05:44,849
+When BSEL is 1, the sign-extended constant
+is selected as the operand.
+
+81
+00:05:44,849 --> 00:05:48,949
+The rest of the datapath logic is the same
+as before.
+
+82
+00:05:48,949 --> 00:05:54,860
+Note that no logic gates are needed to perform
+sign-extension - it's all done with wiring!
+
+83
+00:05:54,860 --> 00:05:59,610
+To sign-extend a two's complement number,
+we just need to replicate the high-order,
+
+84
+00:05:59,610 --> 00:06:03,289
+or sign, bit as many times as necessary.
+
+85
+00:06:03,289 --> 00:06:07,909
+You might find it useful to review the discussion
+of two's complement in Lecture 1 of Part 1
+
+86
+00:06:07,909 --> 00:06:09,460
+of the course.
+
+87
+00:06:09,460 --> 00:06:15,300
+So to form a 32-bit operand from a 16-bit
+constant, we just replicate it's high-order
+
+88
+00:06:15,300 --> 00:06:22,000
+bit (ID[15]) sixteen times as we make the
+connection to the BSEL MUX.
+
+89
+00:06:22,000 --> 00:06:28,190
+During execution of ALU-with-constant instructions,
+the flow of data is much as it was before.
+
+90
+00:06:28,190 --> 00:06:33,979
+The one difference is that the control logic
+sets the BSEL control signal to 1, selecting
+
+91
+00:06:33,979 --> 00:06:38,250
+the sign-extended constant as the second ALU
+operand.
+
+92
+00:06:38,250 --> 00:06:43,350
+As before, the control logic generates the
+appropriate ALU function code and the output
+
+93
+00:06:43,350 --> 00:06:49,069
+of the ALU is routed to the register file
+to be written back to the RC register.
+
+94
+00:06:49,069 --> 00:06:54,139
+Amazingly, this datapath is sufficient to
+execute most of the instructions in the Beta
+
+95
+00:06:54,139 --> 00:06:55,780
+ISA!
+
+96
+00:06:55,780 --> 00:06:59,490
+We just have the memory and branch instruction
+left to implement.
+
+97
+00:06:59,490 --> 00:07:00,430
+That's our next task.

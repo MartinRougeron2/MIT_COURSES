@@ -1,0 +1,518 @@
+1
+00:00:01,709 --> 00:00:07,740
+For this problem, assume that you have a fully
+functioning 5-stage pipelined beta with full
+
+2
+00:00:07,740 --> 00:00:13,500
+bypassing and annulment of branch delay slots
+as presented in lecture.
+
+3
+00:00:13,500 --> 00:00:17,500
+This beta has been running the program shown
+here for a while.
+
+4
+00:00:17,500 --> 00:00:22,539
+The actual functionality of this program is
+not so important for this problem, but lets
+
+5
+00:00:22,539 --> 00:00:24,949
+just review it quickly.
+
+6
+00:00:24,949 --> 00:00:30,380
+This program begins by initializing R1 to
+0 before entering the loop.
+
+7
+00:00:30,380 --> 00:00:35,370
+R1 represents the index of the array element
+currently being accessed.
+
+8
+00:00:35,370 --> 00:00:40,770
+Within the loop, the value of that array element
+is loaded into R0.
+
+9
+00:00:40,770 --> 00:00:47,170
+R1 is then incremented by 4 in order to point
+to the next element in the array.
+
+10
+00:00:47,170 --> 00:00:52,489
+We then compare the array element that was
+just loaded into R0 with the updated index
+
+11
+00:00:52,489 --> 00:00:57,010
+in R1 and if they are equal, then we repeat
+the loop.
+
+12
+00:00:57,010 --> 00:01:02,909
+If they are not equal, then we store the current
+value of R1 into a memory location called
+
+13
+00:01:02,909 --> 00:01:09,050
+index to remember which index value satisfied
+the compare instruction.
+
+14
+00:01:09,050 --> 00:01:13,070
+We want to understand how this program would
+run on our beta.
+
+15
+00:01:13,070 --> 00:01:19,910
+In order to do this, we will create a pipeline
+diagram showing the execution of this program.
+
+16
+00:01:19,910 --> 00:01:26,600
+A pipeline diagram demonstrates which instruction
+is currently being executed in each of the
+
+17
+00:01:26,600 --> 00:01:29,079
+5 pipeline stages.
+
+18
+00:01:29,079 --> 00:01:33,590
+Our rows indicate the pipeline stage that
+the instruction is in.
+
+19
+00:01:33,590 --> 00:01:36,030
+There are five pipeline stages.
+
+20
+00:01:36,030 --> 00:01:42,780
+The first is IF, or instruction fetch, which
+fetches the next instruction from memory.
+
+21
+00:01:42,780 --> 00:01:51,340
+The second is RF, or register file stage which
+reads the source operands of the instruction.
+
+22
+00:01:51,340 --> 00:01:59,190
+Next comes the ALU stage where all required
+arithmetic and logic unit operations are executed.
+
+23
+00:01:59,190 --> 00:02:04,070
+The fourth stage is the MEM stage where we
+can begin accessing memory for a load or store
+
+24
+00:02:04,070 --> 00:02:10,050
+operation because the address of the memory
+location was computed in the ALU stage.
+
+25
+00:02:10,050 --> 00:02:17,230
+Finally, the last stage is WB, or the write
+back stage where the results are written back
+
+26
+00:02:17,230 --> 00:02:19,860
+into the register file.
+
+27
+00:02:19,860 --> 00:02:25,850
+The columns in a pipeline diagram represent
+the execution cycles.
+
+28
+00:02:25,850 --> 00:02:32,490
+Our loop begins with a LD operation, so we
+see our LD instruction in the IF stage in
+
+29
+00:02:32,490 --> 00:02:34,220
+cycle 1001.
+
+30
+00:02:34,220 --> 00:02:42,690
+The LD operation then proceeds down the 5
+stages of the pipelined beta.
+
+31
+00:02:42,690 --> 00:02:45,510
+Next comes the ADDC instruction.
+
+32
+00:02:45,510 --> 00:02:51,140
+Since there is no dependency between the LD
+and the ADDC instruction, the ADDC instruction
+
+33
+00:02:51,140 --> 00:03:00,060
+begins in cycle 1002 and proceeds through
+all the 5 stages of the beta pipeline as well.
+
+34
+00:03:00,060 --> 00:03:02,980
+Next comes the CMPEQ instruction.
+
+35
+00:03:02,980 --> 00:03:08,200
+When we reach the CMPEQ instruction, we are
+met with our first data hazard caused by the
+
+36
+00:03:08,200 --> 00:03:15,350
+fact that the LD is updating R0, and the CMPEQ
+wants to read this new value of R0.
+
+37
+00:03:15,350 --> 00:03:22,120
+Recall, that a LD does not produce its value
+until the WB stage of the pipeline.
+
+38
+00:03:22,120 --> 00:03:28,310
+This means that even with full bypassing logic,
+the CMPEQ instruction cannot read register
+
+39
+00:03:28,310 --> 00:03:32,690
+R0 until the LD is in the WB stage.
+
+40
+00:03:32,690 --> 00:03:39,380
+So we must initiate a stall of the pipeline
+in cycle 1004.
+
+41
+00:03:39,380 --> 00:03:46,270
+The stall can be seen in our pipeline diagram
+in cycle 1005 where the CMPEQ has remained
+
+42
+00:03:46,270 --> 00:03:52,510
+in the RF stage and we have inserted a NOP
+in place of the CMPEQ that was coming down
+
+43
+00:03:52,510 --> 00:03:54,970
+the pipe one cycle earlier.
+
+44
+00:03:54,970 --> 00:03:59,590
+The instruction that follows the CMPEQ is
+the BNE.
+
+45
+00:03:59,590 --> 00:04:06,690
+Notice that it entered the IF stage in cycle
+1004, but it too was stalled by the CMPEQ,
+
+46
+00:04:06,690 --> 00:04:15,020
+so the BNE remains in the IF stage while the
+CMPEQ is stuck in the RF stage.
+
+47
+00:04:15,020 --> 00:04:21,939
+In cycle 1005, the CMPEQ is able to complete
+the read of its operands by using the bypass
+
+48
+00:04:21,939 --> 00:04:28,710
+path from the WB stage to read the updated
+value of R0, and by using the bypass path
+
+49
+00:04:28,710 --> 00:04:37,099
+from the MEM stage to read the updated value
+of R1 produced by the ADDC instruction.
+
+50
+00:04:37,099 --> 00:04:45,620
+In cycle 1006, the CMPEQ instruction moves
+on to the ALU stage and the BNE can move on
+
+51
+00:04:45,620 --> 00:04:47,800
+to the RF stage.
+
+52
+00:04:47,800 --> 00:04:53,669
+Since the CMPEQ is going to update the value
+of R2 which is the register that the BNE is
+
+53
+00:04:53,669 --> 00:05:00,509
+trying to read, we need to make use of the
+bypass path from the ALU stage to the RF stage
+
+54
+00:05:00,509 --> 00:05:08,360
+in order to provide the BNE with the result
+of the CMPEQ instruction in cycle 1006.
+
+55
+00:05:08,360 --> 00:05:12,610
+The RF stage is also the stage when Z is generated.
+
+56
+00:05:12,610 --> 00:05:17,819
+The Z signal tells the beta whether or not
+a register is equal to zero.
+
+57
+00:05:17,819 --> 00:05:24,270
+This means that by the end of the RF stage
+in cycle 1006, the BNE will know whether it
+
+58
+00:05:24,270 --> 00:05:26,789
+is repeating the loop or not.
+
+59
+00:05:26,789 --> 00:05:32,150
+We now illustrate what happens to the pipeline
+diagram if the loop is repeated.
+
+60
+00:05:32,150 --> 00:05:38,860
+In cycle 1006, the ST instruction enters the
+IF stage of the pipeline because until we
+
+61
+00:05:38,860 --> 00:05:43,990
+resolve whether a branch is taken or not,
+we assume that we should continue fetching
+
+62
+00:05:43,990 --> 00:05:46,199
+the next instruction.
+
+63
+00:05:46,199 --> 00:05:51,300
+If the BNE determines that it should branch
+back to LOOP, then this ST instruction which
+
+64
+00:05:51,300 --> 00:05:57,520
+was just fetched must be annulled by inserting
+a NOP in its place.
+
+65
+00:05:57,520 --> 00:06:05,020
+The annulment is initiated in cycle 1006 and
+shows up as a NOP in the RF stage in cycle
+
+66
+00:06:05,020 --> 00:06:07,220
+1007.
+
+67
+00:06:07,220 --> 00:06:13,860
+In cycle 1007, we also see that we now fetch
+the first instruction of the loop which is
+
+68
+00:06:13,860 --> 00:06:20,610
+the LD instruction so that we can repeat the
+loop.
+
+69
+00:06:20,610 --> 00:06:25,620
+Here is a complete pipeline diagram showing
+repeated execution of the loop in our sample
+
+70
+00:06:25,620 --> 00:06:31,260
+code together with the bypass paths being
+used as well as the initiation of stalls and
+
+71
+00:06:31,260 --> 00:06:34,069
+annulment of branch delay slots.
+
+72
+00:06:34,069 --> 00:06:41,840
+We are now ready to answer a few questions
+about the execution of this loop on our beta.
+
+73
+00:06:41,840 --> 00:06:49,169
+The first question we want to consider is
+which of the registers R0, R1, and/or R2 were
+
+74
+00:06:49,169 --> 00:06:54,370
+read at least once directly from the register
+file rather than through a bypass path?
+
+75
+00:06:54,370 --> 00:07:00,759
+Looking back at our completed pipeline diagram,
+we see that the LD and ADDC instructions did
+
+76
+00:07:00,759 --> 00:07:04,270
+not get their operands through bypass paths.
+
+77
+00:07:04,270 --> 00:07:09,909
+Since both of those instructions read R1,
+that means that register R1 was read at least
+
+78
+00:07:09,909 --> 00:07:12,849
+once directly from the register file.
+
+79
+00:07:12,849 --> 00:07:18,900
+R0 which is only read by the CMPEQ always
+comes from a bypass path.
+
+80
+00:07:18,900 --> 00:07:25,509
+Similarly, R2, which is only read by the BNE,
+always comes from a bypass path as well.
+
+81
+00:07:25,509 --> 00:07:32,759
+Next, we want to identify the cycle in which
+stall was set to 1 in the pipelined beta hardware.
+
+82
+00:07:32,759 --> 00:07:38,639
+This occurs in the cycle where the stall is
+initiated which was in cycle 1004.
+
+83
+00:07:38,639 --> 00:07:43,520
+At the end of that cycle the instructions
+that are currently in the IF and RF stage
+
+84
+00:07:43,520 --> 00:07:49,800
+are stalled by not allowing a load of a new
+value into the instruction registers of that
+
+85
+00:07:49,800 --> 00:07:51,400
+pipeline stage.
+
+86
+00:07:51,400 --> 00:07:58,340
+Next, we want to determine in which cycle
+was ANNUL_IF != 0?
+
+87
+00:07:58,340 --> 00:08:05,550
+Recall that the ANNUL_STAGE control signals
+specify when an annulment is initiated in
+
+88
+00:08:05,550 --> 00:08:07,819
+that particular stage.
+
+89
+00:08:07,819 --> 00:08:13,419
+In order to initiate an annulment, then the
+instruction that is currently in the IF stage
+
+90
+00:08:13,419 --> 00:08:15,550
+is replaced with a NOP.
+
+91
+00:08:15,550 --> 00:08:21,229
+This occurs in the IF stage when we need to
+annul a branch delay slot.
+
+92
+00:08:21,229 --> 00:08:26,020
+In our example this occurs in cycle 1006.
+
+93
+00:08:26,020 --> 00:08:30,740
+In which cycle was ANNUL_RF != 0?
+
+94
+00:08:30,740 --> 00:08:36,590
+This question is asking when an annulment
+was initiated in the RF stage.
+
+95
+00:08:36,590 --> 00:08:42,039
+This occurred when the CMPEQ instruction needed
+to be stalled in the RF stage.
+
+96
+00:08:42,039 --> 00:08:47,460
+In order to fill the pipeline bubbles, a NOP
+is inserted into the pipeline in place of
+
+97
+00:08:47,460 --> 00:08:54,130
+the CMPEQ instruction that was in the RF stage
+in cycle 1004.
+
+98
+00:08:54,130 --> 00:09:03,660
+The stall and thus the setting of ANNUL_RF
+!= 0 occurs in cycle 1004.
+
+99
+00:09:03,660 --> 00:09:07,150
+In which cycle was ANNUL_ALU != 0?
+
+100
+00:09:07,150 --> 00:09:12,430
+In other words, in which cycle did we initiate
+the replacement of an instruction in the ALU
+
+101
+00:09:12,430 --> 00:09:15,180
+stage with a NOP?
+
+102
+00:09:15,180 --> 00:09:18,440
+This does not occur in our example.
+
+103
+00:09:18,440 --> 00:09:24,010
+Next, we want to consider our bypass paths.
+
+104
+00:09:24,010 --> 00:09:30,790
+In which cycle was either bypass coming from
+the ALU stage?
+
+105
+00:09:30,790 --> 00:09:41,210
+In cycle 1006, the BNE reads the result of
+the CMPEQ instruction from the ALU stage.
+
+106
+00:09:41,210 --> 00:09:46,720
+In which cycle was either bypass coming from
+the MEM stage?
+
+107
+00:09:46,720 --> 00:09:54,720
+In cycle 1005, the CMPEQ reads the result
+of the ADDC instruction from the MEM stage.
+
+108
+00:09:54,720 --> 00:10:01,570
+Finally, in which cycle was either bypass
+coming from the WB stage?
+
+109
+00:10:01,570 --> 00:10:08,750
+In cycle 1005, the CMPEQ reads the result
+of the LD instruction from the WB stage.

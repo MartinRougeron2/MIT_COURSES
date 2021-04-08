@@ -1,0 +1,462 @@
+1
+00:00:00,500 --> 00:00:05,390
+Let's start by redrawing and simplifying the
+Beta data path so that it will be easier to
+
+2
+00:00:05,390 --> 00:00:08,340
+reason about when we add pipelining.
+
+3
+00:00:08,340 --> 00:00:13,690
+The first simplification is to focus on sequential
+execution and so leave out the branch addressing
+
+4
+00:00:13,690 --> 00:00:15,660
+and PC mux logic.
+
+5
+00:00:15,660 --> 00:00:20,560
+Our simplified Beta always executes the next
+instruction from PC+4.
+
+6
+00:00:20,560 --> 00:00:25,960
+We'll add back the branch and jump logic when
+we discuss control hazards.
+
+7
+00:00:25,960 --> 00:00:31,180
+The second simplification is to have the register
+file appear twice in the diagram so that we
+
+8
+00:00:31,180 --> 00:00:35,800
+can tease apart the read and write operations
+that occur at different stages of instruction
+
+9
+00:00:35,800 --> 00:00:37,710
+execution.
+
+10
+00:00:37,710 --> 00:00:42,830
+The top Register File shows the combinational
+read ports, used to when reading the register
+
+11
+00:00:42,830 --> 00:00:45,239
+operands in the RF stage.
+
+12
+00:00:45,239 --> 00:00:49,440
+The bottom Register File shows the clocked
+write port, used to write the result into
+
+13
+00:00:49,440 --> 00:00:53,280
+the destination register at the end of the
+WB stage.
+
+14
+00:00:53,280 --> 00:00:58,719
+Physically, there's only one set of 32 registers,
+we've just drawn the read and write circuity
+
+15
+00:00:58,719 --> 00:01:01,430
+as separate components in the diagram.
+
+16
+00:01:01,430 --> 00:01:06,790
+If we add pipeline registers to the simplified
+diagram, we see that execution proceeds through
+
+17
+00:01:06,790 --> 00:01:09,750
+the five stages from top to bottom.
+
+18
+00:01:09,750 --> 00:01:15,000
+If we consider execution of instruction sequences
+with no data hazards, information is flowing
+
+19
+00:01:15,000 --> 00:01:20,250
+down the pipeline and the pipeline will correctly
+overlap the execution of all the instructions
+
+20
+00:01:20,250 --> 00:01:22,220
+in the pipeline.
+
+21
+00:01:22,220 --> 00:01:27,470
+The diagram shows the components needed to
+implement each of the five stages.
+
+22
+00:01:27,470 --> 00:01:32,270
+The IF stage contains the program counter
+and the main memory interface for fetching
+
+23
+00:01:32,270 --> 00:01:33,270
+instructions.
+
+24
+00:01:33,270 --> 00:01:37,610
+The RF stage has the register file and operand
+multiplexers.
+
+25
+00:01:37,610 --> 00:01:42,060
+The ALU stage uses the operands and computes
+the result.
+
+26
+00:01:42,060 --> 00:01:47,119
+The MEM stage handles the memory access for
+load and store operations.
+
+27
+00:01:47,119 --> 00:01:52,520
+And the WB stage writes the result into the
+destination register.
+
+28
+00:01:52,520 --> 00:01:57,189
+In each clock cycle, each stage does its part
+in the execution of a particular instruction.
+
+29
+00:01:57,189 --> 00:02:02,469
+In a given clock cycle, there are five instructions
+in the pipeline.
+
+30
+00:02:02,469 --> 00:02:06,610
+Note that data accesses to main memory span
+almost two clock cycles.
+
+31
+00:02:06,610 --> 00:02:11,390
+Data accesses are initiated at the beginning
+of the MEM stage and returning data is only
+
+32
+00:02:11,390 --> 00:02:14,730
+needed just before the end of the WB stage.
+
+33
+00:02:14,730 --> 00:02:20,530
+The memory is itself pipelined and can simultaneously
+finish the access from an earlier instruction
+
+34
+00:02:20,530 --> 00:02:24,510
+while starting an access for the next instruction.
+
+35
+00:02:24,510 --> 00:02:28,640
+This simplified diagram isn't showing how
+the control logic is split across the pipeline
+
+36
+00:02:28,640 --> 00:02:29,730
+stages.
+
+37
+00:02:29,730 --> 00:02:31,200
+How does that work?
+
+38
+00:02:31,200 --> 00:02:36,040
+Note that we've included instruction registers
+as part of each pipeline stage, so that each
+
+39
+00:02:36,040 --> 00:02:40,790
+stage can compute the control signals it needs
+from its instruction register.
+
+40
+00:02:40,790 --> 00:02:45,940
+The encoded instruction is simply passed from
+one stage to the next as the instruction flows
+
+41
+00:02:45,940 --> 00:02:48,220
+through the pipeline..
+
+42
+00:02:48,220 --> 00:02:52,829
+Each stage computes its control signals from
+the opcode field of its instruction register.
+
+43
+00:02:52,829 --> 00:02:57,640
+The RF stage needs the RA, RB, and literal
+fields from its instruction register.
+
+44
+00:02:57,640 --> 00:03:03,010
+And the WB stage needs the RC field from its
+instruction register.
+
+45
+00:03:03,010 --> 00:03:07,459
+The required logic is very similar to the
+unpipelined implementation, it's just been
+
+46
+00:03:07,459 --> 00:03:11,530
+split up and moved to the appropriate pipeline
+stage.
+
+47
+00:03:11,530 --> 00:03:16,370
+We'll see that we will have to add some additional
+control logic to deal correctly with pipeline
+
+48
+00:03:16,370 --> 00:03:18,459
+hazards.
+
+49
+00:03:18,459 --> 00:03:21,050
+Our simplified diagram isn't so simple anymore!
+
+50
+00:03:21,050 --> 00:03:26,540
+To see how the pipeline works, let's follow
+along as it executes this sequence of six
+
+51
+00:03:26,540 --> 00:03:27,540
+instructions.
+
+52
+00:03:27,540 --> 00:03:31,320
+Note that the instructions are reading and
+writing from different registers, so there
+
+53
+00:03:31,320 --> 00:03:34,020
+are no potential data hazards.
+
+54
+00:03:34,020 --> 00:03:39,519
+And there are no branches and jumps, so there
+are no potential control hazards.
+
+55
+00:03:39,519 --> 00:03:44,129
+Since there are no potential hazards, the
+instruction executions can be overlapped and
+
+56
+00:03:44,129 --> 00:03:47,659
+their overlapped execution in the pipeline
+will work correctly.
+
+57
+00:03:47,659 --> 00:03:49,940
+Okay, here we go!
+
+58
+00:03:49,940 --> 00:03:55,620
+During cycle 1, the IF stage sends the value
+from the program counter to main memory to
+
+59
+00:03:55,620 --> 00:04:00,160
+fetch the first instruction (the green LD
+instruction), which will be stored in the
+
+60
+00:04:00,160 --> 00:04:04,070
+RF-stage instruction register at the end of
+the cycle.
+
+61
+00:04:04,070 --> 00:04:10,769
+Meanwhile, it's also computing PC+4, which
+will be the next value of the program counter.
+
+62
+00:04:10,769 --> 00:04:16,019
+We've colored the next value blue to indicate
+that it's the address of the blue instruction
+
+63
+00:04:16,019 --> 00:04:17,660
+in the sequence.
+
+64
+00:04:17,660 --> 00:04:21,839
+We'll add the appropriately colored label
+on the right of each pipeline stage to indicate
+
+65
+00:04:21,839 --> 00:04:25,500
+which instruction the stage is processing.
+
+66
+00:04:25,500 --> 00:04:31,530
+At the start of cycle 2, we see that values
+in the PC and instruction registers for the
+
+67
+00:04:31,530 --> 00:04:35,650
+RF stage now correspond to the green instruction.
+
+68
+00:04:35,650 --> 00:04:40,090
+During the cycle the register file will be
+reading the register operands, in this case
+
+69
+00:04:40,090 --> 00:04:42,950
+R1, which is needed for the green instruction.
+
+70
+00:04:42,950 --> 00:04:49,210
+Since the green instruction is a LD, ASEL
+is 0 and BSEL is 1, selecting the appropriate
+
+71
+00:04:49,210 --> 00:04:54,710
+values to be written into the A and B operand
+registers at the end of the cycle.
+
+72
+00:04:54,710 --> 00:05:00,440
+Concurrently, the IF stage is fetching the
+blue instruction from main memory and computing
+
+73
+00:05:00,440 --> 00:05:04,789
+an updated PC value for the next cycle.
+
+74
+00:05:04,789 --> 00:05:10,760
+In cycle 3, the green instruction is now in
+the ALU stage, where the ALU is adding the
+
+75
+00:05:10,760 --> 00:05:16,410
+values in its operand registers (in this case
+the value of R1 and the constant 4) and the
+
+76
+00:05:16,410 --> 00:05:21,740
+result will be stored in Y_MEM register at
+the end of the cycle.
+
+77
+00:05:21,740 --> 00:05:26,780
+In cycle 4, we're overlapping execution of
+four instructions.
+
+78
+00:05:26,780 --> 00:05:31,449
+The MEM stage initiates a memory read for
+the green LD instruction.
+
+79
+00:05:31,449 --> 00:05:36,330
+Note that the read data will first become
+available in the WB stage - it's not available
+
+80
+00:05:36,330 --> 00:05:40,310
+to CPU in the current clock cycle.
+
+81
+00:05:40,310 --> 00:05:45,210
+In cycle 5, the results of the main memory
+read initiated in cycle 4 are available for
+
+82
+00:05:45,210 --> 00:05:49,180
+writing to the register file in the WB stage.
+
+83
+00:05:49,180 --> 00:05:54,150
+So execution of the green LD instruction will
+be complete when the memory data is written
+
+84
+00:05:54,150 --> 00:05:56,960
+to R2 at the end of cycle 5.
+
+85
+00:05:56,960 --> 00:06:02,569
+Meanwhile, the MEM stage is initiating a memory
+read for the blue LD instruction.
+
+86
+00:06:02,569 --> 00:06:07,840
+The pipeline continues to complete successive
+instructions in successive clock cycles.
+
+87
+00:06:07,840 --> 00:06:11,550
+The latency for a particular instruction is
+5 clock cycles.
+
+88
+00:06:11,550 --> 00:06:16,070
+The throughput of the pipelined CPU is 1 instruction/cycle.
+
+89
+00:06:16,070 --> 00:06:21,600
+This is the same as the unpipelined implementation,
+except that the clock period is shorter because
+
+90
+00:06:21,600 --> 00:06:25,710
+each pipeline stage has fewer components.
+
+91
+00:06:25,710 --> 00:06:31,210
+Note that the effects of the green LD, i.e.,
+filling R2 with a new value, don't happen
+
+92
+00:06:31,210 --> 00:06:35,280
+until the rising edge of the clock at the
+end of cycle 5.
+
+93
+00:06:35,280 --> 00:06:40,330
+In other words, the results of the green LD
+aren't available to other instructions until
+
+94
+00:06:40,330 --> 00:06:42,580
+cycle 6.
+
+95
+00:06:42,580 --> 00:06:47,520
+If there were instructions in the pipeline
+that read R2 before cycle 6, they would have
+
+96
+00:06:47,520 --> 00:06:50,270
+gotten an old value!
+
+97
+00:06:50,270 --> 00:06:51,820
+This is an example of a data hazard.
+
+98
+00:06:51,820 --> 00:06:58,009
+Not a problem for us, since our instruction
+sequence didn't trigger this data hazard.
+
+99
+00:06:58,009 --> 00:07:00,580
+Tackling data hazards is our next task.

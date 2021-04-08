@@ -1,0 +1,80 @@
+1
+00:00:01,069 --> 00:00:02,790
+"Optimal" sounds pretty good!
+
+2
+00:00:02,790 --> 00:00:05,170
+Does that mean we can't do any better?
+
+3
+00:00:05,170 --> 00:00:08,750
+Well, not by encoding symbols one-at-a-time.
+
+4
+00:00:08,750 --> 00:00:13,309
+But if we want to encode long sequences of
+symbols, we can reduce the expected length
+
+5
+00:00:13,309 --> 00:00:19,920
+of the encoding by working with, say, pairs
+of symbols instead of only single symbols.
+
+6
+00:00:19,920 --> 00:00:24,039
+The table below shows the probability of pairs
+of symbols from our example.
+
+7
+00:00:24,039 --> 00:00:29,490
+If we use Huffman's Algorithm to build the
+optimal variable-length code using these probabilities,
+
+8
+00:00:29,490 --> 00:00:36,320
+it turns out the expected length when encoding
+pairs is 1.646 bits/symbol.
+
+9
+00:00:36,320 --> 00:00:43,460
+This is a small improvement on the 1.667 bits/symbols
+when encoding each symbol individually.
+
+10
+00:00:43,460 --> 00:00:48,670
+And we'd do even better if we encoded sequences
+of length 3, and so on.
+
+11
+00:00:48,670 --> 00:00:53,129
+Modern file compression algorithms use an
+adaptive algorithm to determine on-the-fly
+
+12
+00:00:53,129 --> 00:00:57,340
+which sequences occur frequently and hence
+should have short encodings.
+
+13
+00:00:57,340 --> 00:01:02,079
+They work quite well when the data has many
+repeating sequences, for example, natural
+
+14
+00:01:02,079 --> 00:01:08,600
+language data where some letter combinations
+or even whole words occur again and again.
+
+15
+00:01:08,600 --> 00:01:12,630
+Compression can achieve dramatic reductions
+from the original file size.
+
+16
+00:01:12,630 --> 00:01:18,030
+If you'd like to learn more, look up "LZW"
+on Wikipedia to read the Lempel-Ziv-Welch
+
+17
+00:01:18,030 --> 00:01:19,160
+data compression algorithm.

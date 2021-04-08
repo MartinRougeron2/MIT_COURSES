@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>4.1 Annotated Slides | 4 Combinational Logic | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="4.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 4.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c4/c4s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c4/index.htm">4 Combinational Logic</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            4.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            4.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="selected">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c4/index.htm">&lt;<span>Combinational Logic</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c4/c4s1/index.htm">4.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c4/c4s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L04: Combinational Logic</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Functional Specifications</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Here’s a Design Approach</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Sum-of-products Building Blocks</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Straightforward Synthesis</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">ANDs and ORs with &gt; 2 Inputs</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">More Building Blocks</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Universal Building Blocks</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">CMOS Loves Inverting Logic</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Wide NANDs and NORs</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">CMOS Sum-of-products Implementation</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Logic Simplification</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Boolean Minimization</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Truth Tables with Don’t Cares</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">The Case for a Non-minimal SOP</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Karnuagh Maps: A Geometric Approach</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Extending K-maps to 4-variable Tables</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Finding Implicants</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Finding Prime Implicants</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Write Down Equations</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Prime Implicants, Glitches &amp; Leniency</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">We’ve Been Designing a MUX</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Systematic Implementation Strategies</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Synthesis By Table Lookup</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">Read-only Memory (ROM)</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">ROM Example</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">ROM Example continued</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Faster ROMs</a></li>     <li style="margin-bottom:0.1em;"><a href="#28">Logic According to ROMs</a></li>     <li style="margin-bottom:0.1em;"><a href="#29">Summary</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <p>In this lecture, you’ll learn various techniques for   creating combinational logic circuits that implement a   particular functional specification.</p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide02.png" alt=""></a></div> <p>A functional specification is part of the static discipline we   use to build the combinational logic abstraction of a circuit.   One approach is to use natural language to describe the   operation of a device.  This approach has its pros and cons.  In   its favor, natural language can convey complicated concepts in   surprisingly compact form and it is a notation that most of us   know how to read and understand.  But, unless the words are very   carefully crafted, there may be ambiguities introduced by words   with multiple interpretations or by lack of completeness since   it’s not always obvious whether all eventualities have   been dealt with.</p> <p>There are good alternatives that address the shortcomings   mentioned above.  Truth tables are a straightforward tabular   representation that specifies the values of the outputs for each   possible combination of the digital inputs.  If a device has N   digital inputs, its truth table will have \(2^N\) rows.  In the   example shown here, the device has 3 inputs, each of which can   have the value 0 or the value 1.  There are \(2 \cdot 2 \cdot 2 =   2^3 = 8\) combinations of the three input values, so there are 8   rows in the truth table.  It’s straightforward to   systematically enumerate the 8 combinations, which makes it easy   to ensure that no combination is omitted when building the   specification.  And since the output values are specified   explicitly, there isn’t much room for misinterpreting the   desired functionality!</p> <p>Truth tables are an excellent choice for devices with small   numbers of inputs and outputs.  Sadly, they aren’t really   practical when the devices have many inputs.  If, for example,   we were describing the functionality of a circuit to add two   32-bit numbers, there would be 64 inputs altogether and the   truth table would need \(2^{64}\) rows.  Hmm, not sure how   practical that is!  If we entered the correct output value for a   row once per second, it would take 584 billion years to fill in   the table!</p> <p>Another alternative specification is to use Boolean equations   to describe how to compute the output values from the input   values using Boolean algebra.  The operations we use are the   logical operations AND, OR, and XOR, each of which takes two   Boolean operands, and NOT which takes a single Boolean operand.   Using the truth tables that describe these logical operations,   it’s straightforward to compute an output value from a   particular combination of input values using the sequence of   operations laid out in the equation.</p> <p>Let me say a quick word about the notation used for Boolean   equations.  Input values are represented by the name of the   input, in this example one of A, B, or C.  The digital   input value 0 is equivalent to the Boolean value FALSE and the   digital input value 1 is equivalent to the Boolean value   TRUE.</p> <p>The Boolean operation NOT is indicated by a horizontal line   drawn above a Boolean expression.  In this example, the first   symbol following the equal sign is a C with line above it,   indicating that the value of C should be inverted before   it’s used in evaluating the rest of the expression.</p> <p>The Boolean operation AND is represented by the multiplication   operation using standard mathematical notation.  Sometimes   we’ll use an explicit multiplication operator —   usually written as a dot between two Boolean expressions —   as shown in the first term of the example equation.  Sometimes   the AND operator is implicit as shown in the remaining three   terms of the example equation.</p> <p>The Boolean operation OR is represented by the addition   operation, always shown as a “+” sign.</p> <p>Boolean equations are useful when the device has many inputs.   And, as we’ll see, it’s easy to convert a Boolean   equation into a circuit schematic.</p> <p>Truth tables and Boolean equations are interchangeable.  If we   have a Boolean equation for each output, we can fill in the   output columns for a row of the truth table by evaluating the   Boolean equations using the particular combination of input   values for that row.  For example, to determine the value for Y   in the first row of the truth table, we’d substitute the   Boolean value FALSE for the symbols A, B, and C in the equation   and then use Boolean algebra to compute the result.</p> <p>We can go the other way too.  We can always convert a truth   table into a particular form of Boolean equation called a   sum-of-products.  Let’s see how...</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide03.png" alt=""></a></div> <p>Start by looking at the truth table and answering the question   “When does Y have the value 1?” Or in the language   of Boolean algebra: “When is Y TRUE?” Well, Y is   TRUE when the inputs correspond to row 2 of the truth table, OR   to row 4, OR to rows 7 OR 8.  Altogether there are 4   combinations of inputs for which Y is TRUE.  The corresponding   Boolean equation thus is the OR for four terms, where each term   is a Boolean expression which evaluates to TRUE for a particular   combination of inputs.</p> <p>Row 2 of the truth table corresponds to C=0, B=0, and A=1.  The   corresponding Boolean expression is \(\overline{C} \cdot \overline{B} \cdot A\),   an expression that evaluates to TRUE if and only if C is 0, B is   0, and A is 1.</p> <p>The Boolean expression corresponding to row 4 is \(\overline{C} \cdot B \cdot A\).   And so on for rows 7 and 8.</p> <p>This approach will always give us an expression in the form of a   sum-of-products.  “Sum” refers to the OR operations and   “products” refers to the groups of AND operations.  In this   example, we have the sum of four product terms.</p> <p>Our next step is to use the Boolean expression as a recipe for   constructing a circuit implementation using combinational logic   gates.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide04.png" alt=""></a></div> <p>As circuit designers, we’ll be working with a library of   combinational logic gates, which either is given to us by the   integrated circuit manufacturer, or which we’ve designed   ourselves as CMOS gates using NFET and PFET switches.</p> <p>One of the simplest gates is the inverter, which has the   schematic symbol shown here.  The small circle on the output   wire indicates an inversion, a common convention used in   schematics.  We can see from its truth table that the inverter   implements the Boolean NOT function.</p> <p>The AND gate outputs 1 if and only if the A input is 1 <i>and</i>   the B input is 1, hence the name AND.  The library will   usually include AND gates with 3 inputs, 4 inputs, etc., which   produce a 1 output if and only if all of their inputs are 1.</p> <p>The OR gate outputs 1 if the A input is 1 *or* if the B input   is 1, hence the name OR.  Again, the library will usually   include OR gates with 3 inputs, 4 inputs, etc., which produce a   1 output when at least one of their inputs is 1.</p> <p>These are the standard schematic symbols for AND and OR gates.   Note that the AND symbol is straight on the input side, while   the OR symbol is curved.  With a little practice, you’ll   find it easy to remember which schematic symbols are which.</p> <p>Now let’s use these building blocks to build a circuit   that implements a sum-of-products Boolean equation.</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide05.png" alt=""></a></div> <p>The structure of the circuit exactly follows the structure of   the Boolean equation.  We use inverters to perform the necessary   Boolean NOT operations.  In a sum-of-products equation the   inverters are operating on particular input values, in this case   A, B and C.  To keep the schematic easy to read we’ve used   a separate inverter for each of the four NOT operations in the   Boolean equation, but in real life we might invert the C input   once to produce a NOT-C signal, then use that signal whenever a   NOT-C value is needed.</p> <p>Each of the four product terms is built using a 3-input AND   gate.  And the product terms are ORed together using a 4-input   OR gate.  The final circuit has a layer of inverters, a layer of   AND gates and final OR gate.  In the next section, we’ll   talk about how to build AND or OR gates with many inputs from   library components with fewer inputs.</p> <p>The propagation delay for a sum-of-products circuit looks   pretty short: the longest path from inputs to outputs includes   an inverter, an AND gate and an OR gate.  Can we really   implement any Boolean equation in a circuit with a   \(t_{\textrm{PD}}\) of three gate delays?</p> <p>Actually not, since building ANDs and ORs with many inputs will   require additional layers of components, which will increase the   propagation delay.  We’ll learn about this in the next   section.</p> <p>The good news is that we now have straightforward techniques   for converting a truth table to its corresponding   sum-of-products Boolean equation, and for building a circuit   that implements that equation.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide06.png" alt=""></a></div> <p>On our to-do list from the previous section is figuring out how   to build AND and OR gates with many inputs.  These will be   needed when creating circuit implementations using a   sum-of-products equation as our template.  Let’s assume   our gate library only has 2-input gates and figure how to build   wider gates using the 2-input gates as building blocks.   We’ll work on creating 3- and 4-input gates, but the   approach we use can be generalized to create AND and OR gates of   any desired width.</p> <p>The approach shown here relies on the associative property of   the AND operator.  This means we can perform an N-way AND by   doing pair-wise ANDs in any convenient order.  The OR and XOR   operations are also associative, so the same approach will work   for designing wide OR and XOR circuits from the corresponding   2-input gate.  Simply substitute 2-input OR gates or 2-input XOR   gates for the 2-input AND gates shown below and you’re   good to go!</p> <p>Let’s start by designing a circuit that computes the AND   of three inputs A, B, and C.  In the circuit shown here, we   first compute (A AND B), then AND that result with C.</p> <p>Using the same strategy, we can build a 4-input AND gate from   three 2-input AND gates.  Essentially we’re building a   chain of AND gates, which implement an N-way AND using N-1   2-input AND gates.</p> <p>We can also associate the four inputs a different way:   computing (A AND B) in parallel with (C AND D), then combining   those two results using a third AND gate.  Using this approach,   we’re building a tree of AND gates.</p> <p>Which approach is best: chains or trees?  First we have to   decide what we mean by “best.” When designing   circuits, we’re interested in cost, which depends on the   number of components, and performance, which we characterize by   the propagation delay of the circuit.</p> <p>Both strategies require the same number of components since the   total number of pair-wise ANDs is the same in both cases.  So   it’s a tie when considering costs.  Now consider   propagation delay.</p> <p>The chain circuit in the middle has a \(t_{\textrm{PD}}\) of 3   gate delays, and we can see that the \(t_{\textrm{PD}}\) for an   N-input chain will be N-1 gate delays.  The propagation delay of   chains grows linearly with the number of inputs.</p> <p>The tree circuit on the bottom has a \(t_{\textrm{PD}}\) of 2   gates, smaller than the chain.  The propagation delay of trees   grows logarithmically with the number of inputs.  Specifically,   the propagation delay of tree circuits built using 2-input gates   grows as log2(N).  When N is large, tree circuits can have   dramatically better propagation delay than chain circuits.</p> <p>The propagation delay is an upper bound on the worst-case delay   from inputs to outputs and is a good measure of performance   assuming that all inputs arrive at the same time.  But in large   circuits, A, B, C and D might arrive at different times   depending on the \(t_{\textrm{PD}}\) of the circuit generating   each one.  Suppose input D arrives considerably after the other   inputs.  If we used the tree circuit to compute the AND of all   four inputs, the additional delay in computing Z is two gate   delays after the arrival of D.  However, if we use the chain   circuit, the additional delay in computing Z might be as little   as one gate delay.</p> <p>The moral of this story: it’s hard to know which   implementation of a subcircuit, like the 4-input AND shown here,   will yield the smallest overall \(t_{\textrm{PD}}\) unless we know   the \(t_{\textrm{PD}}\) of the circuits that compute the values   for the input signals.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide07.png" alt=""></a></div> <p>In designing CMOS circuits, the individual gates are naturally   inverting, so instead of using AND and OR gates, for the best   performance we want to the use the NAND and NOR gates shown   here.  NAND and NOR gates can be implemented as a single CMOS   gate involving one pullup circuit and one pulldown circuit.  AND   and OR gates require two CMOS gates in their   implementation, <i>e.g.</i>, a NAND gate followed by an   INVERTER.  We’ll talk about how to build sum-of-products   circuitry using NANDs and NORs in the next section.</p> <p>Note that NAND and NOR operations are not associative:   NAND(A,B,C) is not equal to NAND(NAND(A,B),C).  So we   can’t build a NAND gate with many inputs by building a   tree of 2-input NANDs.  We’ll talk about this in the next   section too!</p> <p>We’ve mentioned the exclusive-or operation, sometimes   called XOR, several times.  This logic function is very useful   when building circuitry for arithmetic or parity calculations.   As you’ll see in Lab 2, implementing a 2-input XOR gate   will take many more NFETs and PFETs than required for a 2-input   NAND or NOR.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide08.png" alt=""></a></div> <p>We know we can come up with a sum-of-products expression for   any truth table and hence build a circuit implementation using   INVERTERs, AND gates, and OR gates.  It turns out we can build   circuits with the same functionality using only 2-INPUT NAND   gates — we say the 2-INPUT NAND is a universal gate.</p> <p>Here we show how to implement the sum-of-products building   blocks using just 2-input NAND gates.  In a minute we’ll   show a more direct implementation for sum-of-products using only   NANDs, but these little schematics are a proof-of-concept   showing that NAND-only equivalent circuits exist.</p> <p>2-INPUT NOR gates are also universal, as shown by these little   schematics.</p> <p>Inverting logic takes a little getting used to, but it’s   the key to designing low-cost high-performance circuits in   CMOS.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide09.png" alt=""></a></div> <p>Now would be a good time to take a moment to look at the   documentation for the library of logic gates we’ll use for   our designs — look for <i>The Standard Cell Library</i> handout.   The information on this slide is taken from there.</p> <p>The library has both inverting gates (such as inverters, NANDs   and NORs) and non-inverting gates (such as buffers, ANDs and   ORs).  Why bother to include both types of gates?  Didn’t   we just learn we can build any circuit using only NAND or   NOR?</p> <p>Good questions!  We get some insight into the answers if we   look at these three implementations for a 4-input AND   function.</p> <p>The upper circuit is a direct implementation using the 4-input   AND gate available in the library.  The \(t_{\textrm{PD}}\) of the   gate is 160 picoseconds and its size is 20 square microns.   Don’t worry too much about the actual numbers, what   matters on this slide is how the numbers compare between   designs.</p> <p>The middle circuit implements the same function, this time   using a 4-INPUT NAND gate hooked to an inverter to produce the   AND functionality we want.  The \(t_{\textrm{PD}}\) of this   circuit is 90 picoseconds, considerably faster than the single   gate above.  The tradeoff is that the size is somewhat   larger.</p> <p>How can this be?  Especially since we know the AND gate   implementation is the NAND/INVERTER pair shown in the middle   circuit.  The answer is that the creators of the library decided   to make the non-inverting gates small but slow by using MOSFETs   with much smaller widths than used in the inverting logic gates,   which were designed to be fast.</p> <p>Why would we ever want to use a slow gate?  Remember that the   propagation delay of a circuit is set by the longest path in   terms of delay from inputs to outputs.  In a complex circuit,   there are many input/output paths, but it’s only the   components on the longest path that need to be fast in order to   achieve the best possible overall \(t_{\textrm{PD}}\).  The   components on the other, shorter paths, can potentially be a bit   slower.  And the components on short input/output paths can be   very slow indeed.  So for the portions of the circuit that   aren’t speed sensitive, it’s a good tradeoff to use   slower but smaller gates.  The overall performance isn’t   affected, but the total size is improved.</p> <p>So for faster performance we’ll design with inverting   gates, and for smallest size we’ll design with   non-inverting gates.  The creators of the gate library designed   the available gates with this tradeoff in mind.</p> <p>The 4-input inverting gates are also designed with this   tradeoff in mind.  For the ultimate in performance, we want to   use a tree circuit of 2-input gates, as shown in the lower   circuit.  This implementation shaves 10 picoseconds off the   \(t_{\textrm{PD}}\), while costing us a bit more in size.</p> <p>Take a closer look at the lower circuit.  This tree circuit   uses two NAND gates whose outputs are combined with a NOR gate.   Does this really compute the AND of A, B, C, and D?  Yup, as you   can verify by building the truth table for this combinational   system using the truth tables for NAND and NOR.</p> <p>This circuit is a good example of the application of a   particular Boolean identity known as Demorgan’s Law.   There are two forms of Demorgan’s law, both of which are   shown here.  The top form is the one we’re interested in   for analyzing the lower circuit.  It tells us that the NOR of A   with B is equivalent to the AND of (NOT A) with (NOT B).  So the   2-input NOR gate can be thought of as a 2-input AND gate with   inverting inputs.  How does this help?  We can now see that the   lower circuit is actually a tree of AND gates, where the   inverting outputs of the first layer match up with the inverting   inputs of the second layer.</p> <p>It’s a little confusing the first time you see it, but   with practice you’ll be comfortable using Demorgan’s   law when building trees or chains of inverting logic.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide10.png" alt=""></a></div> <p>Using Demorgan’s Law we can answer the question of how to   build NANDs and NORs with large numbers of inputs.  Our gate   library includes inverting gates with up to 4 inputs.  Why stop   there?  Well, the pulldown chain of a 4-input NAND gate has 4   NFETs in series and the resistance of the conducting channels is   starting to add up.  We could make the NFETs wider to   compensate, but then the gate gets much larger and the wider   NFETs impose a higher capacitive load on the input signals.  The   number of possible tradeoffs between size and speed grows   rapidly with the number of inputs, so it’s usually just   best for the library designer to stop at 4-input gates and let   the circuit designer take it from there.</p> <p>Happily, Demorgan’s law shows us how build trees of   alternating NANDs and NORs to build inverting logic with a large   number of inputs.  Here we see schematics for an 8-input NAND   and an 8-input NOR gate.</p> <p>Think of the middle layer of NOR gates in the left circuit as   AND gates with inverting inputs and then it’s easy to see   that the circuit is a tree of ANDs with an inverting output.</p> <p>Similarly, think of the middle layer of NAND gates in the right   circuit as OR gates with inverting inputs and see that we really   have a tree of OR gates with an inverting output.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide11.png" alt=""></a></div> <p>Now let’s see how to build sum-of-products circuits using   inverting logic.  The two circuits shown here implement the same   sum-of-products logic function.  The one on the top uses two   layers of NAND gates, the one on the bottom, two layers of NOR   gates.</p> <p>Let’s visualize Demorgan’s Law in action on the top   circuit.  The NAND gate with Y on its output can be transformed   by Demorgan’s Law into an OR gate with inverting inputs.   So we can redraw the circuit on the top left as the circuit   shown on the top right.  Now, notice that the inverting outputs   of the first layer are cancelled by the inverting inputs of the   second layer [CLICK], a step we can show visually by removing   matching inversions.  And, voila, we see the NAND/NAND circuit   in sum-of-products form: a layer of inverters, a layer of AND   gates, and an OR gate to combine the product terms.</p> <p>We can use a similar visualization to transform the output gate   of the bottom circuit, giving us the circuit on the bottom   right.  Match up the bubbles and we see that we have the same   logic function as above.</p> <p>Looking at the NOR/NOR circuit on the bottom left, we see it   has 4 inverters, where as the NAND/NAND circuit only has one.   Why would we ever use the NOR/NOR implementation?  It has to do   with the loading on the inputs.  In the top circuit, the input A   connects to a total of four MOSFET switches.  In the bottom   circuit, it connects to only the two MOSFET switches in the   inverter.  So, the bottom circuit imposes half the capacitive   load on the A signal.  This might be significant if the signal A   connected to many such circuits.</p> <p>The bottom line: when you find yourself needing a fast   implementation for the AND/OR circuitry for a sum-of-products   expression, try using the NAND/NAND implementation.  It’ll   be noticeably faster than using AND/OR.</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide12.png" alt=""></a></div> <p>The previous sections showed us how to build a circuit that   computes a given sum-of-products expression.  An interesting   question to ask is if we can implement the same functionality   using fewer gates or smaller gates?  In other words is there an   equivalent Boolean expression that involves fewer operations?   Boolean algebra has many identities that can be used to   transform an expression into an equivalent, and hopefully   smaller, expression.</p> <p>The reduction identity in particular offers a transformation   that simplifies an expression involving two variables and four   operations into a single variable and no operations.   Let’s see how we might use that identity to simplify a   sum-of-products expression.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide13.png" alt=""></a></div> <p>Here’s the equation from the start of this chapter,   involving 4 product terms.  We’ll use a variant of the   reduction identity involving a Boolean expression alpha and a   single variable A.  Looking at the product terms, the middle two   offer an opportunity to apply the reduction identity if we let   alpha be the expression (C AND B).  So we simplify the middle   two product terms to just alpha, <i>i.e.</i>, (C AND B),   eliminating the variable A from this part of the expression.</p> <p>Considering the now three product terms, we see that the first   and last terms can also be reduced, this time letting alpha be   the expression (NOT C and A).  Wow, this equivalent equation is   much smaller!  Counting inversions and pair-wise operations, the   original equation has 14 operations, while the simplified   equation has 4 operations.  The simplified circuit would be much   cheaper to build and have a smaller \(t_{\textrm{PD}}\) in the   bargain!</p> <p>Doing this sort of Boolean simplification by hand is tedious   and error-prone.  Just the sort of task a computer program could   help with.  Such programs are in common use, but the computation   needed to discover the smallest possible form for an expression   grows faster than exponentially as the number of inputs   increases.  So for larger equations, the programs use various   heuristics to choose which simplifications to apply.  The   results are quite good, but not necessarily optimal.  But it   sure beats doing the simplification by hand!</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide14.png" alt=""></a></div> <p>Another way to think about simplification is by searching the   truth table for don’t-care situations.  For example,   look at the first and third rows of the original truth table on   the left.  In both cases A is 0, C is 0, and the output Y is 0.   The only difference is the value of B, which we can then tell is   irrelevant when both A and C are 0.  This gives us the first row   of the truth table on the right, where we use X to indicate that   the value of B doesn’t matter when A and C are both 0.  By   comparing rows with the same value for Y, we can find other   don’t-care situations.</p> <p>The truth table with don’t-cares has only three rows   where the output is 1.  And, in fact, the last row is redundant   in the sense that the input combinations it matches (011 and   111) are covered by the second and fourth rows.</p> <p>The product terms derived from rows two and four are exactly   the product terms we found by applying the reduction   identity.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide15.png" alt=""></a></div> <p>Do we always want to use the simplest possible equation as the   template for our circuits?  Seems like that would minimize the   circuit cost and maximize performance, a good thing.</p> <p>The simplified circuit is shown here.  Let’s look at how   it performs when A is 1, B is 1, and C makes a transition from 1   to 0.  Before the transition, C is 1 and we can see from the   annotated node values that it’s the bottom AND gate   that’s causing the Y output to be 1.</p> <p>When C transitions to 0, the bottom AND gate turns off and the   top AND gate turns on, and, eventually the Y output becomes 1   again.  But the turning on of the top AND is delayed by the   \(t_{\textrm{PD}}\) of the inverter, so there’s a brief   period of time where neither AND gate is on, and the output   momentarily becomes 0.  This short blip in Y’s value is   called a glitch and it may result in short-lived changes on many   node values as it propagates through other parts of the circuit.   All those changes consume power, so it would be good to avoid   these sorts of glitches if we can.</p> <p>If we include the third product term BA in our implementation,   the circuit still computes the same long-term answer as before.   But now when A and B are both high, the output Y will be 1   independently of the value of the C input.  So the 1-to-0   transition on the C input doesn’t cause a glitch on the Y   output.  If you recall the last section of the previous chapter,   the phrase we used to describe such circuits is <i>lenient</i>.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide16.png" alt=""></a></div> <p>When trying to minimize a sum-of-products expression using the   reduction identity, our goal is to find two product terms that   can be written as one smaller product term, eliminating the   don’t-care variable.  This is easy to do when two the   product terms come from adjacent rows in the truth table.  For   example, look at the bottom two rows in this truth table.  Since   the Y output is 1 in both cases, both rows will be represented   in the sum-of-products expression for this function.  It’s   easy to spot the don’t care variable: when C and B are   both 1, the value of A isn’t needed to determine the value   of Y.  Thus, the last two rows of the truth table can be   represented by the single product term (B AND C).</p> <p>Finding these opportunities would be easier if we reorganized   the truth table so that the appropriate product terms were on   adjacent rows.  That’s what we’ve done in the   Karnaugh map, K-map for short, shown on the right.  The K-map   organizes the truth table as a two-dimensional table with its   rows and columns labeled with the possible values for the   inputs.  In this K-map, the first row contains entries for when   C is 0 and the second row contains entries for when C is 1.   Similarly, the first column contains entries for when A is 0 and   B is 0.  And so on.  The entries in the K-map are exactly the   same as the entries in the truth table, they’re just   formatted differently.</p> <p>Note that the columns have been listed in a special sequence   that’s different from the usual binary counting sequence.   In this sequence, called a Gray Code, adjacent labels differ in   exactly one of their bits.  In other words, for any two adjacent   columns, either the value of the A label changed, or the value   of the B label changed.</p> <p>In this sense, the leftmost and rightmost columns are also   adjacent.  We write the table as a two-dimensional matrix, but   you should think of it as cylinder with its left and right edges   touching.  If it helps you visualize which entries are adjacent,   the edges of the cube shows which 3-bit input values differ by   only one bit.  As shown by the red arrows, if two entries are   adjacent in the cube, they are also adjacent in the table.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide17.png" alt=""></a></div> <p>It’s easy to extend the K-map notation to truth tables   for functions with 4 inputs, as shown here.  We’ve used a   Gray code sequencing for the rows as well as the columns.  As   before, the leftmost and rightmost columns are adjacent, as are   the top and bottom rows.  Again, as we move to an adjacent   column or an adjacent row, only one of the four input labels   will have changed.</p> <p>To build a K-map for functions of 6 variables we’d need a   4x4x4 matrix of values.  That’s hard to draw on the 2D   page and it would be a challenge to tell which cells in the 3D   matrix were adjacent.  For more than 6 variables we’d need   additional dimensions.  Something we can handle with computers,   but hard those of us who live in only a three-dimensional   space!</p> <p>As a practical matter, K-maps work well for up to 4 variables,   and we’ll stick with that.  But keep in mind that you can   generalize the K-map technique to higher dimensions.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide18.png" alt=""></a></div> <p>So why talk about K-maps?  Because patterns of adjacent K-map   entries that contain 1’s will reveal opportunities for   using simpler product terms in our sum-of-products   expression.</p> <p>Let’s introduce the notion of an implicant, a fancy name   for a rectangular region of the K-map where the entries are all   1’s. Remember when an entry is a 1, we’ll want the   sum-of-products expression to evaluate to TRUE for that   particular combination of input values.</p> <p>We require the width and length of the implicant to be a power of 2, <i>i.e.</i>, the region should have 1, 2, or 4 rows, and 1, 2, or 4 columns.</p> <p>It’s okay for implicants to overlap.  We say that an   implicant is a <i>prime implicant</i> if it is not completely   contained in any other implicant.  Each product term in our   final minimized sum-of-products expression will be related to   some prime implicant in the K-map.</p> <p>Let’s see how these rules work in practice using these   two example K-maps.  As we identify prime implicants,   we’ll circle them in red.  Starting with the K-map on the   left, the first implicant contains the singleton 1-cell   that’s not adjacent to any other cell containing   1’s.</p> <p>The second prime implicant is the pair of adjacent 1’s in   the upper right hand corner of the K-map.  This implicant is has   one row and two columns, meeting our constraints on an   implicant’s dimensions.</p> <p>Finding the prime implicants in the right-hand K-map is a bit   trickier.  Recalling that the left and right columns are   adjacent, we can spot a 2x2 prime implicant.  Note that this   prime implicant contains many smaller 1x2, 2x1 and 1x1   implicants, but none of those would be prime implicants since   they are completely contained in the 2x2 implicant.</p> <p>It’s tempting draw a 1x1 implicant around the remaining   1, but actually we want to find the largest implicant that   contains this particular cell.  In this case, that’s the   1x2 prime implicant shown here.  Why do we want to find the   largest possible prime implicants?  We’ll answer that   question in a minute...</p> <p>Each implicant can be uniquely identified by a product term, a   Boolean expression that evaluates to TRUE for every cell   contained within the implicant and FALSE for all other cells.   Just as we did for the truth table rows at the beginning of this   chapter, we can use the row and column labels to help us build   the correct product term.</p> <p>The first implicant we circled corresponds to the product term   \(\overline{A} \cdot \overline{B} \cdot C\), an expression that   evaluates to TRUE when A is 0, B is 0, and C is 1.</p> <p>How about the 1x2 implicant in the upper-right hand corner?  We   don’t want include the input variables that change as we   move around in the implicant.  In this case the two input values   that remain constant are C (which has the value 0) and A (which   has the value 1), so the corresponding product term is   \(A \cdot \overline{C}\).</p> <p>Here are the two product terms for the two prime implicants in   the right-hand K-map.  Notice that the larger the prime   implicant, the smaller the product term!  That makes sense: as   we move around inside a large implicant, the number of inputs   that remain constant across the entire implicant is smaller.   Now we see why we want to find the largest possible prime   implicants: they give us the smallest product terms!</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide19.png" alt=""></a></div> <p>Let’s try another example.  Remember that we’re   looking for the largest possible prime implicants.  A good way   to proceed is to find some un-circled 1, and then identify the   largest implicant we can find that incorporates that cell.</p> <p>There’s a 2x4 implicant that covers the middle two rows   of the table.  Looking at the 1’s in the top row, we can   identify two 2x2 implicants that include those cells.</p> <p>There’s a 4x1 implicant that covers the right column,   leaving the lonely 1 in the lower left-hand corner of the table.   Looking for adjacent 1’s and remembering the table is   cyclic, we can find a 2x2 implicant that incorporates this last   un-circled 1.</p> <p>Notice that we’re always looking for the largest possible   implicant, subject to constraint that each dimension has to be   either 1, 2 or 4.  It’s these largest implicants that will   turn out to be prime implicants.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide20.png" alt=""></a></div> <p>Now that we’ve identified the prime implicants,   we’re ready to build the minimal sum-of-products   expression.</p> <p>Here are two example K-maps where we’ve shown only the   prime implicants needed to cover all the 1’s in the map.   This means, for example, that in the 4-variable map, we   didn’t include the 4x1 implicant covering the right   column.  That implicant was a prime implicant since it   wasn’t completely contained by any other implicant, but it   wasn’t needed to provide a cover for all the ones in the   table.</p> <p>Looking at the top table, we’ll assemble the minimal   sum-of-products expression by including the product terms for   each of the shown implicants.  The top implicant has the product   term A AND (not C), and the bottom implicant has the product   term (B AND C).  And we’re done!  Why is the resulting   equation minimal?  If there was some further reduction that   could be applied, to produce a yet smaller product term, that   would mean there was a larger prime implicant that could have   been circled in the K-map.</p> <p>Looking the bottom table, we can assemble the sum-of-products   expression term-by-term.  There were 4 prime implicants, so   there are 4 product terms in the expression.</p> <p>And we’re done.  Finding prime implicants in a K-map is   faster and less error-prone that fooling around with Boolean   algebra identities.</p> <p>Note that the minimal sum-of-products expression isn’t   necessarily unique.  If we had used a different mix of the prime   implicants when building our cover, we would have come up with   different sum-of-products expression.  Of course, the two   expressions are equivalent in the sense that they produce the   same value of Y for any particular combination of input values   — they were built from the same truth table after all.   And the two expressions will have the same number of   operations.</p> <p>So when you need to come with up a minimal sum-of-products   expression for functions of up to 4 variables, K-maps are the   way to go!</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide21.png" alt=""></a></div> <p>We can also use K-maps to help us remove glitches from output   signals.  Earlier in the chapter we saw this circuit and   observed that when A was 1 and B was 1, then a 1-to-0 transition   on C might produce a glitch on the Y output as the bottom   product term turned off and the top product term turned on.</p> <p>That particular situation is shown by the yellow arrow on the   K-map, where we’re transitioning from the cell on the   bottom row of the 1-1 column to the cell on the top row.   It’s easy to see that we’re leaving one implicant   and moving to another.  It’s the gap between the two   implicants that leads to the potential glitch on Y.</p> <p>It turns out there’s a prime implicant that covers the   cells involved in this transition shown here with a dotted red   outline.  We didn’t include it when building the original   sum-of-products implementation since the other two product terms   provided the necessary functionality.  But if we do include that   implicant as a third product term in the sum-of products, no   glitch can occur on the Y output.</p> <p>To make an implementation lenient, simply include all the prime   implicants in the sum-of-products expression.  That will bridge   the gaps between product terms that lead to potential output   glitches.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide22.png" alt=""></a></div> <p>The truth table we’ve been using as an example describes   a very useful combinational device called a 2-to-1 multiplexer.   A multiplexer, or MUX for short, selects one of its two input   values as the output value.  When the select input, marked with   an S in the diagram, is 0, the value on data input D0 becomes   the value of the Y output.  When S is 1, the value of data input   D1 is selected as the Y output value.</p> <p>MUXes come in many sizes, depending on the number of select   inputs.  A MUX with K select inputs will choose between the   values of \(2^K\) data inputs.  For example, here’s a 4-to-1   multiplexer with 4 data inputs and 2 select inputs.</p> <p>Larger MUXes can be built from a tree of 2-to-1 MUXes, as shown here.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide23.png" alt=""></a></div> <p>Why are MUXes interesting?  One answer is that they provide a   very elegant and general way of implementing a logic function.   Consider the 8-to-1 MUX shown on the right.  The 3 inputs —   A, B, and CIN — are used as the three select signals for   the MUX.  Think of the three inputs as forming a 3-bit binary   number.  For example, when they’re all 0, the MUX will   select data input 0, and when they’re all 1, the MUX will   select data input 7, and so on.</p> <p>How does make it easy to implement the logic function shown in   the truth table?  Well, we’ll wire up the data inputs of   the MUX to the constant values shown in the output column in the   truth table.  The values on the A, B and CIN inputs will cause   the MUX to select the appropriate constant on the data inputs as   the value for the COUT output.</p> <p>If later on we change the truth table, we don’t have to   redesign some complicated sum-of-products circuit, we simply   have to change the constants on the data inputs.  Think of the   MUX as a table-lookup device that can be reprogrammed to   implement, in this case, any three-input equation.  This sort of   circuit can be used to create various forms of programmable   logic, where the functionality of the integrated circuit   isn’t determined at the time of manufacture, but is set   during a programming step performed by the user at some later   time.  Modern programmable logic circuits can be programmed to   replace millions of logic gates.  Very handy for prototyping   digital systems before committing to the expense of a custom   integrated circuit implementation.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide24.png" alt=""></a></div> <p>So MUXes with N select lines are effectively stand-ins for   N-input logic circuits.  Such a MUX would have \(2^N\) data   inputs.  They’re useful for N up to 5 or 6, but for   functions with more inputs, the exponential growth in circuit   size makes them impractical.</p> <p>Not surprisingly, MUXes are universal as shown by these   MUX-based implementations for the sum-of-products building   blocks.  There is some speculation that in molecular-scale logic   technologies, MUXes may be the natural gate, so it’s good   to know they can be used to implement any logic function.</p> <p>Even XOR is simple to implement with a single 2-to-1 MUX!</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide25.png" alt=""></a></div> <p>Here’s a final logic implementation strategy using   read-only memories.  This strategy is useful when you need to   generate many different outputs from the same set of inputs, a   situation we’ll see a lot when we get to finite state   machines later on in the course.  Where MUXes are good for   implementing truth tables with one output column, read-only   memories are good for implementing truth tables with many output   columns.</p> <p>One of the key components in a read-only memory is the decoder   which has K select inputs and \(2^K\) data outputs.  Only one of   the data outputs will be 1 (or HIGH) at any given time, which   one is determined by the value on the select inputs.  The Jth   output will be 1 when the select lines are set to the binary   representation of J.</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide26.png" alt=""></a></div> <p>Here’s a read-only memory implementation for the 2-output   truth table shown on the left.  This particular 2-output device   is a full adder, which is used as a building block in addition   circuits.</p> <p>The three inputs to the function (A, B, and CI) are connected   to the select lines of a 3-to-8 decoder.  The 8 outputs of the   decoder run horizontally in the schematic diagram and each is   labeled with the input values for which that output will be   HIGH.  So when the inputs are 000, the top decoder output will   be HIGH and all the other decoder outputs LOW.  When the inputs   are 001 — <i>i.e.</i>, when A and B are 0 and CI is 1   — the second decoder output will be HIGH.  And so on.</p> <p>The decoder outputs control a matrix of NFET pulldown switches.   The matrix has one vertical column for each output of the truth   table.  Each switch connects a particular vertical column to   ground, forcing it to a LOW value when the switch is on.  The   column circuitry is designed so that if no pulldown switches   force its value to 0, its value will be a 1.  The value on each   of the vertical columns is inverted to produce the final output   values.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide27.png" alt=""></a></div> <p>So how do we use all this circuitry to implement the function   described by the truth table?  For any particular combination of   input values, exactly one of the decoder outputs will be HIGH,   all the others will be low.  Think of the decoder outputs as   indicating which row of the truth table has been selected by the   input values.  All of the pulldown switches controlled by the   HIGH decoder output will be turned ON, forcing the vertical   column to which they connect LOW.</p> <p>For example, if the inputs are 001, the decoder output labeled   001 will be HIGH.  This will turn on the circled pulldown   switch, forcing the S vertical column LOW .  The COUT vertical   column is not pulled down, so it will be HIGH.  After the output   inverters, S will be 1 and COUT will be 0, the desired output   values.</p> <p>By changing the locations of the pulldown switches, this   read-only memory can be programmed to implement any 3-input,   2-output function.</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide28.png" alt=""></a></div> <p>For read-only memories with many inputs, the decoders have many   outputs and the vertical columns in the switch matrix can become   quite long and slow.  We can reconfigure the circuit slightly so   that some of the inputs control the decoder and the other inputs   are used to select among multiple shorter and faster vertical   columns.  This combination of smaller decoders and output MUXes   is quite common in these sorts of memory circuits.</p> <div class="lecslide"><a name="28"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide29.png" alt=""></a></div> <p>Read-only memories, ROMs for short, are an implementation   strategy that ignores the structure of the particular Boolean   expression to be implemented.  The ROM’s size and overall   layout are determined only by the number of inputs and outputs.   Typically the switch matrix is fully populated, with all   possible switch locations filled with an NFET pulldown.  A   separate physical or electrical programming operation determines   which switches are actually controlled by the decoder lines.   The other switches are configured to be in the permanently off   state.</p> <p>If the ROM has N inputs and M outputs, then the switch matrix   will have \(2^N\) rows and M output columns, corresponding exactly   to the size of the truth table.</p> <p>As the inputs to the ROM change, various decoder outputs will   turn off and on, but at slightly different times.  As the   decoder lines cycle, the output values may change several times   until the final configuration of the pulldown switches is   stable.  So ROMs are not lenient and the outputs may show the   glitchy behavior discussed earlier.</p> <div class="lecslide"><a name="29"><img class="lecslideimg" src="../../../contents/c4/c4s1/Slide30.png" alt=""></a></div> <p>Whew!  This has been a whirlwind tour of various circuits we   can use to implement logic functions.  The sum-of-products   approach lends itself nicely to implementation with inverting   logic. Each circuit is custom-designed to implement a particular   function and as such can be made both fast and small.  The   design and manufacturing expense of creating such circuits is   worthwhile when you need high-end performance or are producing   millions of devices.</p> <p>MUX and ROM circuit implementations are mostly independent of   the specific function to be implemented.  That’s   determined by a separate programming step, which may be   completed after the manufacture of the devices.  They are   particularly suited for prototyping, low-volume production, or   devices where the functionality may need to be updated after the   device is out in the field.</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c4/index.htm">Back<span>Combinational Logic</span></a></li>     <li id="continue_btn"><a href="../../../contents/c4/c4s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

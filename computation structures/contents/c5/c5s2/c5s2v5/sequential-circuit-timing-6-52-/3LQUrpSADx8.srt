@@ -1,0 +1,680 @@
+1
+00:00:00,500 --> 00:00:04,840
+In 6.004, we have a specific
+plan on how we’ll use registers
+
+2
+00:00:04,840 --> 00:00:08,380
+in our designs, which we call
+the single-clock synchronous
+
+3
+00:00:08,380 --> 00:00:10,360
+discipline.
+
+4
+00:00:10,360 --> 00:00:12,710
+Looking at the sketch of
+a circuit on the left,
+
+5
+00:00:12,710 --> 00:00:14,840
+we see that it
+consists of registers
+
+6
+00:00:14,840 --> 00:00:18,310
+— the rectangular icons with
+the edge-triggered symbol —
+
+7
+00:00:18,310 --> 00:00:20,160
+and combinational
+logic circuits,
+
+8
+00:00:20,160 --> 00:00:24,830
+shown here as little clouds
+with inputs and outputs.
+
+9
+00:00:24,830 --> 00:00:27,970
+Remembering that there is no
+combinational path between
+
+10
+00:00:27,970 --> 00:00:31,940
+a register’s input and output,
+the overall circuit has no
+
+11
+00:00:31,940 --> 00:00:33,960
+combinational cycles.
+
+12
+00:00:33,960 --> 00:00:37,230
+In other words, paths from
+system inputs and register
+
+13
+00:00:37,230 --> 00:00:40,030
+outputs to the
+inputs of registers
+
+14
+00:00:40,030 --> 00:00:44,430
+never visit the same
+combinational block twice.
+
+15
+00:00:44,430 --> 00:00:46,590
+A single periodic
+clock signal is shared
+
+16
+00:00:46,590 --> 00:00:49,310
+among all the clocked devices.
+
+17
+00:00:49,310 --> 00:00:51,810
+Using multiple clock
+signals is possible,
+
+18
+00:00:51,810 --> 00:00:54,020
+but analyzing the
+timing for signals
+
+19
+00:00:54,020 --> 00:00:56,560
+that cross between clock
+domains is quite tricky,
+
+20
+00:00:56,560 --> 00:01:01,080
+so life is much simpler when all
+registers use the same clock.
+
+21
+00:01:01,080 --> 00:01:02,800
+The details of
+which data signals
+
+22
+00:01:02,800 --> 00:01:05,280
+change when are
+largely unimportant.
+
+23
+00:01:05,280 --> 00:01:08,730
+All that matters is that signals
+hooked to register inputs are
+
+24
+00:01:08,730 --> 00:01:12,080
+stable and valid for long enough
+to meet the registers’ setup
+
+25
+00:01:12,080 --> 00:01:13,270
+time.
+
+26
+00:01:13,270 --> 00:01:16,510
+And, of course, stay stable long
+enough to meet the registers’
+
+27
+00:01:16,510 --> 00:01:18,700
+hold time.
+
+28
+00:01:18,700 --> 00:01:21,570
+We can guarantee that the
+dynamic discipline is obeyed
+
+29
+00:01:21,570 --> 00:01:23,720
+by choosing the clock
+period to be greater
+
+30
+00:01:23,720 --> 00:01:27,090
+then the t_PD of every
+path from register outputs
+
+31
+00:01:27,090 --> 00:01:28,930
+to register inputs,
+
+32
+00:01:28,930 --> 00:01:32,980
+plus, of course, the
+registers’ setup time.
+
+33
+00:01:32,980 --> 00:01:36,280
+A happy consequence of choosing
+the clock period in this way
+
+34
+00:01:36,280 --> 00:01:38,930
+is that at the moment of
+the rising clock edge,
+
+35
+00:01:38,930 --> 00:01:41,260
+there are no other
+noise-inducing logic
+
+36
+00:01:41,260 --> 00:01:44,120
+transitions happening
+anywhere in the circuit.
+
+37
+00:01:44,120 --> 00:01:45,620
+Which means there
+should be no noise
+
+38
+00:01:45,620 --> 00:01:50,010
+problems when we update the
+stored state of each register.
+
+39
+00:01:50,010 --> 00:01:52,370
+Our next task is to
+learn how to analyze
+
+40
+00:01:52,370 --> 00:01:55,650
+the timing of a single-clock
+synchronous system.
+
+41
+00:01:55,650 --> 00:01:59,340
+Here’s a model of a particular
+path in our synchronous system.
+
+42
+00:01:59,340 --> 00:02:02,050
+A large digital system
+will have many such paths
+
+43
+00:02:02,050 --> 00:02:05,510
+and we have to do the analysis
+below for each one in order
+
+44
+00:02:05,510 --> 00:02:08,030
+to find the path that will
+determine the smallest
+
+45
+00:02:08,030 --> 00:02:09,639
+workable clock period.
+
+46
+00:02:09,639 --> 00:02:12,560
+As you might suspect, there are
+computed-aided design programs
+
+47
+00:02:12,560 --> 00:02:15,740
+that will do these
+calculations for us.
+
+48
+00:02:15,740 --> 00:02:18,740
+There’s an upstream register,
+whose output is connected
+
+49
+00:02:18,740 --> 00:02:22,290
+to a combinational logic circuit
+which generates the input
+
+50
+00:02:22,290 --> 00:02:25,790
+signal, labeled STAR, to
+the downstream register.
+
+51
+00:02:25,790 --> 00:02:28,680
+Let’s build a carefully-drawn
+timing diagram showing when
+
+52
+00:02:28,680 --> 00:02:33,250
+each signal in the system
+changes and when it is stable.
+
+53
+00:02:33,250 --> 00:02:36,050
+The rising edge of the clock
+triggers the upstream register,
+
+54
+00:02:36,050 --> 00:02:39,060
+whose output (labeled
+Q_R1) changes
+
+55
+00:02:39,060 --> 00:02:41,700
+as specified by the
+contamination and propagation
+
+56
+00:02:41,700 --> 00:02:43,760
+delays of the register.
+
+57
+00:02:43,760 --> 00:02:47,500
+Q_R1 maintains its old value
+for at least the contamination
+
+58
+00:02:47,500 --> 00:02:50,790
+delay of REG1, and then
+reaches its final stable value
+
+59
+00:02:50,790 --> 00:02:53,160
+by the propagation
+delay of REG1.
+
+60
+00:02:53,160 --> 00:02:55,630
+At this point Q_R1
+will remain stable
+
+61
+00:02:55,630 --> 00:02:58,110
+until the next
+rising clock edge.
+
+62
+00:02:58,110 --> 00:03:00,490
+Now let’s figure out the
+waveforms for the output
+
+63
+00:03:00,490 --> 00:03:02,250
+of the combinational
+logic circuit,
+
+64
+00:03:02,250 --> 00:03:05,220
+marked with a red
+star in the diagram.
+
+65
+00:03:05,220 --> 00:03:07,110
+The contamination
+delay of the logic
+
+66
+00:03:07,110 --> 00:03:10,730
+determines the earliest time
+STAR will go invalid measured
+
+67
+00:03:10,730 --> 00:03:14,200
+from when Q_R1 went invalid.
+
+68
+00:03:14,200 --> 00:03:16,050
+The propagation
+delay of the logic
+
+69
+00:03:16,050 --> 00:03:17,830
+determines the
+latest time STAR will
+
+70
+00:03:17,830 --> 00:03:22,640
+be stable measured from
+when Q_R1 became stable.
+
+71
+00:03:22,640 --> 00:03:24,380
+Now that we know
+the timing for STAR,
+
+72
+00:03:24,380 --> 00:03:26,820
+we can determine whether
+STAR will meet the setup
+
+73
+00:03:26,820 --> 00:03:30,420
+and hold times for the
+downstream register REG2.
+
+74
+00:03:30,420 --> 00:03:33,590
+Time t1 measures how
+long STAR will stay valid
+
+75
+00:03:33,590 --> 00:03:35,940
+after the rising clock edge.
+
+76
+00:03:35,940 --> 00:03:39,070
+t1 is the sum of REG1’s
+contamination delay
+
+77
+00:03:39,070 --> 00:03:41,750
+and the logic’s
+contamination delay.
+
+78
+00:03:41,750 --> 00:03:44,370
+The HOLD time for
+REG2 measures how long
+
+79
+00:03:44,370 --> 00:03:47,340
+STAR has to stay valid after
+the rising clock edge in order
+
+80
+00:03:47,340 --> 00:03:49,420
+to ensure correct operation.
+
+81
+00:03:49,420 --> 00:03:52,600
+So t1 has to be greater than
+or equal to the HOLD time
+
+82
+00:03:52,600 --> 00:03:54,220
+for REG2.
+
+83
+00:03:54,220 --> 00:03:56,890
+Time t2 is the sum
+of the propagation
+
+84
+00:03:56,890 --> 00:04:01,700
+delays for REG1 and the logic,
+plus the SETUP time for REG2.
+
+85
+00:04:01,700 --> 00:04:05,160
+This tells us the earliest time
+at which the next rising clock
+
+86
+00:04:05,160 --> 00:04:08,890
+edge can happen and still ensure
+that the SETUP time for REG2
+
+87
+00:04:08,890 --> 00:04:10,380
+is met.
+
+88
+00:04:10,380 --> 00:04:13,090
+So t2 has to be less
+than or equal to the time
+
+89
+00:04:13,090 --> 00:04:16,470
+between rising clock edges,
+called the clock period
+
+90
+00:04:16,470 --> 00:04:18,230
+or tCLK.
+
+91
+00:04:18,230 --> 00:04:20,810
+If the next rising
+clock happens before t2,
+
+92
+00:04:20,810 --> 00:04:25,750
+we’ll be violating the
+dynamic discipline for REG2.
+
+93
+00:04:25,750 --> 00:04:28,070
+So we have two
+inequalities that must
+
+94
+00:04:28,070 --> 00:04:30,870
+be satisfied for every
+register-to-register path
+
+95
+00:04:30,870 --> 00:04:32,810
+in our digital system.
+
+96
+00:04:32,810 --> 00:04:34,920
+If either inequality
+is violated,
+
+97
+00:04:34,920 --> 00:04:37,610
+we won’t be obeying the
+dynamic discipline for REG2
+
+98
+00:04:37,610 --> 00:04:42,920
+and our circuit will not be
+guaranteed to work correctly.
+
+99
+00:04:42,920 --> 00:04:45,380
+Looking at the inequality
+involving tCLK,
+
+100
+00:04:45,380 --> 00:04:48,820
+we see that the propagation
+delay of the upstream register
+
+101
+00:04:48,820 --> 00:04:51,050
+and setup time for the
+downstream register
+
+102
+00:04:51,050 --> 00:04:54,570
+take away from the time
+available useful work performed
+
+103
+00:04:54,570 --> 00:04:57,010
+by the combinational logic.
+
+104
+00:04:57,010 --> 00:04:59,410
+Not surprisingly, designers
+try to use registers
+
+105
+00:04:59,410 --> 00:05:02,840
+that minimize these two times.
+
+106
+00:05:02,840 --> 00:05:05,590
+What happens if there’s no
+combinational logic between
+
+107
+00:05:05,590 --> 00:05:08,640
+the upstream and
+downstream registers?
+
+108
+00:05:08,640 --> 00:05:11,670
+This happens when designing
+shift registers, digital delay
+
+109
+00:05:11,670 --> 00:05:13,540
+lines, etc.
+
+110
+00:05:13,540 --> 00:05:16,400
+Well, then the first
+inequality tells us
+
+111
+00:05:16,400 --> 00:05:19,140
+that the contamination delay
+of the upstream register
+
+112
+00:05:19,140 --> 00:05:22,570
+had better be greater than
+or equal to the hold time
+
+113
+00:05:22,570 --> 00:05:25,090
+of the downstream register.
+
+114
+00:05:25,090 --> 00:05:27,710
+In practice, contamination
+delays are smaller than hold
+
+115
+00:05:27,710 --> 00:05:31,410
+times, so in general this
+wouldn’t be the case.
+
+116
+00:05:31,410 --> 00:05:35,170
+So designers are often required
+to insert dummy logic, e.g.,
+
+117
+00:05:35,170 --> 00:05:37,270
+two inverters in
+series, in order
+
+118
+00:05:37,270 --> 00:05:41,900
+to create the necessary
+contamination delay.
+
+119
+00:05:41,900 --> 00:05:44,320
+Finally we have to worry
+about the phenomenon called
+
+120
+00:05:44,320 --> 00:05:48,210
+clock skew, where the clock
+signal arrives at one register
+
+121
+00:05:48,210 --> 00:05:50,970
+before it arrives at the other.
+
+122
+00:05:50,970 --> 00:05:53,040
+We won’t go into
+the analysis here,
+
+123
+00:05:53,040 --> 00:05:55,850
+but the net effect is to
+increase the apparent setup
+
+124
+00:05:55,850 --> 00:05:58,160
+and hold times of the
+downstream register,
+
+125
+00:05:58,160 --> 00:06:03,080
+assuming we can’t predict
+the sign of the skew.
+
+126
+00:06:03,080 --> 00:06:06,130
+The clock period, tCLK,
+characterizes the performance
+
+127
+00:06:06,130 --> 00:06:07,660
+of our system.
+
+128
+00:06:07,660 --> 00:06:10,110
+You may have noticed that
+Intel is willing to sell you
+
+129
+00:06:10,110 --> 00:06:13,250
+processor chips that run at
+different clock frequencies,
+
+130
+00:06:13,250 --> 00:06:19,640
+e.g., a 1.7 GHz processor
+vs. a 2 GHz processor.
+
+131
+00:06:19,640 --> 00:06:23,010
+Did you ever wonder how
+those chips are different?
+
+132
+00:06:23,010 --> 00:06:25,310
+As is turns out they’re not!
+
+133
+00:06:25,310 --> 00:06:28,270
+What’s going on is that
+variations in the manufacturing
+
+134
+00:06:28,270 --> 00:06:32,290
+process mean that some chips
+have better tPDs than others.
+
+135
+00:06:32,290 --> 00:06:35,070
+On fast chips, a smaller
+tPD for the logic
+
+136
+00:06:35,070 --> 00:06:38,400
+means that they can have a
+smaller tCLK and hence a higher
+
+137
+00:06:38,400 --> 00:06:39,810
+clock frequency.
+
+138
+00:06:39,810 --> 00:06:42,850
+So Intel manufactures many
+copies of the same chip,
+
+139
+00:06:42,850 --> 00:06:46,500
+measures their tPDs and
+selects the fast ones to sell
+
+140
+00:06:46,500 --> 00:06:48,720
+as higher-performance parts.
+
+141
+00:06:48,720 --> 00:06:52,090
+That’s what it takes to
+make money in the chip biz!

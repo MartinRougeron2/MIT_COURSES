@@ -1,0 +1,396 @@
+1
+00:00:00,680 --> 00:00:04,970
+We can use a 2-to-1 multiplexer to build a
+settable storage element.
+
+2
+00:00:04,970 --> 00:00:10,170
+Recall that a MUX selects as its output value
+the value of one of its two data inputs.
+
+3
+00:00:10,170 --> 00:00:15,050
+The output of the MUX serves as the state
+output of the memory component.
+
+4
+00:00:15,050 --> 00:00:19,250
+Internally to the memory component we'll also
+connect the output of the MUX to its D0 data
+
+5
+00:00:19,250 --> 00:00:20,670
+input.
+
+6
+00:00:20,670 --> 00:00:26,060
+The MUX's D1 data input will become the data
+input of the memory component.
+
+7
+00:00:26,060 --> 00:00:30,330
+And the select line of the MUX will become
+the memory component's load signal, here called
+
+8
+00:00:30,330 --> 00:00:32,640
+the gate.
+
+9
+00:00:32,640 --> 00:00:37,530
+When the gate input is LOW, the MUX's output
+is looped back through MUX through the D0
+
+10
+00:00:37,530 --> 00:00:41,079
+data input,
+forming the bi-stable positive feedback loop
+
+11
+00:00:41,079 --> 00:00:43,870
+discussed in the last section.
+
+12
+00:00:43,870 --> 00:00:50,390
+Note our circuit now has a cycle, so it no
+longer qualifies as a combinational circuit.
+
+13
+00:00:50,390 --> 00:00:55,239
+When the gate input is HIGH, the MUX's output
+is determined by the value of the D1 input,
+
+14
+00:00:55,239 --> 00:00:59,000
+i.e., the data input of the memory component.
+
+15
+00:00:59,000 --> 00:01:03,880
+To load new data into the memory component,
+we set the gate input HIGH for long enough
+
+16
+00:01:03,880 --> 00:01:06,110
+for the Q output to become valid and stable.
+
+17
+00:01:06,110 --> 00:01:12,000
+Looking at the truth table, we see that when
+G is 1, the Q output follows the D input.
+
+18
+00:01:12,000 --> 00:01:16,789
+While the G input is HIGH, any changes in
+the D input will be reflected as changes in
+
+19
+00:01:16,789 --> 00:01:22,090
+the Q output, the timing being determined
+by the tPD of the MUX.
+
+20
+00:01:22,090 --> 00:01:27,210
+Then we can set the gate input LOW to switch
+the memory component into memory mode,
+
+21
+00:01:27,210 --> 00:01:32,408
+where the stable Q value is maintained indefinitely
+by the positive feedback loop as shown in
+
+22
+00:01:32,408 --> 00:01:34,820
+the first two rows of the truth table.
+
+23
+00:01:34,820 --> 00:01:39,850
+Our memory device is a called a D latch, or
+just a latch for short, with the schematic
+
+24
+00:01:39,850 --> 00:01:42,160
+symbol shown here.
+
+25
+00:01:42,160 --> 00:01:46,520
+When the latch's gate is HIGH, the latch is
+open and information flows from the D input
+
+26
+00:01:46,520 --> 00:01:48,670
+to the Q output.
+
+27
+00:01:48,670 --> 00:01:53,650
+When the latch's gate is LOW, the latch is
+closed and in "memory mode", remembering whatever
+
+28
+00:01:53,650 --> 00:01:58,729
+value was on the D input when the gate transitioned
+from HIGH to LOW.
+
+29
+00:01:58,729 --> 00:02:01,950
+This is shown in the timing diagrams on the
+right.
+
+30
+00:02:01,950 --> 00:02:06,479
+The waveforms show when a signal is stable,
+i.e., a constant signal that's either LOW
+
+31
+00:02:06,479 --> 00:02:10,189
+or HIGH,
+and when a signal is changing, shown as one
+
+32
+00:02:10,189 --> 00:02:12,840
+or more transitions between LOW and HIGH.
+
+33
+00:02:12,840 --> 00:02:19,980
+When G is HIGH, we can see Q changing to a
+new stable output value no later than tPD
+
+34
+00:02:19,980 --> 00:02:23,629
+after D reaches a new stable value.
+
+35
+00:02:23,629 --> 00:02:28,549
+Our theory is that after G transitions to
+a LOW value, Q will stay stable at whatever
+
+36
+00:02:28,549 --> 00:02:32,590
+value was on D when G made the HIGH to LOW
+transition.
+
+37
+00:02:32,590 --> 00:02:37,449
+But, we know that in general, we can't assume
+anything about the output of a combinational
+
+38
+00:02:37,449 --> 00:02:41,279
+device until tPD after the input transition.
+
+39
+00:02:41,279 --> 00:02:47,130
+The device is allowed to do whatever it wants
+in the interval between tCD and tPD after
+
+40
+00:02:47,130 --> 00:02:48,389
+the input transition.
+
+41
+00:02:48,389 --> 00:02:54,750
+But how will our memory work if the 1-to-0
+transition on G causes the Q output to become
+
+42
+00:02:54,750 --> 00:02:57,590
+invalid for a brief interval?
+
+43
+00:02:57,590 --> 00:03:01,730
+After all it's the value on the Q output we're
+trying to remember!
+
+44
+00:03:01,730 --> 00:03:07,989
+We're going to have ensure that a 1-to-0 transition
+on G doesn't affect the Q output.
+
+45
+00:03:07,989 --> 00:03:11,999
+That's why we specified a lenient MUX for
+our memory component.
+
+46
+00:03:11,999 --> 00:03:15,010
+The truth table for a lenient MUX is shown
+here.
+
+47
+00:03:15,010 --> 00:03:19,809
+The output of a lenient MUX remains valid
+and stable even after an input transition
+
+48
+00:03:19,809 --> 00:03:22,930
+under any of the following three conditions.
+
+49
+00:03:22,930 --> 00:03:28,829
+(1) When we're loading the latch by setting
+G HIGH, once the D input has been valid and
+
+50
+00:03:28,829 --> 00:03:32,930
+stable for tPD,
+we are guaranteed that the Q output will be
+
+51
+00:03:32,930 --> 00:03:39,609
+stable and valid with the same value as the
+D input, independently of Q's initial value.
+
+52
+00:03:39,609 --> 00:03:46,389
+Or (2) If both Q and D are valid and stable
+for tPD, the Q output will be unaffected by
+
+53
+00:03:46,389 --> 00:03:49,829
+subsequent transitions on the G input.
+
+54
+00:03:49,829 --> 00:03:55,359
+This is the situation that will allow us to
+have a 1-to-0 transition on G without contaminating
+
+55
+00:03:55,359 --> 00:03:56,609
+the Q output.
+
+56
+00:03:56,609 --> 00:04:04,010
+Or, finally, (3) if G is LOW and Q has been
+stable for at least tPD, the output will be
+
+57
+00:04:04,010 --> 00:04:08,500
+unaffected by subsequent transitions on the
+D input.
+
+58
+00:04:08,500 --> 00:04:10,719
+Does lenience guarantee a working latch?
+
+59
+00:04:10,719 --> 00:04:15,150
+Well, only if we're careful about ensuring
+that signals are stable at the right times
+
+60
+00:04:15,150 --> 00:04:19,089
+so we can leverage the lenient behavior of
+the MUX.
+
+61
+00:04:19,089 --> 00:04:23,789
+Here are the steps we need to follow in order
+to ensure the latch will work as we want.
+
+62
+00:04:23,789 --> 00:04:28,990
+First, while the G input is HIGH, set the
+D input to the value we wish store in the
+
+63
+00:04:28,990 --> 00:04:29,990
+latch.
+
+64
+00:04:29,990 --> 00:04:36,009
+Then, after tPD, we're guaranteed that value
+will be stable and valid on the Q output.
+
+65
+00:04:36,009 --> 00:04:40,120
+This is condition (1) from the previous slide.
+
+66
+00:04:40,120 --> 00:04:46,120
+Now we wait another tPD so that the information
+about the new value on the Q' input propagates
+
+67
+00:04:46,120 --> 00:04:48,879
+through the internal circuitry of the latch.
+
+68
+00:04:48,879 --> 00:04:55,330
+Now, both D *and* Q' have been stable for
+at least tPD, giving us condition (2) from
+
+69
+00:04:55,330 --> 00:04:57,940
+the previous slide.
+
+70
+00:04:57,940 --> 00:05:04,889
+So if D is stable for 2*tPD, transitions on
+G will not affect the Q output.
+
+71
+00:05:04,889 --> 00:05:09,509
+This requirement on D is called the setup
+time of the latch: it's how long D must be
+
+72
+00:05:09,509 --> 00:05:12,950
+stable and valid before the HIGH-to-LOW transition
+of G.
+
+73
+00:05:12,950 --> 00:05:18,800
+Now we can set G to LOW, still holding D stable
+and valid.
+
+74
+00:05:18,800 --> 00:05:23,380
+After another tPD to allow the new G value
+to propagate through the internal circuitry
+
+75
+00:05:23,380 --> 00:05:28,330
+of the latch, we've satisfied condition (3)
+from the previous slide,
+
+76
+00:05:28,330 --> 00:05:34,180
+and the Q output will be unaffected by subsequent
+transitions on D.
+
+77
+00:05:34,180 --> 00:05:38,270
+This further requirement on D's stability
+is called the hold time of the latch:
+
+78
+00:05:38,270 --> 00:05:43,990
+it's how long after the transition on G that
+D must stay stable and valid.
+
+79
+00:05:43,990 --> 00:05:48,039
+Together the setup and hold time requirements
+are called the dynamic discipline, which must
+
+80
+00:05:48,039 --> 00:05:51,550
+be followed if the latch is to operate correctly.
+
+81
+00:05:51,550 --> 00:05:57,270
+In summary, the dynamic discipline requires
+that the D input be stable and valid both
+
+82
+00:05:57,270 --> 00:06:00,040
+before and after a transition on G.
+
+83
+00:06:00,040 --> 00:06:05,259
+If our circuit is designed to obey the dynamic
+discipline, we can guarantee that this memory
+
+84
+00:06:05,259 --> 00:06:10,849
+component will reliably store the information
+on D when the gate makes a HIGH-to-LOW transition.

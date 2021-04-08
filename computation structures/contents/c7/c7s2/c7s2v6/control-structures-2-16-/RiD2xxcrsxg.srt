@@ -1,0 +1,237 @@
+1
+00:00:00,500 --> 00:00:03,210
+Let’s summarize what we’ve
+learned about controlling
+
+2
+00:00:03,210 --> 00:00:05,115
+pipelined systems.
+
+3
+00:00:05,115 --> 00:00:06,490
+The most
+straightforward approach
+
+4
+00:00:06,490 --> 00:00:08,320
+is to use a pipeline
+with the system
+
+5
+00:00:08,320 --> 00:00:12,970
+clock chosen to accommodate
+the worst-case processing time.
+
+6
+00:00:12,970 --> 00:00:16,300
+These systems are easy to
+design but can’t produce higher
+
+7
+00:00:16,300 --> 00:00:19,590
+throughputs if the processing
+stages might run more quickly
+
+8
+00:00:19,590 --> 00:00:22,190
+for some data values.
+
+9
+00:00:22,190 --> 00:00:24,320
+We saw that we could
+use a simple handshake
+
+10
+00:00:24,320 --> 00:00:27,010
+protocol to move data
+through the system.
+
+11
+00:00:27,010 --> 00:00:29,190
+All communication still
+happens on the rising edge
+
+12
+00:00:29,190 --> 00:00:31,870
+of the system clock, but
+the specific clock edge
+
+13
+00:00:31,870 --> 00:00:33,720
+used to transfer
+data is determined
+
+14
+00:00:33,720 --> 00:00:36,690
+by the stages themselves.
+
+15
+00:00:36,690 --> 00:00:39,150
+It’s tempting to wonder if we
+can might adjust the global
+
+16
+00:00:39,150 --> 00:00:42,100
+clock period to take advantage
+of data-dependent processing
+
+17
+00:00:42,100 --> 00:00:43,650
+speedups.
+
+18
+00:00:43,650 --> 00:00:45,480
+But the necessary
+timing generators
+
+19
+00:00:45,480 --> 00:00:48,460
+can be very complicated
+in large systems.
+
+20
+00:00:48,460 --> 00:00:51,620
+It’s usually much easier to
+use local communication between
+
+21
+00:00:51,620 --> 00:00:54,820
+modules to determine system
+timing than trying to figure
+
+22
+00:00:54,820 --> 00:00:57,370
+out all the constraints
+at the system level.
+
+23
+00:00:57,370 --> 00:01:00,800
+So this approach isn’t
+usually a good one.
+
+24
+00:01:00,800 --> 00:01:03,680
+But what about locally-timed
+asynchronous systems
+
+25
+00:01:03,680 --> 00:01:06,330
+like the example we just saw?
+
+26
+00:01:06,330 --> 00:01:09,330
+Each generation of engineers
+has heard the siren call
+
+27
+00:01:09,330 --> 00:01:11,170
+of asynchronous logic.
+
+28
+00:01:11,170 --> 00:01:13,660
+Sadly, it usually proves
+too hard to produce
+
+29
+00:01:13,660 --> 00:01:16,510
+a provably reliable
+design for a large system,
+
+30
+00:01:16,510 --> 00:01:19,190
+say, a modern computer.
+
+31
+00:01:19,190 --> 00:01:22,150
+But there are special cases,
+such as the logic for integer
+
+32
+00:01:22,150 --> 00:01:25,220
+division, where the
+data-dependent speed-ups
+
+33
+00:01:25,220 --> 00:01:28,420
+make the extra work worthwhile.
+
+34
+00:01:28,420 --> 00:01:30,840
+We characterized the
+performance of our systems
+
+35
+00:01:30,840 --> 00:01:33,680
+by measuring their
+latency and throughput.
+
+36
+00:01:33,680 --> 00:01:35,550
+For combinational
+circuits, the latency
+
+37
+00:01:35,550 --> 00:01:37,920
+is simply the propagation
+delay of the circuit
+
+38
+00:01:37,920 --> 00:01:41,800
+and its throughput
+is just 1/latency.
+
+39
+00:01:41,800 --> 00:01:44,390
+We introduced a systematic
+strategy for designing
+
+40
+00:01:44,390 --> 00:01:48,580
+K-pipelines, where there’s a
+register on the outputs of each
+
+41
+00:01:48,580 --> 00:01:52,320
+stage, and there are exactly
+K registers on every path from
+
+42
+00:01:52,320 --> 00:01:54,840
+input to output.
+
+43
+00:01:54,840 --> 00:01:57,050
+The period of the
+system clock t_CLK
+
+44
+00:01:57,050 --> 00:02:00,850
+is determined by the propagation
+delay of the slowest pipeline
+
+45
+00:02:00,850 --> 00:02:02,210
+stage.
+
+46
+00:02:02,210 --> 00:02:05,840
+The throughput of a pipelined
+system is 1/t_CLK and its
+
+47
+00:02:05,840 --> 00:02:09,780
+latency is K times t_CLK.
+
+48
+00:02:09,780 --> 00:02:11,840
+Pipelining is the
+key to increasing
+
+49
+00:02:11,840 --> 00:02:14,270
+the throughput of most
+high-performance digital
+
+50
+00:02:14,270 --> 00:02:15,820
+systems.

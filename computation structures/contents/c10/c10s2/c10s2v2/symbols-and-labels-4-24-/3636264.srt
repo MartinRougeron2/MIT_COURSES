@@ -1,0 +1,433 @@
+1
+00:00:00,550 --> 00:00:04,240
+Let's follow along as the
+assembler processes our source
+
+2
+00:00:04,240 --> 00:00:04,740
+file.
+
+3
+00:00:04,740 --> 00:00:07,101
+The assembler maintains
+a symbol table
+
+4
+00:00:07,101 --> 00:00:10,250
+that maps symbols names
+to their numeric values.
+
+5
+00:00:10,250 --> 00:00:13,333
+Initially the symbol table
+is loaded with mappings
+
+6
+00:00:13,333 --> 00:00:15,260
+for all the register symbols.
+
+7
+00:00:15,260 --> 00:00:18,431
+The assembler reads the
+source file line-by-line,
+
+8
+00:00:18,431 --> 00:00:22,012
+defining symbols and labels,
+expanding macros, or evaluating
+
+9
+00:00:22,012 --> 00:00:25,460
+expressions to generate
+bytes for the output array.
+
+10
+00:00:25,460 --> 00:00:28,350
+Whenever the assembler
+encounters a use of a symbol
+
+11
+00:00:28,350 --> 00:00:31,593
+or label, it's replaced by the
+corresponding numeric value
+
+12
+00:00:31,593 --> 00:00:34,080
+found in the symbol table.
+
+13
+00:00:34,080 --> 00:00:38,280
+The first line, N = 12, defines
+the value of the symbol N
+
+14
+00:00:38,280 --> 00:00:40,613
+to be 12, so the
+appropriate entry
+
+15
+00:00:40,613 --> 00:00:42,980
+is made in the symbol table.
+
+16
+00:00:42,980 --> 00:00:45,480
+Advancing to the next
+line, the assembler
+
+17
+00:00:45,480 --> 00:00:47,980
+encounters an invocation
+of the ADDC macro
+
+18
+00:00:47,980 --> 00:00:52,329
+with the arguments
+"r31", "N", and "r1".
+
+19
+00:00:52,329 --> 00:00:54,786
+As we'll see in a
+couple of slides,
+
+20
+00:00:54,786 --> 00:00:57,244
+this triggers a series of
+nested macro expansions
+
+21
+00:00:57,244 --> 00:01:00,422
+that eventually lead to
+generating a 32-bit binary
+
+22
+00:01:00,422 --> 00:01:03,840
+value to be placed
+in memory location 0.
+
+23
+00:01:03,840 --> 00:01:05,897
+The 32-bit value
+is formatted here
+
+24
+00:01:05,897 --> 00:01:09,274
+to show the instruction fields
+and the destination address
+
+25
+00:01:09,274 --> 00:01:11,810
+is shown in brackets.
+
+26
+00:01:11,810 --> 00:01:15,538
+The next instruction is
+processed in the same way,
+
+27
+00:01:15,538 --> 00:01:17,610
+generating a second 32-bit word.
+
+28
+00:01:17,610 --> 00:01:19,387
+On the fourth line,
+the label loop
+
+29
+00:01:19,387 --> 00:01:22,180
+is defined to have the value
+of the location in memory
+
+30
+00:01:22,180 --> 00:01:26,600
+that's about to filled,
+in this case, location 8.
+
+31
+00:01:26,600 --> 00:01:29,477
+So the appropriate entry
+is made in the symbol table
+
+32
+00:01:29,477 --> 00:01:32,725
+and the MUL macro is
+expanded into the 32-bit word
+
+33
+00:01:32,725 --> 00:01:35,560
+to be placed in location 8.
+
+34
+00:01:35,560 --> 00:01:38,045
+The assembler processes
+the file line-by-line
+
+35
+00:01:38,045 --> 00:01:41,345
+until it reaches
+the end of the file.
+
+36
+00:01:41,345 --> 00:01:43,720
+Actually the assembler makes
+two passes through the file.
+
+37
+00:01:43,720 --> 00:01:46,526
+On the first pass it loads the
+symbol table with the values
+
+38
+00:01:46,526 --> 00:01:48,930
+from all the symbol
+and label definitions.
+
+39
+00:01:48,930 --> 00:01:53,199
+Then, on the second pass, it
+generates the binary output.
+
+40
+00:01:53,199 --> 00:01:55,235
+The two-pass approach
+allows a statement
+
+41
+00:01:55,235 --> 00:01:58,603
+to refer to symbol or
+label that is defined later
+
+42
+00:01:58,603 --> 00:02:01,119
+in the file, e.g., a
+forward branch instruction
+
+43
+00:02:01,119 --> 00:02:03,820
+could refer to the
+label for an instruction
+
+44
+00:02:03,820 --> 00:02:05,820
+later in the program.
+
+45
+00:02:05,820 --> 00:02:08,225
+As we saw in the
+previous slide, there's
+
+46
+00:02:08,225 --> 00:02:10,030
+nothing magic about
+the register symbols.
+
+47
+00:02:10,030 --> 00:02:14,570
+They are just symbolic names
+for the values 0 through 31.
+
+48
+00:02:14,570 --> 00:02:16,893
+So when processing
+ADDC(r31,N,r1),
+
+49
+00:02:16,893 --> 00:02:22,120
+UASM replaces the symbols
+with their values and actually
+
+50
+00:02:22,120 --> 00:02:24,470
+expands ADDC(31,12,1).
+
+51
+00:02:24,470 --> 00:02:28,890
+UASM is very simple.
+
+52
+00:02:28,890 --> 00:02:32,215
+It simply replaces
+symbols with their values,
+
+53
+00:02:32,215 --> 00:02:34,590
+expands macros and
+evaluates expressions.
+
+54
+00:02:34,590 --> 00:02:37,770
+So if you use a register
+symbol where a numeric value is
+
+55
+00:02:37,770 --> 00:02:39,361
+expected, the
+value of the symbol
+
+56
+00:02:39,361 --> 00:02:42,020
+is used as the numeric constant.
+
+57
+00:02:42,020 --> 00:02:44,460
+Probably not what the
+programmer intended.
+
+58
+00:02:44,460 --> 00:02:48,468
+Similarly, if you use a symbol
+or expression where a register
+
+59
+00:02:48,468 --> 00:02:51,884
+number is expected, the
+low-order 5 bits of the value
+
+60
+00:02:51,884 --> 00:02:54,754
+is used as the register
+number, in this example,
+
+61
+00:02:54,754 --> 00:02:57,030
+as the Rb register number.
+
+62
+00:02:57,030 --> 00:03:00,740
+Again probably not what
+the programmer intended.
+
+63
+00:03:00,740 --> 00:03:04,084
+The moral of the story is that
+when writing UASM assembly
+
+64
+00:03:04,084 --> 00:03:07,130
+language programs, you have
+to keep your wits about you
+
+65
+00:03:07,130 --> 00:03:09,570
+and recognize that the
+interpretation of an operand
+
+66
+00:03:09,570 --> 00:03:13,640
+is determined by the opcode
+macro, not by the way
+
+67
+00:03:13,640 --> 00:03:15,370
+you wrote the operand.
+
+68
+00:03:15,370 --> 00:03:18,067
+Recall from Lecture 9
+that branch instructions
+
+69
+00:03:18,067 --> 00:03:21,150
+use the 16-bit constant
+field of the instruction
+
+70
+00:03:21,150 --> 00:03:23,394
+to encode the address
+of the branch target
+
+71
+00:03:23,394 --> 00:03:26,800
+as a word offset from the
+location of the branch
+
+72
+00:03:26,800 --> 00:03:27,680
+instruction.
+
+73
+00:03:27,680 --> 00:03:31,700
+Well, actually the offset is
+calculated from the instruction
+
+74
+00:03:31,700 --> 00:03:35,645
+immediately following the
+branch, so an offset of -1
+
+75
+00:03:35,645 --> 00:03:38,250
+would refer to
+the branch itself.
+
+76
+00:03:38,250 --> 00:03:41,752
+The calculation of the offset
+is a bit tedious to do by hand
+
+77
+00:03:41,752 --> 00:03:45,088
+and would, of course, change
+if we added or removed
+
+78
+00:03:45,088 --> 00:03:48,270
+instructions between the branch
+instruction and branch target.
+
+79
+00:03:48,270 --> 00:03:50,745
+Happily macros for the
+branch instructions
+
+80
+00:03:50,745 --> 00:03:52,395
+incorporate the
+necessary formula
+
+81
+00:03:52,395 --> 00:03:55,944
+to compute the offset from
+the address of the branch
+
+82
+00:03:55,944 --> 00:03:58,329
+and the address of
+the branch target.
+
+83
+00:03:58,329 --> 00:04:01,341
+So we just specify the
+address of the branch target,
+
+84
+00:04:01,341 --> 00:04:06,030
+usually with a label, and let
+UASM do the heavy lifting.
+
+85
+00:04:06,030 --> 00:04:09,650
+Here we see that BNE branches
+backwards by three instructions
+
+86
+00:04:09,650 --> 00:04:12,787
+(remember to count from
+the instruction following
+
+87
+00:04:12,787 --> 00:04:16,728
+the branch) so the offset is -3.
+
+88
+00:04:16,728 --> 00:04:19,178
+The 16-bit two's complement
+representation of -3
+
+89
+00:04:19,178 --> 00:04:22,989
+is the value placed in the
+constant field of the BNE
+
+90
+00:04:22,989 --> 00:04:24,239
+instruction.

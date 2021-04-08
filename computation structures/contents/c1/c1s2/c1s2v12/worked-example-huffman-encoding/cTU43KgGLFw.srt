@@ -1,0 +1,532 @@
+1
+00:00:00,750 --> 00:00:04,059
+This problems presents
+Huffman Encoding
+
+2
+00:00:04,059 --> 00:00:06,950
+which produces variable-length
+encodings based
+
+3
+00:00:06,950 --> 00:00:08,820
+on the probabilities
+of the occurrence
+
+4
+00:00:08,820 --> 00:00:10,710
+of each different choice.
+
+5
+00:00:10,710 --> 00:00:13,870
+More likely choices will end
+up with shorter encodings
+
+6
+00:00:13,870 --> 00:00:15,010
+than less likely choices.
+
+7
+00:00:20,030 --> 00:00:22,160
+The goal of this
+problem is to produce
+
+8
+00:00:22,160 --> 00:00:26,280
+a Huffman code to encode
+student choices of majors.
+
+9
+00:00:26,280 --> 00:00:29,930
+There are a total of 4 majors,
+and each has a probability
+
+10
+00:00:29,930 --> 00:00:32,049
+associated with it.
+
+11
+00:00:32,049 --> 00:00:35,790
+To produce a Huffman encoding,
+one begins with the 2 choices
+
+12
+00:00:35,790 --> 00:00:37,950
+with lowest probability.
+
+13
+00:00:37,950 --> 00:00:43,560
+In this example, major 6-7,
+has a probability of 0.06,
+
+14
+00:00:43,560 --> 00:00:47,080
+and major 6-1, has a
+probability of 0.09.
+
+15
+00:00:47,080 --> 00:00:51,900
+Since these are the two lowest
+probabilities, these two
+
+16
+00:00:51,900 --> 00:00:54,350
+choices are selected
+as the starting point
+
+17
+00:00:54,350 --> 00:00:56,900
+for building our encoding tree.
+
+18
+00:00:56,900 --> 00:00:59,400
+The root node that
+combines the two choices,
+
+19
+00:00:59,400 --> 00:01:02,750
+has a probability equal to
+the sum of the leaf nodes,
+
+20
+00:01:02,750 --> 00:01:06,440
+or 0.15 in this example.
+
+21
+00:01:06,440 --> 00:01:09,170
+We then label one side
+of this tree with a 0
+
+22
+00:01:09,170 --> 00:01:10,290
+and the other with a 1.
+
+23
+00:01:10,290 --> 00:01:14,880
+The next step is to find the
+next two smallest probabilities
+
+24
+00:01:14,880 --> 00:01:17,270
+out of the remaining set
+of probabilities where
+
+25
+00:01:17,270 --> 00:01:21,730
+majors 6-1 and 6-7 have been
+replaced by node A which
+
+26
+00:01:21,730 --> 00:01:25,450
+has probability 0.15.
+
+27
+00:01:25,450 --> 00:01:28,180
+In this case, our
+lowest probabilities
+
+28
+00:01:28,180 --> 00:01:31,940
+are 0.15 (which is the
+probability of node A)
+
+29
+00:01:31,940 --> 00:01:36,760
+and 0.41 (which is the
+probability of major 6-3).
+
+30
+00:01:36,760 --> 00:01:41,990
+So we create a new node B
+that merges nodes A and 6-3.
+
+31
+00:01:41,990 --> 00:01:46,100
+This new node has
+probability 0.56.
+
+32
+00:01:46,100 --> 00:01:48,800
+Again we label the two
+branches, one with a 0
+
+33
+00:01:48,800 --> 00:01:50,920
+and the other with a 1.
+
+34
+00:01:50,920 --> 00:01:53,690
+We now repeat this
+process one last time
+
+35
+00:01:53,690 --> 00:01:56,170
+with the only two
+remaining choices which
+
+36
+00:01:56,170 --> 00:01:59,290
+are now node B and major 6-2.
+
+37
+00:01:59,290 --> 00:02:02,390
+This means that we should
+make a new node C that merges
+
+38
+00:02:02,390 --> 00:02:04,990
+node B and major 6-2.
+
+39
+00:02:04,990 --> 00:02:07,030
+Note that the
+probability of this node
+
+40
+00:02:07,030 --> 00:02:11,550
+is 1.0 because we have
+reached the top of our tree.
+
+41
+00:02:11,550 --> 00:02:16,290
+Our final step is to label
+these last two branches.
+
+42
+00:02:16,290 --> 00:02:18,120
+Now that all the
+branches are labeled,
+
+43
+00:02:18,120 --> 00:02:21,750
+we can traverse the tree from
+the root node to each leaf node
+
+44
+00:02:21,750 --> 00:02:24,390
+in order to identify
+the encoding that
+
+45
+00:02:24,390 --> 00:02:28,750
+has been assigned to the major
+associated with that leaf node.
+
+46
+00:02:28,750 --> 00:02:33,950
+We find that for major
+6-1 the encoding is 101.
+
+47
+00:02:33,950 --> 00:02:38,770
+For major 6-2, we end up
+with a 1-bit encoding of 0.
+
+48
+00:02:38,770 --> 00:02:42,570
+Next we traverse the tree to
+identify the last two encodings
+
+49
+00:02:42,570 --> 00:02:47,590
+and find that for major 6-3 the
+encoding 11 has been assigned,
+
+50
+00:02:47,590 --> 00:02:53,560
+and for major 6-7 the encoding
+100 has been assigned.
+
+51
+00:02:53,560 --> 00:02:55,560
+These encodings make
+sense because we
+
+52
+00:02:55,560 --> 00:02:58,190
+expect the major with
+the highest probability,
+
+53
+00:02:58,190 --> 00:03:03,110
+in this case major 6-2 to end
+up with the shortest encoding.
+
+54
+00:03:03,110 --> 00:03:05,070
+The next highest
+probability major
+
+55
+00:03:05,070 --> 00:03:08,870
+is 6-3 so it ends up with
+the second shortest encoding,
+
+56
+00:03:08,870 --> 00:03:09,720
+and so on.
+
+57
+00:03:12,990 --> 00:03:16,180
+We just saw that the encodings
+resulting from this Huffman
+
+58
+00:03:16,180 --> 00:03:22,440
+encoding tree are: 101 for
+major 6-1, a 0 for major 6-2,
+
+59
+00:03:22,440 --> 00:03:28,930
+11 for major 6-3, and
+100 for major 6-7.
+
+60
+00:03:28,930 --> 00:03:31,950
+Note that the Huffman
+encoding tree for this problem
+
+61
+00:03:31,950 --> 00:03:35,460
+could have also been
+drawn like this.
+
+62
+00:03:35,460 --> 00:03:38,390
+These two trees are identical
+in structure and result
+
+63
+00:03:38,390 --> 00:03:40,570
+in the same encodings
+for the four majors.
+
+64
+00:03:44,130 --> 00:03:47,420
+Furthermore, a Huffman tree
+can result in more than one
+
+65
+00:03:47,420 --> 00:03:48,930
+valid encoding.
+
+66
+00:03:48,930 --> 00:03:51,500
+The only constraint
+in labeling the edges
+
+67
+00:03:51,500 --> 00:03:55,730
+is that from each node, there is
+both a 0 branch and a 1 branch
+
+68
+00:03:55,730 --> 00:03:58,480
+but there are no constraints
+about which side has to be
+
+69
+00:03:58,480 --> 00:04:01,390
+labeled 0 and which side 1.
+
+70
+00:04:01,390 --> 00:04:03,800
+So for example, we
+could have chosen
+
+71
+00:04:03,800 --> 00:04:06,510
+to label the left side
+of the B node with a 1
+
+72
+00:04:06,510 --> 00:04:09,830
+and the right side with
+a 0 instead of the way we
+
+73
+00:04:09,830 --> 00:04:11,760
+originally labeled them.
+
+74
+00:04:11,760 --> 00:04:13,880
+Note, however, that
+this would result
+
+75
+00:04:13,880 --> 00:04:17,209
+in a different but also
+valid Huffman encoding.
+
+76
+00:04:17,209 --> 00:04:21,600
+In this case the encoding
+for major 6-1 is 111,
+
+77
+00:04:21,600 --> 00:04:27,150
+major 6-2 remains 0,
+major 6-3 becomes 10,
+
+78
+00:04:27,150 --> 00:04:30,600
+and major 6-7 becomes 110.
+
+79
+00:04:30,600 --> 00:04:34,300
+As long as one
+maintains consistency
+
+80
+00:04:34,300 --> 00:04:37,860
+across the selected tree,
+a valid Huffman encoding
+
+81
+00:04:37,860 --> 00:04:40,650
+is produced.
+
+82
+00:04:40,650 --> 00:04:44,430
+We now add one more column
+to our table which gives p *
+
+83
+00:04:44,430 --> 00:04:48,850
+log2(1/p) for each
+of the majors.
+
+84
+00:04:48,850 --> 00:04:52,110
+Using this information we
+can calculate the entropy
+
+85
+00:04:52,110 --> 00:04:54,180
+which is the average
+amount of information
+
+86
+00:04:54,180 --> 00:04:56,360
+contained in each message.
+
+87
+00:04:56,360 --> 00:05:02,850
+This is calculated by taking
+the sum of p * log2(1/p) for all
+
+88
+00:05:02,850 --> 00:05:04,750
+choices of majors.
+
+89
+00:05:04,750 --> 00:05:07,150
+For this problem,
+the entropy is 1.6.
+
+90
+00:05:07,150 --> 00:05:11,020
+We can now also calculate
+the average bits
+
+91
+00:05:11,020 --> 00:05:14,430
+per major of the encodings
+that we have identified.
+
+92
+00:05:14,430 --> 00:05:16,210
+This is calculated
+by multiplying
+
+93
+00:05:16,210 --> 00:05:19,580
+the number of bits in each
+encoding times the probability
+
+94
+00:05:19,580 --> 00:05:20,980
+of that major.
+
+95
+00:05:20,980 --> 00:05:23,310
+Recall that our
+encoding for major 6-1
+
+96
+00:05:23,310 --> 00:05:29,110
+was 111, for major 6-2 it was
+0, for major 6-3 it was 10,
+
+97
+00:05:29,110 --> 00:05:34,190
+and finally for
+major 6-7 it was 110.
+
+98
+00:05:34,190 --> 00:05:37,600
+This means that the average
+bits per major is 3 times
+
+99
+00:05:37,600 --> 00:05:41,020
+0.09 plus 1 times
+0.44 plus 2 times
+
+100
+00:05:41,020 --> 00:05:47,350
+0.41 plus 3 times 0.06 =
+0.27 plus 0.44 plus 0.82
+
+101
+00:05:47,350 --> 00:05:50,150
+plus 0.18 which equals 1.71.
+
+102
+00:05:50,150 --> 00:05:56,820
+Note that this is
+slightly larger
+
+103
+00:05:56,820 --> 00:06:03,150
+than the entropy which is 1.6.
+
+104
+00:06:03,150 --> 00:06:05,730
+This occurs because
+while Huffman encoding is
+
+105
+00:06:05,730 --> 00:06:08,380
+an efficient encoding which
+gets us most of the way
+
+106
+00:06:08,380 --> 00:06:11,510
+there, there are still
+some inefficiencies present
+
+107
+00:06:11,510 --> 00:06:14,330
+in Huffman encoding
+because it is only
+
+108
+00:06:14,330 --> 00:06:18,440
+encoding one major at a time
+rather than also considering
+
+109
+00:06:18,440 --> 00:06:20,760
+the probabilities
+associated with seeing
+
+110
+00:06:20,760 --> 00:06:24,050
+a particular sequence of
+majors in a message that
+
+111
+00:06:24,050 --> 00:06:28,471
+conveys the major selected for
+a large number of students.

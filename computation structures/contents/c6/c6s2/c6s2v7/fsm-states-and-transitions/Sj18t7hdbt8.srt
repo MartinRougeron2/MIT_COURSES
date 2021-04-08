@@ -1,0 +1,467 @@
+1
+00:00:01,270 --> 00:00:03,190
+PROFESSOR: This truth
+table represents
+
+2
+00:00:03,190 --> 00:00:07,240
+a five-state finite
+state machine, or FSM,
+
+3
+00:00:07,240 --> 00:00:11,530
+with a one-bit input, IN,
+and a two-bit output, OUT.
+
+4
+00:00:11,530 --> 00:00:14,210
+This FSM is a Mealy machine.
+
+5
+00:00:14,210 --> 00:00:16,210
+That means that its
+outputs are a function
+
+6
+00:00:16,210 --> 00:00:20,040
+of both the current state
+and the current input.
+
+7
+00:00:20,040 --> 00:00:23,040
+When this FSM is initialized,
+its starting state
+
+8
+00:00:23,040 --> 00:00:27,060
+is state B. We are given
+a partially filled state
+
+9
+00:00:27,060 --> 00:00:29,820
+transition diagram shown here.
+
+10
+00:00:29,820 --> 00:00:32,880
+Our job is to fill in the
+missing state and transition
+
+11
+00:00:32,880 --> 00:00:33,930
+labels.
+
+12
+00:00:33,930 --> 00:00:37,080
+In other words, S1
+through S4 should
+
+13
+00:00:37,080 --> 00:00:41,850
+be replaced with the states A
+through E. And T1 through T7
+
+14
+00:00:41,850 --> 00:00:45,780
+should be replaced with a
+IN/OUT transition corresponding
+
+15
+00:00:45,780 --> 00:00:46,680
+to that arrow.
+
+16
+00:00:49,420 --> 00:00:53,320
+In order to do this, we begin
+by looking at the truth table,
+
+17
+00:00:53,320 --> 00:00:54,820
+beginning with
+the starting state
+
+18
+00:00:54,820 --> 00:00:59,560
+B. The truth table shows
+us that when IN equals 0,
+
+19
+00:00:59,560 --> 00:01:04,480
+our next state is state C.
+Since the 0 input transition out
+
+20
+00:01:04,480 --> 00:01:07,300
+of state B is already
+labeled for us,
+
+21
+00:01:07,300 --> 00:01:14,170
+we know that state S2 equals
+C. This also tells us that T2
+
+22
+00:01:14,170 --> 00:01:17,150
+corresponds to IN equals 1.
+
+23
+00:01:17,150 --> 00:01:23,425
+So S4 is equal to D.
+And T2 is equal to 1/00.
+
+24
+00:01:26,110 --> 00:01:30,190
+From state D, we have
+the one input transition
+
+25
+00:01:30,190 --> 00:01:31,840
+already labeled.
+
+26
+00:01:31,840 --> 00:01:36,400
+So T3 corresponds
+to IN equals 0.
+
+27
+00:01:36,400 --> 00:01:40,360
+Looking at the truth
+table, that means that S3
+
+28
+00:01:40,360 --> 00:01:47,330
+equals E and T3 equals 0/01.
+
+29
+00:01:47,330 --> 00:01:51,260
+The truth table then shows
+us that from state E,
+
+30
+00:01:51,260 --> 00:01:54,730
+a 1 input takes you
+back to state B.
+
+31
+00:01:54,730 --> 00:02:04,130
+So T4 equals 1/01, which in
+turn means that T5 equals 0/10.
+
+32
+00:02:04,130 --> 00:02:07,520
+And state S1 equals A.
+
+33
+00:02:07,520 --> 00:02:11,030
+From state A, the
+0 input transition
+
+34
+00:02:11,030 --> 00:02:13,250
+is already filled in.
+
+35
+00:02:13,250 --> 00:02:17,750
+So T1 equals 1/11.
+
+36
+00:02:17,750 --> 00:02:22,490
+From state C, a 1
+input goes to state B.
+
+37
+00:02:22,490 --> 00:02:31,055
+So T6 equals 1/01, which in
+turn means that T7 equals 0/10.
+
+38
+00:02:34,860 --> 00:02:38,600
+Now that we have a complete
+state diagram for our FSM,
+
+39
+00:02:38,600 --> 00:02:42,230
+the next thing we want to figure
+out is what sequence of outputs
+
+40
+00:02:42,230 --> 00:02:48,620
+is produced if we begin in state
+B and receive inputs 1, 0, 0.
+
+41
+00:02:48,620 --> 00:02:51,860
+Since our state transition
+diagram is now filled,
+
+42
+00:02:51,860 --> 00:02:56,450
+we see that from state B, a
+1 input takes us to state D
+
+43
+00:02:56,450 --> 00:03:00,600
+and produces a 00 output.
+
+44
+00:03:00,600 --> 00:03:06,970
+From state D, a 0 input moves
+us to state E and outputs 01.
+
+45
+00:03:06,970 --> 00:03:11,505
+Finally, from state E, a 0
+input moves us to state A
+
+46
+00:03:11,505 --> 00:03:15,030
+and produces a 10 output.
+
+47
+00:03:15,030 --> 00:03:15,900
+OK.
+
+48
+00:03:15,900 --> 00:03:18,420
+Now let's try to find
+a sequence of inputs
+
+49
+00:03:18,420 --> 00:03:22,260
+that is guaranteed to
+leave the FSM in state E,
+
+50
+00:03:22,260 --> 00:03:25,440
+regardless of the state it
+is in before the sequence is
+
+51
+00:03:25,440 --> 00:03:27,000
+processed.
+
+52
+00:03:27,000 --> 00:03:30,750
+To answer this question, we take
+a look at our filled-in state
+
+53
+00:03:30,750 --> 00:03:33,990
+diagram and determine
+what sequence of inputs
+
+54
+00:03:33,990 --> 00:03:37,530
+takes us from each
+state X to state E.
+
+55
+00:03:37,530 --> 00:03:41,230
+We begin with state
+A. From state A,
+
+56
+00:03:41,230 --> 00:03:45,300
+the shortest sequence of inputs
+required to get to state E
+
+57
+00:03:45,300 --> 00:03:47,760
+is 1, 1, 0.
+
+58
+00:03:47,760 --> 00:03:52,960
+This takes you from A
+to B to D to E. Next,
+
+59
+00:03:52,960 --> 00:03:58,090
+we examine state B. We see that
+the sequence 1, 0 will take us
+
+60
+00:03:58,090 --> 00:04:01,690
+from B to D to E.
+Since we are looking
+
+61
+00:04:01,690 --> 00:04:04,930
+for a single sequence that
+will work from all states,
+
+62
+00:04:04,930 --> 00:04:08,830
+we want to see if 1,
+1, 0 would also work.
+
+63
+00:04:08,830 --> 00:04:12,190
+Taking a closer look
+at state D shows us
+
+64
+00:04:12,190 --> 00:04:14,890
+that the sequence
+1, 1, 0 will also
+
+65
+00:04:14,890 --> 00:04:19,390
+get us from B to E because the
+extra 1 just keeps you in state
+
+66
+00:04:19,390 --> 00:04:21,940
+D for one extra iteration.
+
+67
+00:04:21,940 --> 00:04:26,840
+And then the 0 takes you
+to state E. Similarly,
+
+68
+00:04:26,840 --> 00:04:30,980
+if you begin at state
+D, the sequence 1, 1, 0
+
+69
+00:04:30,980 --> 00:04:33,890
+leaves you at state
+D for two iterations.
+
+70
+00:04:33,890 --> 00:04:38,520
+And then on the third, the
+0 takes you to state E.
+
+71
+00:04:38,520 --> 00:04:42,720
+Beginning at state E
+itself, the sequence 1, 1, 0
+
+72
+00:04:42,720 --> 00:04:47,160
+takes you to state
+B, then D, then E.
+
+73
+00:04:47,160 --> 00:04:49,200
+So we have one
+state left to check,
+
+74
+00:04:49,200 --> 00:04:52,500
+and that is state
+C. From state C,
+
+75
+00:04:52,500 --> 00:04:58,350
+the sequence 1, 1, 0 takes us
+to state B, then D, then E.
+
+76
+00:04:58,350 --> 00:05:01,990
+So once again, the
+sequence 1, 1, 0 works.
+
+77
+00:05:01,990 --> 00:05:04,080
+This means that
+regardless of what state
+
+78
+00:05:04,080 --> 00:05:10,570
+you start in, the sequence 1, 1,
+0 will have you end at state E.
+
+79
+00:05:10,570 --> 00:05:13,600
+The last question we want to
+answer about the finite state
+
+80
+00:05:13,600 --> 00:05:16,240
+machine is whether
+or not there exists
+
+81
+00:05:16,240 --> 00:05:21,610
+an equivalent FSM that has only
+four states instead of five.
+
+82
+00:05:21,610 --> 00:05:23,590
+In other words, are
+there two states
+
+83
+00:05:23,590 --> 00:05:27,940
+that can be merged into one to
+reduce the FSM to an equivalent
+
+84
+00:05:27,940 --> 00:05:31,300
+FSM with one fewer state?
+
+85
+00:05:31,300 --> 00:05:34,300
+Recall that in a
+Mealy FSM, two states
+
+86
+00:05:34,300 --> 00:05:37,930
+are equivalent if they
+have the same input/output
+
+87
+00:05:37,930 --> 00:05:40,780
+transitions as each other.
+
+88
+00:05:40,780 --> 00:05:43,690
+If it were a Moore FSM,
+then the two states
+
+89
+00:05:43,690 --> 00:05:46,750
+would be equivalent if they
+produced the same output
+
+90
+00:05:46,750 --> 00:05:49,780
+and have the same transitions.
+
+91
+00:05:49,780 --> 00:05:53,020
+Taking a closer look at
+the states in this FSM,
+
+92
+00:05:53,020 --> 00:05:57,730
+we see that both states C and
+E transition to state B on a 1
+
+93
+00:05:57,730 --> 00:06:01,090
+input and produce a 01 output.
+
+94
+00:06:01,090 --> 00:06:04,480
+On a 0 input, they both
+transition to state A
+
+95
+00:06:04,480 --> 00:06:07,180
+and produce a 10 output.
+
+96
+00:06:07,180 --> 00:06:10,180
+So states C and E are
+equivalent and can
+
+97
+00:06:10,180 --> 00:06:13,960
+be merged into a single state,
+thus reducing the total number
+
+98
+00:06:13,960 --> 00:06:17,271
+of states in our FSM to four.

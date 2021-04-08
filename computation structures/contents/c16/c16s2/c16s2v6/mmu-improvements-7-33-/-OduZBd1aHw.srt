@@ -1,0 +1,448 @@
+1
+00:00:00,510 --> 00:00:07,490
+There are a few MMU implementation details
+we can tweak for more efficiency or functionality.
+
+2
+00:00:07,490 --> 00:00:12,840
+In our simple page-map implementation, the
+full page map occupies some number of physical
+
+3
+00:00:12,840 --> 00:00:14,350
+pages.
+
+4
+00:00:14,350 --> 00:00:19,220
+Using the numbers shown here, if each page
+map entry occupies one word of main memory,
+
+5
+00:00:19,220 --> 00:00:24,990
+we'd need 2^20 words (or 2^10 pages) to hold
+the page table.
+
+6
+00:00:24,990 --> 00:00:30,340
+If we have multiple contexts, we would need
+multiple page tables, and the demands on our
+
+7
+00:00:30,340 --> 00:00:35,100
+physical memory resources would start to get
+large.
+
+8
+00:00:35,100 --> 00:00:39,829
+The MMU implementation shown here uses a hierarchical
+page map.
+
+9
+00:00:39,829 --> 00:00:45,730
+The top 10 bits of virtual address are used
+to access a "page directory", which indicates
+
+10
+00:00:45,730 --> 00:00:52,219
+the physical page that holds the page map
+for that segment of the virtual address space.
+
+11
+00:00:52,219 --> 00:00:57,030
+The key idea is that the page map segments
+are in virtual memory, i.e., they don't all
+
+12
+00:00:57,030 --> 00:01:00,559
+have to be resident at any given time.
+
+13
+00:01:00,559 --> 00:01:05,370
+If the running application is only actively
+using a small portion of its virtual address
+
+14
+00:01:05,370 --> 00:01:11,039
+space, we may only need a handful of pages
+to hold the page directory and the necessary
+
+15
+00:01:11,039 --> 00:01:13,280
+page map segments.
+
+16
+00:01:13,280 --> 00:01:18,600
+The resultant savings really add up when there
+are many applications, each with their own
+
+17
+00:01:18,600 --> 00:01:20,430
+context.
+
+18
+00:01:20,430 --> 00:01:26,860
+In this example, note that the middle entries
+in the page directory, i.e., the entries corresponding
+
+19
+00:01:26,860 --> 00:01:32,910
+to the as-yet unallocated virtual memory between
+the stack and heap, are all marked as not
+
+20
+00:01:32,910 --> 00:01:33,910
+resident.
+
+21
+00:01:33,910 --> 00:01:38,979
+.133 So no page map resources need be devoted
+to holding a zillion page map entries all
+
+22
+00:01:38,979 --> 00:01:42,170
+marked "not resident".
+
+23
+00:01:42,170 --> 00:01:47,640
+Accessing the page map now requires two access
+to main memory (first to the page directory,
+
+24
+00:01:47,640 --> 00:01:49,970
+then to the appropriate segment of the page
+map),
+
+25
+00:01:49,970 --> 00:01:56,340
+but the TLB makes the impact of that additional
+access negligible.
+
+26
+00:01:56,340 --> 00:02:01,500
+Normally when changing contexts, the OS would
+reload the page-table pointer to point to
+
+27
+00:02:01,500 --> 00:02:06,310
+the appropriate page table (or page table
+directory if we adopt the scheme from the
+
+28
+00:02:06,310 --> 00:02:08,250
+previous slide).
+
+29
+00:02:08,250 --> 00:02:13,189
+Since this context switch in effect changes
+all the entries in the page table, the OS
+
+30
+00:02:13,189 --> 00:02:18,260
+would also have to invalidate all the entries
+in the TLB cache.
+
+31
+00:02:18,260 --> 00:02:23,819
+This naturally has a huge impact on the TLB
+hit ratio and the average memory access time
+
+32
+00:02:23,819 --> 00:02:29,110
+takes a huge hit because of the all page map
+accesses that are now necessary until the
+
+33
+00:02:29,110 --> 00:02:31,790
+TLB is refilled.
+
+34
+00:02:31,790 --> 00:02:37,549
+To reduce the impact of context switches,
+some MMUs include a context-number register
+
+35
+00:02:37,549 --> 00:02:44,639
+whose contents are concatenated with the virtual
+page number to form the query to the TLB.
+
+36
+00:02:44,639 --> 00:02:49,840
+Essentially this means that the tag field
+in the TLB cache entries will expand to include
+
+37
+00:02:49,840 --> 00:02:55,079
+the context number provided at the time the
+TLB entry was filled.
+
+38
+00:02:55,079 --> 00:03:00,849
+To switch contexts, the OS would now reload
+both the context-number register and the page-table
+
+39
+00:03:00,849 --> 00:03:02,069
+pointer.
+
+40
+00:03:02,069 --> 00:03:07,879
+With a new context number, entries in the
+TLB for other contexts would no longer match,
+
+41
+00:03:07,879 --> 00:03:11,890
+so no need to flush the TLB on a context switch.
+
+42
+00:03:11,890 --> 00:03:19,390
+If the TLB has sufficient capacity to cache
+the VPN-to-PPN mappings for several contexts,
+
+43
+00:03:19,390 --> 00:03:24,999
+context switches would no longer have a substantial
+impact on average memory access time.
+
+44
+00:03:24,999 --> 00:03:30,700
+Finally, let's return to the question about
+how to incorporate both a cache and an MMU
+
+45
+00:03:30,700 --> 00:03:33,299
+into our memory system.
+
+46
+00:03:33,299 --> 00:03:38,349
+The first choice is to place the cache between
+the CPU and the MMU, i.e., the cache would
+
+47
+00:03:38,349 --> 00:03:40,470
+work on virtual addresses.
+
+48
+00:03:40,470 --> 00:03:47,250
+This seems good: the cost of the VPN-to-PPN
+translation is only incurred on a cache miss.
+
+49
+00:03:47,250 --> 00:03:53,439
+The difficulty comes when there's a context
+switch, which changes the effective contents
+
+50
+00:03:53,439 --> 00:03:55,010
+of virtual memory.
+
+51
+00:03:55,010 --> 00:03:59,569
+After all that was the point of the context
+switch, since we want to switch execution
+
+52
+00:03:59,569 --> 00:04:00,689
+to another program.
+
+53
+00:04:00,689 --> 00:04:06,700
+But that means the OS would have to invalidate
+all the entries in the cache when performing
+
+54
+00:04:06,700 --> 00:04:13,989
+a context switch, which makes the cache miss
+ratio quite large until the cache is refilled.
+
+55
+00:04:13,989 --> 00:04:20,240
+So once again the performance impact of a
+context switch would be quite high.
+
+56
+00:04:20,240 --> 00:04:25,260
+We can solve this problem by caching physical
+addresses, i.e., placing the cache between
+
+57
+00:04:25,260 --> 00:04:27,400
+the MMU and main memory.
+
+58
+00:04:27,400 --> 00:04:31,930
+Thus the contents of the cache are unaffected
+by context switches -
+
+59
+00:04:31,930 --> 00:04:37,780
+the requested physical addresses will be different,
+but the cache handles that in due course.
+
+60
+00:04:37,780 --> 00:04:42,650
+The downside of this approach is that we have
+to incur the cost of the MMU translation before
+
+61
+00:04:42,650 --> 00:04:50,060
+we can start the cache access, slightly increasing
+the average memory access time.
+
+62
+00:04:50,060 --> 00:04:54,170
+But if we're clever we don't have to wait
+for the MMU to finish before starting the
+
+63
+00:04:54,170 --> 00:04:56,370
+access to the cache.
+
+64
+00:04:56,370 --> 00:05:00,850
+To get started, the cache needs the line number
+from the virtual address in order to fetch
+
+65
+00:05:00,850 --> 00:05:03,670
+the appropriate cache line.
+
+66
+00:05:03,670 --> 00:05:08,600
+If the address bits used for the line number
+are completely contained in the page offset
+
+67
+00:05:08,600 --> 00:05:14,080
+of the virtual address, these bits are unaffected
+by the MMU translation,
+
+68
+00:05:14,080 --> 00:05:20,230
+and so the cache lookup can happen in parallel
+with the MMU operation.
+
+69
+00:05:20,230 --> 00:05:24,530
+Once the cache lookup is complete, the tag
+field of the cache line can be compared with
+
+70
+00:05:24,530 --> 00:05:29,590
+the appropriate bits of the physical address
+produced by the MMU.
+
+71
+00:05:29,590 --> 00:05:34,840
+If there was a TLB hit in the MMU, the physical
+address should be available at about the same
+
+72
+00:05:34,840 --> 00:05:39,490
+time as the tag field produced by the cache
+lookup.
+
+73
+00:05:39,490 --> 00:05:44,640
+By performing the MMU translation and cache
+lookup in parallel, there's usually no impact
+
+74
+00:05:44,640 --> 00:05:47,170
+on the average memory access time!
+
+75
+00:05:47,170 --> 00:05:52,940
+Voila, the best of both worlds: a physically
+addressed cache that incurs no time penalty
+
+76
+00:05:52,940 --> 00:05:56,080
+for MMU translation.
+
+77
+00:05:56,080 --> 00:06:01,460
+One final detail: one way to increase the
+capacity of the cache is to increase the number
+
+78
+00:06:01,460 --> 00:06:07,560
+of cache lines and hence the number of bits
+of address used as the line number.
+
+79
+00:06:07,560 --> 00:06:11,940
+Since we want the line number to fit into
+the page offset field of the virtual address,
+
+80
+00:06:11,940 --> 00:06:15,060
+we're limited in how many cache lines we can
+have.
+
+81
+00:06:15,060 --> 00:06:19,690
+The same argument applies to increasing the
+block size.
+
+82
+00:06:19,690 --> 00:06:26,390
+So to increase the capacity of the cache our
+only option is to increase the cache associativity,
+
+83
+00:06:26,390 --> 00:06:33,240
+which adds capacity without affecting the
+address bits used for the line number.
+
+84
+00:06:33,240 --> 00:06:36,330
+That's it for our discussion of virtual memory.
+
+85
+00:06:36,330 --> 00:06:42,270
+We use the MMU to provide the context for
+mapping virtual addresses to physical addresses.
+
+86
+00:06:42,270 --> 00:06:48,640
+By switching contexts we can create the illusion
+of many virtual address spaces, so many programs
+
+87
+00:06:48,640 --> 00:06:54,650
+can share a single CPU and physical memory
+without interfering with each other.
+
+88
+00:06:54,650 --> 00:07:00,490
+We discussed using a page map to translate
+virtual page numbers to physical page numbers.
+
+89
+00:07:00,490 --> 00:07:06,610
+To save costs, we located the page map in
+physical memory and used a TLB to eliminate
+
+90
+00:07:06,610 --> 00:07:13,540
+the cost of accessing the page map for most
+virtual memory accesses.
+
+91
+00:07:13,540 --> 00:07:18,480
+Access to a non-resident page causes a page
+fault exception, allowing the OS to manage
+
+92
+00:07:18,480 --> 00:07:25,240
+the complexities of equitably sharing physical
+memory across many applications.
+
+93
+00:07:25,240 --> 00:07:30,520
+We saw that providing contexts was the first
+step towards creating virtual machines, which
+
+94
+00:07:30,520 --> 00:07:32,380
+is the topic of our next lecture.

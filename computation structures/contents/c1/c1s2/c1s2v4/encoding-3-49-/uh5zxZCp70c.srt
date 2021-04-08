@@ -1,0 +1,231 @@
+1
+00:00:01,630 --> 00:00:07,820
+Next we turn our attention to encoding data
+as sequences of 0's and 1's, a string of bits.
+
+2
+00:00:07,820 --> 00:00:12,540
+An encoding is an unambiguous mapping between
+bit strings and the members of the set of
+
+3
+00:00:12,540 --> 00:00:14,410
+data to be encoded.
+
+4
+00:00:14,410 --> 00:00:20,140
+For example, suppose we have a set of four
+symbols -- A, B, C, and D – and we want
+
+5
+00:00:20,140 --> 00:00:26,710
+to use bit strings to encode messages constructed
+of these symbols, for example "ABBA".
+
+6
+00:00:26,710 --> 00:00:32,189
+If we choose to encode the message one character
+at a time, our encoding would assign a unique
+
+7
+00:00:32,189 --> 00:00:34,800
+bit string to each symbol.
+
+8
+00:00:34,800 --> 00:00:39,010
+Since we have four symbols, we might choose
+a unique two-bit string for each: "A" could
+
+9
+00:00:39,010 --> 00:00:45,890
+be "00", B = "01", C = "10", and D = "11".
+
+10
+00:00:45,890 --> 00:00:50,460
+This would be called a "fixed-length encoding"
+since the bit strings used to represent the
+
+11
+00:00:50,460 --> 00:00:52,930
+symbols all have the same length.
+
+12
+00:00:52,930 --> 00:01:00,610
+The encoding for the message "ABBA" would
+be "00-01-01-00".
+
+13
+00:01:00,610 --> 00:01:05,899
+And we can run the process backwards: given
+a bit string and the encoding key, we can
+
+14
+00:01:05,899 --> 00:01:12,270
+look up the next bits in the bit string, using
+the key to determine the symbol they represent.
+
+15
+00:01:12,270 --> 00:01:18,340
+"00" would be decoded as "A", "01" as B and
+so on.
+
+16
+00:01:18,340 --> 00:01:24,249
+We can also use bit strings of different lengths
+to encode symbols -- this is called a variable-length
+
+17
+00:01:24,249 --> 00:01:25,759
+encoding.
+
+18
+00:01:25,759 --> 00:01:32,399
+So A could be "01", B = "1", C = "000" and
+D = "001".
+
+19
+00:01:32,399 --> 00:01:39,289
+"ABBA" would be encoded as "01-1-1-01".
+
+20
+00:01:39,289 --> 00:01:43,990
+We'll see that carefully constructed variable-length
+encodings are useful for the efficient encoding
+
+21
+00:01:43,990 --> 00:01:48,740
+of messages where the symbols occur with different
+probabilities.
+
+22
+00:01:48,740 --> 00:01:52,049
+We have to be careful that the encoding is
+unambiguous!
+
+23
+00:01:52,049 --> 00:01:59,880
+Suppose we had decided to encode A as "0",
+B as "1", C as "10" and D as "11".
+
+24
+00:01:59,880 --> 00:02:04,659
+The encoding for "ABBA" would be "0-1-1-0".
+
+25
+00:02:04,659 --> 00:02:09,850
+Looking good since that encoding is shorter
+than either of the previous two encodings.
+
+26
+00:02:09,850 --> 00:02:13,820
+Now let's try to decode this bit string -- oops.
+
+27
+00:02:13,820 --> 00:02:19,100
+Using the encoding key, we can unfortunately
+arrive at several decodings: "ABBA" of course,
+
+28
+00:02:19,100 --> 00:02:24,380
+but also "ADA" or "ABC" depending on how we
+group the bits.
+
+29
+00:02:24,380 --> 00:02:28,740
+This attempt at specifying an encoding has
+failed since the message cannot be interpreted
+
+30
+00:02:28,740 --> 00:02:30,390
+unambiguously.
+
+31
+00:02:30,390 --> 00:02:35,590
+Graphically we can represent an unambiguous
+encoding as a binary tree, labeling the branches
+
+32
+00:02:35,590 --> 00:02:40,700
+from each tree node with "0" and "1", placing
+the symbols to be encoded as the leaves of
+
+33
+00:02:40,700 --> 00:02:41,880
+the tree.
+
+34
+00:02:41,880 --> 00:02:46,510
+If you build a binary tree for a proposed
+encoding and find that there are no symbols
+
+35
+00:02:46,510 --> 00:02:51,579
+labeling interior nodes and exactly one symbol
+at each leaf, then your encoding is good to
+
+36
+00:02:51,579 --> 00:02:52,660
+go!
+
+37
+00:02:52,660 --> 00:02:55,940
+For example, consider the encoding shown on
+the left.
+
+38
+00:02:55,940 --> 00:02:59,460
+It takes just a second to draw the corresponding
+binary tree.
+
+39
+00:02:59,460 --> 00:03:04,020
+The symbol B is distance 1 from the root of
+the tree, along an arc labeled "0".
+
+40
+00:03:04,020 --> 00:03:09,040
+A is distance two, and C and D are distance
+3.
+
+41
+00:03:09,040 --> 00:03:15,910
+If we receive an encoded message, for example
+"01111", we can decode it using successive
+
+42
+00:03:15,910 --> 00:03:20,870
+bits of the encoding to identify a path from
+the root of tree, descending step-by-step
+
+43
+00:03:20,870 --> 00:03:25,900
+until we come to leaf, then repeating the
+process starting at the root again, until
+
+44
+00:03:25,900 --> 00:03:29,540
+all the bits in the encoded message have been
+consumed.
+
+45
+00:03:29,540 --> 00:03:34,930
+So the message from the sheep is: "0" takes
+us from the root to the leaf B, which is our
+
+46
+00:03:34,930 --> 00:03:36,750
+first decoded symbol.
+
+47
+00:03:36,750 --> 00:03:41,320
+Then "1-1" takes us to A and the next "1-1"
+results in a second A.
+
+48
+00:03:41,320 --> 00:03:46,990
+The final decoded message -- "BAA" -- is not
+totally unexpected, at least from an American
+
+49
+00:03:46,990 --> 00:03:47,920
+sheep.

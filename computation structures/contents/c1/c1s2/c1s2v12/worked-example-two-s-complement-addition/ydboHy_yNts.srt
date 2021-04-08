@@ -1,0 +1,227 @@
+1
+00:00:01,829 --> 00:00:07,069
+The nice feature of two's complement representation
+is that it allows you to do both addition
+
+2
+00:00:07,069 --> 00:00:13,860
+and subtraction as addition problems, by simply
+turning the subtraction problem A-B into an
+
+3
+00:00:13,860 --> 00:00:17,750
+addition problem of A + (-B).
+
+4
+00:00:17,750 --> 00:00:22,680
+Since we now know how to easily negate values
+in two's complement, this is pretty straight
+
+5
+00:00:22,680 --> 00:00:23,820
+forward.
+
+6
+00:00:23,820 --> 00:00:31,650
+For example, let's perform 15 - 18 using 6-bit
+two's complement representation.
+
+7
+00:00:31,650 --> 00:00:42,370
+15-18 = 15 + (-18)
+15 = 001111
+
+8
+00:00:42,370 --> 00:00:55,260
+18 = 010010
+To convert 18 to -18, we flip all the bits
+
+9
+00:00:55,260 --> 00:00:56,930
+and add one.
+
+10
+00:00:56,930 --> 00:01:04,540
+This results in 101110 which is = -18.
+
+11
+00:01:04,540 --> 00:01:10,430
+We can now take our two's complement representation
+of our two numbers and add them together.
+
+12
+00:01:10,430 --> 00:01:16,640
+Whenever we add 1 + 1 in binary that produces
+a 0 plus a carry of 1.
+
+13
+00:01:16,640 --> 00:01:20,289
+So our final sum is 111101.
+
+14
+00:01:20,289 --> 00:01:28,150
+To see what this number is equal to, we again
+flip the bits and add one.
+
+15
+00:01:28,150 --> 00:01:38,960
+Flipping the bits, we get 000010, and adding
+one to that we get 000011 which equals 3.
+
+16
+00:01:38,960 --> 00:01:48,500
+Which means that 111101 = -3 which is the
+result we expected to get when performing
+
+17
+00:01:48,500 --> 00:01:55,090
+15-18.
+
+18
+00:01:55,090 --> 00:02:02,460
+Let's try another example:
+27 - 6 = 27 + (-6)
+
+19
+00:02:02,460 --> 00:02:12,770
+27 is equal to 16 + 8 + 2 + 1 which is equal
+to 24 + 23 + 21
+
+20
+00:02:12,770 --> 00:02:14,430
++ 20.
+
+21
+00:02:14,430 --> 00:02:19,440
+So in two's complement representation this
+number is 011011.
+
+22
+00:02:19,440 --> 00:02:29,870
+6 is equal to 4 + 2 which is equal to 22
++ 21, so its 6-bit binary representation
+
+23
+00:02:29,870 --> 00:02:33,800
+is 000110.
+
+24
+00:02:33,800 --> 00:02:39,730
+To find the representation of negative six,
+we flip all the bits and add one resulting
+
+25
+00:02:39,730 --> 00:02:43,670
+in 111010.
+
+26
+00:02:43,670 --> 00:02:51,319
+When we add these two numbers together, remembering
+that in binary 1 + 1 produces a 0 plus a carry
+
+27
+00:02:51,319 --> 00:02:56,340
+of 1, we find that our result ends up having
+7 bits.
+
+28
+00:02:56,340 --> 00:03:01,160
+This most significant bit is dropped because
+we are working with 6-bit representation in
+
+29
+00:03:01,160 --> 00:03:02,500
+this case.
+
+30
+00:03:02,500 --> 00:03:12,950
+So our final result is 010101 which is equal
+to 24 + 22 + 20
+
+31
+00:03:12,950 --> 00:03:25,150
+which equal 16 + 4 + 1 or 21.
+
+32
+00:03:25,150 --> 00:03:29,530
+If you try adding two numbers whose result
+is beyond the range of numbers that can be
+
+33
+00:03:29,530 --> 00:03:36,709
+represented using your N-bit representation,
+then that means that overflow occurred.
+
+34
+00:03:36,709 --> 00:03:41,319
+Overflow can be detected by looking at the
+sign of the two numbers being added and the
+
+35
+00:03:41,319 --> 00:03:43,629
+sign of the resulting number.
+
+36
+00:03:43,629 --> 00:03:49,040
+If you try adding two positive numbers (where
+the most significant bit is 0) and your result
+
+37
+00:03:49,040 --> 00:03:55,450
+ends up being negative (your most significant
+bit is a 1), then overflow occurred.
+
+38
+00:03:55,450 --> 00:04:01,019
+Similarly if you try adding two negative numbers
+whose most significant bit is one, and you
+
+39
+00:04:01,019 --> 00:04:07,349
+end up with a result that is positive (where
+the most significant bit is 0) then once again
+
+40
+00:04:07,349 --> 00:04:09,629
+overflow occurred.
+
+41
+00:04:09,629 --> 00:04:15,959
+Overflow cannot occur when you add a positive
+and negative number that are within range.
+
+42
+00:04:15,959 --> 00:04:18,420
+Let's take a look at an example of this.
+
+43
+00:04:18,420 --> 00:04:24,639
+Suppose we try adding 31 + 12 using 6-bit
+two's complement.
+
+44
+00:04:24,639 --> 00:04:32,580
+This results in 101011 which has its most
+significant bit equal to 1 even though we
+
+45
+00:04:32,580 --> 00:04:35,229
+were adding two positive numbers.
+
+46
+00:04:35,229 --> 00:04:38,360
+This means that overflow occurred.
+
+47
+00:04:38,360 --> 00:04:44,680
+Overflow occurred because the result of adding
+these two numbers is 43 which is larger than
+
+48
+00:04:44,680 --> 00:04:52,050
+2 to the 5th minus 1, or 31, which is the largest
+positive number that can be represented using
+
+49
+00:04:52,050 --> 00:04:53,659
+6-bits two's complement.

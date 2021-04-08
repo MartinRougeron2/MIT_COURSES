@@ -1,0 +1,208 @@
+1
+00:00:00,849 --> 00:00:06,859
+Using more complicated series/parallel networks
+of switches, we can build devices that implement
+
+2
+00:00:06,859 --> 00:00:09,930
+more complex logic functions.
+
+3
+00:00:09,930 --> 00:00:14,370
+To design a more complex logic gate, first
+figure the series and parallel connections
+
+4
+00:00:14,370 --> 00:00:19,880
+of PFET switches that will connect the gate's
+output to V_DD for the right combination of
+
+5
+00:00:19,880 --> 00:00:21,160
+inputs.
+
+6
+00:00:21,160 --> 00:00:29,690
+In this example, the output F will be 1 when
+A is 0 OR when both B is 0 AND C is 0.
+
+7
+00:00:29,690 --> 00:00:35,770
+The "OR" translates into a parallel connection,
+and the "AND" translates into a series connection,
+
+8
+00:00:35,770 --> 00:00:39,160
+giving the pullup circuit you see to the right.
+
+9
+00:00:39,160 --> 00:00:44,010
+To build the complementary pulldown circuit,
+systematically walk the hierarchy of pullup
+
+10
+00:00:44,010 --> 00:00:50,250
+connections, replacing PFETs with NFETs, series
+subcircuits with parallel subcircuits, and
+
+11
+00:00:50,250 --> 00:00:53,829
+parallel subcircuits with series subcircuits.
+
+12
+00:00:53,829 --> 00:00:59,809
+In the example shown, the pullup circuit had
+a switch controlled by A in parallel with
+
+13
+00:00:59,809 --> 00:01:04,530
+a series subcircuit consisting of switches
+controlled by B and C.
+
+14
+00:01:04,530 --> 00:01:11,020
+The complementary pulldown circuit uses NFETs,
+with the switch controlled by A in series
+
+15
+00:01:11,020 --> 00:01:16,350
+with a parallel subcircuit consisting of switches
+controlled by B and C.
+
+16
+00:01:16,350 --> 00:01:24,100
+Finally combine the pullup and pulldown circuits
+to form a fully-complementary CMOS implementation.
+
+17
+00:01:24,100 --> 00:01:27,908
+This probably went by a quickly, but with
+practice you'll get comfortable with the CMOS
+
+18
+00:01:27,908 --> 00:01:30,670
+design process.
+
+19
+00:01:30,670 --> 00:01:37,560
+Mr. Blue is asking a good question: will this
+recipe work for any and all logic functions?
+
+20
+00:01:37,560 --> 00:01:41,170
+The answer is "no", let's see why.
+
+21
+00:01:41,170 --> 00:01:46,939
+Using CMOS, a single gate (a circuit with
+one pullup network and one pulldown network)
+
+22
+00:01:46,939 --> 00:01:51,750
+can only implement the so-called inverting
+functions where rising inputs lead to falling
+
+23
+00:01:51,750 --> 00:01:54,549
+outputs and vice versa.
+
+24
+00:01:54,549 --> 00:02:00,329
+To see why, consider what happens with one
+of the gate's inputs goes from 0 to 1.
+
+25
+00:02:00,329 --> 00:02:05,930
+Any NFET switches controlled by the rising
+input will go from off to on.
+
+26
+00:02:05,930 --> 00:02:10,300
+This may enable one or more paths between
+the gate's output and GROUND.
+
+27
+00:02:10,300 --> 00:02:15,660
+And PFET switches controlled by the rising
+input will from on to off.
+
+28
+00:02:15,660 --> 00:02:21,430
+This may disable one or more paths between
+the gate's output and V_DD.
+
+29
+00:02:21,430 --> 00:02:26,720
+So if the gate's output changes as the result
+of the rising input, it must be because some
+
+30
+00:02:26,720 --> 00:02:31,720
+pulldown path was enabled and some pullup
+path was disabled.
+
+31
+00:02:31,720 --> 00:02:37,820
+In other words, any change in the output voltage
+due to a rising input must be a falling transition
+
+32
+00:02:37,820 --> 00:02:40,950
+from 1 to 0.
+
+33
+00:02:40,950 --> 00:02:45,590
+Similar reasoning tells us that falling inputs
+must lead to rising outputs.
+
+34
+00:02:45,590 --> 00:02:51,380
+In fact, for any non-constant CMOS gate, we
+know that its output must be 1 when all inputs
+
+35
+00:02:51,380 --> 00:02:55,650
+are 0 (since all the NFETs are off and all
+the PFETs are on).
+
+36
+00:02:55,650 --> 00:03:02,690
+And vice-versa: if all the inputs are 1, the
+gate's output must be 0.
+
+37
+00:03:02,690 --> 00:03:09,140
+This means that so-called positive logic can't
+be implemented with a single CMOS gate.
+
+38
+00:03:09,140 --> 00:03:13,090
+Look at this truth table for the AND function.
+
+39
+00:03:13,090 --> 00:03:18,480
+It's value when both inputs are 0 or both
+inputs are 1 is inconsistent with our deductions
+
+40
+00:03:18,480 --> 00:03:22,980
+about the output of a CMOS gate for these
+combinations of inputs.
+
+41
+00:03:22,980 --> 00:03:30,910
+Furthermore, we can see that when A is 1 and
+B rises from 0 to 1, the output rises instead
+
+42
+00:03:30,910 --> 00:03:33,370
+of falls.
+
+43
+00:03:33,370 --> 00:03:38,790
+Moral of the story: when you're a CMOS designer,
+you'll get very good at implementing functionality
+
+44
+00:03:38,790 --> 00:03:39,840
+with inverting logic!

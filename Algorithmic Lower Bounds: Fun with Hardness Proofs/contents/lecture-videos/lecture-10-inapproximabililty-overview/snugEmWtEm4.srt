@@ -1,0 +1,6722 @@
+1
+00:00:00,080 --> 00:00:02,430
+The following content is
+provided under a Creative
+
+2
+00:00:02,430 --> 00:00:03,810
+Commons license.
+
+3
+00:00:03,810 --> 00:00:06,060
+Your support will help
+MIT OpenCourseWare
+
+4
+00:00:06,060 --> 00:00:10,150
+continue to offer high-quality
+educational resources for free.
+
+5
+00:00:10,150 --> 00:00:12,690
+To make a donation, or to
+view additional materials
+
+6
+00:00:12,690 --> 00:00:16,600
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:16,600 --> 00:00:17,258
+at ocw.mit.edu.
+
+8
+00:00:25,744 --> 00:00:27,570
+PROFESSOR: All
+right, welcome back.
+
+9
+00:00:27,570 --> 00:00:29,710
+Today, we start a
+series of lectures
+
+10
+00:00:29,710 --> 00:00:31,820
+on approximation algorithms.
+
+11
+00:00:31,820 --> 00:00:34,382
+So something rather
+different, although
+
+12
+00:00:34,382 --> 00:00:36,090
+we're still going to
+be doing reductions.
+
+13
+00:00:36,090 --> 00:00:39,820
+They're just going to be
+stronger sense of reductions.
+
+14
+00:00:39,820 --> 00:00:42,244
+So let me start
+with reminding you--
+
+15
+00:00:42,244 --> 00:00:43,660
+I assume you've
+seen approximation
+
+16
+00:00:43,660 --> 00:00:45,910
+algorithms at some
+level before, but I
+
+17
+00:00:45,910 --> 00:00:49,050
+want to define a few
+things which we'll
+
+18
+00:00:49,050 --> 00:00:51,510
+need for the lower bound side.
+
+19
+00:00:56,580 --> 00:01:00,057
+So pretty much throughout, we've
+been-- in the context of NP,
+
+20
+00:01:00,057 --> 00:01:01,890
+we've been thinking
+about decision problems,
+
+21
+00:01:01,890 --> 00:01:03,590
+because that's
+where NP make sense.
+
+22
+00:01:03,590 --> 00:01:08,240
+Now, we need to change the
+setup to where the output is
+
+23
+00:01:08,240 --> 00:01:10,010
+not just yes or no,
+but it's some kind
+
+24
+00:01:10,010 --> 00:01:12,200
+of solution with a cost.
+
+25
+00:01:12,200 --> 00:01:15,620
+So in general, the goal
+in an optimization problem
+
+26
+00:01:15,620 --> 00:01:20,150
+is going to be to go
+from some instance
+
+27
+00:01:20,150 --> 00:01:31,420
+to a solution with
+min or max cost.
+
+28
+00:01:31,420 --> 00:01:33,220
+So there's
+minimization problems,
+
+29
+00:01:33,220 --> 00:01:34,740
+maximization problems.
+
+30
+00:01:34,740 --> 00:01:37,910
+And so you are given--
+in order to specify this,
+
+31
+00:01:37,910 --> 00:01:43,240
+you're given a set of
+possible instances.
+
+32
+00:01:43,240 --> 00:01:45,230
+That's your usual
+notion of input.
+
+33
+00:01:45,230 --> 00:01:56,540
+And then for each instance, we
+are given a set of solutions.
+
+34
+00:01:56,540 --> 00:01:59,120
+Usually, these are
+called feasible
+
+35
+00:01:59,120 --> 00:02:00,890
+solutions or valid solutions.
+
+36
+00:02:00,890 --> 00:02:02,775
+I'll just call them solutions.
+
+37
+00:02:02,775 --> 00:02:08,810
+Those are the allowable
+outputs to that problem.
+
+38
+00:02:08,810 --> 00:02:11,120
+And then for each
+of those solutions,
+
+39
+00:02:11,120 --> 00:02:12,560
+we're going to define some cost.
+
+40
+00:02:12,560 --> 00:02:18,290
+I will assume that
+they are non-negative,
+
+41
+00:02:18,290 --> 00:02:20,950
+so I don't have to
+worry about signs.
+
+42
+00:02:20,950 --> 00:02:24,940
+And then you're
+also given what's
+
+43
+00:02:24,940 --> 00:02:29,270
+usually called the objective,
+which is either min or max.
+
+44
+00:02:31,961 --> 00:02:34,210
+OK, so you're going to be
+given an item from this set.
+
+45
+00:02:34,210 --> 00:02:36,770
+You want to produce an item
+from this set that minimizes
+
+46
+00:02:36,770 --> 00:02:39,095
+or maximizes this cost.
+
+47
+00:02:39,095 --> 00:02:41,720
+That's not going to be possible,
+because all these problems are
+
+48
+00:02:41,720 --> 00:02:42,720
+going to be NP complete.
+
+49
+00:02:42,720 --> 00:02:44,940
+But the point of
+approximation is
+
+50
+00:02:44,940 --> 00:02:47,890
+to relax getting
+the best solution,
+
+51
+00:02:47,890 --> 00:02:51,160
+and aim to get an approximately
+best solution, which
+
+52
+00:02:51,160 --> 00:02:55,570
+we will define in a moment.
+
+53
+00:02:55,570 --> 00:02:59,890
+But let me start with some
+useful notation, which
+
+54
+00:02:59,890 --> 00:03:10,810
+is opt of x, x is an instance,
+this is going to be two things.
+
+55
+00:03:10,810 --> 00:03:14,590
+No definition should
+be unambiguous.
+
+56
+00:03:14,590 --> 00:03:22,782
+So it's going to be the cost
+of a min or a max solution.
+
+57
+00:03:28,730 --> 00:03:30,330
+Cost solution.
+
+58
+00:03:30,330 --> 00:03:33,660
+And it's also going to be such
+a solution itself, sometimes.
+
+59
+00:03:36,870 --> 00:03:39,160
+Cool.
+
+60
+00:03:39,160 --> 00:03:41,120
+So this is sort of
+the usual setup.
+
+61
+00:03:41,120 --> 00:03:45,190
+Now let's make it a little bit
+more interesting by defining
+
+62
+00:03:45,190 --> 00:03:46,870
+an NP optimization problem.
+
+63
+00:03:53,090 --> 00:03:58,480
+This is going to be the
+analog of NP for optimization.
+
+64
+00:03:58,480 --> 00:04:03,630
+So one thing is
+that all solutions
+
+65
+00:04:03,630 --> 00:04:09,720
+have polynomial length,
+polynomial in the length
+
+66
+00:04:09,720 --> 00:04:11,285
+of the input, the instance.
+
+67
+00:04:14,180 --> 00:04:20,920
+Another thing is that
+instances and solutions
+
+68
+00:04:20,920 --> 00:04:21,729
+can be recognized.
+
+69
+00:04:30,902 --> 00:04:32,485
+So there's a polynomial
+time algorithm
+
+70
+00:04:32,485 --> 00:04:35,220
+that tells you yes,
+that's a solution, yes,
+
+71
+00:04:35,220 --> 00:04:38,340
+that's an instance, or no.
+
+72
+00:04:38,340 --> 00:04:42,650
+And let's see, the
+cost function should
+
+73
+00:04:42,650 --> 00:04:45,360
+be polynomially-computable.
+
+74
+00:04:45,360 --> 00:04:48,560
+And that's it.
+
+75
+00:04:48,560 --> 00:04:51,160
+OK, so just making
+these actually
+
+76
+00:04:51,160 --> 00:04:53,900
+reasonable from an
+algorithmic standpoint.
+
+77
+00:04:53,900 --> 00:04:57,700
+And so now, you know,
+thinking like NP,
+
+78
+00:04:57,700 --> 00:05:02,640
+the solution is going to be
+something like the certificate
+
+79
+00:05:02,640 --> 00:05:04,580
+that you had a yes answer.
+
+80
+00:05:04,580 --> 00:05:07,070
+Here, it's going to be a
+certificate that the cost is
+
+81
+00:05:07,070 --> 00:05:08,460
+a particular thing.
+
+82
+00:05:08,460 --> 00:05:10,920
+So given an empty
+optimization problem,
+
+83
+00:05:10,920 --> 00:05:15,010
+you can define a
+decision problem,
+
+84
+00:05:15,010 --> 00:05:20,320
+or decision version of NPO.
+
+85
+00:05:20,320 --> 00:05:27,450
+So NPO is going to be the
+class of all such problems, NP
+
+86
+00:05:27,450 --> 00:05:30,340
+optimization problems.
+
+87
+00:05:30,340 --> 00:05:33,580
+Just like NP was
+all the problems
+
+88
+00:05:33,580 --> 00:05:37,170
+solvable in nondeterministic
+polynomial time.
+
+89
+00:05:37,170 --> 00:05:41,890
+These things I claim, if
+we convert to the decision
+
+90
+00:05:41,890 --> 00:05:47,471
+version, which is for a min
+problem, the question is
+
+91
+00:05:47,471 --> 00:05:53,760
+is opt of x, the cost, less than
+or equal to some query value.
+
+92
+00:05:53,760 --> 00:05:58,690
+And for a max
+version, it is is opt
+
+93
+00:05:58,690 --> 00:06:03,740
+of x greater than or
+equal to the query value.
+
+94
+00:06:03,740 --> 00:06:05,450
+This thing is an NP.
+
+95
+00:06:08,030 --> 00:06:12,050
+So let's see why.
+
+96
+00:06:12,050 --> 00:06:15,270
+If you have these properties,
+then the resulting decision
+
+97
+00:06:15,270 --> 00:06:18,490
+problem will be an NP because
+if I give you a solution,
+
+98
+00:06:18,490 --> 00:06:20,320
+and solutions have
+polynomial length,
+
+99
+00:06:20,320 --> 00:06:24,290
+you can compute its cost, verify
+that it was a valid solution,
+
+100
+00:06:24,290 --> 00:06:27,340
+and then you know that
+opt-- opt is some min,
+
+101
+00:06:27,340 --> 00:06:29,030
+so it's going to be
+less than or equal
+
+102
+00:06:29,030 --> 00:06:30,700
+to any particular solution.
+
+103
+00:06:30,700 --> 00:06:34,040
+So if I give you a solution,
+then I verify that opt of x
+
+104
+00:06:34,040 --> 00:06:36,830
+is less than or equal
+to q in polynomial time.
+
+105
+00:06:36,830 --> 00:06:39,850
+For max, it's the reverse.
+
+106
+00:06:39,850 --> 00:06:41,962
+And for example, if
+you wanted to check--
+
+107
+00:06:41,962 --> 00:06:43,670
+if you wanted to know
+whether the min was
+
+108
+00:06:43,670 --> 00:06:45,840
+greater than or
+equal to something,
+
+109
+00:06:45,840 --> 00:06:47,600
+well that's a co NP problem.
+
+110
+00:06:47,600 --> 00:06:51,170
+So that's-- these are the
+correct decision versions
+
+111
+00:06:51,170 --> 00:06:53,980
+of those NP optimization
+problems in the sense that you
+
+112
+00:06:53,980 --> 00:06:56,230
+get a problem in NP.
+
+113
+00:06:56,230 --> 00:06:59,770
+So this is a strict
+generalization, in some sense,
+
+114
+00:06:59,770 --> 00:07:04,380
+of NP problems, or
+specialization I suppose.
+
+115
+00:07:04,380 --> 00:07:08,670
+This is a particular-- well,
+we have optimization versions
+
+116
+00:07:08,670 --> 00:07:10,030
+which still give us NP problems.
+
+117
+00:07:10,030 --> 00:07:13,390
+We can still talk about NP
+completeness of these problems.
+
+118
+00:07:13,390 --> 00:07:16,310
+But we're interested--
+we're setting all this up
+
+119
+00:07:16,310 --> 00:07:19,400
+so we can actually talk about
+costs of not just the best
+
+120
+00:07:19,400 --> 00:07:24,800
+solution, but costs of
+suboptimal solutions.
+
+121
+00:07:24,800 --> 00:07:26,930
+So let's get to approximation.
+
+122
+00:07:41,500 --> 00:07:46,500
+So we're going to call
+an algorithm, ALG, a c
+
+123
+00:07:46,500 --> 00:07:47,950
+approximation.
+
+124
+00:07:47,950 --> 00:07:51,096
+I write c, but it's not
+necessarily a constant.
+
+125
+00:07:51,096 --> 00:08:01,010
+It could be a function of
+N. If-- in the min case,
+
+126
+00:08:01,010 --> 00:08:05,910
+what we want is the cost
+of the algorithm applied
+
+127
+00:08:05,910 --> 00:08:12,690
+to an input, x, divided by
+the cost of the optimal of x.
+
+128
+00:08:12,690 --> 00:08:14,810
+Here, for whatever
+reason, I write cost
+
+129
+00:08:14,810 --> 00:08:16,960
+of opt instead of just opt.
+
+130
+00:08:16,960 --> 00:08:18,690
+That should be less
+than or equal to c.
+
+131
+00:08:23,110 --> 00:08:25,220
+We look at the ratio,
+we want that to be
+
+132
+00:08:25,220 --> 00:08:26,970
+bounded by some value.
+
+133
+00:08:26,970 --> 00:08:30,630
+In the max case, there
+are two definitions
+
+134
+00:08:30,630 --> 00:08:34,080
+that are standard in
+the literature that
+
+135
+00:08:34,080 --> 00:08:38,950
+correspond to different ways
+of looking at the same thing.
+
+136
+00:08:38,950 --> 00:08:50,200
+One would be cost of OPT
+divided by cost of ALG.
+
+137
+00:08:50,200 --> 00:08:51,720
+That should be, at most, c.
+
+138
+00:08:51,720 --> 00:08:57,470
+This would correspond to c being
+greater than or equal to 1.
+
+139
+00:08:57,470 --> 00:09:01,150
+And the alternative is to
+flip the inequality instead
+
+140
+00:09:01,150 --> 00:09:02,570
+of the ratio.
+
+141
+00:09:13,150 --> 00:09:14,550
+First, let's think about min.
+
+142
+00:09:14,550 --> 00:09:16,790
+With a minimization problem,
+whatever the algorithm produces
+
+143
+00:09:16,790 --> 00:09:18,331
+will be greater than
+or equal to OPT.
+
+144
+00:09:18,331 --> 00:09:22,080
+So this is a ratio that will
+give something greater than
+
+145
+00:09:22,080 --> 00:09:22,930
+or equal to 1.
+
+146
+00:09:22,930 --> 00:09:26,550
+And so usually we think
+about two approximation,
+
+147
+00:09:26,550 --> 00:09:29,140
+1.5 approximation,
+100 approximation,
+
+148
+00:09:29,140 --> 00:09:31,190
+whatever, just saying
+the algorithm is
+
+149
+00:09:31,190 --> 00:09:33,460
+within a factor of
+100 of the optimal.
+
+150
+00:09:33,460 --> 00:09:36,080
+For maximization, the thing
+that the algorithm produces
+
+151
+00:09:36,080 --> 00:09:38,090
+will be less than
+or equal to OPT.
+
+152
+00:09:38,090 --> 00:09:41,010
+And so if you want something
+that is greater than 1,
+
+153
+00:09:41,010 --> 00:09:43,520
+you have to flip the ratio.
+
+154
+00:09:43,520 --> 00:09:47,670
+In this situation, c would
+be less than or equal to 1.
+
+155
+00:09:47,670 --> 00:09:53,590
+So some people call-- if
+you have an algorithm that
+
+156
+00:09:53,590 --> 00:09:56,859
+produces a solution that is
+at least 1/2 times optimal,
+
+157
+00:09:56,859 --> 00:09:58,400
+you might call it
+a two approximation
+
+158
+00:09:58,400 --> 00:10:00,150
+or you might call it
+a 1/2 approximation,
+
+159
+00:10:00,150 --> 00:10:01,600
+depending on the paper.
+
+160
+00:10:01,600 --> 00:10:03,440
+I think this is, by
+now, more common,
+
+161
+00:10:03,440 --> 00:10:07,310
+but it really depends on the
+era and the person and so on.
+
+162
+00:10:07,310 --> 00:10:08,490
+So good to be aware of both.
+
+163
+00:10:08,490 --> 00:10:10,198
+It's measuring the
+same thing, of course,
+
+164
+00:10:10,198 --> 00:10:12,500
+just c is either bigger
+than 1 or less than 1.
+
+165
+00:10:12,500 --> 00:10:13,000
+Yeah?
+
+166
+00:10:13,000 --> 00:10:15,200
+AUDIENCE: Is that
+over all instances?
+
+167
+00:10:15,200 --> 00:10:17,170
+PROFESSOR: Oh yeah, this
+should be for all x.
+
+168
+00:10:22,340 --> 00:10:25,360
+For all valid instances x.
+
+169
+00:10:25,360 --> 00:10:28,080
+Good.
+
+170
+00:10:28,080 --> 00:10:41,150
+So usually when we say a
+c approximation algorithm,
+
+171
+00:10:41,150 --> 00:10:43,960
+usually we're interested in
+polynomial time c approximation
+
+172
+00:10:43,960 --> 00:10:44,620
+algorithm.
+
+173
+00:10:44,620 --> 00:10:46,344
+Almost all the time
+that is the case.
+
+174
+00:10:46,344 --> 00:10:48,260
+I will probably forget
+to say polynomial time,
+
+175
+00:10:48,260 --> 00:10:51,560
+but I always mean it
+unless I say otherwise,
+
+176
+00:10:51,560 --> 00:10:52,880
+which will probably be never.
+
+177
+00:10:52,880 --> 00:10:54,910
+But there are a few papers
+that look at exponential time
+
+178
+00:10:54,910 --> 00:10:56,618
+approximation algorithms
+that have better
+
+179
+00:10:56,618 --> 00:11:00,750
+exponent than the exact
+counterparts, and so on.
+
+180
+00:11:00,750 --> 00:11:04,250
+So this is interesting
+because while
+
+181
+00:11:04,250 --> 00:11:09,070
+your-- the straight-up decision
+problem, which is basically
+
+182
+00:11:09,070 --> 00:11:12,800
+deciding OPT exactly,
+that might be NP complete.
+
+183
+00:11:12,800 --> 00:11:15,050
+The approximation version,
+like finding a two
+
+184
+00:11:15,050 --> 00:11:17,160
+approximate solution,
+might be polynomial.
+
+185
+00:11:17,160 --> 00:11:20,760
+And that would be observed
+by finding a polynomial
+
+186
+00:11:20,760 --> 00:11:22,130
+to approximation algorithm.
+
+187
+00:11:24,810 --> 00:11:32,390
+Sometimes you can do even
+better than con-- well.
+
+188
+00:11:32,390 --> 00:11:35,740
+So here, we've been thinking
+about constant factors for c.
+
+189
+00:11:35,740 --> 00:11:38,257
+Sometimes you can do even
+better than any constant factor,
+
+190
+00:11:38,257 --> 00:11:40,090
+or you can achieve any
+constant factor would
+
+191
+00:11:40,090 --> 00:11:42,760
+be another way of saying it.
+
+192
+00:11:42,760 --> 00:11:46,821
+This is called a polynomial time
+approximation scheme, usually
+
+193
+00:11:46,821 --> 00:11:47,320
+PTAS.
+
+194
+00:11:58,300 --> 00:12:00,610
+You can think of this as a
+1 plus epsilon approximation
+
+195
+00:12:00,610 --> 00:12:02,340
+for any epsilon.
+
+196
+00:12:02,340 --> 00:12:04,880
+But the general-- or
+you can think of it
+
+197
+00:12:04,880 --> 00:12:07,060
+as an algorithm that,
+given epsilon, produces a 1
+
+198
+00:12:07,060 --> 00:12:09,010
+plus epsilon
+approximation algorithm.
+
+199
+00:12:09,010 --> 00:12:11,490
+Or you can think of
+it as an algorithm
+
+200
+00:12:11,490 --> 00:12:15,885
+with an additional input, not
+just the instance, but also
+
+201
+00:12:15,885 --> 00:12:19,200
+a value epsilon.
+
+202
+00:12:19,200 --> 00:12:23,950
+It's a rational epsilon
+greater than zero.
+
+203
+00:12:23,950 --> 00:12:38,110
+And then the-- let's say
+produces a solution that's
+
+204
+00:12:38,110 --> 00:12:43,360
+a 1 plus epsilon approximation.
+
+205
+00:12:47,240 --> 00:12:49,190
+So this would be a sort
+of ideal situation.
+
+206
+00:12:49,190 --> 00:12:51,800
+You get to specify what
+the error bound is,
+
+207
+00:12:51,800 --> 00:12:56,430
+and the algorithm will
+find a suitable solution.
+
+208
+00:12:56,430 --> 00:12:59,960
+And the polynomial time
+part is that this algorithm
+
+209
+00:12:59,960 --> 00:13:11,310
+must be polynomial time for
+any fixed epsilon, which
+
+210
+00:13:11,310 --> 00:13:13,990
+means that the dependence on
+epsilon could be horrible.
+
+211
+00:13:13,990 --> 00:13:15,640
+You could have an
+algorithm, if N
+
+212
+00:13:15,640 --> 00:13:19,336
+is your input size, that runs
+in something like N to the 2
+
+213
+00:13:19,336 --> 00:13:22,430
+to the 2 to the 1 over
+epsilon or whatever.
+
+214
+00:13:22,430 --> 00:13:26,370
+That's polynomial time for
+any fixed value of epsilon.
+
+215
+00:13:26,370 --> 00:13:29,500
+It's rather large for any
+reasonable value of epsilon,
+
+216
+00:13:29,500 --> 00:13:32,170
+like a half, but anyway.
+
+217
+00:13:32,170 --> 00:13:35,470
+Or even 1 is still
+getting up there.
+
+218
+00:13:35,470 --> 00:13:36,820
+But that's considered a P test.
+
+219
+00:13:36,820 --> 00:13:38,880
+Now there are stronger
+notions of P tests
+
+220
+00:13:38,880 --> 00:13:40,410
+that prevent this kind of thing.
+
+221
+00:13:40,410 --> 00:13:42,493
+We will get to that when
+we get to fixed parameter
+
+222
+00:13:42,493 --> 00:13:43,820
+tractability.
+
+223
+00:13:43,820 --> 00:13:47,690
+But for now, this would be
+considered the gold standard.
+
+224
+00:13:47,690 --> 00:13:52,240
+This is the best you could hope
+for at this level of detail.
+
+225
+00:13:52,240 --> 00:13:57,830
+And for-- let me give
+you some more classes.
+
+226
+00:13:57,830 --> 00:14:00,190
+So we defined NPO.
+
+227
+00:14:00,190 --> 00:14:01,570
+There's the class PTAS.
+
+228
+00:14:01,570 --> 00:14:10,810
+Again, reuse of term, but this
+is all problems-- NPO problems
+
+229
+00:14:10,810 --> 00:14:15,460
+with a PTAS algorithm.
+
+230
+00:14:15,460 --> 00:14:27,140
+And more generally, if we
+have some class of functions,
+
+231
+00:14:27,140 --> 00:14:30,800
+then I'm going to write
+FAPX to be all the NPO
+
+232
+00:14:30,800 --> 00:14:45,650
+problems with poly-time f
+approximation algorithms.
+
+233
+00:14:45,650 --> 00:14:48,960
+I'll write f of N
+to be clear what
+
+234
+00:14:48,960 --> 00:15:04,970
+we're depending on for some
+little f in the class big F.
+
+235
+00:15:04,970 --> 00:15:09,510
+So for example, f
+of N could be 3.
+
+236
+00:15:09,510 --> 00:15:11,670
+That would be a constant
+factor approximation.
+
+237
+00:15:11,670 --> 00:15:14,220
+In that case, we
+just call it APX.
+
+238
+00:15:14,220 --> 00:15:18,209
+APX is what you might otherwise
+call order one APX, things
+
+239
+00:15:18,209 --> 00:15:20,250
+that you can approximate
+in some constant factor,
+
+240
+00:15:20,250 --> 00:15:22,120
+any constant factor.
+
+241
+00:15:22,120 --> 00:15:26,200
+Another class that's
+commonly studied is log APX.
+
+242
+00:15:26,200 --> 00:15:33,789
+This is log N approximable
+some constant factor.
+
+243
+00:15:33,789 --> 00:15:34,580
+And there are more.
+
+244
+00:15:34,580 --> 00:15:36,880
+There's poly APX,
+where you just want
+
+245
+00:15:36,880 --> 00:15:41,240
+N to some constant, usually
+less than one but not always.
+
+246
+00:15:41,240 --> 00:15:44,947
+But I think this will
+be enough for us.
+
+247
+00:15:44,947 --> 00:15:47,280
+And so we're interested in
+distinguishing these classes.
+
+248
+00:15:47,280 --> 00:15:49,650
+We're going to do that by
+defining reductions, using
+
+249
+00:15:49,650 --> 00:15:52,690
+reductions, defining hardness,
+and then getting the hardest
+
+250
+00:15:52,690 --> 00:15:54,550
+problems in certains
+of these classes
+
+251
+00:15:54,550 --> 00:15:58,880
+to show that's the best kind
+of approximability you can get.
+
+252
+00:15:58,880 --> 00:16:01,700
+Today, we'll be thinking in
+particular about the boundary
+
+253
+00:16:01,700 --> 00:16:04,580
+between PTAS and APX.
+
+254
+00:16:04,580 --> 00:16:07,160
+So PTAS, we can get 1 plus
+epsilon for any epsilon.
+
+255
+00:16:07,160 --> 00:16:08,630
+APX, you can get
+a constant factor,
+
+256
+00:16:08,630 --> 00:16:10,170
+but there's some
+limit to how small
+
+257
+00:16:10,170 --> 00:16:13,570
+that constant factor could be,
+at least in the hardest case.
+
+258
+00:16:13,570 --> 00:16:18,030
+APX includes PTAS, but there's
+problems in APX minus PTAS.
+
+259
+00:16:18,030 --> 00:16:21,790
+Those have a limit how
+far down you can get.
+
+260
+00:16:21,790 --> 00:16:22,290
+OK.
+
+261
+00:16:22,290 --> 00:16:29,240
+We have PTAS is a subset of APX.
+
+262
+00:16:29,240 --> 00:16:34,640
+And furthermore, if P is not
+equal NP, it's a strict subset.
+
+263
+00:16:34,640 --> 00:16:40,140
+And let's say log
+APX or whatever.
+
+264
+00:16:40,140 --> 00:16:44,460
+You pick your favorite
+approximation factor,
+
+265
+00:16:44,460 --> 00:16:46,700
+and there are problems
+where you can achieve
+
+266
+00:16:46,700 --> 00:16:49,780
+that and nothing better.
+
+267
+00:16:49,780 --> 00:16:53,310
+It's actually an easy exercise
+to come up with such a thing.
+
+268
+00:16:53,310 --> 00:16:58,980
+This is if P does not equal NP.
+
+269
+00:16:58,980 --> 00:17:03,660
+So you can take, I don't know,
+Hamiltonian cycle or something,
+
+270
+00:17:03,660 --> 00:17:05,500
+or pick your favorite
+NP hard problem.
+
+271
+00:17:05,500 --> 00:17:08,160
+And if the answer is
+yes to that problem,
+
+272
+00:17:08,160 --> 00:17:11,785
+then you construct a
+solution with some cost.
+
+273
+00:17:11,785 --> 00:17:14,470
+And if the answer is no,
+it's way, way smaller.
+
+274
+00:17:14,470 --> 00:17:17,690
+And so any approximation
+within your desired factor
+
+275
+00:17:17,690 --> 00:17:21,829
+will be hard to find.
+
+276
+00:17:21,829 --> 00:17:24,540
+Let me get a little bit more
+specific, and let's talk
+
+277
+00:17:24,540 --> 00:17:26,670
+about some real problems.
+
+278
+00:17:26,670 --> 00:17:30,720
+So in the world of graph
+algorithm approximability,
+
+279
+00:17:30,720 --> 00:17:33,510
+these are the typical kinds of
+approximation factors you see.
+
+280
+00:17:33,510 --> 00:17:35,710
+Of course, it depends
+exactly what subdomain.
+
+281
+00:17:35,710 --> 00:17:38,890
+This is not a complete list, but
+it starts to give you a flavor.
+
+282
+00:17:38,890 --> 00:17:41,990
+And today, we'll be thinking
+mostly at the top level.
+
+283
+00:17:41,990 --> 00:17:47,290
+But let me define some of
+these problems for you.
+
+284
+00:17:47,290 --> 00:17:50,210
+A lot of them we have seen,
+or a few of them we have seen,
+
+285
+00:17:50,210 --> 00:17:53,140
+such as Steiner tree.
+
+286
+00:17:53,140 --> 00:17:55,450
+We talked about
+rectilinear Steiner tree.
+
+287
+00:17:55,450 --> 00:17:56,940
+That was a Euclidean problem.
+
+288
+00:17:56,940 --> 00:17:58,420
+You were given
+points in the plane,
+
+289
+00:17:58,420 --> 00:17:59,794
+and you wanted to
+connect them up
+
+290
+00:17:59,794 --> 00:18:03,790
+by the shortest
+connected network.
+
+291
+00:18:03,790 --> 00:18:08,916
+In a graph-- so that problem
+has a PTAS rectilinear Steiner
+
+292
+00:18:08,916 --> 00:18:10,540
+tree, because it's
+a Euclidean problem.
+
+293
+00:18:10,540 --> 00:18:13,030
+A lot of Euclidean
+problems have PTAS's.
+
+294
+00:18:13,030 --> 00:18:15,780
+And I'm denoting PTAS
+here by 1 plus epsilon.
+
+295
+00:18:15,780 --> 00:18:18,050
+In general, epsilon here
+means for all epsilon greater
+
+296
+00:18:18,050 --> 00:18:20,640
+than zero.
+
+297
+00:18:20,640 --> 00:18:23,470
+Steiner tree in a graph
+is I give you a graph
+
+298
+00:18:23,470 --> 00:18:27,179
+and you have a bunch of special
+vertices, k special vertices.
+
+299
+00:18:27,179 --> 00:18:28,720
+You want to find a
+connected subgraph
+
+300
+00:18:28,720 --> 00:18:33,380
+of that graph that hits all
+of the special vertices.
+
+301
+00:18:33,380 --> 00:18:36,090
+That problem has a constant
+factor approximation,
+
+302
+00:18:36,090 --> 00:18:39,740
+and there's no PTAS
+for a general graph.
+
+303
+00:18:39,740 --> 00:18:41,380
+Steiner forest is
+almost the same.
+
+304
+00:18:41,380 --> 00:18:42,910
+Instead of giving
+vertices that all
+
+305
+00:18:42,910 --> 00:18:45,720
+have to connect to each other,
+you say which pairs of vertices
+
+306
+00:18:45,720 --> 00:18:47,220
+need to connect to each other.
+
+307
+00:18:47,220 --> 00:18:49,610
+This guy and this guy,
+and this guy and this guy.
+
+308
+00:18:49,610 --> 00:18:51,319
+You can still-- this
+is a generalization.
+
+309
+00:18:51,319 --> 00:18:53,776
+In the case where you want to
+connect them in a [? Kleek ?]
+
+310
+00:18:53,776 --> 00:18:55,350
+pattern, that's Steiner tree.
+
+311
+00:18:55,350 --> 00:18:59,770
+But Steiner forest has
+the same approximability
+
+312
+00:18:59,770 --> 00:19:01,449
+up to constant factors.
+
+313
+00:19:01,449 --> 00:19:02,990
+Traveling salesman
+in a graph, you've
+
+314
+00:19:02,990 --> 00:19:05,490
+probably seen a 1.5
+approximation to that.
+
+315
+00:19:05,490 --> 00:19:08,499
+Definitely two approximation
+is really easy, like MST.
+
+316
+00:19:08,499 --> 00:19:10,790
+And that's-- for in a graph,
+that's the best you can do
+
+317
+00:19:10,790 --> 00:19:11,900
+in 2D.
+
+318
+00:19:11,900 --> 00:19:15,390
+Or in a planar graph or
+in an H-minor free graph,
+
+319
+00:19:15,390 --> 00:19:17,490
+there's a PTAS.
+
+320
+00:19:17,490 --> 00:19:22,530
+I think H-minor free, traveling
+salesman problem weighted was
+
+321
+00:19:22,530 --> 00:19:24,660
+solved just a couple years ago.
+
+322
+00:19:24,660 --> 00:19:27,750
+But that has a PTAS.
+
+323
+00:19:27,750 --> 00:19:29,150
+Let's see.
+
+324
+00:19:29,150 --> 00:19:31,137
+Usually most people
+like to think
+
+325
+00:19:31,137 --> 00:19:32,720
+about minimization
+problems, but there
+
+326
+00:19:32,720 --> 00:19:34,882
+are maximization problems, too.
+
+327
+00:19:34,882 --> 00:19:37,490
+Let's see, what else
+haven't I defined.
+
+328
+00:19:37,490 --> 00:19:40,910
+Did we talk about set cover?
+
+329
+00:19:40,910 --> 00:19:43,310
+You have-- I think
+we did briefly.
+
+330
+00:19:43,310 --> 00:19:45,994
+You have sets and
+you have elements.
+
+331
+00:19:45,994 --> 00:19:48,410
+You want to choose the fewest
+sets that hits all elements.
+
+332
+00:19:48,410 --> 00:19:50,840
+Each set contains
+some of the elements.
+
+333
+00:19:50,840 --> 00:19:53,234
+You can think of it as a
+bipartite graph, sets on one
+
+334
+00:19:53,234 --> 00:19:54,400
+side, elements on the other.
+
+335
+00:19:54,400 --> 00:19:56,170
+You want to choose
+the fewest vertices
+
+336
+00:19:56,170 --> 00:20:01,210
+on the left that hit all
+the vertices on the right.
+
+337
+00:20:01,210 --> 00:20:05,130
+Dominating set is the
+non-bipartite version
+
+338
+00:20:05,130 --> 00:20:05,820
+of that problem.
+
+339
+00:20:05,820 --> 00:20:07,980
+You're just given a graph.
+
+340
+00:20:07,980 --> 00:20:10,390
+And if you choose a vertex,
+it covers that vertex
+
+341
+00:20:10,390 --> 00:20:12,607
+and its neighboring vertices.
+
+342
+00:20:12,607 --> 00:20:14,190
+And your goal is to
+cover all vertices
+
+343
+00:20:14,190 --> 00:20:16,220
+using the smallest
+dominating set,
+
+344
+00:20:16,220 --> 00:20:18,540
+by choosing the fewest vertices.
+
+345
+00:20:18,540 --> 00:20:20,600
+So these problems turn
+out to be equivalent from
+
+346
+00:20:20,600 --> 00:20:22,310
+an approximability standpoint.
+
+347
+00:20:22,310 --> 00:20:25,350
+And in a stronger sense,
+they're both log N approximable,
+
+348
+00:20:25,350 --> 00:20:27,410
+and that's the best you can do.
+
+349
+00:20:27,410 --> 00:20:31,050
+This is assuming p
+does not equal NP.
+
+350
+00:20:31,050 --> 00:20:34,000
+Some of these results assume
+slightly stronger things
+
+351
+00:20:34,000 --> 00:20:39,410
+than p versus NP, but we won't
+worry about that too much.
+
+352
+00:20:39,410 --> 00:20:39,910
+Let's see.
+
+353
+00:20:39,910 --> 00:20:43,280
+Another fun problem-- I'm
+just highlighting the ones you
+
+354
+00:20:43,280 --> 00:20:45,260
+should know about.
+
+355
+00:20:45,260 --> 00:20:47,642
+Chromatic number,
+we've seen what we
+
+356
+00:20:47,642 --> 00:20:48,850
+thought about three coloring.
+
+357
+00:20:48,850 --> 00:20:50,308
+But the chromatic
+number problem is
+
+358
+00:20:50,308 --> 00:20:52,230
+to minimize the
+number of colors, k,
+
+359
+00:20:52,230 --> 00:20:54,290
+such that your graph
+is k-colorable.
+
+360
+00:20:54,290 --> 00:20:57,231
+And that's really
+hard to approximate.
+
+361
+00:20:57,231 --> 00:20:58,980
+The best approximation
+algorithm, I think,
+
+362
+00:20:58,980 --> 00:21:03,200
+is N divided by log N,
+or something roughly N.
+
+363
+00:21:03,200 --> 00:21:04,140
+That's not so good.
+
+364
+00:21:04,140 --> 00:21:05,590
+And there's a lower
+bound that you
+
+365
+00:21:05,590 --> 00:21:08,840
+can't do better than N to the 1
+minus epsilon for all epsilon.
+
+366
+00:21:08,840 --> 00:21:11,590
+So you really--
+that's pretty tight.
+
+367
+00:21:11,590 --> 00:21:15,700
+Not completely tight,
+but pretty close.
+
+368
+00:21:15,700 --> 00:21:20,056
+And let's see.
+
+369
+00:21:20,056 --> 00:21:21,410
+Other good problems.
+
+370
+00:21:21,410 --> 00:21:24,442
+So maybe out here, another
+really hard problem
+
+371
+00:21:24,442 --> 00:21:25,900
+to approximate--
+these are problems
+
+372
+00:21:25,900 --> 00:21:27,566
+you should try to
+avoid if you're trying
+
+373
+00:21:27,566 --> 00:21:29,170
+to solve things approximately.
+
+374
+00:21:29,170 --> 00:21:30,750
+Or if you're driving
+hardness, you'd
+
+375
+00:21:30,750 --> 00:21:33,840
+want to use these if you can,
+if your problem looks like this.
+
+376
+00:21:33,840 --> 00:21:35,400
+Independence set,
+just find me a set
+
+377
+00:21:35,400 --> 00:21:37,800
+of vertices that
+induce no edges.
+
+378
+00:21:37,800 --> 00:21:39,310
+So no edges connecting them.
+
+379
+00:21:39,310 --> 00:21:40,780
+That's really hard.
+
+380
+00:21:40,780 --> 00:21:43,461
+If you complement the
+graph everywhere there's
+
+381
+00:21:43,461 --> 00:21:44,960
+an edge deleted and
+everywhere there
+
+382
+00:21:44,960 --> 00:21:47,620
+wasn't an edge added, that's
+the same problem as Kleek.
+
+383
+00:21:47,620 --> 00:21:53,400
+So these are the same also from
+an approximation standpoint.
+
+384
+00:21:53,400 --> 00:21:54,419
+OK.
+
+385
+00:21:54,419 --> 00:21:55,960
+This is annoying
+because [? Kleeks ?]
+
+386
+00:21:55,960 --> 00:21:57,660
+are useful in practice, but.
+
+387
+00:21:57,660 --> 00:21:59,910
+There's another problem
+called [? densest ?] subgraph,
+
+388
+00:21:59,910 --> 00:22:01,280
+which is approximate
+[? Kleeks. ?] That's actually
+
+389
+00:22:01,280 --> 00:22:01,955
+easier to approximate.
+
+390
+00:22:01,955 --> 00:22:02,320
+Yeah.
+
+391
+00:22:02,320 --> 00:22:04,069
+AUDIENCE: What's the
+hardness of something
+
+392
+00:22:04,069 --> 00:22:05,900
+for the chromatic
+number lower bound?
+
+393
+00:22:05,900 --> 00:22:09,860
+PROFESSOR: I think that's
+like P does not equal ZPP,
+
+394
+00:22:09,860 --> 00:22:12,920
+or NP does not
+equal ZPP, I think.
+
+395
+00:22:12,920 --> 00:22:13,670
+Yeah.
+
+396
+00:22:13,670 --> 00:22:15,370
+For that-- that's
+strong lower bounds.
+
+397
+00:22:15,370 --> 00:22:17,828
+There are weaker lower bounds
+assuming P does not equal NP.
+
+398
+00:22:21,820 --> 00:22:22,320
+OK.
+
+399
+00:22:22,320 --> 00:22:28,280
+One other good one, fun one,
+to think about is set cover.
+
+400
+00:22:28,280 --> 00:22:31,410
+You want to choose the fewest
+sets to hit all elements.
+
+401
+00:22:31,410 --> 00:22:35,215
+Maximum coverage, you don't
+have to hit all the elements
+
+402
+00:22:35,215 --> 00:22:37,290
+but you want to hit as
+many elements as possible
+
+403
+00:22:37,290 --> 00:22:39,450
+using k sets.
+
+404
+00:22:39,450 --> 00:22:41,120
+So in the decision
+problem, these
+
+405
+00:22:41,120 --> 00:22:43,180
+are the same in some sense.
+
+406
+00:22:43,180 --> 00:22:44,410
+Here, I give you k sets.
+
+407
+00:22:44,410 --> 00:22:48,410
+I want to know can I
+hit all the elements.
+
+408
+00:22:48,410 --> 00:22:51,090
+For example, here
+I'm giving k sets
+
+409
+00:22:51,090 --> 00:22:55,350
+and I want to know can I hit
+at least J of the elements.
+
+410
+00:22:55,350 --> 00:22:58,160
+So this you could think is a
+generalization from a decision
+
+411
+00:22:58,160 --> 00:22:59,740
+standpoint, but
+it's actually easier
+
+412
+00:22:59,740 --> 00:23:02,410
+to approximate because the
+objective is different.
+
+413
+00:23:02,410 --> 00:23:05,980
+Here we have to hit every
+element, no questions asked.
+
+414
+00:23:05,980 --> 00:23:07,900
+Here, it's OK if we miss
+some of the elements
+
+415
+00:23:07,900 --> 00:23:11,277
+because we only need a
+constant factor approximation.
+
+416
+00:23:11,277 --> 00:23:12,860
+And we can get a
+constant factor here,
+
+417
+00:23:12,860 --> 00:23:15,488
+whereas the best we
+can do is log N here.
+
+418
+00:23:18,140 --> 00:23:19,510
+Cool.
+
+419
+00:23:19,510 --> 00:23:23,450
+But unique coverage,
+this is a result of ours.
+
+420
+00:23:23,450 --> 00:23:25,452
+If you're trying to
+maximize coverage
+
+421
+00:23:25,452 --> 00:23:26,910
+but if you double
+cover an element,
+
+422
+00:23:26,910 --> 00:23:28,610
+you no longer get points for it.
+
+423
+00:23:28,610 --> 00:23:31,230
+That requires log
+N approximation.
+
+424
+00:23:31,230 --> 00:23:35,120
+So I think I will
+leave it at that.
+
+425
+00:23:35,120 --> 00:23:38,010
+Directed graphs are much
+harder, although it's not
+
+426
+00:23:38,010 --> 00:23:38,980
+known exactly how hard.
+
+427
+00:23:38,980 --> 00:23:42,500
+Here's an example of a big gap
+in what we between log squared
+
+428
+00:23:42,500 --> 00:23:45,260
+and N to the epsilon.
+
+429
+00:23:45,260 --> 00:23:47,250
+Something we will get
+to in a later class
+
+430
+00:23:47,250 --> 00:23:48,370
+is called label cover.
+
+431
+00:23:48,370 --> 00:23:50,161
+I won't define the
+problem here, because it
+
+432
+00:23:50,161 --> 00:23:51,275
+takes a while to define.
+
+433
+00:23:51,275 --> 00:23:53,620
+But there, there's very
+strong lower bounds
+
+434
+00:23:53,620 --> 00:23:56,870
+on-- in approximability.
+
+435
+00:23:56,870 --> 00:23:59,770
+It's similar to N to the 1
+minus epsilon, but it's not.
+
+436
+00:23:59,770 --> 00:24:00,710
+It's a little smaller.
+
+437
+00:24:00,710 --> 00:24:05,520
+So you see 2 to the log N would
+be N. That would be great.
+
+438
+00:24:05,520 --> 00:24:07,600
+And so you'd really
+like 2 to the log N
+
+439
+00:24:07,600 --> 00:24:09,070
+to the 1 minus epsilon.
+
+440
+00:24:09,070 --> 00:24:11,790
+But what we have here is
+something a little smaller
+
+441
+00:24:11,790 --> 00:24:15,330
+than log N, log N to the
+1 minus epsilon power.
+
+442
+00:24:15,330 --> 00:24:18,020
+And then you exponentiate that.
+
+443
+00:24:18,020 --> 00:24:23,740
+So this is somewhat smaller
+than what we'd actually like,
+
+444
+00:24:23,740 --> 00:24:27,460
+which is something like N to the
+1 minus-- or N to some epsilon,
+
+445
+00:24:27,460 --> 00:24:29,230
+I guess, would be ideal.
+
+446
+00:24:29,230 --> 00:24:31,899
+This is smaller than
+any N to the epsilon.
+
+447
+00:24:31,899 --> 00:24:33,940
+The best upper bounds, it
+depends on the problem.
+
+448
+00:24:33,940 --> 00:24:36,331
+With N to some constant,
+like for label cover,
+
+449
+00:24:36,331 --> 00:24:37,080
+it's N to the 1/3.
+
+450
+00:24:37,080 --> 00:24:38,800
+For directed Steiner
+forest, which
+
+451
+00:24:38,800 --> 00:24:40,550
+is you have pairs
+of vertices you
+
+452
+00:24:40,550 --> 00:24:43,120
+want to connect, but
+with a directed path.
+
+453
+00:24:43,120 --> 00:24:45,316
+So similar to a
+problem we've seen.
+
+454
+00:24:45,316 --> 00:24:46,690
+Best approximation
+known for that
+
+455
+00:24:46,690 --> 00:24:48,440
+is N to the 4/5 plus epsilon.
+
+456
+00:24:48,440 --> 00:24:51,040
+And this is just a
+couple years ago.
+
+457
+00:24:51,040 --> 00:24:53,339
+So that seems very hard to
+do better than any constant.
+
+458
+00:24:53,339 --> 00:24:55,380
+Probably there's an N to
+the epsilon lower bound,
+
+459
+00:24:55,380 --> 00:24:57,710
+but this is the best we
+know so far, a bit smaller.
+
+460
+00:25:01,170 --> 00:25:02,400
+Cool.
+
+461
+00:25:02,400 --> 00:25:05,070
+Any questions about that table?
+
+462
+00:25:05,070 --> 00:25:13,120
+We will probably come back to it
+a few times, but in more depth.
+
+463
+00:25:13,120 --> 00:25:15,860
+So how do you prove
+the lower bound side?
+
+464
+00:25:15,860 --> 00:25:17,450
+We're going to use reductions.
+
+465
+00:25:17,450 --> 00:25:22,500
+Now this field is a little bit
+messier in terms of reductions.
+
+466
+00:25:22,500 --> 00:25:25,020
+For NP completeness,
+NP hardness, we just
+
+467
+00:25:25,020 --> 00:25:28,600
+worried about [? carp ?]
+style, one call reductions.
+
+468
+00:25:28,600 --> 00:25:30,140
+That's all we had
+to think about.
+
+469
+00:25:30,140 --> 00:25:36,270
+In this universe, there
+are 1, 2, 3, 4, 5, 6, 7, 8,
+
+470
+00:25:36,270 --> 00:25:41,800
+9-- at least nine
+definitions of reduction.
+
+471
+00:25:41,800 --> 00:25:43,470
+You don't need to know them all.
+
+472
+00:25:43,470 --> 00:25:49,420
+I will define four
+of them, I think.
+
+473
+00:25:49,420 --> 00:25:51,822
+They're all very
+similar, and they all
+
+474
+00:25:51,822 --> 00:25:53,780
+lead to slightly different
+notions of hardness.
+
+475
+00:25:53,780 --> 00:25:55,196
+So you have to be
+a little careful
+
+476
+00:25:55,196 --> 00:25:58,080
+when you say oh, this
+problem is something hard.
+
+477
+00:25:58,080 --> 00:26:00,020
+But I'll give you
+some definitions
+
+478
+00:26:00,020 --> 00:26:03,520
+that are pretty easy
+to work with, I think.
+
+479
+00:26:03,520 --> 00:26:06,940
+In general, this
+family is called
+
+480
+00:26:06,940 --> 00:26:10,510
+approximation-preserving
+reductions.
+
+481
+00:26:18,970 --> 00:26:25,430
+So let's say we want to
+go from some problem A
+
+482
+00:26:25,430 --> 00:26:34,000
+to some problem B. So you're
+given an instance of A,
+
+483
+00:26:34,000 --> 00:26:40,250
+let's call it x, and you want to
+produce an instance of B. Let's
+
+484
+00:26:40,250 --> 00:26:43,990
+call it x prime.
+
+485
+00:26:43,990 --> 00:26:45,790
+And we're going to do
+that by a function f,
+
+486
+00:26:45,790 --> 00:26:49,580
+so x prime is f of x.
+
+487
+00:26:49,580 --> 00:26:53,810
+So far, just like NP reductions.
+
+488
+00:26:53,810 --> 00:26:57,850
+But now-- usually what we said
+is that the answer to x equals
+
+489
+00:26:57,850 --> 00:26:59,510
+the answer to x prime.
+
+490
+00:26:59,510 --> 00:27:02,500
+So you could say OPT of x
+equals the OPT of x prime.
+
+491
+00:27:02,500 --> 00:27:04,800
+But that's not going
+to be strong enough.
+
+492
+00:27:04,800 --> 00:27:08,960
+What we want is that, if we
+can find a solution to this B
+
+493
+00:27:08,960 --> 00:27:16,710
+problem-- let's call it
+y-prime to the problem x-prime.
+
+494
+00:27:16,710 --> 00:27:18,220
+So the x-prime is
+an instance of B.
+
+495
+00:27:18,220 --> 00:27:21,540
+You can find some solution-- any
+solution y-prime-- to x-prime,
+
+496
+00:27:21,540 --> 00:27:23,180
+then we want to be
+able to convert it
+
+497
+00:27:23,180 --> 00:27:32,430
+back by a function, g,
+into a solution to A, which
+
+498
+00:27:32,430 --> 00:27:33,990
+we'll call y.
+
+499
+00:27:33,990 --> 00:27:38,420
+And so it's g-- you might
+think it's g of y-prime,
+
+500
+00:27:38,420 --> 00:27:40,890
+but we'll make it g
+of x comma y prime.
+
+501
+00:27:40,890 --> 00:27:45,390
+So it can also depend on
+what you started with.
+
+502
+00:27:45,390 --> 00:27:47,800
+So this is the general flavor.
+
+503
+00:27:47,800 --> 00:27:50,570
+A reduction consists
+of two steps.
+
+504
+00:27:50,570 --> 00:27:52,560
+First, like before, we
+convert instances of A
+
+505
+00:27:52,560 --> 00:27:55,010
+to instances of B.
+Now in addition,
+
+506
+00:27:55,010 --> 00:27:57,570
+we want to be able to
+recover solutions of B
+
+507
+00:27:57,570 --> 00:28:01,590
+into similarly good
+solutions to A.
+
+508
+00:28:01,590 --> 00:28:05,980
+And there's many ways to
+define similarly good.
+
+509
+00:28:05,980 --> 00:28:14,730
+Let me give you one.
+
+510
+00:28:21,000 --> 00:28:27,000
+So if we're just interested
+in PTAS's, then--
+
+511
+00:28:27,000 --> 00:28:30,040
+like you want to know does
+my problem have a PTAS
+
+512
+00:28:30,040 --> 00:28:33,290
+or I want to prove
+impossibility of PTAS's, then
+
+513
+00:28:33,290 --> 00:28:37,230
+I think there's one clear
+notion of reduction,
+
+514
+00:28:37,230 --> 00:28:40,015
+which is obviously enough
+called PTAS reduction.
+
+515
+00:28:45,100 --> 00:28:55,070
+So what we want to say is--
+I hope you've seen calculus
+
+516
+00:28:55,070 --> 00:28:56,196
+at some point.
+
+517
+00:28:56,196 --> 00:28:59,050
+In calculus, there's this
+notion of epsilon delta proofs,
+
+518
+00:28:59,050 --> 00:29:00,660
+or definitions.
+
+519
+00:29:00,660 --> 00:29:03,230
+So I'm going to say-- you don't
+have to think of it this way,
+
+520
+00:29:03,230 --> 00:29:06,010
+but I find it useful to
+think of it this way.
+
+521
+00:29:06,010 --> 00:29:09,390
+Let me get to what
+the statement is.
+
+522
+00:29:09,390 --> 00:29:21,090
+If y-prime is a 1 plus
+delta approximation to B,
+
+523
+00:29:21,090 --> 00:29:39,190
+then y is a 1 plus epsilon
+approximation to A.
+
+524
+00:29:39,190 --> 00:29:43,230
+So ultimately we're
+interested in PTAS's, and we
+
+525
+00:29:43,230 --> 00:29:46,630
+want to say that if you
+have a PTAS for B, then
+
+526
+00:29:46,630 --> 00:29:48,316
+you get a PTAS for A.
+
+527
+00:29:48,316 --> 00:29:50,190
+It used to be, when we
+did a reduction from A
+
+528
+00:29:50,190 --> 00:29:55,110
+to B, that showed that if B had
+a polynomial time algorithm,
+
+529
+00:29:55,110 --> 00:29:58,470
+then so did A, because you just
+plug in these chains together.
+
+530
+00:29:58,470 --> 00:30:00,640
+You convert A into
+the B instance,
+
+531
+00:30:00,640 --> 00:30:02,710
+you run your poly algorithm
+and get a solution,
+
+532
+00:30:02,710 --> 00:30:04,554
+and convert it back.
+
+533
+00:30:04,554 --> 00:30:06,470
+Well, with NP, we didn't
+even have to convert.
+
+534
+00:30:06,470 --> 00:30:07,470
+The answer was the same.
+
+535
+00:30:07,470 --> 00:30:08,772
+Now we could do that.
+
+536
+00:30:08,772 --> 00:30:10,480
+We want to do the same
+thing with PTAS's.
+
+537
+00:30:10,480 --> 00:30:14,205
+So if we have a PTAS for
+B, we can convert A into B,
+
+538
+00:30:14,205 --> 00:30:17,300
+run the PTAS, get a solution,
+and come back and get--
+
+539
+00:30:17,300 --> 00:30:19,750
+what we want is for it
+to be a 1 plus epsilon
+
+540
+00:30:19,750 --> 00:30:22,480
+approximation to A.
+So that's the goal,
+
+541
+00:30:22,480 --> 00:30:24,400
+1 plus epsilon approximation.
+
+542
+00:30:24,400 --> 00:30:25,850
+And what this is
+saying is there's
+
+543
+00:30:25,850 --> 00:30:29,900
+some function delta of
+epsilon-- for any epsilon,
+
+544
+00:30:29,900 --> 00:30:33,760
+there's some value
+delta where you
+
+545
+00:30:33,760 --> 00:30:38,110
+can give that value
+to the PTAS for B,
+
+546
+00:30:38,110 --> 00:30:42,500
+and it will give you
+what you want for A.
+
+547
+00:30:42,500 --> 00:30:48,210
+Because PTAS is supposed to
+run for any fixed constant--
+
+548
+00:30:48,210 --> 00:30:51,060
+we called it epsilon, but
+it could also be delta.
+
+549
+00:30:51,060 --> 00:30:53,790
+And so you plug in
+this to the PTAS.
+
+550
+00:30:53,790 --> 00:30:55,710
+You will get a 1 plus
+delta approximation
+
+551
+00:30:55,710 --> 00:30:57,080
+to your B problem.
+
+552
+00:30:57,080 --> 00:31:00,050
+And then what we want is
+that this conversion-- so y
+
+553
+00:31:00,050 --> 00:31:03,380
+here is g of xy-prime.
+
+554
+00:31:05,990 --> 00:31:08,266
+So we want g-- this
+is a constraint on g.
+
+555
+00:31:08,266 --> 00:31:11,730
+We want g to have the property
+that if y-prime is that good,
+
+556
+00:31:11,730 --> 00:31:15,690
+then y will still be
+as good as we need.
+
+557
+00:31:15,690 --> 00:31:20,490
+So maybe you just-- you want
+to get a 1.1 approximation.
+
+558
+00:31:20,490 --> 00:31:22,660
+You want to get within
+10% of the right answer.
+
+559
+00:31:22,660 --> 00:31:25,070
+Maybe you have to call B
+with a much smaller thing.
+
+560
+00:31:25,070 --> 00:31:29,500
+Maybe delta is 0.01.
+
+561
+00:31:29,500 --> 00:31:32,030
+You need to be within
+1% of the right answer.
+
+562
+00:31:32,030 --> 00:31:35,480
+But there's-- for
+a PTAS reduction,
+
+563
+00:31:35,480 --> 00:31:38,300
+you want there to be some
+approximability you asked
+
+564
+00:31:38,300 --> 00:31:41,374
+for so that you get
+what you actually want.
+
+565
+00:31:41,374 --> 00:31:43,540
+This is sort of the obvious--
+this the natural thing
+
+566
+00:31:43,540 --> 00:31:46,740
+if you want to preserve
+PTAS-ness in this direction,
+
+567
+00:31:46,740 --> 00:31:49,830
+from B to A.
+
+568
+00:31:49,830 --> 00:31:53,940
+One slight note is
+that we also allow f
+
+569
+00:31:53,940 --> 00:31:59,060
+and g to depend on epsilon.
+
+570
+00:31:59,060 --> 00:32:00,890
+So this reduction-- it
+would be hard to get
+
+571
+00:32:00,890 --> 00:32:05,550
+this property for all epsilon
+with the same instance
+
+572
+00:32:05,550 --> 00:32:06,432
+conversion.
+
+573
+00:32:06,432 --> 00:32:08,390
+So now we allow the
+conversion of the instances
+
+574
+00:32:08,390 --> 00:32:12,220
+to depend on epsilon, so you
+can do fun things that way
+
+575
+00:32:12,220 --> 00:32:14,790
+for the purposes
+of PTAS reductions.
+
+576
+00:32:14,790 --> 00:32:21,350
+But the key thing we get is
+that if B is a PTAS, then--
+
+577
+00:32:21,350 --> 00:32:23,120
+or has a PTAS--
+then A as a PTAS,
+
+578
+00:32:23,120 --> 00:32:25,490
+so it's in the
+complexity class PTAS.
+
+579
+00:32:25,490 --> 00:32:28,560
+Of course, what we care about
+is the contrapositive of that.
+
+580
+00:32:28,560 --> 00:32:35,680
+So if A is not in PTAS,
+then B is not in PTAS.
+
+581
+00:32:35,680 --> 00:32:38,370
+So we can use this-- we
+reduced from our hard problem
+
+582
+00:32:38,370 --> 00:32:41,070
+that we know is not in PTAS,
+assuming P does not equal NP,
+
+583
+00:32:41,070 --> 00:32:44,530
+and we get that our new
+problem B is not in PTAS.
+
+584
+00:32:44,530 --> 00:32:46,360
+That's the point.
+
+585
+00:32:49,210 --> 00:32:51,020
+This is also true for
+something like APX.
+
+586
+00:32:54,580 --> 00:32:57,200
+So if you just want constant
+factor approximation,
+
+587
+00:32:57,200 --> 00:32:59,010
+this will convert
+one constant factor
+
+588
+00:32:59,010 --> 00:33:01,880
+into another constant factor.
+
+589
+00:33:01,880 --> 00:33:06,580
+So yeah, if you
+have-- I mean, it's
+
+590
+00:33:06,580 --> 00:33:09,000
+maybe stronger than what
+you need, but will give you
+
+591
+00:33:09,000 --> 00:33:11,340
+constant factor
+approximations, as well.
+
+592
+00:33:23,050 --> 00:33:25,330
+So here's some easy
+more definitions.
+
+593
+00:33:28,438 --> 00:33:32,250
+Oh, OK, so a few more fun facts.
+
+594
+00:33:32,250 --> 00:33:34,970
+If this statement
+also holds true
+
+595
+00:33:34,970 --> 00:33:38,170
+for epsilon equals 0 when you
+plug in epsilon equals zero,
+
+596
+00:33:38,170 --> 00:33:40,420
+delta equals zero,
+then you're just
+
+597
+00:33:40,420 --> 00:33:43,300
+getting the regular notion
+of reduction from NP land.
+
+598
+00:33:43,300 --> 00:33:45,970
+This is saying the
+OPTs are equal.
+
+599
+00:33:45,970 --> 00:33:48,790
+So usually your solution
+also works in that setting.
+
+600
+00:33:48,790 --> 00:33:50,530
+That's usually the
+easy thing to do.
+
+601
+00:33:50,530 --> 00:33:54,620
+So this is a strictly stronger
+notion of NP reduction
+
+602
+00:33:54,620 --> 00:33:58,810
+if you allow the 0,0 case.
+
+603
+00:33:58,810 --> 00:34:00,570
+Also, reductions change.
+
+604
+00:34:00,570 --> 00:34:02,590
+So if A reduces to B
+and B reduces to C,
+
+605
+00:34:02,590 --> 00:34:05,635
+then A reduces to C. All the
+usual things you'd expect.
+
+606
+00:34:09,030 --> 00:34:14,159
+Some special cases of
+interest are AP reduction.
+
+607
+00:34:14,159 --> 00:34:16,664
+This is when the delta
+function is linear in epsilon.
+
+608
+00:34:21,929 --> 00:34:25,270
+So this is nice because
+it tells you, for example,
+
+609
+00:34:25,270 --> 00:34:32,630
+if B is in-- has some order
+f approximation, then A does,
+
+610
+00:34:32,630 --> 00:34:34,130
+as well.
+
+611
+00:34:34,130 --> 00:34:38,210
+It just changes this
+constant factor.
+
+612
+00:34:38,210 --> 00:34:42,360
+So this is useful if you care
+about log N approximation.
+
+613
+00:34:42,360 --> 00:34:45,360
+If you use this
+definition, things
+
+614
+00:34:45,360 --> 00:34:47,170
+could change, because
+you're allowed
+
+615
+00:34:47,170 --> 00:34:52,580
+to change what the factor
+is out here in crazy ways.
+
+616
+00:34:52,580 --> 00:34:56,130
+So over here, [? before-- ?] so
+[? it's ?] just a linear blow
+
+617
+00:34:56,130 --> 00:34:58,970
+up in the approximation factor,
+then we only lose constant
+
+618
+00:34:58,970 --> 00:35:02,010
+factors in approximability.
+
+619
+00:35:02,010 --> 00:35:05,080
+And one more is
+strict reduction.
+
+620
+00:35:08,600 --> 00:35:10,900
+This is when there's no blowup.
+
+621
+00:35:13,730 --> 00:35:18,697
+If you have a c
+approximation here,
+
+622
+00:35:18,697 --> 00:35:20,030
+you get a c approximation there.
+
+623
+00:35:23,060 --> 00:35:24,510
+That's nice when you can get it.
+
+624
+00:35:24,510 --> 00:35:26,300
+We're not going to aim
+for this in particular,
+
+625
+00:35:26,300 --> 00:35:27,410
+but there are a
+bunch of reductions
+
+626
+00:35:27,410 --> 00:35:29,260
+we'll talk about
+today that are strict.
+
+627
+00:35:29,260 --> 00:35:31,926
+So it's nice to just have a word
+to say oh, this is even strict.
+
+628
+00:35:31,926 --> 00:35:35,490
+You don't even need any
+[? blowup ?] like this stuff.
+
+629
+00:35:35,490 --> 00:35:41,990
+So that was strict AP
+and PTAS reductions.
+
+630
+00:35:46,570 --> 00:35:51,585
+There's one more, but maybe
+first let me define hardness.
+
+631
+00:36:03,500 --> 00:36:07,800
+So today, we will
+focus on APX hardness.
+
+632
+00:36:07,800 --> 00:36:16,640
+And these are supposed to be
+the hardest problems in APX.
+
+633
+00:36:23,660 --> 00:36:25,600
+And so, I mean,
+because we're trying
+
+634
+00:36:25,600 --> 00:36:30,370
+to distinguish between
+PTAS-able problems and just
+
+635
+00:36:30,370 --> 00:36:33,150
+constant factor
+approximable problems,
+
+636
+00:36:33,150 --> 00:36:37,660
+we are interested
+in PTAS reductions.
+
+637
+00:36:37,660 --> 00:36:42,270
+So it's going to turn out
+that APX hard-- well I
+
+638
+00:36:42,270 --> 00:36:44,230
+guess we sort of already know.
+
+639
+00:36:44,230 --> 00:36:51,310
+This implies you're not in PTAS
+if P equals NP-- P does not
+
+640
+00:36:51,310 --> 00:36:57,090
+equal NP-- because of
+this strict containment,
+
+641
+00:36:57,090 --> 00:37:00,710
+P does not equal NP, then
+PTAS is different from APX.
+
+642
+00:37:00,710 --> 00:37:03,880
+And so if you show your
+hardest problem in APX,
+
+643
+00:37:03,880 --> 00:37:07,210
+using a reduction that
+preserves PTAS-ability,
+
+644
+00:37:07,210 --> 00:37:12,600
+then you know-- I mean, the
+idea is that-- all right.
+
+645
+00:37:12,600 --> 00:37:15,280
+When we're doing
+these reductions,
+
+646
+00:37:15,280 --> 00:37:18,170
+we know that if B had a
+PTAS then A had a PTAS.
+
+647
+00:37:18,170 --> 00:37:21,330
+And what we're saying is you
+can re-- your APX hard means
+
+648
+00:37:21,330 --> 00:37:26,270
+you can reduce from any
+problem in APX to your problem.
+
+649
+00:37:26,270 --> 00:37:30,200
+So if your problem had a PTAS,
+that would mean all problems
+
+650
+00:37:30,200 --> 00:37:30,960
+had PTAS's.
+
+651
+00:37:30,960 --> 00:37:32,560
+All APX problems had PTAS's.
+
+652
+00:37:32,560 --> 00:37:35,010
+But we know that's not the case.
+
+653
+00:37:35,010 --> 00:37:37,940
+Therefore, your problem
+does not have a PTAS.
+
+654
+00:37:37,940 --> 00:37:40,080
+So it's just like
+MP completeness,
+
+655
+00:37:40,080 --> 00:37:41,310
+just with different letters.
+
+656
+00:37:44,020 --> 00:37:44,520
+Cool.
+
+657
+00:37:44,520 --> 00:37:45,561
+And different reductions.
+
+658
+00:37:48,396 --> 00:37:49,770
+These reductions
+are all a little
+
+659
+00:37:49,770 --> 00:37:54,405
+bit awkward to work
+with directly for--
+
+660
+00:37:54,405 --> 00:37:56,590
+or these definitions
+are a little awkward
+
+661
+00:37:56,590 --> 00:38:01,130
+to check directly, although
+ultimately it's the same thing.
+
+662
+00:38:01,130 --> 00:38:04,240
+In practice, people seem
+to use a different notion
+
+663
+00:38:04,240 --> 00:38:09,160
+of reduction, for the most
+part, called L reductions.
+
+664
+00:38:09,160 --> 00:38:14,260
+That's stronger than AP
+reduction, not as strong
+
+665
+00:38:14,260 --> 00:38:16,820
+as strict.
+
+666
+00:38:16,820 --> 00:38:20,060
+I guess it's not directly
+related either way to strict,
+
+667
+00:38:20,060 --> 00:38:21,430
+but, it's OK.
+
+668
+00:38:29,960 --> 00:38:33,400
+So while I define this in
+terms of PTAS reduction,
+
+669
+00:38:33,400 --> 00:38:36,540
+because that's what you
+need to get this result,
+
+670
+00:38:36,540 --> 00:38:38,040
+most people think
+about L reduction,
+
+671
+00:38:38,040 --> 00:38:55,590
+which is going to imply--
+it's going to be stronger
+
+672
+00:38:55,590 --> 00:38:58,815
+than the other two notions
+of reduction, AP and PTAS.
+
+673
+00:39:05,360 --> 00:39:07,010
+So what's the definition?
+
+674
+00:39:07,010 --> 00:39:09,100
+We want to satisfy
+two properties.
+
+675
+00:39:09,100 --> 00:39:17,650
+The first property is a kind
+of blowup, going left to right.
+
+676
+00:39:26,310 --> 00:39:27,930
+Funnily enough, the
+other reductions
+
+677
+00:39:27,930 --> 00:39:29,520
+do not have this property,
+because they don't quite
+
+678
+00:39:29,520 --> 00:39:31,103
+need it in the way
+that they're going.
+
+679
+00:39:31,103 --> 00:39:36,030
+But we want that the transform
+problem, its optimal solution
+
+680
+00:39:36,030 --> 00:39:36,907
+is not much bigger.
+
+681
+00:39:36,907 --> 00:39:38,490
+It's bigger by only
+a constant factor.
+
+682
+00:39:38,490 --> 00:39:40,239
+This is, like, less
+than or equal to alpha
+
+683
+00:39:40,239 --> 00:39:44,190
+times the optimal-- the
+original optimal solution given
+
+684
+00:39:44,190 --> 00:39:51,080
+instance, so A.
+Second property--
+
+685
+00:39:51,080 --> 00:39:56,860
+and we'll see why we
+need this in a moment--
+
+686
+00:39:56,860 --> 00:40:00,310
+is if you look at the
+absolute error instead
+
+687
+00:40:00,310 --> 00:40:07,690
+of the ratio between the
+computed solution y--
+
+688
+00:40:07,690 --> 00:40:11,050
+and y was the thing that we
+got in the lower left corner,
+
+689
+00:40:11,050 --> 00:40:15,550
+we produced the solution
+y-- we look at the cost
+
+690
+00:40:15,550 --> 00:40:18,794
+that we get out of--
+y is the solution.
+
+691
+00:40:18,794 --> 00:40:20,460
+So we look at the
+cost of that solution,
+
+692
+00:40:20,460 --> 00:40:22,000
+we compare it to
+the optimal solution
+
+693
+00:40:22,000 --> 00:40:23,541
+to our original
+instance-- because it
+
+694
+00:40:23,541 --> 00:40:25,910
+is a solution to that instance.
+
+695
+00:40:25,910 --> 00:40:29,290
+That should not be much
+bigger than the error
+
+696
+00:40:29,290 --> 00:40:30,980
+on the right side.
+
+697
+00:40:30,980 --> 00:40:33,060
+Again, absolute error.
+
+698
+00:40:33,060 --> 00:40:41,940
+So we want this to be big O of
+cost in B's problem of y-prime
+
+699
+00:40:41,940 --> 00:40:47,230
+minus OPT of B of x prime.
+
+700
+00:40:50,850 --> 00:40:52,337
+So these are both in B land.
+
+701
+00:40:52,337 --> 00:40:53,920
+Again, we look at
+the optimal solution
+
+702
+00:40:53,920 --> 00:40:57,475
+to the produced instance
+versus some solution
+
+703
+00:40:57,475 --> 00:40:58,334
+that we were given.
+
+704
+00:40:58,334 --> 00:41:00,000
+We didn't produce
+that solution, so this
+
+705
+00:41:00,000 --> 00:41:04,500
+has to hold no matter
+what solution y-prime
+
+706
+00:41:04,500 --> 00:41:07,960
+you're given to the instance
+x-prime, when you convert it
+
+707
+00:41:07,960 --> 00:41:12,520
+using g to a solution
+to x in problem A,
+
+708
+00:41:12,520 --> 00:41:17,480
+you want that the gap--
+absolute gap-- is not stretched
+
+709
+00:41:17,480 --> 00:41:19,770
+by more than a constant factor.
+
+710
+00:41:19,770 --> 00:41:22,820
+Again, this is at most some
+constant times [? that ?]
+
+711
+00:41:22,820 --> 00:41:24,690
+[? thing ?].
+
+712
+00:41:24,690 --> 00:41:25,410
+OK?
+
+713
+00:41:25,410 --> 00:41:30,610
+Now it should not be obvious
+that this implies this,
+
+714
+00:41:30,610 --> 00:41:39,540
+but it does, with delta equal
+to, I think-- get some color.
+
+715
+00:41:39,540 --> 00:41:42,365
+Let's say the constant
+in here is alpha,
+
+716
+00:41:42,365 --> 00:41:45,840
+the constant here is beta.
+
+717
+00:41:45,840 --> 00:41:50,510
+And this should be alpha
+times beta times epsilon.
+
+718
+00:41:50,510 --> 00:41:53,460
+That is delta of epsilon.
+
+719
+00:41:53,460 --> 00:41:55,250
+That's the claim.
+
+720
+00:41:55,250 --> 00:42:01,560
+Let's prove the claim,
+ideally without cheating.
+
+721
+00:42:01,560 --> 00:42:11,300
+So I claim that if I
+have such an L reduction,
+
+722
+00:42:11,300 --> 00:42:16,190
+that this holds where-- when
+delta is that linear function
+
+723
+00:42:16,190 --> 00:42:18,120
+of epsilon.
+
+724
+00:42:18,120 --> 00:42:23,200
+So I want to conclude that y
+is a pretty good approximation.
+
+725
+00:42:23,200 --> 00:42:29,020
+So to do that, I will look at
+the cost of y divided by OPT.
+
+726
+00:42:35,120 --> 00:42:39,010
+OPT of X would be
+the original input.
+
+727
+00:42:39,010 --> 00:42:43,170
+So we want to show that this
+is, at most, 1 plus epsilon.
+
+728
+00:42:43,170 --> 00:42:44,976
+Now what do we know?
+
+729
+00:42:44,976 --> 00:42:46,600
+I should write A, I
+guess, because this
+
+730
+00:42:46,600 --> 00:42:51,020
+is all about problem
+A. What do we know?
+
+731
+00:42:51,020 --> 00:42:56,550
+We know this property-- I
+wrote absolute value here,
+
+732
+00:42:56,550 --> 00:42:59,210
+so this works for
+maximization and minimization.
+
+733
+00:42:59,210 --> 00:43:00,642
+You can even
+convert minimization
+
+734
+00:43:00,642 --> 00:43:02,600
+to maximization problems
+using this definition.
+
+735
+00:43:02,600 --> 00:43:05,550
+We will do that at some point.
+
+736
+00:43:05,550 --> 00:43:06,050
+OK.
+
+737
+00:43:06,050 --> 00:43:11,320
+So let's just try to
+plug this into here.
+
+738
+00:43:11,320 --> 00:43:14,380
+So I think I need
+to split into cases,
+
+739
+00:43:14,380 --> 00:43:16,870
+and I'll just worry about
+the minimization case.
+
+740
+00:43:16,870 --> 00:43:20,650
+So let's say that cost
+of A is bigger than OPT.
+
+741
+00:43:20,650 --> 00:43:27,020
+So then cost of A is going to
+be OPT plus this thing, at most.
+
+742
+00:43:27,020 --> 00:43:41,079
+So this is going to be at
+most OPT of x plus beta--
+
+743
+00:43:41,079 --> 00:43:42,745
+I'm going to not use
+the big O notation,
+
+744
+00:43:42,745 --> 00:43:45,560
+and just write the beta thing.
+
+745
+00:43:45,560 --> 00:43:49,390
+Beta times-- I guess there's
+no absolute value needed,
+
+746
+00:43:49,390 --> 00:43:51,670
+because this is a
+minimization problem.
+
+747
+00:43:51,670 --> 00:44:03,361
+Let's say-- so this will be cos
+sub B of y-prime minus OPT of B
+
+748
+00:44:03,361 --> 00:44:03,860
+of x-prime.
+
+749
+00:44:06,850 --> 00:44:09,600
+So that's what I get from
+expanding out the numerator,
+
+750
+00:44:09,600 --> 00:44:13,150
+and the denominator is the same.
+
+751
+00:44:13,150 --> 00:44:13,650
+Clear?
+
+752
+00:44:16,300 --> 00:44:18,901
+Just rearranging terms
+here, essentially.
+
+753
+00:44:18,901 --> 00:44:19,400
+OK.
+
+754
+00:44:19,400 --> 00:44:28,600
+Now these two terms cancel,
+so we get 1 plus that.
+
+755
+00:44:28,600 --> 00:44:32,210
+That's good, because I
+wanted that to be epsilon.
+
+756
+00:44:32,210 --> 00:44:32,710
+Let's see.
+
+757
+00:44:32,710 --> 00:44:34,570
+What else do we know.
+
+758
+00:44:34,570 --> 00:44:37,710
+It's 1 plus this thing.
+
+759
+00:44:37,710 --> 00:44:40,505
+Let me scroll down.
+
+760
+00:44:51,599 --> 00:44:52,890
+OK, we have one other property.
+
+761
+00:44:52,890 --> 00:44:54,080
+We've got to use it.
+
+762
+00:44:54,080 --> 00:44:56,460
+The other property
+is that OPT sub
+
+763
+00:44:56,460 --> 00:45:02,980
+B is related to OPT sub A.
+Now we have OPT sub A here,
+
+764
+00:45:02,980 --> 00:45:05,730
+but it's in the denominator,
+which flips the relation.
+
+765
+00:45:05,730 --> 00:45:08,990
+So we can write that relation
+up there as OPT sub A of x
+
+766
+00:45:08,990 --> 00:45:12,130
+is omega of OPT
+sub B of x-prime.
+
+767
+00:45:12,130 --> 00:45:14,470
+That's the same
+as statement one.
+
+768
+00:45:14,470 --> 00:45:16,750
+And because the
+denominator is omega,
+
+769
+00:45:16,750 --> 00:45:20,540
+that means the whole thing is
+big L. So this is going to be,
+
+770
+00:45:20,540 --> 00:45:28,880
+at most, one plus-- so
+now we have this thing.
+
+771
+00:45:28,880 --> 00:45:31,080
+So the numerator is the same.
+
+772
+00:45:31,080 --> 00:45:37,623
+We had before beta times
+cost sub B of y-prime minus
+
+773
+00:45:37,623 --> 00:45:40,210
+OPT sub B of x-prime.
+
+774
+00:45:40,210 --> 00:45:42,350
+So that's unchanged.
+
+775
+00:45:42,350 --> 00:45:45,580
+But now, instead of
+dividing by OPT sub A,
+
+776
+00:45:45,580 --> 00:45:52,117
+we're going to divide
+by OPT sub B of x-prime.
+
+777
+00:45:52,117 --> 00:45:54,700
+And we lost a constant factor,
+that constant factor translated
+
+778
+00:45:54,700 --> 00:45:56,840
+to B alpha in the
+numerator because we
+
+779
+00:45:56,840 --> 00:45:58,380
+inverted the equation.
+
+780
+00:45:58,380 --> 00:46:00,150
+We divided by the
+constant factor there.
+
+781
+00:46:03,390 --> 00:46:10,520
+So what-- well now
+this cancels with that.
+
+782
+00:46:10,520 --> 00:46:14,240
+So this is going
+to be 1 plus alpha
+
+783
+00:46:14,240 --> 00:46:27,890
+beta times cost sub B y-prime
+over OPT sub B of x-prime
+
+784
+00:46:27,890 --> 00:46:29,430
+minus 1.
+
+785
+00:46:29,430 --> 00:46:31,440
+Still looks kind of weird.
+
+786
+00:46:31,440 --> 00:46:33,210
+But what we-- there's
+one more thing
+
+787
+00:46:33,210 --> 00:46:36,900
+we didn't use, which is we
+assumed the-- we were given
+
+788
+00:46:36,900 --> 00:46:40,270
+some solution y-prime that
+was a 1 plus delta of epsilon
+
+789
+00:46:40,270 --> 00:46:42,544
+approximation, where
+delta is this thing
+
+790
+00:46:42,544 --> 00:46:43,460
+that we defined there.
+
+791
+00:46:43,460 --> 00:46:46,590
+It's obviously set to cancel out
+everything that happened here.
+
+792
+00:46:46,590 --> 00:46:54,132
+So this thing should be,
+at most, 1 plus delta,
+
+793
+00:46:54,132 --> 00:46:55,840
+because this is exactly
+the approximation
+
+794
+00:46:55,840 --> 00:46:59,700
+ratio for y-prime versus the
+optimal solution to x-prime.
+
+795
+00:46:59,700 --> 00:47:07,910
+And 1 plus delta is 1
+plus alpha beta epsilon.
+
+796
+00:47:07,910 --> 00:47:12,890
+So this 1 cancels with that
+1, these alpha betas-- whoops.
+
+797
+00:47:12,890 --> 00:47:14,270
+AUDIENCE: I think
+it's backwards.
+
+798
+00:47:14,270 --> 00:47:16,030
+PROFESSOR: Which is backwards?
+
+799
+00:47:16,030 --> 00:47:18,274
+The definition of delta?
+
+800
+00:47:18,274 --> 00:47:19,021
+OK.
+
+801
+00:47:19,021 --> 00:47:19,520
+Whoops.
+
+802
+00:47:25,250 --> 00:47:29,270
+Let's try epsilon
+over alpha beta.
+
+803
+00:47:33,450 --> 00:47:37,920
+That makes sense, because delta
+should be smaller than epsilon
+
+804
+00:47:37,920 --> 00:47:42,810
+probably, and alpha and beta
+are probably bigger than 1.
+
+805
+00:47:42,810 --> 00:47:47,920
+So now we get epsilon
+over alpha beta here.
+
+806
+00:47:47,920 --> 00:47:50,830
+And then that alpha beta
+cancels with that alpha beta,
+
+807
+00:47:50,830 --> 00:47:54,420
+and we are left
+with 1 plus epsilon.
+
+808
+00:47:54,420 --> 00:47:56,380
+OK.
+
+809
+00:47:56,380 --> 00:48:00,339
+So this is why it's not
+obvious, but it's just plugging
+
+810
+00:48:00,339 --> 00:48:01,630
+in all the things and it works.
+
+811
+00:48:01,630 --> 00:48:03,890
+And the funny thing is,
+somehow L reductions,
+
+812
+00:48:03,890 --> 00:48:07,095
+though they-- a little bit
+less natural, I feel like.
+
+813
+00:48:07,095 --> 00:48:09,720
+I mean, if you're thinking about
+constant factor approximation,
+
+814
+00:48:09,720 --> 00:48:12,146
+why should you care
+about absolute error?
+
+815
+00:48:12,146 --> 00:48:14,520
+The short answer that I've
+seen written in various papers
+
+816
+00:48:14,520 --> 00:48:16,790
+is because it's easier
+to think that way
+
+817
+00:48:16,790 --> 00:48:20,900
+for a lot of the typical
+reductions that you do.
+
+818
+00:48:20,900 --> 00:48:25,640
+So let us do some
+of those reductions.
+
+819
+00:48:25,640 --> 00:48:28,340
+And we'll get some intuition.
+
+820
+00:48:28,340 --> 00:48:32,440
+L reductions also-- they
+do work in the zero case.
+
+821
+00:48:32,440 --> 00:48:34,960
+If you have an optimal
+solution to x-prime,
+
+822
+00:48:34,960 --> 00:48:36,910
+you will get an
+optimal solution to x.
+
+823
+00:48:36,910 --> 00:48:39,050
+So they are also NP reductions.
+
+824
+00:48:39,050 --> 00:48:41,810
+Again, that's a generalization
+of-- or strengthening
+
+825
+00:48:41,810 --> 00:48:46,460
+of the type of reduction we
+saw in all previous lectures.
+
+826
+00:48:46,460 --> 00:48:48,190
+All right.
+
+827
+00:48:48,190 --> 00:48:50,930
+So I want to
+simultaneously tell you
+
+828
+00:48:50,930 --> 00:48:53,300
+a bunch of problems
+that are APX complete so
+
+829
+00:48:53,300 --> 00:48:54,830
+that you know things
+to reduce from,
+
+830
+00:48:54,830 --> 00:48:57,200
+but also I'll show you
+examples of such things.
+
+831
+00:48:57,200 --> 00:49:00,102
+So some of these I will omit the
+proofs, because they're messy
+
+832
+00:49:00,102 --> 00:49:02,060
+and it's just useful to
+know that they're there
+
+833
+00:49:02,060 --> 00:49:03,020
+so you can reduce from them.
+
+834
+00:49:03,020 --> 00:49:05,110
+Others I-- most of them,
+I will cover the proofs.
+
+835
+00:49:35,610 --> 00:49:36,110
+All right.
+
+836
+00:49:36,110 --> 00:49:39,730
+And we're going to
+return to an old issue
+
+837
+00:49:39,730 --> 00:49:43,460
+from the first SAT lecture.
+
+838
+00:49:47,807 --> 00:49:50,800
+And I'm going to introduce
+some new notation.
+
+839
+00:49:50,800 --> 00:49:56,110
+So a lot of the starting
+points here are just max SAT.
+
+840
+00:49:56,110 --> 00:49:57,906
+Or I should-- let's
+say a max CNF SAT.
+
+841
+00:49:57,906 --> 00:49:59,030
+You're given a CNF formula.
+
+842
+00:49:59,030 --> 00:50:00,630
+It's picked out a
+bunch of clauses.
+
+843
+00:50:00,630 --> 00:50:02,380
+You want to maximize
+the number of clauses
+
+844
+00:50:02,380 --> 00:50:05,140
+that you satisfy with
+some variable assignment.
+
+845
+00:50:05,140 --> 00:50:07,034
+So that's going to
+be APX complete.
+
+846
+00:50:07,034 --> 00:50:08,700
+There are constant
+factor approximations
+
+847
+00:50:08,700 --> 00:50:11,630
+if the clauses are constant
+size, I should say.
+
+848
+00:50:11,630 --> 00:50:15,340
+So like max 3SAT has a
+constant factor approximation,
+
+849
+00:50:15,340 --> 00:50:18,390
+I forget what the
+current best is.
+
+850
+00:50:18,390 --> 00:50:19,100
+And no better.
+
+851
+00:50:19,100 --> 00:50:21,550
+There's no PTAS for a max 3SAT.
+
+852
+00:50:21,550 --> 00:50:25,020
+This is a stronger
+form of max 3SAT,
+
+853
+00:50:25,020 --> 00:50:28,790
+which we have not seen before,
+though we've hinted around it.
+
+854
+00:50:28,790 --> 00:50:32,030
+The E means every
+clause has exactly
+
+855
+00:50:32,030 --> 00:50:34,030
+three distinct literals.
+
+856
+00:50:48,540 --> 00:50:51,190
+This is an issue that
+we stumbled into.
+
+857
+00:50:51,190 --> 00:50:54,000
+Oh, do we allow clauses
+to have only two literals?
+
+858
+00:50:54,000 --> 00:50:56,220
+I said no, in the
+original definition.
+
+859
+00:50:56,220 --> 00:50:57,800
+But I did allow
+repeated literals,
+
+860
+00:50:57,800 --> 00:50:58,800
+which is the same thing.
+
+861
+00:50:58,800 --> 00:51:02,520
+So when I say three set, I
+mean you can repeat literals,
+
+862
+00:51:02,520 --> 00:51:04,610
+or you can have fewer
+than three literals.
+
+863
+00:51:04,610 --> 00:51:09,330
+When I say E three set, then
+you're not allowed to do that.
+
+864
+00:51:09,330 --> 00:51:12,640
+Then you may remember we
+talked about 3SAT five.
+
+865
+00:51:12,640 --> 00:51:15,890
+That meant every clause
+has only three literals,
+
+866
+00:51:15,890 --> 00:51:20,290
+and every variable appears,
+at most, five times.
+
+867
+00:51:20,290 --> 00:51:25,060
+E5 means exactly five times.
+
+868
+00:51:25,060 --> 00:51:38,304
+Each variable appears
+exactly five times.
+
+869
+00:51:38,304 --> 00:51:39,280
+Do you have a question?
+
+870
+00:51:39,280 --> 00:51:41,071
+AUDIENCE: [INAUDIBLE]
+gives you a condition
+
+871
+00:51:41,071 --> 00:51:42,800
+on the number of clauses.
+
+872
+00:51:42,800 --> 00:51:43,970
+PROFESSOR: Oh, you're right.
+
+873
+00:51:43,970 --> 00:51:45,683
+That gives you a linear relation
+between the number of clauses
+
+874
+00:51:45,683 --> 00:51:46,849
+and the number of variables.
+
+875
+00:51:46,849 --> 00:51:48,910
+You can work it out.
+
+876
+00:51:48,910 --> 00:51:49,820
+This is hard.
+
+877
+00:51:49,820 --> 00:51:51,350
+I will not prove it.
+
+878
+00:51:51,350 --> 00:51:54,340
+It's not hard, but it's
+just a little bit messy.
+
+879
+00:51:54,340 --> 00:51:55,175
+Sorry.
+
+880
+00:51:55,175 --> 00:51:58,250
+It's not difficult.
+
+881
+00:51:58,250 --> 00:52:01,310
+I will prove a slightly
+different result, which
+
+882
+00:52:01,310 --> 00:52:06,580
+this one is based on, which
+is a little bit more familiar
+
+883
+00:52:06,580 --> 00:52:09,490
+but also introduces something
+new we hadn't seen before.
+
+884
+00:52:09,490 --> 00:52:11,070
+This is the regular 3SAT.
+
+885
+00:52:11,070 --> 00:52:14,700
+Each clause has, at
+most, three literals.
+
+886
+00:52:14,700 --> 00:52:18,130
+And every variable appears,
+at most, three times.
+
+887
+00:52:18,130 --> 00:52:20,290
+This is something I
+didn't realize was hard.
+
+888
+00:52:20,290 --> 00:52:23,010
+It's not written in most places.
+
+889
+00:52:23,010 --> 00:52:27,430
+But it is here, in the
+world of approximability.
+
+890
+00:52:27,430 --> 00:52:29,420
+This is the reduction.
+
+891
+00:52:29,420 --> 00:52:31,870
+It's kind of funny.
+
+892
+00:52:31,870 --> 00:52:33,330
+So suppose you
+have a variable, x,
+
+893
+00:52:33,330 --> 00:52:35,660
+which appears a million times.
+
+894
+00:52:35,660 --> 00:52:40,704
+You're going to make
+a cycle, so to speak.
+
+895
+00:52:40,704 --> 00:52:42,120
+It's a formula,
+so it's not really
+
+896
+00:52:42,120 --> 00:52:45,260
+a cycle, but of size 1 million.
+
+897
+00:52:45,260 --> 00:52:50,360
+And you're going to write down
+this 2SAT constraint-- not xi
+
+898
+00:52:50,360 --> 00:52:52,290
+or xi plus 1 for all i.
+
+899
+00:52:52,290 --> 00:52:54,900
+And do it around in
+the cycle, so not x6
+
+900
+00:52:54,900 --> 00:52:58,670
+or x1-- or x a million or x1.
+
+901
+00:52:58,670 --> 00:53:01,500
+That's, of course, equivalent
+to saying if xi is set to true,
+
+902
+00:53:01,500 --> 00:53:03,410
+then xi plus 1 must
+also be set to true.
+
+903
+00:53:03,410 --> 00:53:05,790
+So if any of these are
+set to true, they all are.
+
+904
+00:53:05,790 --> 00:53:07,280
+So the only
+satisfying assignments
+
+905
+00:53:07,280 --> 00:53:12,860
+here are everybody true,
+everybody not true.
+
+906
+00:53:12,860 --> 00:53:15,940
+So if you're just worried
+about NP reductions,
+
+907
+00:53:15,940 --> 00:53:19,070
+this is a reduction
+from 3SAT to 3SAT-3.
+
+908
+00:53:19,070 --> 00:53:21,050
+Because every variable
+now will appear
+
+909
+00:53:21,050 --> 00:53:24,360
+in exactly three--
+exactly three,
+
+910
+00:53:24,360 --> 00:53:28,130
+in fact-- so constraints.
+
+911
+00:53:28,130 --> 00:53:31,810
+This one, this one, and whatever
+it originally-- whatever
+
+912
+00:53:31,810 --> 00:53:33,720
+you want to plug it into.
+
+913
+00:53:33,720 --> 00:53:36,570
+So each of these was an
+occurrence of that variable.
+
+914
+00:53:36,570 --> 00:53:39,090
+Maybe use the positive form,
+maybe use the negative form,
+
+915
+00:53:39,090 --> 00:53:42,430
+but each variable appears three
+times in this first picture.
+
+916
+00:53:42,430 --> 00:53:46,060
+Now that's a great
+reduction for 3SAT-3.
+
+917
+00:53:46,060 --> 00:53:48,970
+Notice I didn't write max,
+because this reduction will not
+
+918
+00:53:48,970 --> 00:53:53,030
+work as an L reduction, say.
+
+919
+00:53:53,030 --> 00:53:57,110
+You cannot prove that max 3SAT
+is hard using this reduction,
+
+920
+00:53:57,110 --> 00:54:02,890
+because you could, for
+example, just violate these two
+
+921
+00:54:02,890 --> 00:54:06,377
+constraints and make all
+of these guys true and all
+
+922
+00:54:06,377 --> 00:54:07,210
+of these guys false.
+
+923
+00:54:07,210 --> 00:54:09,330
+And if this is size
+a million, that
+
+924
+00:54:09,330 --> 00:54:12,327
+means you're saying--
+I mean, you're
+
+925
+00:54:12,327 --> 00:54:14,160
+setting the variable
+half true, half false--
+
+926
+00:54:14,160 --> 00:54:17,920
+or you could use any ratio you
+want-- at a very small cost.
+
+927
+00:54:17,920 --> 00:54:21,310
+You're only paying a penalty
+of two constraints violated,
+
+928
+00:54:21,310 --> 00:54:24,310
+and yet you're able to satisfy
+1/2 of the clauses using
+
+929
+00:54:24,310 --> 00:54:26,800
+xi equal to true, and
+some other set of clauses
+
+930
+00:54:26,800 --> 00:54:28,980
+using xi set to false.
+
+931
+00:54:28,980 --> 00:54:31,220
+And there's no way to
+bound how many clauses you
+
+932
+00:54:31,220 --> 00:54:33,740
+can sort of misrepresent.
+
+933
+00:54:33,740 --> 00:54:35,795
+And the objective in
+max 3SAT is to maximize
+
+934
+00:54:35,795 --> 00:54:37,814
+the number of clauses satisfied.
+
+935
+00:54:37,814 --> 00:54:39,230
+So if you allow
+this kind of thing
+
+936
+00:54:39,230 --> 00:54:41,390
+where you can flip in
+crazy ways and change
+
+937
+00:54:41,390 --> 00:54:44,910
+a huge number of clauses one
+way or the other in this sort
+
+938
+00:54:44,910 --> 00:54:46,910
+of false way, how
+would-- if you're
+
+939
+00:54:46,910 --> 00:54:50,790
+trying to actually construct
+a solution to max 3SAT
+
+940
+00:54:50,790 --> 00:54:53,780
+from a solution to
+this 3SAT-3 instance,
+
+941
+00:54:53,780 --> 00:54:56,087
+you wouldn't know which way
+to set the variable x to.
+
+942
+00:54:56,087 --> 00:54:57,920
+If you set it to true,
+there's a whole bunch
+
+943
+00:54:57,920 --> 00:54:59,360
+of clauses that
+wanted it to be false.
+
+944
+00:54:59,360 --> 00:55:01,240
+If you set it to false, a whole
+bunch you wanted to be true.
+
+945
+00:55:01,240 --> 00:55:01,450
+Yeah.
+
+946
+00:55:01,450 --> 00:55:03,741
+AUDIENCE: If we're just
+talking about NP hardness here,
+
+947
+00:55:03,741 --> 00:55:05,914
+can't you make those edges
+very heavy by repeating
+
+948
+00:55:05,914 --> 00:55:07,045
+the clause many times?
+
+949
+00:55:07,045 --> 00:55:09,170
+PROFESSOR: If we're just
+worried about NP hardness,
+
+950
+00:55:09,170 --> 00:55:10,110
+this is fine.
+
+951
+00:55:10,110 --> 00:55:11,860
+Because then all of
+these have to be true.
+
+952
+00:55:11,860 --> 00:55:14,355
+AUDIENCE: Uh, I mean for
+the max decision problem.
+
+953
+00:55:14,355 --> 00:55:16,770
+PROFESSOR: Well then
+the decision problem
+
+954
+00:55:16,770 --> 00:55:18,590
+is, can you satisfy all of them.
+
+955
+00:55:18,590 --> 00:55:20,380
+That is a special
+case of the max--
+
+956
+00:55:20,380 --> 00:55:21,381
+AUDIENCE: Satisfy k of--
+
+957
+00:55:21,381 --> 00:55:23,254
+PROFESSOR: Yeah, but if
+you set k equal to N,
+
+958
+00:55:23,254 --> 00:55:25,185
+that's a special case
+of the general form.
+
+959
+00:55:25,185 --> 00:55:26,035
+AUDIENCE: Oh, OK.
+
+960
+00:55:26,035 --> 00:55:26,660
+PROFESSOR: So--
+
+961
+00:55:26,660 --> 00:55:28,118
+AUDIENCE: I see
+what you're saying.
+
+962
+00:55:28,118 --> 00:55:29,290
+PROFESSOR: Yeah.
+
+963
+00:55:29,290 --> 00:55:31,700
+If you didn't-- if you wanted
+to make k and N different,
+
+964
+00:55:31,700 --> 00:55:34,510
+you could just add a bunch of
+things that are unsatisfiable.
+
+965
+00:55:34,510 --> 00:55:36,900
+Lots of ways to change
+how many there are.
+
+966
+00:55:39,840 --> 00:55:40,940
+OK.
+
+967
+00:55:40,940 --> 00:55:44,410
+Nonetheless, we can prove
+max 3SAT-3 is hard with an L
+
+968
+00:55:44,410 --> 00:55:47,330
+reduction from 3SAT.
+
+969
+00:55:47,330 --> 00:55:52,089
+So I'm not going to prove
+that 3SAT is APX hard.
+
+970
+00:55:52,089 --> 00:55:53,630
+We might do that in
+a future lecture,
+
+971
+00:55:53,630 --> 00:55:54,880
+but just take that as given.
+
+972
+00:55:54,880 --> 00:55:57,430
+What I want to show you
+is how to convert max 3SAT
+
+973
+00:55:57,430 --> 00:56:00,020
+into max 3SAT-3.
+
+974
+00:56:00,020 --> 00:56:05,400
+Not like this, but
+using a different trick.
+
+975
+00:56:05,400 --> 00:56:17,200
+So reducing from max 3SAT.
+
+976
+00:56:17,200 --> 00:56:20,150
+We're given a formula,
+we're given some variables.
+
+977
+00:56:20,150 --> 00:56:22,175
+Let's say-- let's
+look at variable x.
+
+978
+00:56:26,380 --> 00:56:27,790
+And let's say it
+appears k times.
+
+979
+00:56:35,480 --> 00:56:38,420
+What we're going to
+do, just like before,
+
+980
+00:56:38,420 --> 00:56:41,380
+we're going to make
+k new variables.
+
+981
+00:56:41,380 --> 00:56:45,420
+We're going to make k variables
+x1 through xk that replace x,
+
+982
+00:56:45,420 --> 00:56:47,250
+and we're going to use
+those instead of x.
+
+983
+00:56:47,250 --> 00:56:49,541
+And I want to force all the
+values of x to be the same,
+
+984
+00:56:49,541 --> 00:56:53,370
+but I want to force it even when
+you're allowed to cheat and set
+
+985
+00:56:53,370 --> 00:56:55,770
+some of the things incorrectly.
+
+986
+00:56:55,770 --> 00:56:59,029
+And we're going to do this
+using a powerful tool, which
+
+987
+00:56:59,029 --> 00:57:00,945
+is good to know about,
+called expander graphs.
+
+988
+00:57:08,130 --> 00:57:09,600
+So there's two
+things to tell you.
+
+989
+00:57:09,600 --> 00:57:10,850
+One is, what is
+an expander graph,
+
+990
+00:57:10,850 --> 00:57:12,530
+and the other thing is, once
+I have an expander graph,
+
+991
+00:57:12,530 --> 00:57:13,080
+what do I do.
+
+992
+00:57:13,080 --> 00:57:15,580
+Let me start with the latter,
+because it's a little simpler.
+
+993
+00:57:20,091 --> 00:57:22,340
+I guess a lot of you have
+heard about expander graphs.
+
+994
+00:57:22,340 --> 00:57:24,860
+And the short answer is they're
+complicated and confusing,
+
+995
+00:57:24,860 --> 00:57:26,830
+but really cool and powerful.
+
+996
+00:57:26,830 --> 00:57:29,517
+We're not going to try to prove
+that expanders exist here.
+
+997
+00:57:29,517 --> 00:57:31,100
+I'm just going to
+tell you they exist,
+
+998
+00:57:31,100 --> 00:57:32,510
+and that's actually
+pretty simple
+
+999
+00:57:32,510 --> 00:57:35,890
+what they-- what
+properties they have.
+
+1000
+00:57:35,890 --> 00:57:40,580
+So what I want to do, whenever
+I have an edge in this graph--
+
+1001
+00:57:40,580 --> 00:57:42,620
+this is a graph
+whose vertices are
+
+1002
+00:57:42,620 --> 00:57:45,560
+the x1 through xk--
+I'm going to convert
+
+1003
+00:57:45,560 --> 00:57:47,880
+an edge into a constraint,
+which is effectively
+
+1004
+00:57:47,880 --> 00:57:56,030
+xi equals xj, which in
+reality is not xi or xj,
+
+1005
+00:57:56,030 --> 00:57:59,120
+and not xj or xi.
+
+1006
+00:58:02,720 --> 00:58:05,719
+So I really probably shouldn't
+think of it as xi equals xj.
+
+1007
+00:58:05,719 --> 00:58:06,760
+That's what I want to do.
+
+1008
+00:58:06,760 --> 00:58:08,720
+I want to force lots
+of things to be equal.
+
+1009
+00:58:08,720 --> 00:58:10,210
+But really, we have
+to, in the end,
+
+1010
+00:58:10,210 --> 00:58:12,410
+think about it in
+terms of constraints,
+
+1011
+00:58:12,410 --> 00:58:15,940
+because some of them
+might be violated.
+
+1012
+00:58:15,940 --> 00:58:17,687
+So what is an expander graph?
+
+1013
+00:58:17,687 --> 00:58:18,770
+There are different types.
+
+1014
+00:58:18,770 --> 00:58:24,000
+But what we will use
+is two properties.
+
+1015
+00:58:29,510 --> 00:58:30,975
+So this is for k nodes.
+
+1016
+00:58:34,220 --> 00:58:42,596
+We have bounded degree, and
+we have, for every cut AB--
+
+1017
+00:58:42,596 --> 00:58:44,840
+and I think we've talked
+about cuts in this context,
+
+1018
+00:58:44,840 --> 00:58:46,440
+in the context of max cut.
+
+1019
+00:58:46,440 --> 00:58:49,030
+So the idea is that
+A and B are disjoint,
+
+1020
+00:58:49,030 --> 00:58:53,180
+and their union is the
+set of all vertices.
+
+1021
+00:58:53,180 --> 00:58:57,250
+So A is 1 side of the cut, B
+is the other side of the cut.
+
+1022
+00:58:57,250 --> 00:58:59,690
+We want the number
+of cross edges,
+
+1023
+00:58:59,690 --> 00:59:05,382
+the number of edges
+between A and B, is big.
+
+1024
+00:59:05,382 --> 00:59:15,030
+It's at least the
+min of A and B.
+
+1025
+00:59:15,030 --> 00:59:16,540
+Some intuition.
+
+1026
+00:59:16,540 --> 00:59:17,405
+Imagine a Kleek.
+
+1027
+00:59:17,405 --> 00:59:19,570
+A [? Kleek ?] is
+not bounded degree,
+
+1028
+00:59:19,570 --> 00:59:21,510
+but it has this property.
+
+1029
+00:59:21,510 --> 00:59:24,041
+If you look at any cut, there's
+a lot of edges between them.
+
+1030
+00:59:24,041 --> 00:59:25,540
+It's actually more
+like the product.
+
+1031
+00:59:25,540 --> 00:59:27,280
+But in particular,
+it's at least the min.
+
+1032
+00:59:27,280 --> 00:59:30,310
+So you can think of the expander
+as a sparse [? Kleek. ?]
+
+1033
+00:59:30,310 --> 00:59:34,419
+It's [? Kleek-y ?]
+enough, in this sense,
+
+1034
+00:59:34,419 --> 00:59:36,460
+which we'll see why this
+is the property we want.
+
+1035
+00:59:36,460 --> 00:59:37,740
+But it has bounded
+degree, therefore
+
+1036
+00:59:37,740 --> 00:59:38,730
+linear number of edges.
+
+1037
+00:59:38,730 --> 00:59:41,160
+So it's very sparse.
+
+1038
+00:59:41,160 --> 00:59:43,560
+In the construction
+we are applying,
+
+1039
+00:59:43,560 --> 00:59:45,290
+which is due to
+[INAUDIBLE] Philips
+
+1040
+00:59:45,290 --> 00:59:49,250
+and [? Sarnak, ?]
+the degree is 14.
+
+1041
+00:59:49,250 --> 00:59:50,170
+But it doesn't matter.
+
+1042
+00:59:50,170 --> 00:59:50,670
+Constant.
+
+1043
+00:59:53,201 --> 00:59:57,630
+It's actually 14
+regular, so that's nice.
+
+1044
+00:59:57,630 --> 00:59:59,924
+So we take this
+graph, which was known
+
+1045
+00:59:59,924 --> 01:00:01,340
+to be out there--
+basically random
+
+1046
+01:00:01,340 --> 01:00:03,130
+graphs [INAUDIBLE]
+property, but we
+
+1047
+01:00:03,130 --> 01:00:04,920
+won't worry about how
+to construct it too
+
+1048
+01:00:04,920 --> 01:00:07,564
+much, although you do have to.
+
+1049
+01:00:07,564 --> 01:00:09,730
+But there's tons of papers
+on how to construct them.
+
+1050
+01:00:09,730 --> 01:00:11,330
+And then for every
+edge, we convert it
+
+1051
+01:00:11,330 --> 01:00:13,810
+into these two constraints.
+
+1052
+01:00:13,810 --> 01:00:16,510
+So let's prove that
+this is an L reduction.
+
+1053
+01:00:22,140 --> 01:00:30,030
+Claim L reduction.
+
+1054
+01:00:30,030 --> 01:00:35,579
+So maybe-- I don't have
+anything to point at,
+
+1055
+01:00:35,579 --> 01:00:37,370
+because I can't point
+at an expander graph.
+
+1056
+01:00:37,370 --> 01:00:41,110
+But let me draw the graph
+so I can point at something.
+
+1057
+01:00:41,110 --> 01:00:42,776
+Let's draw the
+[? Kleek, ?] just so it's
+
+1058
+01:00:42,776 --> 01:00:44,500
+a little easier to think about.
+
+1059
+01:00:44,500 --> 01:00:47,260
+This is an expander, [? k4 ?].
+
+1060
+01:00:47,260 --> 01:00:52,700
+And let's say, in your solution,
+some of these end up getting
+
+1061
+01:00:52,700 --> 01:00:55,690
+assigned true value--
+let's represent that
+
+1062
+01:00:55,690 --> 01:00:58,580
+by red-- some of them not.
+
+1063
+01:00:58,580 --> 01:01:00,550
+Maybe three of them
+are true, one of them
+
+1064
+01:01:00,550 --> 01:01:01,790
+is false or whatever.
+
+1065
+01:01:01,790 --> 01:01:05,270
+In general, I'm
+going to choose--
+
+1066
+01:01:05,270 --> 01:01:07,160
+so I mean, we're given
+some solution, right?
+
+1067
+01:01:07,160 --> 01:01:11,230
+This is the solution y-prime
+to the constructed instance
+
+1068
+01:01:11,230 --> 01:01:11,730
+x-prime.
+
+1069
+01:01:11,730 --> 01:01:13,480
+X-prime has this expander.
+
+1070
+01:01:13,480 --> 01:01:15,870
+So we look at a solution
+y-prime to x-prime,
+
+1071
+01:01:15,870 --> 01:01:18,870
+we have no control
+over what it is.
+
+1072
+01:01:18,870 --> 01:01:21,232
+If you look at a variable,
+some fraction of them
+
+1073
+01:01:21,232 --> 01:01:23,190
+are set to true, some of
+them are set to false.
+
+1074
+01:01:23,190 --> 01:01:25,950
+We're going to
+choose the majority.
+
+1075
+01:01:25,950 --> 01:01:27,830
+So here it's majority
+red, so we're going
+
+1076
+01:01:27,830 --> 01:01:31,640
+to change this guy to be red.
+
+1077
+01:01:31,640 --> 01:01:34,670
+Now does that hurt us?
+
+1078
+01:01:34,670 --> 01:01:36,170
+Well, we can think
+of there as being
+
+1079
+01:01:36,170 --> 01:01:39,070
+a cut of the red
+nodes versus the not
+
+1080
+01:01:39,070 --> 01:01:40,290
+red nodes, the black nodes.
+
+1081
+01:01:45,200 --> 01:01:49,440
+And I claim the number
+of edges here is big.
+
+1082
+01:01:49,440 --> 01:01:51,539
+It's at least the
+minimum of A and B.
+
+1083
+01:01:51,539 --> 01:01:53,830
+Now what we were doing is
+taking the minimum of A and B
+
+1084
+01:01:53,830 --> 01:01:56,820
+and recoloring that side
+to be the other side.
+
+1085
+01:01:56,820 --> 01:02:00,610
+When we do that, we
+have these constraints,
+
+1086
+01:02:00,610 --> 01:02:02,640
+which are supposed to
+be equality constraints.
+
+1087
+01:02:02,640 --> 01:02:05,445
+These things are supposed to be
+equal, but they weren't before.
+
+1088
+01:02:05,445 --> 01:02:08,950
+Before I recolored this, these
+were-- at least one constraint
+
+1089
+01:02:08,950 --> 01:02:11,350
+here was violated, because
+this one of them was red,
+
+1090
+01:02:11,350 --> 01:02:12,850
+one of them was black.
+
+1091
+01:02:12,850 --> 01:02:15,640
+When I fill this in,
+I improve my solution,
+
+1092
+01:02:15,640 --> 01:02:18,050
+because-- by at least
+the size of the cut.
+
+1093
+01:02:20,830 --> 01:02:23,590
+Each of these guys
+now becomes satisfied.
+
+1094
+01:02:23,590 --> 01:02:24,850
+It wasn't before.
+
+1095
+01:02:24,850 --> 01:02:27,930
+So I improve my
+solution by this much.
+
+1096
+01:02:27,930 --> 01:02:31,160
+I also worsen my
+solution, potentially,
+
+1097
+01:02:31,160 --> 01:02:37,290
+because that node
+appears in one clause.
+
+1098
+01:02:37,290 --> 01:02:41,619
+And so it gets worse by 1.
+
+1099
+01:02:41,619 --> 01:02:43,660
+So suppose there are B
+nodes on the smaller side,
+
+1100
+01:02:43,660 --> 01:02:45,160
+and we're recoloring B nodes.
+
+1101
+01:02:45,160 --> 01:02:49,680
+So we got an improvement by
+P, and also we worsened things
+
+1102
+01:02:49,680 --> 01:02:55,780
+by up to P. Because these P guys
+appear in P different clauses.
+
+1103
+01:02:55,780 --> 01:02:59,290
+Each one potentially we mess
+up is no longer satisfied.
+
+1104
+01:02:59,290 --> 01:03:01,820
+But for every one that we mess
+up-- so these guys up here
+
+1105
+01:03:01,820 --> 01:03:06,270
+in some actual clause--
+each one we mess up,
+
+1106
+01:03:06,270 --> 01:03:09,090
+we also make at least
+one thing happy.
+
+1107
+01:03:09,090 --> 01:03:11,460
+Because we fixed the cut.
+
+1108
+01:03:11,460 --> 01:03:14,010
+So if we have any solution,
+we can convert it into one
+
+1109
+01:03:14,010 --> 01:03:16,060
+where our variables are
+all true or all false,
+
+1110
+01:03:16,060 --> 01:03:17,950
+and not lose anything.
+
+1111
+01:03:17,950 --> 01:03:21,600
+Therefore, there exists
+an optimal solution.
+
+1112
+01:03:21,600 --> 01:03:23,910
+There exists an
+optimal solution.
+
+1113
+01:03:23,910 --> 01:03:28,300
+And you do this variable by
+variable, where variables
+
+1114
+01:03:28,300 --> 01:03:32,170
+are all true or all false.
+
+1115
+01:03:40,450 --> 01:03:47,400
+Now, we do change the
+value of OPT here.
+
+1116
+01:03:47,400 --> 01:03:50,170
+Because we added a
+ton of constraints,
+
+1117
+01:03:50,170 --> 01:03:52,540
+and we just said well the--
+in the optimal solution,
+
+1118
+01:03:52,540 --> 01:03:55,390
+or an optimal solution-- in
+fact, all of these constraints
+
+1119
+01:03:55,390 --> 01:03:56,600
+will be satisfied.
+
+1120
+01:03:56,600 --> 01:03:59,090
+Which means OPT has increased.
+
+1121
+01:03:59,090 --> 01:04:04,200
+So the OPT for
+x-prime, this thing,
+
+1122
+01:04:04,200 --> 01:04:06,400
+is going to be larger
+than the OPT for x.
+
+1123
+01:04:08,955 --> 01:04:18,770
+OPT of x-prime is going to
+equal OPT of x plus order
+
+1124
+01:04:18,770 --> 01:04:26,510
+the total number of occurrences
+of all variables, which
+
+1125
+01:04:26,510 --> 01:04:29,290
+is at most three times
+the number of clauses.
+
+1126
+01:04:36,170 --> 01:04:38,710
+So we want to know,
+does it satisfy
+
+1127
+01:04:38,710 --> 01:04:40,170
+this definition of L reduction.
+
+1128
+01:04:40,170 --> 01:04:42,230
+We need to know that
+the OPT does not explode
+
+1129
+01:04:42,230 --> 01:04:44,350
+by more than a constant factor.
+
+1130
+01:04:44,350 --> 01:04:46,690
+And yet, we added this big term.
+
+1131
+01:04:46,690 --> 01:04:49,630
+But the good news
+is, in 3SAT, you
+
+1132
+01:04:49,630 --> 01:04:52,340
+can always satisfy a constant
+fraction of the clauses.
+
+1133
+01:04:52,340 --> 01:04:56,270
+So OPT is always at least--
+I think I have written here,
+
+1134
+01:04:56,270 --> 01:04:59,790
+like, half of them.
+
+1135
+01:04:59,790 --> 01:05:02,140
+I think you just randomly
+assign the variables,
+
+1136
+01:05:02,140 --> 01:05:07,050
+and some constant fraction will
+be satisfied in expectation.
+
+1137
+01:05:07,050 --> 01:05:09,710
+So there's definitely a solution
+where OPT of-- so OPT of x
+
+1138
+01:05:09,710 --> 01:05:11,210
+is definitely at
+least some constant
+
+1139
+01:05:11,210 --> 01:05:12,650
+times the number of clauses.
+
+1140
+01:05:12,650 --> 01:05:15,380
+And so this adding some constant
+times the number of clauses
+
+1141
+01:05:15,380 --> 01:05:18,030
+doesn't change the overall cos
+by more than a constant factor.
+
+1142
+01:05:18,030 --> 01:05:20,020
+So property one holds.
+
+1143
+01:05:20,020 --> 01:05:26,600
+Property two holds, in
+fact, with beta equal 1.
+
+1144
+01:05:26,600 --> 01:05:28,410
+You're not making
+your solution in-- you
+
+1145
+01:05:28,410 --> 01:05:30,370
+see we have this additive
+thing, because we
+
+1146
+01:05:30,370 --> 01:05:33,040
+add these gadgets and stuff.
+
+1147
+01:05:33,040 --> 01:05:35,027
+Multiplicatively,
+it's confusing,
+
+1148
+01:05:35,027 --> 01:05:36,860
+and that's what we were
+worrying about here.
+
+1149
+01:05:36,860 --> 01:05:38,560
+But additively, it's very clean.
+
+1150
+01:05:38,560 --> 01:05:41,680
+We always add the exact same
+amount to your solution.
+
+1151
+01:05:41,680 --> 01:05:43,200
+So if you have a
+solution y-prime
+
+1152
+01:05:43,200 --> 01:05:45,460
+and you convert it
+back to a solution y,
+
+1153
+01:05:45,460 --> 01:05:47,970
+the gap-- the additive
+gap between the cost
+
+1154
+01:05:47,970 --> 01:05:52,430
+of y versus OPT of x will
+be equal to the additive gap
+
+1155
+01:05:52,430 --> 01:05:55,761
+between the cost of y-prime
+versus OPT of x-prime.
+
+1156
+01:05:55,761 --> 01:05:56,260
+Question.
+
+1157
+01:05:56,260 --> 01:05:59,182
+AUDIENCE: So here,
+how many times
+
+1158
+01:05:59,182 --> 01:06:01,617
+are you using each variable?
+
+1159
+01:06:01,617 --> 01:06:05,300
+PROFESSOR: We are using
+each variable 29 times.
+
+1160
+01:06:08,870 --> 01:06:13,020
+We're using it-- why 29?
+
+1161
+01:06:13,020 --> 01:06:16,430
+Because-- right.
+
+1162
+01:06:16,430 --> 01:06:18,820
+We have degree 14, but
+then for every edge
+
+1163
+01:06:18,820 --> 01:06:20,310
+we actually have
+two constraints,
+
+1164
+01:06:20,310 --> 01:06:21,950
+the implication
+[? in ?] both ways.
+
+1165
+01:06:21,950 --> 01:06:22,760
+So that's 28.
+
+1166
+01:06:22,760 --> 01:06:24,640
+Plus the vari--
+each of those nodes
+
+1167
+01:06:24,640 --> 01:06:28,440
+actually appears in
+one actual clause.
+
+1168
+01:06:28,440 --> 01:06:28,940
+OK.
+
+1169
+01:06:28,940 --> 01:06:32,660
+So this proves that
+max 3SAT-29 is hard.
+
+1170
+01:06:32,660 --> 01:06:34,080
+Yep, good question.
+
+1171
+01:06:34,080 --> 01:06:37,840
+Why did I claim max 3SAT-3?
+
+1172
+01:06:37,840 --> 01:06:40,670
+Because we can use
+this reduction now.
+
+1173
+01:06:43,190 --> 01:06:45,710
+So there is another
+reason I showed you this.
+
+1174
+01:06:45,710 --> 01:06:47,960
+I haven't seen this explicitly
+said in the literature,
+
+1175
+01:06:47,960 --> 01:06:50,930
+but all the pieces
+are out there.
+
+1176
+01:06:50,930 --> 01:06:57,670
+So once you show max 3SAT
+some constant is hard,
+
+1177
+01:06:57,670 --> 01:06:59,990
+then you can do an L
+reduction from that problem
+
+1178
+01:06:59,990 --> 01:07:03,090
+to max 3SAT-3, just like this.
+
+1179
+01:07:03,090 --> 01:07:04,760
+So first we do the expander.
+
+1180
+01:07:04,760 --> 01:07:07,270
+And then, still these nodes
+have too high a degree.
+
+1181
+01:07:07,270 --> 01:07:09,540
+They're degree 29.
+
+1182
+01:07:09,540 --> 01:07:12,660
+Now we're going to expand
+those into little cycles
+
+1183
+01:07:12,660 --> 01:07:14,850
+of constraints.
+
+1184
+01:07:14,850 --> 01:07:21,300
+Now this is actually OK when
+the cycle has constant length,
+
+1185
+01:07:21,300 --> 01:07:25,090
+because maybe-- suppose some
+of these are set to true,
+
+1186
+01:07:25,090 --> 01:07:26,697
+some of them are set to false.
+
+1187
+01:07:26,697 --> 01:07:28,030
+Then just set them all to false.
+
+1188
+01:07:28,030 --> 01:07:29,334
+Don't even take majority.
+
+1189
+01:07:29,334 --> 01:07:30,250
+Set them all to false.
+
+1190
+01:07:30,250 --> 01:07:31,669
+How much does that hurt you?
+
+1191
+01:07:31,669 --> 01:07:33,460
+Well, you know that
+each of these variables
+
+1192
+01:07:33,460 --> 01:07:36,200
+appeared in a constant
+number of clauses.
+
+1193
+01:07:36,200 --> 01:07:41,950
+So it only hurt you
+by a constant amount.
+
+1194
+01:07:41,950 --> 01:07:45,530
+Every time you flip a
+variable from true to false,
+
+1195
+01:07:45,530 --> 01:07:50,800
+you only lose an additive
+constant in your solution.
+
+1196
+01:07:50,800 --> 01:07:53,260
+So when we're converting from
+a solution y-prime, which
+
+1197
+01:07:53,260 --> 01:07:55,420
+does weird things on
+a cycle, potentially,
+
+1198
+01:07:55,420 --> 01:07:58,060
+when we convert it to y
+and set them all to false,
+
+1199
+01:07:58,060 --> 01:08:01,820
+we-- I mean we know--
+so there's two cases.
+
+1200
+01:08:01,820 --> 01:08:04,030
+One is, all of these
+constraints are satisfied.
+
+1201
+01:08:04,030 --> 01:08:05,988
+Then, you should choose
+exactly what's written,
+
+1202
+01:08:05,988 --> 01:08:08,300
+and then they will all
+be true or all be false.
+
+1203
+01:08:08,300 --> 01:08:10,300
+But if at least one
+of them is violated,
+
+1204
+01:08:10,300 --> 01:08:13,980
+you can charge to that violation
+and set them all to false.
+
+1205
+01:08:13,980 --> 01:08:16,310
+And when you do that, I don't
+know how many-- you know,
+
+1206
+01:08:16,310 --> 01:08:19,979
+at most 1,000 violations
+happen, some constant.
+
+1207
+01:08:19,979 --> 01:08:22,740
+Like three times 20-- whatever.
+
+1208
+01:08:22,740 --> 01:08:24,600
+Some constant.
+
+1209
+01:08:24,600 --> 01:08:27,340
+And then you know
+that you can charge
+
+1210
+01:08:27,340 --> 01:08:30,800
+that cost to the violation
+that you were given in y-prime.
+
+1211
+01:08:30,800 --> 01:08:33,439
+And so you can get that L
+reduction property, too,
+
+1212
+01:08:33,439 --> 01:08:36,460
+and say oh good,
+the additive gap
+
+1213
+01:08:36,460 --> 01:08:39,510
+in my produced solution where
+I just set all those to false
+
+1214
+01:08:39,510 --> 01:08:41,810
+is at most 1,000 times
+the original additive gap.
+
+1215
+01:08:41,810 --> 01:08:45,810
+And so that's an L
+reduction from max 3SAT
+
+1216
+01:08:45,810 --> 01:08:49,439
+constant to max 3SAT-3.
+
+1217
+01:08:49,439 --> 01:08:51,505
+Questions?
+
+1218
+01:08:51,505 --> 01:08:52,004
+Yeah.
+
+1219
+01:08:52,004 --> 01:08:54,254
+AUDIENCE: So how do you know
+there's a constant number
+
+1220
+01:08:54,254 --> 01:08:55,280
+of violations?
+
+1221
+01:08:55,280 --> 01:08:57,630
+PROFESSOR: Because
+now we were given
+
+1222
+01:08:57,630 --> 01:08:59,770
+an instance of 3SAT
+constant, meaning
+
+1223
+01:08:59,770 --> 01:09:02,850
+each variable appears in a
+constant number of clauses.
+
+1224
+01:09:02,850 --> 01:09:07,529
+So we were given a
+situation-- right, sorry.
+
+1225
+01:09:07,529 --> 01:09:10,890
+Also, when we do this,
+each-- we set it up
+
+1226
+01:09:10,890 --> 01:09:16,529
+so each of these variables
+appears in one original clause.
+
+1227
+01:09:16,529 --> 01:09:19,240
+Yeah And we know the total
+size of the cycle is constant.
+
+1228
+01:09:19,240 --> 01:09:21,810
+So each of these, every time
+we turn one of these to false,
+
+1229
+01:09:21,810 --> 01:09:23,187
+we lose one point.
+
+1230
+01:09:23,187 --> 01:09:25,020
+And there's only a
+constant number of these,
+
+1231
+01:09:25,020 --> 01:09:27,870
+so it's actually-- the
+constant is only 27.
+
+1232
+01:09:27,870 --> 01:09:28,810
+Or 29, sorry.
+
+1233
+01:09:28,810 --> 01:09:30,319
+29.
+
+1234
+01:09:30,319 --> 01:09:32,909
+It's a little weird to
+get used to L reductions.
+
+1235
+01:09:32,909 --> 01:09:34,200
+I'm still getting used to them.
+
+1236
+01:09:34,200 --> 01:09:37,260
+But as you can see,
+it's pretty powerful.
+
+1237
+01:09:37,260 --> 01:09:40,890
+You can do a lot,
+and it's just OK.
+
+1238
+01:09:40,890 --> 01:09:43,010
+You definitely
+have to be careful.
+
+1239
+01:09:43,010 --> 01:09:45,370
+In general, you want things
+to have bounded degree.
+
+1240
+01:09:45,370 --> 01:09:46,359
+That makes things
+really helpful.
+
+1241
+01:09:46,359 --> 01:09:48,525
+That's why I'm telling you
+about these two problems.
+
+1242
+01:09:55,873 --> 01:09:56,830
+What next.
+
+1243
+01:09:56,830 --> 01:10:00,470
+Let's just continue--
+let me at least mention,
+
+1244
+01:10:00,470 --> 01:10:02,590
+in case I run out
+of time, max not all
+
+1245
+01:10:02,590 --> 01:10:11,310
+equal 3SAT, also hard, positive
+1 in 3SAT, even one in E3SAT.
+
+1246
+01:10:11,310 --> 01:10:12,700
+Also, APX hard.
+
+1247
+01:10:12,700 --> 01:10:14,030
+APX complete.
+
+1248
+01:10:14,030 --> 01:10:18,820
+So those are good friends from
+3SAT land to carry over here.
+
+1249
+01:10:18,820 --> 01:10:22,930
+But let's prove some-- and I
+will eventually prove those.
+
+1250
+01:10:22,930 --> 01:10:27,690
+Let's prove some
+other fun problems.
+
+1251
+01:10:27,690 --> 01:10:30,910
+Next one is independent set.
+
+1252
+01:10:30,910 --> 01:10:34,170
+Now I have to be a
+little bit careful here.
+
+1253
+01:10:34,170 --> 01:10:38,740
+Independent set is really
+really, really hard.
+
+1254
+01:10:38,740 --> 01:10:42,630
+But an interesting special
+case is bounded degree
+
+1255
+01:10:42,630 --> 01:10:44,370
+independent set.
+
+1256
+01:10:44,370 --> 01:10:46,080
+So that's what I'll
+talk about next.
+
+1257
+01:10:57,800 --> 01:11:00,970
+I think I'm going to prove max
+degree for independent set,
+
+1258
+01:11:00,970 --> 01:11:12,110
+although it's known that
+max degree 3 is hard also.
+
+1259
+01:11:12,110 --> 01:11:18,870
+So constant degree independent
+set is actually APX complete.
+
+1260
+01:11:18,870 --> 01:11:23,520
+So there is a constant
+factor approximation,
+
+1261
+01:11:23,520 --> 01:11:26,080
+which is take any maximal
+independent set-- just
+
+1262
+01:11:26,080 --> 01:11:28,270
+keep adding vertices
+until you can't anymore.
+
+1263
+01:11:28,270 --> 01:11:34,100
+That will be within a factor of
+this of optimal, you can show.
+
+1264
+01:11:34,100 --> 01:11:37,400
+That's pretty clear.
+
+1265
+01:11:37,400 --> 01:11:40,990
+So that puts it in APX.
+
+1266
+01:11:40,990 --> 01:11:43,390
+And furthermore, we
+claim that's [INAUDIBLE].
+
+1267
+01:11:43,390 --> 01:11:45,990
+So there's a constant
+factor, and there's also
+
+1268
+01:11:45,990 --> 01:11:47,540
+a constant factor
+in approximability.
+
+1269
+01:11:47,540 --> 01:11:50,600
+Some constant you
+cannot go below.
+
+1270
+01:11:50,600 --> 01:11:54,220
+And the proof is this,
+although it's a little bit--
+
+1271
+01:11:54,220 --> 01:11:58,140
+so it's a reduction from,
+let's say, the one we just did,
+
+1272
+01:11:58,140 --> 01:12:00,874
+max 3SAT-3.
+
+1273
+01:12:00,874 --> 01:12:02,540
+And it's going to be
+a strict reduction.
+
+1274
+01:12:02,540 --> 01:12:06,190
+We're not going to lose
+anything if I did things right.
+
+1275
+01:12:06,190 --> 01:12:08,727
+Now in fact-- so I drew
+here six recurrences of xi,
+
+1276
+01:12:08,727 --> 01:12:10,310
+but there's really
+only three of them.
+
+1277
+01:12:10,310 --> 01:12:12,620
+But the idea is
+complete bipartite graph
+
+1278
+01:12:12,620 --> 01:12:14,780
+between the positive
+instances of xi
+
+1279
+01:12:14,780 --> 01:12:16,420
+and the negative instances.
+
+1280
+01:12:16,420 --> 01:12:18,520
+And then these are going
+to be plugged in directly
+
+1281
+01:12:18,520 --> 01:12:20,700
+to the clause gadgets.
+
+1282
+01:12:20,700 --> 01:12:22,080
+These are the same variable.
+
+1283
+01:12:24,340 --> 01:12:25,840
+And so the idea is
+each of these was
+
+1284
+01:12:25,840 --> 01:12:27,190
+plugged into only one clause.
+
+1285
+01:12:27,190 --> 01:12:28,820
+So I need to make copies.
+
+1286
+01:12:28,820 --> 01:12:31,310
+I do this complete bipartite
+graph between them.
+
+1287
+01:12:31,310 --> 01:12:35,560
+And now we're trying to do
+max independent set, which
+
+1288
+01:12:35,560 --> 01:12:40,470
+means whatever solution we find,
+it will be an independent set.
+
+1289
+01:12:40,470 --> 01:12:41,040
+That's cool.
+
+1290
+01:12:41,040 --> 01:12:42,850
+There's no slack in
+independence here.
+
+1291
+01:12:42,850 --> 01:12:44,350
+It's just about
+how many we choose.
+
+1292
+01:12:44,350 --> 01:12:44,850
+Question?
+
+1293
+01:12:44,850 --> 01:12:46,190
+AUDIENCE: What is
+an independent set?
+
+1294
+01:12:46,190 --> 01:12:47,110
+PROFESSOR:
+Independence set is you
+
+1295
+01:12:47,110 --> 01:12:48,160
+want to choose a set
+of variables that
+
+1296
+01:12:48,160 --> 01:12:49,770
+have no edges between them.
+
+1297
+01:12:49,770 --> 01:12:52,990
+Sorry, instead of vertices,
+they have no edges between them.
+
+1298
+01:12:52,990 --> 01:12:56,610
+So that means that if I choose
+any one of the blue nodes here,
+
+1299
+01:12:56,610 --> 01:12:59,200
+I can't choose any of the
+red nodes, and vice versa.
+
+1300
+01:12:59,200 --> 01:13:01,290
+So I may not be able to
+choose all of the blue
+
+1301
+01:13:01,290 --> 01:13:03,940
+or all of the red, but
+that's how it goes.
+
+1302
+01:13:03,940 --> 01:13:06,440
+Now if we look at a clause,
+there's-- in this case,
+
+1303
+01:13:06,440 --> 01:13:09,726
+we have to actually handle
+the case of clauses of size 2
+
+1304
+01:13:09,726 --> 01:13:11,535
+and clauses of size 3.
+
+1305
+01:13:11,535 --> 01:13:13,120
+If you have a clause
+of size 3, you'd
+
+1306
+01:13:13,120 --> 01:13:14,940
+just build a triangle on them.
+
+1307
+01:13:14,940 --> 01:13:19,240
+And the idea is only one
+of those can be chosen.
+
+1308
+01:13:19,240 --> 01:13:22,340
+But it could be zero get chosen,
+because you might be screwed.
+
+1309
+01:13:22,340 --> 01:13:24,749
+Maybe you chose a
+red xi, and then you
+
+1310
+01:13:24,749 --> 01:13:26,290
+won't be able to
+choose this blue xi.
+
+1311
+01:13:26,290 --> 01:13:27,580
+Maybe you chose a red xj.
+
+1312
+01:13:27,580 --> 01:13:29,980
+Maybe you chose a blue xk.
+
+1313
+01:13:29,980 --> 01:13:31,740
+In that case, you
+won't be able to choose
+
+1314
+01:13:31,740 --> 01:13:33,004
+any of these vertices.
+
+1315
+01:13:33,004 --> 01:13:34,670
+But if at least one
+of these [INAUDIBLE]
+
+1316
+01:13:34,670 --> 01:13:38,070
+is true, if you chose--
+if you're either
+
+1317
+01:13:38,070 --> 01:13:41,630
+choosing the blue xi's or the
+blue xj's or the red xk's, then
+
+1318
+01:13:41,630 --> 01:13:44,140
+in fact you get one
+point for each clause.
+
+1319
+01:13:44,140 --> 01:13:46,420
+And in general, the
+number of points you get,
+
+1320
+01:13:46,420 --> 01:13:47,710
+the number of things
+you'll be able to put
+
+1321
+01:13:47,710 --> 01:13:49,251
+into your independent
+set, is exactly
+
+1322
+01:13:49,251 --> 01:13:52,360
+the number of clauses
+you'll be able to satisfy.
+
+1323
+01:13:52,360 --> 01:13:57,230
+And just by looking at whether
+any of the blue xi's are true,
+
+1324
+01:13:57,230 --> 01:14:00,340
+then you set xi to true, looking
+at whether any of the red xi's
+
+1325
+01:14:00,340 --> 01:14:03,310
+are set-- are chosen
+in the independent set,
+
+1326
+01:14:03,310 --> 01:14:04,581
+then you set xi to false.
+
+1327
+01:14:04,581 --> 01:14:05,955
+That will recover
+the assignment,
+
+1328
+01:14:05,955 --> 01:14:09,370
+and it'll have exactly the same
+cost as the independent set
+
+1329
+01:14:09,370 --> 01:14:10,187
+size.
+
+1330
+01:14:10,187 --> 01:14:12,520
+Number of clauses you satisfy
+will be exactly the number
+
+1331
+01:14:12,520 --> 01:14:14,895
+of independent set size.
+
+1332
+01:14:17,850 --> 01:14:21,120
+And similarly, for
+a clause of size 2.
+
+1333
+01:14:21,120 --> 01:14:21,880
+So that's cool.
+
+1334
+01:14:21,880 --> 01:14:27,300
+Independent set is really easy
+to reduce from max 3SAT-3.
+
+1335
+01:14:27,300 --> 01:14:29,550
+In fact, it would work
+for max 3SAT constant.
+
+1336
+01:14:29,550 --> 01:14:32,070
+But if you do a max at
+3SAT-3, there's only three
+
+1337
+01:14:32,070 --> 01:14:33,270
+of these guys.
+
+1338
+01:14:33,270 --> 01:14:36,130
+Then I think the biggest
+degree you get is 4.
+
+1339
+01:14:36,130 --> 01:14:38,697
+This guy maybe is
+attached to two things,
+
+1340
+01:14:38,697 --> 01:14:40,280
+and then also to two
+things over here.
+
+1341
+01:14:43,580 --> 01:14:46,250
+Great.
+
+1342
+01:14:46,250 --> 01:14:51,680
+Next problem is vertex cover.
+
+1343
+01:14:51,680 --> 01:14:53,050
+So this is a funny one.
+
+1344
+01:14:56,100 --> 01:14:59,395
+So let's do a constant
+degree vertex cover.
+
+1345
+01:14:59,395 --> 01:15:01,770
+In general, there's a two
+approximation for vertex cover.
+
+1346
+01:15:01,770 --> 01:15:07,076
+So we don't need the constant
+degree to be an APX, but.
+
+1347
+01:15:07,076 --> 01:15:09,420
+This is also APX complete.
+
+1348
+01:15:09,420 --> 01:15:13,230
+And it's kind of identical
+to the independent set
+
+1349
+01:15:13,230 --> 01:15:18,140
+in a funny way, which
+is for any graph,
+
+1350
+01:15:18,140 --> 01:15:22,360
+if you look at a vertex
+cover, its complement
+
+1351
+01:15:22,360 --> 01:15:23,990
+is an independent set.
+
+1352
+01:15:23,990 --> 01:15:25,510
+If you look at any
+independent set,
+
+1353
+01:15:25,510 --> 01:15:28,910
+its complement is
+a vertex cover.
+
+1354
+01:15:28,910 --> 01:15:31,590
+Sorry, any maximal independent
+set, its complement
+
+1355
+01:15:31,590 --> 01:15:34,240
+is a vertex cover.
+
+1356
+01:15:34,240 --> 01:15:36,660
+So they're kind of
+duel in that, if you
+
+1357
+01:15:36,660 --> 01:15:38,700
+look at the size
+of a vertex cover
+
+1358
+01:15:38,700 --> 01:15:42,470
+plus size of a maximal
+independent set,
+
+1359
+01:15:42,470 --> 01:15:45,700
+it will always equal
+the number of vertices.
+
+1360
+01:15:45,700 --> 01:15:50,040
+So maximizing this is the
+same as minimizing this.
+
+1361
+01:15:50,040 --> 01:15:52,320
+But approximating this
+is not necessarily
+
+1362
+01:15:52,320 --> 01:15:53,700
+the same as approximating this.
+
+1363
+01:15:53,700 --> 01:15:56,740
+One's a maximization problem,
+one's a minimization problem.
+
+1364
+01:15:56,740 --> 01:16:03,290
+But it's still an L reduction
+for bounded degree graphs,
+
+1365
+01:16:03,290 --> 01:16:06,800
+because if you have
+degree at most delta,
+
+1366
+01:16:06,800 --> 01:16:10,220
+there's always an independent
+set size of at least N
+
+1367
+01:16:10,220 --> 01:16:11,390
+over delta.
+
+1368
+01:16:11,390 --> 01:16:14,300
+And there's always a
+vertex cover of size N.
+
+1369
+01:16:14,300 --> 01:16:16,940
+So they're within constant
+factors of each other.
+
+1370
+01:16:16,940 --> 01:16:23,700
+In fact, these are both always
+theta the number of vertices.
+
+1371
+01:16:23,700 --> 01:16:24,950
+OK?
+
+1372
+01:16:24,950 --> 01:16:28,640
+So the reduction is you give me
+an instance of independent set,
+
+1373
+01:16:28,640 --> 01:16:31,920
+I give you that exact same
+instance to vertex cover.
+
+1374
+01:16:31,920 --> 01:16:35,260
+And then-- so f is trivial.
+
+1375
+01:16:35,260 --> 01:16:37,240
+G takes the complement.
+
+1376
+01:16:37,240 --> 01:16:39,630
+Whatever you had in
+the vertex cover,
+
+1377
+01:16:39,630 --> 01:16:41,420
+you don't put it in
+the independent set,
+
+1378
+01:16:41,420 --> 01:16:43,010
+and vice versa.
+
+1379
+01:16:43,010 --> 01:16:45,570
+And then you just have to check
+that this is an L reduction.
+
+1380
+01:16:45,570 --> 01:16:47,880
+So the first thing is the OPTs
+are within a constant factor
+
+1381
+01:16:47,880 --> 01:16:48,170
+of each other.
+
+1382
+01:16:48,170 --> 01:16:50,586
+That's true, because they're
+both within a constant factor
+
+1383
+01:16:50,586 --> 01:16:52,120
+of the number of vertices.
+
+1384
+01:16:52,120 --> 01:16:56,430
+And then you prove that
+the additive gap is fixed.
+
+1385
+01:16:56,430 --> 01:17:00,140
+And it's the same thing if you
+decrement this accidentally,
+
+1386
+01:17:00,140 --> 01:17:02,150
+then you increment
+this accidentally.
+
+1387
+01:17:02,150 --> 01:17:04,530
+They're one for one.
+
+1388
+01:17:04,530 --> 01:17:06,100
+So this is kind of cool.
+
+1389
+01:17:06,100 --> 01:17:08,730
+It feels a little scary, but
+we can convert a maximization
+
+1390
+01:17:08,730 --> 01:17:11,250
+problem into a minimization
+problem with L reductions.
+
+1391
+01:17:11,250 --> 01:17:13,940
+This would be very hard
+to even think about
+
+1392
+01:17:13,940 --> 01:17:16,742
+in the other
+reduction types, which
+
+1393
+01:17:16,742 --> 01:17:18,950
+is one of the reasons L
+reductions are so successful,
+
+1394
+01:17:18,950 --> 01:17:19,450
+I think.
+
+1395
+01:17:22,336 --> 01:17:24,430
+That was vertex cover.
+
+1396
+01:17:24,430 --> 01:17:25,430
+We can do one more.
+
+1397
+01:17:29,940 --> 01:17:32,030
+OK, really easy.
+
+1398
+01:17:32,030 --> 01:17:32,850
+Dominating set.
+
+1399
+01:17:36,100 --> 01:17:38,140
+Remember, dominating
+set-- with vertex cover,
+
+1400
+01:17:38,140 --> 01:17:40,236
+when you put a
+vertex in your cover,
+
+1401
+01:17:40,236 --> 01:17:41,860
+you cover all the
+edges incident to it,
+
+1402
+01:17:41,860 --> 01:17:43,130
+and you want to
+cover all the edges.
+
+1403
+01:17:43,130 --> 01:17:44,838
+Dominating set, when
+you put a vertex in,
+
+1404
+01:17:44,838 --> 01:17:46,980
+you cover all the
+neighboring vertices.
+
+1405
+01:17:46,980 --> 01:17:49,070
+You want to cover all vertices.
+
+1406
+01:17:49,070 --> 01:17:51,765
+So I'm going to reduce
+from vertex cover.
+
+1407
+01:17:51,765 --> 01:17:55,460
+If you have an edge,
+what you do is convert it
+
+1408
+01:17:55,460 --> 01:18:00,360
+into a path of length
+2 plus that edge.
+
+1409
+01:18:00,360 --> 01:18:03,580
+So then you know that, if
+this is in the dominating set,
+
+1410
+01:18:03,580 --> 01:18:06,660
+you can just move it
+over to [INAUDIBLE] or w.
+
+1411
+01:18:06,660 --> 01:18:09,260
+It will cover all the things
+it could cover before,
+
+1412
+01:18:09,260 --> 01:18:11,420
+and maybe even more.
+
+1413
+01:18:11,420 --> 01:18:13,480
+So then in the optimal
+solution over here,
+
+1414
+01:18:13,480 --> 01:18:15,385
+you'd never need to choose
+one of these vertices, which
+
+1415
+01:18:15,385 --> 01:18:17,968
+means we can assume that on the
+original vertices, which means
+
+1416
+01:18:17,968 --> 01:18:21,100
+you are just solving
+vertex cover,
+
+1417
+01:18:21,100 --> 01:18:25,150
+because covering that is the
+same as covering that edge.
+
+1418
+01:18:25,150 --> 01:18:26,344
+Good.
+
+1419
+01:18:26,344 --> 01:18:27,510
+I think that's good for now.
+
+1420
+01:18:27,510 --> 01:18:30,330
+We'll do a bunch more
+reductions next time.

@@ -1,0 +1,337 @@
+1
+00:00:00,880 --> 00:00:06,690
+In discussing out-of-order superscalar pipelined
+CPUs we commented that the costs grow very
+
+2
+00:00:06,690 --> 00:00:11,470
+quickly relative to the performance gains,
+leading to the cost-performance curve shown
+
+3
+00:00:11,470 --> 00:00:12,820
+here.
+
+4
+00:00:12,820 --> 00:00:17,109
+If we move down the curve, we can arrive at
+more efficient architectures that give, say,
+
+5
+00:00:17,109 --> 00:00:20,189
+1/2 the performance at a 1/4 of the cost.
+
+6
+00:00:20,189 --> 00:00:24,980
+When our applications involve independent
+computations that can be performed in a parallel,
+
+7
+00:00:24,980 --> 00:00:29,859
+it may be that we would be able to use two
+cores to provide the same performance as the
+
+8
+00:00:29,859 --> 00:00:34,400
+original expensive core, but a fraction of
+the cost.
+
+9
+00:00:34,400 --> 00:00:39,590
+If the available parallelism allows us to
+use additional cores, we'll see a linear relationship
+
+10
+00:00:39,590 --> 00:00:43,740
+between increased performance vs. increased
+cost.
+
+11
+00:00:43,740 --> 00:00:48,290
+The key, of course, is that desired computations
+can be divided into multiple tasks that can
+
+12
+00:00:48,290 --> 00:00:53,070
+run independently, with little or no need
+for communication or coordination between
+
+13
+00:00:53,070 --> 00:00:55,240
+the tasks.
+
+14
+00:00:55,240 --> 00:01:00,160
+What is the optimal tradeoff between core
+cost and the number of cores?
+
+15
+00:01:00,160 --> 00:01:04,760
+If our computation is arbitrarily divisible
+without incurring additional overhead,
+
+16
+00:01:04,760 --> 00:01:09,000
+then we would continue to move down the curve
+until we found the cost-performance point
+
+17
+00:01:09,000 --> 00:01:12,380
+that gave us the desired performance at the
+least cost.
+
+18
+00:01:12,380 --> 00:01:18,260
+In reality, dividing the computation across
+many cores does involve some overhead, e.g.,
+
+19
+00:01:18,260 --> 00:01:23,499
+distributing the data and code, then collecting
+and aggregating the results, so the optimal
+
+20
+00:01:23,499 --> 00:01:25,729
+tradeoff is harder to find.
+
+21
+00:01:25,729 --> 00:01:32,158
+Still, the idea of using a larger number of
+smaller, more efficient cores seems attractive.
+
+22
+00:01:32,158 --> 00:01:36,770
+Many applications have some computations that
+can be performed in parallel, but also have
+
+23
+00:01:36,770 --> 00:01:40,390
+computations that won't benefit from parallelism.
+
+24
+00:01:40,390 --> 00:01:44,530
+To understand the speedup we might expect
+from exploiting parallelism, it's useful to
+
+25
+00:01:44,530 --> 00:01:50,899
+perform the calculation proposed by computer
+scientist Gene Amdahl in 1967, now known as
+
+26
+00:01:50,899 --> 00:01:53,119
+Amdahl's Law.
+
+27
+00:01:53,119 --> 00:01:57,429
+Suppose we're considering an enhancement that
+speeds up some fraction F of the task at hand
+
+28
+00:01:57,429 --> 00:02:01,899
+by a factor of S.
+As shown in the figure, the gray portion of
+
+29
+00:02:01,899 --> 00:02:07,299
+the task now takes F/S of the time that it
+used to require.
+
+30
+00:02:07,299 --> 00:02:14,060
+Some simple arithmetic lets us calculate the
+overall speedup we get from using the enhancement.
+
+31
+00:02:14,060 --> 00:02:18,920
+One conclusion we can draw is that we'll benefit
+the most from enhancements that affect a large
+
+32
+00:02:18,920 --> 00:02:25,579
+portion of the required computations, i.e.,
+we want to make F as large a possible.
+
+33
+00:02:25,579 --> 00:02:29,980
+What's the best speedup we can hope for if
+we have many cores that can be used to speed
+
+34
+00:02:29,980 --> 00:02:32,700
+up the parallel part of the task?
+
+35
+00:02:32,700 --> 00:02:38,700
+Here's the speedup formula based on F and
+S, where in this case F is the parallel fraction
+
+36
+00:02:38,700 --> 00:02:40,579
+of the task.
+
+37
+00:02:40,579 --> 00:02:44,610
+If we assume that the parallel fraction of
+the task can be speed up arbitrarily by using
+
+38
+00:02:44,610 --> 00:02:49,220
+more and more cores, we see that the best
+possible overall speed up is 1/(1-F).
+
+39
+00:02:49,220 --> 00:02:57,020
+For example, you write a program that can
+do 90% of its work in parallel, but the other
+
+40
+00:02:57,020 --> 00:03:00,230
+10% must be done sequentially.
+
+41
+00:03:00,230 --> 00:03:05,320
+The best overall speedup that can be achieved
+is a factor of 10, no matter how many cores
+
+42
+00:03:05,320 --> 00:03:08,250
+you have at your disposal.
+
+43
+00:03:08,250 --> 00:03:12,230
+Turning the question around, suppose you have
+a 1000-core machine which you hope to be able
+
+44
+00:03:12,230 --> 00:03:16,960
+to use to achieve a speedup of 500 on your
+target application.
+
+45
+00:03:16,960 --> 00:03:22,970
+You would need to be able parallelize 99.8%
+of the computation in order to reach your
+
+46
+00:03:22,970 --> 00:03:24,290
+goal!
+
+47
+00:03:24,290 --> 00:03:32,170
+Clearly multicore machines are most useful
+when the target task has lots of natural parallelism.
+
+48
+00:03:32,170 --> 00:03:37,440
+Using multiple independent cores to execute
+a parallel task is called thread-level parallelism
+
+49
+00:03:37,440 --> 00:03:42,180
+(TLP), where each core executes a separate
+computation "thread".
+
+50
+00:03:42,180 --> 00:03:47,000
+The threads are independent programs, so the
+execution model is potentially more flexible
+
+51
+00:03:47,000 --> 00:03:52,120
+than the lock-step execution provided by vector
+machines.
+
+52
+00:03:52,120 --> 00:03:56,300
+When there are a small number of threads,
+you often see the cores sharing a common main
+
+53
+00:03:56,300 --> 00:04:01,030
+memory, allowing the threads to communicate
+and synchronize by sharing a common address
+
+54
+00:04:01,030 --> 00:04:02,030
+space.
+
+55
+00:04:02,030 --> 00:04:05,230
+We'll discuss this further in the next section.
+
+56
+00:04:05,230 --> 00:04:12,490
+This is the approach used in current multicore
+processors, which have between 2 and 12 cores.
+
+57
+00:04:12,490 --> 00:04:17,380
+Shared memory becomes a real bottleneck when
+there 10's or 100's of cores, since collectively
+
+58
+00:04:17,380 --> 00:04:20,490
+they quickly overwhelm the available memory
+bandwidth.
+
+59
+00:04:20,490 --> 00:04:26,250
+In these architectures, threads communicate
+using a communication network to pass messages
+
+60
+00:04:26,250 --> 00:04:28,210
+back and forth.
+
+61
+00:04:28,210 --> 00:04:32,470
+We discussed possible network topologies in
+an earlier lecture.
+
+62
+00:04:32,470 --> 00:04:38,170
+A cost-effective on-chip approach is to use
+a nearest-neighbor mesh network, which supports
+
+63
+00:04:38,170 --> 00:04:43,790
+many parallel point-to-point communications,
+while still allowing multi-hop communication
+
+64
+00:04:43,790 --> 00:04:46,870
+between any two cores.
+
+65
+00:04:46,870 --> 00:04:52,460
+Message passing is also used in computing
+clusters, where many ordinary CPUs collaborate
+
+66
+00:04:52,460 --> 00:04:54,560
+on large tasks.
+
+67
+00:04:54,560 --> 00:04:58,590
+There's a standardized message passing interface
+(MPI) and
+
+68
+00:04:58,590 --> 00:05:04,750
+specialized, very high throughput, low latency
+message-passing communication networks (e.g.,
+
+69
+00:05:04,750 --> 00:05:09,310
+Infiniband) that make it easy to build high-performance
+computing clusters.
+
+70
+00:05:09,310 --> 00:05:13,970
+In the next couple of sections we'll look
+more closely at some of the issues involved
+
+71
+00:05:13,970 --> 00:05:16,650
+in building shared-memory multicore processors.

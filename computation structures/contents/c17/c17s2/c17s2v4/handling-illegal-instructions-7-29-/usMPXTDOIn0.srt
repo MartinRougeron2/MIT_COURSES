@@ -1,0 +1,477 @@
+1
+00:00:00,570 --> 00:00:05,880
+Another service provided by operating system
+is dealing properly with the attempt to execute
+
+2
+00:00:05,880 --> 00:00:09,420
+instructions with "illegal" opcodes.
+
+3
+00:00:09,420 --> 00:00:13,740
+Illegal is quotes because that just means
+opcodes whose operations aren't implemented
+
+4
+00:00:13,740 --> 00:00:15,089
+directly by the hardware.
+
+5
+00:00:15,089 --> 00:00:22,390
+As we'll see, it's possible extend the functionality
+of the hardware via software emulation.
+
+6
+00:00:22,390 --> 00:00:26,789
+The action of the CPU upon encountering an
+illegal instruction (sometimes referred to
+
+7
+00:00:26,789 --> 00:00:34,590
+as an unimplemented user operation or UUO)
+is very similar to how it processes interrupts.
+
+8
+00:00:34,590 --> 00:00:39,370
+Think of illegal instructions as an interrupt
+caused directly by the CPU!
+
+9
+00:00:39,370 --> 00:00:45,270
+As for interrupts, the execution of the current
+instruction is suspended and the control signals
+
+10
+00:00:45,270 --> 00:00:53,289
+are set to values to capture PC+4 in the XP
+register and set the PC to, in this case,
+
+11
+00:00:53,289 --> 00:00:55,500
+0x80000004.
+
+12
+00:00:55,500 --> 00:01:02,470
+Note that bit 31 of the new PC, aka the supervisor
+bit, is set to 1, meaning that the OS handler
+
+13
+00:01:02,470 --> 00:01:06,200
+will have access to the kernel-mode context.
+
+14
+00:01:06,200 --> 00:01:09,630
+Here's some code similar to that found in
+the Tiny Operating System (TinyOS), which
+
+15
+00:01:09,630 --> 00:01:12,240
+you'll be experimenting with in the final
+lab assignment.
+
+16
+00:01:12,240 --> 00:01:17,829
+Let's do a quick walk-through of the code
+executed when an illegal instruction is executed.
+
+17
+00:01:17,829 --> 00:01:21,720
+Starting at location 0, we see the branches
+to the handlers for the various interrupts
+
+18
+00:01:21,720 --> 00:01:22,799
+and exceptions.
+
+19
+00:01:22,799 --> 00:01:31,340
+In the case of an illegal instruction, the
+BR(I_IllOp) in location 4 will be executed.
+
+20
+00:01:31,340 --> 00:01:35,430
+Immediately following is where the OS data
+structures are allocated.
+
+21
+00:01:35,430 --> 00:01:40,979
+This includes space for the OS stack, UserMState
+where user-mode register values are stored
+
+22
+00:01:40,979 --> 00:01:46,479
+during interrupts, and the process table,
+providing long-term storage for the complete
+
+23
+00:01:46,479 --> 00:01:51,158
+state of each process while another process
+is executing.
+
+24
+00:01:51,158 --> 00:01:55,969
+When writing in assembly language, it's convenient
+to define macros for operations that are used
+
+25
+00:01:55,969 --> 00:01:57,590
+repeatedly.
+
+26
+00:01:57,590 --> 00:02:02,500
+We can use a macro call whenever we want to
+perform the action and the assembler will
+
+27
+00:02:02,500 --> 00:02:07,700
+insert the body of the macro in place of the
+macro call, performing a lexical substitution
+
+28
+00:02:07,700 --> 00:02:10,479
+of the macro's arguments.
+
+29
+00:02:10,479 --> 00:02:14,980
+Here's a macro for a two-instruction sequence
+that extracts a particular field of bits from
+
+30
+00:02:14,980 --> 00:02:16,750
+a 32-bit value.
+
+31
+00:02:16,750 --> 00:02:22,590
+M is the bit number of the left-most bit,
+N is the bit number of the right-most bit.
+
+32
+00:02:22,590 --> 00:02:28,290
+Bits are numbered 0 through 31, where bit
+31 is the most-significant bit, i.e., the
+
+33
+00:02:28,290 --> 00:02:33,110
+one at the left end of the 32-bit binary value.
+
+34
+00:02:33,110 --> 00:02:37,750
+And here are some macros that expand into
+instruction sequences that save and restore
+
+35
+00:02:37,750 --> 00:02:43,800
+the CPU registers to or from the UserMState
+temporary storage area.
+
+36
+00:02:43,800 --> 00:02:48,560
+With those macros in hand, let's see how illegal
+opcodes are handled.
+
+37
+00:02:48,560 --> 00:02:53,110
+Like all interrupt handlers, the first action
+is to save the user-mode registers in the
+
+38
+00:02:53,110 --> 00:02:57,530
+temporary storage area and initialize the
+OS stack.
+
+39
+00:02:57,530 --> 00:03:02,260
+Next, we fetch the illegal instruction from
+the user-mode program.
+
+40
+00:03:02,260 --> 00:03:07,710
+Note that the saved PC+4 value is a virtual
+address in the context of the interrupted
+
+41
+00:03:07,710 --> 00:03:08,950
+program.
+
+42
+00:03:08,950 --> 00:03:14,090
+So we'll need to use the MMU routines to compute
+the correct physical address - more about
+
+43
+00:03:14,090 --> 00:03:16,910
+this on the next slide.
+
+44
+00:03:16,910 --> 00:03:23,380
+Then we'll use the opcode of the illegal instruction
+as an index into a table of subroutine addresses,
+
+45
+00:03:23,380 --> 00:03:27,950
+one for each of the 64 possible opcodes.
+
+46
+00:03:27,950 --> 00:03:33,061
+Once we have the address of the handler for
+this particular illegal opcode, we JMP there
+
+47
+00:03:33,061 --> 00:03:36,230
+to deal with the situation.
+
+48
+00:03:36,230 --> 00:03:41,730
+Selecting a destination from a table of addresses
+is called "dispatching" and the table is called
+
+49
+00:03:41,730 --> 00:03:44,020
+the "dispatch table".
+
+50
+00:03:44,020 --> 00:03:48,800
+If the dispatch table contains many different
+entries, dispatching is much more efficient
+
+51
+00:03:48,800 --> 00:03:53,340
+in time and space than a long series of compares
+and branches.
+
+52
+00:03:53,340 --> 00:03:58,340
+In this case, the table is indicating that
+the handler for most illegal opcodes is the
+
+53
+00:03:58,340 --> 00:04:03,680
+UUOError routine,
+so it might have smaller and faster simply
+
+54
+00:04:03,680 --> 00:04:09,910
+to test for the two illegal opcodes the OS
+is going to emulate.
+
+55
+00:04:09,910 --> 00:04:15,200
+Illegal opcode 1 will be used to implement
+procedure calls from user-mode to the OS,
+
+56
+00:04:15,200 --> 00:04:17,779
+which we call supervisor calls.
+
+57
+00:04:17,779 --> 00:04:20,899
+More on this in the next segment.
+
+58
+00:04:20,899 --> 00:04:26,120
+As an example of having the OS emulate an
+instruction, we'll use illegal opcode 2 as
+
+59
+00:04:26,120 --> 00:04:30,400
+the opcode for the SWAPREG instruction, which
+we'll discuss now.
+
+60
+00:04:30,400 --> 00:04:35,340
+But first just a quick look at how the OS
+converts user-mode virtual addresses into
+
+61
+00:04:35,340 --> 00:04:38,190
+physical addresses it can use.
+
+62
+00:04:38,190 --> 00:04:44,030
+We'll build on the MMU VtoP procedure, described
+in the previous lecture.
+
+63
+00:04:44,030 --> 00:04:48,630
+This procedure expects as its arguments the
+virtual page number and offset fields of the
+
+64
+00:04:48,630 --> 00:04:53,340
+virtual address, so,
+following our convention for passing arguments
+
+65
+00:04:53,340 --> 00:04:58,210
+to C procedures, these are pushed onto the
+stack in reverse order.
+
+66
+00:04:58,210 --> 00:05:02,820
+The corresponding physical address is returned
+in R0.
+
+67
+00:05:02,820 --> 00:05:08,250
+We can then use the calculated physical address
+to read the desired location from physical
+
+68
+00:05:08,250 --> 00:05:09,250
+memory.
+
+69
+00:05:09,250 --> 00:05:12,970
+Okay, back to dealing with illegal opcodes.
+
+70
+00:05:12,970 --> 00:05:15,750
+Here's the handler for opcodes that are truly
+illegal.
+
+71
+00:05:15,750 --> 00:05:20,440
+In this case the OS uses various kernel routines
+to print out a helpful error message on the
+
+72
+00:05:20,440 --> 00:05:23,970
+user's console, then crashes the system!
+
+73
+00:05:23,970 --> 00:05:28,530
+You may have seen these "blue screens of death"
+if you run the Windows operating system, full
+
+74
+00:05:28,530 --> 00:05:30,830
+of cryptic hex numbers.
+
+75
+00:05:30,830 --> 00:05:35,620
+Actually, this wouldn't be the best approach
+to handling an illegal opcode in a user's
+
+76
+00:05:35,620 --> 00:05:36,620
+program.
+
+77
+00:05:36,620 --> 00:05:41,400
+In a real operating system, it would be better
+to save the state of the process in a special
+
+78
+00:05:41,400 --> 00:05:45,610
+debugging file historically referred to as
+a "core dump"
+
+79
+00:05:45,610 --> 00:05:50,580
+and then terminate this particular process,
+perhaps printing a short error message on
+
+80
+00:05:50,580 --> 00:05:53,830
+the user's console to let them know what happened.
+
+81
+00:05:53,830 --> 00:05:58,990
+Then later the user could start a debugging
+program to examine the dump file to see where
+
+82
+00:05:58,990 --> 00:06:00,490
+their bug is.
+
+83
+00:06:00,490 --> 00:06:06,020
+Finally, here's the handler that will emulate
+the actions of the SWAPREG instruction, after
+
+84
+00:06:06,020 --> 00:06:12,840
+which program execution will resume as if
+the instruction had been implemented in hardware.
+
+85
+00:06:12,840 --> 00:06:18,280
+SWAPREG is an instruction that swaps the values
+in the two specified registers.
+
+86
+00:06:18,280 --> 00:06:24,610
+To define a new instruction, we'd first have
+to let the assembler know to convert the swapreg(ra,rc)
+
+87
+00:06:24,610 --> 00:06:27,580
+assembly language statement into binary.
+
+88
+00:06:27,580 --> 00:06:33,020
+In this case we'll use a binary format similar
+to the ADDC instruction, but setting the unused
+
+89
+00:06:33,020 --> 00:06:35,090
+literal field to 0.
+
+90
+00:06:35,090 --> 00:06:40,830
+The encoding for the RA and RC registers occur
+in their usual fields and the opcode field
+
+91
+00:06:40,830 --> 00:06:44,260
+is set to 2.
+
+92
+00:06:44,260 --> 00:06:46,490
+Emulation is surprisingly simple.
+
+93
+00:06:46,490 --> 00:06:51,770
+First we extract the RA and RC fields from
+the binary for the swapreg instruction and
+
+94
+00:06:51,770 --> 00:06:57,180
+convert those values into the appropriate
+byte offsets for accessing the temporary array
+
+95
+00:06:57,180 --> 00:06:59,530
+of saved register values.
+
+96
+00:06:59,530 --> 00:07:04,810
+Then we use RA and RC offsets to access the
+user-mode register values that have been saved
+
+97
+00:07:04,810 --> 00:07:07,040
+in UserMState.
+
+98
+00:07:07,040 --> 00:07:12,270
+We'll make the appropriate interchange, leaving
+the updated register values in UserMState,
+
+99
+00:07:12,270 --> 00:07:17,240
+where they'll be loaded into the CPU registers
+upon returning from the illegal instruction
+
+100
+00:07:17,240 --> 00:07:19,030
+interrupt handler.
+
+101
+00:07:19,030 --> 00:07:25,870
+Finally, we'll branch to the kernel code that
+restores the process state and resumes execution.
+
+102
+00:07:25,870 --> 00:07:28,120
+We'll see this code in the next segment.

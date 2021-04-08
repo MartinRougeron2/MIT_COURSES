@@ -1,0 +1,1068 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>Monty Hall Conditional Confusions | 4.2 Conditional Probability | 4.2 Conditional Probability | Unit 4: Probability | Mathematics for Computer Science | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-042j-mathematics-for-computer-science-spring-2015" name="WT.cg_n">
+    <meta content="Monty Hall Conditional Confusions" name="WT.cg_s">
+    <meta content="Media Resource:" name="Description">
+    <meta content="Meyer, Albert R." name="Author">
+    <meta content="Chlipala, Adam" name="Author">
+    <meta content="6.042J,6.042,18.062J,18.062,formal logic notation,proof methods,induction,sets,relations,graph theory,integer congruences,asymptotic notation,growth of functions,permutations,combinations,counting,discrete probability,Computer Science,Applied Mathematics,Probability and Statistics" name="keywords">
+    <meta content="6.042J Mathematics for Computer Science | Monty Hall Conditional Confusions" name="Search_Display">
+    <meta content="Computer Science" itemprop="about">
+    <meta content="Applied Mathematics" itemprop="about">
+    <meta content="Probability and Statistics" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/courses_new.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/jquery.jscrollpane.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/media_tabs.css">
+	<link href="../../../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/probability/tp12-1/vertical-038350815734/monty-hall-conditional-confusions/">
+	<link rel="apple-touch-icon" href="../../../../../common/images/apple-touch-icon.png">
+	
+	
+      
+	
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/bubble-popup-offline.js"></script>
+	
+	
+	
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#tabs").tabs();
+        IpadScroller();
+      });
+    </script>
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center_media">
+      	<div id="grid">
+      		<div id="left">
+        		<nav id="breadcrumb_media" aria-label="Breadcrumb">
+                	<p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/index.htm">Mathematics for Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/probability/index.htm">Unit 4: Probability</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/probability/tp12-1/index.htm">4.2 Conditional Probability</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/probability/tp12-1/vertical-038350815734/index.htm">4.2.7 Monty Hall Problem: Video</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            Monty Hall Conditional Confusions
+         
+    
+</p>
+
+            	</nav>
+            	<div class="clear"></div>
+        		<div id="media_title">
+        		<h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            Monty Hall Conditional Confusions
+        </span>
+    </h1>
+        		</div>
+           		<div class="clear"></div>
+           		<div id="course_wrapper_media">
+           			<nav id="course_nav" aria-label="Course">
+           				<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/readings/index.htm">
+		                  Readings  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/lecture-slides/index.htm">
+		                  Lecture Slides  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/in-class-questions/index.htm">
+		                  In-Class Questions  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/assignments/index.htm">
+		                  Assignments  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/exams/index.htm">
+		                  Exams  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="proofs" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuproofs'); toggleClass('proofs'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/proofs/index.htm" class="">
+		                  Unit 1: Proofs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuproofs" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp1-1/index.htm" class="">1.1 Intro to Proofs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp1-2/index.htm" class="">1.2 Proof Methods</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp2-1/index.htm" class="">1.3 Well Ordering Principle</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp2-2/index.htm" class="">1.4 Logic &amp; Propositions</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp3-1/index.htm" class="">1.5 Quantifiers &amp; Predicate Logic</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp3-2/index.htm" class="">1.6  Sets</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp3-3/index.htm" class="">1.7 Binary Relations</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp4-1/index.htm" class="">1.8  Induction</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp4-2/index.htm" class="">1.9  State Machines - Invariants</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/recursive-definition/index.htm" class="">1.10 Recursive Definition</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp4-3/index.htm" class="">1.11  Infinite Sets</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="structures" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menustructures'); toggleClass('structures'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/structures/index.htm" class="">
+		                  Unit 2: Structures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menustructures" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp5-1/index.htm" class="">2.1  GCDs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp5-2/index.htm" class="">2.2  Congruences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp6-1/index.htm" class="">2.3  Euler's Theorem</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp6-2/index.htm" class="">2.4  RSA Encryption</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp6-3/index.htm" class="">2.5  Digraphs: Walks &amp; Paths</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp7-1/index.htm" class="">2.6 Directed Acyclic Graphs (DAGs) &amp; Scheduling</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/partial-orders-and-equivalence/index.htm" class="">2.7 Partial Orders and Equivalence</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp7-2/index.htm" class="">2.8  Degrees &amp; Isomorphism</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp7-3/index.htm" class="">2.9 Coloring &amp; Connectivity</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp8-1/index.htm" class="">2.10 Trees</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/stable-matching/index.htm" class="">2.11 Stable Matching</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="counting" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menucounting'); toggleClass('counting'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/counting/index.htm" class="">
+		                  Unit 3: Counting  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menucounting" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp8-2/index.htm" class="">3.1 Sums &amp; Products</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp8-3/index.htm" class="">3.2 Asymptotics</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp9-1/index.htm" class="">3.3 Counting with Bijections</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp9-2/index.htm" class="">3.4 Repetitions &amp; Binomial Theorem</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp10-1/index.htm" class="">3.5 Pigeonhole Principle, Inclusion-Exclusion</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="probability" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuprobability'); toggleClass('probability'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../../../contents/probability/index.htm" class="">
+		                  Unit 4: Probability  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuprobability" class="selected">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp11-2/index.htm" class="">4.1 Intro to Discrete Probability</a>
+		            </li>
+		            <li class="selected">
+				 		<a href="../../../../../contents/probability/tp12-1/index.htm" class="selected">4.2 Conditional Probability</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp12-2/index.htm" class="">4.3 Independence &amp; Causality</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp12-3/index.htm" class="">4.4 Random Variables, Density Functions</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp13-1/index.htm" class="">4.5 Expectation</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp13-2/index.htm" class="">4.6 Deviation: Markov &amp; Chebyshev Bounds</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp14-1/index.htm" class="">4.7 Sampling &amp; Confidence</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/random-walks-pagerank/index.htm" class="">4.8 Random Walks &amp; Pagerank</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/resource-index/index.htm">
+		                  Resource Index  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+           			</nav>
+           			<main id="course_inner_media" aria-labelledby="media_title">
+      					 
+        <div class="" id="parent-fieldname-text">
+            
+            
+        </div>
+    
+      					     
+    
+    
+
+
+
+<script type="text/javascript">var caption_embed_1 ={'English - US': '/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/probability/tp12-1/vertical-038350815734/monty-hall-conditional-confusions/BEAv82FinM0.srt'}</script>     
+     <div id="media-embed">
+         <div class="attention_message" id="embed_1">
+<p>Flash and JavaScript are required for this feature.</p>
+<p>Download the video from <a href="https://itunes.apple.com/us/itunes-u/id1077791636">iTunes U</a> or the <a href="https://archive.org/download/MIT6.042JS15/MIT6_042JS15_probcondmonty_video_ipod.mp4">Internet Archive</a>.</p>
+</div>
+     </div>
+    
+     <script type="text/javascript">ocw_embed_chapter_media('embed_1', 'https://www.youtube.com/v/BEAv82FinM0', 'youtube', '/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/probability/tp12-1/vertical-038350815734/monty-hall-conditional-confusions', 'https://img.youtube.com/vi/BEAv82FinM0/0.jpg',0,0, 'https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/probability/tp12-1/vertical-038350815734/monty-hall-conditional-confusions/BEAv82FinM0.srt')</script>
+	 
+	 
+	 		
+	 		<div id="transcript1"></div>
+				 <script type="text/javascript">createThreePlayParams(2, 820104, "embed_1", 0, 0)</script>
+			 
+	
+
+     
+ 
+
+
+<script type="text/javascript">
+		window.onload=function(){
+		init();
+		
+		}
+		var tabLinks = new Array();
+		var contentDivs = new Array();
+		function init() {
+		  // Grab the tab links and content divs from the page
+		  var tabListItems = document.getElementById('tabs').childNodes;
+		  for ( var i = 0; i < tabListItems.length; i++ ) {
+			if ( tabListItems[i].nodeName == "LI" ) {
+			  var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
+			  var id = getHash( tabLink.getAttribute('href') );
+			  tabLinks[id] = tabLink;
+			  contentDivs[id] = document.getElementById( id );
+			}
+		  }
+		  // Assign onclick events to the tab links, and
+		  // highlight the first tab
+		  var i = 0;
+		  for ( var id in tabLinks ) {
+			tabLinks[id].onclick = showTab;
+			tabLinks[id].onfocus = function() { this.blur() };
+			if ( i == 0 ) tabLinks[id].className = 'selected';
+			i++;
+		  }
+		  // Hide all content divs except the first
+		  var i = 0;
+		  for ( var id in contentDivs ) {
+			if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
+			i++;
+		  }
+		}
+		function showTab() {
+		  var selectedId = getHash( this.getAttribute('href') );
+		  // Highlight the selected tab, and dim all others.
+		  // Also show the selected content div, and hide all others.
+		  for ( var id in contentDivs ) {
+			if ( id == selectedId ) {
+			  tabLinks[id].className = 'selected';
+			  contentDivs[id].className = 'tabContent';
+			} else {
+			  tabLinks[id].className = '';
+			  contentDivs[id].className = 'tabContent hide';
+			}
+		  }
+		  // Stop the browser following the link
+		  return false;
+		}
+		function getFirstChildWithTagName( element, tagName ) {
+		  for ( var i = 0; i < element.childNodes.length; i++ ) {
+			if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
+		  }
+		}
+		function getHash( url ) {
+		  var hashPos = url.lastIndexOf ( '#' );
+		  return url.substring( hashPos + 1 );
+		}
+ </script>	
+ 
+
+  <div id="media_tabs">
+     
+        <ul id="tabs">
+            <li class="first">
+                <a href="#vid_about" class="selected">Transcript</a>
+            </li>
+            <li class="">
+                <a href="#vid_index" class="">Download this Video</a>
+            </li>
+        </ul>
+   
+        <div id="vid_about" itemprop="description" class="tabContent">
+<ul><li><a class="transcript-link" title="Open in a new window." alt="Open in a new window." style="text-decoration: none; font-size: 1.0em;" target="_blank" text-decoration: none font-size: href="../../../../../contents/probability/tp12-1/vertical-038350815734/monty-hall-conditional-confusions/BEAv82FinM0.pdf"> Download English-US transcript (PDF)</a></li></ul>
+<p><span m="940">Now,</span> <span m="1090">conditional</span> <span m="1540">probability</span> <span m="2180">will</span> <span m="2390">let</span> <span m="2550">us</span> <span m="2720">explain</span> <span m="3410">a</span> <span m="3680">lot</span> <span m="3960">of</span> <span m="4180">the</span> <span m="4670">confused</span> <span m="5280">arguments</span> <span m="6260">that</span> <span m="6450">people</span> <span m="6770">brought</span> <span m="7100">up</span> <span m="7570">about</span> <span m="7980">Monty</span> <span m="8310">Hall.</span> <span m="9100">And</span> <span m="9270">we'll</span> <span m="9390">see</span> <span m="9610">that</span> <span m="9780">it</span> <span m="9900">is</span> <span m="10120">a</span> <span m="10210">little</span> <span m="10420">bit</span> <span m="10610">confusing</span> <span m="12120">and</span> <span m="12370">where</span> <span m="12510">there</span> <span m="12760">is</span> <span m="12850">some</span> <span m="13480">correct</span> <span m="14230">sounding</span> <span m="14670">arguments</span> <span m="15360">that</span> <span m="15540">give</span> <span m="15710">you</span> <span m="15790">the</span> <span m="15970">wrong</span> <span m="16239">answer.</span> </p>
+<p><span m="17250">So</span> <span m="17290">let's</span> <span m="17540">go</span> <span m="17660">back</span> <span m="17980">and</span> <span m="18060">look</span> <span m="18290">at</span> <span m="18410">our</span> <span m="19530">Monty</span> <span m="19830">Hall</span> <span m="20190">tree</span> <span m="20660">that</span> <span m="20890">allowed</span> <span m="21280">us</span> <span m="21450">to</span> <span m="21590">derive</span> <span m="22210">the</span> <span m="22290">sample</span> <span m="22620">space</span> <span m="22785">and</span> <span m="22950">probability</span> <span m="23510">space</span> <span m="24250">for</span> <span m="24510">the</span> <span m="24610">whole</span> <span m="24920">process</span> <span m="25600">of</span> <span m="26660">the</span> <span m="27000">prize</span> <span m="27400">being</span> <span m="27640">placed</span> <span m="28040">and</span> <span m="28130">the</span> <span m="28240">contest</span> <span m="28750">picking</span> <span m="29080">a</span> <span m="29130">door</span> <span m="29600">and</span> <span m="29790">Carol</span> <span m="30210">opening</span> <span m="30620">a</span> <span m="30670">door.</span> <span m="31660">Now,</span> <span m="31790">this</span> <span m="31950">tree</span> <span m="32220">was</span> <span m="32479">way</span> <span m="32770">more</span> <span m="32950">complicated</span> <span m="34030">than</span> <span m="34310">we</span> <span m="34420">needed</span> <span m="34910">if</span> <span m="35080">all</span> <span m="35250">we</span> <span m="35380">were</span> <span m="35620">trying</span> <span m="35840">to</span> <span m="35890">do</span> <span m="36030">was</span> <span m="36180">figure</span> <span m="36490">out</span> <span m="36620">the</span> <span m="36710">probability</span> <span m="37320">of</span> <span m="37410">winning</span> <span m="37700">if</span> <span m="37800">you</span> <span m="37900">switch.</span> <span m="38760">But</span> <span m="39140">having</span> <span m="39530">the</span> <span m="39610">tree</span> <span m="39850">will</span> <span m="40050">allow</span> <span m="40350">us</span> <span m="40520">to</span> <span m="40610">discuss</span> <span m="40990">a</span> <span m="41040">whole</span> <span m="41200">bunch</span> <span m="41420">of</span> <span m="41540">other</span> <span m="41790">events</span> <span m="42140">in</span> <span m="42210">their</span> <span m="42330">probabilities</span> <span m="43430">that</span> <span m="43590">will</span> <span m="43710">get</span> <span m="43890">us</span> <span m="43930">a</span> <span m="44330">grip</span> <span m="44630">on</span> <span m="44850">some</span> <span m="45070">of</span> <span m="45150">the</span> <span m="45260">arguments</span> <span m="45910">that</span> <span m="46310">gave</span> <span m="46610">the</span> <span m="46730">wrong</span> <span m="46980">answer.</span> </p>
+<p><span m="47950">So</span> <span m="48020">let's</span> <span m="48270">look</span> <span m="48480">at</span> <span m="48570">the</span> <span m="48710">event,</span> <span m="49180">first</span> <span m="49370">of</span> <span m="49500">all</span> <span m="49650">that</span> <span m="49755">the</span> <span m="49860">goat</span> <span m="50100">is</span> <span m="50360">at</span> <span m="50595">2.</span> <span m="51150">Now,</span> <span m="51740">this</span> <span m="51970">is</span> <span m="52110">the</span> <span m="52200">branch</span> <span m="52640">where</span> <span m="52800">the</span> <span m="52940">prize</span> <span m="53106">is</span> <span m="53273">at</span> <span m="53440">2.</span> <span m="53630">And</span> <span m="54450">so</span> <span m="54680">in</span> <span m="54730">all</span> <span m="54900">the</span> <span m="55060">other</span> <span m="55260">branches</span> <span m="56090">the</span> <span m="56200">goat</span> <span m="56440">is</span> <span m="56660">at</span> <span m="56820">2,</span> <span m="57120">l</span> <span m="62900">which</span> <span m="63270">means</span> <span m="63650">that</span> <span m="63920">we</span> <span m="64180">have</span> <span m="65000">these</span> <span m="65430">eight</span> <span m="65900">of</span> <span m="66060">the</span> <span m="66170">12</span> <span m="66760">outcomes</span> <span m="67690">in</span> <span m="67790">the</span> <span m="67960">event--</span> <span m="68310">goat</span> <span m="68590">is</span> <span m="68745">at</span> <span m="68900">2.</span> </p>
+<p><span m="69680">Now,</span> <span m="69800">let's</span> <span m="70080">also</span> <span m="70440">look</span> <span m="70690">at</span> <span m="70810">the</span> <span m="70950">event</span> <span m="71840">that</span> <span m="72240">the</span> <span m="72330">prize</span> <span m="72950">is</span> <span m="73090">at</span> <span m="73250">1.</span> <span m="73620">That's</span> <span m="73900">just</span> <span m="74120">this</span> <span m="74330">branch</span> <span m="74660">of</span> <span m="74750">the</span> <span m="74840">tree,</span> <span m="75970">OK?</span> <span m="77450">So</span> <span m="78420">one</span> <span m="78590">of</span> <span m="78640">the</span> <span m="78750">arguments</span> <span m="79290">is</span> <span m="79750">that</span> <span m="80330">when</span> <span m="80640">the</span> <span m="81260">contestant</span> <span m="81960">is</span> <span m="82110">at</span> <span m="82250">the</span> <span m="82340">point</span> <span m="82850">where</span> <span m="84410">they've</span> <span m="84700">seen</span> <span m="85610">that</span> <span m="86280">the</span> <span m="86520">open</span> <span m="86880">door</span> <span m="87390">and</span> <span m="87610">they're</span> <span m="87880">trying</span> <span m="88150">to</span> <span m="88250">decide</span> <span m="88650">whether</span> <span m="88940">to</span> <span m="89100">stick</span> <span m="89760">or</span> <span m="89930">switch,</span> <span m="91750">they</span> <span m="91980">know</span> <span m="92510">that</span> <span m="92880">the</span> <span m="93000">goat</span> <span m="93340">is</span> <span m="93500">at</span> <span m="93650">the</span> <span m="93710">door</span> <span m="93980">2.</span> <span m="94270">Say</span> <span m="94470">without</span> <span m="94840">loss</span> <span m="95050">of</span> <span m="95110">generality</span> <span m="95830">that</span> <span m="96340">that</span> <span m="96550">was</span> <span m="96730">the</span> <span m="96820">door</span> <span m="97060">that</span> <span m="97290">they</span> <span m="97410">got</span> <span m="97670">to</span> <span m="97870">look</span> <span m="98130">at</span> <span m="98280">behind,</span> <span m="98870">that</span> <span m="99190">Carol</span> <span m="99460">opened.</span> </p>
+<p><span m="100330">And</span> <span m="100560">so</span> <span m="101420">we</span> <span m="101680">want</span> <span m="101890">to</span> <span m="101980">ask</span> <span m="102320">the</span> <span m="102450">probability,</span> <span m="103450">given</span> <span m="103790">that</span> <span m="104040">he</span> <span m="104310">picked</span> <span m="105530">1,</span> <span m="106210">what's</span> <span m="106460">the</span> <span m="106570">probability</span> <span m="107520">that</span> <span m="107720">the</span> <span m="107820">prize</span> <span m="108250">is</span> <span m="108410">at</span> <span m="108550">1</span> <span m="109020">given</span> <span m="109620">that</span> <span m="109810">the</span> <span m="109890">goat</span> <span m="110130">is</span> <span m="110290">at</span> <span m="110500">2?</span> <span m="110750">That</span> <span m="110960">means</span> <span m="111190">that</span> <span m="111290">if</span> <span m="111400">you're</span> <span m="111580">at</span> <span m="112940">door</span> <span m="113200">1</span> <span m="113880">then</span> <span m="114370">you</span> <span m="114520">should</span> <span m="115860">stick</span> <span m="116310">if</span> <span m="116500">that</span> <span m="116710">probability</span> <span m="117890">is</span> <span m="119230">high</span> <span m="119640">and</span> <span m="119850">otherwise</span> <span m="120300">you</span> <span m="120400">shouldn't</span> <span m="120760">stick.</span> </p>
+<p><span m="121460">So</span> <span m="122230">we</span> <span m="122380">can</span> <span m="122520">look</span> <span m="122740">at</span> <span m="122860">this</span> <span m="123350">event,</span> <span m="124180">the</span> <span m="124310">prize</span> <span m="124830">at</span> <span m="125000">1</span> <span m="125430">given</span> <span m="126170">the</span> <span m="126280">goat</span> <span m="126500">at</span> <span m="126630">2,</span> <span m="127390">and</span> <span m="127620">what</span> <span m="127790">we</span> <span m="127940">can</span> <span m="128100">see</span> <span m="128449">is</span> <span m="128710">that</span> <span m="128910">it's</span> <span m="129240">taking</span> <span m="129669">up</span> <span m="129900">exactly</span> <span m="130580">half</span> <span m="131430">of</span> <span m="131680">the</span> <span m="131860">outcomes</span> <span m="132470">for</span> <span m="132650">goat</span> <span m="132850">at</span> <span m="133020">2</span> <span m="133460">and</span> <span m="134070">the</span> <span m="134170">same</span> <span m="134460">kind</span> <span m="134840">of</span> <span m="134930">outcomes--</span> <span m="135410">red</span> <span m="135660">ones</span> <span m="135920">and</span> <span m="136610">green</span> <span m="136880">ones.</span> <span m="137130">The</span> <span m="137230">red</span> <span m="137430">ones</span> <span m="137580">are</span> <span m="138090">worth</span> <span m="138390">an</span> <span m="138510">1/18</span> <span m="138900">and</span> <span m="139010">the</span> <span m="139130">green</span> <span m="139390">ones</span> <span m="139590">are</span> <span m="139630">worth</span> <span m="139870">a</span> <span m="139930">1/9</span> <span m="140510">in</span> <span m="140880">probability,</span> <span m="141970">and</span> <span m="142200">that</span> <span m="142470">implies</span> <span m="143490">that</span> <span m="143990">the</span> <span m="144130">probability</span> <span m="144780">that</span> <span m="144950">the</span> <span m="145040">prize</span> <span m="145380">is</span> <span m="145480">at</span> <span m="145580">1</span> <span m="145920">given</span> <span m="146250">that</span> <span m="146400">the</span> <span m="146490">goat</span> <span m="146730">is</span> <span m="146870">at</span> <span m="147050">2</span> <span m="147960">is</span> <span m="148190">1/2.</span> <span m="148640">It</span> <span m="148780">really</span> <span m="149110">is.</span> </p>
+<p><span m="150610">And</span> <span m="150880">that's</span> <span m="151220">the</span> <span m="151390">argument</span> <span m="151960">that</span> <span m="152120">people</span> <span m="152500">were</span> <span m="152630">saying.</span> <span m="153020">They</span> <span m="153180">said,</span> <span m="153460">look,</span> <span m="153900">when</span> <span m="154050">the</span> <span m="154150">contestant</span> <span m="154720">sees</span> <span m="155030">that</span> <span m="155280">the</span> <span m="155350">goat</span> <span m="155560">is</span> <span m="155706">at</span> <span m="155853">door</span> <span m="156000">2,</span> <span m="158380">and</span> <span m="158530">they're</span> <span m="158660">trying</span> <span m="158890">to</span> <span m="158970">decide</span> <span m="159410">whether</span> <span m="159650">the</span> <span m="159780">goat--</span> <span m="160200">the</span> <span m="160390">prize</span> <span m="160635">is</span> <span m="160880">at</span> <span m="161020">the</span> <span m="161110">door--</span> <span m="161660">is</span> <span m="162000">it</span> <span m="162070">door</span> <span m="162320">1</span> <span m="162730">or</span> <span m="163020">at</span> <span m="163310">the</span> <span m="163440">other</span> <span m="163620">door,</span> <span m="164350">and</span> <span m="164640">it's</span> <span m="164820">equally</span> <span m="165180">likely.</span> <span m="165790">And</span> <span m="165890">so</span> <span m="165920">it</span> <span m="165990">doesn't</span> <span m="166260">matter</span> <span m="166530">whether</span> <span m="166730">they</span> <span m="166930">stick</span> <span m="167220">or</span> <span m="167330">switch.</span> <span m="167780">That's</span> <span m="167990">a</span> <span m="168285">correct</span> <span m="168580">argument</span> <span m="169540">but</span> <span m="169790">it's</span> <span m="170000">not</span> <span m="170600">calculating</span> <span m="171660">the</span> <span m="171770">probability</span> <span m="173540">of</span> <span m="173920">the</span> <span m="174050">stick</span> <span m="174350">strategy</span> <span m="174890">winning.</span> </p>
+<p><span m="175840">Why?</span> <span m="176810">Well,</span> <span m="177960">because</span> <span m="179680">there's</span> <span m="180260">more</span> <span m="180650">information</span> <span m="181360">that's</span> <span m="181580">available</span> <span m="182530">than</span> <span m="182810">goat</span> <span m="183030">is</span> <span m="183210">at</span> <span m="183430">2.</span> <span m="184850">The</span> <span m="185080">contestant</span> <span m="185680">not</span> <span m="185880">only</span> <span m="186110">knows</span> <span m="186480">that</span> <span m="186590">the</span> <span m="186660">goat</span> <span m="186765">is</span> <span m="186870">at</span> <span m="187170">2</span> <span m="187320">and</span> <span m="187470">trying</span> <span m="187630">to</span> <span m="187720">figure</span> <span m="188070">out</span> <span m="188160">the</span> <span m="188240">probability</span> <span m="188850">that</span> <span m="188980">the</span> <span m="189080">prize</span> <span m="189420">is</span> <span m="189530">at</span> <span m="189640">1,</span> <span m="190150">but</span> <span m="190430">the</span> <span m="190540">contestant</span> <span m="191110">knows</span> <span m="191340">what</span> <span m="191600">door</span> <span m="191810">he</span> <span m="191980">picked.</span> </p>
+<p><span m="192990">So</span> <span m="193260">let's</span> <span m="193500">suppose</span> <span m="193930">that</span> <span m="194090">the</span> <span m="194180">contestant</span> <span m="194575">did</span> <span m="194970">pick</span> <span m="195310">door</span> <span m="195490">1</span> <span m="196180">and</span> <span m="196380">learned</span> <span m="196760">that</span> <span m="196880">the</span> <span m="196960">goat</span> <span m="197230">was</span> <span m="197420">at</span> <span m="197550">door</span> <span m="197820">2,</span> <span m="198520">that's</span> <span m="198800">a</span> <span m="198830">different</span> <span m="199210">event.</span> <span m="200030">If</span> <span m="200420">the</span> <span m="200840">blue</span> <span m="201250">one</span> <span m="201440">is</span> <span m="201570">marked</span> <span m="201870">off</span> <span m="202540">at</span> <span m="202710">the</span> <span m="202800">places</span> <span m="203320">where</span> <span m="203590">the</span> <span m="203730">contestant</span> <span m="204410">picks</span> <span m="204670">one,</span> <span m="206200">this</span> <span m="206420">is</span> <span m="206550">where</span> <span m="206750">the</span> <span m="207290">door</span> <span m="207495">is</span> <span m="207700">picked--</span> <span m="208030">is</span> <span m="208170">1</span> <span m="208570">and</span> <span m="208690">here's</span> <span m="208980">1</span> <span m="209400">and</span> <span m="209590">here's</span> <span m="209890">1.</span> <span m="211710">This</span> <span m="212080">1</span> <span m="212370">splits</span> <span m="212840">into</span> <span m="213700">one</span> <span m="213980">event,</span> <span m="214350">this</span> <span m="214540">1</span> <span m="214700">splits</span> <span m="215060">into</span> <span m="215640">one</span> <span m="215860">event,</span> <span m="216180">but</span> <span m="216420">this</span> <span m="216860">choice</span> <span m="217160">of</span> <span m="217270">1</span> <span m="217460">splits</span> <span m="217810">into</span> <span m="218040">two</span> <span m="218240">outcomes.</span> </p>
+<p><span m="219610">And</span> <span m="219870">so</span> <span m="220780">when</span> <span m="221110">we</span> <span m="221250">look</span> <span m="221550">at</span> <span m="221950">the</span> <span m="222220">event</span> <span m="222740">that</span> <span m="223120">both</span> <span m="223520">the</span> <span m="223590">goat</span> <span m="223810">is</span> <span m="223960">at</span> <span m="224060">2</span> <span m="224360">and</span> <span m="224650">the</span> <span m="224760">contestant</span> <span m="225390">picked</span> <span m="225690">1,</span> <span m="225940">which</span> <span m="226230">is</span> <span m="226340">what</span> <span m="226540">the</span> <span m="226620">contest</span> <span m="227130">really</span> <span m="227400">knows</span> <span m="228350">when</span> <span m="228620">they</span> <span m="228740">get</span> <span m="228970">to</span> <span m="229050">see</span> <span m="229270">that</span> <span m="229470">there's</span> <span m="229640">a</span> <span m="229700">goat</span> <span m="229900">at</span> <span m="230160">door</span> <span m="230320">2,</span> <span m="231050">we</span> <span m="231300">wind</span> <span m="231750">up</span> <span m="232310">with</span> <span m="233880">the</span> <span m="234060">overlap</span> <span m="234880">of</span> <span m="235070">just</span> <span m="235510">three</span> <span m="235870">outcomes.</span> <span m="236740">Two</span> <span m="237170">outcomes</span> <span m="237780">that</span> <span m="237940">have</span> <span m="238170">probability</span> <span m="238730">1/8</span> <span m="239730">and</span> <span m="240000">one</span> <span m="240250">outcome</span> <span m="240870">that</span> <span m="241340">has</span> <span m="241680">probability</span> <span m="243266">a</span> <span m="243630">1/9.</span> <span m="245730">It's</span> <span m="245880">just</span> <span m="246110">those</span> <span m="246380">three.</span> </p>
+<p><span m="246880">And</span> <span m="247070">the</span> <span m="247140">result</span> <span m="247580">is</span> <span m="247890">that</span> <span m="248060">the</span> <span m="248150">probability</span> <span m="248720">that</span> <span m="248900">the</span> <span m="248990">prize</span> <span m="249490">is</span> <span m="249670">at</span> <span m="249810">1</span> <span m="250500">given</span> <span m="251290">that</span> <span m="251480">you</span> <span m="251600">picked</span> <span m="251910">1</span> <span m="252160">and</span> <span m="252270">the</span> <span m="252360">goat</span> <span m="252460">is</span> <span m="252560">at</span> <span m="252830">2--</span> <span m="254220">so</span> <span m="254510">this</span> <span m="254780">is</span> <span m="256060">the</span> <span m="256920">event--</span> <span m="258610">goat</span> <span m="258910">at</span> <span m="259130">2</span> <span m="259380">and</span> <span m="259490">picked</span> <span m="259790">1,</span> <span m="260130">these</span> <span m="260360">three</span> <span m="260620">outcomes.</span> <span m="261730">The</span> <span m="261860">prize</span> <span m="262290">is</span> <span m="262450">at</span> <span m="262610">1</span> <span m="263810">is</span> <span m="264560">these</span> <span m="265000">two</span> <span m="265260">outcomes,</span> <span m="265860">which</span> <span m="265950">are</span> <span m="266020">each</span> <span m="267120">worth</span> <span m="267360">an</span> <span m="267470">1/18</span> <span m="268050">and</span> <span m="268190">this</span> <span m="268360">is</span> <span m="268490">an</span> <span m="268610">outcome</span> <span m="269010">that's</span> <span m="269180">worth</span> <span m="269410">a</span> <span m="269460">1/9.</span> <span m="269800">So</span> <span m="270490">the</span> <span m="270600">prize</span> <span m="271100">at</span> <span m="271250">1</span> <span m="272370">outcomes</span> <span m="273070">amount</span> <span m="273630">to</span> <span m="273740">1/2</span> <span m="274640">of</span> <span m="274850">the</span> <span m="274970">total</span> <span m="275290">probability</span> <span m="275960">of</span> <span m="276030">this</span> <span m="276220">event,</span> <span m="276550">goat</span> <span m="276790">at</span> <span m="276920">2</span> <span m="277080">picked</span> <span m="277340">at</span> <span m="277470">1.</span> <span m="277740">So,</span> <span m="277940">again,</span> <span m="278580">the</span> <span m="278850">probability</span> <span m="279410">that</span> <span m="279510">the</span> <span m="279650">prize</span> <span m="280080">is</span> <span m="280185">at</span> <span m="280290">1</span> <span m="280700">given</span> <span m="281450">that</span> <span m="281880">the</span> <span m="281980">contestant</span> <span m="282500">picked</span> <span m="282760">1</span> <span m="283070">and</span> <span m="283390">saw</span> <span m="283630">the</span> <span m="283750">goat</span> <span m="283980">at</span> <span m="284210">2</span> <span m="285110">is</span> <span m="285340">a</span> <span m="285390">1/2</span> <span m="285810">also.</span> <span m="287430">That's</span> <span m="287700">confusing.</span> </p>
+<p><span m="289460">So</span> <span m="289830">it</span> <span m="290020">seems</span> <span m="290360">as</span> <span m="290490">though</span> <span m="290880">the</span> <span m="291010">contestant</span> <span m="291530">may</span> <span m="291680">as</span> <span m="291790">well</span> <span m="291980">stick</span> <span m="292420">because</span> <span m="293480">at</span> <span m="293670">the</span> <span m="293770">point</span> <span m="294130">that</span> <span m="294230">he</span> <span m="294910">has</span> <span m="295350">to</span> <span m="295460">decide</span> <span m="295860">whether</span> <span m="296080">to</span> <span m="296150">stick</span> <span m="296440">or</span> <span m="296520">switch,</span> <span m="296920">and</span> <span m="297000">he</span> <span m="297130">knows</span> <span m="297510">where--</span> <span m="298010">he</span> <span m="298110">sees</span> <span m="298370">where</span> <span m="298470">the</span> <span m="298580">goat</span> <span m="298850">is</span> <span m="299060">and</span> <span m="299110">he</span> <span m="299160">knows</span> <span m="299400">what</span> <span m="299630">door</span> <span m="299710">he's</span> <span m="300000">picked,</span> <span m="301210">it's</span> <span m="301540">50-50</span> <span m="302300">whether</span> <span m="302590">he</span> <span m="302710">should</span> <span m="302920">stick</span> <span m="303095">or</span> <span m="303270">switch.</span> <span m="303610">The</span> <span m="303700">probability</span> <span m="304270">that</span> <span m="304450">the</span> <span m="304540">prize</span> <span m="304940">is</span> <span m="305330">at</span> <span m="306070">door</span> <span m="306240">1</span> <span m="306510">that</span> <span m="306630">he</span> <span m="306830">picked</span> <span m="307520">is</span> <span m="307645">a</span> <span m="307770">1/2,</span> <span m="308970">so</span> <span m="309250">it</span> <span m="309360">really</span> <span m="309570">doesn't</span> <span m="309840">matter</span> <span m="310070">if</span> <span m="310150">he</span> <span m="310250">stays</span> <span m="310570">there</span> <span m="310740">or</span> <span m="310860">if</span> <span m="310980">he</span> <span m="311100">decides</span> <span m="311480">to</span> <span m="311580">switch</span> <span m="311940">to</span> <span m="312040">the</span> <span m="312450">unopened</span> <span m="313300">door.</span> </p>
+<p><span m="315240">But</span> <span m="315530">wait</span> <span m="315710">a</span> <span m="315750">minute,</span> <span m="316290">that's</span> <span m="316500">not</span> <span m="317270">right</span> <span m="318020">because</span> <span m="318710">the</span> <span m="318830">contestant</span> <span m="319620">not</span> <span m="319880">only</span> <span m="320170">knows</span> <span m="320580">what</span> <span m="320880">door</span> <span m="321150">he</span> <span m="321270">picked,</span> <span m="321980">not</span> <span m="322330">only</span> <span m="322480">knows</span> <span m="323790">that</span> <span m="324170">there's</span> <span m="324390">a</span> <span m="324440">goat</span> <span m="324800">behind</span> <span m="325730">a</span> <span m="325830">given</span> <span m="326160">door</span> <span m="327010">that</span> <span m="327430">Carol</span> <span m="327740">has</span> <span m="327940">opened,</span> <span m="328490">but</span> <span m="328760">he</span> <span m="328920">knows</span> <span m="329630">that</span> <span m="329860">Carol</span> <span m="330330">has</span> <span m="330640">opened</span> <span m="331050">that</span> <span m="331380">door.</span> <span m="332020">That's</span> <span m="332260">how</span> <span m="332440">he</span> <span m="332710">got</span> <span m="332920">to</span> <span m="333010">know</span> <span m="333250">that</span> <span m="333450">the</span> <span m="333530">goat</span> <span m="333820">was</span> <span m="334030">there.</span> </p>
+<p><span m="334560">So</span> <span m="334760">let's</span> <span m="335080">go</span> <span m="335240">back</span> <span m="335600">and</span> <span m="335700">look</span> <span m="335920">at</span> <span m="336020">the</span> <span m="336110">tree.</span> <span m="336990">What</span> <span m="337420">basically</span> <span m="337940">the</span> <span m="338070">previous</span> <span m="338520">two</span> <span m="338700">arguments</span> <span m="339180">are</span> <span m="339290">conditioning</span> <span m="339980">on</span> <span m="340290">the</span> <span m="340460">wrong</span> <span m="340910">events.</span> <span m="341720">It's</span> <span m="341930">a</span> <span m="342020">typical</span> <span m="342450">mistake</span> <span m="342720">and</span> <span m="342990">one</span> <span m="343100">that</span> <span m="343210">you</span> <span m="343330">really</span> <span m="343530">have</span> <span m="343720">to</span> <span m="343830">watch</span> <span m="344390">out</span> <span m="344590">for.</span> </p>
+<p><span m="345360">So</span> <span m="345710">if</span> <span m="345860">you</span> <span m="345950">use</span> <span m="346180">the</span> <span m="346280">correct</span> <span m="346680">event,</span> <span m="347390">what</span> <span m="347530">we're</span> <span m="347630">looking</span> <span m="348020">at</span> <span m="348300">is</span> <span m="348840">the</span> <span m="348940">contestant</span> <span m="349560">knows</span> <span m="349870">that</span> <span m="350030">they've</span> <span m="350230">picked</span> <span m="350580">door</span> <span m="350840">1.</span> <span m="351910">That's</span> <span m="352930">the</span> <span m="353170">outcomes</span> <span m="353690">of</span> <span m="353830">picked</span> <span m="354070">door</span> <span m="354270">1</span> <span m="354500">are</span> <span m="354570">marked</span> <span m="354960">here.</span> <span m="356410">In</span> <span m="356550">addition,</span> <span m="358140">the</span> <span m="358310">contestant</span> <span m="359180">will</span> <span m="359480">get</span> <span m="359710">to</span> <span m="359800">know,</span> <span m="360090">for</span> <span m="360300">example,</span> <span m="360770">in</span> <span m="360850">a</span> <span m="360920">play</span> <span m="361170">of</span> <span m="361240">the</span> <span m="361310">game</span> <span m="361515">that</span> <span m="361720">Carol</span> <span m="362270">has</span> <span m="362490">opened</span> <span m="362900">door</span> <span m="363200">2.</span> <span m="364260">Carol</span> <span m="364720">opening</span> <span m="365240">door</span> <span m="365530">2</span> <span m="365850">is</span> <span m="366030">quite</span> <span m="366380">a</span> <span m="366420">different</span> <span m="366790">event</span> <span m="367390">from</span> <span m="367700">the</span> <span m="367780">goat</span> <span m="368220">being</span> <span m="368530">at</span> <span m="368690">2.</span> </p>
+<p><span m="369250">This</span> <span m="369500">is</span> <span m="369640">a</span> <span m="369710">picture</span> <span m="370220">of</span> <span m="370720">the</span> <span m="370870">outcomes</span> <span m="371520">in</span> <span m="372040">Carol</span> <span m="372540">opening</span> <span m="372970">door</span> <span m="373280">2,</span> <span m="373730">and</span> <span m="374000">we're</span> <span m="374200">interested</span> <span m="374750">in</span> <span m="375190">the</span> <span m="375320">intersection</span> <span m="376020">of</span> <span m="376250">them.</span> <span m="376650">That</span> <span m="376840">is,</span> <span m="377030">just</span> <span m="377380">this</span> <span m="377630">guy</span> <span m="377830">that's</span> <span m="378060">in</span> <span m="378180">both</span> <span m="378740">and</span> <span m="378940">this</span> <span m="379160">guy</span> <span m="379380">that's</span> <span m="379560">in</span> <span m="379820">both.</span> <span m="381070">There</span> <span m="381265">they</span> <span m="381460">are.</span> </p>
+<p><span m="382640">And</span> <span m="382890">so</span> <span m="383510">what</span> <span m="383730">we</span> <span m="383860">can</span> <span m="384050">do</span> <span m="384370">is</span> <span m="384870">identify</span> <span m="385255">that</span> <span m="385640">the</span> <span m="386040">event</span> <span m="386790">that</span> <span m="386980">you</span> <span m="387090">picked</span> <span m="387430">1</span> <span m="387930">and</span> <span m="388110">that</span> <span m="388290">Carol</span> <span m="388740">opened</span> <span m="389030">door</span> <span m="389330">2</span> <span m="389680">consists</span> <span m="390190">simply</span> <span m="390650">of</span> <span m="390830">two</span> <span m="391070">outcomes--</span> <span m="392090">one</span> <span m="392460">worth</span> <span m="393300">an</span> <span m="393450">1/18</span> <span m="394250">and</span> <span m="394420">one</span> <span m="394640">worth</span> <span m="395130">a</span> <span m="395230">1/9.</span> <span m="396540">Now,</span> <span m="396860">of</span> <span m="396970">these</span> <span m="397080">two</span> <span m="397290">outcomes,</span> <span m="397930">which</span> <span m="398110">one</span> <span m="398380">has</span> <span m="398650">the</span> <span m="398760">prize</span> <span m="399180">at</span> <span m="399310">1?</span> <span m="400150">Well,</span> <span m="400390">only</span> <span m="400670">that</span> <span m="400960">one.</span> <span m="401070">Remember</span> <span m="401380">the</span> <span m="401480">first</span> <span m="401750">component</span> <span m="402150">here</span> <span m="402320">is</span> <span m="402410">where</span> <span m="402560">the</span> <span m="402680">prize</span> <span m="403050">is.</span> </p>
+<p><span m="403750">And</span> <span m="404020">so</span> <span m="405450">the</span> <span m="405840">prize</span> <span m="406230">at</span> <span m="406320">1</span> <span m="406570">event</span> <span m="408170">among</span> <span m="408970">the</span> <span m="409520">given</span> <span m="409920">picked</span> <span m="410210">1</span> <span m="410500">and</span> <span m="410700">opened</span> <span m="411080">2</span> <span m="411360">is</span> <span m="411570">just</span> <span m="412290">this</span> <span m="412490">red</span> <span m="412800">outcome.</span> <span m="414040">Now,</span> <span m="414180">the</span> <span m="414310">red</span> <span m="414540">outcome</span> <span m="415570">has</span> <span m="417110">probability</span> <span m="417730">1/18</span> <span m="418720">and</span> <span m="419010">the</span> <span m="419480">green</span> <span m="419810">outcome</span> <span m="420210">has</span> <span m="420540">probability</span> <span m="421050">that's</span> <span m="421320">twice</span> <span m="421770">as</span> <span m="421900">much.</span> <span m="423400">So</span> <span m="423530">that</span> <span m="423820">means</span> <span m="424130">that</span> <span m="424350">relative</span> <span m="425130">to</span> <span m="425640">this</span> <span m="426330">event,</span> <span m="427540">the</span> <span m="427590">probability</span> <span m="428210">that</span> <span m="428400">the</span> <span m="428520">prize</span> <span m="428930">is</span> <span m="429090">at</span> <span m="429210">1</span> <span m="429610">given</span> <span m="429990">that</span> <span m="430180">you</span> <span m="430310">picked</span> <span m="430660">1</span> <span m="431080">and</span> <span m="431230">opened</span> <span m="431590">2</span> <span m="432680">is</span> <span m="432930">actually</span> <span m="433540">1/18</span> <span m="434460">over</span> <span m="434770">1/18</span> <span m="435470">plus</span> <span m="436260">1/9,</span> <span m="436690">or</span> <span m="437180">1/3.</span> </p>
+<p><span m="439200">So</span> <span m="439500">given</span> <span m="439790">that</span> <span m="439920">you</span> <span m="440040">picked</span> <span m="440420">1</span> <span m="441220">and</span> <span m="441610">you</span> <span m="441730">get</span> <span m="441980">to</span> <span m="442370">see</span> <span m="442640">what</span> <span m="442890">Carrol</span> <span m="443250">did,</span> <span m="443890">the</span> <span m="444040">probability</span> <span m="445040">the</span> <span m="445130">prize</span> <span m="445700">is</span> <span m="445880">at</span> <span m="446000">the</span> <span m="446090">door</span> <span m="446330">you</span> <span m="446470">picked</span> <span m="446780">is</span> <span m="446920">only</span> <span m="447160">1/3,</span> <span m="448970">which</span> <span m="449290">means</span> <span m="449780">that</span> <span m="450450">if</span> <span m="450620">you</span> <span m="450710">stick</span> <span m="451040">you</span> <span m="451120">only</span> <span m="451250">have</span> <span m="451380">a</span> <span m="451450">1/3</span> <span m="451910">chance</span> <span m="452230">of</span> <span m="452340">winning.</span> <span m="453450">You</span> <span m="453480">should</span> <span m="453700">switch.</span> <span m="456200">And</span> <span m="456860">if</span> <span m="457050">you</span> <span m="457150">do,</span> <span m="457750">you'll</span> <span m="458010">have</span> <span m="458240">a</span> <span m="458320">2/3</span> <span m="458920">probability</span> <span m="459520">of</span> <span m="459630">winning.</span> </p>
+<p><span m="460310">So</span> <span m="460530">when</span> <span m="460740">we</span> <span m="460890">finally</span> <span m="461350">condition</span> <span m="462020">on</span> <span m="462270">everything</span> <span m="462960">that</span> <span m="463080">we</span> <span m="463260">know,</span> <span m="463740">which</span> <span m="463990">is</span> <span m="464660">the</span> <span m="464890">contestant</span> <span m="465420">knows</span> <span m="465630">what</span> <span m="465880">door</span> <span m="465950">he</span> <span m="466220">picked</span> <span m="466490">and</span> <span m="466700">what</span> <span m="466910">door</span> <span m="467080">Carol</span> <span m="467640">opened,</span> <span m="468460">then</span> <span m="468640">we</span> <span m="468770">discover</span> <span m="469640">that</span> <span m="469880">it</span> <span m="470270">correctly--</span> <span m="470660">as</span> <span m="470800">we</span> <span m="471130">deduced</span> <span m="471510">previously--</span> <span m="472580">that</span> <span m="473100">the</span> <span m="473230">probability</span> <span m="473750">of</span> <span m="473830">switching</span> <span m="474370">wins</span> <span m="474660">is</span> <span m="474780">2/3.</span> <span m="475530">So</span> <span m="475660">we're</span> <span m="475740">not</span> <span m="475960">trying</span> <span m="476290">to</span> <span m="476750">rederive</span> <span m="477500">the</span> <span m="477590">fact</span> <span m="477890">that</span> <span m="478010">the</span> <span m="478110">probability</span> <span m="478660">of</span> <span m="478730">switching</span> <span m="479140">wins</span> <span m="479390">is</span> <span m="479530">2/3.</span> <span m="480370">We're</span> <span m="480560">trying</span> <span m="480770">to</span> <span m="480820">illustrate</span> <span m="481670">a</span> <span m="481780">very</span> <span m="482180">basic</span> <span m="482620">blunder</span> <span m="482960">that</span> <span m="483090">you</span> <span m="483160">have</span> <span m="483380">to</span> <span m="483490">watch</span> <span m="483740">out</span> <span m="483950">for,</span> <span m="484230">which</span> <span m="484450">is</span> <span m="484570">when</span> <span m="484700">you're</span> <span m="484850">trying</span> <span m="485170">to</span> <span m="485600">reason</span> <span m="485970">about</span> <span m="486260">some</span> <span m="486410">situation</span> <span m="487370">and</span> <span m="487630">you</span> <span m="487770">condition</span> <span m="488390">on</span> <span m="488560">some</span> <span m="488790">event</span> <span m="489150">that</span> <span m="489320">you</span> <span m="489420">think</span> <span m="489690">summarizes</span> <span m="490670">what's</span> <span m="491090">going</span> <span m="491410">on,</span> <span m="492520">if</span> <span m="492610">you</span> <span m="492760">don't</span> <span m="493140">get</span> <span m="493370">the</span> <span m="493630">conditioning</span> <span m="494170">event</span> <span m="494520">right,</span> <span m="494800">you're</span> <span m="494960">going</span> <span m="495120">to</span> <span m="495170">get</span> <span m="495430">the</span> <span m="495550">wrong</span> <span m="495830">answer.</span> </p>
+<p><span m="497540">So</span> <span m="497870">it's</span> <span m="498010">easy</span> <span m="498230">to</span> <span m="498310">see</span> <span m="498470">how</span> <span m="498600">many</span> <span m="498850">people</span> <span m="499150">got</span> <span m="499380">confused,</span> <span m="500680">and,</span> <span m="500940">in</span> <span m="501070">fact,</span> <span m="501410">finding</span> <span m="501730">the</span> <span m="501830">right</span> <span m="502030">event</span> <span m="502340">can</span> <span m="502480">be</span> <span m="502600">tricky.</span> <span m="503550">When</span> <span m="503950">in</span> <span m="504090">doubt,</span> <span m="505850">the</span> <span m="505940">4</span> <span m="506170">step</span> <span m="506460">method</span> <span m="506830">with</span> <span m="507000">constructing</span> <span m="507560">the</span> <span m="507660">tree</span> <span m="508410">where</span> <span m="508620">you're</span> <span m="508750">not</span> <span m="508910">even</span> <span m="509110">thinking</span> <span m="509460">about</span> <span m="510320">conditional</span> <span m="510760">probabilities</span> <span m="511430">but</span> <span m="511550">you're</span> <span m="511670">just</span> <span m="512150">examining</span> <span m="513130">the</span> <span m="513340">individual</span> <span m="513890">outcomes</span> <span m="514720">is</span> <span m="514940">a</span> <span m="515000">good</span> <span m="515309">fall</span> <span m="515669">back</span> <span m="516330">to</span> <span m="516539">avoid</span> <span m="517010">these</span> <span m="517220">kinds</span> <span m="517500">of</span> <span m="517620">confusing</span> <span m="518200">situations.</span> </p>
+</div>
+        <div id="vid_index" itemprop="description" class="tabContent hide">
+<h2 class="subhead">Free Downloads</h2>
+<h3 class="subsubhead">Video</h3>
+<ul>
+<li>iTunes U (<a href="https://itunes.apple.com/us/itunes-u/id1077791636">MP4 - 19.9MB</a>)</li>
+<li>Internet Archive (<a href="https://archive.org/download/MIT6.042JS15/MIT6_042JS15_probcondmonty_video_ipod.mp4">MP4 - 19.9MB</a>)</li>
+</ul>
+<br>
+<h3 class="subsubhead">Caption</h3>
+<ul>
+<li>English-US (<a href="../../../../../contents/probability/tp12-1/vertical-038350815734/monty-hall-conditional-confusions/BEAv82FinM0.srt">SRT</a>)</li>
+</ul>
+</div>
+    
+   </div>  
+
+
+
+
+      					 
+        <div class="" id="parent-fieldname-bottom_html_area">
+            
+            
+        </div>
+    
+               </main><!--Course_inner_media tag close -->
+           		</div>
+<!--Course_wrapper tag close -->
+            </div>
+<!--left tag close -->
+            <aside id="right">
+                <!--Begin Right Portion -->
+                    <div>
+    
+
+
+
+</div>
+
+                	<div>
+    
+
+
+
+</div>
+
+
+        <div class="" id="parent-fieldname-rsi_top_html_area">
+            
+            
+        </div>
+    
+
+<!-- RSI google ad space-->
+
+
+
+<div id="google_ads">    
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script type="text/javascript">var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];</script>
+    <script type="text/javascript">
+googletag.cmd.push(function() {googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_A_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_A_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_B_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_B_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_C_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_C_DL').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+ googletag.enableServices();
+});</script>
+    <script language="javascript" type="text/javascript">
+googletag.cmd.push(function() {googletag.pubads().set("TYPE","HOUSE");googletag.pubads().set("DEPARTMENT","6");googletag.pubads().set("CRS_BEG2","04");googletag.pubads().set("CRS_END","2J");googletag.pubads().set("SESSION","S");googletag.pubads().set("YEAR","15");})
+</script>
+    
+    <div id="VIDEO_INDIVIDUAL_SLOT_A_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_A_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_B_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_B_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_C_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_C_DL'); });</script>
+    </div>
+</div>
+
+<!-- End RSI ads--> 
+
+
+<div>
+    
+
+
+
+</div>
+
+            </aside><!--Right div close -->
+            <div class="clear"></div>
+        </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

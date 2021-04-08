@@ -1,0 +1,340 @@
+1
+00:00:00,500 --> 00:00:04,970
+Let’s think a bit more
+about the FSM abstraction.
+
+2
+00:00:04,970 --> 00:00:08,039
+If we see an FSM that
+uses K state bits,
+
+3
+00:00:08,039 --> 00:00:10,830
+what can we say about the
+number of states in its state
+
+4
+00:00:10,830 --> 00:00:13,090
+transition diagram?
+
+5
+00:00:13,090 --> 00:00:16,670
+Well, we know the FSM can
+have at most 2^K states,
+
+6
+00:00:16,670 --> 00:00:21,520
+since that’s the number of
+unique combinations of K bits.
+
+7
+00:00:21,520 --> 00:00:24,630
+Suppose we connect
+two FSMs in series,
+
+8
+00:00:24,630 --> 00:00:27,950
+with the outputs of the first
+FSM serving as the inputs
+
+9
+00:00:27,950 --> 00:00:29,650
+to the second.
+
+10
+00:00:29,650 --> 00:00:33,590
+This larger system is also an
+FSM — how many states does it
+
+11
+00:00:33,590 --> 00:00:35,200
+have?
+
+12
+00:00:35,200 --> 00:00:37,600
+Well, if we don’t know
+the details of either
+
+13
+00:00:37,600 --> 00:00:41,440
+of the component FSMs, the upper
+bound on the number of states
+
+14
+00:00:41,440 --> 00:00:44,660
+for the larger system is M*N.
+
+15
+00:00:44,660 --> 00:00:47,440
+This is because it may be
+possible for the first FSM
+
+16
+00:00:47,440 --> 00:00:51,460
+to be in any of its M states
+while the second FSM is
+
+17
+00:00:51,460 --> 00:00:54,630
+any of its N states.
+
+18
+00:00:54,630 --> 00:00:57,160
+Note that the answer
+doesn’t depend on X or Y,
+
+19
+00:00:57,160 --> 00:01:01,790
+the number of input signals
+to each of the component FSMs.
+
+20
+00:01:01,790 --> 00:01:05,010
+Wider inputs just mean that
+there are longer labels
+
+21
+00:01:05,010 --> 00:01:07,800
+on the transitions in the
+state transition diagram,
+
+22
+00:01:07,800 --> 00:01:10,540
+but doesn’t tell us anything
+about the number of internal
+
+23
+00:01:10,540 --> 00:01:12,980
+states.
+
+24
+00:01:12,980 --> 00:01:15,540
+Finally, here’s a question
+that’s a bit trickier than it
+
+25
+00:01:15,540 --> 00:01:16,970
+seems.
+
+26
+00:01:16,970 --> 00:01:21,760
+I give you an FSM with two
+inputs labeled 0 and 1,
+
+27
+00:01:21,760 --> 00:01:25,200
+and one output
+implemented as a light.
+
+28
+00:01:25,200 --> 00:01:28,790
+Then I ask you to discover
+its state transition diagram.
+
+29
+00:01:28,790 --> 00:01:30,670
+Can you do it?
+
+30
+00:01:30,670 --> 00:01:32,550
+Just to be a bit
+more concrete, you
+
+31
+00:01:32,550 --> 00:01:34,810
+experiment for an hour
+pushing the buttons
+
+32
+00:01:34,810 --> 00:01:37,920
+in a variety of sequences.
+
+33
+00:01:37,920 --> 00:01:41,490
+Each time you push the 0
+button the light turns off
+
+34
+00:01:41,490 --> 00:01:43,360
+if it was on.
+
+35
+00:01:43,360 --> 00:01:45,970
+And when you push the 1
+button the light turns on
+
+36
+00:01:45,970 --> 00:01:50,140
+if it was off, otherwise
+nothing seems to happen.
+
+37
+00:01:50,140 --> 00:01:52,100
+What state transition
+diagram could we
+
+38
+00:01:52,100 --> 00:01:55,550
+draw based on our experiments?
+
+39
+00:01:55,550 --> 00:01:59,400
+Consider the following two
+state transition diagrams.
+
+40
+00:01:59,400 --> 00:02:01,610
+The top diagram
+describes the behavior
+
+41
+00:02:01,610 --> 00:02:05,750
+we observed in our experiments:
+pushing 0 turns the light off,
+
+42
+00:02:05,750 --> 00:02:08,110
+pushing 1 turns the light on.
+
+43
+00:02:08,110 --> 00:02:11,650
+The second diagram appears
+to do the same thing
+
+44
+00:02:11,650 --> 00:02:17,360
+unless you happened to push
+the 1 button 4 times in a row!
+
+45
+00:02:17,360 --> 00:02:19,970
+If we don’t have an upper
+bound on the number of states
+
+46
+00:02:19,970 --> 00:02:23,870
+in the FSM, we can never be sure
+that we’ve explored all of its
+
+47
+00:02:23,870 --> 00:02:26,610
+possible behaviors.
+
+48
+00:02:26,610 --> 00:02:29,450
+But if we do have an
+upper bound, say, K,
+
+49
+00:02:29,450 --> 00:02:32,470
+on the number of states
+and we reset the FSM
+
+50
+00:02:32,470 --> 00:02:36,670
+to its initial state, we
+can discover its behavior.
+
+51
+00:02:36,670 --> 00:02:40,180
+This is because in a K-state
+FSM every reachable state
+
+52
+00:02:40,180 --> 00:02:42,510
+can reached in less
+than K transitions,
+
+53
+00:02:42,510 --> 00:02:44,190
+starting from the initial state.
+
+54
+00:02:44,190 --> 00:02:48,820
+.244 So if we try all the
+possible K-step input sequences
+
+55
+00:02:48,820 --> 00:02:52,040
+one after the other starting
+each trial at the initial
+
+56
+00:02:52,040 --> 00:02:55,540
+state, we’ll be guaranteed
+to have visited every state
+
+57
+00:02:55,540 --> 00:02:58,250
+in the machine.
+
+58
+00:02:58,250 --> 00:03:00,990
+Our answer is also
+complicated by the observation
+
+59
+00:03:00,990 --> 00:03:06,200
+that FSMs with different number
+of states may be equivalent.
+
+60
+00:03:06,200 --> 00:03:10,920
+Here are two FSMs, one with
+2 states, one with 5 states.
+
+61
+00:03:10,920 --> 00:03:12,420
+Are they different?
+
+62
+00:03:12,420 --> 00:03:15,280
+Well, not in any
+practical sense.
+
+63
+00:03:15,280 --> 00:03:18,630
+Since the FSMs are
+externally indistinguishable,
+
+64
+00:03:18,630 --> 00:03:21,680
+we can use them interchangeably.
+
+65
+00:03:21,680 --> 00:03:23,980
+We say that two FSMs
+are equivalent if
+
+66
+00:03:23,980 --> 00:03:27,400
+and only if every input
+sequence yields identical output
+
+67
+00:03:27,400 --> 00:03:29,750
+sequences from both FSMs.
+
+68
+00:03:29,750 --> 00:03:32,320
+So as engineers,
+if we have an FSM
+
+69
+00:03:32,320 --> 00:03:35,420
+we would like to find the the
+simplest (and hence the least
+
+70
+00:03:35,420 --> 00:03:38,680
+expensive) equivalent FSM.
+
+71
+00:03:38,680 --> 00:03:41,950
+We’ll talk about how to
+find smaller equivalent FSMs
+
+72
+00:03:41,950 --> 00:03:45,000
+in the context of
+our next example.

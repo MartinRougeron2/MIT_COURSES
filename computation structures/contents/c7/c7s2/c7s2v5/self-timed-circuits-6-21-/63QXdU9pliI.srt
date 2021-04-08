@@ -1,0 +1,394 @@
+1
+00:00:01,099 --> 00:00:06,540
+We've been designing our processing pipelines
+to have all the stages operate in lock step,
+
+2
+00:00:06,540 --> 00:00:12,150
+choosing the clock period to accommodate the
+worst-case processing time over all the stages.
+
+3
+00:00:12,150 --> 00:00:16,830
+This is what we'd call a synchronous, globally
+timed system.
+
+4
+00:00:16,830 --> 00:00:21,180
+But what if there are data dependencies in
+the processing time, i.e., if for some data
+
+5
+00:00:21,180 --> 00:00:25,980
+inputs a particular processing stage might
+be able to produce its output in a shorter
+
+6
+00:00:25,980 --> 00:00:27,170
+time?
+
+7
+00:00:27,170 --> 00:00:32,479
+Can we design a system that could take advantage
+of that opportunity to increase throughput?
+
+8
+00:00:32,479 --> 00:00:37,159
+One alternative is to continue to use a single
+system clock, but for each stage to signal
+
+9
+00:00:37,159 --> 00:00:42,950
+when it's ready for a new input and when it
+has a new output ready for the next stage.
+
+10
+00:00:42,950 --> 00:00:48,089
+It's fun to design a simple 2-signal handshake
+protocol to reliably transfer data from one
+
+11
+00:00:48,089 --> 00:00:50,219
+stage to the next.
+
+12
+00:00:50,219 --> 00:00:55,309
+The upstream stage produces a signal called
+HERE-IS-X to indicate that is has new data
+
+13
+00:00:55,309 --> 00:00:57,180
+for the downstream stage.
+
+14
+00:00:57,180 --> 00:01:01,559
+And the downstream stage produces a signal
+called GOT-X to indicate when it is willing
+
+15
+00:01:01,559 --> 00:01:02,789
+to consume data.
+
+16
+00:01:02,789 --> 00:01:08,280
+It's a synchronous system so the signal values
+are only examined on the rising edge of the
+
+17
+00:01:08,280 --> 00:01:10,539
+clock.
+
+18
+00:01:10,539 --> 00:01:16,220
+The handshake protocol works as follows:
+the upstream stage asserts HERE-IS-X if it
+
+19
+00:01:16,220 --> 00:01:21,420
+will have a new output value available at
+the next rising edge of the clock.
+
+20
+00:01:21,420 --> 00:01:26,420
+The downstream stage asserts GOT-X if it will
+grab the next output at the rising edge of
+
+21
+00:01:26,420 --> 00:01:27,840
+the clock.
+
+22
+00:01:27,840 --> 00:01:32,840
+Both stages look at the signals on the rising
+edge of the clock to decide what to do next.
+
+23
+00:01:32,840 --> 00:01:38,970
+If both stages see that HERE-IS-X and GOT-X
+are asserted at the same clock edge, the handshake
+
+24
+00:01:38,970 --> 00:01:44,030
+is complete and the data transfer happens
+at that clock edge.
+
+25
+00:01:44,030 --> 00:01:48,289
+Either stage can delay a transfer if they
+are still working on producing the next output
+
+26
+00:01:48,289 --> 00:01:50,658
+or consuming the previous input.
+
+27
+00:01:50,658 --> 00:01:56,549
+It's possible, although considerably more
+difficult, to build a clock-free asynchronous
+
+28
+00:01:56,549 --> 00:02:00,969
+self-timed system that uses a similar handshake
+protocol.
+
+29
+00:02:00,969 --> 00:02:03,729
+The handshake involves four phases.
+
+30
+00:02:03,729 --> 00:02:09,940
+In phase 1, when the upstream stage has a
+new output and GOT-X is deasserted, it asserts
+
+31
+00:02:09,940 --> 00:02:15,820
+its HERE-IS-X signal and then waits to see
+the downstream stage's reply on the GOT-X
+
+32
+00:02:15,820 --> 00:02:17,840
+signal.
+
+33
+00:02:17,840 --> 00:02:24,610
+In phase 2, the downstream stage, seeing that
+HERE-IS-X is asserted, asserts GOT-X when
+
+34
+00:02:24,610 --> 00:02:26,840
+it has consumed the available input.
+
+35
+00:02:26,840 --> 00:02:33,610
+In phase 3, the downstream stage waits to
+see the HERE-IS-X go low, indicating that
+
+36
+00:02:33,610 --> 00:02:38,590
+the upstream stage has successfully received
+the GOT-X signal.
+
+37
+00:02:38,590 --> 00:02:44,860
+In phase 4, once HERE-IS-X is deasserted,
+the downstream stage deasserts GOT-X and the
+
+38
+00:02:44,860 --> 00:02:48,670
+transfer handshake is ready to begin again.
+
+39
+00:02:48,670 --> 00:02:53,230
+Note that the upstream stage waits until it
+sees the GOT-X deasserted before starting
+
+40
+00:02:53,230 --> 00:02:54,810
+the next handshake.
+
+41
+00:02:54,810 --> 00:02:59,440
+The timing of the system is based on the transitions
+of the handshake signals, which can happen
+
+42
+00:02:59,440 --> 00:03:04,250
+at any time the conditions required by the
+protocol are satisfied.
+
+43
+00:03:04,250 --> 00:03:07,300
+No need for a global clock here!
+
+44
+00:03:07,300 --> 00:03:11,330
+It's fun to think about how this self-timed
+protocol might work when there are multiple
+
+45
+00:03:11,330 --> 00:03:14,840
+downstream modules, each with their own internal
+timing.
+
+46
+00:03:14,840 --> 00:03:20,370
+In this example, A's output is consumed by
+both the B and C stages.
+
+47
+00:03:20,370 --> 00:03:25,440
+We need a special circuit, shown as a yellow
+box in the diagram, to combine the GOT-X signals
+
+48
+00:03:25,440 --> 00:03:31,100
+from the B and C stages and produce a summary
+signal for the A stage.
+
+49
+00:03:31,100 --> 00:03:34,610
+Let's take a quick look at the timing diagram
+shown here.
+
+50
+00:03:34,610 --> 00:03:40,550
+After A has asserted HERE-IS-X, the circuit
+in the yellow box waits until both the B and
+
+51
+00:03:40,550 --> 00:03:46,640
+the C stage have asserted their GOT-X signals
+before asserting GOT-X to the A stage.
+
+52
+00:03:46,640 --> 00:03:52,260
+At this point the A stage deasserts HERE-IS-X,
+then the yellow box waits until both the B
+
+53
+00:03:52,260 --> 00:03:59,370
+and C stages have deasserted their GOT-X signals,
+before deasserting GOT-X to the A stage.
+
+54
+00:03:59,370 --> 00:04:01,300
+Let's watch the system in action!
+
+55
+00:04:01,300 --> 00:04:05,960
+When a signal is asserted we'll show it in
+red, otherwise it's shown in black.
+
+56
+00:04:05,960 --> 00:04:11,120
+A new value for the A stage arrives on A's
+data input and the module supplying the value
+
+57
+00:04:11,120 --> 00:04:16,589
+then asserts its HERE-IS-X signal to let A
+know it has a new input.
+
+58
+00:04:16,589 --> 00:04:22,540
+At some point later, A signals GOT-X back
+upstream to indicate that it has consumed
+
+59
+00:04:22,540 --> 00:04:29,200
+the value, then the upstream stage deasserts
+HERE-IS-X, followed by A deasserting its GOT-X
+
+60
+00:04:29,200 --> 00:04:30,200
+signal.
+
+61
+00:04:30,200 --> 00:04:34,120
+This completes the transfer of the data to
+the A stage.
+
+62
+00:04:34,120 --> 00:04:39,781
+When A is ready to send a new output to the
+B and C stages, it checks that its GOT-X input
+
+63
+00:04:39,781 --> 00:04:44,909
+is deasserted (which it is),
+so it asserts the new output value and signals
+
+64
+00:04:44,909 --> 00:04:49,900
+HERE-IS-X to the yellow box which forwards
+the signal to the downstream stages.
+
+65
+00:04:49,900 --> 00:04:55,490
+B is ready to consume the new input and so
+asserts its GOT-X output.
+
+66
+00:04:55,490 --> 00:05:01,470
+Note that C is still waiting for its second
+input and has yet to assert its GOT-X output.
+
+67
+00:05:01,470 --> 00:05:07,740
+After B finishes its computation, it supplies
+a new value to C and asserts its HERE-IS-X
+
+68
+00:05:07,740 --> 00:05:12,370
+output to let C know its second input is ready.
+
+69
+00:05:12,370 --> 00:05:18,720
+Now C is happy and signals both upstream stages
+that it has consumed its two inputs.
+
+70
+00:05:18,720 --> 00:05:25,150
+Now that both GOT-X inputs are asserted, the
+yellow box asserts A's GOT-X input to let
+
+71
+00:05:25,150 --> 00:05:28,620
+it know that the data has been transferred.
+
+72
+00:05:28,620 --> 00:05:34,730
+Meanwhile B completes its part of the handshake,
+and C completes its transaction with B and
+
+73
+00:05:34,730 --> 00:05:40,530
+A deasserts HERE-IS-X to indicate that it
+has seen its GOT-X input.
+
+74
+00:05:40,530 --> 00:05:46,780
+When the B and C stages see their HERE-IS-X
+inputs go low, they their finish their handshakes
+
+75
+00:05:46,780 --> 00:05:51,159
+by deasserting their GOT-X outputs,
+and when they're both low, the yellow box
+
+76
+00:05:51,159 --> 00:05:56,490
+lets A know the handshake is complete by deserting
+A's GOT-X input.
+
+77
+00:05:56,490 --> 00:05:57,490
+Whew!
+
+78
+00:05:57,490 --> 00:06:02,100
+The system has returned to the initial state
+where A is now ready to accept some future
+
+79
+00:06:02,100 --> 00:06:04,500
+input value.
+
+80
+00:06:04,500 --> 00:06:08,730
+This an elegant design based entirely on transition
+signaling.
+
+81
+00:06:08,730 --> 00:06:14,000
+Each module is in complete control of when
+it consumes inputs and produces outputs, and
+
+82
+00:06:14,000 --> 00:06:19,020
+so the system can process data at the fastest
+possible speed, rather than waiting for the
+
+83
+00:06:19,020 --> 00:06:20,710
+worst-case processing delay.

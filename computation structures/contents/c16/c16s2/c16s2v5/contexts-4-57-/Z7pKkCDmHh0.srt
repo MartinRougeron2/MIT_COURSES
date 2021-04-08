@@ -1,0 +1,304 @@
+1
+00:00:00,560 --> 00:00:06,830
+The page map provides the context for interpreting
+virtual addresses, i.e., it provides the information
+
+2
+00:00:06,830 --> 00:00:11,730
+needed to correctly determine where to find
+a virtual address in main memory or secondary
+
+3
+00:00:11,730 --> 00:00:13,530
+storage.
+
+4
+00:00:13,530 --> 00:00:20,249
+Several programs may be simultaneously loaded
+into main memory, each with its own context.
+
+5
+00:00:20,249 --> 00:00:25,470
+Note that the separate contexts ensure that
+the programs don't interfere which each other.
+
+6
+00:00:25,470 --> 00:00:31,199
+For example, the physical location for virtual
+address 0 in one program will be different
+
+7
+00:00:31,199 --> 00:00:36,750
+than the physical location for virtual address
+0 in another program.
+
+8
+00:00:36,750 --> 00:00:41,870
+Each program operates independently in its
+own virtual address space.
+
+9
+00:00:41,870 --> 00:00:47,350
+It's the context provided by the page map
+that allows them to coexist and share a common
+
+10
+00:00:47,350 --> 00:00:49,560
+physical memory.
+
+11
+00:00:49,560 --> 00:00:53,470
+So we need to switch contexts when switching
+programs.
+
+12
+00:00:53,470 --> 00:00:56,140
+This is accomplished by reloading the page
+map.
+
+13
+00:00:56,140 --> 00:01:03,030
+In a timesharing system, the CPU will periodically
+switch from running one program to another,
+
+14
+00:01:03,030 --> 00:01:08,869
+giving the illusion that multiple programs
+are each running on their own virtual machine.
+
+15
+00:01:08,869 --> 00:01:15,130
+This is accomplished by switching contexts
+when switching the CPU state to the next program.
+
+16
+00:01:15,130 --> 00:01:20,560
+There's a privileged set of code called the
+operating system (OS) that manages the sharing
+
+17
+00:01:20,560 --> 00:01:26,100
+of one physical processor and main memory
+amongst many programs, each with its own CPU
+
+18
+00:01:26,100 --> 00:01:29,280
+state and virtual address space.
+
+19
+00:01:29,280 --> 00:01:34,439
+The OS is effectively creating many virtual
+machines and choreographing their execution
+
+20
+00:01:34,439 --> 00:01:39,259
+using a single set of shared physical resources.
+
+21
+00:01:39,259 --> 00:01:44,600
+The OS runs in a special OS context, which
+we call the kernel.
+
+22
+00:01:44,600 --> 00:01:50,030
+The OS contains the necessary exception handlers
+and timesharing support.
+
+23
+00:01:50,030 --> 00:01:54,889
+Since it has to manage physical memory, it's
+allowed to access any physical location as
+
+24
+00:01:54,889 --> 00:01:58,369
+it deals with page faults, etc.
+
+25
+00:01:58,369 --> 00:02:02,950
+Exceptions in running programs cause the hardware
+to switch to the kernel context, which we
+
+26
+00:02:02,950 --> 00:02:05,909
+call entering "kernel mode".
+
+27
+00:02:05,909 --> 00:02:11,068
+After the exception handling is complete,
+execution of the program resumes in what we
+
+28
+00:02:11,068 --> 00:02:13,990
+call "user mode".
+
+29
+00:02:13,990 --> 00:02:18,950
+Since the OS runs in kernel mode it has privileged
+access to many hardware registers that are
+
+30
+00:02:18,950 --> 00:02:21,400
+inaccessible in user mode.
+
+31
+00:02:21,400 --> 00:02:26,200
+These include the MMU state, I/O devices,
+and so on.
+
+32
+00:02:26,200 --> 00:02:31,189
+User-mode programs that need to access, say,
+the disk, need to make a request to the OS
+
+33
+00:02:31,189 --> 00:02:36,370
+kernel to perform the operation, giving the
+OS the chance to vet the request for appropriate
+
+34
+00:02:36,370 --> 00:02:38,860
+permissions, etc.
+
+35
+00:02:38,860 --> 00:02:43,760
+We'll see how all of this works in an upcoming
+lecture.
+
+36
+00:02:43,760 --> 00:02:49,400
+User-mode programs (aka applications) are
+written as if they have access to the entire
+
+37
+00:02:49,400 --> 00:02:52,129
+virtual address space.
+
+38
+00:02:52,129 --> 00:02:56,291
+They often obey the same conventions such
+as the address of the first instruction in
+
+39
+00:02:56,291 --> 00:03:01,159
+the program, the initial value for the stack
+pointer, etc.
+
+40
+00:03:01,159 --> 00:03:06,590
+Since all these virtual addresses are interpreted
+using the current context, by controlling
+
+41
+00:03:06,590 --> 00:03:14,980
+the contexts the OS can ensure that the programs
+can coexist without conflict.
+
+42
+00:03:14,980 --> 00:03:19,280
+The diagram on the right shows a standard
+plan for organizing the virtual address space
+
+43
+00:03:19,280 --> 00:03:20,939
+of an application.
+
+44
+00:03:20,939 --> 00:03:27,010
+Typically the first virtual page is made inaccessible,
+which helps catch errors involving references
+
+45
+00:03:27,010 --> 00:03:31,870
+to uninitialized (i.e., zero-valued) pointers.
+
+46
+00:03:31,870 --> 00:03:36,770
+Then come some number of read-only pages that
+hold the application's code and perhaps the
+
+47
+00:03:36,770 --> 00:03:40,549
+code from any shared libraries it uses.
+
+48
+00:03:40,549 --> 00:03:45,890
+Marking code pages as read-only avoids hard-to-find
+bugs where errant data accesses inadvertently
+
+49
+00:03:45,890 --> 00:03:48,439
+change the program!
+
+50
+00:03:48,439 --> 00:03:54,719
+Then there are read-write pages holding the
+application's statically allocated data structures.
+
+51
+00:03:54,719 --> 00:03:59,989
+The rest of the virtual address space is divided
+between two data regions that can grow over
+
+52
+00:03:59,989 --> 00:04:01,590
+time.
+
+53
+00:04:01,590 --> 00:04:07,140
+The first is the application's stack, used
+to hold procedure activation records.
+
+54
+00:04:07,140 --> 00:04:11,239
+Here we show it located at the lower end of
+the virtual address space since our convention
+
+55
+00:04:11,239 --> 00:04:15,860
+is that the stack grows towards higher addresses.
+
+56
+00:04:15,860 --> 00:04:21,250
+The other growable region is the heap, used
+when dynamically allocating storage for long-lived
+
+57
+00:04:21,250 --> 00:04:22,669
+data structures.
+
+58
+00:04:22,669 --> 00:04:27,470
+"Dynamically" means that the allocation and
+deallocation of objects is done by explicit
+
+59
+00:04:27,470 --> 00:04:30,639
+procedure calls while the application is running.
+
+60
+00:04:30,639 --> 00:04:35,870
+In other words, we don't know which objects
+will be created until the program actually
+
+61
+00:04:35,870 --> 00:04:36,870
+executes.
+
+62
+00:04:36,870 --> 00:04:43,360
+As shown here, as the heap expands it grows
+towards lower addresses.
+
+63
+00:04:43,360 --> 00:04:47,669
+The page fault handler knows to allocate new
+pages when these regions grow.
+
+64
+00:04:47,669 --> 00:04:53,271
+Of course, if they ever meet somewhere in
+the middle and more space is needed, the application
+
+65
+00:04:53,271 --> 00:04:56,070
+is out of luck - it's run out of virtual memory!

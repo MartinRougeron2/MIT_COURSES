@@ -1,0 +1,304 @@
+1
+00:00:00,919 --> 00:00:05,620
+Okay, here's our final contract for how procedure
+calls will work:
+
+2
+00:00:05,620 --> 00:00:10,440
+The calling procedure ("caller") will
+PUSH the argument values onto the stack in
+
+3
+00:00:10,440 --> 00:00:14,190
+reverse order
+Branch to the entry point of the callee, putting
+
+4
+00:00:14,190 --> 00:00:17,640
+the return address into the linkage pointer.
+
+5
+00:00:17,640 --> 00:00:23,029
+When the callee returns, remove the argument
+values from the stack.
+
+6
+00:00:23,029 --> 00:00:27,910
+The called procedure ("callee") will
+Perform the promised computation, leaving
+
+7
+00:00:27,910 --> 00:00:29,980
+the result in R0.
+
+8
+00:00:29,980 --> 00:00:34,170
+Jump to the return address when the computation
+has finished
+
+9
+00:00:34,170 --> 00:00:39,269
+Remove any items it has placed on the stack,
+leaving the stack as it was when the procedure
+
+10
+00:00:39,269 --> 00:00:41,089
+was entered.
+
+11
+00:00:41,089 --> 00:00:45,780
+Note that the arguments were PUSHed on the
+stack by the caller, so it will be up to the
+
+12
+00:00:45,780 --> 00:00:48,039
+caller to remove them.
+
+13
+00:00:48,039 --> 00:00:52,989
+Preserve the values in all registers except
+R0, which holds the return value.
+
+14
+00:00:52,989 --> 00:00:58,050
+So the caller can assume any values placed
+in registers before a nested call will be
+
+15
+00:00:58,050 --> 00:01:02,879
+there when the nested call returns.
+
+16
+00:01:02,879 --> 00:01:07,600
+We saw the code template for procedure calls
+on an earlier slide.
+
+17
+00:01:07,600 --> 00:01:11,210
+Here's the template for the entry point to
+a procedure F.
+
+18
+00:01:11,210 --> 00:01:18,030
+The code saves the caller's LP and BP values,
+initializes BP for the current stack frame
+
+19
+00:01:18,030 --> 00:01:23,090
+and allocates words on the stack to hold any
+local variable values.
+
+20
+00:01:23,090 --> 00:01:28,539
+The final step is to PUSH the value of any
+registers (besides R0) that will be used by
+
+21
+00:01:28,539 --> 00:01:32,060
+the remainder of the procedure's code.
+
+22
+00:01:32,060 --> 00:01:37,408
+The template for the exit sequence mirrors
+the actions of the entry sequence, restoring
+
+23
+00:01:37,408 --> 00:01:42,420
+all the values saved by the entry sequence,
+performing the POP operations in the reverse
+
+24
+00:01:42,420 --> 00:01:47,350
+of the order of the PUSH operations in the
+entry sequence.
+
+25
+00:01:47,350 --> 00:01:53,149
+Note that in moving the BP value into SP we've
+reset the stack to its state at the point
+
+26
+00:01:53,149 --> 00:01:56,630
+of the MOVE(SP,BP) in the entry sequence.
+
+27
+00:01:56,630 --> 00:02:01,640
+This implicitly undoes the effect of the ALLOCATE
+statement in the entry sequence, so we don't
+
+28
+00:02:01,640 --> 00:02:05,889
+need a matching DEALLOCATE in the exit sequence.
+
+29
+00:02:05,889 --> 00:02:12,380
+The last instruction in the exit sequence
+transfers control back to the calling procedure.
+
+30
+00:02:12,380 --> 00:02:15,230
+With practice you'll become familiar with
+these code templates.
+
+31
+00:02:15,230 --> 00:02:20,090
+Meanwhile, you can refer back to this slide
+whenever you need to generate code for a procedure
+
+32
+00:02:20,090 --> 00:02:21,400
+call.
+
+33
+00:02:21,400 --> 00:02:25,819
+Here's the code our compiler would generate
+for the C implementation of factorial shown
+
+34
+00:02:25,819 --> 00:02:27,410
+on the left.
+
+35
+00:02:27,410 --> 00:02:33,530
+The entry sequence saves the caller's LP and
+BP, then initializes BP for the current stack
+
+36
+00:02:33,530 --> 00:02:34,900
+frame.
+
+37
+00:02:34,900 --> 00:02:39,970
+The value of R1 is saved so we can use R1
+in code that follows.
+
+38
+00:02:39,970 --> 00:02:44,810
+The exit sequence restores all the saved values,
+including that for R1.
+
+39
+00:02:44,810 --> 00:02:49,780
+The code for the body of the procedure has
+arranged for R0 to contain the return value
+
+40
+00:02:49,780 --> 00:02:53,829
+by the time execution reaches the exit sequence.
+
+41
+00:02:53,829 --> 00:02:58,380
+The nested procedure call passes the argument
+value on the stack and removes it after the
+
+42
+00:02:58,380 --> 00:03:01,150
+nested call returns.
+
+43
+00:03:01,150 --> 00:03:05,879
+The remainder of the code is generated using
+the templates we saw in the previous lecture.
+
+44
+00:03:05,879 --> 00:03:10,879
+Aside from computing and pushing the values
+of the arguments, there are approximately
+
+45
+00:03:10,879 --> 00:03:15,920
+10 instructions needed to implement the linking
+approach to a procedure call.
+
+46
+00:03:15,920 --> 00:03:21,590
+That's not much for a procedure of any size,
+but might be significant for a trivial procedure.
+
+47
+00:03:21,590 --> 00:03:27,670
+As mentioned earlier, some optimizing compilers
+can make the tradeoff of inlining small non-recursive
+
+48
+00:03:27,670 --> 00:03:32,450
+procedures saving this small amount of overhead.
+
+49
+00:03:32,450 --> 00:03:38,280
+So have we solved the activation record storage
+issue for recursive procedures?
+
+50
+00:03:38,280 --> 00:03:39,280
+Yes!
+
+51
+00:03:39,280 --> 00:03:43,099
+A new stack from is allocated for each procedure
+call.
+
+52
+00:03:43,099 --> 00:03:47,750
+In each frame we see the storage for the argument
+and return address.
+
+53
+00:03:47,750 --> 00:03:53,560
+And as the nested calls return the stack frames
+will be deallocated in inverse order.
+
+54
+00:03:53,560 --> 00:03:58,000
+Interestingly we can learn a lot about the
+current state of execution by looking at the
+
+55
+00:03:58,000 --> 00:04:00,120
+active stack frames.
+
+56
+00:04:00,120 --> 00:04:06,170
+The current value of BP, along the older values
+saved in the activation records, allow us
+
+57
+00:04:06,170 --> 00:04:11,370
+to identify the active procedure calls and
+determine their arguments, the values of any
+
+58
+00:04:11,370 --> 00:04:14,950
+local variables for active calls, and so on.
+
+59
+00:04:14,950 --> 00:04:20,660
+If we print out all this information at any
+given time we would have a "stack trace" showing
+
+60
+00:04:20,660 --> 00:04:22,250
+the progress of the computation.
+
+61
+00:04:22,250 --> 00:04:29,220
+In fact, when an problem occurs, many language
+runtimes will print out that stack trace to
+
+62
+00:04:29,220 --> 00:04:31,730
+help the programmer determine what happened.
+
+63
+00:04:31,730 --> 00:04:37,560
+And, of course, if you can interpret the information
+in the stack frames, you can show you understand
+
+64
+00:04:37,560 --> 00:04:40,450
+our conventions for procedure call and return.
+
+65
+00:04:40,450 --> 00:04:43,230
+Don't be surprised to find such a question
+on a quiz :)

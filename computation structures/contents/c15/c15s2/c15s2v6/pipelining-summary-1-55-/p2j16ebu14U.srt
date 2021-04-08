@@ -1,0 +1,129 @@
+1
+00:00:01,240 --> 00:00:06,090
+So here's the final version of our 5-stage
+pipelined data path.
+
+2
+00:00:06,090 --> 00:00:11,840
+To deal with data hazards we've added stall
+logic to the IF and RF input registers.
+
+3
+00:00:11,840 --> 00:00:16,610
+We've also added bypass muxes on the output
+of the register file read ports so we can
+
+4
+00:00:16,610 --> 00:00:21,250
+route values from later in the data path if
+we need to access a register value that's
+
+5
+00:00:21,250 --> 00:00:25,109
+been computed but not yet written to the register
+file.
+
+6
+00:00:25,109 --> 00:00:30,519
+We also made a provision to insert NOPs into
+the pipeline after the RF stage if the IF
+
+7
+00:00:30,519 --> 00:00:33,810
+and RF stages are stalled.
+
+8
+00:00:33,810 --> 00:00:40,040
+To deal with control hazards, we speculate
+that the next instruction is at PC+4.
+
+9
+00:00:40,040 --> 00:00:45,330
+But for JMPs and taken branches, that guess
+is wrong so we added a provision for annulling
+
+10
+00:00:45,330 --> 00:00:48,870
+the instruction in the IF stage.
+
+11
+00:00:48,870 --> 00:00:53,840
+To deal with exceptions and interrupts we
+added instruction muxes in all but the final
+
+12
+00:00:53,840 --> 00:00:55,550
+pipeline stage.
+
+13
+00:00:55,550 --> 00:01:01,010
+An instruction that causes an exception is
+replaced by our magic BNE instruction to capture
+
+14
+00:01:01,010 --> 00:01:03,030
+its PC+4 value.
+
+15
+00:01:03,030 --> 00:01:05,260
+And instructions in earlier stages are annulled.
+
+16
+00:01:05,260 --> 00:01:11,689
+All this extra circuitry has been added to
+ensure that pipelined execution gives the
+
+17
+00:01:11,689 --> 00:01:15,320
+same result as unpipelined execution.
+
+18
+00:01:15,320 --> 00:01:19,920
+The use of bypassing and branch prediction
+ensures that data and control hazards have
+
+19
+00:01:19,920 --> 00:01:24,090
+only a small negative impact on the effective
+CPI.
+
+20
+00:01:24,090 --> 00:01:28,710
+This means that the much shorter clock period
+translates to a large increase in instruction
+
+21
+00:01:28,710 --> 00:01:29,710
+throughput.
+
+22
+00:01:29,710 --> 00:01:34,780
+It's worth remembering the strategies we used
+to deal with hazards: stalling, bypassing
+
+23
+00:01:34,780 --> 00:01:36,749
+and speculation.
+
+24
+00:01:36,749 --> 00:01:41,310
+Most execution issues can be dealt with using
+one of these strategies, so keep these in
+
+25
+00:01:41,310 --> 00:01:46,479
+mind if you ever need to design a high-performance
+pipelined system.
+
+26
+00:01:46,479 --> 00:01:49,100
+This completes our discussion of pipelining.
+
+27
+00:01:49,100 --> 00:01:54,060
+We'll explore other avenues to higher processor
+performance in the last lecture, which discusses
+
+28
+00:01:54,060 --> 00:01:55,179
+parallel processing.

@@ -1,0 +1,244 @@
+1
+00:00:00,830 --> 00:00:04,770
+Our final challenge is figuring out how to
+represent signed integers, for example, what
+
+2
+00:00:04,770 --> 00:00:08,800
+should be our representation for the number
+-2000?
+
+3
+00:00:08,800 --> 00:00:14,040
+In decimal notation, the convention is to
+precede the number with a "+" or "-" to indicate
+
+4
+00:00:14,040 --> 00:00:18,400
+whether it's positive or negative, usually
+omitting the "+" to simplify the notation
+
+5
+00:00:18,400 --> 00:00:22,580
+for positive numbers.
+We could adopt a similar notation -- called
+
+6
+00:00:22,580 --> 00:00:28,430
+"signed magnitude" -- in binary, by allocating
+a separate bit at the front of the binary
+
+7
+00:00:28,430 --> 00:00:33,830
+string to indicate the sign, say "0" for positive
+numbers and "1" for negative numbers.
+
+8
+00:00:33,830 --> 00:00:39,010
+So the signed-magnitude representation for
+-2000 would be an initial "1" to indicate
+
+9
+00:00:39,010 --> 00:00:43,570
+a negative number, followed by the representation
+for 2000 (as described on the previous two
+
+10
+00:00:43,570 --> 00:00:47,540
+slides).
+However there are some complications in using
+
+11
+00:00:47,540 --> 00:00:51,980
+a signed-magnitude representation.
+There are two possible binary representations
+
+12
+00:00:51,980 --> 00:00:57,140
+for zero: "+0" and "-0".
+This makes the encoding slightly inefficient
+
+13
+00:00:57,140 --> 00:01:02,300
+but, more importantly, the circuitry for doing
+addition of signed-magnitude numbers is different
+
+14
+00:01:02,300 --> 00:01:07,220
+than the circuitry for doing subtraction.
+Of course, we're used to that – in elementary
+
+15
+00:01:07,220 --> 00:01:12,330
+school we learned one technique for addition
+and another for subtraction.
+
+16
+00:01:12,330 --> 00:01:17,580
+To keep the circuitry simple, most modern
+digital systems use the two's complement binary
+
+17
+00:01:17,580 --> 00:01:22,390
+representation for signed numbers.
+In this representation, the high-order bit
+
+18
+00:01:22,390 --> 00:01:27,370
+of an N-bit two's complement number has a
+negative weight, as shown in the figure.
+
+19
+00:01:27,370 --> 00:01:32,100
+Thus all negative numbers have a 1 in the
+high-order bit and, in that sense, the high-order
+
+20
+00:01:32,100 --> 00:01:37,640
+bit is serving as the "sign bit" – if it's
+1, the represented number is negative.
+
+21
+00:01:37,640 --> 00:01:41,820
+The most negative N-bit number has a 1-bit
+in the high-order position, representing the
+
+22
+00:01:41,820 --> 00:01:48,120
+value -2^(N-1).
+The most positive N-bit number has a 0 in
+
+23
+00:01:48,120 --> 00:01:52,940
+the negative-weight high-order bit and 1's
+for all the positive-weight bits, representing
+
+24
+00:01:52,940 --> 00:02:00,030
+the value 2^(N-1)-1.
+This gives us the range of possible values
+
+25
+00:02:00,030 --> 00:02:07,220
+– for example, in an 8-bit two's complement
+representation, the most negative number is
+
+26
+00:02:07,220 --> 00:02:16,220
+-2^7 = -128 and the most positive number is
+2^7 – 1 = 127.
+
+27
+00:02:16,220 --> 00:02:20,700
+If all N bits are 1, think of that as the
+sum of the most negative number with the most
+
+28
+00:02:20,700 --> 00:02:31,120
+positive number, i.e., -2^(N-1) + 2^(N-1)-1,
+which equals -1.
+
+29
+00:02:31,120 --> 00:02:38,030
+And, of course, if all N bits are 0, that's
+the unique representation of 0.
+
+30
+00:02:38,030 --> 00:02:44,390
+Let's see what happens when we add the N-bit
+values for -1 and 1, keeping an N-bit answer.
+
+31
+00:02:44,390 --> 00:02:49,280
+In the rightmost column, 1 plus 1 is 0, carry
+the 1.
+
+32
+00:02:49,280 --> 00:02:54,280
+In the second column, the carry of 1 plus
+1 plus 0 is 0, carry the 1.
+
+33
+00:02:54,280 --> 00:03:00,400
+And so on – the result is all zero's, the
+representation for 0… perfect!
+
+34
+00:03:00,400 --> 00:03:06,320
+Notice that we just used ordinary binary addition,
+even when one or both of the operands are
+
+35
+00:03:06,320 --> 00:03:11,960
+negative.
+Two's complement is perfect for N-bit arithmetic!
+
+36
+00:03:11,960 --> 00:03:17,710
+To compute B - A, we can just use addition
+and compute B + (-A).
+
+37
+00:03:17,710 --> 00:03:22,239
+So now we just need to figure out the two's
+complement representation for –A, given
+
+38
+00:03:22,239 --> 00:03:29,849
+the two's complement representation for A.
+Well, we know that A + (-A) = 0 and using
+
+39
+00:03:29,849 --> 00:03:34,870
+the example above, we can rewrite 0 as 1 +
+(-1).
+
+40
+00:03:34,870 --> 00:03:41,650
+Reorganizing terms, we see that –A equals
+1 plus the quantity (-1) – A.
+
+41
+00:03:41,650 --> 00:03:47,380
+As we saw above, the two's complement representation
+for -1 is all 1-bits, so we can write that
+
+42
+00:03:47,380 --> 00:03:55,660
+subtraction as all 1's minus the individual
+bits of A: A_0, A_1, … up to A_N-1.
+
+43
+00:03:55,660 --> 00:04:05,290
+If a particular bit A_i is 0, then 1-A_i = 1
+and if A_i is 1, then 1-A_i = 0.
+
+44
+00:04:05,290 --> 00:04:10,850
+So in each column, the result is the bitwise
+complement of A_i, which we'll write using
+
+45
+00:04:10,850 --> 00:04:14,730
+the C-language bitwise complement operator
+tilde.
+
+46
+00:04:14,730 --> 00:04:19,959
+So we see that –A equals the bitwise complement
+of A plus 1.
+
+47
+00:04:19,959 --> 00:04:23,779
+Ta-dah!
+To practice your skill with two's complement,
+
+48
+00:04:23,779 --> 00:04:28,419
+try your hand at the following exercises.
+All you need to remember is how to do binary
+
+49
+00:04:28,420 --> 00:04:33,480
+addition and two's complement negation (which
+is "bitwise complement and add 1").

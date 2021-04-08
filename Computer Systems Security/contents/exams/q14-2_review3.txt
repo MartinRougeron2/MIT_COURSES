@@ -1,0 +1,415 @@
+6.858 Quiz 2 Review
+===================
+
+Medical Device Security
+-----------------------
+
+FDA standards
+
+Semmelweis e.g. => Should wash hands
+
+Defirbillator
+  2003: Implanted defibrillator use wifi. What could
+    possibly go wrong?
+  Inside: battery, radio, hermetically sealed	
+
+Why wireless?
+  Old way: Inject a needle into arm to twist dial. :(
+
+Q: What are security risks of wireless?
+
+Unsafe practices - implementation errors.
+  "MAUDE"
+  Cause of death: buffer overflow in infusion pump.
+    Error detected, but brought to safe mode, turn off pump.
+    Patient died after increase in brain pressure because
+      no pump, because of buffer overflow.
+
+#### Human factors and software
+
+Why unique?
+
+500+ deaths
+
+E.g. User interface for delivering dosage to patients.
+  hh:mm:ss --> order of magnitude error
+    20 min vs the intended 20 hrs
+
+#### Managerial issues
+
+Medical devices also need to take software updates
+
+E.g. McAffee classified DLL as malicious, quarantines,
+messed up hospital services.
+
+E.g. hospitals using Windows XP
+  No more security updates from Microsoft
+  Still new medical products shipping Windows XP
+
+
+#### FDA Cybersecurity Guidance
+
+What is expected to be seen from manufacturers re: how they
+have thought through the security problems / risks /
+mitigation strategies / residual risks?
+
+
+#### Adversary stuff
+
+Defibrillator & Implants
+
+  Device prorammed w. wand, speaking proprietary protocol
+    over specially licensed spectrum. (good idea? wrt
+    security?)
+  Patient awake but numbed and sedated
+  Six people weave electrodes through blood vessel....
+
+  Patient given a base station, looks like AP
+    Speaks proprietary RF to implant
+    Data sent via Internet to healthcare company
+
+  Communication between device and programmer
+    No crypto / auth -- Data sent in plaintext
+      Device state
+	Patient name
+	DOB
+	Make & Model
+	Serial no.
+	more...
+
+  Use a software radio (USRP/GNU Radio Software)
+
+  Q: Can you wirelessly induce a fatal heart rhythm
+  A: Yes. Device emitted 500V shock in 1 msec.
+     E.g. get kicked in chest by horse.
+
+  Devices fixed through software updates?
+
+#### Healthcare Providers
+
+Screenshot of "Hospitals Stuck with Windows XP"
+  600 Service Pack 0 Windows XP Devices in the Hospital !!
+
+Average time to infection for healthcare devices
+  12 days w/o protection
+  1 year w/ antivirus
+
+#### Vendors are a common source of infection
+
+USB Drive is a common vector for infection
+
+
+#### Medical device signatures over download
+
+Click here to download software update
+  Website appears to contain malware
+  Chrome: Safe web browsing service detected "ventilator"
+    malware
+
+"Drug Compounder" example
+  Runs Windows XP embedded
+  **FDA Expects Manufacturers to keep SW Up To Date**
+  **Manufacturers claim cannot update because of FDA**
+
+
+#### How significant intentional malicious SW malfunctions?
+
+E.g. 1: Chicago 1982: Somebody inserts cyanide into Tylenol
+
+E.g. 2: Somebody posted flashing images on epillepsy support group
+website.
+
+
+#### Why do you trust sensors?
+
+E.g. smartphones.
+  Batteryless sensors demo. Running on an MSP430.
+
+uC believes anything coming from ADC to uC
+
+Possible to do something related to resonsant freq of wire
+there?
+
+Inject interference into the baseband
+  Hard to filter in the analog.
+  => Higher quality audio w interference than microphone.
+
+Send a signal that matches resonant frequency of the wire.
+
+Treat circuit as unintentional demodulator
+  Can use high frequency signal to trick uC into thinking
+  there is a low frequency signal due to knowing interrupt
+  frequncy of uC and related properties.
+
+Cardiac devices vulnerable to baseband EMI
+  Insert intentional EM interferencei in baseband
+
+Send pulsed sinewave to trick Defib into thinking heart
+beating correctly
+  Works in vtiro
+  Hard to repliacte in a body or saline solution
+
+Any defenses?
+  Send an extra pacing pulse right after a beat
+  => A real heart shouldn't send a response.
+
+
+#### Detecting malware at power outlets
+
+Embedded system <--> WattsUpDoc <--> POWER-OUTLET
+
+
+#### Bigger problems than security?
+
+Q: True or false: Hackers breaking into medical devices is
+the biggest risk at the moment.
+
+A: False. Wide scale unavailability of patient care and
+integrity of medical sensors are more important.
+
+Security cannot be bolted on
+  E.g. MRI on windows 95
+  E.g. Pacemaker programmer running on OS/2
+
+Check gmail on medical devices, etc
+
+Run pandora on medical machine
+
+Keep clinical workflow predictable
+
+
+Tor
+---
+
+(Resources)
+  * Paper
+  * Blog posts 1, 2, 3
+  * Lec Notes
+  * Old Quizzes
+
+---
+
+Tor
+  Goals
+  Mechanisms
+    Streams/Circuits
+    Rendezvous Points & Hidden services
+  Directory Servers
+  Attacks & Defenses
+  Practice Problems
+
+---
+
+Goals
+  Anonymous communication
+  Responder anonymity
+  Deployability / usability (why a sec goal?)
+  TCP layer (why?)
+  NOT p2p
+
+---
+
+Circuit creation
+
+Alice multiplexes many TCP streams onto a few circuits
+  Why? Low-latency system, expensive to make new circ.
+
+Directory server
+  State of network, OR PKs, OR IPs
+
+ORs
+  All connected to one another with TLS
+  See blog post 1: Authorities vote on consensus directory document.
+
+[ Draw example of Alice building a new circuit ]
+[ and connecting to Twitter.                   ]
+
+---
+
+Rendezvous Points & Hidden services
+
+[ Add an example of Alice connecting to Bob's  ]
+[ hidden service on Tor                        ]
+
+Bob runs hidden service
+  Decides on long term PK/SK pair
+  Publish introduction points, advertises on lookup service
+  Builds a circuit to Intro Points, waits for messages
+
+Alice wants to connect to Bob's HS
+  Build circuit to new Rendezvous Point (any OR)
+    Gives cookie to RP
+  Builds circuit to one of Bob's intro point and sends message
+    with {RP, Cookie, g^x}_PKbob
+  Bob builds circ to RP, sends Cookie, g^y, H(K) 
+  RP Connects Alice and Bob
+
+
+### Old Quizzes
+
+Quiz 2, 2009
+
+Q: Bob is running a hidden service on top of Tor, and wants
+to know how frequently he should choose new introduction
+points. Bob cares about his identity not being exposed, and
+about the availability of his service. Help Bob make an
+informed choice by explaining the costs and benefits of
+rotating introduction points either more or less frequently
+
+A: Rotating introduction points more frequently helps avoid
+DoS attacks on a fixed set of introduction points. Rotation
+also helps prevent a single introduction point from gaining
+long-term statistics on how often the service is accessed.
+Rotation does not improve Bob's anonymity, because Bob can
+keep building new circuits to the same introduction point.
+More frequent rotation places additional load on directory
+services that provide lookup functionality. However, this
+does not compromise anonymity either, since lookups and
+updates happen via anonymous Tor circuits as well.
+
+---
+
+Quiz 2, 2010
+
+Alice wants to improve the privacy of Tor, and changes
+the design slightly. In Alice’s design, clients choose an
+exit node, and instead of building one circuit to the exit
+node, they build two circuits to the same exit node. Once
+the client builds both circuits, it sends the same
+randomly-chosen cookie to the exit node via each of the
+circuits, to tell the exit node that the two circuits belong
+to the same client. (After this point, the client and the
+exit node use the same stream IDs on both circuits
+interchangeably.) When a client wants to send a packet to
+the exit node, it sends the packet via one of the two
+circuits, chosen at random. Similarly, when the exit node
+wants to send data back to the client, it uses one of the
+two circuits at random.
+
+Q9: What kinds of attacks against privacy does this scheme
+make more difficult?
+
+A9: Fingerprinting sites based on file sizes and access
+patterns, and timing analysis attacks, especially on
+intermediate Tor onion router nodes.
+
+Q10: What kinds of attacks against privacy does this scheme
+make easier?
+
+A10: If either circuit is compromised, the user’s privacy is
+lost. Denial of service attacks are easier.
+
+Q11: More state kept at exit nodes, including packet
+buffering, makes them more susceptible to DoS attacks.
+Guessing the cookie may allow an adversary to snoop on
+packets.
+
+Q12: Propose a modified design for Tor’s hidden services
+that would allow a hidden service to require CAPTCHAs before
+spending resources on a client’s request. Explain who
+generates the CAPTCHA in your design, who is responsible for
+checking the solution, and how the steps required to connect
+to a CAPTCHA-enabled hidden service change (along the lines
+of the list in Section 5.1 of the paper).
+
+A12: When the service registers with the introduction point,
+the service generates a set of CAPTCHA images, and sends
+them to the introduction point. When a client connects to
+the introduction point, the introduction point replies with
+one of the CAPTCHAs. The user solves the CAPTCHA, and
+contacts the introduction point again, with her CAPTCHA
+solution and rendezvous point address and cookie.  Once the
+introduction point forwards the client’s CAPTCHA solution
+and rendezvous information to the service, the service
+checks the CAPTCHA solution, and contacts the client’s
+rendezvous point if the CAPTCHA was solved correctly.
+
+The above solution still generates load for the service, in
+that it has to verify CAPTCHA solutions.  An alternative may
+be for the service to send hashes of CAPTCHA solutions to
+the introduction point.  The introduction point can then
+verify if the hash of the client’s CAPTCHA answer matches
+the hash provided by the service. However, even if the
+introduction point is compromised, it cannot obtain valid
+CAPTCHA answers from the hashes.
+
+Several other approaches were acceptable too
+
+---
+
+Quiz 2 2011
+
+Q8: An “Occupy Northbridge” protestor has set up a Twitter
+account to broadcast messages under an assumed name. In
+order to remain anonymous, he decides to use Tor to log into
+the account.  He installs Tor on his computer (from a
+trusted source) and enables it, launches Firefox, types in
+www.twitter.com into his browser, and proceeds to log in.
+What adversaries may be able to now compromise the protestor
+in some way as a result of him using Tor? Ignore security
+bugs in the Tor client itself.
+
+A8: The protestor is vulnerable to a malicious exit node
+intercepting his non-HTTPS-protected connection. (Since Tor
+involves explicitly proxying through an exit node, this is
+easier than intercepting HTTP over the public internet.)
+
+
+Q9: The protestor now uses the same Firefox browser to
+connect to another web site that hosts a discussion forum,
+also via Tor (but only after building a fresh Tor circuit).
+His goal is to ensure that Twitter and the forum cannot
+collude to determine that the same person accessed Twitter
+and the forum. To avoid third-party tracking, he deletes all
+cookies, HTML5 client-side storage, history, etc.  from his
+browser between visits to different sites. How could an
+adversary correlate his original visit to Twitter and his
+visit to the forum, assuming no software bugs, and a large
+volume of other traffic to both sites?
+
+A9: An adversary can fingerprint the protestor’s browser,
+using the user-agent string, the plug-ins installed on that
+browser, window dimensions, etc., which may be enough to
+strongly correlate the two visits.
+
+---
+
+Quiz 2, 2012
+
+Q2: Alyssa wants to learn the identity of a hidden service
+running on Tor. She plans to set up a malicious Tor OR, set
+up a rendezvous point on that malicious Tor OR, and send
+this rendezvous point’s address to the introduction point of
+the hidden service. Then, when the hidden service connects
+to the malicious rendezvous point, the malicious Tor OR will
+record where the connection is coming from.
+
+Will Alyssa’s plan work? Why or why not?
+
+A2: Will not work. A new Tor circuit is constructed between
+the hidden service and the rendezvous point. Assuming the
+right precautions are taken by the hidden service (e.g.,
+building the circuit through a sufficient number of
+randomly-chosen nodes, and re-building the circuit after
+some suitably short period of time), the rendezvous point
+will not be able to learn the IP address of the hidden
+service.
+
+---
+
+Quiz 2, 2013
+
+Q9: Tor uses TLS (which provides confidentiality and
+integrity) between onion routers, and encrypts cells
+traversing these routers with AES (see Figure 1). In
+addition, Tor checks integrity at the edges of each stream.
+Why is it necessary to perform end-to-end stream integrity
+in addition to TLS between routers?
+
+A9: Without end-to-end integrity checking, malicious routers
+may be able to change the ciphertext of cells in sensible
+ways that are undetectable at the edges. This will allow a
+malicious router in the middle of a circuit to corrupt
+packets and perhaps observe which outgoing packets from some
+exit node get corrupted as a result.
+

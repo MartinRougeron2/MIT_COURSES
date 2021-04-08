@@ -1,0 +1,134 @@
+1
+00:00:02,290 --> 00:00:08,550
+This video is optional, but we wanted to answer
+the question "Are there uncomputable functions?"
+
+2
+00:00:08,550 --> 00:00:14,941
+Yes, there are well-defined discrete functions
+that cannot be computed by any TM, i.e., no
+
+3
+00:00:14,941 --> 00:00:22,110
+algorithm can compute f(x) for arbitrary finite
+x in a finite number of steps.
+
+4
+00:00:22,110 --> 00:00:28,860
+It's not that we don't know the algorithm,
+we can actually prove that no algorithm exists.
+
+5
+00:00:28,860 --> 00:00:35,430
+So the finite memory limitations of FSMs wasn't
+the only barrier as to whether we can solve
+
+6
+00:00:35,430 --> 00:00:37,570
+a problem.
+
+7
+00:00:37,570 --> 00:00:42,960
+The most famous uncomputable function is the
+so-called Halting function.
+
+8
+00:00:42,960 --> 00:00:46,870
+When TMs undertake a computation there two
+possible outcomes.
+
+9
+00:00:46,870 --> 00:00:53,470
+Either the TM writes an answer onto the tape
+and halts, or the TM loops forever.
+
+10
+00:00:53,470 --> 00:00:57,010
+The Halting function tells which outcome we'll
+get:
+
+11
+00:00:57,010 --> 00:01:05,640
+given two integer arguments k and j, the Halting
+function determines if the kth TM halts when
+
+12
+00:01:05,640 --> 00:01:09,360
+given a tape containing j as the input.
+
+13
+00:01:09,360 --> 00:01:14,409
+Let's quick sketch an argument as to why the
+Halting function is not computable.
+
+14
+00:01:14,409 --> 00:01:22,180
+Well, suppose it was computable, then it would
+be equivalent to some TM, say T_H.
+
+15
+00:01:22,180 --> 00:01:30,160
+So we can use T_H to build another TM, T_N
+(the "N" stands for nasty!) that processes
+
+16
+00:01:30,160 --> 00:01:34,119
+its single argument and either LOOPs or HALTs.
+
+17
+00:01:34,119 --> 00:01:41,960
+T_N[X] is designed to loop if TM X given input
+X halts.
+
+18
+00:01:41,960 --> 00:01:49,799
+And vice versa: T_N[X] halts if TM X given
+input X loops.
+
+19
+00:01:49,799 --> 00:01:56,020
+The idea is that T_N[X] does the opposite
+of whatever T_X[X] does.
+
+20
+00:01:56,020 --> 00:02:04,720
+T_N is easy to implement assuming that we
+have T_H to answer the "halts or loops" question.
+
+21
+00:02:04,720 --> 00:02:10,880
+Now consider what happens if we give N as
+the argument to T_N.
+
+22
+00:02:10,880 --> 00:02:20,230
+From the definition of T_N, T_N[N] will LOOP
+if the halting function tells us that T_N[N]
+
+23
+00:02:20,230 --> 00:02:22,180
+halts.
+
+24
+00:02:22,180 --> 00:02:32,739
+And T_N[N] will HALT if the halting function
+tells us that T_N[N] loops.
+
+25
+00:02:32,739 --> 00:02:38,959
+Obviously T_N[N] can't both LOOP and HALT
+at the same time!
+
+26
+00:02:38,959 --> 00:02:45,599
+So if the Halting function is computable and
+T_H exists, we arrive at this impossible behavior
+
+27
+00:02:45,599 --> 00:02:49,420
+for T_N[N].
+
+28
+00:02:49,420 --> 00:02:55,769
+This tells us that T_H cannot exist and hence
+that the Halting function is not computable.

@@ -1,0 +1,164 @@
+1
+00:00:00,340 --> 00:00:05,860
+Given the CMOS circuit with pull-down shown
+here, we can generate the corresponding function
+
+2
+00:00:05,860 --> 00:00:15,740
+that this CMOS circuit represents which is
+NOT(F) = (A+B)C + D.
+
+3
+00:00:15,740 --> 00:00:25,060
+So F = ((A+B)C + D) the whole thing negated.
+This function can be expressed as a truth
+
+4
+00:00:25,060 --> 00:00:30,790
+table which describes the output that the
+function produces for any set of inputs.
+
+5
+00:00:30,790 --> 00:00:36,350
+All of the possible input combinations are
+enumerated, and then the value of F is specified
+
+6
+00:00:36,350 --> 00:00:42,760
+for each of those combinations.
+For this function, F, for example, if A=0
+
+7
+00:00:42,760 --> 00:00:54,660
+B=0 C=0 and D=0, then (A+B)C = 0 that ORed
+with D = 0, and finally the entire thing is
+
+8
+00:00:54,660 --> 00:01:08,319
+negated, so F = 1.
+For A=0 B=0 C=0 and D=1, (A+B)C = 0 + D=1
+
+9
+00:01:08,319 --> 00:01:12,100
+gives us 1 and the whole thing negated is
+F=0.
+
+10
+00:01:12,100 --> 00:01:17,759
+In the same way, we can complete the rest
+of the truth table, and we get.
+
+11
+00:01:17,759 --> 00:01:33,030
+1 0 1 0 0 0 1 0 0 0 1 0 0 0
+Given a truth table, one can be asked if the
+
+12
+00:01:33,030 --> 00:01:39,649
+function F that this truth table defines,
+can be implemented using a single CMOS gate.
+
+13
+00:01:39,649 --> 00:01:45,560
+To figure that out, we first convert the truth
+table to a logical equation for F.
+
+14
+00:01:45,560 --> 00:01:50,810
+Given this truth table, the function F can
+be expressed as a sum of products by listing
+
+15
+00:01:50,810 --> 00:02:00,520
+all terms that make F=1 and ORing them together.
+For this truth table F = NOT(A) NOT(B) NOT(C)
+
+16
+00:02:00,520 --> 00:02:10,869
++ NOT(A) B NOT(C) + A NOT(B) NOT(C).
+In order to determine if this function can
+
+17
+00:02:10,869 --> 00:02:16,510
+be implemented as a single CMOS circuit, the
+function F needs to be manipulated through
+
+18
+00:02:16,510 --> 00:02:23,420
+logic simplifications in order to see if NOT(F)
+can be written as a function of just the inputs
+
+19
+00:02:23,420 --> 00:02:31,629
+A, B, and C (without any negations of those
+inputs) together with ANDs and ORs.
+
+20
+00:02:31,629 --> 00:02:39,079
+We start with our function for F.
+Factoring out NOT(C), that equals NOT(C) (NOT(A)
+
+21
+00:02:39,079 --> 00:02:49,239
+NOT(B) + NOT(A) B + A NOT(B)).
+Rearranging the terms and repeating the first
+
+22
+00:02:49,239 --> 00:02:59,760
+one continues to produce the same function.
+So F = NOT(C) (NOT(A) NOT(B) + A NOT(B) +
+
+23
+00:02:59,760 --> 00:03:12,560
+NOT(A) B + NOT(A) NOT(B)).
+Noting that A X + NOT(A) X = X, this reduces
+
+24
+00:03:12,560 --> 00:03:22,030
+to: F = NOT(C) (NOT(B) + NOT(A)).
+We are almost there, we now want to convert
+
+25
+00:03:22,030 --> 00:03:31,450
+F to NOT(F) by negating the entire thing,
+so NOT(F) = NOT (NOT(C) (NOT(B) + NOT(A)).
+
+26
+00:03:31,450 --> 00:03:46,219
+To simplify this we make use of De Morgan's
+Law which states that NOT(AB) = NOT(A) + NOT(B).
+
+27
+00:03:46,219 --> 00:04:01,460
+And that NOT(A+B) = NOT(A) AND NOT(B).
+So NOT(F) = C + NOT(NOT(B) + NOT(A)), and
+
+28
+00:04:01,460 --> 00:04:12,790
+finally NOT(F) = C + (B A).
+Now that we have found that NOT(F) = C + BA,
+
+29
+00:04:12,790 --> 00:04:18,488
+we know that F can be implemented as a single
+CMOS gate because we were able to express
+
+30
+00:04:18,488 --> 00:04:25,060
+NOT(F) as a function that consists purely
+of our non-negated inputs, A, B, and C, together
+
+31
+00:04:25,060 --> 00:04:30,180
+with ANDs and ORs.
+The pull-down for this circuit would basically
+
+32
+00:04:30,180 --> 00:04:37,080
+implement NOT(F) so it would be series(A,B)
+in parallel with C.
+
+33
+00:04:37,080 --> 00:04:43,320
+The pull-up would be the inverse of that which
+is parallel(A,B) in series with C.

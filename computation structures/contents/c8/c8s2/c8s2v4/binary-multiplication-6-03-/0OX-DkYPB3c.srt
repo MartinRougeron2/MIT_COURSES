@@ -1,0 +1,398 @@
+1
+00:00:01,079 --> 00:00:06,700
+One of the biggest and slowest circuits in
+an arithmetic and logic unit is the multiplier.
+
+2
+00:00:06,700 --> 00:00:11,280
+We'll start by developing a straightforward
+implementation and then, in the next section,
+
+3
+00:00:11,280 --> 00:00:16,509
+look into tradeoffs to make it either smaller
+or faster.
+
+4
+00:00:16,509 --> 00:00:21,510
+Here's the multiplication operation for two
+unsigned 4-bit operands broken down into its
+
+5
+00:00:21,510 --> 00:00:24,090
+component operations.
+
+6
+00:00:24,090 --> 00:00:27,529
+This is exactly how we learned to do it in
+primary school.
+
+7
+00:00:27,529 --> 00:00:33,330
+We take each digit of the multiplier (the
+B operand) and use our memorized multiplication
+
+8
+00:00:33,330 --> 00:00:38,540
+tables to multiply it with each digit of the
+multiplicand (the A operand),
+
+9
+00:00:38,540 --> 00:00:44,640
+dealing with any carries into the next column
+as we process the multiplicand right-to-left.
+
+10
+00:00:44,640 --> 00:00:49,250
+The output from this step is called a partial
+product and then we repeat the step for the
+
+11
+00:00:49,250 --> 00:00:51,640
+remaining bits of the multiplier.
+
+12
+00:00:51,640 --> 00:00:56,150
+Each partial product is shifted one digit
+to the left, reflecting the increasing weight
+
+13
+00:00:56,150 --> 00:00:59,119
+of the multiplier digits.
+
+14
+00:00:59,119 --> 00:01:05,120
+In our case the digits are just single bits,
+i.e., they're 0 or 1 and the multiplication
+
+15
+00:01:05,120 --> 00:01:06,610
+table is pretty simple!
+
+16
+00:01:06,610 --> 00:01:13,010
+In fact, the 1-bit-by-1-bit binary multiplication
+circuit is just a 2-input AND gate.
+
+17
+00:01:13,010 --> 00:01:16,420
+And look Mom, no carries!
+
+18
+00:01:16,420 --> 00:01:20,580
+The partial products are N bits wide since
+there are no carries.
+
+19
+00:01:20,580 --> 00:01:25,450
+If the multiplier has M bits, there will be
+M partial products.
+
+20
+00:01:25,450 --> 00:01:30,390
+And when we add the partial products together,
+we'll get an N+M bit result if we account
+
+21
+00:01:30,390 --> 00:01:34,220
+for the possible carry-out from the high-order
+bit.
+
+22
+00:01:34,220 --> 00:01:38,640
+The easy part of the multiplication is forming
+the partial products - it just requires some
+
+23
+00:01:38,640 --> 00:01:40,030
+AND gates.
+
+24
+00:01:40,030 --> 00:01:46,610
+The more expensive operation is adding together
+the M N-bit partial products.
+
+25
+00:01:46,610 --> 00:01:52,320
+Here's the schematic for the combinational
+logic needed to implement the 4x4 multiplication,
+
+26
+00:01:52,320 --> 00:01:58,080
+which would be easy to extend for larger multipliers
+(we'd need more rows) or larger multiplicands
+
+27
+00:01:58,080 --> 00:01:59,930
+(we'd need more columns).
+
+28
+00:01:59,930 --> 00:02:06,710
+The M*N 2-input AND gates compute the bits
+of the M partial products.
+
+29
+00:02:06,710 --> 00:02:11,020
+The adder modules add the current row's partial
+product with the sum of the partial products
+
+30
+00:02:11,020 --> 00:02:13,080
+from the earlier rows.
+
+31
+00:02:13,080 --> 00:02:15,640
+Actually there are two types of adder modules.
+
+32
+00:02:15,640 --> 00:02:19,880
+The full adder is used when the modules needs
+three inputs.
+
+33
+00:02:19,880 --> 00:02:24,970
+The simpler half adder is used when only two
+inputs are needed.
+
+34
+00:02:24,970 --> 00:02:28,910
+The longest path through this circuit takes
+a moment to figure out.
+
+35
+00:02:28,910 --> 00:02:33,900
+Information is always moving either down a
+row or left to the adjacent column.
+
+36
+00:02:33,900 --> 00:02:40,349
+Since there are M rows and, in any particular
+row, N columns, there are at most N+M modules
+
+37
+00:02:40,349 --> 00:02:43,690
+along any path from input to output.
+
+38
+00:02:43,690 --> 00:02:50,810
+So the latency is order N, since M and N differ
+by just some constant factor.
+
+39
+00:02:50,810 --> 00:02:55,329
+Since this is a combinational circuit, the
+throughput is just 1/latency.
+
+40
+00:02:55,329 --> 00:02:58,650
+And the total amount of hardware is order
+N^2.
+
+41
+00:02:58,650 --> 00:03:03,890
+In the next section, we'll investigate how
+to reduce the hardware costs, or, separately,
+
+42
+00:03:03,890 --> 00:03:06,240
+how to increase the throughput.
+
+43
+00:03:06,240 --> 00:03:10,160
+But before we do that, let's take a moment
+to see how the circuit would change if the
+
+44
+00:03:10,160 --> 00:03:15,730
+operands were two's complement integers instead
+of unsigned integers.
+
+45
+00:03:15,730 --> 00:03:22,110
+With a two's complement multiplier and multiplicand,
+the high-order bit of each has negative weight.
+
+46
+00:03:22,110 --> 00:03:26,770
+So when adding together the partial products,
+we'll need to sign-extend each of the N-bit
+
+47
+00:03:26,770 --> 00:03:31,280
+partial products to the full N+M-bit width
+of the addition.
+
+48
+00:03:31,280 --> 00:03:35,770
+This will ensure that a negative partial product
+is properly treated when doing the addition.
+
+49
+00:03:35,770 --> 00:03:40,740
+And, of course, since the high-order bit of
+the multiplier has a negative weight, we'd
+
+50
+00:03:40,740 --> 00:03:44,989
+subtract instead of add the last partial product.
+
+51
+00:03:44,989 --> 00:03:46,590
+Now for the clever bit.
+
+52
+00:03:46,590 --> 00:03:51,160
+We'll add 1's to various of the columns and
+then subtract them later, with the goal of
+
+53
+00:03:51,160 --> 00:03:54,150
+eliminating all the extra additions caused
+by the sign-extension.
+
+54
+00:03:54,150 --> 00:03:59,500
+We'll also rewrite the subtraction of the
+last partial product as first complementing
+
+55
+00:03:59,500 --> 00:04:02,900
+the partial product and then adding 1.
+
+56
+00:04:02,900 --> 00:04:05,660
+This is all a bit mysterious but…
+
+57
+00:04:05,660 --> 00:04:11,019
+Here in step 3 we see the effect of all the
+step 2 machinations.
+
+58
+00:04:11,019 --> 00:04:16,149
+Let's look at the high order bit of the first
+partial product X3Y0.
+
+59
+00:04:16,149 --> 00:04:22,599
+If that partial product is non-negative, X3Y0
+is a 0, so all the sign-extension bits are
+
+60
+00:04:22,599 --> 00:04:24,909
+0 and can be removed.
+
+61
+00:04:24,909 --> 00:04:30,689
+The effect of adding a 1 in that position
+is to simply complement X3Y0.
+
+62
+00:04:30,689 --> 00:04:36,779
+On the other hand, if that partial product
+is negative, X3Y0 is 1, and all the sign-extension
+
+63
+00:04:36,779 --> 00:04:38,099
+bits are 1.
+
+64
+00:04:38,099 --> 00:04:44,990
+Now when we add a 1 in that position, we complement
+the X3Y0 bit back to 0, but we also get a
+
+65
+00:04:44,990 --> 00:04:46,819
+carry-out.
+
+66
+00:04:46,819 --> 00:04:51,740
+When that's added to the first sign-extension
+bit (which is itself a 1), we get zero with
+
+67
+00:04:51,740 --> 00:04:53,219
+another carry-out.
+
+68
+00:04:53,219 --> 00:04:58,999
+And so on, with all the sign-extension bits
+eventually getting flipped to 0 as the carry
+
+69
+00:04:58,999 --> 00:05:01,580
+ripples to the end.
+
+70
+00:05:01,580 --> 00:05:09,240
+Again the net effect of adding a 1 in that
+position is to simply complement X3Y0.
+
+71
+00:05:09,240 --> 00:05:13,969
+We do the same for all the other sign-extended
+partial products, leaving us with the results
+
+72
+00:05:13,969 --> 00:05:15,279
+shown here.
+
+73
+00:05:15,279 --> 00:05:19,319
+In the final step we do a bit of arithmetic
+on the remaining constants to end up with
+
+74
+00:05:19,319 --> 00:05:21,729
+this table of work to be done.
+
+75
+00:05:21,729 --> 00:05:26,009
+Somewhat to our surprise, this isn't much
+different than the original table for the
+
+76
+00:05:26,009 --> 00:05:28,169
+unsigned multiplication.
+
+77
+00:05:28,169 --> 00:05:32,979
+There are a few partial product bits that
+need to be complemented, and two 1-bits that
+
+78
+00:05:32,979 --> 00:05:35,499
+need to be added to particular columns.
+
+79
+00:05:35,499 --> 00:05:38,159
+The resulting circuitry is shown here.
+
+80
+00:05:38,159 --> 00:05:42,860
+We've changed some of the AND gates to NAND
+gates to perform the necessary complements.
+
+81
+00:05:42,860 --> 00:05:46,819
+And we've changed the logic necessary to deal
+with the two 1-bits that needed to be added
+
+82
+00:05:46,819 --> 00:05:48,869
+in.
+
+83
+00:05:48,869 --> 00:05:54,029
+The colored elements show the changes made
+from the original unsigned multiplier circuitry.
+
+84
+00:05:54,029 --> 00:05:59,409
+Basically, the circuit for multiplying two's
+complement operands has the same latency,
+
+85
+00:05:59,409 --> 00:06:02,419
+throughput and hardware costs as the original
+circuitry.

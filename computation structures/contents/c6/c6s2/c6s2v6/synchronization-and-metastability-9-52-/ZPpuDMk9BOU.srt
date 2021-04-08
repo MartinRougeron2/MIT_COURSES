@@ -1,0 +1,618 @@
+1
+00:00:01,050 --> 00:00:06,370
+Okay, it's finally time to investigate issues
+caused by asynchronous inputs to a sequential
+
+2
+00:00:06,370 --> 00:00:08,170
+logic circuit.
+
+3
+00:00:08,170 --> 00:00:12,530
+By "asynchronous" we mean that the timing
+of transitions on the input is completely
+
+4
+00:00:12,530 --> 00:00:16,090
+independent of the timing of the sequential
+logic clock.
+
+5
+00:00:16,090 --> 00:00:20,759
+This situation arises when the inputs arrive
+from the outside world where the timing of
+
+6
+00:00:20,759 --> 00:00:24,039
+events is not under our control.
+
+7
+00:00:24,039 --> 00:00:29,399
+As we saw at the end of Chapter 5, to ensure
+reliable operation of the state registers
+
+8
+00:00:29,399 --> 00:00:35,039
+inputs to a sequential logic system have to
+obey setup and hold time constraints relative
+
+9
+00:00:35,039 --> 00:00:37,829
+to the rising edge of the system clock.
+
+10
+00:00:37,829 --> 00:00:42,340
+Clearly if the input can change at anytime,
+it can change at time that would violate the
+
+11
+00:00:42,340 --> 00:00:44,060
+setup and hold times.
+
+12
+00:00:44,060 --> 00:00:50,039
+Maybe we can come up with a synchronizer circuit
+that takes an unsynchronized input signal
+
+13
+00:00:50,039 --> 00:00:54,800
+and produces a synchronized signal that only
+changes shortly after the rising edge of the
+
+14
+00:00:54,800 --> 00:00:56,399
+clock.
+
+15
+00:00:56,399 --> 00:01:02,260
+We'd use a synchronizer on each asynchronous
+input and solve our timing problems that way.
+
+16
+00:01:02,260 --> 00:01:05,790
+Here's a detailed specification for our synchronizer.
+
+17
+00:01:05,790 --> 00:01:12,680
+The synchronizer has two inputs, IN and CLK,
+which have transitions at time t_IN and t_C
+
+18
+00:01:12,680 --> 00:01:14,230
+respectively.
+
+19
+00:01:14,230 --> 00:01:19,310
+If IN's transition happens sufficiently before
+C's transition, we want the synchronizer to
+
+20
+00:01:19,310 --> 00:01:25,220
+output a 1 within some bounded time t_D after
+CLK's transition.
+
+21
+00:01:25,220 --> 00:01:30,020
+And if CLK's transition happens sufficient
+before IN's transition, we want the synchronizer
+
+22
+00:01:30,020 --> 00:01:34,690
+to output a 0 within time t_D after CLK's
+transition.
+
+23
+00:01:34,690 --> 00:01:41,240
+Finally, if the two transitions are closer
+together than some specified interval t_E,
+
+24
+00:01:41,240 --> 00:01:47,789
+the synchronizer can output either a 0 or
+a 1 within time t_D of CLK's transition.
+
+25
+00:01:47,789 --> 00:01:55,620
+Either answer is fine so long as it's a stable
+digital 0 or digital 1 by the specified deadline.
+
+26
+00:01:55,620 --> 00:01:58,580
+This turns out to be an unsolvable problem!
+
+27
+00:01:58,580 --> 00:02:04,650
+For no finite values of t_E and t_D can we
+build a synchronizer that's guaranteed to
+
+28
+00:02:04,650 --> 00:02:11,130
+meet this specification even when using components
+that are 100% reliable.
+
+29
+00:02:11,130 --> 00:02:14,470
+But can't we just use a D register to solve
+the problem?
+
+30
+00:02:14,470 --> 00:02:20,720
+We'll connect IN to the register's data input
+and connect CLK to the register's clock input.
+
+31
+00:02:20,720 --> 00:02:26,250
+We'll set the decision time t_D to the propagation
+delay of the register and the allowable error
+
+32
+00:02:26,250 --> 00:02:31,920
+interval to the larger of the register's setup
+and hold times.
+
+33
+00:02:31,920 --> 00:02:36,910
+Our theory is that if the rising edge of IN
+occurs at least t_SETUP before the rising
+
+34
+00:02:36,910 --> 00:02:42,100
+edge of CLK, the register is guaranteed to
+output a 1.
+
+35
+00:02:42,100 --> 00:02:47,920
+And if IN transitions more than t_HOLD after
+the rising edge of CLK, the register is guaranteed
+
+36
+00:02:47,920 --> 00:02:49,150
+to output a 0.
+
+37
+00:02:49,150 --> 00:02:51,740
+So far, so good.
+
+38
+00:02:51,740 --> 00:02:57,040
+If IN transitions during the setup and hold
+times with respect to the rising edge on CLK,
+
+39
+00:02:57,040 --> 00:03:01,650
+we know we've violated the dynamic discipline
+and we can't tell whether the register will
+
+40
+00:03:01,650 --> 00:03:04,350
+store a 0 or a 1.
+
+41
+00:03:04,350 --> 00:03:10,220
+But in this case, our specification lets us
+produce either answer, so we're good to go,
+
+42
+00:03:10,220 --> 00:03:11,220
+right?
+
+43
+00:03:11,220 --> 00:03:13,900
+Sadly, we're not good to go.
+
+44
+00:03:13,900 --> 00:03:19,060
+We're lured by the digital abstraction into
+assuming that even if we violate the dynamic
+
+45
+00:03:19,060 --> 00:03:24,360
+discipline that Q must be either 1 or 0 after
+the propagation delay.
+
+46
+00:03:24,360 --> 00:03:29,459
+But that isn't a valid assumption as we'll
+see when we look more carefully at the operation
+
+47
+00:03:29,459 --> 00:03:35,329
+of the register's master latch when B and
+C change at about the same time.
+
+48
+00:03:35,329 --> 00:03:39,710
+Recall that the master latch is really just
+a lenient MUX that can be configured as a
+
+49
+00:03:39,710 --> 00:03:44,329
+bi-stable storage element using a positive
+feedback loop.
+
+50
+00:03:44,329 --> 00:03:49,230
+When the latch is in memory mode, it's essentially
+a two-gate cyclic circuit whose behavior has
+
+51
+00:03:49,230 --> 00:03:52,900
+two constraints:
+the voltage transfer characteristic of the
+
+52
+00:03:52,900 --> 00:03:58,590
+two-gate circuit, shown in green on the graph,
+and that V_IN = V_OUT, a constraint that's
+
+53
+00:03:58,590 --> 00:04:01,170
+shown in red on the graph.
+
+54
+00:04:01,170 --> 00:04:04,500
+These two curves intersect at three points.
+
+55
+00:04:04,500 --> 00:04:07,680
+Our concern is the middle point of intersection.
+
+56
+00:04:07,680 --> 00:04:13,310
+If IN and CLK change at the same time, the
+voltage on Q may be in transition at the time
+
+57
+00:04:13,310 --> 00:04:17,630
+the MUX closes and enables the positive feedback
+loop.
+
+58
+00:04:17,630 --> 00:04:22,419
+So the initial voltage in the feedback loop
+may happen to be at or very near the voltage
+
+59
+00:04:22,419 --> 00:04:25,590
+of the middle intersection point.
+
+60
+00:04:25,590 --> 00:04:30,999
+When Q is at the metastable voltage, the storage
+loop is in an unstable equilibrium called
+
+61
+00:04:30,999 --> 00:04:32,840
+the metastable state.
+
+62
+00:04:32,840 --> 00:04:37,680
+In theory the system could balance at this
+point forever, but a small change in the voltages
+
+63
+00:04:37,680 --> 00:04:42,340
+in the loop will move the system away from
+the metastable equilibrium point and set it
+
+64
+00:04:42,340 --> 00:04:46,259
+irrevocably in motion towards the stable equilibrium
+points.
+
+65
+00:04:46,259 --> 00:04:50,990
+Here's the issue we face: we can't bound the
+amount of time the system will spend in the
+
+66
+00:04:50,990 --> 00:04:52,969
+metastable state.
+
+67
+00:04:52,969 --> 00:04:55,629
+Here's what we know about the metastable state.
+
+68
+00:04:55,629 --> 00:05:00,889
+It's in the forbidden zone of the digital
+signaling specifications and so corresponds
+
+69
+00:05:00,889 --> 00:05:03,919
+to an invalid logic level.
+
+70
+00:05:03,919 --> 00:05:08,020
+Violating the dynamic discipline means that
+our register is no longer guaranteed to produce
+
+71
+00:05:08,020 --> 00:05:10,610
+a digital output in bounded time.
+
+72
+00:05:10,610 --> 00:05:16,870
+A persistent invalid logic level can wreak
+both logical and electrical havoc in our sequential
+
+73
+00:05:16,870 --> 00:05:19,000
+logic circuit.
+
+74
+00:05:19,000 --> 00:05:24,529
+Since combinational logic gates with invalid
+inputs have unpredictable outputs, an invalid
+
+75
+00:05:24,529 --> 00:05:29,930
+signal may corrupt the state and output values
+in our sequential system.
+
+76
+00:05:29,930 --> 00:05:35,400
+At the electrical level, if an input to a
+CMOS gate is at the metastable voltage, both
+
+77
+00:05:35,400 --> 00:05:40,379
+PFET and NFET switches controlled by that
+input would be conducting, so we'd have a
+
+78
+00:05:40,379 --> 00:05:47,580
+path between V_DD and GROUND, causing a spike
+in the system's power dissipation.
+
+79
+00:05:47,580 --> 00:05:52,400
+It's an unstable equilibrium and will eventually
+be resolved by a transition to one of the
+
+80
+00:05:52,400 --> 00:05:55,190
+two stable equilibrium points.
+
+81
+00:05:55,190 --> 00:05:59,289
+You can see from the graph that the metastable
+voltage is in the high-gain region of the
+
+82
+00:05:59,289 --> 00:06:06,240
+VTC, so a small change in V_IN results in
+a large change in V_OUT, and once away from
+
+83
+00:06:06,240 --> 00:06:09,870
+the metastable point the loop voltage will
+move towards 0 or V_DD.
+
+84
+00:06:09,870 --> 00:06:17,319
+The time it takes for the system to evolve
+to a stable equilibrium is related to how
+
+85
+00:06:17,319 --> 00:06:23,990
+close Q's voltage was to the metastable point
+when the positive feedback loop was enabled.
+
+86
+00:06:23,990 --> 00:06:29,440
+The closer Q's initial voltage is to the metastable
+voltage, the longer it will take for the system
+
+87
+00:06:29,440 --> 00:06:32,389
+to resolve the metastability.
+
+88
+00:06:32,389 --> 00:06:37,490
+But since there's no lower bound on how close
+Q is to the metastable voltage, there's no
+
+89
+00:06:37,490 --> 00:06:40,979
+upper bound on the time it will take for resolution.
+
+90
+00:06:40,979 --> 00:06:47,460
+In other words, if you specify a bound, e.g.,
+t_D, on the time available for resolution,
+
+91
+00:06:47,460 --> 00:06:53,710
+there's a range of initial Q voltages that
+won't be resolved within that time.
+
+92
+00:06:53,710 --> 00:06:58,689
+If the system goes metastable at some point
+in time, then there's a non-zero probability
+
+93
+00:06:58,689 --> 00:07:04,219
+that the system will still be metastable after
+some interval T, for any finite choice of
+
+94
+00:07:04,219 --> 00:07:08,289
+T.
+The good news is that the probability of being
+
+95
+00:07:08,289 --> 00:07:14,219
+metastable at the end of the interval decreases
+exponentially with increasing T.
+
+96
+00:07:14,219 --> 00:07:18,240
+Note that every bistable system has at least
+one metastable state.
+
+97
+00:07:18,240 --> 00:07:24,819
+So metastability is the price we pay for building
+storage elements from positive feedback loops.
+
+98
+00:07:24,819 --> 00:07:29,280
+If you'd like to read a more thorough discussion
+of synchronizers and related problems and
+
+99
+00:07:29,280 --> 00:07:34,499
+learn about the mathematics behind the exponential
+probabilities, please see Chapter 10 of the
+
+100
+00:07:34,499 --> 00:07:36,530
+Course Notes.
+
+101
+00:07:36,530 --> 00:07:40,749
+Our approach to dealing with asynchronous
+inputs is to put the potentially metastable
+
+102
+00:07:40,749 --> 00:07:46,710
+value coming out of our D-register synchronizer
+into "quarantine" by adding a second register
+
+103
+00:07:46,710 --> 00:07:50,499
+hooked to the output of the first register.
+
+104
+00:07:50,499 --> 00:07:55,310
+If a transition on the input violates the
+dynamic discipline and causes the first register
+
+105
+00:07:55,310 --> 00:08:00,839
+to go metastable, it's not immediately an
+issue since the metastable value is stopped
+
+106
+00:08:00,839 --> 00:08:03,310
+from entering the system by the second register.
+
+107
+00:08:03,310 --> 00:08:08,159
+In fact, during the first half of the clock
+cycle, the master latch in the second register
+
+108
+00:08:08,159 --> 00:08:13,639
+is closed, so the metastable value is being
+completely ignored.
+
+109
+00:08:13,639 --> 00:08:19,050
+It's only at the next clock edge, an entire
+clock period later, that the second D register
+
+110
+00:08:19,050 --> 00:08:21,659
+will need a valid and stable input.
+
+111
+00:08:21,659 --> 00:08:25,909
+There's still some probability that the first
+register will be metastable after an entire
+
+112
+00:08:25,909 --> 00:08:31,449
+clock period, but we can make that probability
+as low as we wish by choosing a sufficiently
+
+113
+00:08:31,449 --> 00:08:33,759
+long clock period.
+
+114
+00:08:33,759 --> 00:08:38,729
+In other words, the output of the second register,
+which provides the signal used by the internal
+
+115
+00:08:38,729 --> 00:08:44,550
+combinational logic, will be stable and valid
+with a probability of our choosing.
+
+116
+00:08:44,550 --> 00:08:51,280
+Validity is not 100% guaranteed, but the failure
+times are measured in years or decades, so
+
+117
+00:08:51,280 --> 00:08:54,029
+it's not an issue in practice.
+
+118
+00:08:54,029 --> 00:08:58,320
+Without the second register, the system might
+see a metastability failure every handful
+
+119
+00:08:58,320 --> 00:09:03,519
+of hours - the exact failure rate depends
+on the transition frequencies and gains in
+
+120
+00:09:03,519 --> 00:09:05,990
+the circuit.
+
+121
+00:09:05,990 --> 00:09:11,480
+What happens if our clock period is short
+but we want a long quarantine time?
+
+122
+00:09:11,480 --> 00:09:15,120
+We can use multiple quarantine registers in
+series.
+
+123
+00:09:15,120 --> 00:09:19,680
+It's the total delay between when the first
+register goes metastable and when the synchronized
+
+124
+00:09:19,680 --> 00:09:25,470
+input is used by the internal logic that determines
+the failure probability.
+
+125
+00:09:25,470 --> 00:09:27,110
+The bottom line?
+
+126
+00:09:27,110 --> 00:09:32,199
+We can use synchronizing registers to quarantine
+potentially metastable signals for some period
+
+127
+00:09:32,199 --> 00:09:34,100
+of time.
+
+128
+00:09:34,100 --> 00:09:39,000
+Since the probability of still being metastable
+decreases exponentially with the quarantine
+
+129
+00:09:39,000 --> 00:09:44,329
+time, we can reduce the failure probability
+to any desired level.
+
+130
+00:09:44,329 --> 00:09:49,240
+Not a 100% guaranteed, but close enough that
+metastability is not a practical issue if
+
+131
+00:09:49,240 --> 00:09:51,050
+we use our quarantine strategy.

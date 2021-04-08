@@ -1,0 +1,406 @@
+1
+00:00:01,090 --> 00:00:06,300
+In order for multiple processes to be able
+to run on the same computer, using a shared
+
+2
+00:00:06,300 --> 00:00:11,350
+address space, we need to have an operating
+system that controls which process gets to
+
+3
+00:00:11,350 --> 00:00:16,350
+run at any given point in time and ensures
+that the state that is currently loaded into
+
+4
+00:00:16,350 --> 00:00:20,190
+the system is the state of the current process.
+
+5
+00:00:20,190 --> 00:00:24,660
+Through the following example we will take
+a closer look at how the operating system
+
+6
+00:00:24,660 --> 00:00:26,540
+for the beta works.
+
+7
+00:00:26,540 --> 00:00:31,760
+We begin by examining the code responsible
+for maintaining the current processor state
+
+8
+00:00:31,760 --> 00:00:36,470
+as well as scheduling which process should
+run at any given point in time.
+
+9
+00:00:36,470 --> 00:00:42,410
+The operating system uses a structure called
+MState to keep track of the value of the 32
+
+10
+00:00:42,410 --> 00:00:45,390
+registers for each of the running processes.
+
+11
+00:00:45,390 --> 00:00:50,860
+The UserMState variable holds the state of
+the currently running process.
+
+12
+00:00:50,860 --> 00:00:56,240
+The ProcTbl or process table, holds all the
+necessary state for each of the processes
+
+13
+00:00:56,240 --> 00:00:58,470
+that runs on the machine.
+
+14
+00:00:58,470 --> 00:01:05,899
+For each process, it stores the value of all
+of its registers in the State variable.
+
+15
+00:01:05,899 --> 00:01:08,729
+Additional state may be stored per process.
+
+16
+00:01:08,729 --> 00:01:14,130
+Examples of some additional state that would
+go in a process table are a page map per process
+
+17
+00:01:14,130 --> 00:01:16,840
+if we want to use virtual memory.
+
+18
+00:01:16,840 --> 00:01:22,219
+Another example, is a keyboard identifier,
+that associates hardware with a particular
+
+19
+00:01:22,219 --> 00:01:23,389
+process.
+
+20
+00:01:23,389 --> 00:01:29,158
+The Cur, or current variable, holds the index
+of the currently running process.
+
+21
+00:01:29,158 --> 00:01:34,479
+When we want to switch control from one process
+to another, we call the Scheduler.
+
+22
+00:01:34,479 --> 00:01:39,289
+The Scheduler first stores the state of the
+currently running process into the process
+
+23
+00:01:39,289 --> 00:01:40,419
+table.
+
+24
+00:01:40,419 --> 00:01:44,848
+Next, it increments the current process by
+1.
+
+25
+00:01:44,848 --> 00:01:50,869
+If the current process was process N – 1,
+then it goes back to process 0.
+
+26
+00:01:50,869 --> 00:01:56,929
+Finally, it reloads the user variable with
+the state for the new current process.
+
+27
+00:01:56,929 --> 00:02:02,319
+In order to be able to run a diagnostic program
+on one process that samples the values in
+
+28
+00:02:02,319 --> 00:02:09,810
+the PC of another process, a supervisor call
+named SamplePC is provided for you.
+
+29
+00:02:09,810 --> 00:02:15,930
+The C portion of the SVC handler is provided
+for you here.
+
+30
+00:02:15,930 --> 00:02:22,860
+It is incomplete, so our first goal is to
+determine what should replace the ???.
+
+31
+00:02:22,860 --> 00:02:30,510
+We are told that the way SamplePC SVC works
+is that it takes a process number p in R0,
+
+32
+00:02:30,510 --> 00:02:36,340
+and returns in R1 the value currently in the
+program counter of process p.
+
+33
+00:02:36,340 --> 00:02:42,250
+The handler shown here reads register 0 from
+the UserMState data structure and stores the
+
+34
+00:02:42,250 --> 00:02:45,180
+value into variable p.
+
+35
+00:02:45,180 --> 00:02:48,530
+This is the number of the process that is
+to be monitored.
+
+36
+00:02:48,530 --> 00:02:54,079
+In order to determine the value of the PC
+of process p, one can look up the value of
+
+37
+00:02:54,079 --> 00:03:00,150
+the XP register that was saved for process
+p the last time process p was run.
+
+38
+00:03:00,150 --> 00:03:04,349
+The XP register holds the value of the next
+PC address.
+
+39
+00:03:04,349 --> 00:03:12,069
+So reading the XP register from ProcTbl[p]
+tells us the next value of the pc for process
+
+40
+00:03:12,069 --> 00:03:13,420
+p.
+
+41
+00:03:13,420 --> 00:03:18,829
+The pc value is to be returned in register
+R1 of the current program.
+
+42
+00:03:18,829 --> 00:03:27,000
+This means that the missing code is UserMState.Regs[1]
+and that should be assigned the value of pc.
+
+43
+00:03:27,000 --> 00:03:32,879
+Suppose you have a compute-bound process consisting
+of a single 10,000 instruction loop.
+
+44
+00:03:32,879 --> 00:03:39,129
+You use the SamplePC supervisor call to sample
+the PC while running this loop.
+
+45
+00:03:39,129 --> 00:03:43,889
+You notice many repeated values in the results
+of the SamplePC code.
+
+46
+00:03:43,889 --> 00:03:49,879
+You realize that the reason this is happening
+is because every time your profiling process
+
+47
+00:03:49,879 --> 00:03:56,140
+gets scheduled to run, it makes many SamplePC
+calls but the other processes aren't running
+
+48
+00:03:56,140 --> 00:04:00,700
+so you are getting the same sampled PC multiple
+times.
+
+49
+00:04:00,700 --> 00:04:03,520
+How can the repeated samples be avoided?
+
+50
+00:04:03,520 --> 00:04:09,409
+To avoid repeated samples, we add a call to
+Scheduler() in our SamplePC handler.
+
+51
+00:04:09,409 --> 00:04:14,879
+This ensures that every time that the profiler
+process is scheduled, it only samples a single
+
+52
+00:04:14,879 --> 00:04:18,899
+PC value and then let's another process run.
+
+53
+00:04:18,899 --> 00:04:23,790
+Suppose that you continue using the original
+version of your SamplePC handler, which does
+
+54
+00:04:23,790 --> 00:04:30,000
+not call Scheduler, and you use it to test
+this code which repeatedly calls the GetKey()
+
+55
+00:04:30,000 --> 00:04:36,130
+supervisor call to read a character from the
+keyboard, and then calls the WrCh() supervisor
+
+56
+00:04:36,130 --> 00:04:40,520
+call to write the character that was just
+read.
+
+57
+00:04:40,520 --> 00:04:47,139
+We want to answer the question of which PC
+value will be the one reported the most often.
+
+58
+00:04:47,139 --> 00:04:53,740
+Address 0x100 which is the address of the
+GetKey() call is reported the most often because
+
+59
+00:04:53,740 --> 00:04:59,460
+most of the time when GetKey() is called,
+there is no key stroke waiting to be processed.
+
+60
+00:04:59,460 --> 00:05:03,870
+This means that the GetKey() call will get
+processed over and over again until there
+
+61
+00:05:03,870 --> 00:05:06,020
+is finally a key to process.
+
+62
+00:05:06,020 --> 00:05:12,520
+The result of this is that the PC value that
+shows up the most often is 0x100.
+
+63
+00:05:12,520 --> 00:05:17,000
+The last question we want to consider is what
+behavior is observed when the profiler which
+
+64
+00:05:17,000 --> 00:05:21,509
+is running in process 0 profiles process 0
+itself.
+
+65
+00:05:21,509 --> 00:05:27,740
+Assume that the profiler code consists primarily
+of one big loop which has a single call to
+
+66
+00:05:27,740 --> 00:05:32,949
+the SamplePC supervisor call at instruction
+0x1000.
+
+67
+00:05:32,949 --> 00:05:38,300
+The rest of the loop processes the data that
+was collected by the SamplePC call.
+
+68
+00:05:38,300 --> 00:05:44,470
+The question we want to answer is what is
+observed in the SamplePC results.
+
+69
+00:05:44,470 --> 00:05:48,229
+We are given 4 choices to select from.
+
+70
+00:05:48,229 --> 00:05:53,630
+The first choice to consider is whether or
+not all the sampled PC values point to the
+
+71
+00:05:53,630 --> 00:05:55,820
+kernel OS code.
+
+72
+00:05:55,820 --> 00:06:00,139
+This choice is false because if it were true
+it would mean that you somehow managed to
+
+73
+00:06:00,139 --> 00:06:05,830
+interrupt kernel code which is not allowed
+by the beta.
+
+74
+00:06:05,830 --> 00:06:12,650
+The next choice to consider is whether the
+sampled PC is always 0x1004.
+
+75
+00:06:12,650 --> 00:06:17,659
+This seems like it might be a correct choice
+because the SamplePC supervisor call is at
+
+76
+00:06:17,659 --> 00:06:28,199
+address 0x1000, so storing PC + 4 would result
+in 0x1004 being stored into the UserMState.Regs[XP].
+
+77
+00:06:28,199 --> 00:06:35,129
+However, if you look closely at the SamplePC
+handler you see that the XP register is read
+
+78
+00:06:35,129 --> 00:06:36,280
+from the ProcTbl.
+
+79
+00:06:36,280 --> 00:06:42,819
+But the UserMState regs are only written to
+ProcTbl when Scheduler() is called, so reading
+
+80
+00:06:42,819 --> 00:06:50,620
+the value from ProcTbl would provide the last
+value of the PC when process 0 was last interrupted.
+
+81
+00:06:50,620 --> 00:06:56,620
+To get the correct value, you would need to
+read UserMState.Regs[XP] instead.
+
+82
+00:06:56,620 --> 00:07:02,610
+The third choice is that the SamplePC call
+never returns.
+
+83
+00:07:02,610 --> 00:07:05,919
+There is no reason for this to be true.
+
+84
+00:07:05,919 --> 00:07:10,039
+Finally, the last choice is "None of the above".
+
+85
+00:07:10,039 --> 00:07:14,360
+Since none of the other choices were correct,
+this is the correct answer.

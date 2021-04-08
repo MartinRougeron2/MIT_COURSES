@@ -1,0 +1,593 @@
+1
+00:00:01,000 --> 00:00:05,520
+So, how hard can it be to build a communication
+channel?
+
+2
+00:00:05,520 --> 00:00:11,070
+Aren't they just logic circuits with a long
+wire that runs from one component to another?
+
+3
+00:00:11,070 --> 00:00:16,800
+A circuit theorist would tell you that wires
+in a schematic diagram are intended to represent
+
+4
+00:00:16,800 --> 00:00:22,779
+the equipotential nodes of the circuit, which
+are used to connect component terminals.
+
+5
+00:00:22,779 --> 00:00:27,550
+In this simple model, a wire has the same
+voltage at all points and any changes in the
+
+6
+00:00:27,550 --> 00:00:32,840
+voltage or current at one component terminal
+is instantly propagated to the other component
+
+7
+00:00:32,840 --> 00:00:36,030
+terminals connected to the same wire.
+
+8
+00:00:36,030 --> 00:00:41,850
+The notion of distance is abstracted out of
+our circuit models: terminals are either connected
+
+9
+00:00:41,850 --> 00:00:44,260
+by a wire, or they're not.
+
+10
+00:00:44,260 --> 00:00:49,020
+If there are resistances, capacitances, and
+inductances that need to be accounted for,
+
+11
+00:00:49,020 --> 00:00:53,140
+the necessary components can be added to the
+circuit model.
+
+12
+00:00:53,140 --> 00:00:54,250
+Wires are timeless.
+
+13
+00:00:54,250 --> 00:01:00,690
+They are used to show how components connect,
+but they aren't themselves components.
+
+14
+00:01:00,690 --> 00:01:06,000
+In fact, thinking of wires as equipotential
+nodes is a very workable model when the rate
+
+15
+00:01:06,000 --> 00:01:11,570
+of change of the voltage on the wire is slow
+compared to the time it takes for an electromagnetic
+
+16
+00:01:11,570 --> 00:01:14,910
+wave to propagate down the wire.
+
+17
+00:01:14,910 --> 00:01:19,430
+Only as circuit speeds have increased with
+advances in integrated circuit technologies
+
+18
+00:01:19,430 --> 00:01:24,240
+did this rule-of-thumb start to be violated
+in logic circuits where the components were
+
+19
+00:01:24,240 --> 00:01:29,240
+separated by at most 10's of inches.
+
+20
+00:01:29,240 --> 00:01:34,039
+In fact, it has been known since the late
+1800s that changes in voltage levels take
+
+21
+00:01:34,039 --> 00:01:37,509
+finite time to propagate down a wire.
+
+22
+00:01:37,509 --> 00:01:42,140
+Oliver Heaviside was a self-taught English
+electrical engineer who, in the 1880's, developed
+
+23
+00:01:42,140 --> 00:01:48,720
+a set of "telegrapher's equations" that described
+how signals propagate down wires.
+
+24
+00:01:48,720 --> 00:01:54,180
+Using these, he was able to show how to improve
+the rate of transmission on then new transatlantic
+
+25
+00:01:54,180 --> 00:01:57,700
+telegraph cable by a factor of 10.
+
+26
+00:01:57,700 --> 00:02:03,030
+We now know that for high-speed signaling
+we have to treat wires as transmission lines,
+
+27
+00:02:03,030 --> 00:02:06,100
+which we'll say more about in the next few
+slides.
+
+28
+00:02:06,100 --> 00:02:11,650
+In this domain, the distance between components
+and hence the lengths of wires is of critical
+
+29
+00:02:11,650 --> 00:02:16,440
+concern if we want to correctly predict the
+performance of our circuits.
+
+30
+00:02:16,440 --> 00:02:24,650
+Distance and signal propagation matter - real-world
+wires are, in fact, fairly complex components!
+
+31
+00:02:24,650 --> 00:02:29,930
+Here's an electrical model for an infinitesimally
+small segment of a real-world wire.
+
+32
+00:02:29,930 --> 00:02:35,510
+An actual wire is correctly modeled by imagining
+a many copies of the model shown here connected
+
+33
+00:02:35,510 --> 00:02:37,590
+end-to-end.
+
+34
+00:02:37,590 --> 00:02:41,930
+The signal, i.e., the voltage on the wire,
+is measured with respect to the reference
+
+35
+00:02:41,930 --> 00:02:45,220
+node which is also shown in the model.
+
+36
+00:02:45,220 --> 00:02:49,060
+There are 4 parameters that characterize the
+behavior of the wire.
+
+37
+00:02:49,060 --> 00:02:52,190
+R tells us the resistance of the conductor.
+
+38
+00:02:52,190 --> 00:02:56,660
+It's usually negligible for the wiring on
+printed circuit boards, but it can be significant
+
+39
+00:02:56,660 --> 00:03:00,000
+for long wires in integrated circuits.
+
+40
+00:03:00,000 --> 00:03:05,629
+L represents the self-inductance of the conductor,
+which characterizes how much energy will be
+
+41
+00:03:05,629 --> 00:03:12,950
+absorbed by the wire's magnetic fields when
+the current flowing through the wire changes.
+
+42
+00:03:12,950 --> 00:03:18,440
+The conductor and reference node are separated
+by some sort insulator (which might be just
+
+43
+00:03:18,440 --> 00:03:21,890
+air!) and hence form a capacitor with capacitance
+C.
+
+44
+00:03:21,890 --> 00:03:28,170
+Finally, the conductance G represents the
+current that leaks through the insulator.
+
+45
+00:03:28,170 --> 00:03:29,900
+Usually this is quite small.
+
+46
+00:03:29,900 --> 00:03:34,840
+The table shows the parameter values we might
+measure for wires inside an integrated circuit
+
+47
+00:03:34,840 --> 00:03:38,280
+and on printed circuit boards.
+
+48
+00:03:38,280 --> 00:03:43,980
+If we analyze what happens when sending signals
+down the wire, we can describe the behavior
+
+49
+00:03:43,980 --> 00:03:49,569
+of the wires using a single component called
+a transmission line, which has a characteristic
+
+50
+00:03:49,569 --> 00:03:53,049
+complex-valued impedance Z_0.
+
+51
+00:03:53,049 --> 00:03:58,190
+At high signaling frequencies and over the
+distances found on-chip or on circuit boards,
+
+52
+00:03:58,190 --> 00:04:03,700
+such as one might find in a modern digital
+system, the transmission line is lossless,
+
+53
+00:04:03,700 --> 00:04:10,040
+and voltage changes ("steps") propagate down
+the wire at the rate of 1/sqrt(LC) meters
+
+54
+00:04:10,040 --> 00:04:12,159
+per second.
+
+55
+00:04:12,159 --> 00:04:16,579
+Using the values given here for a printed
+circuit board, the characteristic impedance
+
+56
+00:04:16,579 --> 00:04:26,160
+is approximately 50 ohms and the speed of
+propagation is about 18 cm (7") per ns.
+
+57
+00:04:26,160 --> 00:04:31,300
+To send digital information from one component
+to another, we change the voltage on the connecting
+
+58
+00:04:31,300 --> 00:04:36,120
+wire, and that voltage step propagates from
+the sender to the receiver.
+
+59
+00:04:36,120 --> 00:04:40,090
+We have to pay some attention to what happens
+to that energy front when it gets to the end
+
+60
+00:04:40,090 --> 00:04:41,460
+of the wire!
+
+61
+00:04:41,460 --> 00:04:46,889
+If we do nothing to absorb that energy, conservation
+laws tell us that it reflects off the end
+
+62
+00:04:46,889 --> 00:04:52,139
+of the wire as an "echo" and soon our wire
+will be full of echoes from previous voltage
+
+63
+00:04:52,139 --> 00:04:54,280
+steps!
+
+64
+00:04:54,280 --> 00:04:58,720
+To prevent these echoes we have to terminate
+the wire with a resistance to ground that
+
+65
+00:04:58,720 --> 00:05:02,840
+matches the characteristic impedance of the
+transmission line.
+
+66
+00:05:02,840 --> 00:05:08,580
+If the signal can propagate in both directions,
+we'll need to terminate at both ends.
+
+67
+00:05:08,580 --> 00:05:13,150
+What this model is telling is the time it
+takes to transmit information from one component
+
+68
+00:05:13,150 --> 00:05:18,889
+to another and that we have to be careful
+to absorb the energy associated with the transmission
+
+69
+00:05:18,889 --> 00:05:22,730
+when the information has reached its destination.
+
+70
+00:05:22,730 --> 00:05:27,110
+With that little bit of theory as background,
+we're in a position to describe the real-world
+
+71
+00:05:27,110 --> 00:05:31,110
+consequences of poor engineering of our signal
+wires.
+
+72
+00:05:31,110 --> 00:05:36,470
+The key observation is that unless we're careful
+there can still be energy left over from previous
+
+73
+00:05:36,470 --> 00:05:41,020
+transmissions that might corrupt the current
+transmission.
+
+74
+00:05:41,020 --> 00:05:46,190
+The general fix to this problem is time, i.e.,
+giving the transmitted value a longer time
+
+75
+00:05:46,190 --> 00:05:49,409
+to settle to an interference-free value.
+
+76
+00:05:49,409 --> 00:05:54,170
+But slowing down isn't usually acceptable
+in high-performance systems, so we have to
+
+77
+00:05:54,170 --> 00:05:58,759
+do our best to minimize these energy-storage
+effects.
+
+78
+00:05:58,759 --> 00:06:03,560
+If the termination isn't exactly right, we'll
+get some reflections from any voltage step
+
+79
+00:06:03,560 --> 00:06:08,630
+reaching the end of the wire, and it will
+take a while for these echoes to die out.
+
+80
+00:06:08,630 --> 00:06:14,039
+In fact, as we'll see, energy will reflect
+off of any impedance discontinuity, which
+
+81
+00:06:14,039 --> 00:06:17,759
+means we'll want to minimize the number of
+such discontinuities.
+
+82
+00:06:17,759 --> 00:06:24,440
+We need to be careful to allow sufficient
+time for signals to reach valid logic levels.
+
+83
+00:06:24,440 --> 00:06:31,020
+The shaded region shows a transition of the
+wire A from 1 to 0 to 1.
+
+84
+00:06:31,020 --> 00:06:35,590
+The first inverter is trying to produce a
+1-output from the initial input transition
+
+85
+00:06:35,590 --> 00:06:41,180
+to 0, but doesn't have sufficient time to
+complete the transition on wire B before the
+
+86
+00:06:41,180 --> 00:06:43,800
+input changes again.
+
+87
+00:06:43,800 --> 00:06:49,139
+This leads to a runt pulse on wire C, the
+output of the second inverter, and we see
+
+88
+00:06:49,139 --> 00:06:55,400
+that the sequence of bits on A has been corrupted
+by the time the signal reaches C.
+
+89
+00:06:55,400 --> 00:07:00,210
+This problem was caused by the energy storage
+in the capacitance of the wire between the
+
+90
+00:07:00,210 --> 00:07:04,500
+inverters, which will limit the speed at which
+we can run the logic.
+
+91
+00:07:04,500 --> 00:07:11,390
+And here see we what happens when a large
+voltage step triggers oscillations in a wire,
+
+92
+00:07:11,390 --> 00:07:16,220
+called ringing, due to the wire's inductance
+and capacitance.
+
+93
+00:07:16,220 --> 00:07:20,710
+The graph shows it takes some time before
+the ringing dampens to the point that we have
+
+94
+00:07:20,710 --> 00:07:23,830
+a reliable digital signal.
+
+95
+00:07:23,830 --> 00:07:28,759
+The ringing can be diminished by spreading
+the voltage step over a longer time.
+
+96
+00:07:28,759 --> 00:07:34,110
+The key idea here is that by paying close
+attention to the design of our wiring and
+
+97
+00:07:34,110 --> 00:07:39,240
+the drivers that put information onto the
+wire, we can minimize the performance implications
+
+98
+00:07:39,240 --> 00:07:42,100
+of these energy-storage effects.
+
+99
+00:07:42,100 --> 00:07:45,280
+Okay, enough electrical engineering!
+
+100
+00:07:45,280 --> 00:07:48,319
+Suppose we have some information in our system.
+
+101
+00:07:48,319 --> 00:07:53,050
+If we preserve that information over time,
+we call that storage.
+
+102
+00:07:53,050 --> 00:07:58,129
+If we send that information to another component,
+we call that communication.
+
+103
+00:07:58,129 --> 00:08:03,599
+In the real world, we've seen that communication
+takes time and we have to budget for that
+
+104
+00:08:03,599 --> 00:08:05,819
+time in our system timing.
+
+105
+00:08:05,819 --> 00:08:11,800
+Our engineering has to accommodate the fundamental
+bounds on propagating speeds, distances between
+
+106
+00:08:11,800 --> 00:08:16,919
+components, and how fast we can change wire
+voltages without triggering the effects we
+
+107
+00:08:16,919 --> 00:08:18,970
+saw on the previous slide.
+
+108
+00:08:18,970 --> 00:08:24,940
+The upshot: our timing models will have to
+account for wire delays.
+
+109
+00:08:24,940 --> 00:08:29,169
+In Part 1 of this course, we had a simple
+timing model that assigned a fixed propagation
+
+110
+00:08:29,169 --> 00:08:34,929
+delay, t_PD, to the time it took for the output
+of a logic gate to reflect a change to the
+
+111
+00:08:34,929 --> 00:08:36,260
+gate's input.
+
+112
+00:08:36,260 --> 00:08:41,419
+We'll need to change our timing model to account
+for delay of transmitting the output of a
+
+113
+00:08:41,419 --> 00:08:44,600
+logic gate to the next components.
+
+114
+00:08:44,600 --> 00:08:50,300
+The timing will be load dependent, so signals
+that connect to the inputs of many other gates
+
+115
+00:08:50,300 --> 00:08:54,050
+will be slower than signals that connect to
+only one other gate.
+
+116
+00:08:54,050 --> 00:09:00,149
+The Jade simulator takes the loading of a
+gate's output signal into account when calculating
+
+117
+00:09:00,149 --> 00:09:03,890
+the effective propagation delay of the gate.
+
+118
+00:09:03,890 --> 00:09:09,200
+We can improve propagation delays by reducing
+the number of loads on output signals or by
+
+119
+00:09:09,200 --> 00:09:15,550
+using specially-design gates called buffers
+(the component shown in red) to drive signals
+
+120
+00:09:15,550 --> 00:09:17,580
+that have very large loads.
+
+121
+00:09:17,580 --> 00:09:23,790
+A common task when optimizing the performance
+of a circuit is to track down heavily-loaded
+
+122
+00:09:23,790 --> 00:09:30,480
+and hence slow wires and re-engineering the
+circuit to make them faster.
+
+123
+00:09:30,480 --> 00:09:35,440
+Today our concern is wires used to connect
+components at the system level.
+
+124
+00:09:35,440 --> 00:09:40,490
+So next we'll turn our attention to possible
+designs for system-level interconnect and
+
+125
+00:09:40,490 --> 00:09:42,050
+the issues that might arise.

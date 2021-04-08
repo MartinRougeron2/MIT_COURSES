@@ -1,0 +1,277 @@
+1
+00:00:00,900 --> 00:00:04,220
+Now let's figure out how to implement semaphores.
+
+2
+00:00:04,220 --> 00:00:10,240
+They are themselves shared data and implementing
+the WAIT and SIGNAL operations will require
+
+3
+00:00:10,240 --> 00:00:15,389
+read/modify/write sequences that must be executed
+as critical sections.
+
+4
+00:00:15,389 --> 00:00:19,869
+Normally we'd use a lock semaphore to implement
+the mutual exclusion constraint for critical
+
+5
+00:00:19,869 --> 00:00:20,869
+sections.
+
+6
+00:00:20,869 --> 00:00:25,259
+But obviously we can't use semaphores to implement
+semaphores!
+
+7
+00:00:25,259 --> 00:00:29,980
+We have what's called a bootstrapping problem:
+we need to implement the required functionality
+
+8
+00:00:29,980 --> 00:00:31,710
+from scratch.
+
+9
+00:00:31,710 --> 00:00:37,820
+Happily, if we're running on a timeshared
+processor with an uninterruptible OS kernel,
+
+10
+00:00:37,820 --> 00:00:42,600
+we can use the supervisor call (SVC) mechanism
+to implement the required functionality.
+
+11
+00:00:42,600 --> 00:00:47,860
+We can also extend the ISA to include a special
+test-and-set instruction that will let us
+
+12
+00:00:47,860 --> 00:00:52,420
+implement a simple lock semaphore,
+which can then be used to protect critical
+
+13
+00:00:52,420 --> 00:00:57,060
+sections that implement more complex semaphore
+semantics.
+
+14
+00:00:57,060 --> 00:01:02,150
+Single instructions are inherently atomic
+and, in a multi-core processor, will do what
+
+15
+00:01:02,150 --> 00:01:06,970
+we want if the shared main memory supports
+reading the old value and writing a new value
+
+16
+00:01:06,970 --> 00:01:12,310
+to a specific memory location as a single
+memory access.
+
+17
+00:01:12,310 --> 00:01:17,110
+There are other, more complex, software-only
+solutions that rely only on the atomicity
+
+18
+00:01:17,110 --> 00:01:20,370
+of individual reads and writes to implement
+a simple lock.
+
+19
+00:01:20,370 --> 00:01:23,600
+For example, see "Dekker's Algorithm" on Wikipedia.
+
+20
+00:01:23,600 --> 00:01:26,650
+We'll look in more detail at the first two
+approaches.
+
+21
+00:01:26,650 --> 00:01:31,700
+Here are the OS handlers for the WAIT and
+SIGNAL supervisor calls.
+
+22
+00:01:31,700 --> 00:01:38,039
+Since SVCs are run kernel mode, they can't
+be interrupted, so the handler code is naturally
+
+23
+00:01:38,039 --> 00:01:41,380
+executed as a critical section.
+
+24
+00:01:41,380 --> 00:01:46,408
+Both handlers expect the address of the semaphore
+location to be passed as an argument in the
+
+25
+00:01:46,408 --> 00:01:49,090
+user's R0.
+
+26
+00:01:49,090 --> 00:01:53,990
+The WAIT handler checks the semaphore's value
+and if it's non-zero, the value is decremented
+
+27
+00:01:53,990 --> 00:01:58,940
+and the handler resumes execution of the user's
+program at the instruction following the WAIT
+
+28
+00:01:58,940 --> 00:01:59,940
+SVC.
+
+29
+00:01:59,940 --> 00:02:05,650
+If the semaphore is 0, the code arranges to
+re-execute the WAIT SVC when the user program
+
+30
+00:02:05,650 --> 00:02:12,569
+resumes execution and then calls SLEEP to
+mark the process as inactive until the corresponding
+
+31
+00:02:12,569 --> 00:02:15,660
+WAKEUP call is made.
+
+32
+00:02:15,660 --> 00:02:20,549
+The SIGNAL handler is simpler: it increments
+the semaphore value and calls WAKEUP to mark
+
+33
+00:02:20,549 --> 00:02:26,829
+as active any processes that were WAITing
+for this particular semaphore.
+
+34
+00:02:26,829 --> 00:02:30,700
+Eventually the round-robin scheduler will
+select a process that was WAITing and it will
+
+35
+00:02:30,700 --> 00:02:34,299
+be able to decrement the semaphore and proceed.
+
+36
+00:02:34,299 --> 00:02:39,030
+Note that the code makes no provision for
+fairness, i.e., there's no guarantee that
+
+37
+00:02:39,030 --> 00:02:44,400
+a WAITing process will eventually succeed
+in finding the semaphore non-zero.
+
+38
+00:02:44,400 --> 00:02:49,430
+The scheduler has a specific order in which
+it runs processes, so the next-in-sequence
+
+39
+00:02:49,430 --> 00:02:54,769
+WAITing process will always get the semaphore
+even if there are later-in-sequence processes
+
+40
+00:02:54,769 --> 00:02:57,870
+that have been WAITing longer.
+
+41
+00:02:57,870 --> 00:03:02,029
+If fairness is desired, WAIT could maintain
+a queue of waiting processes and use the queue
+
+42
+00:03:02,029 --> 00:03:07,840
+to determine which process is next in line,
+independent of scheduling order.
+
+43
+00:03:07,840 --> 00:03:13,420
+Many ISAs support an instruction like the
+TEST-and-CLEAR instruction shown here.
+
+44
+00:03:13,420 --> 00:03:18,999
+The TCLR instruction reads the current value
+of a memory location and then sets it to zero,
+
+45
+00:03:18,999 --> 00:03:21,319
+all as a single operation.
+
+46
+00:03:21,319 --> 00:03:26,769
+It's like a LD except that it zeros the memory
+location after reading its value.
+
+47
+00:03:26,769 --> 00:03:31,730
+To implement TCLR, the memory needs to support
+read-and-clear operations, as well as normal
+
+48
+00:03:31,730 --> 00:03:33,680
+reads and writes.
+
+49
+00:03:33,680 --> 00:03:37,779
+The assembly code at the bottom of the slide
+shows how to use TCLR to implement a simple
+
+50
+00:03:37,779 --> 00:03:39,540
+lock.
+
+51
+00:03:39,540 --> 00:03:43,969
+The program uses TCLR to access the value
+of the lock semaphore.
+
+52
+00:03:43,969 --> 00:03:49,590
+If the returned value in RC is zero, then
+some other process has the lock and the program
+
+53
+00:03:49,590 --> 00:03:52,930
+loops to try TCLR again.
+
+54
+00:03:52,930 --> 00:03:57,939
+If the returned value is non-zero, the lock
+has been acquired and execution of the critical
+
+55
+00:03:57,939 --> 00:04:00,299
+section can proceed.
+
+56
+00:04:00,299 --> 00:04:05,779
+In this case, TCLR has also set the lock to
+zero, so that other processes will be prevented
+
+57
+00:04:05,779 --> 00:04:08,779
+from entering the critical section.
+
+58
+00:04:08,779 --> 00:04:13,890
+When the critical section has finished executing,
+a ST instruction is used to set the semaphore
+
+59
+00:04:13,890 --> 00:04:15,420
+to a non-zero value.

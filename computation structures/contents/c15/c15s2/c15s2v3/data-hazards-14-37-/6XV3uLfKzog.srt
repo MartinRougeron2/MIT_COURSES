@@ -1,0 +1,915 @@
+1
+00:00:00,170 --> 00:00:05,190
+The data path diagram isn't all that useful
+in diagramming the pipelined execution of
+
+2
+00:00:05,190 --> 00:00:10,540
+an instruction sequence since we need a new
+copy of the diagram for each clock cycle.
+
+3
+00:00:10,540 --> 00:00:16,650
+A more compact and easier-to-read diagram
+of pipelined execution is provided by the
+
+4
+00:00:16,650 --> 00:00:20,820
+pipeline diagrams we met back in Part 1 of
+the course.
+
+5
+00:00:20,820 --> 00:00:28,600
+There's one row in the diagram for each pipeline
+stage and one column for each cycle of execution.
+
+6
+00:00:28,600 --> 00:00:34,479
+Entries in the table show which instruction
+is in each pipeline stage at each cycle.
+
+7
+00:00:34,479 --> 00:00:38,819
+In normal operation, a particular instruction
+moves diagonally through the diagram as it
+
+8
+00:00:38,819 --> 00:00:42,899
+proceeds through the five pipeline stages.
+
+9
+00:00:42,899 --> 00:00:47,629
+To understand data hazards, let's first remind
+ourselves of when the register file is read
+
+10
+00:00:47,629 --> 00:00:50,589
+and written for a particular instruction.
+
+11
+00:00:50,589 --> 00:00:55,160
+Register reads happen when the instruction
+is in the RF stage, i.e., when we're reading
+
+12
+00:00:55,160 --> 00:00:59,409
+the instruction's register operands.
+
+13
+00:00:59,409 --> 00:01:04,349
+Register writes happen at the end of the cycle
+when the instruction is in the WB stage.
+
+14
+00:01:04,349 --> 00:01:10,960
+For example, for the first LD instruction,
+we read R1 during cycle 2 and write R2 at
+
+15
+00:01:10,960 --> 00:01:13,969
+the end of cycle 5.
+
+16
+00:01:13,969 --> 00:01:17,979
+Or consider the register file operations in
+cycle 6:
+
+17
+00:01:17,979 --> 00:01:24,810
+we're reading R12 and R13 for the MUL instruction
+in the RF stage, and writing R4 at the end
+
+18
+00:01:24,810 --> 00:01:29,130
+of the cycle for the LD instruction in the
+WB stage.
+
+19
+00:01:29,130 --> 00:01:32,869
+Okay, now let's see what happens when there
+are data hazards.
+
+20
+00:01:32,869 --> 00:01:38,369
+In this instruction sequence, the ADDC instruction
+writes its result in R2, which is immediately
+
+21
+00:01:38,369 --> 00:01:41,689
+read by the following SUBC instruction.
+
+22
+00:01:41,689 --> 00:01:45,929
+Correct execution of the SUBC instruction
+clearly depends on the results of the ADDC
+
+23
+00:01:45,929 --> 00:01:47,280
+instruction.
+
+24
+00:01:47,280 --> 00:01:51,520
+This what we'd call a read-after-write dependency.
+
+25
+00:01:51,520 --> 00:01:56,969
+This pipeline diagram shows the cycle-by-cycle
+execution where we've circled the cycles during
+
+26
+00:01:56,969 --> 00:02:01,030
+which ADDC writes R2 and SUBC reads R2.
+
+27
+00:02:01,030 --> 00:02:02,030
+Oops!
+
+28
+00:02:02,030 --> 00:02:08,100
+ADDC doesn't write R2 until the end of cycle
+5, but SUBC is trying to read the R2 value
+
+29
+00:02:08,100 --> 00:02:09,430
+in cycle 3.
+
+30
+00:02:09,430 --> 00:02:16,079
+The value in R2 in the register file in cycle
+3 doesn't yet reflect the execution of the
+
+31
+00:02:16,079 --> 00:02:17,989
+ADDC instruction.
+
+32
+00:02:17,989 --> 00:02:24,190
+So as things stand the pipeline would *not*
+correctly execute this instruction sequence.
+
+33
+00:02:24,190 --> 00:02:28,549
+This instruction sequence has triggered a
+data hazard.
+
+34
+00:02:28,549 --> 00:02:34,070
+We want the pipelined CPU to generate the
+same program results as the unpipelined CPU,
+
+35
+00:02:34,070 --> 00:02:36,760
+so we'll need to figure out a fix.
+
+36
+00:02:36,760 --> 00:02:41,430
+There are three general strategies we can
+pursue to fix pipeline hazards.
+
+37
+00:02:41,430 --> 00:02:46,269
+Any of the techniques will work, but as we'll
+see they have different tradeoffs for instruction
+
+38
+00:02:46,269 --> 00:02:49,150
+throughput and circuit complexity.
+
+39
+00:02:49,150 --> 00:02:53,720
+The first strategy is to stall instructions
+in the RF stage until the result they need
+
+40
+00:02:53,720 --> 00:02:56,180
+has been written to the register file.
+
+41
+00:02:56,180 --> 00:03:01,450
+"Stall" means that we don't reload the instruction
+register at the end of the cycle, so we'll
+
+42
+00:03:01,450 --> 00:03:05,100
+try to execute the same instruction in the
+next cycle.
+
+43
+00:03:05,100 --> 00:03:09,239
+If we stall one pipeline stage, all earlier
+stages must also be stalled since they are
+
+44
+00:03:09,239 --> 00:03:12,879
+blocked by the stalled instruction.
+
+45
+00:03:12,879 --> 00:03:18,879
+If an instruction is stalled in the RF stage,
+then the IF stage is also stalled.
+
+46
+00:03:18,879 --> 00:03:24,079
+Stalling will always work, but has a negative
+impact on instruction throughput.
+
+47
+00:03:24,079 --> 00:03:30,739
+Stall for too many cycles and you'll loose
+the performance advantages of pipelined execution!
+
+48
+00:03:30,739 --> 00:03:35,689
+The second strategy is to route the needed
+value to earlier pipeline stages as soon as
+
+49
+00:03:35,689 --> 00:03:36,909
+its computed.
+
+50
+00:03:36,909 --> 00:03:39,930
+This called bypassing or forwarding.
+
+51
+00:03:39,930 --> 00:03:44,739
+As it turns out, the value we need often exists
+somewhere in the pipelined data path, it just
+
+52
+00:03:44,739 --> 00:03:48,299
+hasn't been written yet to the register file.
+
+53
+00:03:48,299 --> 00:03:53,040
+If the value exists and can be forwarded to
+where it's needed, we won't need to stall.
+
+54
+00:03:53,040 --> 00:03:59,970
+We'll be able to use this strategy to avoid
+stalling on most types of data hazards.
+
+55
+00:03:59,970 --> 00:04:03,100
+The third strategy is called speculation.
+
+56
+00:04:03,100 --> 00:04:07,810
+We'll make an intelligent guess for the needed
+value and continue execution.
+
+57
+00:04:07,810 --> 00:04:12,799
+Once the actual value is determined, if we
+guessed correctly, we're all set.
+
+58
+00:04:12,799 --> 00:04:17,880
+If we guessed incorrectly, we have to back
+up execution and restart with the correct
+
+59
+00:04:17,880 --> 00:04:19,170
+value.
+
+60
+00:04:19,170 --> 00:04:24,010
+Obviously speculation only makes sense if
+it's possible to make accurate guesses.
+
+61
+00:04:24,010 --> 00:04:28,860
+We'll be able to use this strategy to avoid
+stalling on control hazards.
+
+62
+00:04:28,860 --> 00:04:33,770
+Let's see how the first two strategies work
+when dealing with our data hazard.
+
+63
+00:04:33,770 --> 00:04:39,440
+Applying the stall strategy to our data hazard,
+we need to stall the SUBC instruction in the
+
+64
+00:04:39,440 --> 00:04:44,720
+RF stage until the ADDC instruction writes
+its result in R2.
+
+65
+00:04:44,720 --> 00:04:50,420
+So in the pipeline diagram, SUBC is stalled
+three times in the RF stage until it can finally
+
+66
+00:04:50,420 --> 00:04:56,000
+access the R2 value from the register file
+in cycle 6.
+
+67
+00:04:56,000 --> 00:05:00,200
+Whenever the RF stage is stalled, the IF stage
+is also stalled.
+
+68
+00:05:00,200 --> 00:05:02,580
+You can see that in the diagram too.
+
+69
+00:05:02,580 --> 00:05:08,030
+But when RF is stalled, what should the ALU
+stage do in the next cycle?
+
+70
+00:05:08,030 --> 00:05:15,000
+The RF stage hasn't finished its job and so
+can't pass along its instruction!
+
+71
+00:05:15,000 --> 00:05:19,770
+The solution is for the RF stage to make-up
+an innocuous instruction for the ALU stage,
+
+72
+00:05:19,770 --> 00:05:24,110
+what's called a NOP instruction, short for
+"no operation".
+
+73
+00:05:24,110 --> 00:05:29,490
+A NOP instruction has no effect on the CPU
+state, i.e., it doesn't change the contents
+
+74
+00:05:29,490 --> 00:05:32,280
+of the register file or main memory.
+
+75
+00:05:32,280 --> 00:05:39,150
+For example any OP-class or OPC-class instruction
+that has R31 as its destination register is
+
+76
+00:05:39,150 --> 00:05:40,340
+a NOP.
+
+77
+00:05:40,340 --> 00:05:46,280
+The NOPs introduced into the pipeline by the
+stalled RF stage are shown in red.
+
+78
+00:05:46,280 --> 00:05:51,850
+Since the SUBC is stalled in the RF stage
+for three cycles, three NOPs are introduced
+
+79
+00:05:51,850 --> 00:05:53,350
+into the pipeline.
+
+80
+00:05:53,350 --> 00:05:57,150
+We sometimes refer to these NOPs as "bubbles"
+in the pipeline.
+
+81
+00:05:57,150 --> 00:06:00,470
+How does the pipeline know when to stall?
+
+82
+00:06:00,470 --> 00:06:05,750
+It can compare the register numbers in the
+RA and RB fields of the instruction in the
+
+83
+00:06:05,750 --> 00:06:12,490
+RF stage with the register numbers in the
+RC field of instructions in the ALU, MEM,
+
+84
+00:06:12,490 --> 00:06:14,920
+and WB stage.
+
+85
+00:06:14,920 --> 00:06:20,030
+If there's a match, there's a data hazard
+and the RF stage should be stalled.
+
+86
+00:06:20,030 --> 00:06:24,620
+The stall will continue until there's no hazard
+detected.
+
+87
+00:06:24,620 --> 00:06:30,180
+There are a few details to take care of:
+some instructions don't read both registers,
+
+88
+00:06:30,180 --> 00:06:35,909
+the ST instruction doesn't use its RC field,
+and we don't want R31 to match since it's
+
+89
+00:06:35,909 --> 00:06:41,120
+always okay to read R31 from the register
+file.
+
+90
+00:06:41,120 --> 00:06:47,440
+Stalling will ensure correct pipelined execution,
+but it does increase the effective CPI.
+
+91
+00:06:47,440 --> 00:06:53,340
+This will lead to longer execution times if
+the increase in CPI is larger than the decrease
+
+92
+00:06:53,340 --> 00:06:56,120
+in cycle time afforded by pipelining.
+
+93
+00:06:56,120 --> 00:07:01,650
+To implement stalling, we only need to make
+two simple changes to our pipelined data path.
+
+94
+00:07:01,650 --> 00:07:06,690
+We generate a new control signal, STALL, which,
+when asserted, disables the loading of the
+
+95
+00:07:06,690 --> 00:07:11,860
+three pipeline registers at the input of the
+IF and RF stages, which means they'll have
+
+96
+00:07:11,860 --> 00:07:15,710
+the same value next cycle as they do this
+cycle.
+
+97
+00:07:15,710 --> 00:07:21,210
+We also introduce a mux to choose the instruction
+to be sent along to the ALU stage.
+
+98
+00:07:21,210 --> 00:07:28,190
+If STALL is 1, we choose a NOP instruction,
+e.g., an ADD with R31 as its destination.
+
+99
+00:07:28,190 --> 00:07:33,780
+If STALL is 0, the RF stage is not stalled,
+so we pass its current instruction to the
+
+100
+00:07:33,780 --> 00:07:34,780
+ALU.
+
+101
+00:07:34,780 --> 00:07:39,230
+And here we see how to compute STALL as described
+in the previous slide.
+
+102
+00:07:39,230 --> 00:07:44,220
+The additional logic needed to implement stalling
+is pretty modest, so the real design tradeoff
+
+103
+00:07:44,220 --> 00:07:50,520
+is about increased CPI due to stalling vs.
+decreased cycle time due to pipelining.
+
+104
+00:07:50,520 --> 00:07:55,800
+So we have a solution, although it carries
+some potential performance costs.
+
+105
+00:07:55,800 --> 00:08:00,620
+Now let's consider our second strategy:
+bypassing, which is applicable if the data
+
+106
+00:08:00,620 --> 00:08:04,810
+we need in the RF stage is somewhere in the
+pipelined data path.
+
+107
+00:08:04,810 --> 00:08:10,780
+In our example, even though ADDC doesn't write
+R2 until the end of cycle 5, the value that
+
+108
+00:08:10,780 --> 00:08:17,080
+will be written is computed during cycle 3
+when the ADDC is in the ALU stage.
+
+109
+00:08:17,080 --> 00:08:22,950
+In cycle 3, the output of the ALU is the value
+needed by the SUBC that's in the RF stage
+
+110
+00:08:22,950 --> 00:08:24,810
+in the same cycle.
+
+111
+00:08:24,810 --> 00:08:31,150
+So, if we detect that the RA field of the
+instruction in the RF stage is the same as
+
+112
+00:08:31,150 --> 00:08:36,919
+the RC field of the instruction in the ALU
+stage, we can use the output of the ALU in
+
+113
+00:08:36,919 --> 00:08:41,399
+place of the (stale) RA value being read from
+the register file.
+
+114
+00:08:41,399 --> 00:08:44,169
+No stalling necessary!
+
+115
+00:08:44,169 --> 00:08:49,339
+In our example, in cycle 3 we want to route
+the output of the ALU to the RF stage to be
+
+116
+00:08:49,339 --> 00:08:52,720
+used as the value for R2.
+
+117
+00:08:52,720 --> 00:08:58,709
+We show this with a red "bypass arrow" showing
+data being routed from the ALU stage to the
+
+118
+00:08:58,709 --> 00:09:00,100
+RF stage.
+
+119
+00:09:00,100 --> 00:09:04,870
+To implement bypassing, we'll add a many-input
+multiplexer to the read ports of the register
+
+120
+00:09:04,870 --> 00:09:10,170
+file so we can select the appropriate value
+from other pipeline stages.
+
+121
+00:09:10,170 --> 00:09:16,420
+Here we show the combinational bypass paths
+from the ALU, MEM, and WB stages.
+
+122
+00:09:16,420 --> 00:09:21,220
+For the bypassing example of the previous
+slides, we use the blue bypass path during
+
+123
+00:09:21,220 --> 00:09:25,910
+cycle 3 to get the correct value for R2.
+
+124
+00:09:25,910 --> 00:09:30,279
+The bypass muxes are controlled by logic that's
+matching the number of the source register
+
+125
+00:09:30,279 --> 00:09:36,600
+to the number of the destination registers
+in the ALU, MEM, and WB stages, with the usual
+
+126
+00:09:36,600 --> 00:09:40,930
+complications of dealing with R31.
+
+127
+00:09:40,930 --> 00:09:45,280
+What if there are multiple matches, i.e.,
+if the RF stage is trying to read a register
+
+128
+00:09:45,280 --> 00:09:51,509
+that's the destination for, say, the instructions
+in both the ALU and MEM stages?
+
+129
+00:09:51,509 --> 00:09:53,110
+No problem!
+
+130
+00:09:53,110 --> 00:09:58,180
+We want to select the result from the most
+recent instruction, so we'd chose the ALU
+
+131
+00:09:58,180 --> 00:10:04,089
+match if there is one, then the MEM match,
+then the WB match, then, finally, the output
+
+132
+00:10:04,089 --> 00:10:06,260
+of the register file.
+
+133
+00:10:06,260 --> 00:10:10,060
+Here's diagram showing all the bypass paths
+we'll need.
+
+134
+00:10:10,060 --> 00:10:14,630
+Note that branches and jumps write their PC+4
+value into the register file, so we'll need
+
+135
+00:10:14,630 --> 00:10:21,519
+to bypass from the PC+4 values in the various
+stages as well as the ALU values.
+
+136
+00:10:21,519 --> 00:10:26,839
+Note that the bypassing is happening at the
+end of the cycle, e.g., after the ALU has
+
+137
+00:10:26,839 --> 00:10:28,080
+computed its answer.
+
+138
+00:10:28,080 --> 00:10:33,149
+To accommodate the extra t_PD of the bypass
+mux, we'll have to extend the clock period
+
+139
+00:10:33,149 --> 00:10:35,279
+by a small amount.
+
+140
+00:10:35,279 --> 00:10:41,290
+So once again there's a design tradeoff - the
+increased CPI of stalling vs the slightly
+
+141
+00:10:41,290 --> 00:10:43,660
+increased cycle time of bypassing.
+
+142
+00:10:43,660 --> 00:10:49,170
+And, of course, in the case of bypassing there's
+the extra area needed for the necessary wiring
+
+143
+00:10:49,170 --> 00:10:51,550
+and muxes.
+
+144
+00:10:51,550 --> 00:10:57,070
+We can cut back on the costs by reducing the
+amount of bypassing, say, to only bypassing
+
+145
+00:10:57,070 --> 00:11:03,740
+ALU results from the ALU stage and use stalling
+to deal with all the other data hazards.
+
+146
+00:11:03,740 --> 00:11:08,310
+If we implement full bypassing, do we still
+need the STALL logic?
+
+147
+00:11:08,310 --> 00:11:10,199
+As it turns out, we do!
+
+148
+00:11:10,199 --> 00:11:14,779
+There's one data hazard that bypassing doesn't
+completely address.
+
+149
+00:11:14,779 --> 00:11:18,670
+Consider trying to immediately the use the
+result of a LD instruction.
+
+150
+00:11:18,670 --> 00:11:23,970
+In the example shown here, the SUBC is trying
+to use the value the immediately preceding
+
+151
+00:11:23,970 --> 00:11:26,249
+LD is writing to R2.
+
+152
+00:11:26,249 --> 00:11:29,740
+This is called a load-to-use hazard.
+
+153
+00:11:29,740 --> 00:11:34,379
+Recalling that LD data isn't available in
+the data path until the cycle when LD reaches
+
+154
+00:11:34,379 --> 00:11:41,220
+the WB stage, even with full bypassing we'll
+need to stall SUBC in the RF stage until cycle
+
+155
+00:11:41,220 --> 00:11:45,689
+5, introducing two NOPs into the pipeline.
+
+156
+00:11:45,689 --> 00:11:51,199
+Without bypassing from the WB stage, we need
+to stall until cycle 6.
+
+157
+00:11:51,199 --> 00:11:56,470
+In summary, we have two strategies for dealing
+with data hazards.
+
+158
+00:11:56,470 --> 00:12:01,529
+We can stall the IF and RF stages until the
+register values needed by the instruction
+
+159
+00:12:01,529 --> 00:12:05,259
+in the RF stage are available in the register
+file.
+
+160
+00:12:05,259 --> 00:12:11,300
+The required hardware is simple, but the NOPs
+introduced into the pipeline waste CPU cycles
+
+161
+00:12:11,300 --> 00:12:14,570
+and result in an higher effective CPI.
+
+162
+00:12:14,570 --> 00:12:20,800
+Or we can use bypass paths to route the required
+values to the RF stage assuming they exist
+
+163
+00:12:20,800 --> 00:12:24,040
+somewhere in the pipelined data path.
+
+164
+00:12:24,040 --> 00:12:28,350
+This approach requires more hardware than
+stalling, but doesn't reduce the effective
+
+165
+00:12:28,350 --> 00:12:29,750
+CPI.
+
+166
+00:12:29,750 --> 00:12:35,689
+Even if we implement bypassing, we'll still
+need stalls to deal with load-to-use hazards.
+
+167
+00:12:35,689 --> 00:12:40,329
+Can we keep adding pipeline stages in the
+hopes of further reducing the clock period?
+
+168
+00:12:40,329 --> 00:12:45,439
+More pipeline stages mean more instructions
+in the pipeline at the same time, which in
+
+169
+00:12:45,439 --> 00:12:50,760
+turn increases the chance of a data hazard
+and the necessity of stalling, thus increasing
+
+170
+00:12:50,760 --> 00:12:53,189
+CPI.
+
+171
+00:12:53,189 --> 00:12:57,290
+Compilers can help reduce dependencies by
+reorganizing the assembly language code they
+
+172
+00:12:57,290 --> 00:12:58,339
+produce.
+
+173
+00:12:58,339 --> 00:13:02,009
+Here's the load-to-use hazard example we saw
+earlier.
+
+174
+00:13:02,009 --> 00:13:06,600
+Even with full bypassing, we'd need to stall
+for 2 cycles.
+
+175
+00:13:06,600 --> 00:13:11,430
+But if the compiler (or assembly language
+programmer!) notices that the MUL and XOR
+
+176
+00:13:11,430 --> 00:13:16,790
+instructions are independent of the SUBC instruction
+and hence can be moved before the SUBC,
+
+177
+00:13:16,790 --> 00:13:22,759
+the dependency is now such that the LD is
+naturally in the WB stage when the SUBC is
+
+178
+00:13:22,759 --> 00:13:27,079
+in the RF stage, so no stalls are needed.
+
+179
+00:13:27,079 --> 00:13:31,309
+This optimization only works when the compiler
+can find independent instructions to move
+
+180
+00:13:31,309 --> 00:13:32,910
+around.
+
+181
+00:13:32,910 --> 00:13:39,290
+Unfortunately there are plenty of programs
+where such instructions are hard to find.
+
+182
+00:13:39,290 --> 00:13:41,869
+Then there's one final approach we could take
+-
+
+183
+00:13:41,869 --> 00:13:49,850
+change the ISA so that data hazards are part
+of the ISA, i.e., just explain that writes
+
+184
+00:13:49,850 --> 00:13:54,920
+to the destination register happen with a
+3-instruction delay!
+
+185
+00:13:54,920 --> 00:13:59,100
+If NOPs are needed, make the programmer add
+them to the program.
+
+186
+00:13:59,100 --> 00:14:04,309
+Simplify the hardware at the "small" cost
+of making the compilers work harder.
+
+187
+00:14:04,309 --> 00:14:08,939
+You can imagine exactly how much the compiler
+writers will like this suggestion.
+
+188
+00:14:08,939 --> 00:14:11,959
+Not to mention assembly language programmers!
+
+189
+00:14:11,959 --> 00:14:17,769
+And you can change the ISA again when you
+add more pipeline stages!
+
+190
+00:14:17,769 --> 00:14:23,779
+This is how a compiler writer views CPU architects
+who unilaterally change the ISA to save a
+
+191
+00:14:23,779 --> 00:14:28,420
+few logic gates :)
+The bottom line is that successful ISAs have
+
+192
+00:14:28,420 --> 00:14:34,209
+very long lifetimes and so shouldn't include
+tradeoffs driven by short-term implementation
+
+193
+00:14:34,209 --> 00:14:35,209
+considerations.
+
+194
+00:14:35,209 --> 00:14:36,579
+Best not to go there.

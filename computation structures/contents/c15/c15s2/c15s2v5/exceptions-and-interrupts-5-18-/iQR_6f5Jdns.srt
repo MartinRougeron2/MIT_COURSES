@@ -1,0 +1,326 @@
+1
+00:00:00,599 --> 00:00:05,060
+Now let's figure out how exceptions impact
+pipelined execution.
+
+2
+00:00:05,060 --> 00:00:09,900
+When an exception occurs because of an illegal
+instruction or an external interrupt, we need
+
+3
+00:00:09,900 --> 00:00:14,820
+to store the current PC+4 value in the XP
+register and load the program counter with
+
+4
+00:00:14,820 --> 00:00:18,730
+the address of the appropriate exception handler.
+
+5
+00:00:18,730 --> 00:00:23,260
+Exceptions cause control flow hazards since
+they are effectively implicit branches.
+
+6
+00:00:23,260 --> 00:00:29,460
+In an unpipelined implementation, exceptions
+affect the execution of the current instruction.
+
+7
+00:00:29,460 --> 00:00:34,160
+We want to achieve exactly the same effect
+in our pipelined implementation.
+
+8
+00:00:34,160 --> 00:00:39,100
+So first we have to identify which one of
+the instructions in our pipeline is affected,
+
+9
+00:00:39,100 --> 00:00:44,670
+then ensure that instructions that came earlier
+in the code complete correctly and that we
+
+10
+00:00:44,670 --> 00:00:49,789
+annul the affected instruction and any following
+instructions that are in the pipeline.
+
+11
+00:00:49,789 --> 00:00:53,179
+Since there are multiple instructions in the
+pipeline, we have a bit of sorting out to
+
+12
+00:00:53,179 --> 00:00:54,179
+do.
+
+13
+00:00:54,179 --> 00:00:59,940
+When, during pipelined execution, do we determine
+that an instruction will cause an exception?
+
+14
+00:00:59,940 --> 00:01:05,860
+An obvious example is detecting an illegal
+opcode when we decode the instruction in the
+
+15
+00:01:05,860 --> 00:01:07,600
+RF stage.
+
+16
+00:01:07,600 --> 00:01:11,280
+But we can also generate exceptions in other
+pipeline stages.
+
+17
+00:01:11,280 --> 00:01:16,140
+For example, the ALU stage can generate an
+exception if the second operand of a DIV instruction
+
+18
+00:01:16,140 --> 00:01:17,780
+is 0.
+
+19
+00:01:17,780 --> 00:01:23,100
+Or the MEM stage may detect that the instruction
+is attempting to access memory with an illegal
+
+20
+00:01:23,100 --> 00:01:24,299
+address.
+
+21
+00:01:24,299 --> 00:01:29,020
+Similarly the IF stage can generate a memory
+exception when fetching the next instruction.
+
+22
+00:01:29,020 --> 00:01:33,369
+In each case, instructions that follow the
+one that caused the exception may already
+
+23
+00:01:33,369 --> 00:01:37,079
+be in the pipeline and will need to be annulled.
+
+24
+00:01:37,079 --> 00:01:42,780
+The good news is that since register values
+are only updated in the WB stage, annulling
+
+25
+00:01:42,780 --> 00:01:45,320
+an instruction only requires replacing it
+with a NOP.
+
+26
+00:01:45,320 --> 00:01:51,630
+We won't have to restore any changed values
+in the register file or main memory.
+
+27
+00:01:51,630 --> 00:01:52,929
+Here's our plan.
+
+28
+00:01:52,929 --> 00:01:58,250
+If an instruction causes an exception in stage
+i, replace that instruction with this BNE
+
+29
+00:01:58,250 --> 00:02:05,749
+instruction, whose only side effect is writing
+the PC+4 value into the XP register.
+
+30
+00:02:05,749 --> 00:02:10,080
+Then flush the pipeline by annulling instructions
+in earlier pipeline stages.
+
+31
+00:02:10,080 --> 00:02:16,500
+And, finally, load the program counter with
+the address of the exception handler.
+
+32
+00:02:16,500 --> 00:02:21,720
+In this example, assume that LD will generate
+a memory exception in the MEM stage, which
+
+33
+00:02:21,720 --> 00:02:24,090
+occurs in cycle 4.
+
+34
+00:02:24,090 --> 00:02:29,050
+The arrows show how the instructions in the
+pipeline are rewritten for cycle 5, at which
+
+35
+00:02:29,050 --> 00:02:35,810
+point the IF stage is working on fetching
+the first instruction in the exception handler.
+
+36
+00:02:35,810 --> 00:02:39,050
+Here are the changes required to the execution
+pipeline.
+
+37
+00:02:39,050 --> 00:02:44,220
+We modify the muxes in the instruction path
+so that they can replace an actual instruction
+
+38
+00:02:44,220 --> 00:02:50,090
+with either NOP if the instruction is to be
+annulled, or BNE if the instruction caused
+
+39
+00:02:50,090 --> 00:02:51,700
+the exception.
+
+40
+00:02:51,700 --> 00:02:56,800
+Since the pipeline is executing multiple instructions
+at the same time, we have to worry about what
+
+41
+00:02:56,800 --> 00:03:01,530
+happens if multiple exceptions are detected
+during execution.
+
+42
+00:03:01,530 --> 00:03:07,170
+In this example assume that LD will cause
+a memory exception in the MEM stage and note
+
+43
+00:03:07,170 --> 00:03:12,550
+that it is followed by an instruction with
+an illegal opcode.
+
+44
+00:03:12,550 --> 00:03:18,900
+Looking at the pipeline diagram, the invalid
+opcode is detected in the RF stage during
+
+45
+00:03:18,900 --> 00:03:25,520
+cycle 3, causing the illegal instruction exception
+process to begin in cycle 4.
+
+46
+00:03:25,520 --> 00:03:31,570
+But during that cycle, the MEM stage detects
+the illegal memory access from the LD instruction
+
+47
+00:03:31,570 --> 00:03:37,540
+and so causes the memory exception process
+to begin in cycle 5.
+
+48
+00:03:37,540 --> 00:03:42,870
+Note that the exception caused by the earlier
+instruction (LD) overrides the exception caused
+
+49
+00:03:42,870 --> 00:03:48,840
+by the later illegal opcode even though the
+illegal opcode exception was detected first.
+
+50
+00:03:48,840 --> 00:03:54,290
+.348 That's the correct behavior since once
+the execution of LD is abandoned, the pipeline
+
+51
+00:03:54,290 --> 00:04:00,660
+should behave as if none of the instructions
+that come after the LD were executed.
+
+52
+00:04:00,660 --> 00:04:05,210
+If multiple exceptions are detected in the
+*same* cycle, the exception from the instruction
+
+53
+00:04:05,210 --> 00:04:10,570
+furthest down the pipeline should be given
+precedence.
+
+54
+00:04:10,570 --> 00:04:15,150
+External interrupts also behave as implicit
+branches, but it turns out they are a bit
+
+55
+00:04:15,150 --> 00:04:18,160
+easier to handle in our pipeline.
+
+56
+00:04:18,160 --> 00:04:23,790
+We'll treat external interrupts as if they
+were an exception that affected the IF stage.
+
+57
+00:04:23,790 --> 00:04:27,430
+Let's assume the external interrupt occurs
+in cycle 2.
+
+58
+00:04:27,430 --> 00:04:32,560
+This means that the SUB instruction will be
+replaced by our magic BNE to capture the PC+4
+
+59
+00:04:32,560 --> 00:04:38,370
+value and we'll force the next PC to be the
+address of the interrupt handler.
+
+60
+00:04:38,370 --> 00:04:42,540
+After the interrupt handler completes, we'll
+want to resume execution of the interrupted
+
+61
+00:04:42,540 --> 00:04:47,602
+program at the SUB instruction, so we'll code
+the handler to correct the value saved in
+
+62
+00:04:47,602 --> 00:04:52,930
+the XP register so that it points to the SUB
+instruction.
+
+63
+00:04:52,930 --> 00:04:55,780
+This is all shown in the pipeline diagram.
+
+64
+00:04:55,780 --> 00:05:00,980
+Note that the ADD, LD, and other instructions
+that came before SUB in the program are unaffected
+
+65
+00:05:00,980 --> 00:05:03,639
+by the interrupt.
+
+66
+00:05:03,639 --> 00:05:08,440
+We can use the existing instruction-path muxes
+to deal with interrupts, since we're treating
+
+67
+00:05:08,440 --> 00:05:11,210
+them as IF-stage exceptions.
+
+68
+00:05:11,210 --> 00:05:17,789
+We simply have to adjust the logic for IRSrc_IF
+to also make it 1 when an interrupt is requested.

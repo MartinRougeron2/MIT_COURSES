@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>5.1 Annotated Slides | 5 Sequential Logic | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="5.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 5.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c5/c5s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c5/index.htm">5 Sequential Logic</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            5.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            5.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="selected">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c5/index.htm">&lt;<span>Sequential Logic</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c5/c5s1/index.htm">5.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c5/c5s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L05: Sequential Logic</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Something We Can't Build (Yet)</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Digital State: What We'd Like to Build</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Memory: Using Capacitors</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Memory: Using Feedback</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Settable Memory Element</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">New Device: D Latch</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">A Plea for Lenience</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">... With a Little Discipline</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Let’s Try it Out!</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">Flakey Control Systems</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Solution: Escapement Strategy (2 Gates)</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Edge-triggered D Register</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">D-Register Waveforms</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Um, About That Hold Time...</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">D-Register Timing</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Single-clock Synchronous Circuits</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Timing in a Single-clock System</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Model: Discrete Time</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Sequential Circuit Timing</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Summary</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide02.png" alt=""></a></div> <p>In the last lecture we learned how to build combinational logic   circuits given a functional specification that told us how   output values were related to the current values of the   inputs.</p> <p>But here’s a simple device we can’t build with   combinational logic.  The device has a light that serves as the   output and push button that serves as the input.  If the light   is off and we push the button, the light turns on.  If the light   is on and we push the button, the light turns off.</p> <p>What makes this circuit different from the combinational   circuits we’ve discussed so far?  The biggest difference   is that the device’s output is not function of the   device’s *current* input value.  The behavior when the   button is pushed depends on what has happened in the past: odd   numbered pushes turn the light on, even numbered pushes turn the   light off.  The device is “remembering” whether the   last push was an odd push or an even push so it will behave   according to the specification when the next button push comes   along.  Devices that remember something about the history of   their inputs are said to have state.</p> <p>The second difference is more subtle.  The push of the button   marks an event in time: we speak of the state before the push   (“the light is on”) and state after the push   (“the light is off”).  It’s the transition of   the button from un-pushed to pushed that we’re interested   in, not the whether the button is currently pushed or not.</p> <p>The device’s internal state is what allows it to produce   different outputs even though it receives the same input.  A   combinational device can’t exhibit this behavior since its   outputs depends only on the current values of the input.   Let’s see how we’ll incorporate the notion of device   state into our circuitry.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide03.png" alt=""></a></div> <p>We’ll introduce a new abstraction of a memory component   that will store the current state of the digital system we want   to build.  The memory component stores one or more bits that   encode the current state of the system.  These bits are   available as digital values on the memory component’s   outputs, shown here as the wire marked “Current   State”.</p> <p>The current state, along with the current input values, are the   inputs to a block of combinational logic that produces two sets   of outputs.  One set of outputs is the next state of the device,   encoded using the same number of bits as the current state.  The   other set of outputs are the signals that serve as the outputs   of the digital system.  The functional specification for the   combinational logic (perhaps a truth table, or maybe a set of   Boolean equations) specifies how the next state and system   outputs are related to the current state and current inputs.</p> <p>The memory component has two inputs: a LOAD control signal that   indicates when to replace the current state with the next state,   and a data input that specifies what the next state should be.   Our plan is to periodically trigger the LOAD control, which will   produce a sequence of values for the current state.  Each state   in the sequence is determined from the previous state and the   inputs at the time the LOAD was triggered.</p> <p>Circuits that include both combinational logic and memory   components are called sequential logic.  The memory component   has a specific capacity measured in bits.  If the memory   component stores K bits, that puts an upper bound of \(2^K\) on   the number of possible states since the state of the device is   encoded using the K bits of memory.</p> <p>So, we’ll need to figure out how to build a memory   component that can loaded with new values now and then.   That’s the subject of this chapter.  We’ll also need   a systematic way of designing sequential logic to achieve the   desired sequence of actions.  That’s the subject of the   next chapter.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide04.png" alt=""></a></div> <p>We’ve been representing bits as voltages, so we might   consider using a capacitor to store a particular voltage.  The   capacitor is passive two-terminal device.  The terminals are   connected to parallel conducting plates separated by insulator.   Adding charge Q to one plate of the capacitor generates a   voltage difference V between the two plate terminals.  Q and V   are related by the capacitance C of the capacitor: Q = CV.</p> <p>When we add charge to a capacitor by hooking a plate terminal   to higher voltage, that’s called “charging the   capacitor”.  And when we take away charge by connecting   the plate terminal to a lower voltage, that’s called   “discharging the capacitor”.</p> <p>So here’s how a capacitor-based memory device might work.   One terminal of the capacitor is hooked to some stable reference   voltage.  We’ll use an NFET switch to connect the other   plate of the capacitor to a wire called the bit line.  The gate   of the NFET switch is connected to a wire called the word   line.</p> <p>To write a bit of information into our memory device, drive the   bit line to the desired voltage (<i>i.e.</i>, a digital 0 or a   digital 1).  Then set the word line HIGH, turning on the NFET   switch.  The capacitor will then charge or discharge until it   has the same voltage as the bit line.  At this point, set the   word line LOW, turning off the NFET switch and isolating the   capacitor’s charge on the internal plate.  In a perfect   world, the charge would remain on the capacitor’s plate   indefinitely.</p> <p>At some later time, to access the stored information, we first   charge the bit line to some intermediate voltage.  Then set the   word line HIGH, turning on the NFET switch, which connects the   charge on the bit line to the charge on the capacitor.  The   charge sharing between the bit line and capacitor will have some   small effect on the charge on the bit line and hence its   voltage.  If the capacitor was storing a digital 1 and hence was   at a higher voltage, charge will flow from the capacitor into   the bit line, raising the voltage of the bit line.  If the   capacitor was storing a digital 0 and was at lower voltage,   charge will flow from the bit line into the capacitor, lowering   the voltage of the bit line.  The change in the bit line’s   voltage depends on the ratio of the bit line capacitance to C,   the storage capacitor’s capacitance, but is usually quite   small.  A very sensitive amplifier, called a sense amp, is used   to detect that small change and produce a legal digital voltage   as the value read from the memory cell.</p> <p>Whew! Reading and writing require a whole sequence of   operations, along with carefully designed analog electronics.   The good news is that the individual storage capacitors are   quite small — in modern integrated circuits we can fit   billions of bits of storage on relatively inexpensive chips   called dynamic random-access memories, or DRAMs for short.   DRAMs have a very low cost per bit of storage.</p> <p>The bad news is that the complex sequence of operations   required for reading and writing takes a while, so access times   are relatively slow.  And we have to worry about carefully   maintaining the charge on the storage capacitor in the face of   external electrical noise.  The really bad news is that the NFET   switch isn’t perfect and there’s a tiny amount   leakage current across the switch even when it’s   officially off.  Over time that leakage current can have a   noticeable impact on the stored charge, so we have to   periodically refresh the memory by reading and re-writing the   stored value before the leakage has corrupted the stored   information.  In current technologies, this has to be done every   10ms or so.</p> <p>Hmm.  Maybe we can get around the drawbacks of capacitive   storage by designing a circuit that uses feedback to provide a   continual refresh of the stored information...</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide05.png" alt=""></a></div> <p>Here’s a circuit using combinational inverters hooked in   a positive feedback loop. If we set the input of one of the   inverters to a digital 0, it will produce a digital 1 on its   output.  The second inverter will then a produce a digital 0 on   its output, which is connected back around to the original   input.  This is a stable system and these digital values will be   maintained, even in the presence of noise, as long as this   circuitry is connected to power and ground.  And, of course,   it’s also stable if we flip the digital values on the two   wires.  The result is a system that has two stable   configurations, called a bi-stable storage element.</p> <p>Here’s the voltage transfer characteristic showing how   \(V_{\textrm{OUT}}\) and \(V_{\textrm{IN}}\) of the two-inverter   system are related.  The effect of connecting the system’s   output to its input is shown by the added constraint that   \(V_{\textrm{IN}}\) equal \(V_{\textrm{OUT}}\).  We can then   graphically solve for values of \(V_{\textrm{IN}}\) and   \(V_{\textrm{OUT}}\) that satisfy both constraints. There are   three possible solutions where the two curves intersect.</p> <p>The two points of intersection at either end of the VTC are   stable in the sense that small changes in \(V_{\textrm{IN}}\)   (due, say, to electrical noise), have no effect on   \(V_{\textrm{OUT}}\).  So the system will return to its stable   state despite small perturbations.</p> <p>The middle point of intersection is what we call metastable.   In theory the system could “balance” at this   particular \(V_{\textrm{IN}}/V_{\textrm{OUT}}\) voltage forever,   but the smallest perturbation will cause the voltages to quickly   transition to one of the stable solutions.  Since we’re   planing to use this bi-stable storage element as our memory   component, we’ll need to figure out how to avoid getting   the system into this metastable state.  More on this in the next   chapter.</p> <p>Now let’s figure out how to load new values into our   bi-stable storage element.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide06.png" alt=""></a></div> <p>We can use a 2-to-1 multiplexer to build a settable storage   element.  Recall that a MUX selects as its output value the   value of one of its two data inputs.  The output of the MUX   serves as the state output of the memory component.  Internally   to the memory component we’ll also connect the output of   the MUX to its D0 data input.  The MUX{}’s D1 data input   will become the data input of the memory component.  And the   select line of the MUX will become the memory component’s   load signal, here called the gate.</p> <p>When the gate input is LOW, the MUX{}’s output is looped   back through MUX through the D0 data input, forming the   bi-stable positive feedback loop discussed in the last section.   Note our circuit now has a cycle, so it no longer qualifies as a   combinational circuit.</p> <p>When the gate input is HIGH, the MUX{}’s output is   determined by the value of the D1 input, <i>i.e.</i>, the data   input of the memory component.</p> <p>To load new data into the memory component, we set the gate   input HIGH for long enough for the Q output to become valid and   stable.  Looking at the truth table, we see that when G is 1,   the Q output follows the D input.  While the G input is HIGH,   any changes in the D input will be reflected as changes in the Q   output, the timing being determined by the tPD of the MUX.</p> <p>Then we can set the gate input LOW to switch the memory   component into memory mode, where the stable Q value is   maintained indefinitely by the positive feedback loop as shown   in the first two rows of the truth table.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide07.png" alt=""></a></div> <p>Our memory device is a called a D latch, or just a latch for   short, with the schematic symbol shown here.</p> <p>When the latch’s gate is HIGH, the latch is open and   information flows from the D input to the Q output.  When the   latch’s gate is LOW, the latch is closed and in   “memory mode”, remembering whatever value was on the   D input when the gate transitioned from HIGH to LOW.</p> <p>This is shown in the timing diagrams on the right.  The   waveforms show when a signal is stable, <i>i.e.</i>, a constant   signal that’s either LOW or HIGH, and when a signal is   changing, shown as one or more transitions between LOW and   HIGH.</p> <p>When G is HIGH, we can see Q changing to a new stable output   value no later than tPD after D reaches a new stable value.</p> <p>Our theory is that after G transitions to a LOW value, Q will   stay stable at whatever value was on D when G made the HIGH to   LOW transition.  But, we know that in general, we can’t   assume anything about the output of a combinational device until   tPD after the input transition — the device is allowed to   do whatever it wants in the interval between tCD and tPD after   the input transition.  But how will our memory work if the   1-to-0 transition on G causes the Q output to become invalid for   a brief interval?  After all it’s the value on the Q   output we’re trying to remember!  We’re going to   have ensure that a 1-to-0 transition on G doesn’t affect   the Q output.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide08.png" alt=""></a></div> <p>That’s why we specified a lenient MUX for our memory   component.  The truth table for a lenient MUX is shown here.   The output of a lenient MUX remains valid and stable even after   an input transition under any of the following three   conditions.</p> <p>(1) When we’re loading the latch by setting G HIGH, once   the D input has been valid and stable for tPD, we are guaranteed   that the Q output will be stable and valid with the same value   as the D input, independently of Q’s initial value.</p> <p>Or (2) If both Q and D are valid and stable for tPD, the Q   output will be unaffected by subsequent transitions on the G   input.  This is the situation that will allow us to have a   1-to-0 transition on G without contaminating the Q output.</p> <p>Or, finally, (3) if G is LOW and Q has been stable for at least   tPD, the output will be unaffected by subsequent transitions on   the D input.</p> <p>Does lenience guarantee a working latch?  Well, only if   we’re careful about ensuring that signals are stable at   the right times so we can leverage the lenient behavior of the   MUX.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide09.png" alt=""></a></div> <p>Here are the steps we need to follow in order to ensure the   latch will work as we want.</p> <p>First, while the G input is HIGH, set the D input to the value   we wish store in the latch. Then, after tPD, we’re   guaranteed that value will be stable and valid on the Q output.   This is condition (1) from the previous slide.</p> <p>Now we wait another tPD so that the information about the new   value on the Q’ input propagates through the internal   circuitry of the latch.  Now, both D *and* Q’ have been   stable for at least tPD, giving us condition (2) from the   previous slide.</p> <p>So if D is stable for 2*tPD, transitions on G will not affect   the Q output.  This requirement on D is called the setup time of   the latch: it’s how long D must be stable and valid before   the HIGH-to-LOW transition of G.</p> <p>Now we can set G to LOW, still holding D stable and valid.   After another tPD to allow the new G value to propagate through   the internal circuitry of the latch, we’ve satisfied   condition (3) from the previous slide, and the Q output will be   unaffected by subsequent transitions on D.</p> <p>This further requirement on D’s stability is called the   hold time of the latch: it’s how long after the transition   on G that D must stay stable and valid.</p> <p>Together the setup and hold time requirements are called the   dynamic discipline, which must be followed if the latch is to   operate correctly.</p> <p>In summary, the dynamic discipline requires that the D input be   stable and valid both both before and after a transition on G.   If our circuit is designed to obey the dynamic discipline, we   can guarantee that this memory component will reliably store the   information on D when the gate makes a HIGH-to-LOW   transition.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide10.png" alt=""></a></div> <p>Let’s try using the latch as the memory component in our   sequential logic system.</p> <p>To load the encoding of the new state into the latch, we open   the latch by setting the latch’s gate input HIGH, letting   the new value propagate to the latch’s Q output, which   represents the current state.  This updated value propagates   through the combinational logic, updating the new state   information.  Oops, if the gate stays HIGH too long, we’ve   created a loop in our system and our plan to load the latch with   new state goes awry as the new state value starts to change   rapidly as information propagates around and around the   loop.</p> <p>So to make this work, we need to carefully time the interval   when G is HIGH.  It has to be long enough to satisfy the   constraints of the dynamic discipline, but it has to be short   enough that the latch closes again before the new state   information has a chance to propagate all the way around the   loop.</p> <p>Hmm.  I think Mr. Blue is right: this sort of tricky system   timing would likely be error-prone since the exact timing of   signals is almost impossible to guarantee.  We have upper and   lower bounds on the timing of signal transitions but no   guarantees of exact intervals.  To make this work, we want to a   load signal that marks an instant in time, not an interval.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide11.png" alt=""></a></div> <p>Here’s an analogy that will help us understand   what’s happening and what we can do about it.  Imagine a   line cars waiting at a toll booth gate.  The sequence of cars   represents the sequence of states in our sequential logic and   the gated toll both represents the latch.</p> <p>Initially the gate is closed and the cars are waiting patiently   to go through the toll booth. When the gate opens, the first car   proceeds out of the toll both.  But you can see that the timing   of when to close the gate is going to be tricky.  It has to be   open long enough for the first car to make it through, but not   too long lest the other cars also make it through.  This is   exactly the issue we faced with using the latch as our memory   component in our sequential logic.</p> <p>So how do we ensure only one car makes it through the open gate?</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide12.png" alt=""></a></div> <p>One solution is to use <i>two</i> gates!  Here’s the plan:   Initially Gate 1 is open allowing exactly one car to enter the   toll booth and Gate 2 is closed.  Then at a particular point in   time, we close Gate 1 while opening Gate 2.  This lets the car   in the toll booth proceed on, but prevents any other car from   passing through.  We can repeat this two-step process to deal   with each car one-at-time.  The key is that at no time is there   a path through both gates.</p> <p>This is the same arrangement as the escapement mechanism in a   mechanical clock.  The escapement ensures that the gear attached   to the clock’s spring only advances one tooth at a time,   preventing the spring from spinning the gear wildly causing a   whole day to pass at once!</p> <p>If we observed the toll booth’s output, we would see a   car emerge shortly after the instant in time when Gate 2 opens.   The next car would emerge shortly after the next time Gate 2   opens, and so on.  Cars would proceed through the toll booth at   a rate set by the interval between Gate 2 openings.</p> <p>Let’s apply this solution to design a memory component   for our sequential logic.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide13.png" alt=""></a></div> <p>Taking our cue from the 2-gate toll both, we’ll design a   new component, called a D register, using two back-to-back   latches.  The load signal for a D register is typically called   the register’s “clock”, but the   register’s D input and Q output play the same roles as   they did for the latch.</p> <p>First we’ll describe the internal structure of the D   register, then we’ll describe what it does and look in   detail at how it does it.</p> <p>The D input is connected to what we call the master latch and   the Q output is connected to the slave latch.</p> <p>Note that the clock signal is inverted before it’s   connected to the gate input of the master latch.  So when the   master latch is open, the slave is closed, and vice versa.  This   achieves the escapement behavior we saw on the previous slide:   at no time is there active path from the register’s D   input to the register’s Q output.</p> <p>The delay introduced by the inverter on the clock signal might   give us cause for concern.  When there’s a rising 0-to-1   transition on the clock signal, might there be a brief interval   when the gate signal is HIGH for both latches since there will   be a small delay before the inverter’s output transitions   from 1 to 0?  Actually the inverter isn’t necessary: Mr   Blue is looking at a slightly different latch schematic where   the latch is open when G is LOW and closed when G is high.  Just   what we need for the master latch!</p> <p>By the way, you’ll sometimes hear a register called a   flip-flop because of the bistable nature of the positive   feedback loops in the latches.</p> <p>That’s the internal structure of the D register.  In the   next section we’ll take a step-by-step tour of the   register in operation.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide14.png" alt=""></a></div> <p>We’ll get a good understanding of how the register   operates as we follow the signals through the circuit.</p> <p>The overall operation of the register is simple: At the rising   0-to-1 transition of the clock input, the register samples the   value of the D input and stores that value until the next rising   clock edge.  The Q output is simply the value stored in the   register. Let’s see how the register implements this   functionality.</p> <p>The clock signal is connected to the gate inputs of the master   and slave latches.  Since all the action happens when the clock   makes a transition, it’s those events we’ll focus   on.  The clock transition from LOW to HIGH is called the rising   edge of the clock.  And its transition from HIGH to LOW is   called the falling edge.  Let’s start by looking the   operation of the master latch and its output signal, which is   labeled STAR in the diagram.</p> <p>On the rising edge of the clock, the master latch goes from   open to closed, sampling the value on its input and entering   memory mode.  The sampled value thus becomes the output of the   latch as long as the latch stays closed.  You can see that the   STAR signal remains stable whenever the clock signal is   high.</p> <p>On the falling edge of the clock the master latch opens and its   output will then reflect any changes in the D input, delayed by   the tPD of the latch.</p> <p>Now let’s figure out what the slave is doing.  It’s   output signal, which also serves as the output of D register, is   shown as the bottom waveform.  On the rising edge of the clock   the slave latch opens and its output will follow the value of   the STAR signal.  Remember though that the STAR signal is stable   while the clock is HIGH since the master latch is closed, so the   Q signal is also stable after an initial transition if value   saved in the slave latch is changing.</p> <p>At the falling clock edge [CLICK], the slave goes from open to   closed, sampling the value on its input and entering memory   mode.  The sampled value then becomes the output of the slave   latch as long as the latch stays closed.  You can see that that   the Q output remains stable whenever the clock signal is   LOW.</p> <p>Now let’s just look at the Q signal by itself for a   moment.  It only changes when the slave latch opens at the   rising edge of the clock.  The rest of the time either the input   to slave latch is stable or the slave latch is closed.  The   change in the Q output is triggered by the rising edge of the   clock, hence the name “positive-edge-triggered D   register”.</p> <p>The convention for labeling the clock input in the schematic   icon for an edge-triggered device is to use a little triangle.   You can see that here in the schematic symbol for the D   register.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide15.png" alt=""></a></div> <p>There is one tricky problem we have to solve when designing the   circuitry for the register.  On the falling clock edge, the   slave latch transitions from open to closed and so its input   (the STAR signal) must meet the setup and hold times of the   slave latch in order to ensure correct operation.</p> <p>The complication is that the master latch opens at the same   time, so the STAR signal may change shortly after the clock   edge.  The contamination delay of the master latch tells us how   long the old value will be stable after the falling clock edge.   And the hold time on the slave latch tells us how long it has to   remain stable after the falling clock edge.</p> <p>So to ensure correct operation of the slave latch, the   contamination delay of the master latch has to be greater than   or equal to the hold time of the slave latch.  Doing the   necessary analysis can be a bit tricky since we have to consider   manufacturing variations as well as environmental factors such   as temperature and power supply voltage.  If necessary, extra   gate delays (<i>e.g.</i>, pairs of inverters) can be added   between the master and slave latches to increase the   contamination delay on the slave’s input relative to the   falling clock edge.  Note that we can only solve slave latch   hold time issues by changing the design of the circuit.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide16.png" alt=""></a></div> <p>Here’s a summary of the timing specifications for a D register.</p> <p>Changes in the Q signal are triggered by a rising edge on the   clock input.  The propagation delay \(t_{\textrm{PD}}\) of the   register is an upper bound on the time it takes for the Q output   to become valid and stable after the rising clock edge.</p> <p>The contamination delay of the register is a lower bound on the   time the previous value of Q remains valid after the rising   clock edge.</p> <p>Note that both \(t_{\textrm{CD}}\) and \(t_{\textrm{PD}}\) are   measured relative to the rising edge of the clock.  Registers   are designed to be lenient in the sense that if the previous   value of Q and the new value of Q are the same, the stability of   the Q signal is guaranteed during the rising clock edge.  In   other words, the \(t_{\textrm{CD}}\) and \(t_{\textrm{PD}}\)   specifications only apply when the Q output actually   changes.</p> <p>In order to ensure correct operation of the master latch, the   register’s D input must meet the setup and hold time   constraints for the master latch.  So the following two   specifications are determined by the timing of the master   latch.</p> <p>\(t_{\textrm{SETUP}}\) is the amount of time that the D input   must be valid and stable before the rising clock edge and   \(t_{\textrm{HOLD}}\) is the amount of time that D must be valid   and stable after the rising clock.  This region of stability   surrounding the clock edge ensures that we’re obeying the   dynamic discipline for the master latch.</p> <p>So when you use a D register component from a   manufacturer’s gate library, you’ll need to look up   these four timing specifications in the register’s data   sheet in order to analyze the timing of your overall circuit.   We’ll see how this analysis is done in the next   section.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide17.png" alt=""></a></div> <p>In 6.004, we have a specific plan on how we’ll use   registers in our designs, which we call the single-clock   synchronous discipline.</p> <p>Looking at the sketch of a circuit on the left, we see that it   consists of registers — the rectangular icons with the   edge-triggered symbol — and combinational logic circuits,   shown here as little clouds with inputs and outputs.</p> <p>Remembering that there is no combinational path between a   register’s input and output, the overall circuit has no   combinational cycles.  In other words, paths from system inputs   and register outputs to the inputs of registers never visit the   same combinational block twice.</p> <p>A single periodic clock signal is shared among all the clocked   devices.  Using multiple clock signals is possible, but   analyzing the timing for signals that cross between clock   domains is quite tricky, so life is much simpler when all   registers use the same clock.</p> <p>The details of which data signals change when are largely   unimportant.  All that matters is that signals hooked to   register inputs are stable and valid for long enough to meet the   registers’ setup time.  And, of course, stay stable long   enough to meet the registers’ hold time.</p> <p>We can guarantee that the dynamic discipline is obeyed by   choosing the clock period to be greater then the   \(t_{\textrm{PD}}\) of every path from register outputs to   register inputs, plus, of course, the registers’ setup   time.</p> <p>A happy consequence of choosing the clock period in this way is   that at the moment of the rising clock edge, there are no other   noise-inducing logic transitions happening anywhere in the   circuit.  Which means there should be no noise problems when we   update the stored state of each register.</p> <p>Our next task is to learn how to analyze the timing of a   single-clock synchronous system.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide18.png" alt=""></a></div> <p>Here’s a model of a particular path in our synchronous   system.  A large digital system will have many such paths and we   have to do the analysis below for each one in order to find the   path that will determine the smallest workable clock period.  As   you might suspect, there are computed-aided design programs that   will do these calculations for us.</p> <p>There’s an upstream register, whose output is connected   to a combinational logic circuit which generates the input   signal, labeled STAR, to the downstream register.</p> <p>Let’s build a carefully-drawn timing diagram showing when   each signal in the system changes and when it is stable.</p> <p>The rising edge of the clock triggers the upstream register,   whose output (labeled \(Q_{\textsc{r1}}\)) changes as specified by   the contamination and propagation delays of the register.   \(Q_{\textsc{r1}}\) maintains its old value for at least the   contamination delay of REG1, and then reaches its final stable   value by the propagation delay of REG1.  At this point   \(Q_{\textsc{r1}}\) will remain stable until the next rising clock   edge.</p> <p>Now let’s figure out the waveforms for the output of the   combinational logic circuit, marked with a red star in the   diagram.  The contamination delay of the logic determines the   earliest time STAR will go invalid measured from when   \(Q_{\textsc{r1}}\) went invalid.  The propagation delay of the   logic determines the latest time STAR will be stable measured   from when \(Q_{\textsc{r1}}\) became stable.</p> <p>Now that we know the timing for STAR, we can determine whether   STAR will meet the setup and hold times for the downstream   register REG2.  Time t1 measures how long STAR will stay valid   after the rising clock edge.  t1 is the sum of REG1’s   contamination delay and the logic’s contamination delay.   The HOLD time for REG2 measures how long STAR has to stay valid   after the rising clock edge in order to ensure correct   operation.  So t1 has to be greater than or equal to the HOLD   time for REG2.</p> <p>Time t2 is the sum of the propagation delays for REG1 and the   logic, plus the SETUP time for REG2.  This tells us the earliest   time at which the next rising clock edge can happen and still   ensure that the SETUP time for REG2 is met.  So t2 has to be   less than or equal to the time between rising clock edges,   called the clock period or tCLK.  If the next rising clock   happens before t2, we’ll be violating the dynamic   discipline for REG2.</p> <p>So we have two inequalities that must be satisfied for every   register-to-register path in our digital system.  If either   inequality is violated, we won’t be obeying the dynamic   discipline for REG2 and our circuit will not be guaranteed to   work correctly.</p> <p>Looking at the inequality involving tCLK, we see that the   propagation delay of the upstream register and setup time for   the downstream register take away from the time available useful   work performed by the combinational logic.  Not surprisingly,   designers try to use registers that minimize these two   times.</p> <p>What happens if there’s no combinational logic between   the upstream and downstream registers?  This happens when   designing shift registers, digital delay lines, etc.  Well, then   the first inequality tells us that the contamination delay of   the upstream register had better be greater than or equal to the   hold time of the downstream register.  In practice,   contamination delays are smaller than hold times, so in general   this wouldn’t be the case.  So designers are often   required to insert dummy logic, <i>e.g.</i>, two inverters in   series, in order to create the necessary contamination   delay.</p> <p>Finally we have to worry about the phenomenon called clock   skew, where the clock signal arrives at one register before it   arrives at the other.  We won’t go into the analysis here,   but the net effect is to increase the apparent setup and hold   times of the downstream register, assuming we can’t   predict the sign of the skew.</p> <p>The clock period, tCLK, characterizes the performance of our   system.  You may have noticed that Intel is willing to sell you   processor chips that run at different clock   frequencies, <i>e.g.</i>, a 1.7 GHz processor vs. a 2 GHz   processor.  Did you ever wonder how those chips are different?   As is turns out they’re not!  What’s going on is   that variations in the manufacturing process mean that some   chips have better tPDs than others.  On fast chips, a smaller   tPD for the logic means that they can have a smaller tCLK and   hence a higher clock frequency.  So Intel manufactures many   copies of the same chip, measures their tPDs and selects the   fast ones to sell as higher-performance parts.  That’s   what it takes to make money in the chip biz!</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide19.png" alt=""></a></div> <p>Using a D register as the memory component in our sequential   logic system works great!  At each rising edge of the clock, the   register loads the new state, which then appears at the   register’s output as the current state for the rest of the   clock period.  The combinational logic uses the current state   and the value of the inputs to calculate the next state and the   values for the outputs.  A sequence of rising clock edges and   inputs will produce a sequence of states, which leads to a   sequence of outputs.  In the next chapter we’ll introduce   a new abstraction, finite state machines, that will make it easy   to design sequential logic systems.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide20.png" alt=""></a></div> <p>Let’s use the timing analysis techniques we’ve   learned on the sequential logic system shown here.  The timing   specifications for the register and combinational logic are as   shown.  Here are the questions we need to answer.</p> <p>The contamination delay of the combinational logic isn’t   specified.  What does it have to be in order for the system to   work correctly?  Well, we know that the sum of register and   logic contamination delays has to be greater than or equal to   the hold time of the register.  Using the timing parameters we   do know along with a little arithmetic tells us that the   contamination delay of the logic has to be at least 1 ns.</p> <p>What is the minimum value for the clock period tCLK? The second   timing inequality from the previous section tells us that tCLK   has be greater than than the sum of the register and logic   propagation delays plus the setup time of the register.  Using   the known values for these parameters gives us a minimum clock   period of 10ns.</p> <p>What are the timing constraints for the Input signal relative   to the rising edge of the clock?  For this we’ll need a   diagram!  The Next State signal is the input to the register so   it has to meet the setup and hold times as shown here.  Next we   show the Input signal and how the timing of its transitions   affect to the timing of the Next State signal.  Now it’s   pretty easy to figure out when Input has to be stable before the   rising edge of the clock, <i>i.e.</i>, the setup time for   Input. The setup time for Input is the sum of propagation delay   of the logic plus the setup time for the register, which we   calculate as 7ns.  In other words, if the Input signal is stable   at least 7ns before the rising clock edge, then Next State will   be stable at least 2ns before the rising clock edge and hence   meet the register’s specified setup time.</p> <p>Similarly, the hold time of Input has to be the hold time of   the register minus the contamination delay of the logic, which   we calculate as 1 ns.  In other words, if Input is stable at   least 1 ns after the rising clock edge, then Next State will be   stable for another 1 ns, <i>i.e.</i>, a total of 2 ns after the   rising clock edge.  This meets the specified hold time of the   register.</p> <p>This completes our introduction to sequential logic.  Pretty   much every digital system out there is a sequential logic system   and hence is obeying the timing constraints imposed by the   dynamic discipline.  So next time you see an ad for a 1.7 GHz   processor chip, you’ll know where the “1.7”   came from!</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c5/c5s1/Slide21.png" alt=""></a></div> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c5/index.htm">Back<span>Sequential Logic</span></a></li>     <li id="continue_btn"><a href="../../../contents/c5/c5s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

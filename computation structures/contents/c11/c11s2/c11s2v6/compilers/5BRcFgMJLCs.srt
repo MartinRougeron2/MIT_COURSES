@@ -1,0 +1,452 @@
+1
+00:00:01,030 --> 00:00:06,519
+In this problem, we will examine how compilers
+translate high level language descriptions
+
+2
+00:00:06,519 --> 00:00:11,049
+into assembly language.
+We will be given several code fragments and
+
+3
+00:00:11,049 --> 00:00:15,759
+asked to help the compiler in figuring out
+the dependencies of the program so that it
+
+4
+00:00:15,759 --> 00:00:22,740
+produces valid code.
+Let's begin with the code fragment: a = b
+
+5
+00:00:22,740 --> 00:00:27,510
++ 3*c.
+We can assume that our variables: a, b, and
+
+6
+00:00:27,510 --> 00:00:32,439
+c are stored in memory.
+We can also assume that registers may be used
+
+7
+00:00:32,439 --> 00:00:37,920
+to store intermediate results.
+Given the following partially completed assembly
+
+8
+00:00:37,920 --> 00:00:43,379
+code, let's determine the missing values that
+the compiler would have had to determine.
+
+9
+00:00:43,379 --> 00:00:49,160
+We begin with XXX which is the first instruction.
+The first instruction is trying to put the
+
+10
+00:00:49,160 --> 00:00:54,130
+value of c into register R1.
+Since c comes from memory, that means that
+
+11
+00:00:54,130 --> 00:01:02,300
+instruction XXX must be a LD operation where
+c is the address of the variable to be loaded.
+
+12
+00:01:02,300 --> 00:01:13,840
+Note that LD(c, R1) is actually a macro instruction
+that is equal to LD(R31, c, R1).
+
+13
+00:01:13,840 --> 00:01:19,710
+The load operation would add the constant
+c to the value of register R31, which is always
+
+14
+00:01:19,710 --> 00:01:25,110
+0, thus ending up with the address c as the
+source address of the load operation.
+
+15
+00:01:25,110 --> 00:01:29,930
+R1 is a temporary register that will hold
+the value of variable c.
+
+16
+00:01:29,930 --> 00:01:38,560
+Next, we need to multiply c by 3.
+Multiply operations are generally very expensive,
+
+17
+00:01:38,560 --> 00:01:43,240
+so it is the compilers job to figure out that
+this operation could potentially be achieved
+
+18
+00:01:43,240 --> 00:01:49,158
+by 2 simpler and faster operations.
+The comment tells us that it first tries to
+
+19
+00:01:49,158 --> 00:01:57,390
+compute 2 * c and store that result into R0.
+Since R1 = c, and the constant in this operation
+
+20
+00:01:57,390 --> 00:02:02,869
+is a 1, we need to realize that the inexpensive
+operation that the compiler would use for
+
+21
+00:02:02,869 --> 00:02:07,549
+this is a logical shift to the left by one
+position.
+
+22
+00:02:07,549 --> 00:02:12,190
+In binary, this produces the same result as
+multiplying a number by 2.
+
+23
+00:02:12,190 --> 00:02:21,260
+So YYY = SHLC.
+Note that we use the constant version of the
+
+24
+00:02:21,260 --> 00:02:26,650
+SHL operation since the amount to shift is
+given by a constant in our instruction rather
+
+25
+00:02:26,650 --> 00:02:32,209
+than being read from another register.
+The next instruction is provided for us and
+
+26
+00:02:32,209 --> 00:02:41,420
+it adds R0 which equals 2*c to R1 which equals
+c in order to produce 3*c.
+
+27
+00:02:41,420 --> 00:02:46,579
+This intermediate result is then stored back
+into R0.
+
+28
+00:02:46,579 --> 00:02:50,680
+Next we want to once again get the value of
+a variable from memory.
+
+29
+00:02:50,680 --> 00:02:59,299
+As we saw before, XXX = LD in order to load
+the contents of address b into register R1.
+
+30
+00:02:59,299 --> 00:03:07,730
+We are almost done, we now just need to add
+R1 = b to R0 = 3*c and then store the result
+
+31
+00:03:07,730 --> 00:03:13,820
+back into memory variable a.
+Since the store instruction is using R0 as
+
+32
+00:03:13,820 --> 00:03:20,360
+its source, that means that ZZZ must also
+be R0 so that the correct value ends up in
+
+33
+00:03:20,360 --> 00:03:25,159
+variable a.
+Next, we will take a look at how a conditional
+
+34
+00:03:25,159 --> 00:03:28,980
+statement would be compiled into assembly
+language.
+
+35
+00:03:28,980 --> 00:03:36,470
+The statement says that if a is greater than
+b then c should be assigned the value 17.
+
+36
+00:03:36,470 --> 00:03:41,090
+Once again we are given the semi-complete
+translation of the high level language code
+
+37
+00:03:41,090 --> 00:03:45,870
+into beta assembly.
+For this example, we first load the values
+
+38
+00:03:45,870 --> 00:03:52,840
+of our variables a and b into temporary registers
+R0 and R1.
+
+39
+00:03:52,840 --> 00:03:58,439
+Now we want to check if a is greater than
+b and if so set c = 17.
+
+40
+00:03:58,439 --> 00:04:03,459
+We know that XXX must be some kind of beta
+comparison operation.
+
+41
+00:04:03,459 --> 00:04:09,160
+However, the beta does not provide a compare
+greater than operation, so instead we need
+
+42
+00:04:09,160 --> 00:04:15,250
+to make use of the compare less than (CMPLT)
+or compare less than or equal (CMPLE) operations.
+
+43
+00:04:15,250 --> 00:04:22,060
+Since we see that the store into label c is
+skipped when the code branches to label _L2,
+
+44
+00:04:22,060 --> 00:04:27,490
+we want to make sure that the branch is not
+taken when a is greater than b.
+
+45
+00:04:27,490 --> 00:04:32,389
+This is equivalent to the branch being taken
+when a is less than or equal to b.
+
+46
+00:04:32,389 --> 00:04:43,420
+So if we make XXX = CMPLE of R0, which equals
+a, and R1, which equals b, then the result
+
+47
+00:04:43,420 --> 00:04:53,750
+stored into R0 will be 1 if a <= b.
+We then set YYY to R0 to ensure that we take
+
+48
+00:04:53,750 --> 00:05:00,550
+the branch when a  b.
+
+49
+00:05:00,550 --> 00:05:09,509
+Finally, if we set ZZZ = 17, then when the
+branch is not taken, we will move 17 into
+
+50
+00:05:09,509 --> 00:05:16,250
+R0 and then store that value into the location
+pointed to by address c.
+
+51
+00:05:16,250 --> 00:05:25,419
+So the complete translation of this conditional
+statement to beta assembly is shown here.
+
+52
+00:05:25,419 --> 00:05:29,509
+For this next code segment, we are going to
+take a look at how a compiler would convert
+
+53
+00:05:29,509 --> 00:05:35,250
+array accesses into beta code.
+Once again we are given partially completed
+
+54
+00:05:35,250 --> 00:05:40,690
+assembly code to help us understand how the
+compiler translates this high level code into
+
+55
+00:05:40,690 --> 00:05:44,819
+beta assembly.
+We begin with a load of the value stored at
+
+56
+00:05:44,819 --> 00:05:51,300
+location i into register R0.
+I is the index into our array.
+
+57
+00:05:51,300 --> 00:05:57,039
+However, since the beta is byte addressed,
+but it deals with 32 bit values, that means
+
+58
+00:05:57,039 --> 00:06:01,120
+that each array element requires 4 bytes of
+storage.
+
+59
+00:06:01,120 --> 00:06:08,710
+So in order to point to the correct location
+in memory, we need to multiply i by 4.
+
+60
+00:06:08,710 --> 00:06:14,481
+As we saw earlier, shifting to the left by
+1 bit is equivalent to multiplying by 2, so
+
+61
+00:06:14,481 --> 00:06:19,690
+here we shift to the left by 2 bits in order
+to multiply by 4.
+
+62
+00:06:19,690 --> 00:06:31,840
+So XXX = 2.
+Now that R0 = 4 * i, in order to load a[i],
+
+63
+00:06:31,840 --> 00:06:39,819
+we would load the location a + 4*i.
+In order to load a[i-1], we need to load the
+
+64
+00:06:39,819 --> 00:06:47,940
+location that is 4 bytes before that, so location
+a + 4*i – 4.
+
+65
+00:06:47,940 --> 00:06:54,310
+This means that in this load operation which
+actually wants to load a[i-1], we need to
+
+66
+00:06:54,310 --> 00:07:03,419
+set YYY = a-4.
+So this load operation places array element
+
+67
+00:07:03,419 --> 00:07:11,970
+a[i-1] into R1.
+Now we want to store the contents of R1 into
+
+68
+00:07:11,970 --> 00:07:18,110
+array element a[i] which is located at address
+a + 4*i.
+
+69
+00:07:18,110 --> 00:07:24,889
+Since R0 already equals 4*i, then adding a
+to R0 will give us the desired destination
+
+70
+00:07:24,889 --> 00:07:29,610
+address of our store.
+This means that we just need to set ZZZ to
+
+71
+00:07:29,610 --> 00:07:37,610
+R1 since that is the value that we want to
+store into a[i].
+
+72
+00:07:37,610 --> 00:07:43,620
+Let's take a look at one last example.
+Here we have a variable sum that is initialized
+
+73
+00:07:43,620 --> 00:07:51,110
+to 0, followed by a loop that increments the
+value of sum by i for every value of i between
+
+74
+00:07:51,110 --> 00:07:56,419
+0 and 9.
+Our partial mostly completed compiled code
+
+75
+00:07:56,419 --> 00:08:00,659
+is shown here.
+The first thing that the compiler does, is
+
+76
+00:08:00,659 --> 00:08:05,099
+it initializes the two variables sum and i
+to 0.
+
+77
+00:08:05,099 --> 00:08:11,960
+This is done by storing the value of register
+R31, which is always 0 in the beta, into the
+
+78
+00:08:11,960 --> 00:08:18,449
+locations pointed to by sum and by i.
+_L7 is a label that indicates the beginning
+
+79
+00:08:18,449 --> 00:08:21,810
+of our loop.
+The first thing that needs to happen in the
+
+80
+00:08:21,810 --> 00:08:26,470
+loop is to load the current values of sum
+and i from memory.
+
+81
+00:08:26,470 --> 00:08:33,890
+Next, sum should be incremented by i.
+Since R0 is stored back into sum, we want
+
+82
+00:08:33,890 --> 00:08:39,600
+XXX = R0 to be the destination register of
+the ADD.
+
+83
+00:08:39,600 --> 00:08:46,270
+Now the loop index needs to be incremented.
+Since R1 = i, that means that we want to increment
+
+84
+00:08:46,270 --> 00:08:53,210
+R1 by 1,so YYY = R1.
+Finally, we need to determine whether the
+
+85
+00:08:53,210 --> 00:08:58,560
+loop needs to be repeated or we are done.
+This is done by checking whether i is less
+
+86
+00:08:58,560 --> 00:09:03,430
+than 10.
+The beta provides the CMPLTC operation to
+
+87
+00:09:03,430 --> 00:09:09,010
+do just that.
+Since R1 holds the latest value of i, comparing
+
+88
+00:09:09,010 --> 00:09:13,860
+R1 to the constant 10 will produce the result
+we want in R0.
+
+89
+00:09:13,860 --> 00:09:20,780
+So ZZZ = 10.
+If the comparison was true, then we need to
+
+90
+00:09:20,780 --> 00:09:27,460
+repeat the loop so we branch back to _L7.
+If not, we proceed to the instruction after
+
+91
+00:09:27,460 --> 00:09:28,260
+the branch.

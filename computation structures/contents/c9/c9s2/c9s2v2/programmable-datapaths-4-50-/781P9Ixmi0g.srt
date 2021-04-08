@@ -1,0 +1,322 @@
+1
+00:00:00,750 --> 00:00:06,250
+Okay, we've figured out a way to design hardware
+to perform a particular computation:
+
+2
+00:00:06,250 --> 00:00:10,860
+Draw the state transition diagram for an FSM
+that describes the sequence of operations
+
+3
+00:00:10,860 --> 00:00:13,410
+needed to complete the computation.
+
+4
+00:00:13,410 --> 00:00:18,760
+Then construct the appropriate datapath, using
+registers to store values and combinational
+
+5
+00:00:18,760 --> 00:00:21,960
+logic to implement the needed operations.
+
+6
+00:00:21,960 --> 00:00:27,630
+Finally build an FSM to generate the control
+signals required by the datapath.
+
+7
+00:00:27,630 --> 00:00:30,900
+Is the datapath plus control logic itself
+an FSM?
+
+8
+00:00:30,900 --> 00:00:36,829
+Well, it has registers and some combinational
+logic, so, yes, it is an FSM.
+
+9
+00:00:36,829 --> 00:00:39,050
+Can we draw the truth table?
+
+10
+00:00:39,050 --> 00:00:40,120
+In theory, yes.
+
+11
+00:00:40,120 --> 00:00:46,680
+In practice, there are 66 bits of registers
+and hence 66 bits of state, so our truth table
+
+12
+00:00:46,680 --> 00:00:49,460
+would need 2^66 rows!
+
+13
+00:00:49,460 --> 00:00:53,870
+Hmm, not very likely that we'd be able to
+draw the truth table!
+
+14
+00:00:53,870 --> 00:00:57,699
+The difficulty comes from thinking of the
+registers in the datapath as part of the state
+
+15
+00:00:57,699 --> 00:00:59,609
+of our super-FSM.
+
+16
+00:00:59,609 --> 00:01:04,769
+That's why we think about the datapath as
+being separate from the control FSM.
+
+17
+00:01:04,769 --> 00:01:09,880
+So how do we generalize this approach so we
+can use one computer circuit to solve many
+
+18
+00:01:09,880 --> 00:01:11,470
+different problems.
+
+19
+00:01:11,470 --> 00:01:17,930
+Well, most problems would probably require
+more storage for operands and results.
+
+20
+00:01:17,930 --> 00:01:21,810
+And a larger list of allowable operations
+would be handy.
+
+21
+00:01:21,810 --> 00:01:26,070
+This is actually a bit tricky: what's the
+minimum set of operations we can get away
+
+22
+00:01:26,070 --> 00:01:27,070
+with?
+
+23
+00:01:27,070 --> 00:01:32,579
+As we'll see later, surprisingly simple hardware
+is sufficient to perform any realizable computation.
+
+24
+00:01:32,579 --> 00:01:39,370
+At the other extreme, many complex operations
+(e.g., fast fourier transform) are best implemented
+
+25
+00:01:39,370 --> 00:01:44,840
+as sequences of simpler operations (e.g.,
+add and multiply) rather than as a single
+
+26
+00:01:44,840 --> 00:01:47,520
+massive combinational circuit.
+
+27
+00:01:47,520 --> 00:01:52,408
+These sorts of design tradeoffs are what makes
+computer architecture fun!
+
+28
+00:01:52,408 --> 00:01:56,579
+We'd then combine our larger storage with
+logic for our chosen set of operations into
+
+29
+00:01:56,579 --> 00:02:02,610
+a general purpose datapath that could be reused
+to solve many different problems.
+
+30
+00:02:02,610 --> 00:02:05,159
+Let's see how that would work…
+
+31
+00:02:05,159 --> 00:02:08,869
+Here's a datapath with 4 data registers to
+hold results.
+
+32
+00:02:08,869 --> 00:02:15,170
+The ASEL and BSEL multiplexers allow any of
+the data registers to be selected as either
+
+33
+00:02:15,170 --> 00:02:19,920
+operand for our repertoire of arithmetic and
+boolean operations.
+
+34
+00:02:19,920 --> 00:02:24,260
+The result is selected by the OPSEL MUX and
+can be written back into any of the data registers
+
+35
+00:02:24,260 --> 00:02:29,760
+by setting the WEN control signal to 1 and
+using the 2-bit WSEL signal to select which
+
+36
+00:02:29,760 --> 00:02:34,040
+data register will be loaded at the next rising
+clock edge.
+
+37
+00:02:34,040 --> 00:02:37,810
+Note that the data registers have a load-enable
+control input.
+
+38
+00:02:37,810 --> 00:02:42,610
+When this signal is 1, the register will load
+a new value from its D input, otherwise it
+
+39
+00:02:42,610 --> 00:02:46,280
+ignores the D input and simply reloads its
+previous value.
+
+40
+00:02:46,280 --> 00:02:52,170
+And, of course, we'll add a control FSM to
+generate the appropriate sequence of control
+
+41
+00:02:52,170 --> 00:02:54,120
+signals for the datapath.
+
+42
+00:02:54,120 --> 00:02:59,030
+The Z input from the datapath allows the system
+to perform data-dependent operations, where
+
+43
+00:02:59,030 --> 00:03:05,489
+the sequence of operations can be influenced
+by the actual values in the data registers.
+
+44
+00:03:05,489 --> 00:03:10,019
+Here's the state transition diagram for the
+control FSM we'd use if we wanted to use this
+
+45
+00:03:10,019 --> 00:03:15,379
+datapath to compute factorial assuming the
+initial contents of the data registers are
+
+46
+00:03:15,379 --> 00:03:16,730
+as shown.
+
+47
+00:03:16,730 --> 00:03:21,019
+We need a few more states than in our initial
+implementation since this datapath can only
+
+48
+00:03:21,019 --> 00:03:23,550
+perform one operation at each step.
+
+49
+00:03:23,550 --> 00:03:29,730
+So we need three steps for each iteration:
+one for the multiply, one for the decrement,
+
+50
+00:03:29,730 --> 00:03:32,650
+and one for the test to see if we're done.
+
+51
+00:03:32,650 --> 00:03:37,099
+As seen here, it's often the case that general-purpose
+computer hardware will need more cycles and
+
+52
+00:03:37,099 --> 00:03:43,220
+perhaps involve more hardware than an optimized
+single-purpose circuit.
+
+53
+00:03:43,220 --> 00:03:46,110
+You can solve many different problems with
+this system:
+
+54
+00:03:46,110 --> 00:03:50,629
+exponentiation, division, square root, and
+so on, so long as you don't need more than
+
+55
+00:03:50,629 --> 00:03:56,030
+four data registers to hold input data, intermediate
+results, or the final answer.
+
+56
+00:03:56,030 --> 00:04:01,030
+By designing a control FSM, we are in effect
+"programming" our digital system, specifying
+
+57
+00:04:01,030 --> 00:04:04,340
+the sequence of operations it will perform.
+
+58
+00:04:04,340 --> 00:04:07,870
+This is exactly how the early digital computers
+worked!
+
+59
+00:04:07,870 --> 00:04:14,350
+Here's a picture of the ENIAC computer built
+in 1943 at the University of Pennsylvania.
+
+60
+00:04:14,350 --> 00:04:19,190
+The Wikipedia article on the ENIAC tells us
+that "ENIAC could be programmed to perform
+
+61
+00:04:19,190 --> 00:04:24,210
+complex sequences of operations, including
+loops, branches, and subroutines.
+
+62
+00:04:24,210 --> 00:04:28,540
+The task of taking a problem and mapping it
+onto the machine was complex, and usually
+
+63
+00:04:28,540 --> 00:04:30,050
+took weeks.
+
+64
+00:04:30,050 --> 00:04:34,880
+After the program was figured out on paper,
+the process of getting the program into ENIAC
+
+65
+00:04:34,880 --> 00:04:37,919
+by manipulating its switches and cables could
+take days.
+
+66
+00:04:37,919 --> 00:04:43,889
+This was followed by a period of verification
+and debugging, aided by the ability to execute
+
+67
+00:04:43,889 --> 00:04:45,419
+the program step by step."
+
+68
+00:04:45,419 --> 00:04:49,909
+It's clear that we need a less cumbersome
+way to program our computer!

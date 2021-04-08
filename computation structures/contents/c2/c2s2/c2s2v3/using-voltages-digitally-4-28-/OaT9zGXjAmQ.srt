@@ -1,0 +1,454 @@
+1
+00:00:00,560 --> 00:00:02,700
+To solve our
+engineering problem,
+
+2
+00:00:02,700 --> 00:00:06,220
+we will introduce what we’ll
+call the “digital abstraction”.
+
+3
+00:00:06,220 --> 00:00:09,500
+The key insight is to use the
+continuous world of voltages
+
+4
+00:00:09,500 --> 00:00:13,260
+to represent some small, finite
+set of values, in our case,
+
+5
+00:00:13,260 --> 00:00:16,430
+the two binary
+values, “0” and “1”.
+
+6
+00:00:16,430 --> 00:00:19,170
+Keep in mind that the world
+is not inherently digital,
+
+7
+00:00:19,170 --> 00:00:22,550
+we would simply like to engineer
+it to behave that way, using
+
+8
+00:00:22,550 --> 00:00:27,650
+continuous physical phenomenon
+to implement digital designs.
+
+9
+00:00:27,650 --> 00:00:29,680
+As a quick aside, let
+me mention that there
+
+10
+00:00:29,680 --> 00:00:32,360
+are physical phenomenon
+that are naturally digital,
+
+11
+00:00:32,360 --> 00:00:34,690
+i.e., that are
+observed to have one
+
+12
+00:00:34,690 --> 00:00:39,450
+of several quantized values,
+e.g., the spin of an electron.
+
+13
+00:00:39,450 --> 00:00:42,130
+This came as a surprise
+to classical physicists
+
+14
+00:00:42,130 --> 00:00:44,110
+who thought measurements
+of physical values
+
+15
+00:00:44,110 --> 00:00:46,010
+were continuous.
+
+16
+00:00:46,010 --> 00:00:47,830
+The development
+of quantum theory
+
+17
+00:00:47,830 --> 00:00:51,400
+to describe the finite number of
+degrees of freedom experienced
+
+18
+00:00:51,400 --> 00:00:53,370
+by subatomic
+particles completely
+
+19
+00:00:53,370 --> 00:00:56,270
+changed the world of
+classical physics.
+
+20
+00:00:56,270 --> 00:00:59,110
+We’re just now starting to
+research how to apply quantum
+
+21
+00:00:59,110 --> 00:01:02,250
+physics to computation and
+there’s interesting progress
+
+22
+00:01:02,250 --> 00:01:05,190
+to report on building
+quantum computers.
+
+23
+00:01:05,190 --> 00:01:08,130
+But for this course, we’ll
+focus on how to use classical
+
+24
+00:01:08,130 --> 00:01:11,780
+continuous phenomenon to
+create digital systems.
+
+25
+00:01:11,780 --> 00:01:14,910
+The key idea in using
+voltages digitally is to have
+
+26
+00:01:14,910 --> 00:01:17,240
+a signaling convention
+that encodes only one bit
+
+27
+00:01:17,240 --> 00:01:21,580
+of information at a time, i.e.,
+one of two values, “0” or “1”.
+
+28
+00:01:21,580 --> 00:01:25,330
+We’ll use the same uniform
+representation for every
+
+29
+00:01:25,330 --> 00:01:28,840
+component and wire in
+our digital system.
+
+30
+00:01:28,840 --> 00:01:31,100
+It’ll take us three attempts
+to arrive at a voltage
+
+31
+00:01:31,100 --> 00:01:34,140
+representation that
+solves all the problems.
+
+32
+00:01:34,140 --> 00:01:36,270
+Our first cut is
+the obvious one:
+
+33
+00:01:36,270 --> 00:01:40,590
+simply divide the range of
+voltages into two sub-ranges,
+
+34
+00:01:40,590 --> 00:01:45,330
+one range to represent “0”,
+the other to represent “1”.
+
+35
+00:01:45,330 --> 00:01:47,220
+Pick some threshold
+voltage, V_TH,
+
+36
+00:01:47,220 --> 00:01:50,650
+to divide the range in two.
+
+37
+00:01:50,650 --> 00:01:53,390
+When a voltage V is less
+than the threshold voltage,
+
+38
+00:01:53,390 --> 00:01:56,570
+we’ll take it to represent
+a bit value of 0.
+
+39
+00:01:56,570 --> 00:01:59,160
+When a voltage V is greater
+than or equal to the threshold
+
+40
+00:01:59,160 --> 00:02:02,780
+voltage, it will represent
+a bit value of 1.
+
+41
+00:02:02,780 --> 00:02:05,130
+This representation
+assigns a digital value
+
+42
+00:02:05,130 --> 00:02:08,810
+to all possible voltages.
+
+43
+00:02:08,810 --> 00:02:10,620
+The problematic part
+of this definition
+
+44
+00:02:10,620 --> 00:02:12,130
+is the difficulty
+in interpreting
+
+45
+00:02:12,130 --> 00:02:14,620
+voltages near the threshold.
+
+46
+00:02:14,620 --> 00:02:16,810
+Given the numeric value
+for a particular voltage,
+
+47
+00:02:16,810 --> 00:02:19,760
+it’s easy to apply the rules and
+come up with the corresponding
+
+48
+00:02:19,760 --> 00:02:21,260
+digital value.
+
+49
+00:02:21,260 --> 00:02:23,280
+But determining the
+correct numeric value
+
+50
+00:02:23,280 --> 00:02:25,760
+accurately gets
+more time consuming
+
+51
+00:02:25,760 --> 00:02:28,440
+and expensive as the voltage
+gets closer and closer
+
+52
+00:02:28,440 --> 00:02:30,070
+to the threshold.
+
+53
+00:02:30,070 --> 00:02:32,410
+The circuits involved would
+have to be made of precision
+
+54
+00:02:32,410 --> 00:02:35,320
+components and run in
+precisely-controlled physical
+
+55
+00:02:35,320 --> 00:02:36,530
+environments
+
+56
+00:02:36,530 --> 00:02:39,080
+— hard to accomplish when
+we consider the multitude
+
+57
+00:02:39,080 --> 00:02:42,020
+of environments and the
+modest cost expectations
+
+58
+00:02:42,020 --> 00:02:45,160
+for the systems
+we want to build.
+
+59
+00:02:45,160 --> 00:02:48,100
+So although this definition
+has an appealing mathematical
+
+60
+00:02:48,100 --> 00:02:51,510
+simplicity, it’s not workable
+on practical grounds.
+
+61
+00:02:51,510 --> 00:02:53,030
+This one gets a big red “X”.
+
+62
+00:02:55,560 --> 00:02:57,940
+In our second attempt, we’ll
+introduce two threshold
+
+63
+00:02:57,940 --> 00:03:01,510
+voltages: V_L and V_H.
+
+64
+00:03:01,510 --> 00:03:05,670
+Voltages less than or equal to
+V_L will be interpreted as 0,
+
+65
+00:03:05,670 --> 00:03:08,140
+and voltages greater
+than or equal to V_H
+
+66
+00:03:08,140 --> 00:03:09,190
+will be interpreted as 1.
+
+67
+00:03:09,190 --> 00:03:14,200
+The range of voltages
+between V_L and V_H is called
+
+68
+00:03:14,200 --> 00:03:17,720
+the “forbidden zone”, where we
+are forbidden to ask for any
+
+69
+00:03:17,720 --> 00:03:20,860
+particular behavior
+of our digital system.
+
+70
+00:03:20,860 --> 00:03:22,350
+A particular system
+can interpret
+
+71
+00:03:22,350 --> 00:03:26,120
+a voltage in the forbidden
+zone as either a 0 or a 1,
+
+72
+00:03:26,120 --> 00:03:28,530
+and is not even required
+to be consistent
+
+73
+00:03:28,530 --> 00:03:30,470
+in its interpretation.
+
+74
+00:03:30,470 --> 00:03:32,110
+In fact the system
+is not required
+
+75
+00:03:32,110 --> 00:03:36,430
+to produce any interpretation at
+all for voltages in this range.
+
+76
+00:03:36,430 --> 00:03:38,680
+How does this help?
+
+77
+00:03:38,680 --> 00:03:41,190
+Now we can build a
+quick-and-dirty voltage-to-bit
+
+78
+00:03:41,190 --> 00:03:44,500
+converter, say by using a
+high-gain op-amp and reference
+
+79
+00:03:44,500 --> 00:03:46,310
+voltage somewhere in
+the forbidden zone
+
+80
+00:03:46,310 --> 00:03:50,310
+to decide if a given voltage
+is above or below the threshold
+
+81
+00:03:50,310 --> 00:03:51,810
+voltage.
+
+82
+00:03:51,810 --> 00:03:54,400
+This reference voltage doesn’t
+have to be super-accurate,
+
+83
+00:03:54,400 --> 00:03:56,180
+so it could be
+generated with, say,
+
+84
+00:03:56,180 --> 00:03:59,250
+a voltage divider built
+from low-cost 10%-accurate
+
+85
+00:03:59,250 --> 00:04:01,400
+resistors.
+
+86
+00:04:01,400 --> 00:04:03,040
+The reference could
+change slightly
+
+87
+00:04:03,040 --> 00:04:05,570
+as the operating temperature
+varied or the power supply
+
+88
+00:04:05,570 --> 00:04:07,950
+voltage changed, and so on.
+
+89
+00:04:07,950 --> 00:04:10,530
+We only need to guarantee
+the correct behavior
+
+90
+00:04:10,530 --> 00:04:16,140
+of our converter for voltages
+below V_L or above V_H.
+
+91
+00:04:16,140 --> 00:04:19,290
+This representation is pretty
+promising and we’ll tentatively
+
+92
+00:04:19,290 --> 00:04:22,110
+give it a green
+checkmark for now.
+
+93
+00:04:22,110 --> 00:04:24,560
+After a bit more discussion,
+we’ll need to make one more
+
+94
+00:04:24,560 --> 00:04:28,300
+small tweak before we get
+to where we want to go.

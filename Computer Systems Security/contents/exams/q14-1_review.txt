@@ -1,0 +1,181 @@
+Baggy bounds checking
+==========================
+
+- Goal: prevent OOB accesses in unsafe languages
+- Question: given any pointer address p, get its base & bounds
+- Basic approach: store base & bound in a lookup table
+- Challenge: reduce space overhead & support fast lookup
+- Key techniques: alignment, padding, slot
+    - Store logarithmic bound
+      * Padding:
+        round up allocation size to 2^e, and store e (e <= 32, one byte)
+    - Infer base pointer from bound 
+      * Alignment:
+        enforce correlation between base and bound
+        e.g. allocation of size 2^e starts from address k * 2^e
+        recover base pointer for in-bound pointer p: base = p & ~(2^e - 1)
+    - Lookup e for any in-bound pointer p using a linear array
+      * Slot:
+        minimal allocation size, slot_size = 2^4 = 16 in the paper
+        log-bound for p: e = table[p >> 4] (4 <= e <= 32)
+- Enforcement
+    - Check bounds when doing pointer arithmetic
+      bounds check: (p^p') >> table[p >> 4] == 0
+      mark/unmark OOB by setting / clearing the highest bit of p
+    - Raise OOB exception only when dereferencing p
+      automatically by the hardware 
+      (upper half of the address space is set to be invalid)
+    - How to get bounds for OOB pointers?
+      * trade-off: only allow OOB pointers +- 1/2 slot_size
+        if OOB bit is set, +- slot_size to get an in-bound pointer
+      * raise exception immediately if the result of pointer
+        arithmetic is outside the allowed OOB range
+- Example:  char *p = malloc(44);
+    assume the result of p = 0x10000, which must be 64-bytes aligned. 
+    allocation size = 64, e = log 64 = 6;
+    number of slots used in lookup table = 64 / 16 = 4
+      i.e. table[0x1000..0x1003] = 6, 
+           where 0x1000 = p >> log2(slot_size)
+    then, for any in-bound pointer p' derived from p, it's log-bound
+    is table[p >> 4] = 6.
+    
+    memory region diagram:
+                 |             |
+                 | OOB-invalid |
+         0x0fff8 |.............|
+                 |  OOB-valid  |  8 bytes   (slot_size / 2)
+         0x10000 |=============| <-- 64-bytes aligned
+                 |             |          \
+                 |  in-object  | 44 bytes  |
+                 |             |           | 64 bytes
+         0x1002c |- - - - - - -|           |
+                 |  in-alloc   | 20 bytes /
+         0x10040 |=============|
+                 |  OOB-valid  |  8 bytes   (slot_size / 2)
+         0x10048 |.............|
+                 | OOB-invalid |
+                 |             |
+                 
+    in-object: can safely dereference.
+    in-alloc : can safely dereference.
+    OOB-valid: can exist, OOB bit set, dereference triggers exception.
+    OOB-invalid: cannot exist, pointer arithmetic triggers exception.
+                 
+                  in-object   in-alloc   OOB-valid  OOB-invd  can-deref?
+    ---------------------------------------------------------------------
+    q = p + 60;
+      = 0x1003c      N         Y          N            N            Y
+    r = q + 16;
+      = 0x1004c      N         N          N            Y            N
+    s = q + 8;
+      = 0x10044      N         N          Y            N            N
+    t = s - 32;
+      = 0x10024      Y         Y          N            N            Y
+
+- what is the result if slot_size is 8, or 32?
+
+
+Native client
+==========================
+
+- Goal: sandboxing untrusted x86 binary code
+- Basic idea: 
+  1) prevent memory access or code execution outside module boundary
+     - easy, using segmentation hardware (%cs, %ds, %fs, %gs)
+  2) verify there's no unsafe instruction in the binary (e.g. syscall, int)
+     - tricky!
+- Challenge: 
+   * x86 code is ambiguous: 
+           AND %eax, $0x000080cd
+         could be interpreted as
+           [garbage]... INT 0x80
+   * prevent jumping into the middle of an instruction
+     - statically verify that all jump targets reachable by fall-through
+       disassembly from the beginning.
+       * for direct jump (e.g. jmp/call $offset)
+         easy: target address is known at compile time
+       * for indirect (computed) jump (e.g. jmp/call *%reg)
+         hard: target address unknown
+- Key technique:
+     - compiler (untrusted) ensures indirect jumps only go to
+       multiples of 32 bytes
+     - verifier (trusted) verifies this property
+     - alignment and padding the code
+       * all indirect jump target begins at 32 byte boundary
+         (e.g. function entry point, jump table entry)
+       * no instruction can span 32-byte boundary
+     - replace computed jump with "nacljmp" instruction bundle:
+           and $0xffffffe0, %eax
+           jmp *%eax
+       "nacljmp" is considered as a single instruction and also
+       cannot span 32-byte boundary
+
+- Questions:
+  * Which addresses are valid for memory reads?
+    4K - 256MB
+  * Which addresses are valid for memory writes?
+    64K - 256MB, excluding module text
+  * Which addresses are valid direct jump target?
+    all instruction boundary through reliable disassembly,
+    but not in-between "nacljump" instruction bundle
+  * Which addresses are valid indirect (computed) jump target?
+    instructions inside module text & beginning at 32-byte boundary,
+  trampoline code?
+
+- Roles of compiler, verifier, runtime, OS and hardware
+
+Property                  compiler   verifier*   runtime*    OS*       HW*
+---------------------------------------------------------------------------
+memory safety                                    loading      x   segmentation
+read-only code                                   loading      x      paging
+jump-target alignment       x          x
+no cross-boundary inst.     x          x
+no invalid inst.         no "ret"      x
+valid direct jump                      x
+valid indirect jump      "nacljmp"     x                      x   segmentation
+communication                             trampoline/springboard
+-------------------------------------------------------------------------
+* trusted (inside the TCB)
+
+
+
+
+Symbolic execution
+==========================
+
+- Understand concolic execution in Lab 3
+- Example:
+
+1  def func(a):
+2    if a < 0:
+3        return 0
+4    b = a * 2
+5    if a * b > 30:
+6        if b > 10:
+7            return 1
+8        return 2
+9    return 3
+
+If concrete_values = {a: 4},
+
+1) What would be cur_path_constr at line 8?
+
+    [
+        not (a < 0),
+        a * (a * 2) > 30,
+        not (a * 2 > 10)
+    ]
+
+2) What would be the queries you send to z3 for new inputs?
+   Give a possible model for each query.
+   Which is the corresponding path in the program for each query?
+
+    3 queries:
+
+    not (not (a < 0)) 
+      ==> model: {a: -1} ==> line 3
+    not (a < 0) and not (a * (a * 2) > 30)
+      ==> model: {a:  0} ==> line 9
+    not (a < 0) and (a * (a * 2) > 30) and (not (not (a * 2 > 10)))
+      ==> model: {a:  6} ==> line 7
+

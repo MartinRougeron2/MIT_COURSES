@@ -1,0 +1,174 @@
+1
+00:00:01,380 --> 00:00:05,890
+In this problem, we are given a 4 state transition
+diagram.
+
+2
+00:00:05,890 --> 00:00:10,720
+We know that it represents a Moore machine
+because the output is a function of only the
+
+3
+00:00:10,720 --> 00:00:15,150
+current state.
+We are also given a partially filled out truth
+
+4
+00:00:15,150 --> 00:00:20,800
+table and our first job is to fill in the
+missing entries in the truth table.
+
+5
+00:00:20,800 --> 00:00:29,300
+In order to do this, we need to find the correlation
+between states A -- D and their S1S0 encoding.
+
+6
+00:00:29,300 --> 00:00:34,860
+We begin by looking at the output column.
+We know that only state A has an output of
+
+7
+00:00:34,860 --> 00:00:42,670
+1, so state A's encoding must be 00 and OUT=1
+regardless of the input because it is a Moore
+
+8
+00:00:42,670 --> 00:00:48,130
+machine.
+We also know that from state A on a 1 input,
+
+9
+00:00:48,130 --> 00:00:53,680
+the FSM moves to state B.
+According to the truth table from state 00
+
+10
+00:00:53,680 --> 00:00:59,100
+(which is A), on a 1 input, we move to state
+01.
+
+11
+00:00:59,100 --> 00:01:06,009
+That means that state B's encoding is 01.
+We continue in this manner, now following
+
+12
+00:01:06,009 --> 00:01:11,970
+the transitions from state B.
+According to the diagram, when IN = 0, we
+
+13
+00:01:11,970 --> 00:01:16,310
+move to state D.
+So looking up that transition in our truth
+
+14
+00:01:16,310 --> 00:01:21,549
+table, tells us that state D's encoding is
+10.
+
+15
+00:01:21,549 --> 00:01:29,399
+We also see in our state diagram that starting
+at state B when IN=1, we move back to state
+
+16
+00:01:29,399 --> 00:01:35,680
+A which we now know to be 00.
+So we can fill in the next missing entry in
+
+17
+00:01:35,680 --> 00:01:40,350
+our truth table.
+Now that we have determined the encoding for
+
+18
+00:01:40,350 --> 00:01:44,630
+states A, B, and D.
+We know that the remaining encoding is for
+
+19
+00:01:44,630 --> 00:01:50,420
+state C and that is 11.
+At this point, we have all the information
+
+20
+00:01:50,420 --> 00:01:55,450
+we need to complete filling out the missing
+entries in the truth table.
+
+21
+00:01:55,450 --> 00:02:03,110
+Looking at the row where the current state
+is 10 (state D) and IN = 1 and the corresponding
+
+22
+00:02:03,110 --> 00:02:10,800
+transition in the state diagram, shows us
+that in this case we go back to state D.
+
+23
+00:02:10,800 --> 00:02:18,190
+Since the encoding of state D is 10, the S0'
+entry is 0.
+
+24
+00:02:18,190 --> 00:02:23,040
+Because this is a Moore machine, we also know
+that the output associated with current state
+
+25
+00:02:23,040 --> 00:02:29,640
+D, regardless of the input, is 0, so the missing
+output entry is 0.
+
+26
+00:02:29,640 --> 00:02:37,950
+Finally, from state 11 (which is state C),
+when IN = 1, we see from the state diagram
+
+27
+00:02:37,950 --> 00:02:46,200
+that we transition to state A which is state
+00, so the remaining missing S0' value is
+
+28
+00:02:46,200 --> 00:02:50,400
+0.
+We now want to determine whether or not there
+
+29
+00:02:50,400 --> 00:02:56,290
+are any equivalent states in this FSM.
+In a Moore machine, equivalent states have
+
+30
+00:02:56,290 --> 00:03:03,010
+the same output, and the same input transitions.
+This rules out state A because it is the only
+
+31
+00:03:03,010 --> 00:03:08,620
+one that has a 1 output.
+Taking a closer look at states B, C, and D,
+
+32
+00:03:08,620 --> 00:03:15,920
+we can see that both states B and C transition
+to state D on a 0 input, and to state A on
+
+33
+00:03:15,920 --> 00:03:20,820
+a 1 input.
+In addition, the output value is 0 for both
+
+34
+00:03:20,820 --> 00:03:25,230
+of them.
+This means that states B and C are equivalent
+
+35
+00:03:25,230 --> 00:03:29,760
+and can be merged into 1 to turn this into
+a 3 state FSM.

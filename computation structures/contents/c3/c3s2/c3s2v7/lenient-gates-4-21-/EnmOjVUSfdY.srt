@@ -1,0 +1,390 @@
+1
+00:00:00,500 --> 00:00:02,540
+It turns out we
+can say a bit more
+
+2
+00:00:02,540 --> 00:00:04,480
+about the timing of
+output transitions
+
+3
+00:00:04,480 --> 00:00:06,650
+for CMOS logic gates.
+
+4
+00:00:06,650 --> 00:00:09,660
+Let’s start by considering
+the behavior of a non-CMOS
+
+5
+00:00:09,660 --> 00:00:13,610
+combinational device that
+implements the NOR function.
+
+6
+00:00:13,610 --> 00:00:15,680
+Looking at the
+waveform diagram, we
+
+7
+00:00:15,680 --> 00:00:18,950
+see that initially the A
+and B inputs are both 0,
+
+8
+00:00:18,950 --> 00:00:24,430
+and the output Z is 1, just as
+specified by the truth table.
+
+9
+00:00:24,430 --> 00:00:28,120
+Now B makes a 0-to-1
+transition and the Z output
+
+10
+00:00:28,120 --> 00:00:29,850
+will eventually
+reflect that change
+
+11
+00:00:29,850 --> 00:00:32,800
+by making a 1-to-0 transition.
+
+12
+00:00:32,800 --> 00:00:34,720
+As we learned in
+the previous video,
+
+13
+00:00:34,720 --> 00:00:36,620
+the timing of the
+Z transition is
+
+14
+00:00:36,620 --> 00:00:39,090
+determined by the
+contamination and propagation
+
+15
+00:00:39,090 --> 00:00:41,210
+delays of the NOR gate.
+
+16
+00:00:41,210 --> 00:00:44,430
+Note that we can’t say anything
+about the value of the Z output
+
+17
+00:00:44,430 --> 00:00:49,330
+in the interval of t_CD to t_PD
+after the input transition,
+
+18
+00:00:49,330 --> 00:00:52,360
+which we indicate with a red
+shaded region on the waveform
+
+19
+00:00:52,360 --> 00:00:54,590
+diagram.
+
+20
+00:00:54,590 --> 00:00:57,090
+Now, let’s consider
+a different set up,
+
+21
+00:00:57,090 --> 00:01:00,270
+where initially both A and
+B are 1, and, appropriately,
+
+22
+00:01:00,270 --> 00:01:02,910
+the output Z is 0.
+
+23
+00:01:02,910 --> 00:01:05,920
+Examining the truth table
+we see that if A is 1,
+
+24
+00:01:05,920 --> 00:01:10,390
+the output Z will be 0
+regardless of the value of B.
+
+25
+00:01:10,390 --> 00:01:14,870
+So what happens when B
+makes a 1-to-0 transition?
+
+26
+00:01:14,870 --> 00:01:17,140
+Before the transition,
+Z was 0 and we
+
+27
+00:01:17,140 --> 00:01:22,140
+expect it to be 0 again,
+t_PD after the B transition.
+
+28
+00:01:22,140 --> 00:01:25,580
+But, in general, we can’t assume
+anything about the value of Z
+
+29
+00:01:25,580 --> 00:01:29,260
+in the interval
+between t_CD and t_PD.
+
+30
+00:01:29,260 --> 00:01:31,340
+Z could have any
+behavior it wants in
+
+31
+00:01:31,340 --> 00:01:33,500
+that interval and the
+device would still
+
+32
+00:01:33,500 --> 00:01:37,210
+be a legitimate
+combinational device.
+
+33
+00:01:37,210 --> 00:01:40,450
+Many gate technologies,
+e.g., CMOS, adhere
+
+34
+00:01:40,450 --> 00:01:44,090
+to even tighter restrictions.
+
+35
+00:01:44,090 --> 00:01:47,660
+Let’s look in detail at the
+switch configuration in a CMOS
+
+36
+00:01:47,660 --> 00:01:51,770
+implementation of a NOR gate
+when both inputs are a digital
+
+37
+00:01:51,770 --> 00:01:52,570
+1.
+
+38
+00:01:52,570 --> 00:01:56,670
+A high gate voltage will turn
+on NFET switches (as indicated
+
+39
+00:01:56,670 --> 00:02:01,030
+by the red arrows) and turn
+off PFET switches (as indicated
+
+40
+00:02:01,030 --> 00:02:02,810
+by the red “Xs”).
+
+41
+00:02:02,810 --> 00:02:05,260
+Since the pullup circuit
+is not conducting
+
+42
+00:02:05,260 --> 00:02:07,750
+and the pulldown
+circuit is conducting,
+
+43
+00:02:07,750 --> 00:02:10,610
+the output Z is connected
+to GROUND, the voltage
+
+44
+00:02:10,610 --> 00:02:13,430
+for a digital 0 output.
+
+45
+00:02:13,430 --> 00:02:18,860
+Now, what happens when the B
+input transitions from 1 to 0?
+
+46
+00:02:18,860 --> 00:02:22,050
+The switches controlled by B
+change their configuration:
+
+47
+00:02:22,050 --> 00:02:27,220
+the PFET switch is now on and
+the NFET switch is now off.
+
+48
+00:02:27,220 --> 00:02:30,630
+But overall the pullup circuit
+is still not conducting
+
+49
+00:02:30,630 --> 00:02:35,060
+and there is still a pulldown
+path from Z to GROUND.
+
+50
+00:02:35,060 --> 00:02:38,000
+So while there used to be
+two paths from Z to GROUND
+
+51
+00:02:38,000 --> 00:02:41,930
+and there is now only one path,
+Z has been connected to GROUND
+
+52
+00:02:41,930 --> 00:02:45,500
+the whole time and its value
+has remained valid and stable
+
+53
+00:02:45,500 --> 00:02:48,320
+throughout B’s transition.
+
+54
+00:02:48,320 --> 00:02:52,340
+In the case of a CMOS NOR gate,
+when one input is a digital 1,
+
+55
+00:02:52,340 --> 00:02:57,520
+the output will be unaffected by
+transitions on the other input.
+
+56
+00:02:57,520 --> 00:02:59,250
+A lenient
+combinational device is
+
+57
+00:02:59,250 --> 00:03:01,620
+one that exhibits
+this behavior, namely
+
+58
+00:03:01,620 --> 00:03:03,910
+that the output is
+guaranteed to be be valid
+
+59
+00:03:03,910 --> 00:03:06,700
+when any combination of
+inputs sufficient to determine
+
+60
+00:03:06,700 --> 00:03:11,400
+the output value has been
+valid for at least t_PD.
+
+61
+00:03:11,400 --> 00:03:13,700
+When some of the inputs
+are in a configuration that
+
+62
+00:03:13,700 --> 00:03:17,640
+triggers this lenient behavior,
+transitions on the other inputs
+
+63
+00:03:17,640 --> 00:03:21,700
+will have no effect on the
+validity of the output value.
+
+64
+00:03:21,700 --> 00:03:24,800
+Happily most CMOS
+implementations of logic gates
+
+65
+00:03:24,800 --> 00:03:27,920
+are naturally lenient.
+
+66
+00:03:27,920 --> 00:03:31,100
+We can extend our truth-table
+notation to indicate lenient
+
+67
+00:03:31,100 --> 00:03:35,250
+behavior by using “X” for the
+input values on certain rows
+
+68
+00:03:35,250 --> 00:03:38,680
+to indicate that input value
+is irrelevant when determining
+
+69
+00:03:38,680 --> 00:03:41,040
+the correct output value.
+
+70
+00:03:41,040 --> 00:03:43,020
+The truth table for
+a lenient NOR gate
+
+71
+00:03:43,020 --> 00:03:47,700
+calls out two such situations:
+when A is 1, the value of B
+
+72
+00:03:47,700 --> 00:03:52,680
+is irrelevant, and when B is 1,
+the value of A is irrelevant.
+
+73
+00:03:52,680 --> 00:03:56,120
+Transitions on the irrelevant
+inputs don’t trigger the t_CD
+
+74
+00:03:56,120 --> 00:03:59,570
+and t_PD output timing normally
+associated with an input
+
+75
+00:03:59,570 --> 00:04:02,010
+transition.
+
+76
+00:04:02,010 --> 00:04:04,320
+When does lenience matter?
+
+77
+00:04:04,320 --> 00:04:06,870
+We’ll need lenient components
+when building memory
+
+78
+00:04:06,870 --> 00:04:11,760
+components, a topic we’ll get
+to in a couple of chapters.
+
+79
+00:04:11,760 --> 00:04:15,250
+You’re ready to try building
+some CMOS gates of your own!
+
+80
+00:04:15,250 --> 00:04:18,680
+Take a look at the first lab
+exercise in Assignment 2.
+
+81
+00:04:18,680 --> 00:04:21,810
+I think you’ll find
+it fun to work on!

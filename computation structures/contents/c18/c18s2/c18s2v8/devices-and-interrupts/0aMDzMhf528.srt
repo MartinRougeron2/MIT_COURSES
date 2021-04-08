@@ -1,0 +1,366 @@
+1
+00:00:00,399 --> 00:00:06,380
+For this problem, assume that we have a computer
+system that has three devices D1, D2, and
+
+2
+00:00:06,380 --> 00:00:07,740
+D3.
+
+3
+00:00:07,740 --> 00:00:10,960
+Each of these devices can cause interrupts
+in our system.
+
+4
+00:00:10,960 --> 00:00:16,209
+This table summarizes the interrupt characteristics
+of our three devices.
+
+5
+00:00:16,209 --> 00:00:20,440
+For each device, we are given its service
+time which is the amount of time it takes
+
+6
+00:00:20,440 --> 00:00:23,900
+to service an interrupt for that particular
+device.
+
+7
+00:00:23,900 --> 00:00:29,080
+We are given an interrupt frequency which
+tells us how frequently the interrupts for
+
+8
+00:00:29,080 --> 00:00:30,980
+that device arrive.
+
+9
+00:00:30,980 --> 00:00:35,680
+You can assume that the first interrupt of
+each device can arrive at any time.
+
+10
+00:00:35,680 --> 00:00:41,140
+The deadline is the longest amount of time
+that is allowed between the interrupt request
+
+11
+00:00:41,140 --> 00:00:43,690
+and the completion of the interrupt handler.
+
+12
+00:00:43,690 --> 00:00:51,480
+Assume we have a program P that takes 100
+seconds to execute when interrupts are disabled.
+
+13
+00:00:51,480 --> 00:00:56,280
+We would like to figure out how long it would
+take to execute this program when interrupts
+
+14
+00:00:56,280 --> 00:00:58,520
+are enabled.
+
+15
+00:00:58,520 --> 00:01:03,610
+To answer this question, we need to determine
+the amount of cpu time that is dedicated to
+
+16
+00:01:03,610 --> 00:01:06,020
+the handling of each of the three devices.
+
+17
+00:01:06,020 --> 00:01:17,220
+D1 has a service time of 400us and it runs
+every 800us so it is using 400/800 or 50%
+
+18
+00:01:17,220 --> 00:01:18,850
+of the cpu time.
+
+19
+00:01:18,850 --> 00:01:32,450
+D2 has a service time of 250us and it runs
+every 1000us so it is using 250/1000 or 25%
+
+20
+00:01:32,450 --> 00:01:34,920
+of the cpu time.
+
+21
+00:01:34,920 --> 00:01:42,210
+D3 uses 100/800 or 12.5% of the cpu time.
+
+22
+00:01:42,210 --> 00:01:47,280
+This means that the user programs have the
+remaining cpu time available to them.
+
+23
+00:01:47,280 --> 00:01:54,390
+The remaining cpu time is 12.5% or 1/8 of
+the cpu time.
+
+24
+00:01:54,390 --> 00:01:58,990
+If the user program can only run for one eighth
+of the time, that means that a program that
+
+25
+00:01:58,990 --> 00:02:06,530
+takes 100 seconds without interrupts will
+take 800 seconds to run with interrupts enabled.
+
+26
+00:02:06,530 --> 00:02:11,299
+We want to consider whether there is a weak
+priority ordering that could satisfy all of
+
+27
+00:02:11,299 --> 00:02:16,799
+the constraints for this system?
+Recall that with a weak priority ordering,
+
+28
+00:02:16,799 --> 00:02:22,810
+there is no preemption, so if an interrupt
+handler has begun running it runs to completion
+
+29
+00:02:22,810 --> 00:02:28,409
+even if another interrupt of higher priority
+arrives before its completion.
+
+30
+00:02:28,409 --> 00:02:33,599
+Upon completion, all interrupts that have
+arrived, regardless of their order of arrival,
+
+31
+00:02:33,599 --> 00:02:37,109
+are processed in priority order.
+
+32
+00:02:37,109 --> 00:02:41,730
+If there is a weak priority ordering that
+satisfies our system, then we should determine
+
+33
+00:02:41,730 --> 00:02:43,799
+the priority ordering.
+
+34
+00:02:43,799 --> 00:02:48,560
+If there is no such ordering, then we should
+identify the devices for which a weak priority
+
+35
+00:02:48,560 --> 00:02:52,889
+ordering cannot guarantee meeting all the
+constraints.
+
+36
+00:02:52,889 --> 00:02:57,829
+Returning to our device characteristics table
+and comparing our deadlines to the device
+
+37
+00:02:57,829 --> 00:03:04,040
+service times, we see that in a weak priority
+system if the D1 handler which has a service
+
+38
+00:03:04,040 --> 00:03:12,279
+time of 400us happens to be running when a
+D2 or D3 interrupt arrives, then the D2 or
+
+39
+00:03:12,279 --> 00:03:18,459
+D3 devices could miss their deadlines because
+the service time of D1 plus their own service
+
+40
+00:03:18,459 --> 00:03:21,700
+time is greater than their deadline.
+
+41
+00:03:21,700 --> 00:03:28,760
+In other words, if D2 or D3 have to wait up
+to 400us before beginning to be serviced then
+
+42
+00:03:28,760 --> 00:03:35,439
+their completion time won't be until 650us
+for D2 which is greater than its deadline
+
+43
+00:03:35,439 --> 00:03:44,560
+of 300us, and 500us for D3 which is greater
+than its deadline of 400us.
+
+44
+00:03:44,560 --> 00:03:51,779
+Thus, there is no weak priority system ordering
+which is guaranteed to satisfy all of our
+
+45
+00:03:51,779 --> 00:03:53,749
+system constraints.
+
+46
+00:03:53,749 --> 00:03:59,879
+Now, lets reconsider the same question assuming
+a strong priority ordering.
+
+47
+00:03:59,879 --> 00:04:05,029
+Recall that with a strong priority ordering,
+the handler for a device with a higher priority
+
+48
+00:04:05,029 --> 00:04:09,159
+will pre-empt a running handler of a lower
+priority device.
+
+49
+00:04:09,159 --> 00:04:15,499
+In other words if the priority of A is greater
+than B and an A interrupt arrives midway through
+
+50
+00:04:15,499 --> 00:04:21,298
+the handling of a B interrupt, then the B
+interrupt handler will get interrupted, the
+
+51
+00:04:21,298 --> 00:04:29,530
+A handler will be run, and upon completion
+of the A handler, the B handler will be resumed.
+
+52
+00:04:29,530 --> 00:04:34,450
+If there is a strong priority ordering that
+satisfies our system, then we should specify
+
+53
+00:04:34,450 --> 00:04:36,030
+what it is.
+
+54
+00:04:36,030 --> 00:04:40,870
+If there is no such ordering, then we should
+identify the devices for which even a strong
+
+55
+00:04:40,870 --> 00:04:45,970
+priority ordering cannot guarantee meeting
+all the constraints.
+
+56
+00:04:45,970 --> 00:04:51,479
+Since we now allow preemption of lower priority
+device handlers in order to satisfy the requirements
+
+57
+00:04:51,479 --> 00:04:57,930
+of a higher priority handler, we are no longer
+faced with the issue that devices D2 and D3
+
+58
+00:04:57,930 --> 00:05:01,860
+can't meet their deadlines if D1 happens to
+be running first.
+
+59
+00:05:01,860 --> 00:05:07,330
+In addition, since at the beginning of our
+problem we determined that there is enough
+
+60
+00:05:07,330 --> 00:05:13,090
+time to service all of our interrupts given
+their service times and interrupt frequencies,
+
+61
+00:05:13,090 --> 00:05:17,669
+that means that there must exist a strong
+priority ordering that can satisfy all the
+
+62
+00:05:17,669 --> 00:05:20,009
+constraints of our system.
+
+63
+00:05:20,009 --> 00:05:24,870
+You can use the scheme that a device with
+a shorter deadline should have a higher priority
+
+64
+00:05:24,870 --> 00:05:31,680
+than one with a longer deadline to arrive
+at a valid strong priority ordering.
+
+65
+00:05:31,680 --> 00:05:40,000
+A valid strong priority ordering is D2 has
+the highest priority, then D3 and then D1.
+
+66
+00:05:40,000 --> 00:05:46,870
+Another way of expressing this is D2 > D3
+> D1.
+
+67
+00:05:46,870 --> 00:05:51,939
+Note that for this example, this priority
+ordering is the only valid ordering that will
+
+68
+00:05:51,939 --> 00:05:56,200
+satisfy all the constraints of our strong
+priority system.
+
+69
+00:05:56,200 --> 00:06:01,060
+To convince ourselves of this, let's take
+a closer look at other priority possibilities
+
+70
+00:06:01,060 --> 00:06:03,509
+and determine what would happen in those situations.
+
+71
+00:06:03,509 --> 00:06:10,940
+If D1 had a higher priority than either D2
+or D3, then the deadlines for D2 and D3 would
+
+72
+00:06:10,940 --> 00:06:13,490
+not be guaranteed to be satisfied.
+
+73
+00:06:13,490 --> 00:06:17,750
+This means that D1 must have the lowest priority.
+
+74
+00:06:17,750 --> 00:06:25,389
+Now between D2 and D3, if D3 had a higher
+priority than D2, then if D3 was being serviced
+
+75
+00:06:25,389 --> 00:06:32,990
+when a D2 interrupt arrived, the D2 interrupt
+may not complete until 350us which is beyond
+
+76
+00:06:32,990 --> 00:06:34,460
+its deadline.
+
+77
+00:06:34,460 --> 00:06:41,490
+So this shows us that D2 must have the highest
+priority, then D3 and finally D1.

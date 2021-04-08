@@ -1,0 +1,280 @@
+1
+00:00:00,630 --> 00:00:03,860
+So far we've talked about assembling instructions.
+
+2
+00:00:03,860 --> 00:00:05,390
+What about data?
+
+3
+00:00:05,390 --> 00:00:11,000
+How do we allocate and initialize data storage
+and how do we get those values into registers
+
+4
+00:00:11,000 --> 00:00:13,519
+so that they can be used as operands?
+
+5
+00:00:13,519 --> 00:00:20,019
+Here we see a program that allocates and initializes
+two memory locations using the LONG macro.
+
+6
+00:00:20,019 --> 00:00:26,739
+We've used labels to remember the addresses
+of these locations for later reference.
+
+7
+00:00:26,739 --> 00:00:33,460
+When the program is assembled the values of
+the label N and factN are 0 and 4 respectively,
+
+8
+00:00:33,460 --> 00:00:38,040
+the addresses of the memory locations holding
+the two data values.
+
+9
+00:00:38,040 --> 00:00:42,790
+To access the first data value, the program
+uses a LD instruction, in this case one of
+
+10
+00:00:42,790 --> 00:00:49,970
+convenience macros that supplies R31 as the
+default value of the Ra field.
+
+11
+00:00:49,970 --> 00:00:55,990
+The assembler replaces the reference to the
+label N with its value 0 from the symbol table.
+
+12
+00:00:55,990 --> 00:01:01,640
+When the LD is executed, it computes the memory
+address by adding the constant (0) to the
+
+13
+00:01:01,640 --> 00:01:06,369
+value of the Ra register (which is R31 and
+hence the value is 0)
+
+14
+00:01:06,369 --> 00:01:12,689
+to get the address (0) of the memory location
+from which to fetch the value to be placed
+
+15
+00:01:12,689 --> 00:01:14,890
+in R1.
+
+16
+00:01:14,890 --> 00:01:20,880
+The constants needed as values for data words
+and instruction fields can be written as expressions.
+
+17
+00:01:20,880 --> 00:01:26,000
+These expressions are evaluated by the assembler
+as it assembles the program and the resulting
+
+18
+00:01:26,000 --> 00:01:28,840
+value is used as needed.
+
+19
+00:01:28,840 --> 00:01:33,200
+Note that the expressions are evaluated at
+the time the assembler runs.
+
+20
+00:01:33,200 --> 00:01:38,079
+By the time the program runs on the Beta,
+the resulting value is used.
+
+21
+00:01:38,079 --> 00:01:43,569
+The assembler does NOT generate ADD and MUL
+instructions to compute the value during program
+
+22
+00:01:43,569 --> 00:01:44,569
+execution.
+
+23
+00:01:44,569 --> 00:01:50,079
+If a value is needed for an instruction field
+or initial data value, the assembler has to
+
+24
+00:01:50,079 --> 00:01:53,479
+be able to perform the arithmetic itself.
+
+25
+00:01:53,479 --> 00:01:58,329
+If you need the program to compute a value
+during execution, you have to write the necessary
+
+26
+00:01:58,329 --> 00:02:01,490
+instructions as part of your program.
+
+27
+00:02:01,490 --> 00:02:08,318
+One last UASM feature: there's a special symbol
+".", called "dot", whose value is the address
+
+28
+00:02:08,318 --> 00:02:13,220
+of the next main memory location to be filled
+by the assembler when it generates binary
+
+29
+00:02:13,220 --> 00:02:14,610
+data.
+
+30
+00:02:14,610 --> 00:02:21,090
+Initially "." is 0 and it's incremented each
+time a new byte value is generated.
+
+31
+00:02:21,090 --> 00:02:27,000
+We can set the value of "." to tell the assembler
+where in memory we wish to place a value.
+
+32
+00:02:27,000 --> 00:02:34,970
+In this example, the constant 0xDEADBEEF is
+placed into location 0x100 of main memory.
+
+33
+00:02:34,970 --> 00:02:39,930
+And we can use "." in expressions to compute
+the values for other symbols, as shown here
+
+34
+00:02:39,930 --> 00:02:43,060
+when defining the value for the symbol "k".
+
+35
+00:02:43,060 --> 00:02:50,200
+In fact, the label definition "k:" is exactly
+equivalent to the UASM statement "k = ."
+
+36
+00:02:50,200 --> 00:02:56,790
+We can even increment the value of "." to
+skip over locations, e.g., if we wanted to
+
+37
+00:02:56,790 --> 00:03:01,940
+leave space for an un initialized array.
+
+38
+00:03:01,940 --> 00:03:04,010
+And that's assembly language!
+
+39
+00:03:04,010 --> 00:03:09,170
+We use assembly language as a convenient notation
+for generating the binary encoding for instructions
+
+40
+00:03:09,170 --> 00:03:10,450
+and data.
+
+41
+00:03:10,450 --> 00:03:15,750
+We let the assembler build the bit-level representations
+we need and to keep track of the addresses
+
+42
+00:03:15,750 --> 00:03:18,780
+where these values are stored in main memory.
+
+43
+00:03:18,780 --> 00:03:25,630
+UASM itself provides support for values, symbols,
+labels and macros.
+
+44
+00:03:25,630 --> 00:03:30,200
+Values can be written as constants or expressions
+involving constants.
+
+45
+00:03:30,200 --> 00:03:35,430
+We use symbols to give meaningful names to
+values so that our programs will be more readable
+
+46
+00:03:35,430 --> 00:03:37,500
+and more easily modified.
+
+47
+00:03:37,500 --> 00:03:43,370
+Similarly, we use labels to give meaningful
+names to addresses in main memory and then
+
+48
+00:03:43,370 --> 00:03:50,100
+use the labels in referring to data locations
+in LD or ST instructions, or to instruction
+
+49
+00:03:50,100 --> 00:03:54,150
+locations in branch instructions.
+
+50
+00:03:54,150 --> 00:03:58,860
+Macros hide the details of how instructions
+are assembled from their component fields.
+
+51
+00:03:58,860 --> 00:04:06,510
+And we can use "." to control where the assembler
+places values in main memory.
+
+52
+00:04:06,510 --> 00:04:10,120
+The assembler is itself a program that runs
+on our computer.
+
+53
+00:04:10,120 --> 00:04:13,850
+That raises an interesting "chicken and egg
+problem":
+
+54
+00:04:13,850 --> 00:04:19,250
+how did the first assembler program get assembled
+into binary so it could run on a computer?
+
+55
+00:04:19,250 --> 00:04:22,050
+Well, it was hand-assembled into binary.
+
+56
+00:04:22,050 --> 00:04:28,690
+I suspect it processed a very simple language
+indeed, with the bells and whistles of symbols,
+
+57
+00:04:28,690 --> 00:04:33,720
+labels, macros, expression evaluation, etc.
+added only after basic instructions could
+
+58
+00:04:33,720 --> 00:04:35,380
+be assembled by the program.
+
+59
+00:04:35,380 --> 00:04:41,090
+And I'm sure they were very careful not loose
+the binary so they wouldn't have to do the
+
+60
+00:04:41,090 --> 00:04:42,940
+hand-assembly a second time!

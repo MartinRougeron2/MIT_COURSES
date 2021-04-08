@@ -1,0 +1,546 @@
+1
+00:00:01,319 --> 00:00:06,019
+In the previous lecture we developed the instruction
+set architecture for the Beta, the computer
+
+2
+00:00:06,019 --> 00:00:09,540
+system we'll be building throughout this part
+of the course.
+
+3
+00:00:09,540 --> 00:00:13,280
+The Beta incorporates two types of storage
+or memory.
+
+4
+00:00:13,280 --> 00:00:19,620
+In the CPU datapath there are 32 general-purpose
+registers, which can be read to supply source
+
+5
+00:00:19,620 --> 00:00:24,279
+operands for the ALU or written with the ALU
+result.
+
+6
+00:00:24,279 --> 00:00:28,890
+In the CPU's control logic there is a special-purpose
+register called the program counter, which
+
+7
+00:00:28,890 --> 00:00:34,740
+contains the address of the memory location
+holding the next instruction to be executed.
+
+8
+00:00:34,740 --> 00:00:40,280
+The datapath and control logic are connected
+to a large main memory with a maximum capacity
+
+9
+00:00:40,280 --> 00:00:46,440
+of 2^32 bytes, organized as 2^30 32-bit words.
+
+10
+00:00:46,440 --> 00:00:49,670
+This memory holds both data and instructions.
+
+11
+00:00:49,670 --> 00:00:54,149
+Beta instructions are 32-bit values comprised
+of various fields.
+
+12
+00:00:54,149 --> 00:00:58,690
+The 6-bit OPCODE field specifies the operation
+to be performed.
+
+13
+00:00:58,690 --> 00:01:07,000
+The 5-bit Ra, Rb, and Rc fields contain register
+numbers, specifying one of the 32 general-purpose
+
+14
+00:01:07,000 --> 00:01:08,240
+registers.
+
+15
+00:01:08,240 --> 00:01:14,439
+There are two instruction formats: one specifying
+an opcode and three registers, the other specifying
+
+16
+00:01:14,439 --> 00:01:19,770
+an opcode, two registers, and a 16-bit signed
+constant.
+
+17
+00:01:19,770 --> 00:01:21,850
+There three classes of instructions.
+
+18
+00:01:21,850 --> 00:01:27,110
+The ALU instructions perform an arithmetic
+or logic operation on two operands, producing
+
+19
+00:01:27,110 --> 00:01:31,189
+a result that is stored in the destination
+register.
+
+20
+00:01:31,189 --> 00:01:36,070
+The operands are either two values from the
+general-purpose registers, or one register
+
+21
+00:01:36,070 --> 00:01:38,490
+value and a constant.
+
+22
+00:01:38,490 --> 00:01:44,600
+The yellow highlighting indicates instructions
+that use the second instruction format.
+
+23
+00:01:44,600 --> 00:01:49,450
+The Load/Store instructions access main memory,
+either loading a value from main memory into
+
+24
+00:01:49,450 --> 00:01:53,130
+a register, or storing a register value to
+main memory.
+
+25
+00:01:53,130 --> 00:01:58,250
+And, finally, there are branches and jumps
+whose execution may change the program counter
+
+26
+00:01:58,250 --> 00:02:02,840
+and hence the address of the next instruction
+to be executed.
+
+27
+00:02:02,840 --> 00:02:07,830
+To program the Beta we'll need to load main
+memory with binary-encoded instructions.
+
+28
+00:02:07,830 --> 00:02:12,300
+Figuring out each encoding is clearly the
+job for a computer, so we'll create a simple
+
+29
+00:02:12,300 --> 00:02:17,579
+programming language that will let us specify
+the opcode and operands for each instruction.
+
+30
+00:02:17,579 --> 00:02:22,140
+So instead of writing the binary at the top
+of slide, we'll write assembly language statements
+
+31
+00:02:22,140 --> 00:02:24,910
+to specify instructions in symbolic form.
+
+32
+00:02:24,910 --> 00:02:30,079
+Of course we still have think about which
+registers to use for which values and write
+
+33
+00:02:30,079 --> 00:02:34,690
+sequences of instructions for more complex
+operations.
+
+34
+00:02:34,690 --> 00:02:39,410
+By using a high-level language we can move
+up one more level abstraction and describe
+
+35
+00:02:39,410 --> 00:02:44,690
+the computation we want in terms of variables
+and mathematical operations rather than registers
+
+36
+00:02:44,690 --> 00:02:47,060
+and ALU functions.
+
+37
+00:02:47,060 --> 00:02:51,490
+In this lecture we'll describe the assembly
+language we'll use for programming the Beta.
+
+38
+00:02:51,490 --> 00:02:56,950
+And in the next lecture we'll figure out how
+to translate high-level languages, such as
+
+39
+00:02:56,950 --> 00:02:59,240
+C, into assembly language.
+
+40
+00:02:59,240 --> 00:03:02,590
+The layer cake of abstractions gets taller
+yet:
+
+41
+00:03:02,590 --> 00:03:07,340
+we could write an interpreter for say, Python,
+in C and then write our application programs
+
+42
+00:03:07,340 --> 00:03:08,820
+in Python.
+
+43
+00:03:08,820 --> 00:03:13,870
+Nowadays, programmers often choose the programming
+language that's most suitable for expressing
+
+44
+00:03:13,870 --> 00:03:19,650
+their computations, then, after perhaps many
+layers of translation, come up with a sequence
+
+45
+00:03:19,650 --> 00:03:23,079
+of instructions that the Beta can actually
+execute.
+
+46
+00:03:23,079 --> 00:03:28,079
+Okay, back to assembly language, which we'll
+use to shield ourselves from the bit-level
+
+47
+00:03:28,079 --> 00:03:33,020
+representations of instructions and from having
+to know the exact location of variables and
+
+48
+00:03:33,020 --> 00:03:34,950
+instructions in memory.
+
+49
+00:03:34,950 --> 00:03:40,240
+A program called the "assembler" reads a text
+file containing the assembly language program
+
+50
+00:03:40,240 --> 00:03:45,450
+and produces an array of 32-bit words that
+can be used to initialize main memory.
+
+51
+00:03:45,450 --> 00:03:50,540
+We'll learn the UASM assembly language, which
+is built into BSim, our simulator for the
+
+52
+00:03:50,540 --> 00:03:52,320
+Beta ISA.
+
+53
+00:03:52,320 --> 00:03:56,760
+UASM is really just a fancy calculator!
+
+54
+00:03:56,760 --> 00:04:02,040
+It reads arithmetic expressions and evaluates
+them to produce 8-bit values, which it then
+
+55
+00:04:02,040 --> 00:04:07,440
+adds sequentially to the array of bytes which
+will eventually be loaded into the Beta's
+
+56
+00:04:07,440 --> 00:04:08,440
+memory.
+
+57
+00:04:08,440 --> 00:04:14,260
+UASM supports several useful language features
+that make it easier to write assembly language
+
+58
+00:04:14,260 --> 00:04:15,430
+programs.
+
+59
+00:04:15,430 --> 00:04:19,730
+Symbols and labels let us give names to particular
+values and addresses.
+
+60
+00:04:19,730 --> 00:04:25,400
+And macros let us create shorthand notations
+for sequences of expressions that, when evaluated,
+
+61
+00:04:25,400 --> 00:04:30,130
+will generate the binary representations for
+instructions and data.
+
+62
+00:04:30,130 --> 00:04:32,600
+Here's an example UASM source file.
+
+63
+00:04:32,600 --> 00:04:38,870
+Typically we write one UASM statement on each
+line and can use spaces, tabs, and newlines
+
+64
+00:04:38,870 --> 00:04:41,010
+to make the source as readable as possible.
+
+65
+00:04:41,010 --> 00:04:43,770
+We've added some color coding to help in our
+explanation.
+
+66
+00:04:43,770 --> 00:04:49,680
+Comments (shown in green) allow us to add
+text annotations to the program.
+
+67
+00:04:49,680 --> 00:04:53,220
+Good comments will help remind you how your
+program works.
+
+68
+00:04:53,220 --> 00:04:57,290
+You really don't want to have figure out from
+scratch what a section of code does each time
+
+69
+00:04:57,290 --> 00:05:00,210
+you need to modify or debug it!
+
+70
+00:05:00,210 --> 00:05:02,610
+There are two ways to add comments to the
+code.
+
+71
+00:05:02,610 --> 00:05:08,320
+"//" starts a comment, which then occupies
+the rest of the source line.
+
+72
+00:05:08,320 --> 00:05:13,480
+Any characters after "//" are ignored by the
+assembler, which will start processing statements
+
+73
+00:05:13,480 --> 00:05:17,620
+again at the start of the next line in the
+source file.
+
+74
+00:05:17,620 --> 00:05:24,380
+You can also enclose comment text using the
+delimiters "/*" and "*/" and the assembler
+
+75
+00:05:24,380 --> 00:05:26,850
+will ignore everything in-between.
+
+76
+00:05:26,850 --> 00:05:32,050
+Using this second type of comment, you can
+"comment-out" many lines of code by placing
+
+77
+00:05:32,050 --> 00:05:39,110
+"/*" at the start and, many lines later, end
+the comment section with a "*/".
+
+78
+00:05:39,110 --> 00:05:43,300
+Symbols (shown in red) are symbolic names
+for constant values.
+
+79
+00:05:43,300 --> 00:05:49,230
+Symbols make the code easier to understand,
+e.g., we can use N as the name for an initial
+
+80
+00:05:49,230 --> 00:05:52,860
+value for some computation, in this case the
+value 12.
+
+81
+00:05:52,860 --> 00:05:57,250
+Subsequent statements can refer to this value
+using the symbol N instead of entering the
+
+82
+00:05:57,250 --> 00:05:59,750
+value 12 directly.
+
+83
+00:05:59,750 --> 00:06:04,230
+When reading the program, we'll know that
+N means this particular initial value.
+
+84
+00:06:04,230 --> 00:06:09,220
+So if later we want to change the initial
+value, we only have to change the definition
+
+85
+00:06:09,220 --> 00:06:14,600
+of the symbol N rather than find all the 12's
+in our program and change them.
+
+86
+00:06:14,600 --> 00:06:19,800
+In fact some of the other appearances of 12
+might not refer to this initial value and
+
+87
+00:06:19,800 --> 00:06:22,560
+so to be sure we only changed the ones that
+did,
+
+88
+00:06:22,560 --> 00:06:26,450
+we'd have to read and understand the whole
+program to make sure we only edited the right
+
+89
+00:06:26,450 --> 00:06:27,630
+12's.
+
+90
+00:06:27,630 --> 00:06:30,510
+You can imagine how error-prone that might
+be!
+
+91
+00:06:30,510 --> 00:06:34,900
+So using symbols is a practice you want to
+follow!
+
+92
+00:06:34,900 --> 00:06:38,210
+Note that all the register names are shown
+in red.
+
+93
+00:06:38,210 --> 00:06:43,880
+We'll define the symbols R0 through R31 to
+have the values 0 through 31.
+
+94
+00:06:43,880 --> 00:06:48,230
+Then we'll use those symbols to help us understand
+which instruction operands are intended to
+
+95
+00:06:48,230 --> 00:06:55,170
+be registers, e.g., by writing R1, and which
+operands are numeric values, e.g., by writing
+
+96
+00:06:55,170 --> 00:06:56,970
+the number 1.
+
+97
+00:06:56,970 --> 00:07:00,730
+We could just use numbers everywhere, but
+the code would be much harder to read and
+
+98
+00:07:00,730 --> 00:07:02,360
+understand.
+
+99
+00:07:02,360 --> 00:07:07,090
+Labels (shown in yellow) are symbols whose
+value are the address of a particular location
+
+100
+00:07:07,090 --> 00:07:08,410
+in the program.
+
+101
+00:07:08,410 --> 00:07:14,150
+Here, the label "loop" will be our name for
+the location of the MUL instruction in memory.
+
+102
+00:07:14,150 --> 00:07:18,710
+In the BNE at the end of the code, we use
+the label "loop" to specify the MUL instruction
+
+103
+00:07:18,710 --> 00:07:20,430
+as the branch target.
+
+104
+00:07:20,430 --> 00:07:26,169
+So if R1 is non-zero, we want to branch back
+to the MUL instruction and start another iteration.
+
+105
+00:07:26,169 --> 00:07:32,220
+We'll use indentation for most UASM statements
+to make it easy to spot the labels defined
+
+106
+00:07:32,220 --> 00:07:34,520
+by the program.
+
+107
+00:07:34,520 --> 00:07:38,840
+Indentation isn't required, it's just another
+habit assembly language programmers use to
+
+108
+00:07:38,840 --> 00:07:42,210
+keep their programs readable.
+
+109
+00:07:42,210 --> 00:07:47,940
+We use macro invocations (shown in blue) when
+we want to write Beta instructions.
+
+110
+00:07:47,940 --> 00:07:53,120
+When the assembler encounters a macro, it
+"expands" the macro, replacing it with a string
+
+111
+00:07:53,120 --> 00:07:56,260
+of text provided by in the macro's definition.
+
+112
+00:07:56,260 --> 00:08:00,889
+During expansion, the provided arguments are
+textually inserted into the expanded text
+
+113
+00:08:00,889 --> 00:08:03,600
+at locations specified in the macro definition.
+
+114
+00:08:03,600 --> 00:08:09,639
+Think of a macro as shorthand for a longer
+text string we could have typed in.
+
+115
+00:08:09,639 --> 00:08:12,270
+We'll show how all this works in the next
+video segment.

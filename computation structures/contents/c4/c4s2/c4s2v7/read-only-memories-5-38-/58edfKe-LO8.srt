@@ -1,0 +1,362 @@
+1
+00:00:00,840 --> 00:00:05,330
+Here's a final logic implementation strategy
+using read-only memories.
+
+2
+00:00:05,330 --> 00:00:10,070
+This strategy is useful when you need to generate
+many different outputs from the same set of
+
+3
+00:00:10,070 --> 00:00:15,990
+inputs, a situation we'll see a lot when we
+get to finite state machines later on in the
+
+4
+00:00:15,990 --> 00:00:16,990
+course.
+
+5
+00:00:16,990 --> 00:00:21,200
+Where MUXes are good for implementing truth
+tables with one output column, read-only memories
+
+6
+00:00:21,200 --> 00:00:24,790
+are good for implementing truth tables with
+many output columns.
+
+7
+00:00:24,790 --> 00:00:31,590
+One of the key components in a read-only memory
+is the decoder which has K select inputs and
+
+8
+00:00:31,590 --> 00:00:34,190
+2^K data outputs.
+
+9
+00:00:34,190 --> 00:00:39,460
+Only one of the data outputs will be 1 (or
+HIGH) at any given time, which one is determined
+
+10
+00:00:39,460 --> 00:00:42,140
+by the value on the select inputs.
+
+11
+00:00:42,140 --> 00:00:49,309
+The Jth output will be 1 when the select lines
+are set to the binary representation of J.
+
+12
+00:00:49,309 --> 00:00:54,920
+Here's a read-only memory implementation for
+the 2-output truth table shown on the left.
+
+13
+00:00:54,920 --> 00:01:00,010
+This particular 2-output device is a full
+adder, which is used as a building block in
+
+14
+00:01:00,010 --> 00:01:02,079
+addition circuits.
+
+15
+00:01:02,079 --> 00:01:07,649
+The three inputs to the function (A, B, and
+CI) are connected to the select lines of a
+
+16
+00:01:07,649 --> 00:01:08,649
+3-to-8 decoder.
+
+17
+00:01:08,649 --> 00:01:15,130
+The 8 outputs of the decoder run horizontally
+in the schematic diagram and each is labeled
+
+18
+00:01:15,130 --> 00:01:19,359
+with the input values for which that output
+will be HIGH.
+
+19
+00:01:19,359 --> 00:01:24,899
+So when the inputs are 000, the top decoder
+output will be HIGH and all the other decoder
+
+20
+00:01:24,899 --> 00:01:26,430
+outputs LOW.
+
+21
+00:01:26,430 --> 00:01:33,899
+When the inputs are 001 - i.e., when A and
+B are 0 and CI is 1 - the second decoder output
+
+22
+00:01:33,899 --> 00:01:34,899
+will be HIGH.
+
+23
+00:01:34,899 --> 00:01:37,070
+And so on.
+
+24
+00:01:37,070 --> 00:01:41,679
+The decoder outputs control a matrix of NFET
+pulldown switches.
+
+25
+00:01:41,679 --> 00:01:47,270
+The matrix has one vertical column for each
+output of the truth table.
+
+26
+00:01:47,270 --> 00:01:52,209
+Each switch connects a particular vertical
+column to ground, forcing it to a LOW value
+
+27
+00:01:52,209 --> 00:01:54,359
+when the switch is on.
+
+28
+00:01:54,359 --> 00:01:59,549
+The column circuitry is designed so that if
+no pulldown switches force its value to 0,
+
+29
+00:01:59,549 --> 00:02:01,829
+its value will be a 1.
+
+30
+00:02:01,829 --> 00:02:08,130
+The value on each of the vertical columns
+is inverted to produce the final output values.
+
+31
+00:02:08,130 --> 00:02:13,269
+So how do we use all this circuitry to implement
+the function described by the truth table?
+
+32
+00:02:13,269 --> 00:02:18,100
+For any particular combination of input values,
+exactly one of the decoder outputs will be
+
+33
+00:02:18,100 --> 00:02:21,180
+HIGH, all the others will be low.
+
+34
+00:02:21,180 --> 00:02:25,340
+Think of the decoder outputs as indicating
+which row of the truth table has been selected
+
+35
+00:02:25,340 --> 00:02:27,709
+by the input values.
+
+36
+00:02:27,709 --> 00:02:32,950
+All of the pulldown switches controlled by
+the HIGH decoder output will be turned ON,
+
+37
+00:02:32,950 --> 00:02:36,849
+forcing the vertical column to which they
+connect LOW.
+
+38
+00:02:36,849 --> 00:02:44,209
+For example, if the inputs are 001, the decoder
+output labeled 001 will be HIGH.
+
+39
+00:02:44,209 --> 00:02:50,069
+This will turn on the circled pulldown switch,
+forcing the S vertical column LOW.
+
+40
+00:02:50,069 --> 00:02:55,349
+The COUT vertical column is not pulled down,
+so it will be HIGH.
+
+41
+00:02:55,349 --> 00:03:01,120
+After the output inverters, S will be 1 and
+COUT will be 0, the desired output values.
+
+42
+00:03:01,120 --> 00:03:06,579
+By changing the locations of the pulldown
+switches, this read-only memory can be programmed
+
+43
+00:03:06,579 --> 00:03:11,580
+to implement any 3-input, 2-output function.
+
+44
+00:03:11,580 --> 00:03:16,819
+For read-only memories with many inputs, the
+decoders have many outputs and the vertical
+
+45
+00:03:16,819 --> 00:03:20,079
+columns in the switch matrix can become quite
+long and slow.
+
+46
+00:03:20,079 --> 00:03:26,170
+We can reconfigure the circuit slightly so
+that some of the inputs control the decoder
+
+47
+00:03:26,170 --> 00:03:31,769
+and the other inputs are used to select among
+multiple shorter and faster vertical columns.
+
+48
+00:03:31,769 --> 00:03:37,440
+This combination of smaller decoders and output
+MUXes is quite common in these sorts of memory
+
+49
+00:03:37,440 --> 00:03:39,299
+circuits.
+
+50
+00:03:39,299 --> 00:03:44,260
+Read-only memories, ROMs for short, are an
+implementation strategy that ignores the structure
+
+51
+00:03:44,260 --> 00:03:47,180
+of the particular boolean expression to be
+implemented.
+
+52
+00:03:47,180 --> 00:03:53,049
+The ROM's size and overall layout are determined
+only by the number of inputs and outputs.
+
+53
+00:03:53,049 --> 00:03:58,180
+Typically the switch matrix is fully populated,
+with all possible switch locations filled
+
+54
+00:03:58,180 --> 00:03:59,769
+with an NFET pulldown.
+
+55
+00:03:59,769 --> 00:04:05,069
+A separate physical or electrical programming
+operation determines which switches are actually
+
+56
+00:04:05,069 --> 00:04:07,430
+controlled by the decoder lines.
+
+57
+00:04:07,430 --> 00:04:12,139
+The other switches are configured to be in
+the permanently off state.
+
+58
+00:04:12,139 --> 00:04:19,048
+If the ROM has N inputs and M outputs, then
+the switch matrix will have 2^N rows and M
+
+59
+00:04:19,048 --> 00:04:24,900
+output columns, corresponding exactly to the
+size of the truth table.
+
+60
+00:04:24,900 --> 00:04:30,610
+As the inputs to the ROM change, various decoder
+outputs will turn off and on, but at slightly
+
+61
+00:04:30,610 --> 00:04:32,889
+different times.
+
+62
+00:04:32,889 --> 00:04:38,889
+As the decoder lines cycle, the output values
+may change several times until the final configuration
+
+63
+00:04:38,889 --> 00:04:40,990
+of the pulldown switches is stable.
+
+64
+00:04:40,990 --> 00:04:47,449
+So ROMs are not lenient and the outputs may
+show the glitchy behavior discussed earlier.
+
+65
+00:04:47,449 --> 00:04:48,449
+Whew!
+
+66
+00:04:48,449 --> 00:04:53,729
+This has been a whirlwind tour of various
+circuits we can use to implement logic functions.
+
+67
+00:04:53,729 --> 00:04:58,840
+The sum-of-products approach lends itself
+nicely to implementation with inverting logic.
+
+68
+00:04:58,840 --> 00:05:03,639
+Each circuit is custom-designed to implement
+a particular function and as such can be made
+
+69
+00:05:03,639 --> 00:05:06,500
+both fast and small.
+
+70
+00:05:06,500 --> 00:05:10,819
+The design and manufacturing expense of creating
+such circuits is worthwhile when you need
+
+71
+00:05:10,819 --> 00:05:16,120
+high-end performance or are producing millions
+of devices.
+
+72
+00:05:16,120 --> 00:05:21,030
+MUX and ROM circuit implementations are mostly
+independent of the specific function to be
+
+73
+00:05:21,030 --> 00:05:22,030
+implemented.
+
+74
+00:05:22,030 --> 00:05:26,490
+That's determined by a separate programming
+step, which may be completed after the manufacture
+
+75
+00:05:26,490 --> 00:05:28,310
+of the devices.
+
+76
+00:05:28,310 --> 00:05:32,930
+They are particularly suited for prototyping,
+low-volume production, or devices where the
+
+77
+00:05:32,930 --> 00:05:37,010
+functionality may need to be updated after
+the device is out in the field.

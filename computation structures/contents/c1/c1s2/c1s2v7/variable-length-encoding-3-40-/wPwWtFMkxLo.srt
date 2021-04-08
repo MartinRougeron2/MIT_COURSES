@@ -1,0 +1,229 @@
+1
+00:00:00,979 --> 00:00:05,400
+Fixed-length encodings work well when all
+the possible choices have the same information
+
+2
+00:00:05,400 --> 00:00:10,440
+content, i.e., all the choices have an equal
+probability of occurring.
+
+3
+00:00:10,440 --> 00:00:14,709
+If those choices don't have the same information
+content, we can do better.
+
+4
+00:00:14,709 --> 00:00:19,570
+To see how, consider the expected length of
+an encoding, computed by considering each
+
+5
+00:00:19,570 --> 00:00:25,460
+x_i to be encoded, and weighting the length
+of its encoding by p_i, the probability of
+
+6
+00:00:25,460 --> 00:00:27,240
+its occurrence.
+
+7
+00:00:27,240 --> 00:00:32,040
+By "doing better" we mean that we can find
+encodings that have a shorter expected length
+
+8
+00:00:32,040 --> 00:00:34,000
+than a fixed-length encoding.
+
+9
+00:00:34,000 --> 00:00:38,980
+Ideally we'd like the expected length of the
+encoding for the x_i to match the entropy
+
+10
+00:00:38,980 --> 00:00:45,050
+H(X), which is the expected information content.
+
+11
+00:00:45,050 --> 00:00:51,670
+We know that if x_i has a higher probability
+(i.e., a larger p_i), that is has a smaller
+
+12
+00:00:51,670 --> 00:00:55,590
+information content, so we'd like to use shorter
+encodings.
+
+13
+00:00:55,590 --> 00:01:01,390
+If x_i has a lower probability, then we'd
+use a longer encoding.
+
+14
+00:01:01,390 --> 00:01:06,550
+So we'll be constructing encodings where the
+x_i may have different length codes - we'll
+
+15
+00:01:06,550 --> 00:01:10,680
+call these variable-length encodings.
+
+16
+00:01:10,680 --> 00:01:12,490
+Here's an example we've seen before.
+
+17
+00:01:12,490 --> 00:01:18,270
+There are four possible choices to encode
+(A, B, C, and D), each with the specified
+
+18
+00:01:18,270 --> 00:01:19,660
+probability.
+
+19
+00:01:19,660 --> 00:01:23,539
+The table shows a suggested encoding where
+we've followed the advice from the previous
+
+20
+00:01:23,539 --> 00:01:29,720
+slide: high-probability choices that convey
+little information (e.g., B) are given shorter
+
+21
+00:01:29,720 --> 00:01:31,860
+encodings,
+while low-probability choices that convey
+
+22
+00:01:31,860 --> 00:01:36,890
+more information (e.g., C or D) are given
+longer encodings.
+
+23
+00:01:36,890 --> 00:01:39,930
+Let's diagram this encoding as a binary tree.
+
+24
+00:01:39,930 --> 00:01:43,880
+Since the symbols all appear as the leaves
+of the tree, we can see that the encoding
+
+25
+00:01:43,880 --> 00:01:45,789
+is unambiguous.
+
+26
+00:01:45,789 --> 00:01:48,840
+Let's try decoding the following encoded data.
+
+27
+00:01:48,840 --> 00:01:53,840
+We'll use the tree as follows: start at the
+root of the tree and use bits from the encoded
+
+28
+00:01:53,840 --> 00:01:58,840
+data to traverse the tree as directed, stopping
+when we reach a leaf.
+
+29
+00:01:58,840 --> 00:02:02,920
+Starting at the root, the first encoded bit
+is 0, which takes us down the left branch
+
+30
+00:02:02,920 --> 00:02:07,890
+to the leaf B.
+So B is the first symbol of the decoded data.
+
+31
+00:02:07,890 --> 00:02:13,010
+Starting at the root again, 1 takes us down
+the right branch, 0 the left branch from there,
+
+32
+00:02:13,010 --> 00:02:18,719
+and 0 the left branch below that, arriving
+at the leaf C, the second symbol of the decoded
+
+33
+00:02:18,719 --> 00:02:20,319
+data.
+
+34
+00:02:20,319 --> 00:02:28,650
+Continuing on: 11 gives us A, 0 decodes as
+B, 11 gives us A again, and, finally, 101
+
+35
+00:02:28,650 --> 00:02:34,420
+gives us D.
+The entire decoded message is "BCABAD".
+
+36
+00:02:34,420 --> 00:02:38,969
+The expected length of this encoding is easy
+to compute: the length of A's encoding (2
+
+37
+00:02:38,969 --> 00:02:44,709
+bits) times its probability, plus the length
+of B's encoding (1 bit) times 1/2, plus the
+
+38
+00:02:44,709 --> 00:02:49,200
+contributions for C and D, each 3 times 1/12.
+
+39
+00:02:49,200 --> 00:02:52,450
+This adds up to 1 and 2/3 bits.
+
+40
+00:02:52,450 --> 00:02:54,060
+How did we do?
+
+41
+00:02:54,060 --> 00:02:58,790
+If we had used a fixed-length encoding for
+our four possible symbols, we'd have needed
+
+42
+00:02:58,790 --> 00:03:04,720
+2 bits each, so we'd need 2000 bits to encode
+1000 symbols.
+
+43
+00:03:04,720 --> 00:03:12,180
+Using our variable-length encoding, the expected
+length for 1000 symbols would be 1667.
+
+44
+00:03:12,180 --> 00:03:17,250
+The lower bound on the number of bits needed
+to encode 1000 symbols is 1000 times the entropy
+
+45
+00:03:17,250 --> 00:03:25,430
+H(X), which is 1626 bits, so the variable-length
+code got us closer to our goal, but not quite
+
+46
+00:03:25,430 --> 00:03:27,849
+all the way there.
+
+47
+00:03:27,849 --> 00:03:30,420
+Could another variable-length encoding have
+done better?
+
+48
+00:03:30,420 --> 00:03:35,879
+In general, it would be nice to have a systematic
+way to generate the best-possible variable-length
+
+49
+00:03:35,879 --> 00:03:38,418
+code, and that's the subject of the next video.

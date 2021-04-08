@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>16.1 Annotated Slides | 16 Virtual Memory | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="16.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 16.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c16/c16s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c16/index.htm">16 Virtual Memory</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            16.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            16.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="selected">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c16/index.htm">&lt;<span>Virtual Memory</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c16/c16s1/index.htm">16.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c16/c16s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L16: Virtual Memory</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Reminder: A Typical Memory Hierarchy</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Reminder: Hardware Caches</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Reminder: A Typical Memory Hierarchy</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Extending the Memory Hierarchy (continued)</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Impact of Enormous Miss Penalty</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Virtual Memory</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Virtual Memory Implementation: Paging</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Demand Paging</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Simple Page Map Design</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">Example: Virtual → Physical Translation</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Page Faults</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Example: Page Fault</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Virtual Memory: the CS View</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">The HW/SW Balance</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Page Map Arithmetic</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Example: Page Map Arithmetic</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">RAM-Resident Page Maps</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Translation Look-aside Buffer (TLB)</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">MMU Address Translation</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Putting it All Together: MMU with TLB</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Contexts</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Contexts: A Sneak Preview</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Memory Management &amp; Protection</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">Multi-level Page Maps</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">Rapid Context Switching</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">Using Caches with Virtual Memory</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Best of Both Worlds: Overlapped Operation</a></li>     <li style="margin-bottom:0.1em;"><a href="#28">Summary: Virtual Memory</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide02.png" alt=""></a></div> <p>In this lecture we return to the memory system that we last   discussed in “The Memory Hierarchy”.  There we   learned about the fundamental tradeoff in current memory   technologies: as the memory’s capacity increases, so does it access time.  It takes some architectural cleverness to build a   memory system that has a large capacity and a small average   access time.  The cleverness is embodied in the cache, a   hardware subsystem that lives between the CPU and main memory.   Modern CPUs have several levels of cache, where the   modest-capacity first level has an access time close to that of   the CPU, and higher levels of cache have slower access times but   larger capacities.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide03.png" alt=""></a></div> <p>Caches give fast access to a small number of memory locations,   using associative addressing so that the cache has the ability   to hold the contents of the memory locations the CPU is   accessing most frequently.  The current contents of the cache   are managed automatically by the hardware.  Caches work well   because of the principle of locality: if the CPU accesses   location X at time T, it’s likely to access nearby locations in   the not-too-distant future.  The cache is organized so that   nearby locations can all reside in the cache simultaneously,   using a simple indexing scheme to choose which cache location   should be checked for a matching address.  If the address   requested by the CPU resides in the cache, access time is quite   fast.</p> <p>In order to increase the probability that requested addresses   reside in the cache, we introduced the notion of   “associativity”, which increased the number of cache   locations checked on each access and solved the problem of   having, say, instructions and data compete for the same cache   locations.</p> <p>We also discussed appropriate choices for block size (the   number of words in a cache line), replacement policy (how to   choose which cache line to reuse on a cache miss), and write   policy (deciding when to write changed data back to main   memory).  We’ll see these same choices again in this lecture as   we work to expand the memory hierarchy beyond main memory.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide04.png" alt=""></a></div> <p>We never discussed where the data in main memory comes from and   how the process of filling main memory is managed.  That’s the   topic of today’s lecture.</p> <p>Flash drives and hard disks provide storage options that have   more capacity than main memory, with the added benefit of being   non-volatile, <i>i.e.</i>, they continue to store data even when   turned off.  The generic name for these new devices is   “secondary storage”, where data will reside until   it’s moved to “primary storage”, <i>i.e.</i>, main   memory, for use.  So when we first turn on a computer system,   all of its data will be found in secondary storage, which we’ll   think of as the final level of our memory hierarchy.</p> <p>As we think about the right memory architecture, we’ll build on   the ideas from our previous discussion of caches, and, indeed,   think of main memory as another level of cache for the   permanent, high-capacity secondary storage.  We’ll be building   what we call a virtual memory system, which, like caches, will   automatically move data from secondary storage into main memory   as needed.  The virtual memory system will also let us control   what data can be accessed by the program, serving as a stepping   stone to building a system that can securely run many programs   on a single CPU.</p> <p>Let’s get started!</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide05.png" alt=""></a></div> <p>Here we see the cache and main memory, the two components of   our memory system as developed in Lecture 14.  And here’s our   new secondary storage layer.  The good news: the capacity of   secondary storage is huge!  Even the most modest modern computer   system will have 100’s of gigabytes of secondary storage and   having a terabyte or two is not uncommon on medium-size desktop   computers.  Secondary storage for the cloud can grow to many   petabytes (a petabyte is \(10^{15}\) bytes or a million   gigabytes).</p> <p>The bad news: disk access times are 100,000 times longer that   those of DRAM.  So the change in access time from DRAM to disk   is much, much larger than the change from caches to DRAM.</p> <p>When looking at DRAM timing, we discovered that the additional   access time for retrieving a contiguous block of words was small   compared to the access time for the first word, so fetching a   block was the right plan assuming we’d eventually access the   additional words.  For disks, the access time difference between   the first word and successive words is even more dramatic.  So,   not surprisingly, we’ll be reading fairly large blocks of data   from disk.</p> <p>The consequence of the much, much larger secondary-storage   access time is that it will be very time consuming to access   disk if the data we need is not in main memory.  So we need to   design our virtual memory system to minimize misses when   accessing main memory.  A miss, and the subsequent disk access,   will have a huge impact on the average memory access time, so   the miss rate will need to be very, very, small compared to,   say, the rate of executing instructions.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide06.png" alt=""></a></div> <p>Given the enormous miss penalties of secondary storage, what   does that tell us about how it should be used as part of our   memory hierarchy?</p> <p>We will need high associativity, <i>i.e.</i>, we need a great   deal of flexibility on how data from disk can be located in main   memory.  In other words, if our working set of memory accesses   fit in main memory, our virtual memory system should make that   possible, avoiding unnecessary collisions between accesses to   one block of data and another.</p> <p>We’ll want to use a large block size to take advantage of the   low incremental cost of reading successive words from disk.   And, given the principle of locality, we’d expect to be   accessing other words of the block, thus amortizing the cost of   the miss over many future hits.</p> <p>Finally, we’ll want to use a write-back strategy where we’ll   only update the contents of disk when data that’s changed in   main memory needs to be replaced by data from other blocks of   secondary storage.</p> <p>There is an upside to misses having such long latencies.  We can   manage the organization of main memory and the accesses to   secondary storage in software.  Even if it takes 1000’s of   instructions to deal with the consequences of a miss, executing   those instructions is quick compared to the access time of a   disk.  So our strategy will be to handle hits in hardware and   misses in software.  This will lead to simple memory management   hardware and the possibility of using very clever strategies   implemented in software to figure out what to do on misses.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide07.png" alt=""></a></div> <p>Here’s how our virtual memory system will work.  The memory   addresses generated by the CPU are called virtual addresses to   distinguish them from the physical addresses used by main   memory.  In between the CPU and main memory there’s a new piece   of hardware called the memory management unit (MMU).  The MMU’s   job is to translate virtual addresses to physical addresses.</p> <p>“But wait!” you say.  “Doesn’t the cache go   between the CPU and main memory?” You’re right and at the   end of this lecture we’ll talk about how to use both an MMU and   a cache.  But for now, let’s assume there’s only an MMU and no   cache.</p> <p>The MMU hardware translates virtual addresses to physical   addresses using a simple table lookup.  This table is called the   page map or page table.  Conceptually, the MMU uses the virtual   address as index to select an entry in the table, which tells us   the corresponding physical address.  The table allows a   particular virtual address to be found anywhere in main memory.   In normal operation we’d want to ensure that two virtual   addresses don’t map to the same physical address.  But it would   be okay if some of the virtual addresses did not have a   translation to a physical address.  This would indicate that the   contents of the requested virtual address haven’t yet been   loaded into main memory, so the MMU would signal a   memory-management exception to the CPU, which could assign a   location in physical memory and perform the required I/O   operation to initialize that location from secondary   storage.</p> <p>The MMU table gives the system a lot of control over how   physical memory is accessed by the program running on the CPU.   For example, we could arrange to run multiple programs in quick   succession (a technique called time sharing) by changing the   page map when we change programs.  Main memory locations   accessible to one program could be made inaccessible to another   program by proper management of their respective page maps.  And   we could use memory-management exceptions to load program   contents into main memory on demand instead of having to load   the entire program before execution starts.  In fact, we only   need to ensure the current working set of a program is actually   resident in main memory.  Locations not currently being used   could live in secondary storage until needed.  In this lecture   and next, we’ll see how the MMU plays a central role in the   design of a modern timesharing computer system.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide08.png" alt=""></a></div> <p>Of course, we’d need an impossibly large table to separately   map each virtual address to a physical address.  So instead we   divide both the virtual and physical address spaces into   fixed-sized blocks, called pages.  Page sizes are always a   power-of-2 bytes, say \(2^p\) bytes, so p is the number address   bits needed to select a particular location on the page.  We’ll   the use low-order p bits of the virtual or physical address as   the page offset.  The remaining address bits tell us which page   is being accessed and are called the page number.</p> <p>A typical page size is 4KB to 16KB, which correspond to p=12   and p=14 respectively.  Suppose p=12.  So if the CPU produces a   32-bit virtual address, the low-order 12 bits of the virtual   address are the page offset and the high-order 20 bits are the   virtual page number.  Similarly, the low-order p bits of the   physical address are the page offset and the remaining physical   address bits are the physical page number.</p> <p>The key idea is that the MMU will manage pages, not individual   locations.  We’ll move entire pages from secondary storage into   main memory.  By the principal of locality, if a program accesses   one location on a page, we expect it will soon access other   nearby locations. By choosing the page offset from the low-order   address bits, we’ll ensure that nearby locations live on the   same page (unless of course we’re near one end of the page or   the other).  So pages naturally capture the notion of   locality. And since pages are large, by dealing with pages when   accessing secondary storage, we’ll take advantage that reading   or writing many locations is only slightly more time consuming   than accessing the first location.</p> <p>The MMU will map virtual page numbers to physical page numbers.   It does this by using the virtual page number (VPN) as an index   into the page table.  Each entry in the page table indicates if   the page is resident in main memory and, if it is, provides the   appropriate physical page number (PPN).  The PPN is combined   with the page offset to form the physical address for main   memory.</p> <p>If the requested virtual page is NOT resident in main memory,   the MMU signals a memory-management exception, called a page   fault, to the CPU so it can load the appropriate page from   secondary storage and set up the appropriate mapping in the   MMU.</p> <p>Our plan to use main memory as page cache is called   “paging” or sometimes “demand paging”   since movements of pages to and from secondary storage is   determined by the demands of the program.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide09.png" alt=""></a></div> <p>So here’s the plan.  Initially all the virtual pages for a   program reside in secondary storage and the MMU is   empty, <i>i.e.</i>, there are no pages resident in physical   memory.</p> <p>The CPU starts running the program and each virtual address it   generates, either for an instruction fetch or data access, is   passed to the MMU to be mapped to a physical address in main   memory.</p> <p>If the virtual address is resident in physical memory, the main   memory hardware can complete the access.</p> <p>If the virtual address in NOT resident in physical memory, the   MMU signals a page fault exception, forcing the CPU to switch   execution to special code called the page fault handler.  The   handler allocates a physical page to hold the requested virtual   page and loads the virtual page from secondary storage into main   memory.  It then adjusts the page map entry for the requested   virtual page to show that it is now resident and to indicate the   physical page number for the newly allocated and initialized   physical page.</p> <p>When trying to allocate a physical page, the handler may   discover that all physical pages are currently in use.  In this   case it chooses an existing page to replace, <i>e.g.</i>, a   resident virtual page that hasn’t been recently accessed.  It   swaps the contents of the chosen virtual page out to secondary   storage and updates the page map entry for the replaced virtual   page to indicate it is no longer resident.  Now there’s a free   physical page to re-use to hold the contents of the virtual page   that was missing.</p> <p>The working set of the program, <i>i.e.</i>, the set of pages   the program is currently accessing, is loaded into main memory   through a series of page faults.  After a flurry of page faults   when the program starts running, the working set changes slowly,   so the frequency of page faults drops dramatically, perhaps   close to zero if the program is small and well-behaved.  It is   possible to write programs that constantly generate page faults,   a phenomenon called thrashing.  Given the long access times of   secondary storage, a program that’s thrashing runs *very*   slowly, usually so slowly that user’s give up and rewrite the   program to behave more sensibly.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide10.png" alt=""></a></div> <p>The design of the page map is straightforward.  There’s one   entry in the page map for each virtual page.  For example, if   the CPU generates a 32-bit virtual address and the page size is   \(2^{12}\) bytes, the virtual page number has \(32-12 = 20\) bits and   the page table will have \(2^{20}\) entries.</p> <p>Each entry in the page table contains a “resident   bit” (R) which is set to 1 when the virtual page is   resident in physical memory.  If R is 0, an access to that   virtual page will cause a page fault.  If R is 1, the entry also   contains the PPN, indicating where to find the virtual page in   main memory.</p> <p>There’s one additional state bit called the “dirty   bit” (D).  When a page has just been loaded from secondary   storage, it’s “clean”, i.e, the contents of physical   memory match the contents of the page in secondary storage.  So   the D bit is set to 0.  If subsequently the CPU stores into a   location on the page, the D bit for the page is set to 1,   indicating the page is “dirty”, <i>i.e.</i>, the   contents of memory now differ from the contents of secondary   storage.  If a dirty page is ever chosen for replacement, its   contents must be written to secondary storage in order to save   the changes before the page gets reused.</p> <p>Some MMUs have additional state bits in each page table entry.   For example, there could be a “read-only” bit which,   when set, would generate an exception if the program attempts to   store into the page.  This would be useful for protecting code   pages from accidentally being corrupted by errant data accesses,   a very handy debugging feature.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide11.png" alt=""></a></div> <p>Here’s an example of the MMU in action.  To make things simple,   assume that the virtual address is 12 bits, consisting of an   8-bit page offset and a 4-bit virtual page number.  So there are   \(2^4 = 16\) virtual pages.  The physical address is 11 bits,   divided into the same 8-bit page offset and a 3-bit physical   page number.  So there are \(2^3 = 8\) physical pages.</p> <p>On the left we see a diagram showing the contents of the   16-entry page map, <i>i.e.</i>, an entry for each virtual page.   Each page table entry includes a dirty bit (D), a resident bit   (R) and a 3-bit physical page number, for a total of 5 bits.  So   the page map has 16 entries, each with 5-bits, for a total of   16*5 = 80 bits.  The first entry in the table is for virtual   page 0, the second entry for virtual page 1, and so on.</p> <p>In the middle of the slide there’s a diagram of physical memory   showing the 8 physical pages.  The annotation for each physical   page shows the virtual page number of its contents.  Note that   there’s no particular order to how virtual pages are stored in   physical memory — which page holds what is determined by   which pages are free at the time of a page fault.  In general,   after the program has run for a while, we’d expected to find the   sort of jumbled ordering we see here.</p> <p>Let’s follow along as the MMU handles the request for virtual   address 0x2C8, generated by the execution of the LD instruction   shown here.  Splitting the virtual address into page number and   offset, we see that the VPN is 2 and the offset is 0xC8.   Looking at the page map entry with index 2, we see that the R   bit is 1, indicating that virtual page 2 is resident in physical   memory.  The PPN field of entry tells us that virtual page 2 can   be found in physical page 4.</p> <p>Combining the PPN with the 8-bit offset, we find that the   contents of virtual address 0x2C8 can be found in main memory   location 0x4C8.  Note that the offset is unchanged by the   translation process — the offset into the physical page is   always the same as the offset into the virtual page.</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide12.png" alt=""></a></div> <p>Let’s review what happens when the CPU accesses a non-resident   virtual page, <i>i.e.</i>, a page with its resident bit set to   0.  In the example shown here, the CPU is trying to access   virtual page 5.</p> <p>In this case, the MMU signals a page fault exception, causing   the CPU to suspend execution of the program and switch to the   page fault handler, which is code that deals with the page   fault.  The handler starts by either finding an unused physical   page or, if necessary, creating an unused page by selecting an   in-use page and making it available.  In our example, the   handler has chosen virtual page 1 for reuse.  If the selected   page is dirty, <i>i.e.</i>, its D bit is 1 indicating that its   contents have changed since being read from secondary storage,   write it back to secondary storage.  Finally, mark the selected   virtual page as no longer resident.  In the “after”   figure, we see that the R bit for virtual page 1 has been set to   0.  Now physical page 4 is available for re-use.</p> <p>Are there any restrictions on which page we can select?   Obviously, we can’t select the page that holds the code for the   page fault handler.  Pages immune from selection are called   “wired” pages.  And it would very inefficient to   choose the page that holds the code that made the initial memory   access, since we expect to start executing that code as soon as   we finish handling the page fault.</p> <p>The optimal strategy would be to choose the page whose next use   will occur farthest in the future.  But, of course, this   involves knowledge of future execution paths and so isn’t a   realizable strategy.  Wikipedia provides a nice description of   the many strategies for choosing a replacement page, with their   various tradeoffs between ease of implementation and impact on   the rate of page faults — see the URL given at the bottom   of the slide.  The aging algorithm they describe is frequently   used since it offers near optimal performance at a moderate   implementation cost.</p> <p>Next, the desired virtual page is read from secondary storage   into the selected physical page.  In our example, virtual page 5   is now loaded into physical page 4.</p> <p>Then the R bit and PPN fields in the page table entry for   virtual page 5 are updated to indicate that the contents of that   virtual page now reside in physical page 4.</p> <p>Finally the handler is finished and execution of the original   program is resumed, re-executing the instruction that caused the   page fault.  Since the page map has been updated, this time the   access succeeds and execution continues.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide13.png" alt=""></a></div> <p>To double-check our understanding of page faults, let’s run   through an example.  Here’s the same setup as in our previous   example, but this time consider a store instruction that’s   making an access to virtual address 0x600, which is located on   virtual page 6.</p> <p>Checking the page table entry for VPN 6, we see that its R bit   0 indicating that it is NOT resident in main memory, which   causes a page fault exception.</p> <p>The page fault handler selects VPN 0xE for replacement since   we’ve been told in the setup that it’s the least-recently-used   page.</p> <p>The page table entry for VPN 0xE has D=1 so the handler writes   the contents of VPN 0xE, which is found in PPN 0x5, to secondary   storage.  Then it updates the page table to indicate that VPN   0xE is no longer resident.</p> <p>Next, the contents of VPN 0x6 are read from secondary storage   into the now available PPN 0x5.</p> <p>Now the handler updates the page table entry for VPN 0x6 to   indicate that it’s resident in PPN 0x5.</p> <p>The page fault handler has completed its work, so program   execution resumes and the ST instruction is re-executed.  This   time the MMU is able to translate virtual address 0x600 to   physical address 0x500.  And since the ST instruction modifies   the contents of VPN 0x6, it’s D bit is set to 1.</p> <p>Whew!  We’re done :)</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide14.png" alt=""></a></div> <p>We can think of the work of the MMU as being divided into two   tasks, which as computer scientists, we would think of as two   procedures.  In this formulation the information in the page map   is held in several arrays: the R array holds the resident bits,   the D array holds the dirty bits, the PPN array holds the   physical page numbers, and the DiskAdr array holds the location   in secondary storage for each virtual page.</p> <p>The VtoP procedure is invoked on each memory access to   translate the virtual address into a physical address.  If the   requested virtual page is not resident, the PageFault procedure   is invoked to make the page resident.  Once the requested page   is resident, the VPN is used as an index to lookup the   corresponding PPN, which is then concatenated with the page   offset to form the physical address.</p> <p>The PageFault routine starts by selecting a virtual page to be   replaced, writing out its contents if it’s dirty.  The selected   page is then marked as not resident.</p> <p>Finally the desired virtual page is read from secondary storage   and the page map information updated to reflect that it’s now   resident in the newly filled physical page.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide15.png" alt=""></a></div> <p>We’ll use hardware to implement the VtoP functionality since   it’s needed for every memory access.  The call to the PageFault   procedure is accomplished via a page fault exception, which   directs the CPU to execute the appropriate handler software that   contains the PageFault procedure.</p> <p>This is a good strategy to pursue in all our implementation   choices: use hardware for the operations that need to be fast,   but use exceptions to handle the (hopefully infrequent)   exceptional cases in software.  Since the software is executed   by the CPU, which is itself a piece of hardware, what we’re   really doing is making the tradeoff between using   special-purpose hardware (<i>e.g.</i>, the MMU) or using   general-purpose hardware (<i>e.g.</i>, the CPU).  In general,   one should be skeptical of proposals to use special-purpose   hardware, reserving that choice for operations that truly are   commonplace and whose performance is critical to the overall   performance of the system.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide16.png" alt=""></a></div> <p>There are three architectural parameters that characterize a   virtual memory system and hence the architecture of the MMU.</p> <p>P is the number of address bits used for the page offset in   both virtual and physical addresses.  V is the number of address   bits used for the virtual page number.  And M is the number of   address bits used for the physical page number.  All the other   parameters, listed on the right, are derived from these three   parameters.</p> <p>As mentioned earlier, the typical page size is between 4KB and   16KB, the sweet spot in the tradeoff between the downside of   using physical memory to hold unwanted locations and the upside   of reading as much as possible from secondary storage so as to   amortize the high cost of accessing the initial word over as   many words as possible.</p> <p>The size of the virtual address is determined by the ISA.   We’re now making the transition from 32-bit architectures, which   support a 4 gigabyte virtual address space, to 64-bit   architectures, which support a 16 exabyte virtual address space.   “Exa” is the SI prefix for \(10^{18}\) - a 64-bit   address can access a lot of memory!</p> <p>The limitations of a small virtual address have been the main   cause for the extinction of many ISAs.  Of course, each   generation of engineers thinks that the transition they make   will be the final one!  I can remember when we all thought that   32 bits was an unimaginably large address.  Back then we’re   buying memory by the megabyte and only in our fantasies did we   think one could have a system with several thousand megabytes.   Today’s CPU architects are feeling pretty smug about 64 bits   — we’ll see how they feel in a couple of decades!</p> <p>The size of physical addresses is currently between 30 bits   (for embedded processors with modest memory needs) and 40+ bits   (for servers that handle large data sets).  Since CPU   implementations are expected to change every couple of years,   the choice of physical memory size can be adjusted to match   current technologies.  Since programmers use virtual addresses,   they’re insulated from this implementation choice.  The MMU   ensures that existing software will continue to function   correctly with different sizes of physical memory.  The   programmer may notice differences in performance, but not in   basic functionality.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide17.png" alt=""></a></div> <p>For example, suppose our system supported a 32-bit virtual   address, a 30-bit physical address and a 4KB page size.  So \(p =   12\), \(v = 32-12 = 20\), and \(m = 30 — 12 = 18\).</p> <p>There are \(2^m\) physical pages, which is \(2^{18}\) in our example.</p> <p>There are \(2^v\) virtual pages, which is \(2^{20}\) in our example.</p> <p>And since there is one entry in the page map for each virtual   page, there are \(2^{20}\) (approximately one million) page map   entries.</p> <p>Each page map entry contains a PPN, an R bit and a D bit, for a   total of m+2 bits, which is 20 bits in our example.  So there   are approximately 20 million bits in the page map.</p> <p>If we were thinking of using a large special-purpose static RAM   to hold the page map, this would get pretty expensive!</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide18.png" alt=""></a></div> <p>But why use a special-purpose memory for the page map?  Why not   use a portion of main memory, which we have a lot of and have   already bought and paid for!</p> <p>We could use a register, called the page map pointer, to hold   the address of the page map array in main memory.  In other   words, the page map would occupy some number of dedicated   physical pages.  Using the desired virtual page number as an   index, the hardware could perform the usual array access   calculation to fetch the needed page map entry from main   memory.</p> <p>The downside of this proposed implementation is that it now   takes two accesses to physical memory to perform one virtual   access: the first to retrieve the page table entry needed for   the virtual-to-physical address translation, and the second to   actually access the requested location.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide19.png" alt=""></a></div> <p>Once again, caches to the rescue.  Most systems incorporate a   special-purpose cache, called a translation look-aside buffer   (TLB), that maps virtual page numbers to physical page numbers.   The TLB is usually small and quite fast.  It’s usually   fully-associative to ensure the best possible hit ratio by   avoiding collisions.  If the PPN is found by using the TLB, the   access to main memory for the page table entry can be avoided,   and we’re back to a single physical access for each virtual   access.</p> <p>The hit ratio of a TLB is quite high, usually better than 99%.   This isn’t too surprising since locality and the notion of a   working set suggest that only a small number of pages are in   active use over short periods of time.</p> <p>As we’ll see in a few slides, there are interesting variations   to this simple TLB page-map-in-main-memory architecture.  But   the basic strategy will remain the same.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide20.png" alt=""></a></div> <p>Putting it all together: the virtual address generated by the   CPU is first processed by the TLB to see if the appropriate   translation from VPN to PPN has been cached.  If so, the main   memory access can proceed directly.</p> <p>If the desired mapping is not in the TLB, the appropriate entry   in the page map is accessed in main memory.  If the page is   resident, the PPN field of the page map entry is used to   complete the address translation.  And, of course, the   translation is cached in the TLB so that subsequent accesses to   this page can avoid the access to the page map.</p> <p>If the desired page is not resident, the MMU triggers a page   fault exception and the page fault handler code will deal with   the problem.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide21.png" alt=""></a></div> <p>Here’s a final example showing all the pieces in action.  In   this example, \(p = 10\), \(v = 22\), and \(m = 14\).</p> <p>How many pages can reside in physical memory at one time?   There are \(2^m\) physical pages, so \(2^{14}\).</p> <p>How many entries are there in the page table?  There’s one   entry for each virtual page and there are \(2^v\) virtual pages,   so there are \(2^{22}\) entries in the page table.</p> <p>How many bits per entry in the page table?  Assume each entry   holds the PPN, the resident bit, and the dirty bit.  Since the   PPN is m bits, there are \(m+2\) bits in each entry, so 16   bits.</p> <p>How many pages does the page table occupy?  There are \(2^v\)   page table entries, each occupying \((m+2)/8\) bytes, so the total   size of the page table in this example is \(2^{23}\) bytes.  Each   page holds \(2^p = 2^10\) bytes, so the page table occupies   \(2^{23}/2^{10} = 2^{13}\) pages.</p> <p>What fraction of virtual memory can be resident at any given   time?  There are \(2^v\) virtual pages, of which \(2^m\) can be   resident.  So the fraction of resident pages is \(2^m/2^v =   2^{14}/2^{22} = 1/2^8\).</p> <p>What is the physical address for virtual address 0x1804?  Which   MMU components are involved in the translation?  First we have   have decompose the virtual address into VPN and offset.  The   offset is the low-order 10 bits, so is 0x004 in this example.   The VPN is the remaining address bits, so the VPN is 0x6.   Looking first in the TLB, we that the VPN-to-PPN mapping for VPN   0x6 is cached, so we can construct the physical address by   concatenating the PPN (0x2) with the 10-bit offset (0x4) to get   a physical address of 0x804.  You’re right!  It’s a bit of pain   to do all the bit manipulations when p is not a multiple of   4.</p> <p>How about virtual address 0x1080?  For this address the VPN is   0x4 and the offset is 0x80.  The translation for VPN 0x4 is not   cached in the TLB, so we have to check the page map, which tells   us that the page is resident in physical page 5.  Concatenating   the PPN and offset, we get 0x1480 as the physical address.</p> <p>Finally, how about virtual address 0x0FC?  Here the VPN is 0   and the offset 0xFC.  The mapping for VPN 0 is not found in the   TLB and checking the page map reveals that VPN 0 is not resident   in main memory, so a page fault exception is triggered.</p> <p>There are a few things to note about the example TLB and page   map contents.  Note that a TLB entry can be invalid (it’s R bit   is 0).  This can happen when a virtual page is replaced, so when   we change the R bit to 0 in the page map, we have to do the same   in the TLB.  And should we be concerned that PPN 0x5 appears   twice in the page table?  Note that the entry for VPN 0x3   doesn’t matter since it’s R bit is 0.  Typically when marking a   page not resident, we don’t bother to clear out the other fields   in the entry since they won’t be used when R=0.  So there’s only   one *valid* mapping to PPN 5.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide22.png" alt=""></a></div> <p>The page map provides the context for interpreting virtual addresses,   <i>i.e.</i>, it provides the information needed to correctly   determine where to find a virtual address in main memory or   secondary storage.</p> <p>Several programs may be simultaneously loaded into main memory,   each with its own context.  Note that the separate contexts   ensure that the programs don’t interfere which each other.  For   example, the physical location for virtual address 0 in one   program will be different than the physical location for virtual   address 0 in another program.  Each program operates   independently in its own virtual address space.  It’s the   context provided by the page map that allows them to coexist and   share a common physical memory.  So we need to switch contexts   when switching programs.  This is accomplished by reloading the   page map.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide23.png" alt=""></a></div> <p>In a timesharing system, the CPU will periodically switch from   running one program to another, giving the illusion that   multiple programs are each running on their own virtual machine.   This is accomplished by switching contexts when switching the   CPU state to the next program.</p> <p>There’s a privileged set of code called the operating system   (OS) that manages the sharing of one physical processor and main   memory amongst many programs, each with its own CPU state and   virtual address space.  The OS is effectively creating many   virtual machines and choreographing their execution using a   single set of shared physical resources.</p> <p>The OS runs in a special OS context, which we call the kernel.   The OS contains the necessary exception handlers and timesharing   support.  Since it has to manage physical memory, it’s allowed   to access any physical location as it deals with page faults,   etc.  Exceptions in running programs cause the hardware to   switch to the kernel context, which we call entering   “kernel mode”.  After the exception handling is   complete, execution of the program resumes in what we call   “user mode”.</p> <p>Since the OS runs in kernel mode it has privileged access to   many hardware registers that are inaccessible in user mode.   These include the MMU state, I/O devices, and so on.  User-mode   programs that need to access, say, the disk, need to make a   request to the OS kernel to perform the operation, giving the OS   the chance to vet the request for appropriate permissions, etc.   We’ll see how all of this works in an upcoming lecture.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide24.png" alt=""></a></div> <p>User-mode programs (aka applications) are written as if they   have access to the entire virtual address space.  They often   obey the same conventions such as the address of the first   instruction in the program, the initial value for the stack   pointer, etc.  Since all these virtual addresses are interpreted   using the current context, by controlling the contexts the OS   can ensure that the programs can coexist without conflict.</p> <p>The diagram on the right shows a standard plan for organizing   the virtual address space of an application.  Typically the   first virtual page is made inaccessible, which helps catch   errors involving references to initialized (<i>i.e.</i>,   zero-valued) pointers.  Then come some number of read-only pages   that hold the application’s code and perhaps the code from any   shared libraries it uses.  Marking code pages as read-only   avoids hard-to-find bugs where errant data accesses   inadvertently change the program!</p> <p>Then there are read-write pages holding the application’s   statically allocated data structures.  The rest of the virtual   address space is divided between two data regions that can grow   over time.  The first is the application’s stack, used to hold   procedure activation records.  Here we show it located at the   lower end of the virtual address space since our convention is   that the stack grows towards higher addresses.</p> <p>The other growable region is the heap, used when dynamically   allocating storage for long-lived data structures.   “Dynamically” means that the allocation and   deallocation of objects is done by explicit procedure calls   while the application is running.  In other words, we don’t know   which objects will be created until the program actually   executes.  As shown here, as the heap expands it grows towards   lower addresses.</p> <p>The page fault handler knows to allocate new pages when these   regions grow.  Of course, if they ever meet somewhere in the   middle and more space is needed, the application is out of luck   — it’s run out of virtual memory!</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide25.png" alt=""></a></div> <p>There are a few MMU implementation details we can tweak for   more efficiency or functionality.</p> <p>In our simple page-map implementation, the full page map   occupies some number of physical pages.  Using the numbers shown   here, if each page map occupies one word of main memory, we’d   need \(2^{20}\) words (or \(2^{12}\) pages) to hold the page table.  If   we have multiple contexts, we would need multiple page tables,   and the demands on our physical memory resources would start to   get large.</p> <p>The MMU implementation shown here uses a hierarchical page map.   The top 10 bits of virtual address are used to access a   “page directory”, which indicates the physical page   that holds the page map for that segment of the virtual address   space.  The key idea is that the page map segments are in   virtual memory, <i>i.e.</i>, they don’t all have to be resident   at any given time.  If the running application is only actively   using a small portion of its virtual address space, we may only   need a handful of pages to hold the page directory and the   necessary page map segments.  The resultant savings really add   up when there are many applications, each with their own   context.</p> <p>In this example, note that the middle entries in the page directory,   <i>i.e.</i>, the entries corresponding to the as-yet unallocated   virtual memory between the stack and heap, are all marked as not   resident.  So no page map resources need be devoted to holding a   zillion page map entries all marked “not   resident”.</p> <p>Accessing the page map now requires two access to main memory   (first to the page directory, then to the appropriate segment of   the page map), but the TLB makes the impact of that additional   access negligible.</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide26.png" alt=""></a></div> <p>Normally when changing contexts, the OS would reload the   page-table pointer to point to the appropriate page table (or   page table directory if we adopt the scheme from the previous   slide).  Since this context switch in effect changes all the   entries in the page table, the OS would also have to invalidate   all the entries in the TLB cache.  This naturally has a huge   impact on the TLB hit ratio and the average memory access time   takes a huge hit because of the all page map accesses that are   now necessary until the TLB is refilled.</p> <p>To reduce the impact of context switches, some MMUs include a   context-number register whose contents are concatenated with the   virtual page number to form the query to the TLB.  Essentially   this means that the tag field in the TLB cache entries will   expand to include the context number provided at the time the   TLB entry was filled.</p> <p>To switch contexts, the OS would now reload both the   context-number register and the page-table pointer.  With a new   context number, entries in the TLB for other contexts would no   longer match, so no need to flush the TLB on a context switch.   If the TLB has sufficient capacity to cache the VPN-to-PPN   mappings for several contexts, context switches would no longer   have a substantial impact on average memory access time.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide27.png" alt=""></a></div> <p>Finally, let’s return to the question about how to incorporate   both a cache and an MMU into our memory system.</p> <p>The first choice is to place the cache between the CPU and the MMU,   <i>i.e.</i>, the cache would work on virtual addresses.  This   seems good: the cost of the VPN-to-PPN translation is only   incurred on a cache miss.  The difficulty comes when there’s a   context switch, which changes the effective contents of virtual   memory.  After all that was the point of the context switch,   since we want to switch execution to another program.  But that   means the OS would have to invalidate all the entries in the   cache when performing a context switch, which makes the cache   miss ratio quite large until the cache is refilled.  So once   again the performance impact of a context switch would be quite   high.</p> <p>We can solve this problem by caching physical   addresses, <i>i.e.</i>, placing the cache between the MMU and   main memory.  Thus the contents of the cache are unaffected by   context switches — the requested physical addresses will   be different, but the cache handles that in due course.  The   downside of this approach is that we have to incur the cost of   the MMU translation before we can start the cache access,   slightly increasing the average memory access time.</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide28.png" alt=""></a></div> <p>But if we’re clever we don’t have to wait for the MMU to finish   before starting the access to the cache.  To get started, the   cache needs the line number from the virtual address in order to   fetch the appropriate cache line.  If the address bits used for   the line number are completely contained in the page offset of   the virtual address, those bits are unaffected by the MMU   translation, and so the cache lookup can happen in parallel with   the MMU operation.</p> <p>Once the cache lookup is complete, the tag field of the cache   line can be compared with the appropriate bits of the physical   address produced by the MMU.  If there was a TLB hit in the MMU,   the physical address should be available at about the same time   as the tag field produced by the cache lookup.</p> <p>By performing the MMU translation and cache lookup in parallel,   there’s usually no impact on the average memory access time!   Voila, the best of both worlds: a physically addressed cache   that incurs no time penalty for MMU translation.</p> <p>One final detail: one way to increase the capacity of the cache   is to increase the number of cache lines and hence the number of   bits of address used as the line number.  Since we want the line   number to fit into the page offset field of the virtual address,   we’re limited in how many cache lines we can have.  The same   argument applies to increasing the block size.  So to increase   the capacity of the cache our only option is to increase the   cache associativity, which adds capacity without affecting the   address bits used for the line number.</p> <div class="lecslide"><a name="28"><img class="lecslideimg" src="../../../contents/c16/c16s1/Slide29.png" alt=""></a></div> <p>That’s it for our discussion of virtual memory.  We use the MMU   to provide the context for mapping virtual addresses to physical   addresses.  By switching contexts we can create the illusion of   many virtual address spaces, so many programs can share a single   CPU and physical memory without interfering with each other.</p> <p>We discussed using a page map to translate virtual page numbers   to physical page numbers.  To save costs, we located the page   map in physical memory and used a TLB to eliminate the cost of   accessing the page map for most virtual memory accesses.  Access   to a non-resident page causes a page fault exception, allowing   the OS to manage the complexities of equitably sharing physical   memory across many applications.</p> <p>We saw that providing contexts was the first step towards   creating virtual machines, which is the topic of our next   lecture.</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c16/index.htm">Back<span>Virtual Memory</span></a></li>     <li id="continue_btn"><a href="../../../contents/c16/c16s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

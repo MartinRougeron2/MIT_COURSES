@@ -1,0 +1,1300 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>11.1 Annotated Slides | 11 Compilers | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="11.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 11.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c11/c11s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c11/index.htm">11 Compilers</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            11.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            11.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="selected">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c11/index.htm">&lt;<span>Compilers</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c11/c11s1/index.htm">11.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c11/c11s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L11: Compilers</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Programming Languages</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">High-Level Languages</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Interpretation</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Compilation</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Interpretation vs. Compilation</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Compilers</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">A Simple Compilation Strategy</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">compile_expr(expr) → Rx</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Compiling Expressions</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">compile_statement</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">compile_statement: Conditional</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">compile_statement: Iteration</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Putting It All Together: Factorial</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Optimization: keep values in regs</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Anatomy of a Modern Compiler</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Frontend Stages: Lexical Analysis</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Frontend Stages: Syntactic Analysis</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Frontend Stages: Semantic Analysis</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Intermediate Representation (IR)</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Common IR: Control Flow Graph</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Control Flow Graph for GCD</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">IR Optimization</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Example IR Optimizations I</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">Example IR Optimizations II</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">Example IR Optimizations II (continued)</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">Example IR Optimizations III</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Example IR Optimizations IV</a></li>     <li style="margin-bottom:0.1em;"><a href="#28">Example IR Optimizations IV (continued)</a></li>     <li style="margin-bottom:0.1em;"><a href="#29">Code Generation</a></li>     <li style="margin-bottom:0.1em;"><a href="#30">Putting It All Together I</a></li>     <li style="margin-bottom:0.1em;"><a href="#31">Putting It All Together II</a></li>     <li style="margin-bottom:0.1em;"><a href="#32">Summary</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide02.png" alt=""></a></div> <p>Today we’re going to talk about how to translate   high-level languages into code that computers can execute.</p> <p>So far we’ve seen the Beta ISA, which includes   instructions that control the datapath operations performed on   32-bit data stored in the registers.  There are also   instructions for accessing main memory and changing the program   counter.  The instructions are formatted as opcode, source, and   destination fields that form 32-bit values in main memory.</p> <p>To make our lives easier, we developed assembly language as a   way of specifying sequences of instructions.  Each assembly   language statement corresponds to a single instruction.  As   assembly language programmers, we’re responsible for   managing which values are in registers and which are in main   memory, and we need to figure out how to break down complicated   operations, <i>e.g.</i>, accessing an element of an array, into   the right sequence of Beta operations.</p> <p>We can go one step further and use high-level languages to   describe the computations we want to perform.  These languages   use variables and other data structures to abstract away the   details of storage allocation and the movement of data to and   from main memory.  We can just refer to a data object by name   and let the language processor handle the details.  Similarly,   we’ll write expressions and other operators such as   assignment (=) to efficiently describe what would require many   statements in assembly language.</p> <p>Today we’re going to dive into how to translate   high-level language programs into code that will run on the   Beta.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide03.png" alt=""></a></div> <p>Here we see Euclid’s algorithm for determining the   greatest common divisor of two numbers, in this case the   algorithm is written in the C programming language.  We’ll   be using a simple subset of C as our example high-level   language.  Please see the brief overview of C in the Handouts   section if you’d like an introduction to C syntax and   semantics.  C was developed by Dennis Ritchie at AT&amp;T Bell Labs   in the late 60’s and early 70’s to use when   implementing the Unix operating system.  Since that time many   new high-level languages have been introduced providing modern   abstractions like object-oriented programming along with useful   new data and control structures.</p> <p>Using C allows us describe a computation without referring to   any of the details of the Beta ISA like registers, specific Beta   instructions, and so on.  The absence of such details means   there is less work required to create the program and makes it   easier for others to read and understand the algorithm   implemented by the program.</p> <p>There are many advantages to using a high-level language.  They   enable programmers to be very productive since the programs are   concise and readable.  These attributes also make it easy to   maintain the code.  Often it is harder to make certain types of   mistakes since the language allows us to check for silly errors   like storing a string value into a numeric variable.  And more   complicated tasks like dynamically allocating and deallocating   storage can be completely automated.  The result is that it can   take much less time to create a correct program in a high-level   language than it would it when writing in assembly language.</p> <p>Since the high-level language has abstracted away the details   of a particular ISA, the programs are portable in the sense that   we can expect to run the same code on different ISAs without   having to rewrite the code.</p> <p>What do we lose by using a high-level language?  Should we   worry that we’ll pay a price in terms of the efficiency   and performance we might get by crafting each instruction by   hand?  The answer depends on how we choose to run high-level   language programs. The two basic execution strategies are   “interpretation” and “compilation”.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide04.png" alt=""></a></div> <p>To interpret a high-level language program, we’ll write a   special program called an “interpreter” that runs on   the actual computer, M1.  The interpreter mimics the behavior of   some abstract easy-to-program machine M2 and for each M2   operation executes sequences of M1 instructions to achieve the   desired result.  We can think of the interpreter along with M1   as an implementation of M2,   <i>i.e.</i>, given a program written for M2, the interpreter   will, step-by-step, emulate the effect of M2 instructions.</p> <p>We often use several layers of interpretation when tackling   computation tasks.  For example, an engineer may use her laptop   with an Intel CPU to run the Python interpreter.  In Python, she   loads the SciPy toolkit, which provides a calculator-like   interface for numerical analysis for matrices of data.  For each   SciPy command,   <i>e.g.</i>, “find the maximum value of a dataset”,   the SciPy tool kit executes many Python statements, <i>e.g.</i>,   to loop over each element of the array, remembering the largest   value.  For each Python statement, the Python interpreter   executes many x86 instructions, <i>e.g.</i>, to increment the   loop index and check for loop termination.  Executing a single   SciPy command may require executing of tens of Python   statements, which in turn each may require executing hundreds of   x86 instructions.  The engineer is very happy she didn’t   have to write each of those instructions herself!</p> <p>Interpretation is an effective implementation strategy when   performing a computation once, or when exploring which   computational approach is most effective before making a more   substantial investment in creating a more efficient   implementation.</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide05.png" alt=""></a></div> <p>We’ll use a compilation implementation strategy when we   have computational tasks that we need to execute repeatedly and   hence we are willing to invest more time up-front for more   efficiency in the long-term.</p> <p>In compilation, we also start with our actual computer M1.   Then we’ll take our high-level language program P2 and   translate it statement-by-statement into a program for M1.  Note   that we’re not actually running the P2 program.  Instead   we’re using it as a template to create an equivalent P1   program that can execute directly on M1.  The translation   process is called “compilation” and the program that   does the translation is called a “compiler”.</p> <p>We compile the P2 program once to get the translation P1, and   then we’ll run P1 on M1 whenever we want to execute P2.   Running P1 avoids the overhead of having to process the P2   source and the costs of executing any intervening layers of   interpretation.  Instead of dynamically figuring out the   necessary machine instructions for each P2 statement as   it’s encountered, in effect we’ve arranged to   capture that stream of machine instructions and save them as a   P1 program for later execution.  If we’re willing to pay   the up-front costs of compilation, we’ll get more   efficient execution.</p> <p>And, with different compilers, we can arrange to run P2 on many   different machines — M2, M3, etc. — without having   rewrite P2.</p> <p>So we now have two ways to execute a high-level language   program: interpretation and compilation.  Both allow us to   change the original source program.  Both allow us to abstract   away the details of the actual computer we’ll use to run   the program.  And both strategies are widely used in modern   computer systems!</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide06.png" alt=""></a></div> <p>Let’s summarize the differences between interpretation   and compilation.</p> <p>Suppose the statement “x+2” appears in the   high-level program.  When the interpreter processes this   statement it immediately fetches the value of the variable x and   adds 2 to it.  On the other hand, the compiler would generate   Beta instructions that would LD the variable x into a register   and then ADD 2 to that value.</p> <p>The interpreter is executing each statement as it’s   processed and, in fact, may process and execute the same   statement many times if, <i>e.g.</i>, it was in a loop.  The   compiler is just generating instructions to be executed at some   later time.</p> <p>Interpreters have the overhead of processing the high-level   source code during execution and that overhead may be incurred   many times in loops.  Compilers incur the processing overhead   once, making the eventual execution more efficient.  But during   development, the programmer may have to compile and run the   program many times, often incurring the cost of compilation for   only a single execution of the program.  So the   compile-run-debug loop can take more time.</p> <p>The interpreter is making decisions about the data type of x   and the type of operations necessary at run time, <i>i.e.</i>,   while the program is running.  The compiler is making those   decisions during the compilation process.</p> <p>Which is the better approach?  In general, executing compiled   code is much faster than running the code interpretively.  But   since the interpreter is making decisions at run time, it can   change its behavior depending, say, on the type of the data in   the variable X, offering considerable flexibility in handling   different types of data with the same algorithm.  Compilers take   away that flexibility in exchange for fast execution.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide07.png" alt=""></a></div> <p>A compiler is a program that translates a high-level language   program into a functionally equivalent sequence of machine   instructions, <i>i.e.</i>, an assembly language program.</p> <p>A compiler first checks that the high-level program is   correct, <i>i.e.</i>, that the statements are well formed, the   programmer isn’t asking for nonsensical computations   — <i>e.g.</i>, adding a string value and an integer   — or attempting to use the value of a variable before it   has been properly initialized.  The compiler may also provide   warnings when operations may not produce the expected   results, <i>e.g.</i>, when converting from a floating-point   number to an integer, where the floating-point value may be too   large to fit in the number of bits provided by the integer.</p> <p>If the program passes scrutiny, the compiler then proceeds to   generate efficient sequences of instructions, often finding ways   to rearrange the computation so that the resulting sequences are   shorter and faster.  It’s hard to beat a modern optimizing   compiler at producing assembly language, since the compiler will   patiently explore alternatives and deduce properties of the   program that may not be apparent to even diligent assembly   language programmers.</p> <p>In this section, we’ll look at a simple technique for   compiling C programs into assembly.  Then, in the next section,   we’ll dive more deeply into how a modern compiler   works.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide08.png" alt=""></a></div> <p>There are two main routines in our simple compiler:   compile_statement and compile_expr.  The job of   compile_statement is to compile a single statement from the   source program.  Since the source program is a sequence of   statements, we’ll be calling compile_statement   repeatedly.</p> <p>We’ll focus on the compilation technique for four types   of statements. An unconditional statement is simply an   expression that’s evaluated once.  A compound statement is   simply a sequence of statements to be executed in turn.   Conditional statements, sometimes called “if   statements”, compute the value of an test expression,   <i>e.g.</i>, a comparison such as “A &lt; B”.  If   the test is true then statement<sub>1</sub> is executed,   otherwise statement<sub>2</sub> is executed.  Iteration   statements also contain a test expression.  In each iteration,   if the test is true, then the statement is executed, and the   process repeats.  If the test is false, the iteration is   terminated.</p> <p>The other main routine is compile_expr whose job it is to   generate code to compute the value of an expression, leaving the   result in some register.  Expressions take many forms:</p> <p>simple constant values,</p> <p>values from scalar or array variables,</p> <p>assignment expressions that compute a value and then store the   result in some variable,</p> <p>unary or binary operations that combine the values of their   operands with the specified operator.  Complex arithmetic   expressions can be decomposed into sequences of unary and binary   operations.</p> <p>And, finally, procedure calls, where a named sequence of   statements will be executed with the values of the supplied   arguments assigned as the values for the formal parameters of   the procedure.  Compiling procedures and procedure calls is a   topic that we’ll tackle next lecture since there are some   complications to understand and deal with.</p> <p>Happily, compiling the other types of expressions and   statements is straightforward, so let’s get started.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide09.png" alt=""></a></div> <p>What code do we need to put the value of a constant into a   register?  If the constant will fit into the 16-bit constant   field of an instruction, we can use CMOVE to load the   sign-extended constant into a register.  This approach works for   constants between -32768 and +32767.  If the constant is too   large, it’s stored in a main memory location and we use a   LD instruction to get the value into a register.</p> <p>Loading the value of a variable is much the same as loading the   value of a large constant: we use a LD instruction to access the   memory location that holds the value of the variable.</p> <p>Performing an array access is slightly more complicated: arrays   are stored as consecutive locations in main memory, starting   with index 0.  Each array element occupies some fixed number of bytes.  So we need code to convert the array index into the   actual main memory address for the specified array element.</p> <p>We first invoke compile_expr to generate code that evaluates   the index expression and leaves the result in Rx.  That will be   a value between 0 and the size of the array minus 1.   We’ll use a LD instruction to access the appropriate array   entry, but that means we need to convert the index into a byte   offset, which we do by multiplying the index by bsize, the   number of bytes in one element.  If b was an array of integers,   bsize would be 4.  Now that we have the byte offset in a   register, we can use LD to add the offset to the base address of   the array computing the address of the desired array element,   then load the memory value at that address into a register.</p> <p>Assignment expressions are easy: invoke compile_expr to   generate code that loads the value of the expression into a   register, then generate a ST instruction to store the value into   the specified variable.</p> <p>Arithmetic operations are pretty easy too: use compile_expr to   generate code for each of the operand expressions, leaving the   results in registers.  Then generate the appropriate ALU   instruction to combine the operands and leave the answer in a   register.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide10.png" alt=""></a></div> <p>Let’s look at example to see how all this works.  Here we have an assignment expression that requires a subtract, a   multiply, and an addition to compute the required value.</p> <p>Let’s follow the compilation process from start to finish   as we invoke compile_expr to generate the necessary code.</p> <p>Following the template for assignment expressions from the   previous page, we recursively call compile_expr to compute value   of the right-hand-side of the assignment.</p> <p>That’s a multiply operation, so, following the Operations   template, we need to compile the left-hand operand of the   multiply.</p> <p>That’s a subtract operation, so, we call compile_expr   again to compile the left-hand operand of the subtract.</p> <p>Aha, we know how to get the value of a variable into a   register. So we generate a LD instruction to load the value of x   into r1.</p> <p>The process we’re following is called “recursive   descent”.  We’ve used recursive calls to   compile_expr to process each level of the expression tree.  At   each recursive call the expressions get simpler, until we reach   a variable or constant, where we can generate the appropriate   instruction without descending further.  At this point   we’ve reached a leaf of the expression tree and we’re   done with this branch of the recursion.</p> <p>We now need to get the value of the right-hand operand of the   subtract into a register.  In case it’s a small constant,   so we generate a CMOVE instruction.</p> <p>Now that both operand values are in registers, we return to the   subtract template and generate a SUB instruction to do the   subtraction.  We now have the value for the left-hand operand of   the multiply in r1.</p> <p>We follow the same process for the right-hand operand of the   multiply, recursively calling compile_expr to process each level   of the expression until we reach a variable or constant.  Then   we return up the expression tree, generating the appropriate   instructions as we go, following the dictates of the appropriate   template from the previous slide.</p> <p>The generated code is shown on the left of the slide.  The   recursive-descent technique makes short work of generating code   for even the most complicated of expressions.</p> <p>There’s even opportunity to find some simple   optimizations by looking at adjacent instructions.  For example,   a CMOVE followed by an arithmetic operation can often be shortened   to a single arithmetic instruction with the constant as its   second operand.  These local transformations are called   “peephole optimizations” since we’re only   considering just one or two instructions at a time.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide11.png" alt=""></a></div> <p>Now let’s turn our attention to compile_statement.</p> <p>The first two statement types are pretty easy to handle.   Unconditional statements are usually assignment expressions or   procedure calls.  We’ll simply ask compile_expr to   generate the appropriate code.</p> <p>Compound statements are equally easy.  We’ll recursively   call compile_statement to generate code for each statement in   turn.  The code for statement_2 will immediately follow the code   generated for statement_1.  Execution will proceed sequentially   through the code for each statement.</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide12.png" alt=""></a></div> <p>Here we see the simplest form of the conditional statement, where   we need to generate code to evaluate the test expression and   then, if the value in the register is FALSE, skip over the code   that executes the statement in the THEN clause.  The simple   assembly-language template uses recursive calls to compile_expr   and compile_statement to generate code for the various parts of   the IF statement.</p> <p>The full-blown conditional statement includes an ELSE clause,   which should be executed if the value of the test expression is   FALSE.  The template uses some branches and labels to ensure the   course of execution is as intended.</p> <p>You can see that the compilation process is really just the   application of many small templates that break the code   generation task down step-by-step into smaller and smaller   tasks, generating the necessary code to glue all the pieces   together in the appropriate fashion.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide13.png" alt=""></a></div> <p>And here’s the template for the WHILE statement, which   looks a lot like the template for the IF statement with a branch   at the end that causes the generated code to be re-executed   until the value of the test expression is FALSE.</p> <p>With a bit of thought, we can improve on this template   slightly.  We’ve reorganized the code so that only a   single branch instruction (BT) is executed each iteration,   instead of the two branches (BF, BR) per iteration in the   original template.  Not a big deal, but little optimizations to   code inside a loop can add up to big savings in a long-running   program.</p> <p>Just a quick comment about another common iteration statement,   the FOR loop.  The FOR loop is a shorthand way of expressing   iterations where the loop index (“i” in the example   shown) is run through a sequence of values and the body of the   FOR loop is executed once for each value of the loop index.</p> <p>The FOR loop can be transformed into the WHILE statement shown   here, which can then be compiled using the templates shown   above.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide14.png" alt=""></a></div> <p>In this example, we’ve applied our templates to generate   code for the iterative implementation of the factorial function   that we’ve seen before.  Look through the generated code   and you’ll be able to match code fragments with the   templates from last couple of slides.  It’s not the most   efficient code, but not bad given the simplicity of the   recursive-descent approach for compiling high-level   programs.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide15.png" alt=""></a></div> <p>It’s a simple matter to modify the recursive-descent   process to accommodate variable values that are stored in   dedicated registers rather than in main memory.  Optimizing   compilers are quite good at identifying opportunities to keep   values in registers and hence avoid the LD and ST operations   needed to access values in main memory.  Using this simple   optimization, the number of instructions in the loop has gone   from 10 down to 4.  Now the generated code is looking pretty   good!</p> <p>But rather than keep tweaking the recursive-descent approach,   let’s stop here.  In the next segment, we’ll see how   modern compilers take a more general approach to generating   code.  Still though, the first time I learned about recursive   descent, I ran home to write a simple implementation and   marveled at having authored my own compiler in an afternoon!</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide16.png" alt=""></a></div> <p>A modern compiler starts by analyzing the source program text   to produce an equivalent sequence of operations expressed in a   language — and machine-independent intermediate   representation (IR).  The analysis, or frontend, phase checks   that the program is well-formed, <i>i.e.</i>, that the syntax of   each high-level language statement is correct.  It understands   the meaning (semantics) of each statement.  Many high-level   languages include declarations of the type — <i>e.g.</i>,   integer, floating point, string, etc. — of each variable,   and the frontend verifies that all operations are correctly   applied, ensuring that numeric operations have numeric-type   operands, string operations have string-type operands, and so   on.  Basically the analysis phase converts the text of the   source program into an internal data structure that specifies   the sequence and type of operations to be performed.</p> <p>Often there are families of frontend programs that translate a   variety of high-level languages (e.g, C, C++, Java) into a   common IR.</p> <p>The synthesis, or backend, phase then optimizes the IR to   reduce the number of operations that will be executed when the   final code is run.  For example, it might find operations inside   of a loop that are independent of the loop index and can moved   outside the loop, where they are performed once instead of   repeatedly inside the loop.  Once the IR is in its final   optimized form, the backend generates code sequences for the   target ISA and looks for further optimizations that take   advantage of particular features of the ISA.  For example, for   the Beta ISA we saw how a CMOVE followed by an arithmetic   operation can be shorted to a single operation with a constant   operand.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide17.png" alt=""></a></div> <p>The analysis phase starts by scanning the source text and   generating a sequence of token objects that identify the type of   each piece of the source text.  While spaces, tabs, newlines,   and so on were needed to separate tokens in the source text,   they’ve all been removed during the scanning process.  To   enable useful error reporting, token objects also include   information about where in the source text each token was   found, <i>e.g.</i>, the file name, line number, and column   number.  The scanning phase reports illegal tokens, <i>e.g.</i>,   the token “3x” would cause an error since in C it   would not be a legal number or a legal variable name.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide18.png" alt=""></a></div> <p>The parsing phase processes the sequence of tokens to build the   syntax tree, which captures the structure of the original   program in a convenient data structure.  The operands have been   organized for each unary and binary operation.  The components   of each statement have been found and labeled.  The role of each   source token has been determined and the information captured in   the syntax tree.</p> <p>Compare the labels of the nodes in the tree to the templates we   discussed in the previous segment.  We can see that it would be   easy to write a program that did a depth-first tree walk, using   the label of each tree node to select the appropriate code   generation template.  We won’t do that quite yet since   there’s still some work to be done analyzing and   transforming the tree.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide19.png" alt=""></a></div> <p>The syntax tree makes it easy to verify that the program is   semantically correct, <i>e.g.</i>, to check that the types of   the operands are compatible with the requested operation.</p> <p>For example, consider the statement x =   “bananas”. The syntax of the assignment operation is   correct: there’s a variable on the left-hand side and an   expression on the right-hand side.  But the semantics is not   correct, at least in the C language!  By looking in its symbol   table to check the declared type for the variable x (int) and   comparing it to the type of the expression (string), the   semantic checker for the “op =” tree node will   detect that the types are not compatible, <i>i.e.</i>, that we   can’t store a string value into an integer variable.</p> <p>When the semantic analysis is complete, we know that the syntax   tree represents a syntactically correct program with valid   semantics, and we’ve finished converting the source   program into an equivalent, language-independent sequence of   operations.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide20.png" alt=""></a></div> <p>The syntax tree is a useful intermediate representation (IR)   that is independent of both the source language and the target   ISA.  It contains information about the sequencing and grouping   of operations that isn’t apparent in individual machine   language instructions.  And it allows frontends for different   source languages to share a common backend targeting a specific   ISA.  As we’ll see, the backend processing can be split   into two sub-phases.  The first performs machine-independent   optimizations on the IR.  The optimized IR is then translated by   the code generation phase into sequences of instructions for the   target ISA.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide21.png" alt=""></a></div> <p>A common IR is to reorganize the syntax tree into what’s   called a control flow graph (CFG).  Each node in the graph is a   sequence of assignment and expression evaluations that ends with   a branch.  The nodes are called “basic blocks” and   represent sequences of operations that are executed as a unit:   once the first operation in a basic block is performed, the   remaining operations will also be performed without any other   intervening operations.  This knowledge lets us consider many   optimizations, <i>e.g.</i>, temporarily storing variable values   in registers, that would be complicated if there was the   possibility that other operations outside the block might also   need to access the variable values while we were in the middle   of this block.</p> <p>The edges of the graph indicate the branches that take us to   another basic block.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide22.png" alt=""></a></div> <p>For example, here’s the CFG for GCD.</p> <p>If a basic block ends with a conditional branch, there are two   edges, labeled “T” and “F” leaving the   block that indicate the next block to execute depending on the   outcome of the test.  Other blocks have only a single departing   arrow, indicating that the block always transfers control to the   block indicated by the arrow.</p> <p>Note that if we can arrive at a block from only a single   predecessor block, then any knowledge we have about operations   and variables from the predecessor block can be carried over to   the destination block.  For example, if the “if (x &gt;   y)” block has generated code to load the values of x and y   into registers, both destination blocks can use that information   and use the appropriate registers without having to generate   their own LDs.</p> <p>But if a block has multiple predecessors, such optimizations   are more constrained: we can only use knowledge that is common   to *all* the predecessor blocks.</p> <p>The CFG looks a lot like the state transition diagram for a   high-level FSM!</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide23.png" alt=""></a></div> <p>We’ll optimize the IR by performing multiple passes over   the CFG.  Each pass performs a specific, simple optimization.   We’ll repeatedly apply the simple optimizations in   multiple passes, until the we can’t find any further   optimizations to perform.  Collectively, the simple   optimizations can combine to achieve very complex   optimizations.</p> <p>Here are some example optimizations:</p> <p>We can eliminate assignments to variables that are never used   and basic blocks that are never reached. This is called   “dead code elimination”.</p> <p>In constant propagation, we identify variables that have a   constant value and substitute that constant in place of   references to the variable.</p> <p>We can compute the value of expressions that have constant   operands.  This is called “constant folding”.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide24.png" alt=""></a></div> <p>To illustrate how these optimizations work, consider this   slightly silly source program and its CFG.  Note that   we’ve broken down complicated expressions into simple   binary operations, using temporary variable names (e.g,   “_t1”) to name the intermediate results.</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide25.png" alt=""></a></div> <p>Let’s get started!</p> <p>The dead code elimination pass can remove the assignment to Z   in the first basic block since Z is reassigned in subsequent   blocks and the intervening code makes no reference to Z.</p> <p>Next we look for variables with constant values.  Here we find   that X is assigned the value of 3 and is never re-assigned, so   we can replace all references to X with the constant 3.</p> <p>Now perform constant folding, evaluating any constant   expressions.</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide26.png" alt=""></a></div> <p>Here’s the updated CFG, ready for another round of optimizations.</p> <p>First dead code elimination.</p> <p>Then constant propagation.</p> <p>And, finally, constant folding.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide27.png" alt=""></a></div> <p>So after two rounds of these simple operations, we’ve   thinned out a number of assignments.  On to round three!</p> <p>Dead code elimination. And here we can determine the outcome of   a conditional branch, eliminating entire basic blocks from the   IR, either because they’re now empty or because they can   no longer be reached.</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide28.png" alt=""></a></div> <p>Wow, the IR is now considerably smaller.</p> <p>Next is another application of constant propagation.</p> <p>And then constant folding.</p> <p>Followed by more dead code elimination.</p> <div class="lecslide"><a name="28"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide29.png" alt=""></a></div> <p>The passes continue until we discover there are no further   optimizations to perform, so we’re done!</p> <p>Repeated applications of these simple transformations have   transformed the original program into an equivalent program that   computes the same final value for Z.</p> <p>We can do more optimizations by adding passes: eliminating   redundant computation of common subexpressions, moving   loop-independent calculations out of loops, unrolling short   loops to perform the effect of, say, two iterations in a single   loop execution, saving some of the cost of increment and test   instructions.  Optimizing compilers have a sophisticated set of   optimizations they employ to make smaller and more efficient   code.</p> <div class="lecslide"><a name="29"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide30.png" alt=""></a></div> <p>Okay, we’re done with optimizations.  Now it’s time   to generate instructions for the target ISA.</p> <p>First the code generator assigns each variable a dedicated   register.  If we have more variables than registers, some   variables are stored in memory and we’ll use LD and ST to   access them as needed.  But frequently-used variables will   almost certainly live as much as possible in registers.</p> <p>Use our templates from before to translate each assignment and   operation into one or more instructions.</p> <p>Then emit the code for each block, adding the appropriate labels   and branches.</p> <p>Reorder the basic block code to eliminate unconditional   branches wherever possible.</p> <p>And finally perform any target-specific peephole optimizations.</p> <div class="lecslide"><a name="30"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide31.png" alt=""></a></div> <p>Here’s the original CFG for the GCD code, along with the   slightly optimized CFG.  GCD isn’t as trivial as the   previous example, so we’ve only been able to do a bit of   constant propagation and constant folding.</p> <p>Note that we can’t propagate knowledge about variable   values from the top basic block to the following   “if” block since the “if” block has   multiple predecessors.</p> <div class="lecslide"><a name="31"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide32.png" alt=""></a></div> <p>Here’s how the code generator will process the optimized CFG.</p> <p>First, it dedicates registers to hold the values for x and y.</p> <p>Then, it emits the code for each of the basic blocks.</p> <p>Next, reorganize the order of the basic blocks to eliminate   unconditional branches wherever possible.</p> <p>The resulting code is pretty good.  There are no obvious changes   that a human programmer might make to make the code faster or   smaller.  Good job, compiler!</p> <div class="lecslide"><a name="32"><img class="lecslideimg" src="../../../contents/c11/c11s1/Slide33.png" alt=""></a></div> <p>Here are all the compilation steps shown in order, along with   their input and output data structures.  Collectively they   transform the original source code into high-quality assembly   code.  The patient application of optimization passes often   produces code that’s more efficient than writing assembly   language by hand.</p> <p>Nowadays, programmers are able to focus on getting the source   code to achieve the desired functionality and leave the details   of translation to instructions in the hands of the compiler.</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c11/index.htm">Back<span>Compilers</span></a></li>     <li id="continue_btn"><a href="../../../contents/c11/c11s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

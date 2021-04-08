@@ -1,0 +1,438 @@
+1
+00:00:01,079 --> 00:00:04,630
+We are given a CBit module shown here.
+
+2
+00:00:04,630 --> 00:00:11,110
+This module takes corresponding bits of two
+unsigned binary numbers, A and B, along with
+
+3
+00:00:11,110 --> 00:00:16,000
+two Cin bits from higher-order
+CBit modules.
+
+4
+00:00:16,000 --> 00:00:21,260
+Its output bit R, is the appropriate bit of
+the larger among A and B.
+
+5
+00:00:21,260 --> 00:00:30,439
+It also has two additional output bits Cout
+which indicate respectively if A>B or B>A
+
+6
+00:00:30,439 --> 00:00:33,370
+in the bits considered so far.
+
+7
+00:00:33,370 --> 00:00:39,290
+The propagation delay of each Cbit module
+is 4ns.
+
+8
+00:00:39,290 --> 00:00:45,620
+The CBit module is used to create a product
+MAXC which is a combinational device that
+
+9
+00:00:45,620 --> 00:00:50,909
+determines the maximum of its two 4-bit unsigned
+binary inputs.
+
+10
+00:00:50,909 --> 00:00:56,320
+It is constructed using 4 CBit modules as
+shown here.
+
+11
+00:00:56,320 --> 00:01:01,260
+The first question we want to consider is
+what are the propagation delay and throughput
+
+12
+00:01:01,260 --> 00:01:04,080
+of this combinational circuit?
+
+13
+00:01:04,080 --> 00:01:09,640
+The propagation delay of a combinational circuit
+is the propagation delay along its longest
+
+14
+00:01:09,640 --> 00:01:12,330
+path from input to output.
+
+15
+00:01:12,330 --> 00:01:17,400
+In this case, the longest path is through
+4 CBit modules.
+
+16
+00:01:17,400 --> 00:01:24,630
+Since each CBit module has a propagation delay
+of 4 ns, the propagation delay of this combinational
+
+17
+00:01:24,630 --> 00:01:31,530
+circuit is 4 * 4 ns = 16 ns.
+
+18
+00:01:31,530 --> 00:01:37,900
+The throughput of a combinational circuit
+is 1 / Latency, so the throughput of this
+
+19
+00:01:37,900 --> 00:01:43,539
+circuit is 1 / (16 ns).
+
+20
+00:01:43,539 --> 00:01:49,380
+The next question we want to consider is what
+two bits would we expect to see coming out
+
+21
+00:01:49,380 --> 00:01:58,570
+of the (unused) Cout outputs from
+the low-order CBit module if A3:0
+
+22
+00:01:58,570 --> 00:02:02,220
+and B3:0 are identical numbers.
+
+23
+00:02:02,220 --> 00:02:10,840
+The Cout[1] bit indicates whether
+A>B and the Cout[0] bit indicates
+
+24
+00:02:10,840 --> 00:02:16,010
+whether B>A.
+Since the numbers are identical neither of
+
+25
+00:02:16,010 --> 00:02:20,870
+these inequalities is true, so both Cout
+bits are 0.
+
+26
+00:02:20,870 --> 00:02:25,590
+Next, we want to pipeline this circuit for
+maximum throughput.
+
+27
+00:02:25,590 --> 00:02:29,700
+We are given ideal pipeline registers for
+this step.
+
+28
+00:02:29,700 --> 00:02:35,329
+Recall that ideal registers have a 0 propagation
+delay and 0 setup time.
+
+29
+00:02:35,329 --> 00:02:40,760
+In order to pipeline this circuit for maximum
+throughput, we want to add pipeline registers
+
+30
+00:02:40,760 --> 00:02:45,690
+that isolate each individual CBit to be in
+its own pipeline stage.
+
+31
+00:02:45,690 --> 00:02:51,599
+Recall, that when pipelining a circuit, we
+want to add pipeline registers to all the
+
+32
+00:02:51,599 --> 00:02:57,930
+outputs, so we begin by adding a contour that
+goes across all 4 outputs.
+
+33
+00:02:57,930 --> 00:03:01,870
+We now want to isolate the low order CBit
+module.
+
+34
+00:03:01,870 --> 00:03:09,750
+To do this we draw an additional contour that
+crosses the outputs R3-R1, then passes between
+
+35
+00:03:09,750 --> 00:03:17,120
+the two low order CBit modules and finally
+crosses the A0 and B0 inputs.
+
+36
+00:03:17,120 --> 00:03:22,910
+Remember that every time a contour crosses
+a wire, it means that we are adding a pipeline
+
+37
+00:03:22,910 --> 00:03:24,210
+register.
+
+38
+00:03:24,210 --> 00:03:33,120
+So this first step added 6 pipeline registers,
+one for each of R3, R2, and R1, another between
+
+39
+00:03:33,120 --> 00:03:39,879
+the two CBit modules and the last 2 on the
+A0 and B0 inputs.
+
+40
+00:03:39,879 --> 00:03:45,930
+Notice that regardless of which input to output
+path we look at the number of pipeline registers
+
+41
+00:03:45,930 --> 00:03:49,440
+along the path so far is 2.
+
+42
+00:03:49,440 --> 00:03:59,880
+We continue in this manner isolating each
+Cbit module into its own pipeline stage.
+
+43
+00:03:59,880 --> 00:04:05,069
+Now that each CBit module has been placed
+into its own pipeline stage, we can clock
+
+44
+00:04:05,069 --> 00:04:07,959
+this circuit for maximum througput.
+
+45
+00:04:07,959 --> 00:04:12,630
+Our clock period must allow for enough time
+for the propagation delay of the pipeline
+
+46
+00:04:12,630 --> 00:04:18,988
+register, plus the propagation delay of the
+Cbit module, plus the setup time of the next
+
+47
+00:04:18,988 --> 00:04:20,798
+pipeline register.
+
+48
+00:04:20,798 --> 00:04:25,740
+Since our pipeline registers are ideal, the
+propagation delay and the setup time of the
+
+49
+00:04:25,740 --> 00:04:32,800
+pipeline registers is 0, so the clock period
+is equal to the propagation delay of 1 CBit
+
+50
+00:04:32,800 --> 00:04:36,099
+module which is 4 ns.
+
+51
+00:04:36,099 --> 00:04:41,659
+The latency of this pipelined circuit is equal
+to the number of pipeline stages (4 in this
+
+52
+00:04:41,659 --> 00:04:52,550
+example) times the clock period time, so the
+latency is 4 * 4 ns = 16 ns.
+
+53
+00:04:52,550 --> 00:04:59,080
+The throughput of a pipelined circuit is 1
+divided by the clock period, so throughput
+
+54
+00:04:59,080 --> 00:05:02,279
+is 1 / (4 ns).
+
+55
+00:05:02,279 --> 00:05:09,379
+Our Cbit module can be used to create the
+MAX4X4 product which is a combinational circuit
+
+56
+00:05:09,379 --> 00:05:14,580
+capable of determining the maximum of four
+4-bit binary inputs.
+
+57
+00:05:14,580 --> 00:05:21,229
+Our first task here is to determine the combinational
+latency and throughput of this new circuit.
+
+58
+00:05:21,229 --> 00:05:25,680
+Looking carefully at this circuit, we see
+that the longest path through the circuit
+
+59
+00:05:25,680 --> 00:05:31,039
+begins at the upper left CBit module and ends
+at the bottom right CBit module.
+
+60
+00:05:31,039 --> 00:05:36,889
+Counting the number of CBit modules along
+this path, we see that we need to cross 6
+
+61
+00:05:36,889 --> 00:05:38,110
+CBit modules.
+
+62
+00:05:38,110 --> 00:05:45,189
+This means that the latency of this circuit
+is L = 6 * propagation delay of a single CBit
+
+63
+00:05:45,189 --> 00:05:51,900
+module = 6 * 4 ns = 24 ns.
+
+64
+00:05:51,900 --> 00:06:00,909
+The throughput of a combinational circuit
+is equal to 1 / Latency = 1 / (24 ns).
+
+65
+00:06:00,909 --> 00:06:07,009
+Out final task is to pipeline this new circuit
+for maximum througput.
+
+66
+00:06:07,009 --> 00:06:12,919
+We begin as we did before by adding a contour
+that goes across all of our outputs.
+
+67
+00:06:12,919 --> 00:06:17,069
+Next we want to figure out how to add the
+remaining contours so that the clock period
+
+68
+00:06:17,069 --> 00:06:20,379
+of our pipelined circuit can be minimized.
+
+69
+00:06:20,379 --> 00:06:25,889
+The clock period must allow enough time for
+the propagation delay of the pipeline register,
+
+70
+00:06:25,889 --> 00:06:31,680
+plus the propagation delay of any combinational
+logic, plus the setup time of the next pipeline
+
+71
+00:06:31,680 --> 00:06:33,139
+register.
+
+72
+00:06:33,139 --> 00:06:38,210
+Since our pipeline registers are ideal, both
+the propagation delay and the setup time of
+
+73
+00:06:38,210 --> 00:06:43,839
+the pipeline registers is 0, so our clock
+period is equal to the propagation delay of
+
+74
+00:06:43,839 --> 00:06:48,460
+the combinational logic between each pair
+of pipeline registers.
+
+75
+00:06:48,460 --> 00:06:53,349
+In order to minimize this, we would like the
+number of CBit modules between each pair of
+
+76
+00:06:53,349 --> 00:06:56,710
+pipeline registers to be at most 1.
+
+77
+00:06:56,710 --> 00:07:00,590
+This would make our period, T = 4 ns.
+
+78
+00:07:00,590 --> 00:07:05,039
+To achieve this, we can draw diagonal contours
+through our circuit.
+
+79
+00:07:05,039 --> 00:07:10,830
+Notice that these contours result in at most
+1 CBit module appearing between any pair of
+
+80
+00:07:10,830 --> 00:07:16,879
+pipeline registers while at the same time
+including as many CBit modules that can be
+
+81
+00:07:16,879 --> 00:07:20,990
+executed in parallel in a single pipeline
+stage.
+
+82
+00:07:20,990 --> 00:07:28,819
+The latter constraint will minimize our latency
+in addition to maximizing our throughput.
+
+83
+00:07:28,819 --> 00:07:34,659
+Notice that regardless of which input to output
+path you follow, at this stage you are crossing
+
+84
+00:07:34,659 --> 00:07:37,659
+3 pipeline registers.
+
+85
+00:07:37,659 --> 00:07:42,499
+We continue pipelining our circuit in this
+manner until we have added enough pipeline
+
+86
+00:07:42,499 --> 00:07:48,719
+stages so that each stage passes through a
+single CBit module.
+
+87
+00:07:48,719 --> 00:07:54,990
+We now see that any path from input to output
+passes through 6 pipeline registers because
+
+88
+00:07:54,990 --> 00:08:00,599
+we have split our circuit into 6 pipeline
+stages in order to break up the longest path.
+
+89
+00:08:00,599 --> 00:08:05,759
+We can now clock this circuit with period
+T = 4 ns.
+
+90
+00:08:05,759 --> 00:08:12,919
+So the latency is the number of pipeline stages
+times the clock period which equals 6 * 4
+
+91
+00:08:12,919 --> 00:08:15,929
+ns = 24 ns.
+
+92
+00:08:15,929 --> 00:08:22,719
+The throughput of this circuit is 1 / clock
+period (T) = 1 /(4 ns).

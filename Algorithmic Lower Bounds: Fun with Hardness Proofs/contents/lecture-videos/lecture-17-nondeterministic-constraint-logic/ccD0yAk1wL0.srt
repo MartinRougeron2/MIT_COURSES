@@ -1,0 +1,8291 @@
+1
+00:00:00,080 --> 00:00:02,430
+The following content is
+provided under a Creative
+
+2
+00:00:02,430 --> 00:00:03,820
+Commons license.
+
+3
+00:00:03,820 --> 00:00:06,050
+Your support will help
+MIT OpenCourseWare
+
+4
+00:00:06,050 --> 00:00:10,150
+continue to offer high quality
+educational resources for free.
+
+5
+00:00:10,150 --> 00:00:12,690
+To make a donation or to
+view additional materials
+
+6
+00:00:12,690 --> 00:00:16,541
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:16,541 --> 00:00:17,166
+at ocw.mit.edu.
+
+8
+00:00:25,815 --> 00:00:26,690
+PROFESSOR: All right.
+
+9
+00:00:26,690 --> 00:00:30,840
+So today we start a new
+topic, but in the same spirit
+
+10
+00:00:30,840 --> 00:00:33,570
+of PSPACE completeness
+of puzzles.
+
+11
+00:00:33,570 --> 00:00:36,690
+We're going to talk
+about a general theory
+
+12
+00:00:36,690 --> 00:00:37,750
+called Constraint Logic.
+
+13
+00:00:42,010 --> 00:00:44,530
+This was the topic
+of the Ph.D. thesis
+
+14
+00:00:44,530 --> 00:00:49,200
+here by Bob Hearn, which later
+turned into this book-- Games,
+
+15
+00:00:49,200 --> 00:00:50,920
+Puzzles, and Computation.
+
+16
+00:00:50,920 --> 00:00:53,580
+And constraint logic
+is a big theory.
+
+17
+00:00:53,580 --> 00:00:56,450
+But today we're going to focus
+on one particular aspect of it
+
+18
+00:00:56,450 --> 00:00:58,860
+called nondeterministic
+constraint logic.
+
+19
+00:00:58,860 --> 00:01:01,180
+Nondeterministic like NP.
+
+20
+00:01:01,180 --> 00:01:07,690
+And that is specifically
+about puzzles
+
+21
+00:01:07,690 --> 00:01:10,780
+and PSPACE completeness.
+
+22
+00:01:10,780 --> 00:01:15,110
+So non-deterministic constraint
+logic-- usually called NCL.
+
+23
+00:01:15,110 --> 00:01:17,490
+And it's a very
+useful infrastructure
+
+24
+00:01:17,490 --> 00:01:19,830
+for proving PSPACE
+hardness results,
+
+25
+00:01:19,830 --> 00:01:23,010
+for puzzles, originally
+motivated by sliding blocks,
+
+26
+00:01:23,010 --> 00:01:25,420
+but we will get
+there in a moment.
+
+27
+00:01:25,420 --> 00:01:27,570
+You've seen it very
+briefly in Lecture 1.
+
+28
+00:01:27,570 --> 00:01:30,030
+I'm going to go through it
+again more slowly and clearly
+
+29
+00:01:30,030 --> 00:01:31,870
+and define everything.
+
+30
+00:01:31,870 --> 00:01:35,660
+And then we'll see lots of
+hardness proofs based on that.
+
+31
+00:01:35,660 --> 00:01:38,630
+So we start with the
+notion of a machine.
+
+32
+00:01:38,630 --> 00:01:40,060
+We won't use this term too much.
+
+33
+00:01:40,060 --> 00:01:43,250
+But the idea is we start
+with an undirected graph.
+
+34
+00:01:43,250 --> 00:01:45,470
+Think of this as a
+model of computation.
+
+35
+00:01:45,470 --> 00:01:47,960
+So your computer is
+an undirected graph
+
+36
+00:01:47,960 --> 00:01:49,390
+of red edges and blue edges.
+
+37
+00:01:49,390 --> 00:01:51,110
+Red edges have weight 1.
+
+38
+00:01:51,110 --> 00:01:53,260
+Blue edges have weight 2.
+
+39
+00:01:53,260 --> 00:01:58,860
+And then a configuration
+of that machine--
+
+40
+00:01:58,860 --> 00:02:02,320
+or a constraint
+graph in total-- is
+
+41
+00:02:02,320 --> 00:02:04,460
+an orientation of that graph.
+
+42
+00:02:04,460 --> 00:02:07,690
+So it's really a directed
+graph with red and blue edges.
+
+43
+00:02:07,690 --> 00:02:10,870
+And you have to satisfy the
+constraint that at every node,
+
+44
+00:02:10,870 --> 00:02:14,110
+the total incoming weight
+should be at least 2.
+
+45
+00:02:14,110 --> 00:02:17,580
+So either at least one blue
+edge or at least two red edges.
+
+46
+00:02:17,580 --> 00:02:20,070
+So this should be a
+satisfying assignment.
+
+47
+00:02:20,070 --> 00:02:21,790
+This one has two red edges.
+
+48
+00:02:21,790 --> 00:02:25,520
+This one has actually one blue
+edge and an additional red edge
+
+49
+00:02:25,520 --> 00:02:26,830
+coming in.
+
+50
+00:02:26,830 --> 00:02:31,055
+But in general we have--
+so, a constraint graph.
+
+51
+00:02:38,900 --> 00:02:51,390
+It's going to be a directed
+red/blue graph satisfying,
+
+52
+00:02:51,390 --> 00:03:02,660
+I'll call it the
+inflow constraint,
+
+53
+00:03:02,660 --> 00:03:17,790
+that for every vertex, the
+total incoming weight is
+
+54
+00:03:17,790 --> 00:03:25,670
+greater than or equal to 2 where
+red is a 1 and a blue is a 2.
+
+55
+00:03:28,550 --> 00:03:33,160
+And then we're interested
+in reconfigurations
+
+56
+00:03:33,160 --> 00:03:38,300
+of constraint graphs by
+reversing one edge at a time.
+
+57
+00:03:38,300 --> 00:03:41,740
+So let's look at a vertex here.
+
+58
+00:03:41,740 --> 00:03:44,510
+This guy has total incoming
+weight of three-- one
+
+59
+00:03:44,510 --> 00:03:47,510
+from the red, two from the blue.
+
+60
+00:03:47,510 --> 00:03:50,000
+And a move we're
+allowed to do is
+
+61
+00:03:50,000 --> 00:03:52,180
+say, reverse an edge like this.
+
+62
+00:03:52,180 --> 00:03:54,929
+So now we have a total
+incoming weight of 4.
+
+63
+00:03:54,929 --> 00:03:56,470
+4 is also greater
+than or equal to 2.
+
+64
+00:03:56,470 --> 00:03:57,870
+So that's a valid move.
+
+65
+00:03:57,870 --> 00:04:00,080
+Now we could also
+reverse this edge.
+
+66
+00:04:00,080 --> 00:04:01,240
+We couldn't before.
+
+67
+00:04:01,240 --> 00:04:02,750
+If we had done it
+in the beginning,
+
+68
+00:04:02,750 --> 00:04:04,583
+there would only be a
+weight of 1 coming in.
+
+69
+00:04:04,583 --> 00:04:07,460
+But now that we have these
+two units of weight coming in,
+
+70
+00:04:07,460 --> 00:04:09,764
+we can redirect this--
+at least local to this
+
+71
+00:04:09,764 --> 00:04:11,180
+vertex-- we can
+redirect this guy.
+
+72
+00:04:11,180 --> 00:04:13,310
+It'll only make
+this vertex happier.
+
+73
+00:04:13,310 --> 00:04:15,790
+The validity of this
+move depended on what
+
+74
+00:04:15,790 --> 00:04:17,470
+that vertex looked like.
+
+75
+00:04:17,470 --> 00:04:20,987
+So in general, we start
+with some constraint graph.
+
+76
+00:04:20,987 --> 00:04:22,570
+We're going to do a
+sequence of moves.
+
+77
+00:04:22,570 --> 00:04:24,680
+At all times we should
+have a valid constraint
+
+78
+00:04:24,680 --> 00:04:27,290
+graph, meaning you satisfy
+the inflow constraint.
+
+79
+00:04:30,850 --> 00:04:32,790
+So those are the
+rules of the game.
+
+80
+00:04:32,790 --> 00:04:36,060
+And at each move, or
+at each time step,
+
+81
+00:04:36,060 --> 00:04:37,880
+you can make any
+valid move you want.
+
+82
+00:04:37,880 --> 00:04:40,260
+That's the
+nondeterministic aspect.
+
+83
+00:04:40,260 --> 00:04:42,495
+And that mimics most puzzles.
+
+84
+00:04:42,495 --> 00:04:43,870
+You're not told
+which move to do.
+
+85
+00:04:43,870 --> 00:04:46,250
+You get to choose
+which move to do.
+
+86
+00:04:46,250 --> 00:04:48,170
+Guess which move
+to do, if you like.
+
+87
+00:04:48,170 --> 00:04:50,920
+So the NCL problem
+is, I give you
+
+88
+00:04:50,920 --> 00:04:52,750
+some crazy network like this.
+
+89
+00:04:52,750 --> 00:04:55,984
+And I want to know, can I
+reverse a particular edge?
+
+90
+00:04:55,984 --> 00:04:57,400
+That's one version
+of the problem.
+
+91
+00:04:57,400 --> 00:05:01,360
+There are actually two decision
+problems we can think about.
+
+92
+00:05:01,360 --> 00:05:03,892
+That one is the most useful.
+
+93
+00:05:03,892 --> 00:05:05,100
+Or most common, I should say.
+
+94
+00:05:14,090 --> 00:05:18,440
+Can you reverse a specified
+edge given the constraint graph?
+
+95
+00:05:23,250 --> 00:05:25,990
+Meaning is there a
+sequence of moves--
+
+96
+00:05:25,990 --> 00:05:29,750
+and the last move is
+reversing the target edge.
+
+97
+00:05:29,750 --> 00:05:32,060
+Another problem
+would be, can you
+
+98
+00:05:32,060 --> 00:05:35,460
+reach a desired other
+constraint graph?
+
+99
+00:05:40,690 --> 00:05:43,080
+So I give you an
+entire configuration
+
+100
+00:05:43,080 --> 00:05:47,480
+and another orientation of
+the graph that's consistent.
+
+101
+00:05:47,480 --> 00:05:51,570
+And to in some sense, that
+gives you more information.
+
+102
+00:05:51,570 --> 00:05:54,315
+I don't just say I
+want to flip this edge.
+
+103
+00:05:54,315 --> 00:05:56,190
+It will actually be, I
+want to flip this edge
+
+104
+00:05:56,190 --> 00:05:59,080
+and no other edges is going
+to be the typical setup.
+
+105
+00:05:59,080 --> 00:06:01,790
+But in general, I give you
+one configuration and another.
+
+106
+00:06:01,790 --> 00:06:04,331
+And I want to know, can I get
+from here to here by a sequence
+
+107
+00:06:04,331 --> 00:06:06,430
+of single-edge reversals.
+
+108
+00:06:06,430 --> 00:06:06,930
+Yeah.
+
+109
+00:06:06,930 --> 00:06:10,380
+AUDIENCE: Does the graph
+[INAUDIBLE] degree 3?
+
+110
+00:06:10,380 --> 00:06:12,970
+PROFESSOR: It will
+always be max degree 3.
+
+111
+00:06:12,970 --> 00:06:14,750
+So you can assume that.
+
+112
+00:06:14,750 --> 00:06:17,270
+In fact, we will show
+both of these problems
+
+113
+00:06:17,270 --> 00:06:24,336
+are PSPACE complete for
+three regular graphs.
+
+114
+00:06:24,336 --> 00:06:26,460
+Although what I've drawn
+here is not three regular.
+
+115
+00:06:26,460 --> 00:06:28,350
+It has some vertices
+in degree 1.
+
+116
+00:06:28,350 --> 00:06:32,210
+You can actually
+assume max degree 3.
+
+117
+00:06:32,210 --> 00:06:34,830
+And you can assume
+that there are only
+
+118
+00:06:34,830 --> 00:06:37,520
+two types of
+vertices-- and those
+
+119
+00:06:37,520 --> 00:06:42,982
+are red, red, blue
+and blue, blue, blue.
+
+120
+00:06:45,580 --> 00:06:48,510
+So even just for these
+two types of vertices,
+
+121
+00:06:48,510 --> 00:06:51,060
+both of these problems
+are PSPACE complete.
+
+122
+00:06:51,060 --> 00:06:51,789
+Yeah.
+
+123
+00:06:51,789 --> 00:06:53,821
+AUDIENCE: Do degree
+1 vertices also
+
+124
+00:06:53,821 --> 00:06:56,010
+have to satisfy the
+inflow constraint?
+
+125
+00:06:59,144 --> 00:06:59,810
+PROFESSOR: Yeah.
+
+126
+00:06:59,810 --> 00:07:02,817
+This would not be valid.
+
+127
+00:07:02,817 --> 00:07:04,650
+We'll show how to
+simulate degree 1 vertices
+
+128
+00:07:04,650 --> 00:07:06,400
+with or without the
+inflow constraint.
+
+129
+00:07:06,400 --> 00:07:06,899
+Yeah.
+
+130
+00:07:06,899 --> 00:07:08,952
+AUDIENCE: Is the
+problem given the graph,
+
+131
+00:07:08,952 --> 00:07:11,397
+find a valid configuration?
+
+132
+00:07:11,397 --> 00:07:12,980
+PROFESSOR: That's a
+different problem.
+
+133
+00:07:12,980 --> 00:07:15,690
+Given an undirected graph,
+find a valid configuration.
+
+134
+00:07:15,690 --> 00:07:17,360
+That problem is NP complete.
+
+135
+00:07:17,360 --> 00:07:19,020
+We'll also prove that.
+
+136
+00:07:19,020 --> 00:07:22,710
+That's called constraint
+graph satisfiability.
+
+137
+00:07:22,710 --> 00:07:24,190
+So that's an analog of SAT.
+
+138
+00:07:35,610 --> 00:07:47,360
+So this is, given
+undirected red/blue graph,
+
+139
+00:07:47,360 --> 00:07:50,337
+find a valid orientation.
+
+140
+00:07:50,337 --> 00:07:51,420
+So that's a good question.
+
+141
+00:07:54,860 --> 00:07:57,340
+At present, there aren't very
+many NP hardness reductions
+
+142
+00:07:57,340 --> 00:07:58,500
+that use this problem.
+
+143
+00:07:58,500 --> 00:08:00,490
+But I think maybe
+there should be more.
+
+144
+00:08:00,490 --> 00:08:01,170
+It's a need.
+
+145
+00:08:05,062 --> 00:08:07,270
+This was not our original
+goal with constraint logic.
+
+146
+00:08:07,270 --> 00:08:10,460
+So we sort of forgot
+about it until recently.
+
+147
+00:08:10,460 --> 00:08:12,090
+We thought it would
+be cool to do more.
+
+148
+00:08:12,090 --> 00:08:13,590
+AUDIENCE: So the
+separation suggests
+
+149
+00:08:13,590 --> 00:08:16,286
+that you can't get from
+any valid configuration
+
+150
+00:08:16,286 --> 00:08:17,730
+to any other valid
+configuration?
+
+151
+00:08:17,730 --> 00:08:18,438
+PROFESSOR: Right.
+
+152
+00:08:18,438 --> 00:08:21,370
+So in particular, for
+lots of different pairs
+
+153
+00:08:21,370 --> 00:08:23,780
+of configurations
+of the same graph,
+
+154
+00:08:23,780 --> 00:08:25,930
+you cannot find a path
+from one to the other.
+
+155
+00:08:25,930 --> 00:08:28,177
+And deciding whether you
+can is PSPACE complete.
+
+156
+00:08:28,177 --> 00:08:30,260
+I mean, that implies there
+are lots of no answers.
+
+157
+00:08:30,260 --> 00:08:32,208
+AUDIENCE: So what
+prevents you from being
+
+158
+00:08:32,208 --> 00:08:35,620
+able to do it intuitively?
+
+159
+00:08:35,620 --> 00:08:38,900
+PROFESSOR: Hopefully it will
+become more and more obvious.
+
+160
+00:08:38,900 --> 00:08:41,110
+I don't have a great
+intuition why it's
+
+161
+00:08:41,110 --> 00:08:45,570
+hard, other than it's hard.
+
+162
+00:08:45,570 --> 00:08:49,090
+I mean, you tend to get
+nice path connectivity
+
+163
+00:08:49,090 --> 00:08:50,370
+in continuous spaces.
+
+164
+00:08:50,370 --> 00:08:52,760
+This is a very discrete space.
+
+165
+00:08:52,760 --> 00:08:54,720
+And there's a lot
+of hard constraints
+
+166
+00:08:54,720 --> 00:08:56,264
+that's like rough intuition.
+
+167
+00:08:56,264 --> 00:08:58,180
+AUDIENCE: You'll probably
+get into this later,
+
+168
+00:08:58,180 --> 00:09:01,030
+but can you give us some
+brief motivation of why
+
+169
+00:09:01,030 --> 00:09:03,030
+we care about this problem?
+
+170
+00:09:03,030 --> 00:09:04,660
+PROFESSOR: The
+motivation is a lot
+
+171
+00:09:04,660 --> 00:09:09,030
+of puzzles can easily simulate
+these kinds of pictures.
+
+172
+00:09:09,030 --> 00:09:12,930
+And in particular, you
+basically need two gadgets.
+
+173
+00:09:12,930 --> 00:09:17,990
+And we'll also prove that this
+is hard for planar graphs.
+
+174
+00:09:17,990 --> 00:09:19,590
+So you don't even
+need a crossover.
+
+175
+00:09:19,590 --> 00:09:22,657
+For planar red/blue graphs,
+with just these two types
+
+176
+00:09:22,657 --> 00:09:24,740
+of vertices, the whole
+problem is PSPACE complete.
+
+177
+00:09:24,740 --> 00:09:26,682
+So the ultimate
+motivation is to prove
+
+178
+00:09:26,682 --> 00:09:27,890
+your problem PSPACE complete.
+
+179
+00:09:27,890 --> 00:09:31,577
+If it falls into the
+category of games like this,
+
+180
+00:09:31,577 --> 00:09:32,660
+you just need two gadgets.
+
+181
+00:09:32,660 --> 00:09:34,840
+And you get a proof
+by two pictures.
+
+182
+00:09:34,840 --> 00:09:39,470
+So that will lead to some very
+efficient PSPACE completeness
+
+183
+00:09:39,470 --> 00:09:39,970
+proofs.
+
+184
+00:09:39,970 --> 00:09:43,400
+Of course, to get there we first
+need to prove this theorem.
+
+185
+00:09:43,400 --> 00:09:45,340
+And I'm going to do
+that first so you
+
+186
+00:09:45,340 --> 00:09:47,144
+see where all this
+comes from, so you
+
+187
+00:09:47,144 --> 00:09:48,310
+don't have to understand it.
+
+188
+00:09:48,310 --> 00:09:52,150
+I think it's helpful in case
+you want to generalize it.
+
+189
+00:09:52,150 --> 00:09:53,140
+OK.
+
+190
+00:09:53,140 --> 00:09:56,880
+So let me tell you about
+these two types of vertices.
+
+191
+00:09:56,880 --> 00:10:02,150
+This one is called
+an AND vertex.
+
+192
+00:10:02,150 --> 00:10:03,680
+And this one is
+called an OR vertex.
+
+193
+00:10:07,330 --> 00:10:14,130
+Because if we think of the
+two red edges as inputs,
+
+194
+00:10:14,130 --> 00:10:19,219
+and think of the
+blue edge as output,
+
+195
+00:10:19,219 --> 00:10:20,760
+this picture is
+supposed to represent
+
+196
+00:10:20,760 --> 00:10:23,320
+that 1 and 1 equals 1.
+
+197
+00:10:23,320 --> 00:10:27,940
+And this picture is supposed to
+represent that 0 or 0 equals 0.
+
+198
+00:10:27,940 --> 00:10:31,460
+And if we do some more moves,
+like if I flip this edge,
+
+199
+00:10:31,460 --> 00:10:33,810
+now I have total
+incoming weight of 3.
+
+200
+00:10:33,810 --> 00:10:35,560
+That's still not enough
+to flip this edge,
+
+201
+00:10:35,560 --> 00:10:40,610
+because 0 and 1 is 0 still.
+
+202
+00:10:40,610 --> 00:10:42,604
+And I could flip it back.
+
+203
+00:10:42,604 --> 00:10:43,770
+Maybe I flip the other edge.
+
+204
+00:10:43,770 --> 00:10:46,620
+Also 1 and 0 is 0.
+
+205
+00:10:46,620 --> 00:10:48,260
+Still can't flip this guy.
+
+206
+00:10:48,260 --> 00:10:51,050
+But if I flip both of them up
+top, if both of the red guys
+
+207
+00:10:51,050 --> 00:10:58,580
+are incoming, then I can if I
+want to flip the bottom edge.
+
+208
+00:10:58,580 --> 00:11:00,650
+But I don't have to right away.
+
+209
+00:11:00,650 --> 00:11:03,240
+So I could go from here to here.
+
+210
+00:11:03,240 --> 00:11:05,340
+But this is sort
+of a slow AND gate.
+
+211
+00:11:05,340 --> 00:11:07,190
+I put in the two 1 inputs.
+
+212
+00:11:07,190 --> 00:11:09,990
+I don't yet have a 1
+output, so to speak,
+
+213
+00:11:09,990 --> 00:11:11,910
+where 1 here is
+represented by 2.
+
+214
+00:11:11,910 --> 00:11:13,380
+You get the idea.
+
+215
+00:11:13,380 --> 00:11:14,740
+OK.
+
+216
+00:11:14,740 --> 00:11:18,240
+So let me write
+down the definition
+
+217
+00:11:18,240 --> 00:11:19,865
+to make that slightly cleaner.
+
+218
+00:11:23,550 --> 00:11:25,998
+So I'm going to define
+the activation of an edge,
+
+219
+00:11:25,998 --> 00:11:27,123
+or an edge being activated.
+
+220
+00:11:35,622 --> 00:11:40,470
+An input edge is going to
+be active if it's incoming.
+
+221
+00:11:43,790 --> 00:11:51,840
+And an output edge is
+active if it's outgoing.
+
+222
+00:11:55,440 --> 00:11:56,710
+This is a symmetric.
+
+223
+00:11:56,710 --> 00:11:58,900
+Incoming and outgoing
+always clear.
+
+224
+00:11:58,900 --> 00:12:00,460
+Either you're going
+into the vertex,
+
+225
+00:12:00,460 --> 00:12:02,080
+or you're going
+out of the vertex.
+
+226
+00:12:02,080 --> 00:12:03,910
+But just by labeling
+these inputs,
+
+227
+00:12:03,910 --> 00:12:07,180
+I'm going to say these edges are
+sort of interesting if they're
+
+228
+00:12:07,180 --> 00:12:08,120
+pointing in.
+
+229
+00:12:08,120 --> 00:12:10,100
+This edge is interesting
+if it's pointing out.
+
+230
+00:12:10,100 --> 00:12:14,190
+These correspond to the one
+bits in a Boolean logic.
+
+231
+00:12:14,190 --> 00:12:18,260
+And what we say for an AND
+gate-- property of an AND
+
+232
+00:12:18,260 --> 00:12:24,150
+gate-- is that the
+output can activate--
+
+233
+00:12:24,150 --> 00:12:31,400
+doesn't have to-- only if
+both inputs are active.
+
+234
+00:12:36,200 --> 00:12:40,400
+So in this language you can
+see that it's an AND gate.
+
+235
+00:12:40,400 --> 00:12:41,760
+You need both of the inputs.
+
+236
+00:12:41,760 --> 00:12:45,370
+The AND of the input should be
+active in order for the output
+
+237
+00:12:45,370 --> 00:12:47,330
+to activate.
+
+238
+00:12:47,330 --> 00:12:49,880
+And so that's why we do
+this asymmetric thing.
+
+239
+00:12:49,880 --> 00:12:52,500
+Another reason to do this
+asymmetric view of inputs
+
+240
+00:12:52,500 --> 00:12:54,710
+and outputs is if
+you have two vertices
+
+241
+00:12:54,710 --> 00:12:56,540
+and an edge between them.
+
+242
+00:13:02,060 --> 00:13:03,750
+It was asymmetric to
+begin with, right?
+
+243
+00:13:03,750 --> 00:13:06,290
+This edge from this guy's
+perspective is outgoing.
+
+244
+00:13:06,290 --> 00:13:08,412
+From this guy's
+perspective, it's incoming.
+
+245
+00:13:08,412 --> 00:13:09,620
+That's annoying to deal with.
+
+246
+00:13:09,620 --> 00:13:12,310
+I want the edge to
+either be active or not.
+
+247
+00:13:12,310 --> 00:13:15,750
+And if this is the output
+edge of this vertex,
+
+248
+00:13:15,750 --> 00:13:18,080
+and it's the input
+of this vertex,
+
+249
+00:13:18,080 --> 00:13:22,670
+than this edge is active.
+
+250
+00:13:22,670 --> 00:13:24,741
+And the other direction
+would be inactive.
+
+251
+00:13:24,741 --> 00:13:25,240
+OK.
+
+252
+00:13:25,240 --> 00:13:27,220
+But it's active from
+this guy's perspective.
+
+253
+00:13:27,220 --> 00:13:28,900
+And it's active from
+this guy's perspective.
+
+254
+00:13:28,900 --> 00:13:30,320
+So while this may
+seem asymmetric,
+
+255
+00:13:30,320 --> 00:13:32,302
+it actually makes the
+picture more symmetric.
+
+256
+00:13:32,302 --> 00:13:32,801
+Yeah.
+
+257
+00:13:32,801 --> 00:13:35,507
+AUDIENCE: Can't have a red
+edge being the output, though.
+
+258
+00:13:35,507 --> 00:13:36,410
+Right?
+
+259
+00:13:36,410 --> 00:13:37,368
+PROFESSOR: That's true.
+
+260
+00:13:37,368 --> 00:13:40,300
+With these gadgets we never
+have a red edge being output.
+
+261
+00:13:40,300 --> 00:13:41,720
+Imagine red being blue.
+
+262
+00:13:46,080 --> 00:13:46,780
+OK.
+
+263
+00:13:46,780 --> 00:13:50,690
+So that is active.
+
+264
+00:13:50,690 --> 00:13:57,860
+And AND, you have sort
+of delayed outputs.
+
+265
+00:13:57,860 --> 00:14:00,270
+You can think of
+this same vertex
+
+266
+00:14:00,270 --> 00:14:02,850
+if you relabel these
+guys as outputs,
+
+267
+00:14:02,850 --> 00:14:04,540
+and this guy as an input.
+
+268
+00:14:04,540 --> 00:14:06,179
+It's just a perspective change.
+
+269
+00:14:06,179 --> 00:14:07,470
+It's just changing terminology.
+
+270
+00:14:07,470 --> 00:14:09,630
+So it doesn't actually
+change what happens.
+
+271
+00:14:09,630 --> 00:14:10,810
+But from this perspective.
+
+272
+00:14:10,810 --> 00:14:14,360
+You essentially are splitting,
+or fanning out, a wire.
+
+273
+00:14:14,360 --> 00:14:17,750
+So if you have a
+signal here of true--
+
+274
+00:14:17,750 --> 00:14:20,720
+so this is an active input
+now-- that both of these
+
+275
+00:14:20,720 --> 00:14:22,150
+can be active if
+they want to be.
+
+276
+00:14:22,150 --> 00:14:23,610
+They don't have to be.
+
+277
+00:14:23,610 --> 00:14:26,980
+But if it's false, then both
+of these have to be inactive.
+
+278
+00:14:26,980 --> 00:14:27,850
+This is inactive.
+
+279
+00:14:27,850 --> 00:14:30,090
+Both of these have
+to be inactive.
+
+280
+00:14:30,090 --> 00:14:33,750
+And there are lots of
+configurations of this guy.
+
+281
+00:14:33,750 --> 00:14:36,450
+So maybe some of them point in.
+
+282
+00:14:36,450 --> 00:14:38,250
+So the split.
+
+283
+00:14:38,250 --> 00:14:41,359
+That's the same vertex that's
+a relabeling of who's active
+
+284
+00:14:41,359 --> 00:14:42,150
+and who's inactive.
+
+285
+00:14:45,350 --> 00:15:02,350
+The outputs can activate
+only if the input is active.
+
+286
+00:15:02,350 --> 00:15:04,270
+And really, I should be
+saying if and only if.
+
+287
+00:15:04,270 --> 00:15:10,171
+But I'm being a
+little concise here.
+
+288
+00:15:10,171 --> 00:15:10,670
+OK.
+
+289
+00:15:10,670 --> 00:15:11,920
+So that's a SPLIT vertex.
+
+290
+00:15:11,920 --> 00:15:14,280
+And then the other
+vertex type is an OR.
+
+291
+00:15:14,280 --> 00:15:19,230
+So this is really the second
+vertex type out of three.
+
+292
+00:15:19,230 --> 00:15:20,490
+Third out of three.
+
+293
+00:15:20,490 --> 00:15:21,330
+Whatever.
+
+294
+00:15:21,330 --> 00:15:23,770
+So this of course
+looks very symmetric.
+
+295
+00:15:23,770 --> 00:15:26,990
+I mean, there's no clear notion
+of inputs or outputs here.
+
+296
+00:15:26,990 --> 00:15:29,520
+But if you define two
+of them to be inputs,
+
+297
+00:15:29,520 --> 00:15:31,040
+and the other one
+to be an output,
+
+298
+00:15:31,040 --> 00:15:33,620
+then that output is the
+OR of those two inputs.
+
+299
+00:15:33,620 --> 00:15:36,520
+This edge can activate only
+if this edge is active,
+
+300
+00:15:36,520 --> 00:15:39,890
+or this edge is active, or both.
+
+301
+00:15:39,890 --> 00:15:42,770
+So it's an inclusive OR.
+
+302
+00:15:42,770 --> 00:15:44,140
+Probably have some animations.
+
+303
+00:15:44,140 --> 00:15:46,740
+Like if I flip this
+guy, now this one
+
+304
+00:15:46,740 --> 00:15:48,640
+can choose to activate.
+
+305
+00:15:48,640 --> 00:15:52,800
+I could also have both of them
+in, or just one of them in.
+
+306
+00:15:52,800 --> 00:15:56,142
+But in order for this one to
+now go back out and deactivate,
+
+307
+00:15:56,142 --> 00:15:57,850
+this when would first
+have to deactivate.
+
+308
+00:16:00,370 --> 00:16:04,050
+So that's ANDs and ORs.
+
+309
+00:16:04,050 --> 00:16:07,240
+You get some sense for why
+this is a Boolean logic.
+
+310
+00:16:07,240 --> 00:16:11,220
+One point to make at this
+point is that I do not
+
+311
+00:16:11,220 --> 00:16:14,120
+have a NOT gadget.
+
+312
+00:16:14,120 --> 00:16:18,730
+And in fact, NOT gadgets are
+impossible in this universe.
+
+313
+00:16:18,730 --> 00:16:22,370
+Because we're always talking
+about outputs can activate,
+
+314
+00:16:22,370 --> 00:16:26,540
+but they don't have to, it's up
+to the non-deterministic player
+
+315
+00:16:26,540 --> 00:16:31,820
+to choose whether to activate
+an output, or when to do it,
+
+316
+00:16:31,820 --> 00:16:33,560
+NOT is impossible.
+
+317
+00:16:33,560 --> 00:16:37,860
+Because a NOT would
+be something like,
+
+318
+00:16:37,860 --> 00:16:43,810
+this edge cannot activate if
+this other edge is active.
+
+319
+00:16:43,810 --> 00:16:48,160
+This output cannot activate
+if this input is active.
+
+320
+00:16:48,160 --> 00:16:51,225
+That would be the idea.
+
+321
+00:16:54,130 --> 00:17:00,155
+Maybe output is inactive
+if the input is active.
+
+322
+00:17:03,560 --> 00:17:06,270
+And that kind of constraint
+is impossible to represent
+
+323
+00:17:06,270 --> 00:17:08,170
+with a lower bound
+on incoming weight.
+
+324
+00:17:08,170 --> 00:17:10,440
+Maybe if you had an upper
+bound, you could do it.
+
+325
+00:17:10,440 --> 00:17:12,260
+But with a lower
+bound, you're always
+
+326
+00:17:12,260 --> 00:17:14,115
+happier to have inputs active.
+
+327
+00:17:16,670 --> 00:17:20,040
+So if it worked with
+the input inactive
+
+328
+00:17:20,040 --> 00:17:22,099
+that the output could
+activate, then it
+
+329
+00:17:22,099 --> 00:17:26,130
+should also work with
+the input active.
+
+330
+00:17:26,130 --> 00:17:27,335
+NOT gates are impossible.
+
+331
+00:17:29,715 --> 00:17:31,340
+So that's a little
+bit annoying, but it
+
+332
+00:17:31,340 --> 00:17:33,220
+won't be too much trouble.
+
+333
+00:17:33,220 --> 00:17:36,430
+We've in some sense dealt
+with that in other proofs.
+
+334
+00:17:36,430 --> 00:17:39,710
+Before I get to these
+hardness results,
+
+335
+00:17:39,710 --> 00:17:42,270
+let me tell you a
+few other vertices
+
+336
+00:17:42,270 --> 00:17:47,250
+that are helpful, and can be
+simulated with ANDs and ORs.
+
+337
+00:17:47,250 --> 00:17:51,520
+So one of them is
+a choice vertex.
+
+338
+00:17:51,520 --> 00:17:56,180
+This is sort of like an
+exclusive OR, in a sense.
+
+339
+00:17:56,180 --> 00:17:59,100
+So two of these edges
+must be incoming--
+
+340
+00:17:59,100 --> 00:18:01,990
+in the symmetric picture--
+two of them must be incoming.
+
+341
+00:18:01,990 --> 00:18:05,270
+At most, one of them
+can be outgoing.
+
+342
+00:18:05,270 --> 00:18:08,020
+And this can be simulated
+by expanding this
+
+343
+00:18:08,020 --> 00:18:10,910
+into a little triangle.
+
+344
+00:18:10,910 --> 00:18:15,260
+So if this guy is outgoing,
+then both of these
+
+345
+00:18:15,260 --> 00:18:18,470
+must be pointing to it.
+
+346
+00:18:18,470 --> 00:18:21,580
+And once both of these
+are pointing out,
+
+347
+00:18:21,580 --> 00:18:23,589
+then the blues must
+be pointing in here,
+
+348
+00:18:23,589 --> 00:18:25,380
+because the red would
+not be enough to make
+
+349
+00:18:25,380 --> 00:18:26,970
+either of these vertices happy.
+
+350
+00:18:26,970 --> 00:18:29,540
+If this guy's making
+that guy happy.
+
+351
+00:18:29,540 --> 00:18:32,690
+So if one of them is out,
+the other two must be in.
+
+352
+00:18:32,690 --> 00:18:34,340
+We'll see how to use
+this in a second.
+
+353
+00:18:34,340 --> 00:18:36,910
+But it's useful to have
+red, red, red in addition
+
+354
+00:18:36,910 --> 00:18:41,861
+to red, red, blue;
+and blue, blue, blue.
+
+355
+00:18:41,861 --> 00:18:42,360
+OK.
+
+356
+00:18:42,360 --> 00:18:46,725
+Now one issue that arises here,
+as you're probably guessing,
+
+357
+00:18:46,725 --> 00:18:49,350
+especially when I did this kind
+of transformation where I said,
+
+358
+00:18:49,350 --> 00:18:50,470
+oh, three red vertices.
+
+359
+00:18:50,470 --> 00:18:54,294
+That's just like this picture,
+except these are now blue.
+
+360
+00:18:54,294 --> 00:18:56,210
+That's not going to work
+so well from whatever
+
+361
+00:18:56,210 --> 00:18:59,040
+they're attached to.
+
+362
+00:18:59,040 --> 00:19:02,430
+Now luckily, we
+can deal with this.
+
+363
+00:19:02,430 --> 00:19:04,160
+The more direct
+version is if we're
+
+364
+00:19:04,160 --> 00:19:07,730
+trying to build some Boolean
+formula like an AND of ORs,
+
+365
+00:19:07,730 --> 00:19:08,975
+the inputs are in the bottom.
+
+366
+00:19:08,975 --> 00:19:11,260
+Because these are the
+inputs to the AND.
+
+367
+00:19:11,260 --> 00:19:14,150
+The AND wants its
+input to be red.
+
+368
+00:19:14,150 --> 00:19:17,200
+But the OR is providing
+an output which is blue.
+
+369
+00:19:17,200 --> 00:19:19,420
+How come we convert a
+red edge to a blue edge?
+
+370
+00:19:19,420 --> 00:19:21,790
+Luckily, we can do it.
+
+371
+00:19:21,790 --> 00:19:23,190
+As long as we have
+an even number
+
+372
+00:19:23,190 --> 00:19:25,540
+of red to blue
+conversions, we can
+
+373
+00:19:25,540 --> 00:19:29,780
+fill in this gadget in
+between, and it works.
+
+374
+00:19:29,780 --> 00:19:34,820
+So basically this is in
+a forced configuration.
+
+375
+00:19:34,820 --> 00:19:37,635
+I think it can't change at all.
+
+376
+00:19:41,080 --> 00:19:43,195
+At least from this
+position, it can't change.
+
+377
+00:19:46,950 --> 00:19:50,409
+What we need at this stage is
+that these guys can point out--
+
+378
+00:19:50,409 --> 00:19:50,950
+both of them.
+
+379
+00:19:50,950 --> 00:19:53,834
+So you always get a
+weight boost of one
+
+380
+00:19:53,834 --> 00:19:55,000
+from both of these vertices.
+
+381
+00:19:55,000 --> 00:19:56,890
+And so now if this
+guy's pointing in,
+
+382
+00:19:56,890 --> 00:19:58,020
+that's a total weight of 2.
+
+383
+00:19:58,020 --> 00:19:59,810
+And so then this
+guy can point out.
+
+384
+00:19:59,810 --> 00:20:01,660
+Of course, as this
+guy is pointing in,
+
+385
+00:20:01,660 --> 00:20:03,360
+this guy can point out.
+
+386
+00:20:03,360 --> 00:20:05,760
+And it's symmetric
+on the two sides.
+
+387
+00:20:05,760 --> 00:20:08,225
+So maybe you do try to
+mess with this gadget.
+
+388
+00:20:08,225 --> 00:20:09,940
+Although I don't think you can.
+
+389
+00:20:09,940 --> 00:20:12,640
+What we need is that you are
+allowed to leave it like this,
+
+390
+00:20:12,640 --> 00:20:15,620
+and you get a bonus point
+for each of those vertices,
+
+391
+00:20:15,620 --> 00:20:16,510
+and all is well.
+
+392
+00:20:16,510 --> 00:20:20,230
+And we'll see later how to make
+an even number of conversions.
+
+393
+00:20:20,230 --> 00:20:23,620
+Now one thing I should maybe
+mention at this point also--
+
+394
+00:20:23,620 --> 00:20:25,480
+this is sort of a
+technical detail--
+
+395
+00:20:25,480 --> 00:20:30,430
+but if you used to think of
+this as a single edge, when
+
+396
+00:20:30,430 --> 00:20:33,230
+I reversed it-- let's say
+it was pointing up before,
+
+397
+00:20:33,230 --> 00:20:36,820
+and I make it point
+down-- this vertex
+
+398
+00:20:36,820 --> 00:20:38,690
+will see that
+effect immediately.
+
+399
+00:20:38,690 --> 00:20:40,740
+This vertex doesn't see it yet.
+
+400
+00:20:40,740 --> 00:20:44,160
+So it's kind of an even
+more delayed reaction.
+
+401
+00:20:44,160 --> 00:20:47,110
+Because we subdivided
+an edge into two parts,
+
+402
+00:20:47,110 --> 00:20:50,040
+we can flip one side without
+having flipped the other side.
+
+403
+00:20:50,040 --> 00:20:52,750
+The way I would view this is in
+the original constraint logic
+
+404
+00:20:52,750 --> 00:20:56,560
+graph, we used to have
+an edge pointing up.
+
+405
+00:20:56,560 --> 00:20:59,360
+We change it into
+an undirected edge.
+
+406
+00:20:59,360 --> 00:21:02,860
+It has no orientation because
+it doesn't benefit either side.
+
+407
+00:21:02,860 --> 00:21:06,520
+It's pointing away
+from both ends.
+
+408
+00:21:06,520 --> 00:21:08,760
+And then we choose to
+direct it the other way.
+
+409
+00:21:08,760 --> 00:21:12,940
+So this is an alternative view
+of a move in a constraint graph
+
+410
+00:21:12,940 --> 00:21:15,360
+that used to be you're
+reversing an edge.
+
+411
+00:21:15,360 --> 00:21:18,350
+Another view is that you
+can change a directed edge
+
+412
+00:21:18,350 --> 00:21:19,360
+into an undirected edge.
+
+413
+00:21:19,360 --> 00:21:21,818
+And you can change an undirected
+edge into a directed edge.
+
+414
+00:21:21,818 --> 00:21:24,500
+So these models are
+almost identical.
+
+415
+00:21:24,500 --> 00:21:27,190
+In fact, you can prove they're
+exactly the same power.
+
+416
+00:21:27,190 --> 00:21:31,770
+And they're called
+asynchronous constraint logic.
+
+417
+00:21:48,770 --> 00:21:51,260
+So if you were worried about
+that, you don't need to worry.
+
+418
+00:21:51,260 --> 00:21:53,260
+I won't prove here that
+they're identical power,
+
+419
+00:21:53,260 --> 00:21:54,050
+but it's not hard.
+
+420
+00:21:54,050 --> 00:21:54,550
+Yeah.
+
+421
+00:21:54,550 --> 00:21:56,928
+AUDIENCE: What was the thing
+where [INAUDIBLE] that you
+
+422
+00:21:56,928 --> 00:21:58,146
+can't flip those colors?
+
+423
+00:21:59,040 --> 00:22:00,581
+Cause you can flip
+the colors, right?
+
+424
+00:22:00,581 --> 00:22:02,569
+But you can flip
+the two red arrows
+
+425
+00:22:02,569 --> 00:22:03,110
+AUDIENCE: In.
+
+426
+00:22:03,110 --> 00:22:04,390
+AUDIENCE: Inwards.
+
+427
+00:22:04,390 --> 00:22:06,809
+And then you can flip the
+blue to cover the top node.
+
+428
+00:22:06,809 --> 00:22:08,350
+AUDIENCE: Basically
+flip all of them.
+
+429
+00:22:08,350 --> 00:22:09,350
+AUDIENCE: So the thing--
+
+430
+00:22:09,350 --> 00:22:11,236
+[INTERPOSING VOICES]
+
+431
+00:22:11,236 --> 00:22:12,850
+AUDIENCE: And the
+best you can do is--
+
+432
+00:22:12,850 --> 00:22:14,891
+PROFESSOR: You can't put
+flip these red guys yet.
+
+433
+00:22:14,891 --> 00:22:17,440
+Are you going to flip
+this blue guy first?
+
+434
+00:22:17,440 --> 00:22:17,940
+But how?
+
+435
+00:22:17,940 --> 00:22:19,820
+AUDIENCE: Well, you
+can't do anything first.
+
+436
+00:22:19,820 --> 00:22:20,110
+PROFESSOR: Yeah.
+
+437
+00:22:20,110 --> 00:22:21,150
+Nothing can happen first.
+
+438
+00:22:21,150 --> 00:22:22,441
+There is another configuration.
+
+439
+00:22:22,441 --> 00:22:24,269
+But from here, I
+think it's rigid.
+
+440
+00:22:24,269 --> 00:22:24,810
+AUDIENCE: Oh.
+
+441
+00:22:24,810 --> 00:22:26,770
+PROFESSOR: There's
+nothing that can change.
+
+442
+00:22:26,770 --> 00:22:29,840
+You can't flip this guy because
+this guy would be unhappy.
+
+443
+00:22:29,840 --> 00:22:32,440
+Therefore, you
+can't flip this guy.
+
+444
+00:22:32,440 --> 00:22:34,710
+Therefore, you can't
+flip these guys.
+
+445
+00:22:34,710 --> 00:22:37,758
+Therefore, you
+can't flip this guy.
+
+446
+00:22:37,758 --> 00:22:43,100
+So I think you get a cycle,
+and nothing can happen first.
+
+447
+00:22:43,100 --> 00:22:44,570
+But we don't need that here.
+
+448
+00:22:44,570 --> 00:22:46,780
+We will need it later.
+
+449
+00:22:46,780 --> 00:22:48,141
+That's why I wanted to mention.
+
+450
+00:22:48,141 --> 00:22:48,640
+OK.
+
+451
+00:22:48,640 --> 00:22:50,030
+So we can convert reds to blues.
+
+452
+00:22:50,030 --> 00:22:51,930
+So now we can chain
+things together
+
+453
+00:22:51,930 --> 00:22:54,210
+and build a CNF formula.
+
+454
+00:22:54,210 --> 00:22:56,200
+As long as we
+represent-- so here
+
+455
+00:22:56,200 --> 00:22:59,850
+we're going to use a choice
+gadget to say-- so right now,
+
+456
+00:22:59,850 --> 00:23:01,740
+nothing is activated.
+
+457
+00:23:01,740 --> 00:23:03,160
+Our goal is to
+activate that edge
+
+458
+00:23:03,160 --> 00:23:04,660
+at the top that's
+going to represent
+
+459
+00:23:04,660 --> 00:23:07,860
+that Boolean formula, the
+satisfiability of that Boolean
+
+460
+00:23:07,860 --> 00:23:09,440
+formula.
+
+461
+00:23:09,440 --> 00:23:12,660
+We use a choice gadget to say,
+look, either W can activate,
+
+462
+00:23:12,660 --> 00:23:14,600
+or Wbar can activate.
+
+463
+00:23:14,600 --> 00:23:16,000
+We need some notion of negation.
+
+464
+00:23:16,000 --> 00:23:16,960
+And this is how
+we're going to get
+
+465
+00:23:16,960 --> 00:23:19,500
+our negation, which is normally
+called dual real logic.
+
+466
+00:23:19,500 --> 00:23:21,650
+You have one
+channel representing
+
+467
+00:23:21,650 --> 00:23:23,980
+X, one representing Xbar.
+
+468
+00:23:23,980 --> 00:23:25,980
+We have this extra
+straggler, which we basically
+
+469
+00:23:25,980 --> 00:23:26,970
+don't care about.
+
+470
+00:23:26,970 --> 00:23:29,800
+Right now it is taking
+the weight somewhere.
+
+471
+00:23:29,800 --> 00:23:31,960
+But you can push it up.
+
+472
+00:23:31,960 --> 00:23:35,320
+If we plug-in a suitable
+terminator down there,
+
+473
+00:23:35,320 --> 00:23:37,200
+which we'll need to talk about.
+
+474
+00:23:37,200 --> 00:23:39,880
+But then, other than
+red/blue conversions,
+
+475
+00:23:39,880 --> 00:23:42,880
+then we are basically
+doing an OR.
+
+476
+00:23:42,880 --> 00:23:44,640
+We have to do an
+OR of three things,
+
+477
+00:23:44,640 --> 00:23:45,790
+and we only have degree 3.
+
+478
+00:23:45,790 --> 00:23:47,052
+So we do an OR of two things.
+
+479
+00:23:47,052 --> 00:23:48,010
+That gives this output.
+
+480
+00:23:48,010 --> 00:23:49,750
+Then we take an OR
+of the other thing.
+
+481
+00:23:49,750 --> 00:23:52,160
+So now this output is
+the OR of three things.
+
+482
+00:23:52,160 --> 00:23:53,830
+We convert it into a red edge.
+
+483
+00:23:53,830 --> 00:23:57,020
+This is a reference to
+the gadget we just saw.
+
+484
+00:23:57,020 --> 00:23:58,400
+And then we can
+take an AND, here
+
+485
+00:23:58,400 --> 00:23:59,900
+we're taking an AND
+of three things.
+
+486
+00:23:59,900 --> 00:24:01,775
+In general, it would be
+an AND of end things.
+
+487
+00:24:01,775 --> 00:24:04,070
+We build a binary
+tree of those ANDs.
+
+488
+00:24:04,070 --> 00:24:06,510
+And so that edge can
+reverse if and only
+
+489
+00:24:06,510 --> 00:24:08,100
+if that formula is satisfiable.
+
+490
+00:24:11,080 --> 00:24:14,610
+Assuming we know what to
+do with degree 1 vertices.
+
+491
+00:24:14,610 --> 00:24:17,260
+So this represents CNF.
+
+492
+00:24:17,260 --> 00:24:19,570
+Let me tell you what to
+do with degree 1 vertices.
+
+493
+00:24:19,570 --> 00:24:21,630
+Here are three
+different gadgets,
+
+494
+00:24:21,630 --> 00:24:23,740
+depending on what
+you want to do.
+
+495
+00:24:23,740 --> 00:24:28,090
+On the one hand, this is an
+unconstrained blue terminator.
+
+496
+00:24:28,090 --> 00:24:30,400
+All the vertices are
+happy even locally.
+
+497
+00:24:30,400 --> 00:24:34,800
+And so this edge
+can go up or down.
+
+498
+00:24:34,800 --> 00:24:36,500
+I think that's pretty clear.
+
+499
+00:24:36,500 --> 00:24:38,650
+This guy already has
+two incoming edges.
+
+500
+00:24:38,650 --> 00:24:40,890
+Everybody has at least one.
+
+501
+00:24:40,890 --> 00:24:43,322
+And the point here is
+it's three regular.
+
+502
+00:24:43,322 --> 00:24:45,030
+So this is actually
+a kind of classic way
+
+503
+00:24:45,030 --> 00:24:49,370
+to make a three regular graph
+out of a degree 1 vertex.
+
+504
+00:24:49,370 --> 00:24:52,530
+On the other hand, we can
+do the same thing with red.
+
+505
+00:24:52,530 --> 00:24:54,930
+And actually, the reason I
+wanted two incoming edges here
+
+506
+00:24:54,930 --> 00:24:56,513
+is when I recolor
+them red, that still
+
+507
+00:24:56,513 --> 00:24:58,040
+makes this vertex satisfied.
+
+508
+00:24:58,040 --> 00:24:59,679
+So this guy can go up or down.
+
+509
+00:24:59,679 --> 00:25:01,970
+Now you might say why do I
+care about a blue terminator
+
+510
+00:25:01,970 --> 00:25:04,011
+separate from a red
+terminator, because I already
+
+511
+00:25:04,011 --> 00:25:05,690
+have red to blue conversion.
+
+512
+00:25:05,690 --> 00:25:07,960
+Because red/blue
+conversion-- assume
+
+513
+00:25:07,960 --> 00:25:10,510
+that the number of red/blue
+conversions was even.
+
+514
+00:25:10,510 --> 00:25:12,950
+And this is how I'm
+going to make it even.
+
+515
+00:25:12,950 --> 00:25:17,100
+If it's not even, I'll take
+any of my degree 1 vertices
+
+516
+00:25:17,100 --> 00:25:20,180
+and add an extra red/blue
+conversion there.
+
+517
+00:25:20,180 --> 00:25:22,490
+Now it will be even,
+because it was odd before.
+
+518
+00:25:22,490 --> 00:25:24,410
+But I need either a
+red or blue terminator,
+
+519
+00:25:24,410 --> 00:25:26,460
+whatever I didn't have before.
+
+520
+00:25:26,460 --> 00:25:28,520
+So this is where we'll get that.
+
+521
+00:25:28,520 --> 00:25:30,310
+And it's easy to do.
+
+522
+00:25:30,310 --> 00:25:31,980
+In the middle we have
+a different thing.
+
+523
+00:25:31,980 --> 00:25:36,300
+This forces this edge
+to be pointed down.
+
+524
+00:25:36,300 --> 00:25:43,620
+That's useful in some
+scenarios for example.
+
+525
+00:25:43,620 --> 00:25:45,890
+So back to this picture.
+
+526
+00:25:45,890 --> 00:25:48,610
+One thing I've done is we
+have these floating edges
+
+527
+00:25:48,610 --> 00:25:50,390
+that we want to throw away.
+
+528
+00:25:50,390 --> 00:25:53,339
+We can just use a red terminator
+unconstrained for that.
+
+529
+00:25:53,339 --> 00:25:54,880
+So that guy can do
+whatever he wants.
+
+530
+00:25:54,880 --> 00:25:59,040
+That still lets you choose
+W or Wbar to be true.
+
+531
+00:25:59,040 --> 00:26:03,910
+If I shrink this picture a
+little bit more and put here,
+
+532
+00:26:03,910 --> 00:26:08,740
+this is I guess a
+free terminator.
+
+533
+00:26:08,740 --> 00:26:11,550
+I don't care whether
+this guy's used also.
+
+534
+00:26:11,550 --> 00:26:14,480
+But I would really like
+this edge to be directed up.
+
+535
+00:26:16,990 --> 00:26:18,530
+This is, of course,
+locally invalid.
+
+536
+00:26:18,530 --> 00:26:23,180
+You have to put in a satisfying
+assignment to make this go up.
+
+537
+00:26:23,180 --> 00:26:27,410
+So this is how we can
+prove that constraint graph
+
+538
+00:26:27,410 --> 00:26:31,540
+satisfiability, finding an
+orientation is NP complete
+
+539
+00:26:31,540 --> 00:26:35,570
+if we use that
+terminator on the top.
+
+540
+00:26:35,570 --> 00:26:37,630
+In the undirected
+form, this thing
+
+541
+00:26:37,630 --> 00:26:40,090
+will force this
+edge to be up, which
+
+542
+00:26:40,090 --> 00:26:42,060
+means it will force this
+thing to be satisfied,
+
+543
+00:26:42,060 --> 00:26:44,555
+or there won't be a
+valid orientation,
+
+544
+00:26:44,555 --> 00:26:45,930
+which means there's
+no satisfying
+
+545
+00:26:45,930 --> 00:26:47,370
+assignment to that formula.
+
+546
+00:26:47,370 --> 00:26:49,370
+So that's one way you
+could use the terminators.
+
+547
+00:26:49,370 --> 00:26:50,578
+We'll use them in other ways.
+
+548
+00:26:50,578 --> 00:26:53,330
+AUDIENCE: Can we just use a
+[INAUDIBLE] red terminator
+
+549
+00:26:53,330 --> 00:26:56,958
+instead of the red-- to
+do a red [INAUDIBLE],
+
+550
+00:26:56,958 --> 00:26:59,549
+instead of the slightly more
+complicated thing we actually
+
+551
+00:26:59,549 --> 00:27:00,049
+did?
+
+552
+00:27:00,049 --> 00:27:01,548
+AUDIENCE: [INAUDIBLE]
+red terminator
+
+553
+00:27:01,548 --> 00:27:04,785
+has a vertex with
+three red edges.
+
+554
+00:27:04,785 --> 00:27:05,660
+PROFESSOR: That's OK.
+
+555
+00:27:09,560 --> 00:27:10,760
+But maybe that's relevant.
+
+556
+00:27:10,760 --> 00:27:16,710
+So this is going
+to expand to this.
+
+557
+00:27:16,710 --> 00:27:19,210
+And that requires a
+red/blue conversion.
+
+558
+00:27:19,210 --> 00:27:19,910
+There we go.
+
+559
+00:27:19,910 --> 00:27:21,010
+That's why.
+
+560
+00:27:21,010 --> 00:27:24,525
+So we're actually already
+using a red/blue conversion
+
+561
+00:27:24,525 --> 00:27:32,000
+of this style in here.
+
+562
+00:27:32,000 --> 00:27:32,500
+All right.
+
+563
+00:27:32,500 --> 00:27:36,300
+Let's move on to more
+interesting things.
+
+564
+00:27:36,300 --> 00:27:39,540
+So that was constraint graph
+satisfactions NP complete.
+
+565
+00:27:39,540 --> 00:27:43,500
+Let's go to the reconfiguration
+problems being PSPACE complete.
+
+566
+00:27:43,500 --> 00:27:52,050
+So now I want to do a sequence
+of moves and flip one edge,
+
+567
+00:27:52,050 --> 00:27:54,490
+or reach a desired
+configuration.
+
+568
+00:27:54,490 --> 00:27:57,080
+We'll start with just
+flipping one edge.
+
+569
+00:27:57,080 --> 00:27:59,130
+We're going to follow the
+same kind of prototype
+
+570
+00:27:59,130 --> 00:28:03,220
+that we saw last class, with
+[? Viglietta's ?] Proof, where
+
+571
+00:28:03,220 --> 00:28:06,320
+we're going to reduce from QSAT.
+
+572
+00:28:06,320 --> 00:28:09,970
+So we have this alternating
+set of quantifiers, variables.
+
+573
+00:28:09,970 --> 00:28:12,440
+And then we have
+some Boolean formula.
+
+574
+00:28:12,440 --> 00:28:15,070
+We'll assume it's in CNF
+form, because we just
+
+575
+00:28:15,070 --> 00:28:18,090
+showed how to do CNF formulas.
+
+576
+00:28:18,090 --> 00:28:19,680
+And we're going to
+represent variables
+
+577
+00:28:19,680 --> 00:28:22,130
+by two rails, x and x bar.
+
+578
+00:28:22,130 --> 00:28:26,210
+And these things are essentially
+nested inside each other,
+
+579
+00:28:26,210 --> 00:28:27,950
+and there's some
+magic mechanisms
+
+580
+00:28:27,950 --> 00:28:29,030
+to glue them together.
+
+581
+00:28:29,030 --> 00:28:34,110
+So in particular, let's see.
+
+582
+00:28:34,110 --> 00:28:37,940
+At the end here, so
+suppose these variables,
+
+583
+00:28:37,940 --> 00:28:40,101
+the idea is that one of
+them will be pointing up
+
+584
+00:28:40,101 --> 00:28:41,600
+and the other will
+be pointing down.
+
+585
+00:28:41,600 --> 00:28:43,430
+That corresponds
+to x being true.
+
+586
+00:28:43,430 --> 00:28:46,440
+If y bar is pointing up
+and y is pointing down,
+
+587
+00:28:46,440 --> 00:28:47,880
+then y bar will be true.
+
+588
+00:28:47,880 --> 00:28:49,640
+In other words, y will be false.
+
+589
+00:28:49,640 --> 00:28:52,050
+So then this thing will
+do its computation.
+
+590
+00:28:52,050 --> 00:28:54,390
+And then the output
+wire is this one.
+
+591
+00:28:54,390 --> 00:28:57,450
+So we'll be pointing
+out of the CNF logic,
+
+592
+00:28:57,450 --> 00:29:00,680
+if and only if that formula
+without the quantifiers
+
+593
+00:29:00,680 --> 00:29:02,241
+was satisfied.
+
+594
+00:29:02,241 --> 00:29:02,740
+OK.
+
+595
+00:29:02,740 --> 00:29:05,110
+Now here we have an AND gate.
+
+596
+00:29:05,110 --> 00:29:08,590
+And we have a signal from
+this gadget saying basically,
+
+597
+00:29:08,590 --> 00:29:10,910
+all the variables are set.
+
+598
+00:29:10,910 --> 00:29:12,200
+And here it's called try out.
+
+599
+00:29:12,200 --> 00:29:13,850
+We'll see what that means.
+
+600
+00:29:13,850 --> 00:29:16,700
+Basically I want to check
+whether this thing is true.
+
+601
+00:29:16,700 --> 00:29:19,300
+And if the try out
+is pointing out,
+
+602
+00:29:19,300 --> 00:29:22,390
+and the satisfy thing
+is pointing out,
+
+603
+00:29:22,390 --> 00:29:25,880
+then this guy can
+point to the left.
+
+604
+00:29:25,880 --> 00:29:27,660
+And so that will
+tell this gadget
+
+605
+00:29:27,660 --> 00:29:29,800
+that yes, it is satisfied.
+
+606
+00:29:29,800 --> 00:29:33,950
+So when activated, and this
+thing has become satisfied,
+
+607
+00:29:33,950 --> 00:29:36,630
+then we will report
+back to that gadget.
+
+608
+00:29:36,630 --> 00:29:39,880
+In general, each of the
+quantifier gadgets--
+
+609
+00:29:39,880 --> 00:29:42,130
+this is an existential one,
+this is the universal one.
+
+610
+00:29:42,130 --> 00:29:44,910
+Don't look at them in
+too much detail yet.
+
+611
+00:29:44,910 --> 00:29:48,870
+But there will be one input
+here, which is a try in.
+
+612
+00:29:48,870 --> 00:29:51,770
+And there'll be an output,
+which is a try out, to say,
+
+613
+00:29:51,770 --> 00:29:54,200
+when I'm told by the previous
+gadget to do something,
+
+614
+00:29:54,200 --> 00:29:55,210
+I'll do something.
+
+615
+00:29:55,210 --> 00:29:57,530
+Then I'll tell the next
+gadget to do something.
+
+616
+00:29:57,530 --> 00:30:00,412
+And if that gadget reports
+back with a positive answer,
+
+617
+00:30:00,412 --> 00:30:02,620
+in this case, I just return
+that positive answer back
+
+618
+00:30:02,620 --> 00:30:03,330
+to my caller.
+
+619
+00:30:03,330 --> 00:30:06,550
+So this is the input
+and the output.
+
+620
+00:30:06,550 --> 00:30:07,900
+And same thing for universal.
+
+621
+00:30:07,900 --> 00:30:09,250
+It's going to have a try in.
+
+622
+00:30:09,250 --> 00:30:10,920
+It's going to
+activate a try out.
+
+623
+00:30:10,920 --> 00:30:13,140
+Then if it gets a satisfied
+end, stuff will happen.
+
+624
+00:30:13,140 --> 00:30:15,120
+And eventually we might
+output a satisfied out.
+
+625
+00:30:15,120 --> 00:30:16,870
+So these things are
+supposed to just chain
+
+626
+00:30:16,870 --> 00:30:18,650
+together left and right.
+
+627
+00:30:18,650 --> 00:30:21,080
+So let's look at each
+gadget individually,
+
+628
+00:30:21,080 --> 00:30:24,580
+and in particular, you will
+see this triangle pattern--
+
+629
+00:30:24,580 --> 00:30:29,170
+the blue, blue, red triangle--
+in a few different places.
+
+630
+00:30:29,170 --> 00:30:30,980
+That's a useful
+construction by itself.
+
+631
+00:30:30,980 --> 00:30:33,200
+Let's think about that first.
+
+632
+00:30:33,200 --> 00:30:35,170
+It's called a latch.
+
+633
+00:30:35,170 --> 00:30:37,930
+It's like a one-bit memory.
+
+634
+00:30:37,930 --> 00:30:39,920
+Currently the latch is locked.
+
+635
+00:30:39,920 --> 00:30:42,920
+When this edge out is
+pointing to the left,
+
+636
+00:30:42,920 --> 00:30:47,370
+then nothing over
+here can change.
+
+637
+00:30:47,370 --> 00:30:49,560
+There are actually two
+possible states here.
+
+638
+00:30:49,560 --> 00:30:52,950
+But if this is
+pointing out, this guy
+
+639
+00:30:52,950 --> 00:30:57,460
+can't flip, which means
+these two can't flip,
+
+640
+00:30:57,460 --> 00:31:00,180
+which means this one can't flip.
+
+641
+00:31:00,180 --> 00:31:00,910
+OK.
+
+642
+00:31:00,910 --> 00:31:02,840
+I guess this guy could reverse.
+
+643
+00:31:02,840 --> 00:31:04,870
+But that's all.
+
+644
+00:31:04,870 --> 00:31:08,410
+So this is in a state where
+A can output something,
+
+645
+00:31:08,410 --> 00:31:10,270
+but B cannot.
+
+646
+00:31:10,270 --> 00:31:12,690
+Now I can flip it to the
+other symmetric state,
+
+647
+00:31:12,690 --> 00:31:15,190
+where B can output
+something and A cannot.
+
+648
+00:31:15,190 --> 00:31:18,120
+But to do that, I first
+must unlock the gadget,
+
+649
+00:31:18,120 --> 00:31:21,050
+unlock the latch by
+flipping this edge.
+
+650
+00:31:21,050 --> 00:31:23,900
+If I can flip this edge,
+then everything becomes free.
+
+651
+00:31:23,900 --> 00:31:26,370
+Now I can flip this edge.
+
+652
+00:31:26,370 --> 00:31:28,480
+And then I can flip
+B actually now.
+
+653
+00:31:28,480 --> 00:31:31,660
+Both A and B can output, which
+is kind of a weird state.
+
+654
+00:31:31,660 --> 00:31:36,100
+But in particular, I
+can flip this edge.
+
+655
+00:31:36,100 --> 00:31:38,350
+And then maybe put A back.
+
+656
+00:31:38,350 --> 00:31:41,340
+That will let me flip this guy.
+
+657
+00:31:41,340 --> 00:31:43,790
+And now this guy's
+happy from this edge.
+
+658
+00:31:43,790 --> 00:31:48,155
+And so I can relock the
+gadget if I want to.
+
+659
+00:31:48,155 --> 00:31:49,470
+If I click hard enough.
+
+660
+00:31:52,520 --> 00:31:53,940
+So now we're back
+in a lock state.
+
+661
+00:31:53,940 --> 00:31:55,050
+And now B can output.
+
+662
+00:31:55,050 --> 00:31:56,340
+It could choose to not output.
+
+663
+00:31:56,340 --> 00:31:57,560
+But B can output.
+
+664
+00:31:57,560 --> 00:31:59,430
+A cannot.
+
+665
+00:31:59,430 --> 00:32:02,340
+So when the gadget
+is in a lock state,
+
+666
+00:32:02,340 --> 00:32:07,350
+we get at most one signal from
+A or B. And it can't change.
+
+667
+00:32:07,350 --> 00:32:10,702
+When we unlock, then we can do
+crazy stuff, have both of them
+
+668
+00:32:10,702 --> 00:32:11,410
+output, whatever.
+
+669
+00:32:11,410 --> 00:32:16,060
+But then when we relock, we know
+that only one of them is on.
+
+670
+00:32:16,060 --> 00:32:17,384
+And that's our one-bit memory.
+
+671
+00:32:17,384 --> 00:32:19,300
+At this point, it's a
+nondeterministic memory.
+
+672
+00:32:19,300 --> 00:32:21,860
+You can basically set it to
+a nondeterministic value,
+
+673
+00:32:21,860 --> 00:32:23,301
+and then lock it down.
+
+674
+00:32:23,301 --> 00:32:23,800
+OK.
+
+675
+00:32:23,800 --> 00:32:26,030
+This is great for
+existential quantifiers.
+
+676
+00:32:26,030 --> 00:32:28,620
+That's basically all we need
+for an existential quantifier.
+
+677
+00:32:28,620 --> 00:32:30,580
+When we're told do
+something, we're
+
+678
+00:32:30,580 --> 00:32:32,200
+going to convert
+that blue to a red.
+
+679
+00:32:40,140 --> 00:32:41,949
+So right now this
+vertex is happy,
+
+680
+00:32:41,949 --> 00:32:44,240
+because we haven't told the
+next gadget to do anything.
+
+681
+00:32:44,240 --> 00:32:47,790
+This edge is
+pointed to the left.
+
+682
+00:32:47,790 --> 00:32:50,180
+So this thing can go up or
+down, whatever it wants.
+
+683
+00:32:50,180 --> 00:32:53,780
+So basically we are free
+to unlock this and set it
+
+684
+00:32:53,780 --> 00:32:55,720
+to either value.
+
+685
+00:32:55,720 --> 00:32:58,890
+So where x is pointing out,
+or x bar is pointing out,
+
+686
+00:32:58,890 --> 00:32:59,980
+or neither.
+
+687
+00:32:59,980 --> 00:33:02,050
+But the direction of
+this edge will sort of
+
+688
+00:33:02,050 --> 00:33:05,030
+keep track of which
+thing is being set.
+
+689
+00:33:05,030 --> 00:33:08,580
+Then the next thing can activate
+only when this is pointing out,
+
+690
+00:33:08,580 --> 00:33:11,410
+which means the latch is locked.
+
+691
+00:33:11,410 --> 00:33:14,450
+So when we activate
+the next existential
+
+692
+00:33:14,450 --> 00:33:18,000
+or universal quantifier,
+or the overall formula,
+
+693
+00:33:18,000 --> 00:33:20,711
+we know both that
+we're told we're
+
+694
+00:33:20,711 --> 00:33:22,210
+activated from the
+left, which means
+
+695
+00:33:22,210 --> 00:33:23,626
+all the variables
+to the left have
+
+696
+00:33:23,626 --> 00:33:25,420
+been locked into their state.
+
+697
+00:33:25,420 --> 00:33:28,600
+And we know from this
+AND gate that this
+
+698
+00:33:28,600 --> 00:33:30,820
+has been locked into its state.
+
+699
+00:33:30,820 --> 00:33:34,170
+So it has only x or x bar set.
+
+700
+00:33:34,170 --> 00:33:35,174
+And then we can proceed.
+
+701
+00:33:35,174 --> 00:33:37,340
+And for existential quantifier,
+that's all you need.
+
+702
+00:33:37,340 --> 00:33:39,300
+That there's some
+value, some setting
+
+703
+00:33:39,300 --> 00:33:41,405
+for x, that satisfies the rest.
+
+704
+00:33:41,405 --> 00:33:43,780
+And so if you get satisfied
+from the rest of the formula,
+
+705
+00:33:43,780 --> 00:33:45,930
+you know you are satisfied.
+
+706
+00:33:45,930 --> 00:33:47,680
+And so here we're using
+the nondeterminism
+
+707
+00:33:47,680 --> 00:33:53,840
+of the player to make the right
+call whether to set x or x bar.
+
+708
+00:33:53,840 --> 00:33:55,590
+That's the easy case.
+
+709
+00:33:55,590 --> 00:33:58,580
+The harder case is the
+universal quantifier.
+
+710
+00:33:58,580 --> 00:34:01,240
+Here we actually
+use two latches.
+
+711
+00:34:01,240 --> 00:34:02,910
+And there's a bunch of lines.
+
+712
+00:34:08,110 --> 00:34:10,190
+So what's the idea?
+
+713
+00:34:10,190 --> 00:34:12,679
+This is viewed as
+a split gadget.
+
+714
+00:34:12,679 --> 00:34:18,440
+So if we activate here,
+we can do that only
+
+715
+00:34:18,440 --> 00:34:20,340
+with this pointing down.
+
+716
+00:34:20,340 --> 00:34:20,840
+OK.
+
+717
+00:34:20,840 --> 00:34:21,880
+Fine.
+
+718
+00:34:21,880 --> 00:34:23,095
+And this points over.
+
+719
+00:34:28,469 --> 00:34:32,239
+For the computation to
+proceed, to do a try out,
+
+720
+00:34:32,239 --> 00:34:35,230
+we need that we are
+active from the try in.
+
+721
+00:34:35,230 --> 00:34:38,000
+But also, this latch
+must be locked.
+
+722
+00:34:38,000 --> 00:34:40,530
+This is the locking
+mechanism of that latch.
+
+723
+00:34:40,530 --> 00:34:43,100
+So when both of
+these are incoming,
+
+724
+00:34:43,100 --> 00:34:46,070
+then we will call the
+rest of the construction.
+
+725
+00:34:46,070 --> 00:34:49,679
+Again, this is just setting
+x or x bar, just like before.
+
+726
+00:34:49,679 --> 00:34:51,670
+But we're making
+copies of x and x bar.
+
+727
+00:34:51,670 --> 00:34:53,870
+So this is a split gadget.
+
+728
+00:34:53,870 --> 00:34:56,780
+If we have this set, we
+can set both this copy
+
+729
+00:34:56,780 --> 00:34:58,600
+of x and this copy of x.
+
+730
+00:34:58,600 --> 00:35:01,240
+If we have this one set, we
+can set this copy of x bar
+
+731
+00:35:01,240 --> 00:35:02,440
+and this copy of x bar.
+
+732
+00:35:02,440 --> 00:35:04,890
+So those are splits.
+
+733
+00:35:04,890 --> 00:35:05,440
+OK.
+
+734
+00:35:05,440 --> 00:35:09,450
+So now, what about this latch?
+
+735
+00:35:09,450 --> 00:35:14,020
+So this is the locking
+mechanism of that latch.
+
+736
+00:35:14,020 --> 00:35:19,820
+And what we're saying
+is that if x bar is set,
+
+737
+00:35:19,820 --> 00:35:28,100
+and the formula is satisfied,
+then we can unlock this latch
+
+738
+00:35:28,100 --> 00:35:29,980
+and set it to something.
+
+739
+00:35:29,980 --> 00:35:33,510
+Now we will want to set
+it so that this edge is
+
+740
+00:35:33,510 --> 00:35:34,220
+pointing down.
+
+741
+00:35:34,220 --> 00:35:39,740
+Initially this edge will
+probably be pointing out.
+
+742
+00:35:39,740 --> 00:35:41,130
+It doesn't have to, though.
+
+743
+00:35:41,130 --> 00:35:42,840
+So we don't really
+care about this edge.
+
+744
+00:35:42,840 --> 00:35:44,465
+It doesn't bias
+anything, this edge.
+
+745
+00:35:44,465 --> 00:35:46,590
+Because we're going to have
+a blue thing coming in,
+
+746
+00:35:46,590 --> 00:35:48,830
+so we don't really care
+which way this edge goes.
+
+747
+00:35:48,830 --> 00:35:50,470
+We really want to set this edge.
+
+748
+00:35:50,470 --> 00:35:52,240
+So if you're the
+nondeterministic player,
+
+749
+00:35:52,240 --> 00:35:55,400
+and suddenly this
+latch is open, you
+
+750
+00:35:55,400 --> 00:35:59,060
+will want to rearrange it
+so that it points down.
+
+751
+00:35:59,060 --> 00:35:59,560
+Why?
+
+752
+00:35:59,560 --> 00:36:01,143
+Because we want to
+satisfy this thing.
+
+753
+00:36:01,143 --> 00:36:03,850
+And this is an AND of
+this edge and that edge.
+
+754
+00:36:03,850 --> 00:36:07,200
+So what this is saying is
+we can turn this latch on,
+
+755
+00:36:07,200 --> 00:36:13,030
+meaning pointing down here, only
+if for the false setting of x,
+
+756
+00:36:13,030 --> 00:36:14,820
+we get a satisfied thing.
+
+757
+00:36:14,820 --> 00:36:16,820
+Cause here again, we're
+taking a satisfied thing
+
+758
+00:36:16,820 --> 00:36:18,460
+and splitting it into two parts.
+
+759
+00:36:18,460 --> 00:36:20,270
+And so satisfied in is true.
+
+760
+00:36:20,270 --> 00:36:21,790
+And x bar is true.
+
+761
+00:36:21,790 --> 00:36:26,280
+Then we can activate this
+latch and set to the new thing.
+
+762
+00:36:26,280 --> 00:36:27,170
+Now what do you do?
+
+763
+00:36:27,170 --> 00:36:31,130
+Now we're going
+to lock the latch,
+
+764
+00:36:31,130 --> 00:36:33,850
+and then roll back the
+entire computation.
+
+765
+00:36:33,850 --> 00:36:34,896
+Undo everything.
+
+766
+00:36:34,896 --> 00:36:36,520
+In this world,
+everything's reversible.
+
+767
+00:36:36,520 --> 00:36:39,071
+If you can reverse an edge,
+you can also put it back.
+
+768
+00:36:39,071 --> 00:36:39,570
+OK.
+
+769
+00:36:39,570 --> 00:36:41,180
+So now unwind everything.
+
+770
+00:36:41,180 --> 00:36:46,600
+Come back to this place and
+unlock this latch again.
+
+771
+00:36:46,600 --> 00:36:49,080
+And now set x to true
+instead of false.
+
+772
+00:36:52,710 --> 00:36:55,430
+And then once this is
+locked in the true state,
+
+773
+00:36:55,430 --> 00:36:57,204
+we can again activate tryout.
+
+774
+00:36:57,204 --> 00:36:59,120
+And now we're going to
+come back through here.
+
+775
+00:36:59,120 --> 00:37:00,411
+We don't care about this latch.
+
+776
+00:37:00,411 --> 00:37:02,000
+We're now going to
+use this vertex.
+
+777
+00:37:02,000 --> 00:37:04,580
+This is the AND of being
+satisfied and having
+
+778
+00:37:04,580 --> 00:37:05,680
+x being true.
+
+779
+00:37:05,680 --> 00:37:07,710
+So if we're satisfied
+with x true,
+
+780
+00:37:07,710 --> 00:37:10,360
+then this edge will be
+pointing to the left.
+
+781
+00:37:10,360 --> 00:37:12,510
+And if we already
+remembered the fact
+
+782
+00:37:12,510 --> 00:37:15,940
+that when we set x to
+false, we also got true,
+
+783
+00:37:15,940 --> 00:37:17,680
+then this AND will be true.
+
+784
+00:37:17,680 --> 00:37:19,060
+And then we can output that.
+
+785
+00:37:19,060 --> 00:37:20,110
+OK?
+
+786
+00:37:20,110 --> 00:37:23,636
+So this is why you don't want to
+reduce from QSAT all the time.
+
+787
+00:37:23,636 --> 00:37:25,760
+There are these annoying
+gadgets you have to build.
+
+788
+00:37:25,760 --> 00:37:27,490
+But now once you
+have this, we just
+
+789
+00:37:27,490 --> 00:37:29,938
+need to build ANDs and
+ORs, which is much easier.
+
+790
+00:37:29,938 --> 00:37:31,930
+AUDIENCE: If we
+have nondeterminism,
+
+791
+00:37:31,930 --> 00:37:34,500
+do we ever have to
+roll back things?
+
+792
+00:37:34,500 --> 00:37:36,217
+Can't we just set
+it to the right one?
+
+793
+00:37:36,217 --> 00:37:36,800
+PROFESSOR: No.
+
+794
+00:37:36,800 --> 00:37:38,717
+With the universal
+quantifier for all--
+
+795
+00:37:38,717 --> 00:37:39,550
+AUDIENCE: Oh, I see.
+
+796
+00:37:39,550 --> 00:37:41,300
+PROFESSOR: You need
+to check both of them.
+
+797
+00:37:41,300 --> 00:37:42,385
+Yeah.
+
+798
+00:37:42,385 --> 00:37:44,093
+AUDIENCE: Do you need
+to build crossovers
+
+799
+00:37:44,093 --> 00:37:45,240
+for this gadget to work?
+
+800
+00:37:45,240 --> 00:37:45,570
+PROFESSOR: Yes.
+
+801
+00:37:45,570 --> 00:37:46,611
+We would need crossovers.
+
+802
+00:37:46,611 --> 00:37:47,610
+But we'll get there.
+
+803
+00:37:47,610 --> 00:37:49,900
+So we're not yet
+doing planar graphs.
+
+804
+00:37:49,900 --> 00:37:54,070
+At this point, I think we have
+proved by this construction
+
+805
+00:37:54,070 --> 00:37:59,250
+that for nonplanar graphs,
+and only AND and OR gates,
+
+806
+00:37:59,250 --> 00:38:03,610
+we have PSPACE completeness
+of flipping one edge.
+
+807
+00:38:03,610 --> 00:38:04,110
+OK.
+
+808
+00:38:04,110 --> 00:38:09,460
+Now what if you wanted to
+go from one configuration
+
+809
+00:38:09,460 --> 00:38:11,070
+to another?
+
+810
+00:38:11,070 --> 00:38:16,340
+Then I could just
+put a latch here
+
+811
+00:38:16,340 --> 00:38:19,470
+that's unlocked by this thing.
+
+812
+00:38:19,470 --> 00:38:21,240
+The goal usually is,
+can I flip this edge.
+
+813
+00:38:21,240 --> 00:38:23,080
+Because if I can
+flip this edge, that
+
+814
+00:38:23,080 --> 00:38:25,740
+means the whole formula is true.
+
+815
+00:38:25,740 --> 00:38:27,550
+So all the quantifier
+constructions.
+
+816
+00:38:27,550 --> 00:38:31,100
+If I put a latch here, and
+I can activate the latch
+
+817
+00:38:31,100 --> 00:38:33,520
+and then change
+its state, then I
+
+818
+00:38:33,520 --> 00:38:35,585
+could roll back
+everything else, and I
+
+819
+00:38:35,585 --> 00:38:36,960
+would back to the
+original state,
+
+820
+00:38:36,960 --> 00:38:38,680
+except the latch is flipped.
+
+821
+00:38:38,680 --> 00:38:41,810
+And that will be possible
+only if the formula is true.
+
+822
+00:38:41,810 --> 00:38:44,390
+So that's how you can predict
+the entire configuration.
+
+823
+00:38:44,390 --> 00:38:46,490
+Nothing will have
+changed, except this one
+
+824
+00:38:46,490 --> 00:38:48,170
+edge, two edges.
+
+825
+00:38:48,170 --> 00:38:48,670
+Whatever.
+
+826
+00:38:51,612 --> 00:38:53,315
+So next question is planarity.
+
+827
+00:38:53,315 --> 00:38:57,430
+But for nonplanar
+graphs, we're good.
+
+828
+00:38:57,430 --> 00:38:59,200
+Here's a crossover.
+
+829
+00:38:59,200 --> 00:39:03,850
+It's a little bit annoying, I
+mean, to check all the cases.
+
+830
+00:39:03,850 --> 00:39:07,670
+But this is going to be
+a blue, blue crossover.
+
+831
+00:39:10,770 --> 00:39:14,820
+So basically these
+three edges will
+
+832
+00:39:14,820 --> 00:39:18,600
+be in the same
+orientation, roughly.
+
+833
+00:39:18,600 --> 00:39:21,457
+And these three
+edges will be-- I
+
+834
+00:39:21,457 --> 00:39:23,790
+mean I can't say they're
+always in the same orientation.
+
+835
+00:39:23,790 --> 00:39:26,680
+Because there's a
+transition period.
+
+836
+00:39:26,680 --> 00:39:28,700
+So I think they
+could both point in.
+
+837
+00:39:28,700 --> 00:39:30,970
+That's like an undirected edge.
+
+838
+00:39:30,970 --> 00:39:33,220
+But if this guy's
+pointing to the left,
+
+839
+00:39:33,220 --> 00:39:34,810
+then this guy must
+point to the left.
+
+840
+00:39:34,810 --> 00:39:35,190
+Why?
+
+841
+00:39:35,190 --> 00:39:36,650
+Cause this points to the
+left, and both of these
+
+842
+00:39:36,650 --> 00:39:37,840
+are pointing to the left.
+
+843
+00:39:37,840 --> 00:39:40,700
+This is pointing
+either up or down.
+
+844
+00:39:40,700 --> 00:39:42,425
+Let's say it's pointing up.
+
+845
+00:39:42,425 --> 00:39:44,550
+That will actually have to
+do with the other edges.
+
+846
+00:39:44,550 --> 00:39:46,280
+But if it's pointing
+up, and this
+
+847
+00:39:46,280 --> 00:39:51,220
+is pointing left-- oh, notice
+here I have a degree 4.
+
+848
+00:39:51,220 --> 00:39:52,350
+It's another gadget.
+
+849
+00:39:52,350 --> 00:39:53,920
+Please wait.
+
+850
+00:39:53,920 --> 00:39:55,400
+But this is the
+usual constraint.
+
+851
+00:39:55,400 --> 00:39:57,880
+There must be a weight of
+at least two coming in.
+
+852
+00:39:57,880 --> 00:40:02,270
+And so if both of these are out,
+then both of these must be in.
+
+853
+00:40:02,270 --> 00:40:06,320
+If this is this way, then
+this must be to the left.
+
+854
+00:40:06,320 --> 00:40:08,840
+So if this is to the left,
+then this must be to the left.
+
+855
+00:40:08,840 --> 00:40:11,290
+And by the same argument,
+this must be to the left.
+
+856
+00:40:11,290 --> 00:40:13,260
+So that's how you
+transition horizontally.
+
+857
+00:40:13,260 --> 00:40:14,850
+And it's a similar
+thing vertically.
+
+858
+00:40:14,850 --> 00:40:17,590
+If this is pointing
+up, then both of these
+
+859
+00:40:17,590 --> 00:40:20,890
+must be pointing
+into that vertex.
+
+860
+00:40:20,890 --> 00:40:25,019
+And this guy's either
+pointing left or right.
+
+861
+00:40:25,019 --> 00:40:26,310
+That depends on the other edge.
+
+862
+00:40:26,310 --> 00:40:28,639
+But let's say it's
+pointing to the right.
+
+863
+00:40:28,639 --> 00:40:30,680
+So if that's pointing to
+the right, both of these
+
+864
+00:40:30,680 --> 00:40:34,090
+are pointing to the
+right, which means
+
+865
+00:40:34,090 --> 00:40:37,020
+both of these are pointing
+out, which means both of these
+
+866
+00:40:37,020 --> 00:40:38,960
+must be pointing in.
+
+867
+00:40:38,960 --> 00:40:42,820
+And so if this is pointing
+out, this is pointing up.
+
+868
+00:40:42,820 --> 00:40:43,620
+I mean, it depends.
+
+869
+00:40:43,620 --> 00:40:45,440
+If this is pointing up,
+then this is pointing up.
+
+870
+00:40:45,440 --> 00:40:46,480
+Or this is pointing up.
+
+871
+00:40:46,480 --> 00:40:48,740
+One of them, depending on
+the state of this edge.
+
+872
+00:40:48,740 --> 00:40:51,640
+But then you can use that again
+to prove this is pointing up.
+
+873
+00:40:51,640 --> 00:40:55,530
+So it could be they're both
+pointing in here or here.
+
+874
+00:40:55,530 --> 00:40:57,530
+But that's like an
+undirected edge.
+
+875
+00:40:57,530 --> 00:40:59,830
+And so if you believe in
+asynchronous constraint logic,
+
+876
+00:40:59,830 --> 00:41:03,140
+this is simulating
+the crossover.
+
+877
+00:41:03,140 --> 00:41:08,270
+So except we have degree 4
+red, red, red, red vertices.
+
+878
+00:41:08,270 --> 00:41:15,180
+So we need one more
+gadget, which is this one.
+
+879
+00:41:15,180 --> 00:41:17,060
+This essentially
+simulates, of course,
+
+880
+00:41:17,060 --> 00:41:21,087
+the edges here are blue.
+
+881
+00:41:21,087 --> 00:41:22,670
+That's why I've drawn
+off to the side.
+
+882
+00:41:22,670 --> 00:41:24,336
+Now here we have to
+be a little careful,
+
+883
+00:41:24,336 --> 00:41:26,690
+because we need that the
+red/blue transitions do not
+
+884
+00:41:26,690 --> 00:41:27,660
+introduce crossings.
+
+885
+00:41:27,660 --> 00:41:29,951
+Because if we did, we'd have
+to use a crossover gadget.
+
+886
+00:41:29,951 --> 00:41:32,400
+And we'd get in this
+infinite recursion.
+
+887
+00:41:32,400 --> 00:41:35,260
+But you can just stick this
+on here and turn it red,
+
+888
+00:41:35,260 --> 00:41:39,260
+and connect it to this guy,
+and similarly over here.
+
+889
+00:41:39,260 --> 00:41:43,009
+And you convert them all the
+red without any crossings.
+
+890
+00:41:43,009 --> 00:41:44,800
+And I think I won't go
+through this gadget,
+
+891
+00:41:44,800 --> 00:41:49,040
+but it simulates the
+constraint that at least two
+
+892
+00:41:49,040 --> 00:41:53,860
+of these edges must be
+pointing into the gadget.
+
+893
+00:41:53,860 --> 00:41:56,040
+Cool.
+
+894
+00:41:56,040 --> 00:41:58,570
+So that was a blue,
+blue crossover.
+
+895
+00:41:58,570 --> 00:42:00,150
+If you have a red,
+blue crossover,
+
+896
+00:42:00,150 --> 00:42:04,427
+or red, red crossover,
+again convert red to blue,
+
+897
+00:42:04,427 --> 00:42:05,260
+and then back again.
+
+898
+00:42:15,550 --> 00:42:16,620
+One more version.
+
+899
+00:42:16,620 --> 00:42:19,810
+So we just did planar
+graphs, or PSPACE complete.
+
+900
+00:42:19,810 --> 00:42:23,370
+If you draw your
+planar graph in a grid,
+
+901
+00:42:23,370 --> 00:42:25,410
+naturally you would
+also want the ability
+
+902
+00:42:25,410 --> 00:42:28,670
+to just take an edge and
+go left or make a turn.
+
+903
+00:42:28,670 --> 00:42:31,980
+So do we need turn gadgets
+and straight gadgets?
+
+904
+00:42:31,980 --> 00:42:33,000
+The answer is no.
+
+905
+00:42:33,000 --> 00:42:34,700
+We can use ANDs and ORs.
+
+906
+00:42:34,700 --> 00:42:38,610
+Actually we can just use ANDs
+to simulate wires and turns.
+
+907
+00:42:38,610 --> 00:42:43,300
+So suppose this is one of
+the gadgets that takes inputs
+
+908
+00:42:43,300 --> 00:42:46,320
+from two adjacent sides
+and outputs on one
+
+909
+00:42:46,320 --> 00:42:48,830
+of the other adjacent sides.
+
+910
+00:42:48,830 --> 00:42:51,600
+Then it's always going to
+look like this pattern,
+
+911
+00:42:51,600 --> 00:42:55,370
+all of the instances of the
+AND gate are rotations of that.
+
+912
+00:42:55,370 --> 00:42:58,810
+I think no reflections.
+
+913
+00:42:58,810 --> 00:43:02,770
+So first we build these fillers.
+
+914
+00:43:02,770 --> 00:43:06,810
+These fillers, I guess we'll
+give them some initial state
+
+915
+00:43:06,810 --> 00:43:11,740
+where we get to choose.
+
+916
+00:43:11,740 --> 00:43:17,420
+So maybe I think I want all
+these edges to be pointing out.
+
+917
+00:43:17,420 --> 00:43:19,720
+So I'm going to set
+everything to 0.
+
+918
+00:43:19,720 --> 00:43:22,610
+It's going to be
+0 and 0 equals 0.
+
+919
+00:43:22,610 --> 00:43:24,820
+So that's locally
+consistent within the cycle.
+
+920
+00:43:24,820 --> 00:43:26,820
+And it means that this
+edge is free to point out
+
+921
+00:43:26,820 --> 00:43:29,540
+if it wants to.
+
+922
+00:43:29,540 --> 00:43:33,776
+So in particular, I guess I want
+these four wires to be zeroes.
+
+923
+00:43:33,776 --> 00:43:35,150
+And so then this
+one could be 01,
+
+924
+00:43:35,150 --> 00:43:37,670
+and still consistent
+with the ANDs.
+
+925
+00:43:37,670 --> 00:43:39,830
+And so that means when
+I put that box here,
+
+926
+00:43:39,830 --> 00:43:42,240
+this is one of those
+filler gadgets,
+
+927
+00:43:42,240 --> 00:43:46,130
+that I have one unit
+of flow-- because those
+
+928
+00:43:46,130 --> 00:43:48,130
+are red edges-- pointing out.
+
+929
+00:43:48,130 --> 00:43:51,980
+And so in particular here,
+if I have a unit here,
+
+930
+00:43:51,980 --> 00:43:54,580
+I get a free unit from the
+side, and therefore the AND
+
+931
+00:43:54,580 --> 00:43:57,550
+will be the same as the input.
+
+932
+00:43:57,550 --> 00:43:59,560
+So I put two by two blocks here.
+
+933
+00:43:59,560 --> 00:44:01,390
+I also have a
+similar two by three
+
+934
+00:44:01,390 --> 00:44:04,650
+block, which I put
+in these chunks.
+
+935
+00:44:04,650 --> 00:44:06,900
+And then this will just
+copy whatever value
+
+936
+00:44:06,900 --> 00:44:08,472
+is here, up there.
+
+937
+00:44:08,472 --> 00:44:09,930
+Again,
+nondeterministically, we can
+
+938
+00:44:09,930 --> 00:44:13,270
+have both of them pointing
+in, but this one can point out
+
+939
+00:44:13,270 --> 00:44:16,660
+only if this one can point in.
+
+940
+00:44:16,660 --> 00:44:19,560
+This can activate only
+if this can activate.
+
+941
+00:44:19,560 --> 00:44:20,390
+That's a straight.
+
+942
+00:44:20,390 --> 00:44:21,537
+Turn is similar.
+
+943
+00:44:21,537 --> 00:44:23,370
+And if you want to do
+an actual computation,
+
+944
+00:44:23,370 --> 00:44:25,600
+you put whatever gadget
+is you want to compute,
+
+945
+00:44:25,600 --> 00:44:28,950
+and use these to copy the data.
+
+946
+00:44:28,950 --> 00:44:30,162
+Question.
+
+947
+00:44:30,162 --> 00:44:31,106
+AUDIENCE: I'm sorry.
+
+948
+00:44:31,106 --> 00:44:32,500
+Do you have [INAUDIBLE]?
+
+949
+00:44:32,500 --> 00:44:33,000
+I'm sorry.
+
+950
+00:44:33,000 --> 00:44:35,460
+The square filler into the top
+right of the straight grid.
+
+951
+00:44:35,460 --> 00:44:35,960
+Yeah.
+
+952
+00:44:35,960 --> 00:44:38,100
+AUDIENCE: There's a
+terminator at the input--
+
+953
+00:44:38,100 --> 00:44:38,300
+PROFESSOR: Oh.
+
+954
+00:44:38,300 --> 00:44:40,080
+You mean there's an
+edge here which doesn't
+
+955
+00:44:40,080 --> 00:44:41,163
+have anything on the side.
+
+956
+00:44:41,163 --> 00:44:41,731
+That's true.
+
+957
+00:44:41,731 --> 00:44:42,230
+Yes.
+
+958
+00:44:42,230 --> 00:44:43,940
+So that's this little thing.
+
+959
+00:44:43,940 --> 00:44:47,840
+So in this particular world,
+this won't work for all proofs,
+
+960
+00:44:47,840 --> 00:44:50,410
+but it's sort of an example
+of what you could do.
+
+961
+00:44:50,410 --> 00:44:53,310
+There needs to be an input
+here which you ignore.
+
+962
+00:44:53,310 --> 00:44:55,864
+So it's like a degree 1 vertex.
+
+963
+00:44:55,864 --> 00:44:56,530
+AUDIENCE: Right.
+
+964
+00:44:56,530 --> 00:44:59,729
+And then we can [INAUDIBLE]
+everything's OK.
+
+965
+00:44:59,729 --> 00:45:01,940
+PROFESSOR: I mean,
+the point is you
+
+966
+00:45:01,940 --> 00:45:03,550
+have to only build
+one gadget-- or two
+
+967
+00:45:03,550 --> 00:45:04,827
+gadgets, the AND and the OR.
+
+968
+00:45:04,827 --> 00:45:07,160
+But it has to have this feature
+that when you stick them
+
+969
+00:45:07,160 --> 00:45:12,280
+on the-- you stick
+an input to this gate
+
+970
+00:45:12,280 --> 00:45:16,060
+into a non-used neighboring
+side from this gate,
+
+971
+00:45:16,060 --> 00:45:17,570
+then it just works.
+
+972
+00:45:17,570 --> 00:45:20,110
+So we'll see an example
+where that happens.
+
+973
+00:45:20,110 --> 00:45:20,610
+Yeah.
+
+974
+00:45:20,610 --> 00:45:22,050
+AUDIENCE: Can you turn right?
+
+975
+00:45:25,980 --> 00:45:28,750
+PROFESSOR: I'm
+guessing to turn right,
+
+976
+00:45:28,750 --> 00:45:31,800
+we might actually need the
+reflected form of the AND.
+
+977
+00:45:31,800 --> 00:45:34,670
+But most gadgets, if it works
+one way and you reflect it,
+
+978
+00:45:34,670 --> 00:45:35,620
+it also works.
+
+979
+00:45:35,620 --> 00:45:37,790
+So yeah.
+
+980
+00:45:37,790 --> 00:45:38,295
+Good.
+
+981
+00:45:38,295 --> 00:45:38,980
+One more.
+
+982
+00:45:38,980 --> 00:45:41,146
+AUDIENCE: Silly question
+about what nondeterministic
+
+983
+00:45:41,146 --> 00:45:42,350
+means in this case.
+
+984
+00:45:42,350 --> 00:45:44,870
+Since we've been using
+nondeterministic to mean
+
+985
+00:45:44,870 --> 00:45:45,875
+you can guess correctly.
+
+986
+00:45:45,875 --> 00:45:48,460
+And to mean that the [INAUDIBLE]
+aren't being reflected.
+
+987
+00:45:48,460 --> 00:45:50,355
+So what exactly does it mean?
+
+988
+00:45:50,355 --> 00:45:51,980
+PROFESSOR: What was
+the second version?
+
+989
+00:45:51,980 --> 00:45:52,710
+The edges--
+
+990
+00:45:52,710 --> 00:45:55,057
+AUDIENCE: About the edges
+taking a while to transfer.
+
+991
+00:45:55,057 --> 00:45:55,640
+PROFESSOR: Oh.
+
+992
+00:45:55,640 --> 00:45:56,890
+No sir, that was asynchronous.
+
+993
+00:45:56,890 --> 00:45:59,599
+Asynchronous is that
+they take awhile.
+
+994
+00:45:59,599 --> 00:46:01,265
+Nondeterministic is
+that the player gets
+
+995
+00:46:01,265 --> 00:46:02,880
+to choose which edge to flip.
+
+996
+00:46:02,880 --> 00:46:04,310
+They're related.
+
+997
+00:46:04,310 --> 00:46:06,370
+I mean, asynchrony
+kind of comes out
+
+998
+00:46:06,370 --> 00:46:09,656
+of this form of
+nondeterminism that we have.
+
+999
+00:46:09,656 --> 00:46:10,780
+But they don't have to be.
+
+1000
+00:46:10,780 --> 00:46:12,280
+The way I originally
+set the models,
+
+1001
+00:46:12,280 --> 00:46:14,880
+when you flip an
+edge instantaneously.
+
+1002
+00:46:14,880 --> 00:46:18,520
+In both the gadgets that we
+build, like the actual AND
+
+1003
+00:46:18,520 --> 00:46:20,789
+and OR gates we build
+for real problems,
+
+1004
+00:46:20,789 --> 00:46:22,580
+they will actually take
+awhile to activate.
+
+1005
+00:46:22,580 --> 00:46:24,490
+You'll like pull some
+things in, and stuff
+
+1006
+00:46:24,490 --> 00:46:26,940
+happens before you can
+pull some things out.
+
+1007
+00:46:26,940 --> 00:46:31,649
+So we will naturally
+get asynchrony.
+
+1008
+00:46:31,649 --> 00:46:34,190
+The way is originally set it
+up, it was just nondeterministic
+
+1009
+00:46:34,190 --> 00:46:36,700
+and having instantaneous flips.
+
+1010
+00:46:36,700 --> 00:46:38,360
+But they're the
+same, so you don't
+
+1011
+00:46:38,360 --> 00:46:41,420
+have to worry too much
+about that distinction.
+
+1012
+00:46:41,420 --> 00:46:43,770
+OK.
+
+1013
+00:46:43,770 --> 00:46:50,780
+One more gadget before I
+go to actual reductions.
+
+1014
+00:46:50,780 --> 00:46:53,992
+And this is the definition
+of a protected OR.
+
+1015
+00:46:53,992 --> 00:46:57,150
+I call it protector OR.
+
+1016
+00:46:57,150 --> 00:46:58,950
+Cause more ORs is better.
+
+1017
+00:46:58,950 --> 00:47:02,296
+But protected OR
+is the proper name.
+
+1018
+00:47:05,490 --> 00:47:09,100
+Protected OR gadget
+looks like an OR gadget.
+
+1019
+00:47:09,100 --> 00:47:18,550
+So we're going to have
+two inputs, one output.
+
+1020
+00:47:18,550 --> 00:47:21,530
+And these are going to be
+labeled which are which.
+
+1021
+00:47:21,530 --> 00:47:28,880
+I want that at most one
+input is active at any time.
+
+1022
+00:47:33,190 --> 00:47:37,310
+What I mean here
+is that if I ever
+
+1023
+00:47:37,310 --> 00:47:39,820
+have the state where
+both of these are active,
+
+1024
+00:47:39,820 --> 00:47:42,440
+then the entire
+universe explodes.
+
+1025
+00:47:42,440 --> 00:47:43,705
+And I give no guarantees.
+
+1026
+00:47:43,705 --> 00:47:45,330
+I mean, not only does
+this gadget fail,
+
+1027
+00:47:45,330 --> 00:47:48,740
+but all gadgets everywhere
+could self-destruct.
+
+1028
+00:47:48,740 --> 00:47:50,990
+Because we're going to
+build some gadgets where
+
+1029
+00:47:50,990 --> 00:47:52,930
+you really only want
+one of these two things
+
+1030
+00:47:52,930 --> 00:47:53,970
+to be pointing in.
+
+1031
+00:47:53,970 --> 00:47:57,270
+If they both point
+in, then the framework
+
+1032
+00:47:57,270 --> 00:48:00,464
+that separates
+gadgets may shatter.
+
+1033
+00:48:00,464 --> 00:48:02,130
+And then gadgets are
+no longer separate.
+
+1034
+00:48:02,130 --> 00:48:03,255
+You can't argue about them.
+
+1035
+00:48:03,255 --> 00:48:06,690
+And literally
+everything falls apart.
+
+1036
+00:48:06,690 --> 00:48:09,130
+So we'll see some
+examples of that,
+
+1037
+00:48:09,130 --> 00:48:11,580
+but this sort of foreshadowing.
+
+1038
+00:48:11,580 --> 00:48:15,040
+It turns out we can set
+things up so that you never
+
+1039
+00:48:15,040 --> 00:48:18,130
+have both things
+pointing into an OR.
+
+1040
+00:48:18,130 --> 00:48:21,910
+Because we can build a fully
+fledged OR out of those
+
+1041
+00:48:21,910 --> 00:48:23,550
+protected ORs.
+
+1042
+00:48:23,550 --> 00:48:30,900
+So this gadget acts as an OR
+where these two are the input
+
+1043
+00:48:30,900 --> 00:48:33,340
+say, and that's the output.
+
+1044
+00:48:33,340 --> 00:48:36,270
+But it does so only
+using protected ORs.
+
+1045
+00:48:36,270 --> 00:48:38,219
+Now it uses a blue
+to red transition.
+
+1046
+00:48:38,219 --> 00:48:40,510
+So we have to again inspect
+the blue to red transition.
+
+1047
+00:48:40,510 --> 00:48:43,150
+This is where I wanted
+that this is rigid,
+
+1048
+00:48:43,150 --> 00:48:45,560
+that you cannot make
+any moves in here,
+
+1049
+00:48:45,560 --> 00:48:49,186
+because that makes me
+happy about this OR.
+
+1050
+00:48:49,186 --> 00:48:50,685
+This is the only
+OR in this picture.
+
+1051
+00:48:50,685 --> 00:48:53,400
+And I might worry, maybe I
+could flip one of these edges,
+
+1052
+00:48:53,400 --> 00:48:55,490
+and then I have two
+inputs activated.
+
+1053
+00:48:55,490 --> 00:48:58,530
+But because no edges can
+flip from this state,
+
+1054
+00:48:58,530 --> 00:49:02,360
+in fact, this guy will
+only have one pointing in,
+
+1055
+00:49:02,360 --> 00:49:05,080
+so no matter how you label
+the inputs and outputs,
+
+1056
+00:49:05,080 --> 00:49:07,800
+it is a protected OR.
+
+1057
+00:49:07,800 --> 00:49:09,520
+OK.
+
+1058
+00:49:09,520 --> 00:49:11,350
+So that part is fine.
+
+1059
+00:49:11,350 --> 00:49:14,114
+And now this simulates an OR.
+
+1060
+00:49:14,114 --> 00:49:15,280
+Do we want to go through it?
+
+1061
+00:49:17,840 --> 00:49:18,340
+Hm?
+
+1062
+00:49:18,340 --> 00:49:20,089
+AUDIENCE: Which of the
+inputs [INAUDIBLE]?
+
+1063
+00:49:20,089 --> 00:49:22,721
+PROFESSOR: So this is one input,
+and this is the other input.
+
+1064
+00:49:22,721 --> 00:49:23,220
+Oh.
+
+1065
+00:49:23,220 --> 00:49:23,820
+For these ORs?
+
+1066
+00:49:23,820 --> 00:49:25,070
+AUDIENCE: Yeah.
+
+1067
+00:49:25,070 --> 00:49:28,942
+PROFESSOR: I'm going to
+guess-- well, let's find out.
+
+1068
+00:49:28,942 --> 00:49:29,650
+I don't remember.
+
+1069
+00:49:29,650 --> 00:49:33,340
+So let's say this
+guy is pointing in.
+
+1070
+00:49:33,340 --> 00:49:39,430
+So if this is also pointing
+down, then this can point up.
+
+1071
+00:49:39,430 --> 00:49:40,890
+But if this is
+pointing down, this
+
+1072
+00:49:40,890 --> 00:49:45,830
+must point up and to the left
+in order to satisfy this node.
+
+1073
+00:49:45,830 --> 00:49:49,080
+So if this is coming in, this
+one must be pointing out.
+
+1074
+00:49:49,080 --> 00:49:50,730
+So I'm going to say
+that's the output.
+
+1075
+00:49:50,730 --> 00:49:52,740
+These are the two inputs.
+
+1076
+00:49:52,740 --> 00:49:55,860
+I'm guessing
+symmetrically, yeah.
+
+1077
+00:49:55,860 --> 00:50:01,470
+If this one is pointing
+into the vertex,
+
+1078
+00:50:01,470 --> 00:50:03,340
+then that must mean
+both of these red guys
+
+1079
+00:50:03,340 --> 00:50:04,840
+are pointing into
+that vertex, which
+
+1080
+00:50:04,840 --> 00:50:07,105
+means this guy must be
+pointing out of that vertex.
+
+1081
+00:50:07,105 --> 00:50:10,400
+So if this one is active for
+this guy, this guy's inactive.
+
+1082
+00:50:10,400 --> 00:50:11,750
+And vice versa.
+
+1083
+00:50:11,750 --> 00:50:14,330
+So this is protected
+from those two.
+
+1084
+00:50:14,330 --> 00:50:16,780
+Similarly over here.
+
+1085
+00:50:16,780 --> 00:50:21,200
+But if this is active, and this
+is down, and this is active,
+
+1086
+00:50:21,200 --> 00:50:27,490
+and this is pointing up, then in
+particular, this can point out.
+
+1087
+00:50:27,490 --> 00:50:31,100
+And this guy's satisfied.
+
+1088
+00:50:31,100 --> 00:50:33,020
+So then this edge can
+point to the right.
+
+1089
+00:50:33,020 --> 00:50:34,721
+And then this one
+can point up here.
+
+1090
+00:50:34,721 --> 00:50:35,720
+And this can point here.
+
+1091
+00:50:35,720 --> 00:50:38,270
+So the AND actually
+outputs a yes.
+
+1092
+00:50:38,270 --> 00:50:41,610
+So if the left is activated,
+then C can activate as well,
+
+1093
+00:50:41,610 --> 00:50:42,730
+and symmetrically.
+
+1094
+00:50:42,730 --> 00:50:44,980
+So this simulates an
+OR, but it's guaranteed
+
+1095
+00:50:44,980 --> 00:50:46,930
+that these two guys are happy.
+
+1096
+00:50:46,930 --> 00:50:47,584
+Yeah.
+
+1097
+00:50:47,584 --> 00:50:48,250
+AUDIENCE: Sorry.
+
+1098
+00:50:48,250 --> 00:50:49,290
+I just want to understand
+the motivation for this,
+
+1099
+00:50:49,290 --> 00:50:51,225
+just to make our
+gadget-building lives easier?
+
+1100
+00:50:51,225 --> 00:50:51,850
+PROFESSOR: Yes.
+
+1101
+00:50:51,850 --> 00:50:54,340
+This is just to make our
+gadget-building lives easier.
+
+1102
+00:50:54,340 --> 00:50:58,510
+It's so that I can now say
+that deciding whether a planar
+
+1103
+00:50:58,510 --> 00:51:03,300
+graph can do a sequence
+of moves and flip an edge
+
+1104
+00:51:03,300 --> 00:51:09,800
+is hard for AND
+and protected OR.
+
+1105
+00:51:09,800 --> 00:51:11,210
+So that's a stronger statement.
+
+1106
+00:51:11,210 --> 00:51:13,470
+Now I only need to
+build a protected OR.
+
+1107
+00:51:13,470 --> 00:51:17,140
+In general, we want to reduce
+the complexity of our gadgets
+
+1108
+00:51:17,140 --> 00:51:20,210
+as much as possible for the
+hard part, which is actually
+
+1109
+00:51:20,210 --> 00:51:21,630
+analyzing a real problem.
+
+1110
+00:51:21,630 --> 00:51:22,130
+Yeah.
+
+1111
+00:51:22,130 --> 00:51:22,370
+AUDIENCE: Wait.
+
+1112
+00:51:22,370 --> 00:51:24,239
+So is protected OR
+easier to build than OR?
+
+1113
+00:51:24,239 --> 00:51:26,030
+PROFESSOR: Protected
+OR is easier to build,
+
+1114
+00:51:26,030 --> 00:51:29,440
+because you don't need
+to worry about the case
+
+1115
+00:51:29,440 --> 00:51:31,233
+for both inputs are active.
+
+1116
+00:51:31,233 --> 00:51:31,775
+AUDIENCE: OK.
+
+1117
+00:51:31,775 --> 00:51:33,524
+PROFESSOR: So you could
+have any behavior.
+
+1118
+00:51:33,524 --> 00:51:35,190
+You might have the
+correct OR behavior,
+
+1119
+00:51:35,190 --> 00:51:37,240
+or you could have any
+other behavior, including
+
+1120
+00:51:37,240 --> 00:51:39,610
+self-destruction.
+
+1121
+00:51:39,610 --> 00:51:42,190
+Or universe
+destruction, I guess.
+
+1122
+00:51:42,190 --> 00:51:44,295
+So it could only
+be easier to build.
+
+1123
+00:51:44,295 --> 00:51:45,920
+AUDIENCE: This is
+for future reduction?
+
+1124
+00:51:45,920 --> 00:51:46,550
+PROFESSOR: Yes.
+
+1125
+00:51:46,550 --> 00:51:48,300
+In fact, the very next
+reduction, I think.
+
+1126
+00:51:48,300 --> 00:51:49,480
+Or the one after that.
+
+1127
+00:51:49,480 --> 00:51:50,261
+Close enough.
+
+1128
+00:51:50,261 --> 00:51:50,760
+All right.
+
+1129
+00:51:50,760 --> 00:51:53,910
+Let's do real
+reduction, shall we?
+
+1130
+00:51:53,910 --> 00:51:56,790
+So all of this stuff
+that you just saw
+
+1131
+00:51:56,790 --> 00:51:59,010
+was built for one problem
+initially, and then
+
+1132
+00:51:59,010 --> 00:52:01,190
+happened to be useful
+for a lot more.
+
+1133
+00:52:01,190 --> 00:52:03,500
+And that's sliding
+block puzzles.
+
+1134
+00:52:03,500 --> 00:52:06,390
+So these are a bunch of examples
+of sliding block puzzles.
+
+1135
+00:52:06,390 --> 00:52:11,130
+You have blocks-- let's
+say typically rectangles--
+
+1136
+00:52:11,130 --> 00:52:14,050
+and you're an
+agent from outside.
+
+1137
+00:52:14,050 --> 00:52:16,320
+You can pick any block
+you want and slide it
+
+1138
+00:52:16,320 --> 00:52:17,740
+along some non-colliding path.
+
+1139
+00:52:17,740 --> 00:52:20,156
+So I can move this over, and
+then move this over, and then
+
+1140
+00:52:20,156 --> 00:52:21,150
+move this guy down.
+
+1141
+00:52:21,150 --> 00:52:24,540
+In this case, the goal is
+to move this block to here.
+
+1142
+00:52:24,540 --> 00:52:27,750
+Because there's a-- well, I
+think that's just the goal.
+
+1143
+00:52:27,750 --> 00:52:30,500
+These puzzles go
+back to the '20s.
+
+1144
+00:52:30,500 --> 00:52:33,190
+Martin Gardner wrote about them.
+
+1145
+00:52:33,190 --> 00:52:36,120
+And in his article, called
+"Sliding-Block Puzzles,"
+
+1146
+00:52:36,120 --> 00:52:39,860
+he says these puzzles are
+in want of a general theory.
+
+1147
+00:52:39,860 --> 00:52:42,480
+And there is no general
+theory because they're PSPACE
+
+1148
+00:52:42,480 --> 00:52:42,980
+complete.
+
+1149
+00:52:42,980 --> 00:52:45,140
+There's no way to easily
+tell whether a puzzle's going
+
+1150
+00:52:45,140 --> 00:52:47,598
+to be solvable or not, which
+is annoying for puzzle design,
+
+1151
+00:52:47,598 --> 00:52:49,052
+but there you go.
+
+1152
+00:52:49,052 --> 00:52:51,260
+Here's an actual instance
+of the puzzle I showed you.
+
+1153
+00:52:51,260 --> 00:52:53,080
+Dad's Puzzle, where
+you take this one.
+
+1154
+00:52:53,080 --> 00:52:54,413
+You're supposed to move it here.
+
+1155
+00:52:54,413 --> 00:52:56,640
+This optimal solution
+has 83 moves.
+
+1156
+00:52:56,640 --> 00:52:58,080
+And in general,
+number of moves is
+
+1157
+00:52:58,080 --> 00:53:01,120
+going to grow exponentially,
+because the problem is PSPACE
+
+1158
+00:53:01,120 --> 00:53:03,352
+complete.
+
+1159
+00:53:03,352 --> 00:53:05,310
+And here's the proof that
+it's PSPACE complete,
+
+1160
+00:53:05,310 --> 00:53:06,350
+in two pictures.
+
+1161
+00:53:06,350 --> 00:53:09,710
+We need an AND gate
+and an OR gate.
+
+1162
+00:53:09,710 --> 00:53:14,810
+And the point is, so here the
+notion of edges being active
+
+1163
+00:53:14,810 --> 00:53:19,050
+is maybe reversed from
+what you think about.
+
+1164
+00:53:19,050 --> 00:53:20,800
+This edge is currently inactive.
+
+1165
+00:53:20,800 --> 00:53:24,350
+And if I slide this
+block out by one,
+
+1166
+00:53:24,350 --> 00:53:29,010
+that activates that edge,
+meaning it points up.
+
+1167
+00:53:29,010 --> 00:53:30,720
+So right now the edge
+is pointing down.
+
+1168
+00:53:30,720 --> 00:53:33,410
+If I move this block down,
+then the edge is pointing up.
+
+1169
+00:53:33,410 --> 00:53:34,542
+So it may seem backwards.
+
+1170
+00:53:34,542 --> 00:53:36,250
+But if you don't think
+about it too much,
+
+1171
+00:53:36,250 --> 00:53:37,540
+it's actually very clear.
+
+1172
+00:53:40,360 --> 00:53:44,470
+What I mean to say is that in
+order to move this block down
+
+1173
+00:53:44,470 --> 00:53:47,730
+by one, I must first move
+this block left by one,
+
+1174
+00:53:47,730 --> 00:53:50,470
+and this block down by one.
+
+1175
+00:53:50,470 --> 00:53:53,510
+So for this guy to be sucked
+in, this guy must be kicked out,
+
+1176
+00:53:53,510 --> 00:53:54,990
+and this guy must be kicked out.
+
+1177
+00:53:54,990 --> 00:53:56,900
+Because then I can slide
+this block over one.
+
+1178
+00:53:56,900 --> 00:53:59,090
+And then I can slide
+this block over and down.
+
+1179
+00:53:59,090 --> 00:54:01,260
+Then I can slide this
+down and then this down.
+
+1180
+00:54:01,260 --> 00:54:03,260
+With that sequence of
+moves, I can move this in.
+
+1181
+00:54:03,260 --> 00:54:05,450
+But I needed enough
+room to do it.
+
+1182
+00:54:05,450 --> 00:54:09,530
+So that's an AND gadget,
+an asynchronous world.
+
+1183
+00:54:09,530 --> 00:54:13,120
+And the OR gadget, this guy will
+be able to move in if and only
+
+1184
+00:54:13,120 --> 00:54:16,240
+if at least one of these guys
+moves out, because if say,
+
+1185
+00:54:16,240 --> 00:54:18,100
+this one moves out,
+this could move down,
+
+1186
+00:54:18,100 --> 00:54:20,670
+this guy can move over,
+and this can move down.
+
+1187
+00:54:20,670 --> 00:54:24,000
+And if the other one happened,
+this guy can move over too.
+
+1188
+00:54:24,000 --> 00:54:26,390
+And then this can move down.
+
+1189
+00:54:26,390 --> 00:54:29,624
+At this point we don't
+need a protected OR.
+
+1190
+00:54:29,624 --> 00:54:31,040
+Now you have to
+think a little bit
+
+1191
+00:54:31,040 --> 00:54:33,370
+about how these gadgets
+are fit together,
+
+1192
+00:54:33,370 --> 00:54:35,550
+but I guess that's
+the next slide.
+
+1193
+00:54:35,550 --> 00:54:40,840
+Before that, here we have 1
+by 2 blocks and 1 by 3 blocks.
+
+1194
+00:54:40,840 --> 00:54:42,960
+That's not satisfying
+because it's not tight.
+
+1195
+00:54:42,960 --> 00:54:44,750
+One by one blocks
+are polynomial,
+
+1196
+00:54:44,750 --> 00:54:46,780
+so we can't do
+one by one blocks.
+
+1197
+00:54:46,780 --> 00:54:50,870
+But it's turns out just
+1 by 2 blocks are enough.
+
+1198
+00:54:50,870 --> 00:54:54,880
+And these were found by a
+semi-automatic computer search.
+
+1199
+00:54:54,880 --> 00:54:58,530
+And I programmed it
+[INAUDIBLE] to analyze.
+
+1200
+00:54:58,530 --> 00:55:01,480
+In particular, these dots
+mean that there will always
+
+1201
+00:55:01,480 --> 00:55:06,990
+be one of the blocks
+overlapping that position.
+
+1202
+00:55:06,990 --> 00:55:09,910
+So like even if this
+guy moves out by one,
+
+1203
+00:55:09,910 --> 00:55:10,926
+this is still occupied.
+
+1204
+00:55:10,926 --> 00:55:13,050
+And so you could use that
+analysis to help cut down
+
+1205
+00:55:13,050 --> 00:55:17,420
+the search and see that actually
+all of the gray tiles cannot
+
+1206
+00:55:17,420 --> 00:55:23,260
+move at all, assuming that you
+don't have boundary effects.
+
+1207
+00:55:23,260 --> 00:55:25,491
+And only the yellow
+tiles can move.
+
+1208
+00:55:25,491 --> 00:55:27,490
+And that kind of highlights
+where the action is.
+
+1209
+00:55:27,490 --> 00:55:30,385
+Again, if this guy slides
+out, and this guy slides out,
+
+1210
+00:55:30,385 --> 00:55:31,760
+then you get this
+chain reaction.
+
+1211
+00:55:31,760 --> 00:55:32,980
+And this can move down.
+
+1212
+00:55:32,980 --> 00:55:36,850
+It needs two units of space.
+
+1213
+00:55:36,850 --> 00:55:38,570
+And then this guy can move down.
+
+1214
+00:55:38,570 --> 00:55:41,840
+And similarly, if this one moves
+out, or this one moves out,
+
+1215
+00:55:41,840 --> 00:55:44,410
+this guy has some freedom
+about how he moves.
+
+1216
+00:55:44,410 --> 00:55:46,330
+And there's a couple
+extra units to gain.
+
+1217
+00:55:46,330 --> 00:55:48,830
+Then this guy can move out.
+
+1218
+00:55:48,830 --> 00:55:51,734
+Now this is a protected
+OR, it turns out.
+
+1219
+00:55:51,734 --> 00:55:53,650
+It's not going to be
+obvious from the picture,
+
+1220
+00:55:53,650 --> 00:55:56,120
+but if both of these move
+out, the whole gadget
+
+1221
+00:55:56,120 --> 00:55:57,580
+can fall apart.
+
+1222
+00:55:57,580 --> 00:56:02,780
+So this is the genesis
+of protected ORs.
+
+1223
+00:56:02,780 --> 00:56:05,465
+But I won't go into
+the details here.
+
+1224
+00:56:05,465 --> 00:56:07,090
+I guess I don't have
+a figure about how
+
+1225
+00:56:07,090 --> 00:56:08,360
+the gadgets fit together.
+
+1226
+00:56:08,360 --> 00:56:11,940
+But essentially these
+corners interact.
+
+1227
+00:56:11,940 --> 00:56:14,930
+Because here we're vertical
+and here we're horizontal,
+
+1228
+00:56:14,930 --> 00:56:17,530
+you get a little nexus
+where nothing can move.
+
+1229
+00:56:17,530 --> 00:56:20,150
+So as long as the
+overall boundary
+
+1230
+00:56:20,150 --> 00:56:22,460
+is fixed-- the big
+rectangular box that we're
+
+1231
+00:56:22,460 --> 00:56:24,460
+fitting in-- you get
+this chain reaction
+
+1232
+00:56:24,460 --> 00:56:27,320
+that because this point
+is always occupied,
+
+1233
+00:56:27,320 --> 00:56:30,310
+even if this slides
+up or down one,
+
+1234
+00:56:30,310 --> 00:56:33,630
+you transfer the
+rigidity of this edge
+
+1235
+00:56:33,630 --> 00:56:34,980
+to the rigidity of this edge.
+
+1236
+00:56:34,980 --> 00:56:37,860
+And so you get that all of the
+gadget boundaries are rigid,
+
+1237
+00:56:37,860 --> 00:56:40,900
+and it's just the action
+in the yellow tiles,
+
+1238
+00:56:40,900 --> 00:56:43,830
+because of these
+dots, basically.
+
+1239
+00:56:43,830 --> 00:56:45,570
+And I think one thing
+that might go wrong
+
+1240
+00:56:45,570 --> 00:56:47,111
+here is if you could
+move out by two,
+
+1241
+00:56:47,111 --> 00:56:48,840
+then who knows what
+happens, right?
+
+1242
+00:56:48,840 --> 00:56:52,165
+Or is this guy could actually
+suck in an additional spot
+
+1243
+00:56:52,165 --> 00:56:54,270
+equivalently.
+
+1244
+00:56:54,270 --> 00:56:54,770
+OK.
+
+1245
+00:56:54,770 --> 00:56:58,500
+So sliding blocks.
+
+1246
+00:56:58,500 --> 00:57:01,300
+Now I said one by
+one blocks are easy.
+
+1247
+00:57:01,300 --> 00:57:04,850
+But here's a slight
+variation where it's hard.
+
+1248
+00:57:04,850 --> 00:57:08,690
+In a graph, suppose
+you have tokens.
+
+1249
+00:57:08,690 --> 00:57:12,080
+And a move is to move
+a token along an edge.
+
+1250
+00:57:12,080 --> 00:57:13,620
+But at all times
+the set of tokens
+
+1251
+00:57:13,620 --> 00:57:14,750
+must be an independent set.
+
+1252
+00:57:14,750 --> 00:57:17,700
+You can never have
+two adjacent tokens.
+
+1253
+00:57:17,700 --> 00:57:21,512
+So this is what you might call
+reconfiguration independence.
+
+1254
+00:57:21,512 --> 00:57:23,470
+And it's a reconfiguration
+problem in the sense
+
+1255
+00:57:23,470 --> 00:57:27,890
+that I'm interested
+in two solutions
+
+1256
+00:57:27,890 --> 00:57:31,177
+to the independence set problem
+of the same size, in fact.
+
+1257
+00:57:31,177 --> 00:57:33,760
+And I want to know, is there a
+sequence of moves that converts
+
+1258
+00:57:33,760 --> 00:57:36,780
+one solution to
+the other solution.
+
+1259
+00:57:36,780 --> 00:57:39,040
+In this case, by
+moving it into one
+
+1260
+00:57:39,040 --> 00:57:42,020
+of the vertices and
+independence set along an edge.
+
+1261
+00:57:42,020 --> 00:57:44,530
+And here you can very
+easily simulate an AND.
+
+1262
+00:57:44,530 --> 00:57:47,480
+This guy can move down
+only if this moves out
+
+1263
+00:57:47,480 --> 00:57:50,160
+and this moves out, because
+of these constraints.
+
+1264
+00:57:50,160 --> 00:57:52,670
+And an OR, this
+guy can move down
+
+1265
+00:57:52,670 --> 00:57:55,120
+only if this guy can
+move here or here.
+
+1266
+00:57:55,120 --> 00:57:57,000
+And to move here, this
+guy must move out.
+
+1267
+00:57:57,000 --> 00:57:59,495
+And to move here, this
+guy must move out.
+
+1268
+00:58:00,640 --> 00:58:02,540
+So you can see, you
+get really short proofs
+
+1269
+00:58:02,540 --> 00:58:03,982
+of PSPACE completeness.
+
+1270
+00:58:03,982 --> 00:58:04,940
+Just need two pictures.
+
+1271
+00:58:07,450 --> 00:58:14,390
+For fun and somewhat relevant
+in particular to your p-set.
+
+1272
+00:58:14,390 --> 00:58:18,520
+Let me mention another
+reconfiguration problem.
+
+1273
+00:58:18,520 --> 00:58:21,080
+I don't have a figure
+for it, but this
+
+1274
+00:58:21,080 --> 00:58:31,370
+is reconfiguration 3SAT.
+
+1275
+00:58:31,370 --> 00:58:35,220
+So suppose I give you two
+solutions to a 3SAT formula--
+
+1276
+00:58:35,220 --> 00:58:37,110
+two satisfying assignments.
+
+1277
+00:58:37,110 --> 00:58:39,570
+And my move is, flip a
+variable from true to false,
+
+1278
+00:58:39,570 --> 00:58:40,950
+or vice versa.
+
+1279
+00:58:40,950 --> 00:58:43,330
+I want at all times to be
+a satisfying assignment.
+
+1280
+00:58:43,330 --> 00:58:48,970
+I claim it is PSPACE complete to
+find a sequence of such moves.
+
+1281
+00:58:48,970 --> 00:58:53,840
+This is originally approved by
+[? Papadimetriou ?] and a bunch
+
+1282
+00:58:53,840 --> 00:58:56,420
+of other people--
+[? Gopala, ?] [? Colitis, ?]
+
+1283
+00:58:56,420 --> 00:58:58,830
+and [? Mineva. ?]
+
+1284
+00:58:58,830 --> 00:59:00,690
+But there's actually
+a really easy proof
+
+1285
+00:59:00,690 --> 00:59:04,340
+once you have nondeterministic
+constraint logic, which
+
+1286
+00:59:04,340 --> 00:59:09,850
+is-- so we're going to simulate
+nondeterministic constraint
+
+1287
+00:59:09,850 --> 00:59:12,290
+logic using this
+reconfiguration problem.
+
+1288
+00:59:12,290 --> 00:59:16,740
+So in order to represent an
+edge in our constraint graph,
+
+1289
+00:59:16,740 --> 00:59:18,400
+we will just make
+that into a variable.
+
+1290
+00:59:21,100 --> 00:59:23,987
+And true for that
+variable means the edge
+
+1291
+00:59:23,987 --> 00:59:26,070
+is pointed one way, and
+false means the other way.
+
+1292
+00:59:26,070 --> 00:59:30,450
+You just decide economical
+orientation for each edge.
+
+1293
+00:59:30,450 --> 00:59:45,700
+And then if we have an OR
+vertex-- call the edges x, y
+
+1294
+00:59:45,700 --> 00:59:51,740
+and z-- then the constraints
+are that x must be in,
+
+1295
+00:59:51,740 --> 00:59:56,380
+or y must be in,
+or z must be in.
+
+1296
+00:59:56,380 --> 00:59:58,320
+That's an OR constraint.
+
+1297
+00:59:58,320 --> 01:00:01,630
+And "in" here means I write x
+or x bar, according to whether
+
+1298
+01:00:01,630 --> 01:00:04,584
+in is the positive or the
+negative orientation--
+
+1299
+01:00:04,584 --> 01:00:06,000
+the true or the
+false orientation,
+
+1300
+01:00:06,000 --> 01:00:08,630
+however you decided this.
+
+1301
+01:00:08,630 --> 01:00:12,680
+So that's a 3SAT clause.
+
+1302
+01:00:12,680 --> 01:00:23,370
+And an AND vertex,
+say, x, y, and z,
+
+1303
+01:00:23,370 --> 01:00:28,010
+is going to be two
+constraints, two clauses.
+
+1304
+01:00:28,010 --> 01:00:31,660
+If x is out, then y must be in.
+
+1305
+01:00:31,660 --> 01:00:36,340
+And if x is out,
+then z must be in.
+
+1306
+01:00:36,340 --> 01:00:36,840
+OK.
+
+1307
+01:00:36,840 --> 01:00:38,700
+So that's two clauses.
+
+1308
+01:00:38,700 --> 01:00:41,380
+We AND them together,
+we can convert a implies
+
+1309
+01:00:41,380 --> 01:00:45,600
+into a not x out
+or y in, as usual.
+
+1310
+01:00:45,600 --> 01:00:47,914
+So these are 2SAT clauses.
+
+1311
+01:00:47,914 --> 01:00:49,830
+You take the conjunction
+of all those clauses,
+
+1312
+01:00:49,830 --> 01:00:52,150
+you get a 3SAT formula.
+
+1313
+01:00:52,150 --> 01:00:57,310
+And that exactly represents
+that the configuration is valid,
+
+1314
+01:00:57,310 --> 01:01:01,100
+that it satisfies the
+inflow constraint.
+
+1315
+01:01:01,100 --> 01:01:03,100
+And so reconfigurations
+in the constraint logic
+
+1316
+01:01:03,100 --> 01:01:04,474
+are identical to
+reconfigurations
+
+1317
+01:01:04,474 --> 01:01:06,190
+in the 3SAT instance.
+
+1318
+01:01:06,190 --> 01:01:08,050
+Very nice simple
+proof found by Sara.
+
+1319
+01:01:10,740 --> 01:01:13,860
+So now you get the sense that
+constraint logic is really
+
+1320
+01:01:13,860 --> 01:01:17,930
+just a very simplified version
+of reconfiguration 3SAT.
+
+1321
+01:01:17,930 --> 01:01:19,750
+We have some very
+specific constraints
+
+1322
+01:01:19,750 --> 01:01:22,250
+on what we need to worry
+about, some very specific types
+
+1323
+01:01:22,250 --> 01:01:24,740
+of vertices we
+need to implement.
+
+1324
+01:01:24,740 --> 01:01:25,980
+And that's it.
+
+1325
+01:01:25,980 --> 01:01:29,230
+So of course you could simulate
+all of reconfiguration 3SAT,
+
+1326
+01:01:29,230 --> 01:01:32,500
+but your life is going to be
+a lot easier by simulating
+
+1327
+01:01:32,500 --> 01:01:35,170
+this special case.
+
+1328
+01:01:35,170 --> 01:01:38,595
+And you've seen already
+a few examples of that.
+
+1329
+01:01:38,595 --> 01:01:39,095
+OK.
+
+1330
+01:01:42,020 --> 01:01:43,300
+Next problem.
+
+1331
+01:01:43,300 --> 01:01:43,840
+Rush hour.
+
+1332
+01:01:43,840 --> 01:01:45,673
+This one we actually
+covered in lecture one,
+
+1333
+01:01:45,673 --> 01:01:49,290
+so I just remind you that
+here the blocks can only
+
+1334
+01:01:49,290 --> 01:01:52,310
+move in the direction
+but they're oriented.
+
+1335
+01:01:52,310 --> 01:01:55,640
+And again, you can build
+an AND or protected OR.
+
+1336
+01:01:55,640 --> 01:01:58,740
+In the setup, this result
+was proofed previously,
+
+1337
+01:01:58,740 --> 01:02:01,390
+but here's a
+constraint logic proof.
+
+1338
+01:02:01,390 --> 01:02:03,490
+Again, we do protected OR.
+
+1339
+01:02:03,490 --> 01:02:07,400
+Now this is 1 by 2
+blocks and 1 by 3 blocks.
+
+1340
+01:02:07,400 --> 01:02:09,430
+That's as far as we could get.
+
+1341
+01:02:09,430 --> 01:02:10,950
+This is a picture
+here we actually
+
+1342
+01:02:10,950 --> 01:02:14,290
+see how things come
+together at the corners.
+
+1343
+01:02:14,290 --> 01:02:16,460
+So this is clearly a
+locked configuration.
+
+1344
+01:02:16,460 --> 01:02:18,610
+That's good.
+
+1345
+01:02:18,610 --> 01:02:22,290
+And then Trump and
+[? Cidibrasi ?]
+
+1346
+01:02:22,290 --> 01:02:26,520
+came up with a purely
+1 by 2 car version.
+
+1347
+01:02:26,520 --> 01:02:28,560
+It's more complicated.
+
+1348
+01:02:28,560 --> 01:02:30,770
+And they had trouble getting
+just a single gadget.
+
+1349
+01:02:30,770 --> 01:02:34,210
+So they ended up doing
+two AND gates using,
+
+1350
+01:02:34,210 --> 01:02:36,644
+I guess, rotational
+symmetry here.
+
+1351
+01:02:36,644 --> 01:02:37,560
+Two AND gates at once.
+
+1352
+01:02:37,560 --> 01:02:41,050
+But of course, this is really
+a split viewed from below.
+
+1353
+01:02:41,050 --> 01:02:43,600
+So if you just
+throw away that end,
+
+1354
+01:02:43,600 --> 01:02:45,530
+and they have a way
+to terminate things,
+
+1355
+01:02:45,530 --> 01:02:47,400
+then that is just an AND gate.
+
+1356
+01:02:47,400 --> 01:02:50,200
+And similarly, they had to
+glue two OR gates together.
+
+1357
+01:02:50,200 --> 01:02:54,390
+But that also can be
+used to build an OR gate.
+
+1358
+01:02:54,390 --> 01:02:56,884
+They built something
+related to an OR,
+
+1359
+01:02:56,884 --> 01:02:58,550
+but in particular,
+it is a protected OR.
+
+1360
+01:02:58,550 --> 01:03:00,050
+And so that's enough.
+
+1361
+01:03:00,050 --> 01:03:01,980
+In fact, these actually
+act as latches,
+
+1362
+01:03:01,980 --> 01:03:03,682
+if you wanted to
+be more efficient.
+
+1363
+01:03:03,682 --> 01:03:05,140
+But you don't worry
+about that, you
+
+1364
+01:03:05,140 --> 01:03:06,680
+can use them as
+protected oars, and then
+
+1365
+01:03:06,680 --> 01:03:08,179
+build latches out
+of that, and build
+
+1366
+01:03:08,179 --> 01:03:10,110
+all the things we've done.
+
+1367
+01:03:10,110 --> 01:03:12,190
+So that's cool.
+
+1368
+01:03:12,190 --> 01:03:14,130
+An open problem in
+the world of Rush Hour
+
+1369
+01:03:14,130 --> 01:03:16,000
+is what about 1 by 1 cars.
+
+1370
+01:03:16,000 --> 01:03:18,410
+Now this is a little
+weird, because 1 by 1 cars
+
+1371
+01:03:18,410 --> 01:03:19,900
+don't have natural orientations.
+
+1372
+01:03:19,900 --> 01:03:22,730
+But if each car is
+marked whether-- I mean,
+
+1373
+01:03:22,730 --> 01:03:24,330
+you can see where
+the headlights are.
+
+1374
+01:03:24,330 --> 01:03:28,730
+So you know whether it's going
+horizontal or vertical only.
+
+1375
+01:03:28,730 --> 01:03:30,990
+It's open whether this
+problem is PSPACE complete.
+
+1376
+01:03:30,990 --> 01:03:33,110
+In the same paper, they
+do a computer search
+
+1377
+01:03:33,110 --> 01:03:35,110
+to find the hardest
+5 by 5 puzzle,
+
+1378
+01:03:35,110 --> 01:03:37,340
+and the hardest 6 by 6 puzzle.
+
+1379
+01:03:37,340 --> 01:03:39,180
+I think with just one
+blank space in here,
+
+1380
+01:03:39,180 --> 01:03:41,405
+the first move is to
+move this up, this up,
+
+1381
+01:03:41,405 --> 01:03:44,480
+this right, this right, this
+right, this down, this over.
+
+1382
+01:03:44,480 --> 01:03:46,590
+The first chain of
+moves, so to speak.
+
+1383
+01:03:46,590 --> 01:03:48,670
+But it's 199 moves
+to solve this.
+
+1384
+01:03:48,670 --> 01:03:51,130
+This puzzle is 732 moves.
+
+1385
+01:03:51,130 --> 01:03:53,170
+And it's drawn here.
+
+1386
+01:03:53,170 --> 01:03:57,060
+That's the longest
+puzzle that's 6 by 6.
+
+1387
+01:03:57,060 --> 01:04:00,369
+So it seems to be growing
+exponentially, maybe.
+
+1388
+01:04:00,369 --> 01:04:02,410
+So maybe it's PSPACE
+complete, but we don't know.
+
+1389
+01:04:05,150 --> 01:04:06,080
+Triangular Rush Hour.
+
+1390
+01:04:06,080 --> 01:04:07,640
+You can do that too.
+
+1391
+01:04:07,640 --> 01:04:09,390
+Again, there's an AND
+gate and an OR gate.
+
+1392
+01:04:09,390 --> 01:04:11,830
+Here we had to build a straight.
+
+1393
+01:04:11,830 --> 01:04:13,650
+But then everything
+fits together.
+
+1394
+01:04:13,650 --> 01:04:14,150
+Question?
+
+1395
+01:04:14,150 --> 01:04:15,712
+AUDIENCE: I was just gonna
+ask what is the goal in those?
+
+1396
+01:04:15,712 --> 01:04:16,930
+Like, there wasn't--
+
+1397
+01:04:16,930 --> 01:04:17,960
+PROFESSOR: Oh.
+
+1398
+01:04:17,960 --> 01:04:18,460
+Right.
+
+1399
+01:04:18,460 --> 01:04:19,760
+What is the goal.
+
+1400
+01:04:19,760 --> 01:04:22,437
+I mean, if you put the
+final edge of the reverse up
+
+1401
+01:04:22,437 --> 01:04:24,020
+in the corner
+somewhere, then there'll
+
+1402
+01:04:24,020 --> 01:04:26,900
+be one car which can escape
+through a little slot
+
+1403
+01:04:26,900 --> 01:04:27,870
+in the exit.
+
+1404
+01:04:27,870 --> 01:04:29,940
+That's the usual
+Rush Hour setup.
+
+1405
+01:04:29,940 --> 01:04:31,447
+If and only if
+that edge-- Sorry?
+
+1406
+01:04:31,447 --> 01:04:33,030
+AUDIENCE: The pictures
+didn't specify.
+
+1407
+01:04:33,030 --> 01:04:35,050
+PROFESSOR: The pictures
+did not specify.
+
+1408
+01:04:35,050 --> 01:04:36,890
+It's true.
+
+1409
+01:04:36,890 --> 01:04:39,420
+Oh, and these ones.
+
+1410
+01:04:39,420 --> 01:04:42,050
+I think it's like
+one of these cars
+
+1411
+01:04:42,050 --> 01:04:44,850
+is going to go out
+through the right.
+
+1412
+01:04:44,850 --> 01:04:46,200
+But I forget.
+
+1413
+01:04:46,200 --> 01:04:48,520
+I think it might be the
+second row, or the first row,
+
+1414
+01:04:48,520 --> 01:04:49,776
+something like that.
+
+1415
+01:04:52,511 --> 01:04:53,010
+OK.
+
+1416
+01:04:53,010 --> 01:04:54,652
+So, cool.
+
+1417
+01:04:54,652 --> 01:04:55,610
+Here's another problem.
+
+1418
+01:04:55,610 --> 01:04:57,568
+Turns out to be related,
+though it doesn't seem
+
+1419
+01:04:57,568 --> 01:04:59,252
+like the same sort of puzzle.
+
+1420
+01:04:59,252 --> 01:05:00,710
+This is called a
+hinged dissection.
+
+1421
+01:05:00,710 --> 01:05:02,260
+It's a chain of
+blocks that folds
+
+1422
+01:05:02,260 --> 01:05:04,468
+from one shape-- in this
+case, equilateral triangle--
+
+1423
+01:05:04,468 --> 01:05:05,840
+to a unit square.
+
+1424
+01:05:05,840 --> 01:05:09,510
+Goes back to even before 1900s.
+
+1425
+01:05:09,510 --> 01:05:11,420
+But this one's from 1900s.
+
+1426
+01:05:11,420 --> 01:05:13,890
+Early 1900s.
+
+1427
+01:05:13,890 --> 01:05:15,200
+And so that's cool.
+
+1428
+01:05:15,200 --> 01:05:18,660
+In particular, there's a motion
+that avoids self-intersection.
+
+1429
+01:05:18,660 --> 01:05:21,840
+And we proved a few years
+ago that for any two polygons
+
+1430
+01:05:21,840 --> 01:05:24,150
+of the same area, there is
+a finite chain of blocks
+
+1431
+01:05:24,150 --> 01:05:27,660
+that can fold one into the
+other without self-intersection.
+
+1432
+01:05:27,660 --> 01:05:28,320
+So great.
+
+1433
+01:05:28,320 --> 01:05:30,130
+Problem solved.
+
+1434
+01:05:30,130 --> 01:05:33,390
+But that's good for if you get
+to design the hinge dissection.
+
+1435
+01:05:33,390 --> 01:05:35,750
+But what if you have some
+existing hinge dissection
+
+1436
+01:05:35,750 --> 01:05:39,130
+that someone came up with?
+
+1437
+01:05:39,130 --> 01:05:41,400
+So this is earlier work.
+
+1438
+01:05:41,400 --> 01:05:43,760
+But it's a chain of these
+right isosceles triangles--
+
+1439
+01:05:43,760 --> 01:05:46,580
+128 of them that can fold into
+any letter of the alphabet
+
+1440
+01:05:46,580 --> 01:05:48,220
+and any number and a square.
+
+1441
+01:05:48,220 --> 01:05:50,500
+So you can follow the six
+into a square into an eight
+
+1442
+01:05:50,500 --> 01:05:51,930
+into a nine into a zero.
+
+1443
+01:05:51,930 --> 01:05:52,930
+That's cool.
+
+1444
+01:05:52,930 --> 01:05:53,690
+Open problem.
+
+1445
+01:05:53,690 --> 01:05:56,570
+Can you do it without
+self-intersection?
+
+1446
+01:05:56,570 --> 01:05:59,210
+And it would be great if we
+had an algorithm to tell us.
+
+1447
+01:05:59,210 --> 01:06:01,040
+But it's PSPACE complete.
+
+1448
+01:06:01,040 --> 01:06:04,410
+So if I give you a hinge
+dissection, and I want to know,
+
+1449
+01:06:04,410 --> 01:06:06,350
+can I get from this
+configuration to that one
+
+1450
+01:06:06,350 --> 01:06:11,290
+without collisions, you can
+simulate essentially Rush Hour.
+
+1451
+01:06:11,290 --> 01:06:13,780
+This is a gadget--
+the hard part here
+
+1452
+01:06:13,780 --> 01:06:17,550
+is to make everything connected
+in one connected hinge
+
+1453
+01:06:17,550 --> 01:06:18,890
+dissection.
+
+1454
+01:06:18,890 --> 01:06:21,550
+And it can simulate this
+block sliding to the right
+
+1455
+01:06:21,550 --> 01:06:26,730
+or not in this kind of way,
+avoiding collisions locally.
+
+1456
+01:06:26,730 --> 01:06:28,750
+And so now it's just
+each of these blocks
+
+1457
+01:06:28,750 --> 01:06:31,980
+can slide left or
+right or up or down.
+
+1458
+01:06:31,980 --> 01:06:35,690
+And they have some weird shapes,
+but it ends up working out.
+
+1459
+01:06:35,690 --> 01:06:37,920
+So that's kind of a cool result.
+
+1460
+01:06:37,920 --> 01:06:40,410
+This is before we proved hinge
+dissections actually exist.
+
+1461
+01:06:40,410 --> 01:06:42,230
+It was discouraging, maybe.
+
+1462
+01:06:42,230 --> 01:06:44,600
+But when you're constructing
+your own hinge dissections,
+
+1463
+01:06:44,600 --> 01:06:47,640
+it's a lot easier
+to avoid collisions.
+
+1464
+01:06:47,640 --> 01:06:48,200
+All right.
+
+1465
+01:06:48,200 --> 01:06:48,860
+Pushing blocks.
+
+1466
+01:06:48,860 --> 01:06:53,970
+Remember this table
+from Lecture 4, I think.
+
+1467
+01:06:53,970 --> 01:06:56,500
+So we did a lot of the
+NP hardness proofs.
+
+1468
+01:06:56,500 --> 01:06:58,750
+But there are some
+PSPACE hardness as well.
+
+1469
+01:06:58,750 --> 01:07:01,700
+And I'm going to
+cover these two.
+
+1470
+01:07:01,700 --> 01:07:06,800
+So Sokoban first,
+and Push 2F, second.
+
+1471
+01:07:06,800 --> 01:07:09,540
+So remember, Sokoban
+is this puzzle
+
+1472
+01:07:09,540 --> 01:07:12,740
+where you want to get the blocks
+into the target locations.
+
+1473
+01:07:12,740 --> 01:07:14,154
+And you are walking around.
+
+1474
+01:07:14,154 --> 01:07:15,570
+You only have the
+strength of one.
+
+1475
+01:07:15,570 --> 01:07:17,810
+You can only push
+one block at a time.
+
+1476
+01:07:17,810 --> 01:07:20,440
+So I think this is
+Level 5 apparently,
+
+1477
+01:07:20,440 --> 01:07:23,190
+in the original classic.
+
+1478
+01:07:23,190 --> 01:07:27,690
+So this is a little bit
+awkward in some ways,
+
+1479
+01:07:27,690 --> 01:07:29,460
+because in constraint
+logic, you're
+
+1480
+01:07:29,460 --> 01:07:31,380
+supposed to be able
+to flip any edge.
+
+1481
+01:07:31,380 --> 01:07:35,210
+In Sokoban you have an
+agent who's walking around.
+
+1482
+01:07:35,210 --> 01:07:39,250
+So we're going to cut a
+lot of tunnels in the walls
+
+1483
+01:07:39,250 --> 01:07:42,420
+so that the agent
+can go anywhere.
+
+1484
+01:07:42,420 --> 01:07:47,960
+And then also, these blocks are
+exactly where they want to be,
+
+1485
+01:07:47,960 --> 01:07:51,780
+meaning there is a target
+location where that block is.
+
+1486
+01:07:51,780 --> 01:07:54,071
+There's only one block
+that's in the wrong spot.
+
+1487
+01:07:54,071 --> 01:07:56,570
+And so we're going to use our
+configuration to configuration
+
+1488
+01:07:56,570 --> 01:08:01,891
+thing to say, I want to solve
+the QSAT formula, which lets me
+
+1489
+01:08:01,891 --> 01:08:03,140
+move one block out of the way.
+
+1490
+01:08:03,140 --> 01:08:05,140
+So I can move one block
+that's in the wrong spot
+
+1491
+01:08:05,140 --> 01:08:08,120
+down to a good spot
+that's in target location.
+
+1492
+01:08:08,120 --> 01:08:09,956
+And then unroll everything.
+
+1493
+01:08:09,956 --> 01:08:12,330
+And then all the blocks are
+back where they wanted to be.
+
+1494
+01:08:12,330 --> 01:08:14,470
+And the one guy that
+we needed to move
+
+1495
+01:08:14,470 --> 01:08:16,630
+got to where he needed to go.
+
+1496
+01:08:16,630 --> 01:08:18,189
+That's Sokoban.
+
+1497
+01:08:18,189 --> 01:08:23,214
+And the rest is mostly
+this AND and OR gadget.
+
+1498
+01:08:23,214 --> 01:08:25,630
+The idea is, because these
+guys are where they need to be,
+
+1499
+01:08:25,630 --> 01:08:28,770
+if I move the D to touch the
+A, you're permanently screwed.
+
+1500
+01:08:28,770 --> 01:08:30,520
+You can never
+separate them again.
+
+1501
+01:08:30,520 --> 01:08:34,189
+And so you'll never be
+able to fill some spot,
+
+1502
+01:08:34,189 --> 01:08:37,529
+because D in particular,
+can no longer be useful.
+
+1503
+01:08:37,529 --> 01:08:40,600
+But every block
+needs to be used.
+
+1504
+01:08:40,600 --> 01:08:46,460
+And so let's see, in
+order to move V down,
+
+1505
+01:08:46,460 --> 01:08:49,084
+we must move- or, sorry.
+
+1506
+01:08:49,084 --> 01:08:50,250
+That's the other way around.
+
+1507
+01:08:50,250 --> 01:08:53,720
+In order to move C to the left,
+we must first move B and E
+
+1508
+01:08:53,720 --> 01:08:55,282
+up one, and A and D left one.
+
+1509
+01:08:55,282 --> 01:08:57,240
+And you can check that
+you can actually do that
+
+1510
+01:08:57,240 --> 01:09:01,010
+by moving this out and moving
+this over, and then pushing E
+
+1511
+01:09:01,010 --> 01:09:03,319
+up, and then pushing B up.
+
+1512
+01:09:03,319 --> 01:09:04,750
+Then C can move in.
+
+1513
+01:09:04,750 --> 01:09:08,100
+And it is reversible
+if you check carefully.
+
+1514
+01:09:08,100 --> 01:09:10,660
+And for an OR, we just separate
+these a little bit more.
+
+1515
+01:09:10,660 --> 01:09:13,774
+So separately each
+of them could move.
+
+1516
+01:09:13,774 --> 01:09:16,149
+And then this guy could move
+in and you won't be trapped.
+
+1517
+01:09:16,149 --> 01:09:18,390
+If you just tried to
+move this directly,
+
+1518
+01:09:18,390 --> 01:09:20,130
+then you'll never be
+able to get in here.
+
+1519
+01:09:20,130 --> 01:09:22,370
+And so these guys are sort
+of locked in position.
+
+1520
+01:09:22,370 --> 01:09:23,372
+And that's bad news.
+
+1521
+01:09:23,372 --> 01:09:24,580
+Or they could only get worse.
+
+1522
+01:09:24,580 --> 01:09:28,620
+You could move A in here, but
+then you're really in trouble.
+
+1523
+01:09:28,620 --> 01:09:31,670
+Now once you do that, you might
+have some parity issues because
+
+1524
+01:09:31,670 --> 01:09:34,359
+of the widths of these gaps.
+
+1525
+01:09:34,359 --> 01:09:37,880
+But you can build this
+kind of extra-long tunnel
+
+1526
+01:09:37,880 --> 01:09:39,750
+to change parity.
+
+1527
+01:09:39,750 --> 01:09:40,750
+We talked about tunnels.
+
+1528
+01:09:40,750 --> 01:09:42,370
+You also need turns.
+
+1529
+01:09:42,370 --> 01:09:44,310
+And then you can simulate
+constraint logic.
+
+1530
+01:09:44,310 --> 01:09:46,130
+This is one of the weirder
+constraint logic proofs.
+
+1531
+01:09:46,130 --> 01:09:48,410
+It's not directly mapping
+because of the agent issue.
+
+1532
+01:09:48,410 --> 01:09:52,240
+But it turns out to work.
+
+1533
+01:09:52,240 --> 01:09:52,840
+OK.
+
+1534
+01:09:52,840 --> 01:09:54,540
+That was Sokoban.
+
+1535
+01:09:54,540 --> 01:09:56,320
+Next one is Push-2F.
+
+1536
+01:09:56,320 --> 01:09:59,130
+I will not cover
+this one in detail
+
+1537
+01:09:59,130 --> 01:10:01,420
+because it's quite
+a complicated proof.
+
+1538
+01:10:01,420 --> 01:10:04,110
+But I will tell you
+that we can simplify it,
+
+1539
+01:10:04,110 --> 01:10:05,410
+now that we know what we know.
+
+1540
+01:10:05,410 --> 01:10:06,786
+This is a fairly old proof.
+
+1541
+01:10:06,786 --> 01:10:07,730
+2002.
+
+1542
+01:10:07,730 --> 01:10:10,800
+So it predates last lecture.
+
+1543
+01:10:10,800 --> 01:10:13,680
+It predates the
+[? Viglietta ?] paper.
+
+1544
+01:10:13,680 --> 01:10:17,650
+So what we've constructed in
+this case is a lock gadget.
+
+1545
+01:10:17,650 --> 01:10:22,430
+This is just like the final
+meta-theorem from last class.
+
+1546
+01:10:22,430 --> 01:10:25,100
+We have an unlock traversal
+where you could come in the U
+
+1547
+01:10:25,100 --> 01:10:26,850
+and actually come back
+out the same place.
+
+1548
+01:10:26,850 --> 01:10:30,730
+It unlocks the thing, so you
+could then go from I to O.
+
+1549
+01:10:30,730 --> 01:10:36,261
+Or if you go from LI to LO,
+you're forced to lock the door.
+
+1550
+01:10:36,261 --> 01:10:36,760
+Sorry.
+
+1551
+01:10:36,760 --> 01:10:38,740
+It was called a door
+in the last class.
+
+1552
+01:10:38,740 --> 01:10:41,060
+So that actually has a door.
+
+1553
+01:10:41,060 --> 01:10:44,710
+Now we needed a door
+and a crossover.
+
+1554
+01:10:44,710 --> 01:10:46,980
+And you can build a
+crossover like this.
+
+1555
+01:10:46,980 --> 01:10:48,960
+I think at this point
+we have a crossover.
+
+1556
+01:10:48,960 --> 01:10:53,010
+So left of this line would be a
+PSPACE completeness proof using
+
+1557
+01:10:53,010 --> 01:10:56,171
+the [? Viglietta ?] framework.
+
+1558
+01:10:56,171 --> 01:10:57,670
+We didn't have it
+at the time, so we
+
+1559
+01:10:57,670 --> 01:11:01,340
+did this part of the proof
+also to build an AND and an OR
+
+1560
+01:11:01,340 --> 01:11:01,840
+gadget.
+
+1561
+01:11:01,840 --> 01:11:05,110
+We're essentially
+doing the 3SAT thing.
+
+1562
+01:11:05,110 --> 01:11:07,830
+And we're just checking
+that all of the things that
+
+1563
+01:11:07,830 --> 01:11:10,290
+need to be true are
+true for AND and OR.
+
+1564
+01:11:10,290 --> 01:11:13,050
+This reminds me of the
+reduction from three
+
+1565
+01:11:13,050 --> 01:11:15,580
+coloring to one of the other
+pushing blocks problems.
+
+1566
+01:11:15,580 --> 01:11:17,125
+Push-1X, I think.
+
+1567
+01:11:17,125 --> 01:11:19,500
+We'll just check that all the
+things that need to be true
+
+1568
+01:11:19,500 --> 01:11:20,270
+are true.
+
+1569
+01:11:20,270 --> 01:11:21,630
+So that's the rough sketch.
+
+1570
+01:11:21,630 --> 01:11:23,713
+But there are a lot of
+details getting it to work.
+
+1571
+01:11:23,713 --> 01:11:27,260
+It'd be great to solve
+Push-1F in the same way,
+
+1572
+01:11:27,260 --> 01:11:30,140
+but that remains
+an open problem.
+
+1573
+01:11:30,140 --> 01:11:30,640
+All right.
+
+1574
+01:11:30,640 --> 01:11:32,540
+That was pushing blocks.
+
+1575
+01:11:32,540 --> 01:11:35,830
+Next we have rolling blocks.
+
+1576
+01:11:35,830 --> 01:11:37,900
+So this is a class of mazes.
+
+1577
+01:11:40,862 --> 01:11:42,820
+So this is how you usually
+are given the input.
+
+1578
+01:11:42,820 --> 01:11:45,630
+What this means, the red
+things here are fixed.
+
+1579
+01:11:45,630 --> 01:11:47,810
+And the green thing
+is actually a 1 by 1
+
+1580
+01:11:47,810 --> 01:11:50,780
+by 2 block sticking
+out of the board.
+
+1581
+01:11:50,780 --> 01:11:52,260
+And so it was in this position.
+
+1582
+01:11:52,260 --> 01:11:55,280
+And you can roll it over
+along one of the edges,
+
+1583
+01:11:55,280 --> 01:11:59,150
+and it ends up occupying
+this rectangle up here.
+
+1584
+01:11:59,150 --> 01:12:02,390
+And you can keep rolling your
+goals to get to t sticking up.
+
+1585
+01:12:02,390 --> 01:12:04,810
+And it's not so easy.
+
+1586
+01:12:04,810 --> 01:12:08,250
+Hence the dot, dot, dot.
+
+1587
+01:12:08,250 --> 01:12:10,430
+So that's the traditional
+rolling block maze.
+
+1588
+01:12:10,430 --> 01:12:13,310
+And if you have a lot of
+rollable blocks, in this case,
+
+1589
+01:12:13,310 --> 01:12:15,060
+all the blocks are rollable.
+
+1590
+01:12:15,060 --> 01:12:17,410
+So these red things are
+actually sticking up.
+
+1591
+01:12:17,410 --> 01:12:19,630
+And the green ones are
+obviously lying in the plan.
+
+1592
+01:12:19,630 --> 01:12:23,800
+And the 1 by 1 squares
+mean that it's sticking up.
+
+1593
+01:12:23,800 --> 01:12:27,080
+Then it's PSPACE complete
+to roll a particular block,
+
+1594
+01:12:27,080 --> 01:12:31,844
+because in order to
+roll this thing down,
+
+1595
+01:12:31,844 --> 01:12:33,510
+you have to make space
+here, which means
+
+1596
+01:12:33,510 --> 01:12:35,010
+this has to have rolled up.
+
+1597
+01:12:35,010 --> 01:12:39,740
+Which means-- well, so if this
+rolls out, and this rolls out,
+
+1598
+01:12:39,740 --> 01:12:41,320
+it will be like here and here.
+
+1599
+01:12:41,320 --> 01:12:44,110
+Then this can fall over,
+replacing that rectangle.
+
+1600
+01:12:44,110 --> 01:12:46,060
+This can fall over,
+replacing that rectangle.
+
+1601
+01:12:46,060 --> 01:12:47,540
+So that's this and this.
+
+1602
+01:12:47,540 --> 01:12:50,440
+Then this guy can roll
+down, so it comes here.
+
+1603
+01:12:50,440 --> 01:12:52,510
+And then this guy can stand up.
+
+1604
+01:12:52,510 --> 01:12:54,230
+And this guy can fall over.
+
+1605
+01:12:54,230 --> 01:12:55,230
+So you get that picture.
+
+1606
+01:12:55,230 --> 01:12:57,180
+And so it's AND game.
+
+1607
+01:12:57,180 --> 01:12:58,700
+And this one is an OR gate.
+
+1608
+01:12:58,700 --> 01:13:01,010
+I think I won't go
+through all the things,
+
+1609
+01:13:01,010 --> 01:13:04,850
+but if either this one comes
+up, or this one falls over,
+
+1610
+01:13:04,850 --> 01:13:07,050
+then this one can come down.
+
+1611
+01:13:07,050 --> 01:13:09,850
+And you can show in
+this case that it's
+
+1612
+01:13:09,850 --> 01:13:11,610
+essentially impossible,
+or never useful,
+
+1613
+01:13:11,610 --> 01:13:14,190
+to make any of the
+red towers fall over,
+
+1614
+01:13:14,190 --> 01:13:17,980
+which lets you argue about
+gadgets independently.
+
+1615
+01:13:17,980 --> 01:13:18,480
+Cool.
+
+1616
+01:13:18,480 --> 01:13:20,370
+That's a pretty recent result.
+
+1617
+01:13:23,390 --> 01:13:28,490
+Oh, in this proof they also--
+it took me awhile staring at I
+
+1618
+01:13:28,490 --> 01:13:30,570
+guess these gadgets
+to think, oh,
+
+1619
+01:13:30,570 --> 01:13:31,900
+do these actually fit together?
+
+1620
+01:13:31,900 --> 01:13:33,720
+This fits together.
+
+1621
+01:13:33,720 --> 01:13:36,420
+But if I rotate this
+one 180 degrees,
+
+1622
+01:13:36,420 --> 01:13:37,800
+the A's will not match up.
+
+1623
+01:13:37,800 --> 01:13:40,840
+And so you need a shift gadget.
+
+1624
+01:13:40,840 --> 01:13:42,930
+And you also need a
+sort of straight gadgets
+
+1625
+01:13:42,930 --> 01:13:48,390
+for just indicating information
+without any stuff going on.
+
+1626
+01:13:48,390 --> 01:13:50,270
+OK.
+
+1627
+01:13:50,270 --> 01:13:52,080
+Getting near the end.
+
+1628
+01:13:52,080 --> 01:13:52,860
+Plank puzzles.
+
+1629
+01:13:52,860 --> 01:13:56,710
+These are ThinkFun puzzles,
+under that name River Crossing.
+
+1630
+01:13:56,710 --> 01:13:59,110
+Although they predate
+that a little bit.
+
+1631
+01:13:59,110 --> 01:14:02,822
+So here you have again,
+an agent moving around.
+
+1632
+01:14:02,822 --> 01:14:05,260
+So we're going to have to do
+some work to get rid of that.
+
+1633
+01:14:05,260 --> 01:14:08,130
+And you can, for example,
+walk along a plank.
+
+1634
+01:14:08,130 --> 01:14:09,530
+Then you can pick that plank up.
+
+1635
+01:14:09,530 --> 01:14:11,321
+And you can only carry
+one plank at a time.
+
+1636
+01:14:11,321 --> 01:14:14,730
+And you can place it, as long
+as this is a length two plank,
+
+1637
+01:14:14,730 --> 01:14:17,920
+as long as there's another dot
+that's exactly length 2 away,
+
+1638
+01:14:17,920 --> 01:14:19,290
+you can drop it down.
+
+1639
+01:14:19,290 --> 01:14:21,132
+And then he walked
+here and walked here.
+
+1640
+01:14:21,132 --> 01:14:22,840
+Then that pickup, that
+unit-length plank,
+
+1641
+01:14:22,840 --> 01:14:23,770
+put it down here.
+
+1642
+01:14:23,770 --> 01:14:25,256
+And I get to this
+picture, then I
+
+1643
+01:14:25,256 --> 01:14:28,897
+can walk here, walk here, pick
+up this plank, put it down.
+
+1644
+01:14:28,897 --> 01:14:31,230
+But I also could have walked
+back to pick up this plank,
+
+1645
+01:14:31,230 --> 01:14:32,852
+walk over, drop
+it somewhere else.
+
+1646
+01:14:32,852 --> 01:14:34,310
+But I can only
+carry one at a time.
+
+1647
+01:14:36,370 --> 01:14:39,700
+You want to cross the
+shore, cross the river.
+
+1648
+01:14:39,700 --> 01:14:44,200
+This is PSPACE complete by
+nondeterministic constraint
+
+1649
+01:14:44,200 --> 01:14:45,520
+logic.
+
+1650
+01:14:45,520 --> 01:14:50,370
+And there's stuff going on here.
+
+1651
+01:14:50,370 --> 01:14:52,360
+I mean, rough idea,
+imagine you can sort
+
+1652
+01:14:52,360 --> 01:14:54,640
+of teleport to some extent.
+
+1653
+01:14:54,640 --> 01:14:57,910
+If this guy can move
+over here, and this guy
+
+1654
+01:14:57,910 --> 01:15:03,080
+can move over here, then let
+me show you a bigger picture.
+
+1655
+01:15:03,080 --> 01:15:07,090
+This is a bunch of
+gadgets stuck together.
+
+1656
+01:15:07,090 --> 01:15:09,990
+But also what we see are
+the navigation mechanism.
+
+1657
+01:15:09,990 --> 01:15:14,875
+There's a length three guy here,
+and a length three guy here.
+
+1658
+01:15:14,875 --> 01:15:18,050
+The length threes are the ones
+that go around each gadget.
+
+1659
+01:15:18,050 --> 01:15:18,932
+This is one gadget.
+
+1660
+01:15:18,932 --> 01:15:20,640
+There's all these
+length three distances.
+
+1661
+01:15:20,640 --> 01:15:22,690
+There are no other
+length three distances.
+
+1662
+01:15:22,690 --> 01:15:24,950
+What that lets you do
+is grab this, move it,
+
+1663
+01:15:24,950 --> 01:15:27,075
+and basically you can
+walk around the boundary.
+
+1664
+01:15:27,075 --> 01:15:29,700
+Then you can also walk along the
+boundary, grab this other guy,
+
+1665
+01:15:29,700 --> 01:15:32,000
+and move it somewhere else.
+
+1666
+01:15:32,000 --> 01:15:33,830
+So you can walk
+along the boundary
+
+1667
+01:15:33,830 --> 01:15:37,085
+and carry an additional
+length three thing with you.
+
+1668
+01:15:37,085 --> 01:15:39,210
+So that turns out to be
+helpful in that when you're
+
+1669
+01:15:39,210 --> 01:15:40,960
+trying to traverse
+a gadget, you need
+
+1670
+01:15:40,960 --> 01:15:42,810
+to be able to enter
+from this side,
+
+1671
+01:15:42,810 --> 01:15:44,650
+and also enter from that side.
+
+1672
+01:15:44,650 --> 01:15:47,100
+And you can set up those
+planks to make that possible.
+
+1673
+01:15:47,100 --> 01:15:49,210
+I'll just wave my hand
+and say that is possible.
+
+1674
+01:15:49,210 --> 01:15:51,570
+It's a little hard to
+see in these diagrams.
+
+1675
+01:15:51,570 --> 01:15:56,820
+But you're getting
+NCL reduction again.
+
+1676
+01:15:56,820 --> 01:15:59,700
+And I have two examples
+of non-puzzles.
+
+1677
+01:15:59,700 --> 01:16:02,820
+Sort of real world
+problems reduced
+
+1678
+01:16:02,820 --> 01:16:05,360
+from nondeterministic
+constraint logic.
+
+1679
+01:16:05,360 --> 01:16:07,300
+One of them is
+dynamic map labeling.
+
+1680
+01:16:07,300 --> 01:16:09,660
+So there's a whole
+field of map labeling.
+
+1681
+01:16:09,660 --> 01:16:13,600
+One of the typical setups is
+that you have points, features,
+
+1682
+01:16:13,600 --> 01:16:15,750
+cities, whatever that
+need to be labeled.
+
+1683
+01:16:15,750 --> 01:16:17,660
+Labels are usually
+model by squares.
+
+1684
+01:16:17,660 --> 01:16:19,740
+Because if you scale
+things, if they
+
+1685
+01:16:19,740 --> 01:16:23,060
+were rectangles of fixed size,
+you'd turn them into squares.
+
+1686
+01:16:23,060 --> 01:16:26,440
+And typically you want to have
+that square, one of its corners
+
+1687
+01:16:26,440 --> 01:16:27,510
+should be at the dot.
+
+1688
+01:16:27,510 --> 01:16:30,410
+So it's easy to read.
+
+1689
+01:16:30,410 --> 01:16:32,640
+But now, suppose things
+are changing in your map.
+
+1690
+01:16:32,640 --> 01:16:35,300
+Maybe you're adding points,
+or your zooming out,
+
+1691
+01:16:35,300 --> 01:16:35,890
+or zooming in.
+
+1692
+01:16:35,890 --> 01:16:38,300
+You'd like to continuously
+change the labels
+
+1693
+01:16:38,300 --> 01:16:40,920
+and you don't want any
+labels to intersect.
+
+1694
+01:16:40,920 --> 01:16:43,015
+So you could think of
+zooming out on Google Maps.
+
+1695
+01:16:43,015 --> 01:16:44,640
+I'm not going to talk
+about the zooming
+
+1696
+01:16:44,640 --> 01:16:49,110
+out, although this paper proves
+that that is PSPACE complete.
+
+1697
+01:16:49,110 --> 01:16:52,470
+Question is, how many labels
+can I preserve and be able
+
+1698
+01:16:52,470 --> 01:16:53,950
+make a continuous change.
+
+1699
+01:16:53,950 --> 01:16:56,370
+Simple example is
+maybe you add one city.
+
+1700
+01:16:56,370 --> 01:16:58,910
+In order to be able to add
+one city and add a new label,
+
+1701
+01:16:58,910 --> 01:17:01,517
+probably something has
+to move out of the way.
+
+1702
+01:17:01,517 --> 01:17:03,600
+And then you can get a
+nondeterministic constraint
+
+1703
+01:17:03,600 --> 01:17:05,750
+logic argument.
+
+1704
+01:17:05,750 --> 01:17:07,250
+I love this figure,
+because it shows
+
+1705
+01:17:07,250 --> 01:17:09,730
+all the gadgets and the
+ways that they fit together.
+
+1706
+01:17:09,730 --> 01:17:13,780
+This is a nondeterministic
+constraint graph.
+
+1707
+01:17:13,780 --> 01:17:17,330
+And an AND gate here.
+
+1708
+01:17:17,330 --> 01:17:19,150
+The pinks are the inputs.
+
+1709
+01:17:19,150 --> 01:17:21,970
+So if this square
+can move over here,
+
+1710
+01:17:21,970 --> 01:17:24,360
+then this one can
+move up to here.
+
+1711
+01:17:24,360 --> 01:17:26,490
+And if this one can
+move over to here,
+
+1712
+01:17:26,490 --> 01:17:30,080
+this one can move down to here,
+then these two can move left.
+
+1713
+01:17:30,080 --> 01:17:31,440
+Then this one can move left.
+
+1714
+01:17:31,440 --> 01:17:33,420
+It overlaps both of
+these, so both of these
+
+1715
+01:17:33,420 --> 01:17:35,180
+have to move out of the way
+before this one can move,
+
+1716
+01:17:35,180 --> 01:17:36,311
+and that one can move.
+
+1717
+01:17:36,311 --> 01:17:36,810
+And so on.
+
+1718
+01:17:36,810 --> 01:17:38,530
+You can see how to build
+a wire, which is just
+
+1719
+01:17:38,530 --> 01:17:39,529
+a chain of these things.
+
+1720
+01:17:39,529 --> 01:17:42,950
+There are these special obstacle
+blocks which prevent you
+
+1721
+01:17:42,950 --> 01:17:44,020
+from doing anything else.
+
+1722
+01:17:46,851 --> 01:17:47,350
+cool.
+
+1723
+01:17:47,350 --> 01:17:49,170
+And then OR is actually easier.
+
+1724
+01:17:49,170 --> 01:17:52,110
+You just chain these
+two things together.
+
+1725
+01:17:52,110 --> 01:17:58,450
+And it doesn't matter
+which one is the input.
+
+1726
+01:17:58,450 --> 01:18:00,420
+This guy can be in
+one of three locations
+
+1727
+01:18:00,420 --> 01:18:03,240
+according to which
+one it's directed in,
+
+1728
+01:18:03,240 --> 01:18:08,940
+which corresponds to the blocks
+being away, out of the way.
+
+1729
+01:18:08,940 --> 01:18:11,810
+So continuously
+changing map labelings
+
+1730
+01:18:11,810 --> 01:18:15,980
+is going to be hard pretty
+much however you slice it.
+
+1731
+01:18:15,980 --> 01:18:19,110
+And finally, this problem
+is even more complicated,
+
+1732
+01:18:19,110 --> 01:18:22,360
+but it's a well-studied problem
+in computational geometry
+
+1733
+01:18:22,360 --> 01:18:23,740
+of searchlights.
+
+1734
+01:18:23,740 --> 01:18:26,220
+So there are these dots.
+
+1735
+01:18:26,220 --> 01:18:30,770
+And imagine you have
+a laser pointer.
+
+1736
+01:18:30,770 --> 01:18:34,570
+And so you can shoot a ray
+in any direction of light.
+
+1737
+01:18:34,570 --> 01:18:40,031
+And if the laser hits
+the spy, the spy dies.
+
+1738
+01:18:40,031 --> 01:18:40,530
+OK?
+
+1739
+01:18:40,530 --> 01:18:44,380
+Your goal is to
+eliminate all spies.
+
+1740
+01:18:44,380 --> 01:18:46,150
+You have this
+yellow region, which
+
+1741
+01:18:46,150 --> 01:18:48,070
+is where all your treasure is.
+
+1742
+01:18:48,070 --> 01:18:50,790
+And you want to make sure there
+are no spies in the treasure
+
+1743
+01:18:50,790 --> 01:18:51,600
+region.
+
+1744
+01:18:51,600 --> 01:18:54,610
+So normally this is a
+finding-the-spy problem.
+
+1745
+01:18:54,610 --> 01:18:57,280
+If you ever see they
+spy, you can capture him.
+
+1746
+01:18:57,280 --> 01:18:59,950
+But the spy can move around
+really fast while you're
+
+1747
+01:18:59,950 --> 01:19:01,160
+moving your lasers around.
+
+1748
+01:19:01,160 --> 01:19:03,940
+So how do you sweep your
+environment with lasers?
+
+1749
+01:19:03,940 --> 01:19:06,120
+Turns out it's PSPACE
+complete to make sure
+
+1750
+01:19:06,120 --> 01:19:07,890
+this region is empty.
+
+1751
+01:19:07,890 --> 01:19:10,220
+And I won't go
+through the proof.
+
+1752
+01:19:10,220 --> 01:19:15,070
+But it's an
+orchestration of laser
+
+1753
+01:19:15,070 --> 01:19:16,870
+continuous reorientations.
+
+1754
+01:19:16,870 --> 01:19:18,600
+And you end up with
+ANDs and OR gates,
+
+1755
+01:19:18,600 --> 01:19:23,450
+and crossovers-- that's
+this gadget-- and then
+
+1756
+01:19:23,450 --> 01:19:26,100
+the nondeterministic constraint
+logic's happening down here.
+
+1757
+01:19:26,100 --> 01:19:28,630
+You end up clearing all of
+this space pretty easily.
+
+1758
+01:19:28,630 --> 01:19:30,580
+And then there's this
+little extra spot
+
+1759
+01:19:30,580 --> 01:19:34,440
+that will only be cleared if
+you get an appropriate laser
+
+1760
+01:19:34,440 --> 01:19:35,110
+from this guy.
+
+1761
+01:19:35,110 --> 01:19:37,730
+Then you could sweep up
+to there and make sure
+
+1762
+01:19:37,730 --> 01:19:40,960
+that it's clear without--
+the worry is that there's
+
+1763
+01:19:40,960 --> 01:19:42,930
+a bad guy over here, and
+he somehow sneaks back
+
+1764
+01:19:42,930 --> 01:19:44,340
+into the other region.
+
+1765
+01:19:44,340 --> 01:19:46,030
+That forces some of
+the lasers to stay
+
+1766
+01:19:46,030 --> 01:19:47,944
+where they are, and
+ends up simulating
+
+1767
+01:19:47,944 --> 01:19:49,360
+nondeterministic
+constraint logic.
+
+1768
+01:19:49,360 --> 01:19:51,210
+Pretty epic proof.
+
+1769
+01:19:51,210 --> 01:19:53,270
+But I will leave it at that.
+
+1770
+01:19:53,270 --> 01:19:55,900
+And that's all for today.

@@ -1,0 +1,641 @@
+1
+00:00:00,720 --> 00:00:04,770
+Finally, let's discuss the third
+class of instructions that let
+
+2
+00:00:04,770 --> 00:00:07,210
+us change the program counter.
+
+3
+00:00:07,210 --> 00:00:08,940
+Up until now, the
+program counter
+
+4
+00:00:08,940 --> 00:00:12,270
+has simply been incremented by 4
+at the end of each instruction,
+
+5
+00:00:12,270 --> 00:00:14,530
+so that the next instruction
+comes from the memory
+
+6
+00:00:14,530 --> 00:00:16,850
+location that immediately
+follows the location that
+
+7
+00:00:16,850 --> 00:00:19,120
+held the current instruction,
+
+8
+00:00:19,120 --> 00:00:21,650
+i.e., the Beta has been
+executing instructions
+
+9
+00:00:21,650 --> 00:00:24,520
+sequentially from memory.
+
+10
+00:00:24,520 --> 00:00:27,270
+But in many programs,
+such as in factorial,
+
+11
+00:00:27,270 --> 00:00:29,750
+we need to disrupt
+sequential execution,
+
+12
+00:00:29,750 --> 00:00:33,520
+either to loop back to repeat
+some earlier instruction,
+
+13
+00:00:33,520 --> 00:00:36,340
+or to skip over instructions
+because of some data
+
+14
+00:00:36,340 --> 00:00:37,980
+dependency.
+
+15
+00:00:37,980 --> 00:00:40,420
+We need a way to change
+the program counter
+
+16
+00:00:40,420 --> 00:00:44,540
+based on data values generated
+by the program's execution.
+
+17
+00:00:44,540 --> 00:00:48,120
+In the factorial example, as
+long as b is not equal to 0,
+
+18
+00:00:48,120 --> 00:00:52,070
+we need to keep executing the
+instructions that calculate a*b
+
+19
+00:00:52,070 --> 00:00:54,180
+and decrement b.
+
+20
+00:00:54,180 --> 00:00:56,870
+So we need instructions
+to test the value of b
+
+21
+00:00:56,870 --> 00:00:59,550
+after it's been decremented
+and if it's non-zero,
+
+22
+00:00:59,550 --> 00:01:03,950
+change the PC to repeat
+the loop one more time.
+
+23
+00:01:03,950 --> 00:01:06,230
+Changing the PC depending
+on some condition
+
+24
+00:01:06,230 --> 00:01:08,530
+is implemented by a
+branch instruction,
+
+25
+00:01:08,530 --> 00:01:13,070
+and the operation is referred
+to as a "conditional branch".
+
+26
+00:01:13,070 --> 00:01:16,000
+When the branch is
+taken, the PC is changed
+
+27
+00:01:16,000 --> 00:01:19,130
+and execution is restarted
+at the new location, which
+
+28
+00:01:19,130 --> 00:01:21,730
+is called the branch target.
+
+29
+00:01:21,730 --> 00:01:25,070
+If the branch is not taken,
+the PC is incremented by 4
+
+30
+00:01:25,070 --> 00:01:29,260
+and execution continues with
+the instruction following
+
+31
+00:01:29,260 --> 00:01:31,490
+the branch.
+
+32
+00:01:31,490 --> 00:01:33,470
+As the name implies,
+a branch instruction
+
+33
+00:01:33,470 --> 00:01:37,190
+represents a potential fork
+in the execution sequence.
+
+34
+00:01:37,190 --> 00:01:39,690
+We'll use branches to
+implement many different types
+
+35
+00:01:39,690 --> 00:01:42,780
+of control structures: loops,
+conditionals, procedure
+
+36
+00:01:42,780 --> 00:01:45,310
+calls, etc.
+
+37
+00:01:45,310 --> 00:01:48,170
+Branches instructions also
+use the instruction format
+
+38
+00:01:48,170 --> 00:01:50,530
+with the 16-bit signed constant.
+
+39
+00:01:50,530 --> 00:01:52,500
+The operation of the
+branch instructions
+
+40
+00:01:52,500 --> 00:01:55,650
+are a bit complicated, so let's
+walk through their operation
+
+41
+00:01:55,650 --> 00:01:57,970
+step-by-step.
+
+42
+00:01:57,970 --> 00:02:00,530
+Let's start by looking at
+the operation of the BEQ
+
+43
+00:02:00,530 --> 00:02:02,480
+instruction.
+
+44
+00:02:02,480 --> 00:02:05,420
+First the usual PC
+4 calculation is
+
+45
+00:02:05,420 --> 00:02:09,370
+performed, giving us the address
+of the instruction following
+
+46
+00:02:09,370 --> 00:02:11,230
+the BEQ.
+
+47
+00:02:11,230 --> 00:02:13,690
+This value is written
+to the "rc" register
+
+48
+00:02:13,690 --> 00:02:16,910
+whether or not the
+branch is taken.
+
+49
+00:02:16,910 --> 00:02:19,200
+This feature of
+branches is pretty handy
+
+50
+00:02:19,200 --> 00:02:21,160
+and we'll use it to
+implement procedure calls
+
+51
+00:02:21,160 --> 00:02:23,750
+a couple of lectures from now.
+
+52
+00:02:23,750 --> 00:02:26,910
+Note that if we don't need
+to remember the PC 4 value,
+
+53
+00:02:26,910 --> 00:02:31,240
+we can specify R31
+as the "rc" register.
+
+54
+00:02:31,240 --> 00:02:34,040
+Next, BEQ tests the
+value of the "ra"
+
+55
+00:02:34,040 --> 00:02:36,350
+register to see if
+it's equal to 0.
+
+56
+00:02:36,350 --> 00:02:39,750
+If it is equal to 0,
+the branch is taken
+
+57
+00:02:39,750 --> 00:02:42,440
+and the PC is incremented
+by the amount specified
+
+58
+00:02:42,440 --> 00:02:45,490
+in the constant field
+of the instruction.
+
+59
+00:02:45,490 --> 00:02:47,600
+Actually the constant,
+called an offset
+
+60
+00:02:47,600 --> 00:02:50,340
+since we're using
+it to offset the PC,
+
+61
+00:02:50,340 --> 00:02:53,830
+is treated as a word offset
+and is multiplied by 4
+
+62
+00:02:53,830 --> 00:02:57,420
+to convert it a byte
+offset since the PC uses
+
+63
+00:02:57,420 --> 00:02:59,600
+byte addressing.
+
+64
+00:02:59,600 --> 00:03:03,210
+If the contents of the "ra"
+register is not equal to 0,
+
+65
+00:03:03,210 --> 00:03:05,940
+the PC is incremented
+by 4 and execution
+
+66
+00:03:05,940 --> 00:03:09,320
+continues with the
+instruction following the BEQ.
+
+67
+00:03:09,320 --> 00:03:13,850
+Let me say a few more
+words about the offset.
+
+68
+00:03:13,850 --> 00:03:17,180
+The branches are using what's
+referred to as "pc-relative
+
+69
+00:03:17,180 --> 00:03:18,510
+addressing".
+
+70
+00:03:18,510 --> 00:03:20,670
+That means the address
+of the branch target
+
+71
+00:03:20,670 --> 00:03:23,540
+is specified relative to
+the address of the branch,
+
+72
+00:03:23,540 --> 00:03:26,150
+or, actually, relative to the
+address of the instruction
+
+73
+00:03:26,150 --> 00:03:27,830
+following the branch.
+
+74
+00:03:27,830 --> 00:03:32,110
+So an offset of 0 would refer
+to the instruction following
+
+75
+00:03:32,110 --> 00:03:34,580
+the branch and an
+offset of -1 would
+
+76
+00:03:34,580 --> 00:03:36,960
+refer to the branch itself.
+
+77
+00:03:36,960 --> 00:03:39,670
+Negative offsets are
+called "backwards branches"
+
+78
+00:03:39,670 --> 00:03:43,470
+and are usually seen at branches
+used at the end of loops, where
+
+79
+00:03:43,470 --> 00:03:46,080
+the looping condition
+is tested and we
+
+80
+00:03:46,080 --> 00:03:48,160
+branch backwards to the
+beginning of the loop
+
+81
+00:03:48,160 --> 00:03:51,040
+if another iteration
+is called for.
+
+82
+00:03:51,040 --> 00:03:53,490
+Positive offsets are
+called "forward branches"
+
+83
+00:03:53,490 --> 00:03:56,950
+and are usually seen in
+code for "if statements",
+
+84
+00:03:56,950 --> 00:03:59,510
+where we might skip over
+some part of the program
+
+85
+00:03:59,510 --> 00:04:02,700
+if a condition is not true.
+
+86
+00:04:02,700 --> 00:04:06,370
+We can use BEQ to implement a
+so-called unconditional branch,
+
+87
+00:04:06,370 --> 00:04:09,290
+i.e., a branch that
+is always taken.
+
+88
+00:04:09,290 --> 00:04:12,230
+If we test R31 to see if
+it's 0, that's always true,
+
+89
+00:04:12,230 --> 00:04:17,459
+so BEQ(R31,...) would always
+branch to the specified target.
+
+90
+00:04:17,459 --> 00:04:20,170
+There's also a BNE
+instruction, identical to BEQ
+
+91
+00:04:20,170 --> 00:04:23,050
+in its operation except
+the sense of the condition
+
+92
+00:04:23,050 --> 00:04:26,800
+is reversed: the branch is taken
+if the value of register "ra"
+
+93
+00:04:26,800 --> 00:04:29,110
+is non-zero.
+
+94
+00:04:29,110 --> 00:04:32,410
+It might seem that only testing
+for zero/non-zero doesn't let
+
+95
+00:04:32,410 --> 00:04:35,440
+us do everything we
+might want to do.
+
+96
+00:04:35,440 --> 00:04:47,012
+For example, how would
+we branch if "a b"?
+
+97
+00:04:47,012 --> 00:04:48,970
+That's where the compare
+instructions come in -
+
+98
+00:04:48,970 --> 00:04:49,450
+they do more
+complicated comparisons,
+
+99
+00:04:49,450 --> 00:04:50,320
+producing a non-zero value
+if the comparison is true
+
+100
+00:04:50,320 --> 00:04:52,153
+and a zero value if the
+comparison is false.
+
+101
+00:04:52,153 --> 00:04:54,270
+Then we can use
+BEQ and BNE to test
+
+102
+00:04:54,270 --> 00:04:56,920
+the result of the comparison
+and branch appropriately.
+
+103
+00:04:56,920 --> 00:04:59,560
+At long last we're
+finally in a position
+
+104
+00:04:59,560 --> 00:05:01,880
+to write Beta code
+to compute factorial
+
+105
+00:05:01,880 --> 00:05:05,520
+using the iterative algorithm
+shown in C code on the left.
+
+106
+00:05:05,520 --> 00:05:07,840
+In the Beta code,
+the loop starts
+
+107
+00:05:07,840 --> 00:05:11,480
+at the second instruction and
+is marked with the "L:" label.
+
+108
+00:05:11,480 --> 00:05:14,790
+The body of the loop consists
+of the required multiplication
+
+109
+00:05:14,790 --> 00:05:16,440
+and the decrement of b.
+
+110
+00:05:16,440 --> 00:05:19,090
+Then, in the fourth
+instruction, b is tested
+
+111
+00:05:19,090 --> 00:05:22,265
+and, if it's non-zero,
+the BNE will branch back
+
+112
+00:05:22,265 --> 00:05:25,520
+to the instruction
+with the label L.
+
+113
+00:05:25,520 --> 00:05:30,170
+Note that in symbolic notation
+for BEQ and BNE instructions
+
+114
+00:05:30,170 --> 00:05:33,425
+we don't write the offset
+directly since directly that
+
+115
+00:05:33,425 --> 00:05:35,285
+would be a pain to
+calculate and would
+
+116
+00:05:35,285 --> 00:05:37,660
+change if we added or removed
+instructions from the loop.
+
+117
+00:05:37,660 --> 00:05:39,160
+Instead we reference
+the instruction
+
+118
+00:05:39,160 --> 00:05:41,320
+to which we want to
+branch, and the program
+
+119
+00:05:41,320 --> 00:05:43,180
+that translates
+the symbolic code
+
+120
+00:05:43,180 --> 00:05:45,040
+into the binary
+instruction fields
+
+121
+00:05:45,040 --> 00:05:48,760
+will do the offset
+calculation for us.
+
+122
+00:05:48,760 --> 00:05:52,480
+There's a satisfying similarity
+between the Beta code
+
+123
+00:05:52,480 --> 00:05:55,950
+and the operations specified
+by the high-level FSM
+
+124
+00:05:55,950 --> 00:05:56,760
+we created for
+
+125
+00:05:56,760 --> 00:05:59,052
+computing factorial in the
+simple programmable datapath
+
+126
+00:05:59,052 --> 00:06:01,170
+discussed earlier
+in this lecture.
+
+127
+00:06:01,170 --> 00:06:02,070
+In this example, each
+
+128
+00:06:02,070 --> 00:06:03,060
+state in the high-level
+FSM matches up nicely
+
+129
+00:06:03,060 --> 00:06:04,800
+with a particular
+Beta instruction.
+
+130
+00:06:04,800 --> 00:06:08,710
+We wouldn't expect that high
+degree of correspondence
+
+131
+00:06:08,710 --> 00:06:13,590
+in general, but since our
+Beta datapath and the example
+
+132
+00:06:13,590 --> 00:06:17,500
+datapath were very similar,
+the states and instructions
+
+133
+00:06:17,500 --> 00:06:20,520
+match up pretty well.

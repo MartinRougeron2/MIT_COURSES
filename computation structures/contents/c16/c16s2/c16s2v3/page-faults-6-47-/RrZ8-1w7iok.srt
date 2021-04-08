@@ -1,0 +1,402 @@
+1
+00:00:01,490 --> 00:00:07,769
+Let's review what happens when the CPU accesses
+a non-resident virtual page, i.e., a page
+
+2
+00:00:07,769 --> 00:00:10,970
+with its resident bit set to 0.
+
+3
+00:00:10,970 --> 00:00:16,079
+In the example shown here, the CPU is trying
+to access virtual page 5.
+
+4
+00:00:16,079 --> 00:00:22,260
+In this case, the MMU signals a page fault
+exception, causing the CPU to suspend execution
+
+5
+00:00:22,260 --> 00:00:27,120
+of the program and switch to the page fault
+handler, which is code that deals with the
+
+6
+00:00:27,120 --> 00:00:29,010
+page fault.
+
+7
+00:00:29,010 --> 00:00:34,930
+The handler starts by either finding an unused
+physical page or, if necessary, creating an
+
+8
+00:00:34,930 --> 00:00:40,180
+unused page by selecting an in-use page and
+making it available.
+
+9
+00:00:40,180 --> 00:00:45,030
+In our example, the handler has chosen virtual
+page 1 for reuse.
+
+10
+00:00:45,030 --> 00:00:50,570
+If the selected page is dirty, i.e., its D
+bit is 1 indicating that its contents have
+
+11
+00:00:50,570 --> 00:00:56,350
+changed since being read from secondary storage,
+write it back to secondary storage.
+
+12
+00:00:56,350 --> 00:01:02,040
+Finally, mark the selected virtual page as
+no longer resident.
+
+13
+00:01:02,040 --> 00:01:08,170
+In the "after" figure, we see that the R bit
+for virtual page 1 has been set to 0.
+
+14
+00:01:08,170 --> 00:01:12,799
+Now physical page 4 is available for re-use.
+
+15
+00:01:12,799 --> 00:01:16,749
+Are there any restrictions on which page we
+can select?
+
+16
+00:01:16,749 --> 00:01:21,719
+Obviously, we can't select the page that holds
+the code for the page fault handler.
+
+17
+00:01:21,719 --> 00:01:25,899
+Pages immune from selection are called "wired"
+pages.
+
+18
+00:01:25,899 --> 00:01:30,090
+And it would very inefficient to choose the
+page that holds the code that made the initial
+
+19
+00:01:30,090 --> 00:01:35,399
+memory access, since we expect to start executing
+that code as soon as we finish handling the
+
+20
+00:01:35,399 --> 00:01:36,979
+page fault.
+
+21
+00:01:36,979 --> 00:01:41,520
+The optimal strategy would be to choose the
+page whose next use will occur farthest in
+
+22
+00:01:41,520 --> 00:01:42,520
+the future.
+
+23
+00:01:42,520 --> 00:01:48,649
+But, of course, this involves knowledge of
+future execution paths and so isn't a realizable
+
+24
+00:01:48,649 --> 00:01:50,229
+strategy.
+
+25
+00:01:50,229 --> 00:01:54,810
+Wikipedia provides a nice description of the
+many strategies for choosing a replacement
+
+26
+00:01:54,810 --> 00:01:59,969
+page, with their various tradeoffs between
+ease of implementation and impact on the rate
+
+27
+00:01:59,969 --> 00:02:05,049
+of page faults -
+see the URL given at the bottom of the slide.
+
+28
+00:02:05,049 --> 00:02:10,780
+The aging algorithm they describe is frequently
+used since it offers near optimal performance
+
+29
+00:02:10,780 --> 00:02:14,220
+at a moderate implementation cost.
+
+30
+00:02:14,220 --> 00:02:20,360
+Next, the desired virtual page is read from
+secondary storage into the selected physical
+
+31
+00:02:20,360 --> 00:02:21,360
+page.
+
+32
+00:02:21,360 --> 00:02:26,420
+In our example, virtual page 5 is now loaded
+into physical page 4.
+
+33
+00:02:26,420 --> 00:02:31,890
+Then the R bit and PPN fields in the page
+table entry for virtual page 5 are updated
+
+34
+00:02:31,890 --> 00:02:38,170
+to indicate that the contents of that virtual
+page now reside in physical page 4.
+
+35
+00:02:38,170 --> 00:02:44,030
+Finally the handler is finished and execution
+of the original program is resumed, re-executing
+
+36
+00:02:44,030 --> 00:02:47,270
+the instruction that caused the page fault.
+
+37
+00:02:47,270 --> 00:02:54,050
+Since the page map has been updated, this
+time the access succeeds and execution continues.
+
+38
+00:02:54,050 --> 00:02:59,050
+To double-check our understanding of page
+faults, let's run through an example.
+
+39
+00:02:59,050 --> 00:03:04,330
+Here's the same setup as in our previous example,
+but this time consider a store instruction
+
+40
+00:03:04,330 --> 00:03:12,900
+that's making an access to virtual address
+0x600, which is located on virtual page 6.
+
+41
+00:03:12,900 --> 00:03:18,710
+Checking the page table entry for VPN 6, we
+see that its R bit 0 indicating that it is
+
+42
+00:03:18,710 --> 00:03:23,460
+NOT resident in main memory, which causes
+a page fault exception.
+
+43
+00:03:23,460 --> 00:03:28,050
+The page fault handler selects VPN 0xE for
+replacement since we've been told in the setup
+
+44
+00:03:28,050 --> 00:03:31,620
+that it's the least-recently-used page.
+
+45
+00:03:31,620 --> 00:03:38,640
+The page table entry for VPN 0xE has D=1 so
+the handler writes the contents of VPN 0xE,
+
+46
+00:03:38,640 --> 00:03:43,110
+which is found in PPN 0x5, to secondary storage.
+
+47
+00:03:43,110 --> 00:03:48,650
+Then it updates the page table to indicate
+that VPN 0xE is no longer resident.
+
+48
+00:03:48,650 --> 00:03:55,960
+Next, the contents of VPN 0x6 are read from
+secondary storage into the now available PPN
+
+49
+00:03:55,960 --> 00:03:57,230
+0x5.
+
+50
+00:03:57,230 --> 00:04:02,070
+Now the handler updates the page table entry
+for VPN 0x6 to indicate that it's resident
+
+51
+00:04:02,070 --> 00:04:05,290
+in PPN 0x5.
+
+52
+00:04:05,290 --> 00:04:10,710
+The page fault handler has completed its work,
+so program execution resumes and the ST instruction
+
+53
+00:04:10,710 --> 00:04:12,730
+is re-executed.
+
+54
+00:04:12,730 --> 00:04:20,709
+This time the MMU is able to translate virtual
+address 0x600 to physical address 0x500.
+
+55
+00:04:20,709 --> 00:04:27,740
+And since the ST instruction modifies the
+contents of VPN 0x6, its D bit is set to 1.
+
+56
+00:04:27,740 --> 00:04:28,740
+Whew!
+
+57
+00:04:28,740 --> 00:04:32,110
+We're done :)
+We can think of the work of the MMU as being
+
+58
+00:04:32,110 --> 00:04:38,949
+divided into two tasks, which as computer
+scientists, we would think of as two procedures.
+
+59
+00:04:38,949 --> 00:04:43,710
+In this formulation the information in the
+page map is held in several arrays: the R
+
+60
+00:04:43,710 --> 00:04:48,580
+array holds the resident bits,
+the D array holds the dirty bits, the PPN
+
+61
+00:04:48,580 --> 00:04:54,490
+array holds the physical page numbers,
+and the DiskAdr array holds the location in
+
+62
+00:04:54,490 --> 00:04:58,909
+secondary storage for each virtual page.
+
+63
+00:04:58,909 --> 00:05:04,050
+The VtoP procedure is invoked on each memory
+access to translate the virtual address into
+
+64
+00:05:04,050 --> 00:05:06,210
+a physical address.
+
+65
+00:05:06,210 --> 00:05:10,610
+If the requested virtual page is not resident,
+the PageFault procedure is invoked to make
+
+66
+00:05:10,610 --> 00:05:11,860
+the page resident.
+
+67
+00:05:11,860 --> 00:05:17,430
+Once the requested page is resident, the VPN
+is used as an index to lookup the corresponding
+
+68
+00:05:17,430 --> 00:05:23,870
+PPN, which is then concatenated with the page
+offset to form the physical address.
+
+69
+00:05:23,870 --> 00:05:28,779
+The PageFault routine starts by selecting
+a virtual page to be replaced, writing out
+
+70
+00:05:28,779 --> 00:05:31,080
+its contents if it's dirty.
+
+71
+00:05:31,080 --> 00:05:35,460
+The selected page is then marked as not resident.
+
+72
+00:05:35,460 --> 00:05:40,569
+Finally the desired virtual page is read from
+secondary storage and the page map information
+
+73
+00:05:40,569 --> 00:05:46,050
+updated to reflect that it's now resident
+in the newly filled physical page.
+
+74
+00:05:46,050 --> 00:05:53,220
+We'll use hardware to implement the VtoP functionality
+since it's needed for every memory access.
+
+75
+00:05:53,220 --> 00:05:58,569
+The call to the PageFault procedure is accomplished
+via a page fault exception, which directs
+
+76
+00:05:58,569 --> 00:06:04,789
+the CPU to execute the appropriate handler
+software that contains the PageFault procedure.
+
+77
+00:06:04,789 --> 00:06:09,979
+This is a good strategy to pursue in all our
+implementation choices: use hardware for the
+
+78
+00:06:09,979 --> 00:06:16,250
+operations that need to be fast, but use exceptions
+to handle the (hopefully infrequent) exceptional
+
+79
+00:06:16,250 --> 00:06:19,340
+cases in software.
+
+80
+00:06:19,340 --> 00:06:24,030
+Since the software is executed by the CPU,
+which is itself a piece of hardware, what
+
+81
+00:06:24,030 --> 00:06:28,960
+we're really doing is making the tradeoff
+between using special-purpose hardware (e.g.,
+
+82
+00:06:28,960 --> 00:06:34,300
+the MMU) or using general-purpose hardware
+(e.g., the CPU).
+
+83
+00:06:34,300 --> 00:06:39,808
+In general, one should be skeptical of proposals
+to use special-purpose hardware, reserving
+
+84
+00:06:39,808 --> 00:06:45,099
+that choice for operations that truly are
+commonplace and whose performance is critical
+
+85
+00:06:45,099 --> 00:06:47,159
+to the overall performance of the system.

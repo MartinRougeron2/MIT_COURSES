@@ -1,0 +1,338 @@
+1
+00:00:00,370 --> 00:00:07,410
+As presented in lecture, in this course, we
+use a simple 32-bit processor called the Beta.
+
+2
+00:00:07,410 --> 00:00:11,590
+The Beta works on 32-bit instruction and data
+words.
+
+3
+00:00:11,590 --> 00:00:15,500
+However, the addresses in memory are specified
+in bytes.
+
+4
+00:00:15,500 --> 00:00:22,810
+A byte is made up of 8 bits, so each 32-bit
+instruction consists of 4 bytes.
+
+5
+00:00:22,810 --> 00:00:28,570
+That means that if you have two instructions
+A and B in consecutive memory locations, if
+
+6
+00:00:28,570 --> 00:00:35,649
+A is at address 0x100, then B is at address
+0x104.
+
+7
+00:00:35,649 --> 00:00:42,370
+Now, suppose that you are given the following
+piece of code.
+
+8
+00:00:42,370 --> 00:00:47,019
+The . = 0 notation tells you that your program
+begins at address 0.
+
+9
+00:00:47,019 --> 00:00:52,809
+You can assume that execution begins at this
+location 0 and halts when the HALT() instruction
+
+10
+00:00:52,809 --> 00:00:55,449
+is about to be executed.
+
+11
+00:00:55,449 --> 00:01:00,460
+We want to determine what value ends up in
+R0 after this instruction sequence has been
+
+12
+00:01:00,460 --> 00:01:02,290
+executed.
+
+13
+00:01:02,290 --> 00:01:06,830
+Note that we are working with hexadecimal
+numbers in this code and we want our answer
+
+14
+00:01:06,830 --> 00:01:09,900
+to also be in hexadecimal.
+
+15
+00:01:09,900 --> 00:01:14,680
+This code begins with a LD operation into
+register R0.
+
+16
+00:01:14,680 --> 00:01:21,120
+The load, uses the value of R31 + c as the
+source address for the load.
+
+17
+00:01:21,120 --> 00:01:29,220
+Since R31 = 0, this means that the value stored
+at address c is being loaded into R0.
+
+18
+00:01:29,220 --> 00:01:35,460
+So after the LD, R0 = 0x300.
+
+19
+00:01:35,460 --> 00:01:41,830
+Next an ADDC of R0 with the constant b is
+performed and that result is stored back into
+
+20
+00:01:41,830 --> 00:01:44,539
+R0.
+
+21
+00:01:44,539 --> 00:01:53,450
+The .=0x200 notation immediately preceding
+the "a" label, tells us that address a = 0x200.
+
+22
+00:01:53,450 --> 00:02:02,160
+This means that address b = 0x204, and c = 0x208.
+
+23
+00:02:02,160 --> 00:02:16,709
+So if we are adding the constant b to R0,
+R0 now becomes 0x300 + 0x204 = 0x504.
+
+24
+00:02:16,709 --> 00:02:20,090
+Now lets take a look at this short piece of
+code.
+
+25
+00:02:20,090 --> 00:02:26,950
+Our goal is to determine the value left in
+R0 in hexadecimal.
+
+26
+00:02:26,950 --> 00:02:32,810
+The . = 0 notation once again tells us that
+our first instruction (the branch) is at address
+
+27
+00:02:32,810 --> 00:02:34,160
+0.
+
+28
+00:02:34,160 --> 00:02:43,480
+The branch instruction then branches to location
+. + 4 = 0 + 4 = 4.
+
+29
+00:02:43,480 --> 00:02:46,590
+This is the address of the HALT() instruction.
+
+30
+00:02:46,590 --> 00:02:52,510
+In addition to branching to the HALT() instruction,
+a branch instruction also stores the address
+
+31
+00:02:52,510 --> 00:02:59,209
+of the instruction immediately following it
+into the destination register, R0 in this
+
+32
+00:02:59,209 --> 00:03:00,209
+case.
+
+33
+00:03:00,209 --> 00:03:07,610
+The address of the next instruction is 4,
+so R0 = 0x4.
+
+34
+00:03:07,610 --> 00:03:12,180
+Let's take a look at what this code is doing.
+
+35
+00:03:12,180 --> 00:03:26,810
+It first loads the contents of address x into
+R0, so R0 = 0x0FACE0FF or 0xFACEOFF for short.
+
+36
+00:03:26,810 --> 00:03:33,110
+It then moves the constant 0 into R1, so R1
+= 0.
+
+37
+00:03:33,110 --> 00:03:40,489
+It now enters the loop where the ANDC puts
+into R3 the least significant bit of R0.
+
+38
+00:03:40,489 --> 00:03:45,260
+The ADD increments R1 if R3 equals 1.
+
+39
+00:03:45,260 --> 00:03:51,750
+This means that if the least significant bit
+of R0 was a 1, then R1 is incremented by 1,
+
+40
+00:03:51,750 --> 00:03:54,790
+otherwise R1 stays the same.
+
+41
+00:03:54,790 --> 00:03:59,790
+The shift right constant then shifts R0 to
+the right by 1.
+
+42
+00:03:59,790 --> 00:04:06,909
+This makes R0 have a 0 in the most significant
+bit, and the top 31 bits, of what R0 used
+
+43
+00:04:06,909 --> 00:04:11,420
+to be, are shifted over by one position to
+the right.
+
+44
+00:04:11,420 --> 00:04:17,399
+Note that this means that the least significant
+bit of the old R0 is now completely gone.
+
+45
+00:04:17,399 --> 00:04:22,960
+That's okay though because we already incremented
+R1 based on that original least significant
+
+46
+00:04:22,960 --> 00:04:25,560
+bit of R0.
+
+47
+00:04:25,560 --> 00:04:32,090
+The BNE, or branch on not equal, then branches
+back to loop as long as R0 is not equal to
+
+48
+00:04:32,090 --> 00:04:33,570
+0.
+
+49
+00:04:33,570 --> 00:04:37,940
+This means that what this loop is doing is
+looking at the current least significant bit
+
+50
+00:04:37,940 --> 00:04:42,360
+of R0,
+incrementing R1 if that bit is 1,
+
+51
+00:04:42,360 --> 00:04:46,860
+and then shifting that bit out until all bits
+have been shifted out.
+
+52
+00:04:46,860 --> 00:04:51,699
+In other words, it's counting the total number
+of ones in the original value loaded from
+
+53
+00:04:51,699 --> 00:04:53,560
+address x.
+
+54
+00:04:53,560 --> 00:05:00,830
+The loop ends when all the 1's have been counted
+at which point R0 is left with a 0 in it because
+
+55
+00:05:00,830 --> 00:05:03,720
+all the 1's have been shifted out.
+
+56
+00:05:03,720 --> 00:05:20,750
+R1 is left with the number of 1's in the data
+0x0FACE0FF equals in binary 0000 1111 1010
+
+57
+00:05:20,750 --> 00:05:31,539
+1100 1110 0000 1111 1111.
+
+58
+00:05:31,539 --> 00:05:47,720
+There are 19 ones in 0x0FACE0FF, so R1 = 19
+= 16 + 3 which in hexadecimal = 0x13.
+
+59
+00:05:47,720 --> 00:05:54,590
+In this piece of code, the CMOVE first sets
+the stack pointer to 0x1000.
+
+60
+00:05:54,590 --> 00:05:58,340
+Then a PUSH(SP) operation is performed.
+
+61
+00:05:58,340 --> 00:06:01,510
+Lets first understand what a PUSH instruction
+does.
+
+62
+00:06:01,510 --> 00:06:06,919
+A PUSH instruction is actually a macro made
+up of two beta instructions.
+
+63
+00:06:06,919 --> 00:06:12,680
+To push a value onto the stack, the stack
+pointer is first incremented by 4 in order
+
+64
+00:06:12,680 --> 00:06:16,550
+to point to the next empty location on the
+stack.
+
+65
+00:06:16,550 --> 00:06:17,870
+This sets SP = 0x1004.
+
+66
+00:06:17,870 --> 00:06:27,110
+Then, the contents of register Ra, which is
+being pushed onto the stack, are stored at
+
+67
+00:06:27,110 --> 00:06:35,379
+the memory location whose address is SP-4
+which is address 0x1000.
+
+68
+00:06:35,379 --> 00:06:42,500
+Now looking at the actual PUSH operation performed
+here, we are performing a PUSH of stack pointer
+
+69
+00:06:42,500 --> 00:06:47,169
+so the Ra register is also the stack pointer.
+
+70
+00:06:47,169 --> 00:06:54,550
+This means that the value stored at location
+0x1000 is actually the value of SP which is
+
+71
+00:06:54,550 --> 00:06:57,710
+0x1004.
+
+72
+00:06:57,710 --> 00:07:03,289
+So the value that got pushed onto the stack
+is 0x1004.

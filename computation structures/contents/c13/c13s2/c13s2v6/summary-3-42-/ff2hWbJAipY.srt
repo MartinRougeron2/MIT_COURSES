@@ -1,0 +1,234 @@
+1
+00:00:00,240 --> 00:00:02,900
+Okay, we're done!
+
+2
+00:00:02,900 --> 00:00:07,689
+Here's the final datapath for executing instructions
+and handling exceptions.
+
+3
+00:00:07,689 --> 00:00:12,580
+Please take a moment to remind yourself of
+what each datapath component does, i.e., why
+
+4
+00:00:12,580 --> 00:00:14,820
+it was added to the datapath.
+
+5
+00:00:14,820 --> 00:00:20,450
+Similarly, you should understand how the control
+signals affect the operation of the datapath.
+
+6
+00:00:20,450 --> 00:00:26,009
+At least to my eye, this seems like a very
+modest amount of hardware to achieve all this
+
+7
+00:00:26,009 --> 00:00:27,980
+functionality!
+
+8
+00:00:27,980 --> 00:00:32,141
+It's so modest in fact, that will ask you
+to actually complete the logic design for
+
+9
+00:00:32,141 --> 00:00:38,290
+the Beta in an upcoming lab assignment :)
+How does our design compare to the processor
+
+10
+00:00:38,290 --> 00:00:42,320
+you're using to view this course online?
+
+11
+00:00:42,320 --> 00:00:46,830
+Modern processors have many additional complexities
+to increase performance:
+
+12
+00:00:46,830 --> 00:00:52,970
+pipelined execution, the ability to execute
+more than instruction per cycle, fancier memory
+
+13
+00:00:52,970 --> 00:00:57,480
+systems to reduce average memory access time,
+etc.
+
+14
+00:00:57,480 --> 00:01:01,590
+We'll cover some of these enhancements in
+upcoming lectures.
+
+15
+00:01:01,590 --> 00:01:08,670
+The bottom line: the Beta hardware might occupy
+1 or 2 sq mm on a modern integrated circuit,
+
+16
+00:01:08,670 --> 00:01:15,260
+while a modern Intel processor occupies 300
+to 600 sq mm.
+
+17
+00:01:15,260 --> 00:01:18,759
+Clearly all that extra circuitry is there
+for a reason!
+
+18
+00:01:18,759 --> 00:01:24,820
+If you're curious, I'd recommend taking a
+course on advanced processor architecture.
+
+19
+00:01:24,820 --> 00:01:30,009
+Here we've gathered up all the control signal
+settings for each class of instructions, including
+
+20
+00:01:30,009 --> 00:01:34,340
+the settings needed for exceptions and during
+reset.
+
+21
+00:01:34,340 --> 00:01:39,090
+Wherever possible, we've specified "don't
+care" for control signals whose value does
+
+22
+00:01:39,090 --> 00:01:44,890
+not affect the actions of the datapath needed
+for a particular instruction.
+
+23
+00:01:44,890 --> 00:01:50,210
+Note that the memory write enable signal always
+has a defined value, ensuring that we only
+
+24
+00:01:50,210 --> 00:01:53,149
+write to the memory during ST instructions.
+
+25
+00:01:53,149 --> 00:01:59,069
+Similarly, the write enable for the register
+file is well-defined, except during RESET
+
+26
+00:01:59,069 --> 00:02:03,979
+when presumably we're restarting the processor
+and don't care about preserving any register
+
+27
+00:02:03,979 --> 00:02:06,060
+values.
+
+28
+00:02:06,060 --> 00:02:11,360
+As mentioned previously, a read-only memory
+(ROM) indexed by the 6-bit opcode field is
+
+29
+00:02:11,360 --> 00:02:16,680
+the easiest way to generate the appropriate
+control signals for the current instruction.
+
+30
+00:02:16,680 --> 00:02:23,060
+The Z and IRQ inputs to the control logic
+will affect the control signals and this can
+
+31
+00:02:23,060 --> 00:02:27,720
+be accomplished with a small amount of logic
+to process the ROM outputs.
+
+32
+00:02:27,720 --> 00:02:32,920
+One can always have fun with Karnuagh maps
+to generate a minimal implementation using
+
+33
+00:02:32,920 --> 00:02:34,950
+ordinary logic gates.
+
+34
+00:02:34,950 --> 00:02:40,060
+The result will be much smaller, both in terms
+of size and propagation delay, but requires
+
+35
+00:02:40,060 --> 00:02:42,500
+a lot more design work!
+
+36
+00:02:42,500 --> 00:02:47,390
+My recommendation: start with the ROM implementation
+and get everything else working.
+
+37
+00:02:47,390 --> 00:02:52,520
+Then come back later when you feel like hacking
+logic gates :)
+
+38
+00:02:52,520 --> 00:02:57,340
+So that's what it takes to design the hardware
+for a simple 32-bit computer.
+
+39
+00:02:57,340 --> 00:03:03,470
+Of course, we made the job easy for ourselves
+by choosing a simple binary encoding for our
+
+40
+00:03:03,470 --> 00:03:10,340
+instructions and limiting the hardware functionality
+to efficiently executing the most common operations.
+
+41
+00:03:10,340 --> 00:03:15,210
+Less common and more complex functionality
+can be left to software.
+
+42
+00:03:15,210 --> 00:03:20,540
+The exception mechanism gave us a powerful
+tool for transferring control to software
+
+43
+00:03:20,540 --> 00:03:23,840
+when the hardware couldn't handle the task.
+
+44
+00:03:23,840 --> 00:03:26,710
+Have fun completing the hardware design of
+your Beta.
+
+45
+00:03:26,710 --> 00:03:29,570
+Thousands of MIT students have enjoyed that
+"Yes!"
+
+46
+00:03:29,570 --> 00:03:33,510
+moment when their design works for the first
+time.
+
+47
+00:03:33,510 --> 00:03:37,870
+For their efforts we reward them with the
+"Beta Inside" sticker you see here, which
+
+48
+00:03:37,870 --> 00:03:41,620
+you can see on laptops as you walk around
+the Institute.
+
+49
+00:03:41,620 --> 00:03:42,220
+Good luck!

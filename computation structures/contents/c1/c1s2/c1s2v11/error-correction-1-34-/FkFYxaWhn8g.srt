@@ -1,0 +1,105 @@
+1
+00:00:00,880 --> 00:00:05,710
+Is there any chance we can not only detect
+a single-bit error but also correct the error
+
+2
+00:00:05,710 --> 00:00:07,770
+to recover the original data?
+
+3
+00:00:07,770 --> 00:00:08,770
+Sure!
+
+4
+00:00:08,770 --> 00:00:10,059
+Here's how.
+
+5
+00:00:10,059 --> 00:00:15,190
+By increasing the Hamming distance between
+valid code words to 3, we guarantee that the
+
+6
+00:00:15,190 --> 00:00:19,150
+sets of code words produced by single-bit
+errors don't overlap.
+
+7
+00:00:19,150 --> 00:00:28,189
+The set of code words produced by corrupting
+000 (100, 010, or 001) has no code words in
+
+8
+00:00:28,189 --> 00:00:37,340
+common with the set of code words produced
+by corrupting 111 (110, 101, or 011).
+
+9
+00:00:37,340 --> 00:00:41,660
+Assuming that at most one error occurred,
+we can deduce the original code word from
+
+10
+00:00:41,660 --> 00:00:43,600
+whatever code word we receive.
+
+11
+00:00:43,600 --> 00:00:50,490
+For example, if we receive 001, we deduce
+that the original code word was 000 and there
+
+12
+00:00:50,490 --> 00:00:53,190
+has been a single-bit error.
+
+13
+00:00:53,190 --> 00:00:58,030
+Again we can generalize this insight: if we
+want to correct up to E errors, the minimum
+
+14
+00:00:58,030 --> 00:01:03,110
+Hamming distance between valid code words
+must be at least 2E + 1.
+
+15
+00:01:03,110 --> 00:01:07,569
+For example, to correct single-bit errors
+we need valid code words with a minimum Hamming
+
+16
+00:01:07,569 --> 00:01:09,590
+distance of 3.
+
+17
+00:01:09,590 --> 00:01:14,130
+Coding theory is a research area devoted to
+developing algorithms to generate code words
+
+18
+00:01:14,130 --> 00:01:17,799
+that have the necessary error detection and
+correction properties.
+
+19
+00:01:17,799 --> 00:01:20,689
+You can take entire courses on this topic!
+
+20
+00:01:20,689 --> 00:01:25,700
+But we'll stop here with our basic insights:
+by choosing code words far enough apart (as
+
+21
+00:01:25,700 --> 00:01:30,530
+measured by Hamming distance) we can ensure
+that we can detect and even correct errors
+
+22
+00:01:30,530 --> 00:01:33,039
+that have corrupted our encoded data.
+
+23
+00:01:33,039 --> 00:01:33,530
+Pretty neat!

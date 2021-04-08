@@ -1,0 +1,670 @@
+1
+00:00:02,680 --> 00:00:05,260
+PROFESSOR: Instead of building
+all of our logic functions
+
+2
+00:00:05,260 --> 00:00:08,140
+directly in CMOS,
+it is easier for us
+
+3
+00:00:08,140 --> 00:00:10,780
+to create a higher
+level of abstraction
+
+4
+00:00:10,780 --> 00:00:14,890
+known as Boolean gates,
+which represent CMOS gates.
+
+5
+00:00:14,890 --> 00:00:17,620
+Each gate is assigned a
+symbol, which can then
+
+6
+00:00:17,620 --> 00:00:21,100
+be used in schematic diagrams
+that combine multiple logic
+
+7
+00:00:21,100 --> 00:00:22,840
+gates together.
+
+8
+00:00:22,840 --> 00:00:24,760
+In order to be
+able to understand
+
+9
+00:00:24,760 --> 00:00:28,690
+what function any combination
+of logic gates will produce,
+
+10
+00:00:28,690 --> 00:00:31,600
+we will begin by reviewing
+the basic gates together
+
+11
+00:00:31,600 --> 00:00:34,960
+with the truth tables
+that define their logic.
+
+12
+00:00:34,960 --> 00:00:37,090
+We begin with an inverter.
+
+13
+00:00:37,090 --> 00:00:39,610
+An inverter is a gate
+that has a single input
+
+14
+00:00:39,610 --> 00:00:41,260
+and a single output.
+
+15
+00:00:41,260 --> 00:00:44,320
+The output is simply the
+inverse of the input.
+
+16
+00:00:44,320 --> 00:00:47,110
+When A equals 0, Y equals 1.
+
+17
+00:00:47,110 --> 00:00:50,530
+And when A equals 1, Y equals 0.
+
+18
+00:00:50,530 --> 00:00:53,520
+Next, we examine
+AND and OR gates.
+
+19
+00:00:53,520 --> 00:00:57,760
+The AND function expects all
+of its inputs to be true,
+
+20
+00:00:57,760 --> 00:01:02,320
+or 1, in order to produce
+a 1 as its output.
+
+21
+00:01:02,320 --> 00:01:08,230
+So its truth table is for A,
+B equals 0, 0, Y equals 0.
+
+22
+00:01:08,230 --> 00:01:11,740
+For A, B equals
+0, 1, Y equals 0.
+
+23
+00:01:11,740 --> 00:01:15,580
+For A, B equals
+1, 0, y equals 0.
+
+24
+00:01:15,580 --> 00:01:20,161
+And for A, B equal
+1, 1, Y equals 1.
+
+25
+00:01:20,161 --> 00:01:23,220
+The OR function just
+expects at least one
+
+26
+00:01:23,220 --> 00:01:26,580
+of its inputs to be true
+in order to produce a 1
+
+27
+00:01:26,580 --> 00:01:28,270
+as its output.
+
+28
+00:01:28,270 --> 00:01:32,130
+So for A, B equals
+0, 0, Y equals 0.
+
+29
+00:01:32,130 --> 00:01:37,040
+But for the other three
+combinations, Y equals 1.
+
+30
+00:01:37,040 --> 00:01:38,660
+NAND and NOR gates
+simply produce
+
+31
+00:01:38,660 --> 00:01:41,180
+the inverse of AND and OR.
+
+32
+00:01:41,180 --> 00:01:44,570
+The reason that we like to
+work with NAND and NOR gates is
+
+33
+00:01:44,570 --> 00:01:46,520
+because they are
+inverting gates,
+
+34
+00:01:46,520 --> 00:01:50,000
+and they can be implemented
+as a single CMOS gate,
+
+35
+00:01:50,000 --> 00:01:53,480
+whereas the AND and
+OR gates cannot.
+
+36
+00:01:53,480 --> 00:01:57,660
+Finally, the last basic
+gate is an exclusive or.
+
+37
+00:01:57,660 --> 00:02:00,380
+The exclusive or
+produces a 1 output
+
+38
+00:02:00,380 --> 00:02:05,240
+if exactly one of its two
+inputs is a 1 and 0 otherwise.
+
+39
+00:02:05,240 --> 00:02:09,410
+So for A, B equals
+0, 0, Y equals 0.
+
+40
+00:02:09,410 --> 00:02:13,100
+For A, B equals
+0, 1, Y equals 1.
+
+41
+00:02:13,100 --> 00:02:17,060
+For A, B equal to
+1, 0, Y equals 1.
+
+42
+00:02:17,060 --> 00:02:23,150
+And for A, B equals
+to 1, 1, y equals 0.
+
+43
+00:02:23,150 --> 00:02:26,480
+The output of one Boolean
+gate can be used as an input
+
+44
+00:02:26,480 --> 00:02:28,430
+to another Boolean gate.
+
+45
+00:02:28,430 --> 00:02:30,800
+So multiple gates can
+be used to generate
+
+46
+00:02:30,800 --> 00:02:33,120
+more complex functions.
+
+47
+00:02:33,120 --> 00:02:35,240
+For example, here
+we have a circuit
+
+48
+00:02:35,240 --> 00:02:38,870
+that consists of two
+inputs and six gates, which
+
+49
+00:02:38,870 --> 00:02:42,710
+are an inverter, an AND
+gate, and OR gate, two NOR
+
+50
+00:02:42,710 --> 00:02:45,140
+gates, and 1 NAND gate.
+
+51
+00:02:45,140 --> 00:02:47,780
+In order to figure out what
+this combination of gates
+
+52
+00:02:47,780 --> 00:02:51,410
+produces as its output,
+we can work incrementally
+
+53
+00:02:51,410 --> 00:02:53,120
+through the circuit.
+
+54
+00:02:53,120 --> 00:02:58,400
+We begin by enumerating all our
+choices of inputs for A and B.
+
+55
+00:02:58,400 --> 00:03:00,890
+We know that the
+output of the inverter
+
+56
+00:03:00,890 --> 00:03:06,260
+is the complement of B. The AND
+and OR gates use the A and B
+
+57
+00:03:06,260 --> 00:03:07,670
+inputs directly.
+
+58
+00:03:07,670 --> 00:03:11,420
+So since we just reviewed
+what AND and OR gates produce,
+
+59
+00:03:11,420 --> 00:03:13,400
+we can fill in these
+columns, as well.
+
+60
+00:03:17,350 --> 00:03:21,070
+Next, we want to see what
+our first NOR gate produces.
+
+61
+00:03:21,070 --> 00:03:24,990
+Its inputs are A and
+the complement of B.
+
+62
+00:03:24,990 --> 00:03:27,840
+We walk through each of
+the input combinations
+
+63
+00:03:27,840 --> 00:03:31,590
+and determine the corresponding
+output for that gate.
+
+64
+00:03:31,590 --> 00:03:35,190
+For input 0, 1, the output is 0.
+
+65
+00:03:35,190 --> 00:03:38,190
+For 0, 0, the output is 1.
+
+66
+00:03:38,190 --> 00:03:41,550
+For inputs 1, 1,
+the output is 0.
+
+67
+00:03:41,550 --> 00:03:45,150
+And for input 1,
+0, the output is 0.
+
+68
+00:03:45,150 --> 00:03:47,580
+In the same manner, we
+evaluate the outputs
+
+69
+00:03:47,580 --> 00:03:49,770
+for our second NOR gate.
+
+70
+00:03:49,770 --> 00:03:54,180
+Its inputs are the outputs of
+the first NOR gate and the AND
+
+71
+00:03:54,180 --> 00:03:55,230
+gate.
+
+72
+00:03:55,230 --> 00:03:58,410
+Again, we simply walk through
+each combination of inputs
+
+73
+00:03:58,410 --> 00:04:02,250
+and specify the outputs
+produced by the second NOR gate.
+
+74
+00:04:02,250 --> 00:04:05,760
+When both inputs are
+0, the output is 1.
+
+75
+00:04:05,760 --> 00:04:08,740
+When one input is 0
+and the other is a 1,
+
+76
+00:04:08,740 --> 00:04:10,990
+the output is a 0.
+
+77
+00:04:10,990 --> 00:04:13,380
+Finally, we take those
+outputs, together
+
+78
+00:04:13,380 --> 00:04:16,079
+with the outputs of the
+OR gate, and generate
+
+79
+00:04:16,079 --> 00:04:20,959
+the final output of the circuit
+at the output of the NAND gate.
+
+80
+00:04:20,959 --> 00:04:25,110
+Here, when both inputs
+are 1, we get a 0 output.
+
+81
+00:04:25,110 --> 00:04:27,840
+Otherwise, the output is a 1.
+
+82
+00:04:27,840 --> 00:04:30,180
+This NAND column
+of our truth table
+
+83
+00:04:30,180 --> 00:04:35,440
+is the resulting output H.
+
+84
+00:04:35,440 --> 00:04:37,720
+Now that we have
+evaluated what our output
+
+85
+00:04:37,720 --> 00:04:41,650
+H is equal to for each
+combination of A and B,
+
+86
+00:04:41,650 --> 00:04:45,040
+we can represent the circuit
+as a single truth table
+
+87
+00:04:45,040 --> 00:04:47,800
+whose inputs are A
+and B and whose output
+
+88
+00:04:47,800 --> 00:04:51,490
+is H. At this point, we
+can express the function
+
+89
+00:04:51,490 --> 00:04:56,590
+H as a combination of all the
+cases that make H equal to 1.
+
+90
+00:04:56,590 --> 00:05:00,700
+This occurs if A and
+B are both equal to 0,
+
+91
+00:05:00,700 --> 00:05:06,280
+or if A equals 0 and B
+equals 1, or if A and B are
+
+92
+00:05:06,280 --> 00:05:08,230
+both equal to 1.
+
+93
+00:05:08,230 --> 00:05:11,200
+This can be expressed as
+a Boolean logic expression
+
+94
+00:05:11,200 --> 00:05:12,850
+as follows.
+
+95
+00:05:12,850 --> 00:05:19,420
+H equals not A
+not B, or not A B,
+
+96
+00:05:19,420 --> 00:05:26,050
+or A B. This notation is called
+the sum of products notation.
+
+97
+00:05:26,050 --> 00:05:29,380
+Any sum of products can be
+converted into a simple gate
+
+98
+00:05:29,380 --> 00:05:33,580
+representation of the function
+using only inverters, AND,
+
+99
+00:05:33,580 --> 00:05:38,230
+and OR gates by having one large
+OR gate that receives as input
+
+100
+00:05:38,230 --> 00:05:40,840
+one AND gate per product term.
+
+101
+00:05:40,840 --> 00:05:43,600
+Inverters are used as
+needed to complement
+
+102
+00:05:43,600 --> 00:05:47,950
+the inputs to the AND gates.
+
+103
+00:05:47,950 --> 00:05:49,630
+One thing that's
+interesting to note
+
+104
+00:05:49,630 --> 00:05:52,060
+about this combination
+of gates is
+
+105
+00:05:52,060 --> 00:05:54,640
+that it can easily be
+converted into a circuit that
+
+106
+00:05:54,640 --> 00:05:57,130
+consists purely of NAND gates.
+
+107
+00:05:57,130 --> 00:05:59,410
+The way to do this is
+to realize that if you
+
+108
+00:05:59,410 --> 00:06:02,560
+take the output of a
+gate and invert it twice,
+
+109
+00:06:02,560 --> 00:06:04,960
+you've produced the
+original output.
+
+110
+00:06:04,960 --> 00:06:08,740
+This means that we can add
+two inverters between each AND
+
+111
+00:06:08,740 --> 00:06:11,200
+output and OR input.
+
+112
+00:06:11,200 --> 00:06:13,630
+We can draw these
+inverters as bubbles,
+
+113
+00:06:13,630 --> 00:06:16,150
+which represent
+inversion, where we place
+
+114
+00:06:16,150 --> 00:06:18,970
+one bubble on the
+output of the AND gate
+
+115
+00:06:18,970 --> 00:06:22,360
+and the other bubble at
+the input to the OR gate.
+
+116
+00:06:22,360 --> 00:06:25,630
+We know that an AND gate
+followed by an inversion
+
+117
+00:06:25,630 --> 00:06:27,880
+is simply a NAND gate.
+
+118
+00:06:27,880 --> 00:06:31,570
+We also know that an inverter
+is equivalent to a NAND gate
+
+119
+00:06:31,570 --> 00:06:35,230
+with both of its
+inputs tied together.
+
+120
+00:06:35,230 --> 00:06:38,140
+In addition, using
+De Morgan's law,
+
+121
+00:06:38,140 --> 00:06:46,420
+we know that not A or not B is
+equivalent to not of A and B.
+
+122
+00:06:46,420 --> 00:06:49,810
+This means that the bubbles
+followed by the OR gate
+
+123
+00:06:49,810 --> 00:06:52,880
+can also be replaced
+with a NAND gate,
+
+124
+00:06:52,880 --> 00:06:55,000
+thus arriving at our
+equivalent circuit
+
+125
+00:06:55,000 --> 00:06:59,350
+representation consisting
+purely of NAND gates.
+
+126
+00:06:59,350 --> 00:07:02,920
+The advantage of using NAND
+gates to implement the circuit
+
+127
+00:07:02,920 --> 00:07:06,760
+is that NAND gates
+are inverting logic,
+
+128
+00:07:06,760 --> 00:07:09,850
+where each gate can be
+implemented as a single CMOS
+
+129
+00:07:09,850 --> 00:07:11,080
+gate.
+
+130
+00:07:11,080 --> 00:07:15,310
+All functions can be expressed
+as a combination of NAND gates.
+
+131
+00:07:15,310 --> 00:07:19,660
+So a NAND gate is
+considered a universal gate.
+
+132
+00:07:19,660 --> 00:07:22,420
+NOR gates are also
+universal and can be
+
+133
+00:07:22,420 --> 00:07:25,210
+used to express any function.
+
+134
+00:07:25,210 --> 00:07:27,280
+Furthermore, any
+circuit that can
+
+135
+00:07:27,280 --> 00:07:30,040
+be used to implement
+any other function
+
+136
+00:07:30,040 --> 00:07:33,990
+is also considered universal.
+
+137
+00:07:33,990 --> 00:07:37,020
+To determine if a
+gate G is universal,
+
+138
+00:07:37,020 --> 00:07:41,790
+one needs to check if one can
+convert G into either a NAND
+
+139
+00:07:41,790 --> 00:07:45,570
+or NOR gate by simply using
+one or more copies of G
+
+140
+00:07:45,570 --> 00:07:49,580
+together with low and
+high constant inputs.

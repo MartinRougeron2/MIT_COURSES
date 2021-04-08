@@ -1,0 +1,386 @@
+1
+00:00:00,380 --> 00:00:05,980
+Okay, now let's apply all this analysis to
+improving the performance of our circuits.
+
+2
+00:00:05,980 --> 00:00:11,519
+The latency of a combinational logic circuit
+is simply its propagation delay t_PD.
+
+3
+00:00:11,519 --> 00:00:16,949
+And the throughput is just 1/t_PD since we
+start processing the next input only after
+
+4
+00:00:16,949 --> 00:00:21,089
+finishing the computation on the current input.
+
+5
+00:00:21,089 --> 00:00:26,029
+Consider a combinational system with three
+components: F, G, and H, where F and G work
+
+6
+00:00:26,029 --> 00:00:31,630
+in parallel to produce the inputs to H.
+Using this timing diagram we can follow the
+
+7
+00:00:31,630 --> 00:00:37,840
+processing of a particular input value X.
+Sometime after X is valid and stable, the
+
+8
+00:00:37,840 --> 00:00:43,080
+F and G modules produce their outputs F(X)
+and G(X).
+
+9
+00:00:43,080 --> 00:00:47,910
+Now that the inputs to H are valid and stable,
+the H module will produce the system output
+
+10
+00:00:47,910 --> 00:00:52,640
+P(X) after a delay set by the propagation
+delay of H.
+
+11
+00:00:52,640 --> 00:00:57,450
+The total elapsed time from valid input to
+valid output is determined by the propagation
+
+12
+00:00:57,450 --> 00:01:00,000
+delays of the component modules.
+
+13
+00:01:00,000 --> 00:01:04,739
+Assuming we use those modules as-is, we can't
+make any improvements on this latency.
+
+14
+00:01:04,739 --> 00:01:08,729
+But what about the system's throughput?
+
+15
+00:01:08,729 --> 00:01:13,679
+Observe that after producing their outputs,
+the F and G modules are sitting sitting idle,
+
+16
+00:01:13,679 --> 00:01:18,380
+just holding their outputs stable while H
+performs its computation.
+
+17
+00:01:18,380 --> 00:01:23,069
+Can we figure out a way for F and G to get
+started processing the next input while still
+
+18
+00:01:23,069 --> 00:01:26,460
+letting H do its job on the first input?
+
+19
+00:01:26,460 --> 00:01:31,069
+In other words, can we divide the processing
+of the combinational circuit into two stages
+
+20
+00:01:31,069 --> 00:01:37,740
+where the first stage computes F(X) and G(X),
+and the second stage computes H(X)?
+
+21
+00:01:37,740 --> 00:01:42,259
+If we can, then we can increase the throughput
+of the system.
+
+22
+00:01:42,259 --> 00:01:48,109
+Mr. Blue's inspiration is to use registers
+to hold the values F(X) and G(X) for use by
+
+23
+00:01:48,109 --> 00:01:53,389
+H, while the F and G modules start working
+on the next input value.
+
+24
+00:01:53,389 --> 00:01:57,399
+To make our timing analysis a little easier,
+we'll assume that our pipelining registers
+
+25
+00:01:57,399 --> 00:02:01,700
+have a zero propagation delay and setup time.
+
+26
+00:02:01,700 --> 00:02:05,811
+The appropriate clock period for this sequential
+circuit is determined by the propagation delay
+
+27
+00:02:05,811 --> 00:02:07,670
+of the slowest processing stage.
+
+28
+00:02:07,670 --> 00:02:15,810
+In this example, the stage with F and G needs
+a clock period of at least 20 ns to work correctly.
+
+29
+00:02:15,810 --> 00:02:20,840
+And the stage with H needs a clock period
+of 25 ns to work correctly.
+
+30
+00:02:20,840 --> 00:02:27,030
+So the second stage is the slowest and sets
+the system clock period at 25 ns.
+
+31
+00:02:27,030 --> 00:02:30,940
+This will be our general plan for increasing
+the throughput of combinational logic:
+
+32
+00:02:30,940 --> 00:02:36,380
+we'll use registers to divide the processing
+into a sequence of stages, where the registers
+
+33
+00:02:36,380 --> 00:02:41,720
+capture the outputs from one processing stage
+and hold them as inputs for the next processing
+
+34
+00:02:41,720 --> 00:02:42,920
+stage.
+
+35
+00:02:42,920 --> 00:02:47,540
+A particular input will progress through the
+system at the rate of one stage per clock
+
+36
+00:02:47,540 --> 00:02:49,320
+cycle.
+
+37
+00:02:49,320 --> 00:02:53,340
+In this example, there are two stages in the
+processing pipeline and the clock period is
+
+38
+00:02:53,340 --> 00:03:00,950
+25 ns, so the latency of the pipelined system
+is 50 ns, i.e., the number of stages times
+
+39
+00:03:00,950 --> 00:03:03,410
+the system's clock period.
+
+40
+00:03:03,410 --> 00:03:07,990
+The latency of the pipeline system is a little
+longer than the latency of the unpipelined
+
+41
+00:03:07,990 --> 00:03:08,990
+system.
+
+42
+00:03:08,990 --> 00:03:14,980
+However, the pipeline system produces 1 output
+every clock period, or 25 ns.
+
+43
+00:03:14,980 --> 00:03:19,520
+The pipeline system has considerably better
+throughput at the cost of a small increase
+
+44
+00:03:19,520 --> 00:03:21,950
+in latency.
+
+45
+00:03:21,950 --> 00:03:26,620
+Pipeline diagrams help us visualize the operation
+of a pipelined system.
+
+46
+00:03:26,620 --> 00:03:31,600
+The rows of the pipeline diagram represent
+the pipeline stages and the columns are successive
+
+47
+00:03:31,600 --> 00:03:33,660
+clock cycles.
+
+48
+00:03:33,660 --> 00:03:39,790
+At the beginning of clock cycle i the input
+X_i becomes stable and valid.
+
+49
+00:03:39,790 --> 00:03:44,760
+Then during clock cycle i the F and G modules
+process that input and at the end of the cycle
+
+50
+00:03:44,760 --> 00:03:51,020
+the results F(X_i) and G(X_i) are captured
+by the pipeline registers between the first
+
+51
+00:03:51,020 --> 00:03:53,010
+and second stages.
+
+52
+00:03:53,010 --> 00:03:59,270
+Then in cycle i+1, H uses the captured values
+do its share of the processing of X_i.
+
+53
+00:03:59,270 --> 00:04:05,510
+And, meanwhile, the F and G modules are working
+on X_i+1.
+
+54
+00:04:05,510 --> 00:04:11,100
+You can see that the processing for a particular
+input value moves diagonally through the diagram,
+
+55
+00:04:11,100 --> 00:04:14,570
+one pipeline stage per clock cycle.
+
+56
+00:04:14,570 --> 00:04:19,510
+At the end of cycle i+1, the output of H is
+captured by the final pipeline register and
+
+57
+00:04:19,510 --> 00:04:22,900
+is available for use during cycle i+2.
+
+58
+00:04:22,900 --> 00:04:27,870
+The total time elapsed between the arrival
+of an input and the availability of the output
+
+59
+00:04:27,870 --> 00:04:30,410
+is two cycles.
+
+60
+00:04:30,410 --> 00:04:36,550
+The processing continues cycle after cycle,
+producing a new output every clock cycle.
+
+61
+00:04:36,550 --> 00:04:40,090
+Using the pipeline diagram we can track how
+a particular input progresses through the
+
+62
+00:04:40,090 --> 00:04:44,780
+system or see what all the stages are doing
+in any particular cycle.
+
+63
+00:04:44,780 --> 00:04:52,060
+We'll define a K-stage pipeline (or K-pipeline
+for short) as an acyclic circuit having exactly
+
+64
+00:04:52,060 --> 00:04:56,120
+K registers on every path from input to output.
+
+65
+00:04:56,120 --> 00:05:00,920
+An unpipelined combinational circuit is thus
+a 0-stage pipeline.
+
+66
+00:05:00,920 --> 00:05:05,340
+To make it easy to build larger pipelined
+systems out of pipelined components, we'll
+
+67
+00:05:05,340 --> 00:05:11,870
+adopt the convention that every pipeline stage,
+and hence every K-stage pipeline, has a register
+
+68
+00:05:11,870 --> 00:05:12,920
+on its output.
+
+69
+00:05:12,920 --> 00:05:17,960
+We'll use the techniques we learned for analyzing
+the timing of sequential circuits to ensure
+
+70
+00:05:17,960 --> 00:05:23,340
+the clock signal common to all the pipeline
+registers has a period sufficient to ensure
+
+71
+00:05:23,340 --> 00:05:26,370
+correct operation of each stage.
+
+72
+00:05:26,370 --> 00:05:32,740
+So for every register-to-register and input-to-register
+path, we need to compute the sum of the propagation
+
+73
+00:05:32,740 --> 00:05:37,470
+delay of the input register, plus the propagation
+delay of the combinational logic, plus the
+
+74
+00:05:37,470 --> 00:05:40,050
+setup time of the output register.
+
+75
+00:05:40,050 --> 00:05:44,080
+Then we'll choose the system's clock period
+to be greater than or equal to the largest
+
+76
+00:05:44,080 --> 00:05:45,600
+such sum.
+
+77
+00:05:45,600 --> 00:05:50,290
+With the correct clock period and exactly
+K-registers along each path from system input
+
+78
+00:05:50,290 --> 00:05:55,590
+to system output, we are guaranteed that the
+K-pipeline will compute the same outputs as
+
+79
+00:05:55,590 --> 00:05:59,750
+the original unpipelined combinational circuit.
+
+80
+00:05:59,750 --> 00:06:04,720
+The latency of a K-pipeline is K times the
+period of the system's clock.
+
+81
+00:06:04,720 --> 00:06:09,970
+And the throughput of a K-pipeline is the
+frequency of the system's clock, i.e., 1 over
+
+82
+00:06:09,970 --> 00:06:10,789
+the clock period.

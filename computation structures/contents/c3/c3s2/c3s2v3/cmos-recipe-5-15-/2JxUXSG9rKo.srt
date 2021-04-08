@@ -1,0 +1,327 @@
+1
+00:00:01,069 --> 00:00:05,819
+Now that we have some sense about how MOSFETs
+function, let's use them to build circuits
+
+2
+00:00:05,819 --> 00:00:09,270
+to process our digitally encoded information.
+
+3
+00:00:09,270 --> 00:00:14,249
+We have two simple rules we'll use when building
+the circuits, which, if they're followed,
+
+4
+00:00:14,249 --> 00:00:19,310
+will allow us to abstract the behavior of
+the MOSFET as a simple voltage-controlled
+
+5
+00:00:19,310 --> 00:00:20,900
+switch.
+
+6
+00:00:20,900 --> 00:00:27,020
+The first rule is that we'll only use n-channel
+MOSFETs, which we'll call NFETs for short,
+
+7
+00:00:27,020 --> 00:00:31,259
+when building pulldown circuits that connect
+a signaling node to the GROUND rail of the
+
+8
+00:00:31,259 --> 00:00:33,140
+power supply.
+
+9
+00:00:33,140 --> 00:00:38,540
+When the pulldown circuit is conducting, the
+signaling node will be at 0V and qualify as
+
+10
+00:00:38,540 --> 00:00:41,600
+the digital value "0".
+
+11
+00:00:41,600 --> 00:00:47,059
+If we obey this rule, NFETs will act switches
+controlled by V_GS, the difference between
+
+12
+00:00:47,059 --> 00:00:50,620
+the voltage of the gate terminal and the voltage
+of the source terminal.
+
+13
+00:00:50,620 --> 00:00:56,670
+When V_GS is lower than the MOSFET's threshold
+voltage, the switch is "open" or not conducting
+
+14
+00:00:56,670 --> 00:01:01,850
+and there is no connection between the MOSFET's
+source and drain terminals.
+
+15
+00:01:01,850 --> 00:01:07,010
+If V_GS is greater than the threshold voltage,
+the switch is "on" or conducting and there
+
+16
+00:01:07,010 --> 00:01:10,280
+is a connection between the source and drain
+terminals.
+
+17
+00:01:10,280 --> 00:01:14,510
+That path has a resistance determined by the
+magnitude of V_GS.
+
+18
+00:01:14,510 --> 00:01:18,950
+The larger V_GS, the lower the effective resistance
+of the switch and the more current that will
+
+19
+00:01:18,950 --> 00:01:21,658
+flow from drain to source.
+
+20
+00:01:21,658 --> 00:01:26,729
+When designing pulldown circuits of NFET switches,
+we can use the following simple mental model
+
+21
+00:01:26,729 --> 00:01:31,590
+for each NFET switch:
+if the gate voltage is a digital 0, the switch
+
+22
+00:01:31,590 --> 00:01:37,658
+will be off; if the gate voltage is a digital
+1, the switch will be on.
+
+23
+00:01:37,658 --> 00:01:43,619
+The situation with PFET switches is analogous,
+except that the potentials are reversed.
+
+24
+00:01:43,619 --> 00:01:49,420
+Our rule is that PFETs can only be used in
+pullup circuits, used to connect a signaling
+
+25
+00:01:49,420 --> 00:01:53,689
+node to the power supply voltage, which we'll
+call V_DD.
+
+26
+00:01:53,689 --> 00:01:58,189
+When the pullup circuit is conducting, the
+signaling node will be at V_DD volts and qualify
+
+27
+00:01:58,189 --> 00:02:02,409
+as the digital value "1".
+
+28
+00:02:02,409 --> 00:02:07,100
+PFETs have a negative threshold voltage and
+V_GS has to be less than the threshold voltage
+
+29
+00:02:07,100 --> 00:02:10,000
+in order for the PFET switch to be conducting.
+
+30
+00:02:10,000 --> 00:02:14,550
+All these negatives can be a bit confusing,
+but, happily there's a simple mental model
+
+31
+00:02:14,550 --> 00:02:18,110
+we can use for each PFET switch in the pullup
+circuit:
+
+32
+00:02:18,110 --> 00:02:23,480
+if the gate voltage is a digital 0, the switch
+will be on; if the gate voltage is a digital
+
+33
+00:02:23,480 --> 00:02:30,270
+1, the switch will be off - basically the
+opposite behavior of the NFET switch.
+
+34
+00:02:30,270 --> 00:02:36,660
+You may be wondering why we can't use NFETs
+in pullup circuits or PFETs in pulldown circuits.
+
+35
+00:02:36,660 --> 00:02:41,620
+You'll get to explore the answer to this question
+in the first lab of Assignment 2.
+
+36
+00:02:41,620 --> 00:02:47,670
+Meanwhile, the short answer is that the signaling
+node will experience degraded signaling levels
+
+37
+00:02:47,670 --> 00:02:52,370
+and we'll loose the noise margins we've worked
+so hard to create!
+
+38
+00:02:52,370 --> 00:02:57,040
+Now consider the CMOS implementation of a
+combinational inverter.
+
+39
+00:02:57,040 --> 00:03:03,360
+If the inverter's input is a digital 0, its
+output is a digital 1, and vice versa.
+
+40
+00:03:03,360 --> 00:03:08,370
+The inverter circuit consists of a single
+NFET switch for the pulldown circuit, connecting
+
+41
+00:03:08,370 --> 00:03:13,890
+the output node to GROUND and a single PFET
+switch for the pullup circuit, connecting
+
+42
+00:03:13,890 --> 00:03:16,280
+the output to V_DD.
+
+43
+00:03:16,280 --> 00:03:21,210
+The gate terminals of both switches are connected
+to the inverter's input node.
+
+44
+00:03:21,210 --> 00:03:24,850
+The inverter's voltage transfer characteristic
+is shown in the figure.
+
+45
+00:03:24,850 --> 00:03:31,890
+When V_IN is a digital 0 input, we see that
+V_OUT is greater than or equal to V_OH, representing
+
+46
+00:03:31,890 --> 00:03:34,310
+a digital 1 output.
+
+47
+00:03:34,310 --> 00:03:38,770
+Let's look at the state of the pullup and
+pulldown switches when the input is a digital
+
+48
+00:03:38,770 --> 00:03:39,770
+0.
+
+49
+00:03:39,770 --> 00:03:45,650
+Recalling the simple mental model for the
+NFET and PFET switches, a 0-input means the
+
+50
+00:03:45,650 --> 00:03:50,720
+NFET switch is off, so there's no connection
+between the output node and ground, and the
+
+51
+00:03:50,720 --> 00:03:56,510
+PFET switch is on, making a connection between
+the output node and V_DD.
+
+52
+00:03:56,510 --> 00:04:00,270
+Current will flow through the pullup switch,
+charging the output node until its voltage
+
+53
+00:04:00,270 --> 00:04:02,470
+reaches V_DD.
+
+54
+00:04:02,470 --> 00:04:07,120
+Once both the source and drain terminals are
+at V_DD, there's no voltage difference across
+
+55
+00:04:07,120 --> 00:04:11,440
+the switch and hence no more current will
+flow through the switch.
+
+56
+00:04:11,440 --> 00:04:18,260
+Similarly, when V_IN is a digital 1, the NFET
+switch is on and PFET switch is off, so the
+
+57
+00:04:18,260 --> 00:04:22,800
+output is connected to ground and eventually
+reaches a voltage of 0V.
+
+58
+00:04:22,800 --> 00:04:29,400
+Again, current flow through pulldown switch
+will cease once the output node reaches 0V.
+
+59
+00:04:29,400 --> 00:04:33,810
+When the input voltage is in the middle of
+its range, it's possible, depending on the
+
+60
+00:04:33,810 --> 00:04:38,840
+particular power supply voltage used and the
+threshold voltage of the MOSFETs, that both
+
+61
+00:04:38,840 --> 00:04:43,140
+the pullup and pulldown circuits will be conducting
+for a short period of time.
+
+62
+00:04:43,140 --> 00:04:44,140
+That's okay.
+
+63
+00:04:44,140 --> 00:04:49,310
+In fact, with both MOSFET switches on, small
+changes in the input voltage will produce
+
+64
+00:04:49,310 --> 00:04:56,710
+large changes in the output voltage, leading
+to the very high gain exhibited by CMOS devices.
+
+65
+00:04:56,710 --> 00:05:00,750
+This in turn will mean we can pick signaling
+thresholds that incorporate generous noise
+
+66
+00:05:00,750 --> 00:05:07,560
+margins, allowing CMOS devices to work reliably
+in many different operating environments.
+
+67
+00:05:07,560 --> 00:05:10,950
+This is our first CMOS combinational logic
+gate.
+
+68
+00:05:10,950 --> 00:05:15,120
+In the next video, we'll explore how to build
+other, more interesting logic functions.

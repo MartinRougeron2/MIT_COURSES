@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>6.1 Annotated Slides | 6 Finite State Machines | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="6.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 6.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c6/c6s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c6/index.htm">6 Finite State Machines</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            6.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            6.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="selected">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c6/index.htm">&lt;<span>Finite State Machines</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c6/c6s1/index.htm">6.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c6/c6s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L06: Finite State Machines</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Our New Machine</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">A Simple Sequential Circuit</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Abstraction <em>du jour</em>: Finite State Machines</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">State Transition Diagram</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Valid State Diagrams</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">State Transition Diagram as a Truth Table</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Now Put It in Hardware</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Discrete State, Discrete Time</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Housekeeping Issues...</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">FSM States</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">What’s My Transition Diagram?</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">FSM Equivalence</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Let's Build a RoboAnt</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Lost in Space</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Bonk!</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">A Little to the Right...</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Then a Little to the Left...</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Dealing With Outside Corners</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Equivalent State Reduction</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">An Evolutionary Step</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Building the Transition Table</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Implementation Details</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Ant Schematic</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">FSMs All the Way Down?</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">The World Doesn’t Run on Our Clock!</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">The Bounded-Time Synchronizer</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Unsolvable? That Can’t Be True...</a></li>     <li style="margin-bottom:0.1em;"><a href="#28">The Mysterious Metastable State</a></li>     <li style="margin-bottom:0.1em;"><a href="#29">Metastable State: Properties</a></li>     <li style="margin-bottom:0.1em;"><a href="#30">Solution: Delay Increases Reliability</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide02.png" alt=""></a></div> <p>In the last chapter we developed sequential logic, which contains both combinational logic and memory components.</p> <p>The combinational logic cloud is an acyclic graph of components   that obeys the static discipline.  The static discipline   guarantees if we supply valid and stable digital inputs, then we   will get valid and stable digital outputs by some specified   interval after the last input transition.  There’s also a   functional specification that tells us the output values for   every possible combination of input values.  In this diagram,   there are k+m inputs and k+n outputs, so the truth table for the   combinational logic will have \(2^{k+m}\) rows and k+n output   columns.</p> <p>The job of the state registers is to remember the current state   of the sequential logic.  The state is encoded as some number k   of bits, which will allow us to represent \(2^k\) unique states.   Recall that the state is used to capture, in some appropriate   way, the relevant history of the input sequence.  To the extent   that previous input values influence the operation of the   sequential logic, that happens through the stored state bits.   Typically the LOAD input of the state registers is triggered by   the rising edge of a periodic clock signal, which updates the   stored state with the new state calculated by the combinational   logic.</p> <p>As designers we have several tasks: first we must decide what   output sequences need to be generated in response to the   expected input sequences.  A particular input may, in fact,   generate a long sequence of output values.  Or the output may   remain unchanged while the input sequence is processed,   step-by-step, where the FSM is remembering the relevant   information by updating its internal state.  Then we have to   develop the functional specification for the logic so it   calculates the correct output and next state values.  Finally,   we need to come up with an actual circuit diagram for the sequential   logic system.</p> <p>All the tasks are pretty interesting, so let’s get started!</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide03.png" alt=""></a></div> <p>As an example of a sequential system, let’s make a combination   lock.  The lock has a 1-bit input signal, where the user enters   the combination as a sequence of bits.  There’s one output   signal, UNLOCK, which is 1 if and only if the correct   combination has been entered.  In this example, we want to   assert UNLOCK, <i>i.e.</i>, set UNLOCK to 1, when the last four   input values are the sequence 0-1-1-0.</p> <p>Mr. Blue is asking a good question: how many state bits do we   need?  Do we have to remember the last four input bits?  In   which case, we’d need four state bits.  Or can we remember   less information and still do our job?  Aha!  We don’t   need the complete history of the last four inputs, we only need   to know if the most recent entries represent some part of a   partially-entered correct combination.  In other words if the   input sequence doesn’t represent a correct combination, we   don’t need to keep track of exactly how it’s   incorrect, we only need to know that is incorrect.</p> <p>With that observation in mind, let’s figure out how to   represent the desired behavior of our digital system.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide04.png" alt=""></a></div> <p>We can characterize the behavior of a sequential system using a   new abstraction called a finite state machine, or FSM for short.   The goal of the FSM abstraction is to describe the input/output   behavior of the sequential logic, independent of its actual   implementation.</p> <p>A finite state machine has a periodic CLOCK input.  A rising   clock edge will trigger the transition from the current state to   the next state.  The FSM has a some fixed number of states, with   a particular state designated as the initial or starting state   when the FSM is first turned on.  One of the interesting   challenges in designing an FSM is to determine the required   number of states since there’s often a tradeoff between   the number of state bits and the complexity of the internal   combinational logic required to compute the next state and   outputs.</p> <p>There are some number of inputs, used to convey all the   external information necessary for the FSM to do its job.   Again, there are interesting design tradeoffs.  Suppose the FSM   required 100 bits of input.  Should we have 100 inputs and   deliver the information all at once?  Or should we have a single   input and deliver the information as a 100-cycle sequence?  In   many real world situations where the sequential logic   is <i>much</i> faster than whatever physical process we’re   trying to control, we’ll often see the use of bit-serial   inputs where the information arrives as a sequence, one bit at a   time.  That will allow us to use much less signaling hardware,   at the cost of the time required to transmit the information   sequentially.</p> <p>The FSM has some number outputs to convey the results of the   sequential logic’s computations.  The comments before   about serial vs. parallel inputs apply equally to choosing how   information should be encoded on the outputs.</p> <p>There are a set of transition rules, specifying how the next   state S-prime is determined from the current state S and the   inputs I.  The specification must be complete, enumerating   S-prime for every possible combination of S and I.</p> <p>And, finally, there’s the specification for how the   output values should be determined.  The FSM design is often a   bit simpler if the outputs are strictly a function of the   current state S, but, in general, the outputs can be a function   of both S and the current inputs.</p> <p>Now that we have our abstraction in place, let’s see how   to use it to design our combinational lock.</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide05.png" alt=""></a></div> <p>We’ll describe the operation of the FSM for our   combination lock using a state transition diagram.  Initially,   the FSM has received no bits of the combination, a state   we’ll call SX.  In the state transition diagram, states   are represented as circles, each labeled for now with a symbolic   name chosen to remind us of what history it represents.  For   this FSM, the unlock output U will be a function of the current   state, so we’ll indicate the value of U inside the circle.   Since in state SX we know nothing about past input bits, the   lock should stay locked and so U = 0.  We’ll indicate the   initial state with a wide border on the circle.</p> <p>We’ll use the successive states to remember what   we’ve seen so far of the input combination.  So if the FSM   is in state SX and it receives a 0 input, it should transition   to state S0 to remind us that we’ve seen the first bit of   the combination of 0-1-1-0. We use arrows to indicate   transitions between states and each arrow has a label telling us   when that transition should occur.  So this particular arrow is   telling us that when the FSM is in state SX and the next input   is a 0, the FSM should transition to state S0.  Transitions are   triggered by the rising edge of the FSM’s clock input.</p> <p>Let’s add the states for the remainder of the specified   combination.  The rightmost state, S0110, represents the point   at which the FSM has detected the specified sequence of inputs,   so the unlock signal is 1 in this state.  Looking at the state   transition diagram, we see that if the FSM starts in state SX,   the input sequence 0-1-1-0 will leave the FSM in state   S0110.</p> <p>So far, so good.  What should the FSM do if an input bit is not   the next bit in the combination?  For example, if the FSM is in   state SX and the input bit is a 1, it still has not received any   correct combination bits, so the next state is SX again.  Here   are the appropriate non-combination transitions for the other   states.  Note that an incorrect combination entry doesn’t   necessarily take the FSM to state SX.  For example, if the FSM   is in state S0110, the last four input bits have been 0-1-1-0.   If the next input is a 1, then the last four inputs bits are now   1-1-0-1, which won’t lead to an open lock.  But the last   two bits might be the first two bits of a valid combination   sequence and so the FSM transitions to S01, indicating that a   sequence of 0-1 has been entered over the last two bits.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide06.png" alt=""></a></div> <p>We’ve been working with an FSM where the outputs are   function of the current state, called a Moore machine.  Here the   outputs are written inside the state circle.</p> <p>If the outputs are a function of both the current state and the   current inputs, it’s called a Mealy machine.  Since the   transitions are also a function of the current state and current   inputs, we’ll label each transition with appropriate   output values using a slash to separate input values from output   values.  So, looking at the state transition diagram on the   right, suppose the FSM is in state S3.  If the input is a 0,   look for the arrow leaving S3 labeled “0/”.  The   value after the slash tells us the output value, in this case 1.   If the input had been a 1, the output value would be 0.</p> <p>There are some simple rules we can use to check that a state   transition diagram is well formed. The transitions from a   particular state must be mutually exclusive, <i>i.e.</i>, for each state, there can’t be more than one transition with   the same input label.  This makes sense: if the FSM is to   operate consistently there can’t be any ambiguity about   the next state for a given current state and input.  By   “consistently” we mean that the FSM should make   the same transitions if it’s restarted at the same   starting state and given the same input sequences.</p> <p>Moreover, the transitions leaving each state should be   collectively exhaustive, <i>i.e.</i>, there should a transition   specified for each possible input value.  If we wish the FSM to   stay in its current state for that particular input   value, we need to show a transition from the current state back   to itself.</p> <p>With these rules there will be exactly one transition selected   for every combination of current state and input value.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide07.png" alt=""></a></div> <p>All the information in a state transition diagram can be   represented in tabular form as a truth table.  The rows of the   truth table list all the possible combinations of current state   and inputs.  And the output columns of the truth table tell us   the next state and output value associated with each row.</p> <p>If we substitute binary values for the symbolic state names, we   end up with a truth table just like the ones we saw in Chapter   4.  If we have <em>K</em> states in our state transition diagram   we’ll need \(\log_2 K\) state bits, rounded up to the next   integer since we don’t have fractional bits!  In our   example, we have a 5-state FSM, so we’ll need 3 state   bits.</p> <p>We can assign the state encodings in any convenient       way, <i>e.g.</i>, 000 for the first state, 001 for the second       state, and so on.  But the choice of state encodings can       have a big effect on the logic needed to implement the truth       table. It’s actually fun to figure out the state       encoding that produces the simplest possible logic.</p> <p>With a truth table in hand, we can use the techniques from   Chapter 4 to design logic circuits that implement the   combinational logic for the FSM.  Of course, we can take the   easy way out and simply use a read-only memory to do the   job!</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide08.png" alt=""></a></div> <p>In this circuit, a read-only memory is used to compute the next   state and outputs from the current state and inputs.   We’re encoding the 5 states of the FSM using a 3-bit   binary value, so we have a 3-bit state register.  The rectangle   with the edge-triggered input is schematic shorthand for a   multi-bit register.  If a wire in the diagram represents a   multi-bit signal, we use a little slash across the wire with a   number to indicate how many bits are in the signal.  In this   example, both current_state and next_state are 3-bit   signals.</p> <p>The read-only memory has a total of 4 input signals — 3   for the current state and 1 for the input value — so the   read-only memory has \(2^4= 16\) locations, which correspond to   the 16 rows in the truth table.  Each location in the ROM   supplies the output values for a particular row of the truth   table.  Since we have 4 output signals — 3 for the next   state and 1 for the output value — each location supplies   4 bits of information.  Memories are often annotated with their   number of locations and the number of bits in each location.  So   our memory is a 16-by-4 ROM: 16 locations of 4 bits each.</p> <p>Of course, in order for the state registers to work correctly,   we need to ensure that the dynamic discipline is obeyed.  We can   use the timing analysis techniques described at the end of   Chapter 5 to check that this is so.  For now, we’ll assume   that the timing of transitions on the inputs is properly   synchronized with the rising edges of the clock.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide09.png" alt=""></a></div> <p>So now we have the FSM abstraction to use when designing the   functionality of a sequential logic system, and a   general-purpose circuit implementation of the FSM using a ROM   and a multi-bit state register.  Recapping our design choices:   the output bits can be strictly a function of the current state   (the FSM would then be called a Moore machine), or they can be a   function of both the current state and current inputs, in which   case the FSM is called a Mealy machine.  We can choose the   number of state bits — <em>S</em> state bits will give us the   ability to encode \(2^S\) possible states.  Note that each extra   state bit DOUBLES the number of locations in the ROM!  So when   using ROMs to implement the necessary logic, we’re very   interested in minimizing the number of state bits.</p> <p>The waveforms for our circuitry are pretty straightforward.   The rising edge of the clock triggers a transition in the state   register outputs.  The ROM then does its thing, calculating the   next state, which becomes valid at some point in the clock   cycle.  This is the value that gets loaded into the state   registers at the next rising clock edge.  This process repeats   over and over as the FSM follows the state transitions dictated   by the state transition diagram.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide10.png" alt=""></a></div> <p>There are a few housekeeping details that need our attention.</p> <p>On start-up we need some way to set the initial contents of the   state register to the correct encoding for the initial state.   Many designs use a RESET signal that’s set to 1 to force   some initial state and then set to 0 to start execution.  We   could adopt that approach here, using the RESET signal to select   an initial value to be loaded into the state register.</p> <p>In our example, we used a 3-bit state encoding which would   allow us to implement an FSM with up to \(2^3 = 8\) states.   We’re only using 5 of these encodings, which means there   are locations in the ROM we’ll never access.  If   that’s a concern, we can always use logic gates to   implement the necessary combinational logic instead of ROMs.   Suppose the state register somehow got loaded with one of the   unused encodings?  Well, that would be like being in a state   that’s not listed in our state transition diagram.  One   way to defend against this problem is design the ROM contents so   that unused states always point to the initial state.  In theory   the problem should never arise, but with this fix at least it   won’t lead to unknown behavior.</p> <p>We mentioned earlier the interesting problem of finding a state   encoding that minimized the combinational logic.  There are   computer-aided design tools to help do this as part of the   larger problem of finding minimal logic implementations for   Boolean functions.  Mr. Blue is showing us another approach to   building the state register for the combination lock: use a   shift register to capture the last four input bits, then simply   look at the recorded history to determine if it matches the   combinations.  No fancy next state logic here!</p> <p>Finally, we still have to address the problem of ensuring that   input transitions don’t violate the dynamic discipline for   the state register.  We’ll get to this in the last section   of this chapter.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide11.png" alt=""></a></div> <p>Let’s think a bit more about the FSM abstraction.</p> <p>If we see an FSM that uses K state bits, what can we say about   the number of states in its state transition diagram?  Well, we   know the FSM can have at most \(2^K\) states, since that’s   the number of unique combinations of K bits.</p> <p>Suppose we connect two FSMs in series, with the outputs of the   first FSM serving as the inputs to the second.  This larger   system is also an FSM — how many states does it have?   Well, if we don’t know the details of either of the   component FSMs, the upper bound on the number of states for the   larger system is M*N.  This is because it may be possible for   the first FSM to be in any of its M states while the second FSM   is any of its N states.  Note that the answer doesn’t   depend on X or Y, the number of input signals to each of the   component FSMs.  Wider inputs just mean that there are longer   labels on the transitions in the state transition diagram, but   don’t tell us anything about the number of internal   states.</p> <p>Finally, here’s a question that’s a bit trickier   than it seems.  I give you an FSM with two inputs labeled 0 and   1, and one output implemented as a light.  Then I ask you to   discover its state transition diagram.  Can you do it?  Just to   be a bit more concrete, you experiment for an hour pushing the   buttons in a variety of sequences.  Each time you push the 0   button the light turns off if it was on.  And when you push the   1 button the light turns on if it was off, otherwise nothing   seems to happen.  What state transition diagram could we draw   based on our experiments?</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide12.png" alt=""></a></div> <p>Consider the following two state transition diagrams.  The top   diagram describes the behavior we observed in our experiments:   pushing 0 turns the light off, pushing 1 turns the light on.</p> <p>The second diagram appears to do the same thing unless you   happened to push the 1 button 4 times in a row!</p> <p>If we don’t have an upper bound on the number of states   in the FSM, we can never be sure that we’ve explored all   of its possible behaviors.</p> <p>But if we do have an upper bound, say, K, on the number of   states and we reset the FSM to its initial state, we can   discover its behavior.  This is because in a K-state FSM every   reachable state can reached in less than K transitions, starting   from the initial state.  So if we try all the possible K-step   input sequences one after the other starting each trial at the   initial state, we’ll be guaranteed to have visited every   state in the machine.</p> <p>Our answer is also complicated by the observation that FSMs   with different numbers of states may be equivalent.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide13.png" alt=""></a></div> <p>Here are two FSMs, one with 2 states, one with 5 states.  Are   they different?  Well, not in any practical sense.  Since the   FSMs are externally indistinguishable, we can use them   interchangeably. We say that two FSMs are equivalent if and only   if every input sequence yields identical output sequences from   both FSMs.</p> <p>So as engineers, if we have an FSM we would like to find the   the simplest (and hence the least expensive) equivalent FSM.   We’ll talk about how to find smaller equivalent FSMs in   the context of our next example.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide14.png" alt=""></a></div> <p>Surprise!  We’ve just been given a robotic ant that has   an FSM for its brain.  The inputs to the FSM come from the   ant’s two antennae, labeled L and R.  An antenna input is   1 if the antenna is touching something, otherwise it's 0.  The   outputs of the FSM control the ant’s motion.  We can make   it step forward by setting the F output to 1, and turn left or   right by asserting the TL or TR outputs respectively.  If the   ant tries to both turn and step forward, the turn happens first.   Note that the ant can turn when its antennae are touching   something, but it can’t move forward.  We’ve been   challenged to design an ant brain that will let it find its way   out of a simple maze like the one shown here.</p> <p>We remember reading that if the maze doesn’t have any   unconnected walls (<i>i.e.</i>,no islands), we can escape using   the “right-hand rule” where we put our right hand   on the wall and walk so that our hand stays on the wall.</p> <p>Let’s try to implement this strategy.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide15.png" alt=""></a></div> <p>We’ll assume that initially our ant is lost in space.   The only sensible strategy to walk forward until we find a maze   wall.  So our initial state, labeled LOST, asserts the F output,   causing the ant to move forward until at least one of the   antennae touches something,   <i>i.e.</i>, at least one of the L or R inputs is a 1.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide16.png" alt=""></a></div> <p>So now the ant finds itself in one of these three situations.   To implement the right-hand rule, the ant should   turn left (counterclockwise) until it’s antennae have just   cleared the wall.  To do this, we’ll add a   rotate-counterclockwise state, which asserts the turn-left   output until both L and R are 0.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide17.png" alt=""></a></div> <p>Now the ant is standing with a wall to its right and we can   start the process of following the wall with its right antenna.   So we have the ant step forward and right, assuming that it will   immediately touch the wall again.  The WALL1 state asserts both   the turn-right and forward outputs, then checks the right   antenna to see what to do next.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide18.png" alt=""></a></div> <p>If the right antenna does touch, as expected, the ant turns   left to free the antenna and then steps forward. The WALL2 state   asserts both the turn-left and forward outputs, then checks the   antennae.  If the right antenna is still touching, it needs to   continue turning.  If the left antenna touches, it’s run   into a corner and needs to reorient itself so the new wall is on   its right, the situation we dealt with the   rotate-counterclockwise state.  Finally, if both antennae are   free, the ant should be in the state of the previous slide:   standing parallel to the wall, so we return the WALL1 state.</p> <p>Our expectation is that the FSM will alternate between the   WALL1 and WALL2 states as the ant moves along the wall.  If it   reaches an inside corner, it rotates to put the new wall on its   right and keeps going.  What happens when it reaches an outside   corner?</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide19.png" alt=""></a></div> <p>When the ant is in the WALL1 state, it moves forward and turns   right, then checks its right antenna, expecting the find the   wall its traveling along.  But if its an outside corner,   there’s no wall to touch!  The correct strategy in this   case is to keep turning right and stepping forward until the   right antenna touches the wall that’s around the corner.   The CORNER state implements this strategy, transitioning to the   WALL2 state when the ant reaches the wall again.</p> <p>Hey, this might even work!</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide20.png" alt=""></a></div> <p>Earlier we talked about about finding equivalent FSMs with   fewer states.  Now we’ll develop an approach for finding   such FSMs by looking for two states that that can be merged into   a single state without changing the behavior of the FSM in any   externally distinguishable manner.</p> <p>Two states are equivalent if they meet the following two   criteria.  First, the states must have identical outputs.  This   makes sense: the outputs are visible to the outside, so if their   values differed between the two states, that difference would   clearly be externally distinguishable!</p> <p>Second, for each combination of input values, the two states   transition to equivalent states.</p> <p>Our strategy for deriving an equivalent machine with fewer   states will be to start with our original FSM, find pairs of   equivalent states and merge those states.  We’ll keep   repeating the process until we can’t find any more   equivalent states.</p> <p>Let’s try this on our ant FSM.  First we need to find a   pair of states that have the same outputs.  As it turns out,   there’s only one such pair: WALL1 and CORNER, both of   which assert the turn-right and forward outputs.</p> <p>Okay, so let’s assume that WALL1 and CORNER are   equivalent and ask if they transition to equivalent states for   each applicable combination of input values.  For these two   states, all the transitions depend only on the value of the R   input, so we just have to check two cases.  If R is 0, both   states transition to CORNER.  If R is 1, both states transition   to WALL2.</p> <p>So both equivalence criteria are satisfied and we can conclude   that the WALL1 and CORNER states are equivalent and can be   merged.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide21.png" alt=""></a></div> <p>This gives us the four-state FSM shown here, where we’ve   called the single merged state WALL1.  This smaller, equivalent   FSM behaves exactly as the previous 5-state FSM.  The   implementation of the 5-state machine requires 3 state bits; the   implementation of the 4-state machine only requires 2 state   bits.  Reducing the number of state bits by 1 is huge since it   reduces the size of the required ROM by half!</p> <p>Just as we were able to achieve considerable hardware savings   by minimizing Boolean equations, we can do the same in   sequential logic by merging equivalent states.</p> <p>RoboAnt customers are looking forward to the price cut!</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide22.png" alt=""></a></div> <p>Let’s look at what we’d need to do if we wanted to   implement the FSM using logic gates instead a ROM for the   combinational logic. First we have to build the truth table,   entering all the transitions in the state transition diagram.   We’ll start with the LOST state.  So if the FSM is in this   state, the F output should be 1.  If both antenna inputs are 0,   the next state is also LOST.  Assigning the LOST state the   encoding 00, we’ve captured this information in the first   row of the table.</p> <p>If either antenna is touching, the FSM should transition from   LOST to the rotate-counterclockwise state.  We’ve given   this an encoding of 01. There are three combinations of L and R   values that match this transition, so we’ve added three   rows to the truth table.  This takes care of all the transitions   from the LOST state.</p> <p>Now we can tackle the transitions from the   rotate-counterclockwise state.  If either antenna is touching,   the next state is again rotate-counterclockwise.  So we’ve   identified the matching values for the inputs and added the   appropriate three rows to the transition table.</p> <p>We can continue in a similar manner to encode the transitions   one by one.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide23.png" alt=""></a></div> <p>Here’s the final table, where we’ve used   don’t cares to reduce the number of rows for presentation.   Next we want to come up with Boolean equations for each of the   outputs of the combinational logic, <i>i.e.</i>, the two   next-state bits and the three motion-control outputs.</p> <p>Here are the Karnaugh maps for the two next-state bits.  Using   our K-map skills from Chapter 4, we’ll find a cover of the   prime implicants for S1-prime and write down the corresponding   product terms in a minimal sum-of-products equation.  And then   do the same for the other next-state bit.</p> <p>We can follow a similar process to derive minimal   sum-of-products expressions for the motion-control outputs.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide24.png" alt=""></a></div> <p>Implementing each sum-of-products in a straightforward fashion   with AND and OR gates, we get the following schematic for the   ant brain.  Pretty neat!  Who knew that maze following behavior   could be implemented with a couple of D registers and a handful   of logic gates?</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide25.png" alt=""></a></div> <p>There are many complex behaviors that can be created with   surprisingly simple FSMs.  Early on, the computer graphics folks   learned that group behaviors like swarming, flocking and   schooling can be modeled by equipping each participant with a   simple FSM.  So next time you see the massive battle scene from   the Lord of the Rings movie, think of many FSMs running in   parallel!</p> <p>Physical behaviors that arise from simple interactions between   component molecules can sometimes be more easily modeled using   cellular automata — arrays of communicating FSMS —   than by trying to solve the partial differential equations that   model the constraints on the molecules’ behavior.</p> <p>And here’s an idea: what if we allowed the FSM to modify   its own transition table?  Hmm.  Maybe that’s a plausible   model for evolution!</p> <p>FSMs are everywhere!  You’ll see FSMs for the rest of your life...</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide26.png" alt=""></a></div> <p>Okay, it’s finally time to investigate issues caused by   asynchronous inputs to a sequential logic circuit.  By   “asynchronous” we mean that the timing of   transitions on the input is completely independent of the timing   of the sequential logic clock.  This situation arises when the   inputs arrive from the outside world where the timing of events   is not under our control.</p> <p>As we saw at the end of Lecture 5, to ensure reliable operation   of the state registers, inputs to a sequential logic system have   to obey setup and hold-time constraints relative to the rising   edge of the system clock.  Clearly if the input can change at   anytime, it can change at time that would violate the setup and   hold times.</p> <p>Maybe we can come up with a synchronizer circuit that takes an   unsynchronized input signal and produces a synchronized signal   that only changes shortly after the rising edge of the clock.   We’d use a synchronizer on each asynchronous input and   solve our timing problems that way.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide27.png" alt=""></a></div> <p>Here’s a detailed specification for our synchronizer.</p> <p>The synchronizer has two inputs, IN and CLK, which have   transitions at time \(t_{\textrm{IN}}\) and \(t_{\textrm{C}}\)   respectively.</p> <p>If IN’s transition happens sufficiently before C’s   transition, we want the synchronizer to output a 1 within some   bounded time \(t_{\textrm{D}}\) after CLK’s transition.</p> <p>And if CLK’s transition happens sufficiently before   IN’s transition, we want the synchronizer to output a 0   within time \(t_{\textrm{D}}\) after CLK’s transition.</p> <p>Finally, if the two transitions are closer together than some   specified interval \(t_{\textrm{E}}\), the synchronizer can output   either a 0 or a 1 within time \(t_{\textrm{D}}\) of CLK’s   transition. Either answer is fine so long as it’s a stable   digital 0 or digital 1 by the specified deadline.</p> <p>This turns out to be an unsolvable problem!  For no finite   values of \(t_{\textrm{E}}\) and \(t_{\textrm{D}}\) can we build a   synchronizer that’s guaranteed to meet this specification   even when using components that are 100% reliable.</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide28.png" alt=""></a></div> <p>But can’t we just use a D register to solve the problem?   We’ll connect IN to the register’s data input and   connect CLK to the register’s clock input.  We’ll   set the decision time \(t_{\textrm{D}}\) to the propagation delay   of the register and the allowable error interval to the larger   of the register’s setup and hold times.</p> <p>Our theory is that if the rising edge of IN occurs at least   \(t_{\textrm{SETUP}}\) before the rising edge of CLK, the register   is guaranteed to output a 1.  And if IN transitions more than   \(t_{\textrm{HOLD}}\) after the rising edge of CLK, the register   is guaranteed to output a 0.  So far, so good.  If IN   transitions during the setup and hold times with respect to the   rising edge on CLK, we know we’ve violated the dynamic   discipline and we can’t tell whether the register will   store a 0 or a 1.  But in this case, our specification lets us   produce either answer, so we’re good to go, right?</p> <p>Sadly, we’re not good to go.  We’re lured by the   digital abstraction into assuming that even if we violate the   dynamic discipline that Q must be either 1 or 0 after the   propagation delay.  But that isn’t a valid assumption as   we’ll see when we look more carefully at the operation of   the register’s master latch when B and C change at about   the same time.</p> <div class="lecslide"><a name="28"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide29.png" alt=""></a></div> <p>Recall that the master latch is really just a lenient MUX that   can be configured as a bi-stable storage element using a   positive feedback loop.  When the latch is in memory mode,   it’s essentially a two-gate cyclic circuit whose behavior   has two constraints: the voltage transfer characteristic of the   two-gate circuit, shown in green on the graph, and that   \(V_{\textrm{IN}}\) equals \(t_{\textrm{OUT}}\), a constraint   that’s shown in red on the graph.</p> <p>These two curves intersect at three points.  Our concern is the   middle point of intersection. If IN and CLK change at the same   time, the voltage on Q may be in transition at the time the MUX   closes and enables the positive feedback loop.  So the initial   voltage in the feedback loop may happen to be at or very near   the voltage of the middle intersection point.</p> <p>When Q is at the metastable voltage, the storage loop is in an   unstable equilibrium called the metastable state.  In theory the   system could balance at this point forever, but a small change   in the voltages in the loop will move the system away from the   metastable equilibrium point and set it irrevocably in motion   towards the stable equilibrium points.  Here’s the issue   we face: we can’t bound the amount of time the system will   spend in the metastable state.</p> <div class="lecslide"><a name="29"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide30.png" alt=""></a></div> <p>Here’s what we know about the metastable state.</p> <p>It’s in the forbidden zone of the digital signaling   specifications and so corresponds to an invalid logic level.   Violating the dynamic discipline means that our register is no   longer guaranteed to produce a digital output in bounded   time.</p> <p>A persistent invalid logic level can wreak both logical and   electrical havoc in our sequential logic circuit.  Since   combinational logic gates with invalid inputs have unpredictable   outputs, an invalid signal may corrupt the state and output   values in our sequential system.</p> <p>At the electrical level, if an input to a CMOS gate is at the   metastable voltage, both PFET and NFET switches controlled by   that input would be conducting, so we’d have a path   between \(V_{\textrm{DD}}\) and GND, causing a spike in the   system’s power dissipation.</p> <p>It’s an unstable equilibrium and will eventually be   resolved by a transition to one of the two stable equilibrium   points.  You can see from the graph that the metastable voltage   is in the high-gain region of the VTC, so a small change in   \(V_{\textrm{IN}}\) results in a large change in   \(t_{\textrm{OUT}}\), and once away from the metastable point the   loop voltage will move towards 0 or \(V_{\textrm{DD}}\).</p> <p>The time it takes for the system to evolve to a stable   equilibrium is related to how close Q’s voltage was to the   metastable point when the positive feedback loop was enabled.   The closer Q’s initial voltage is to the metastable   voltage, the longer it will take for the system to resolve the   metastability.  But since there’s no lower bound on how   close Q is to the metastable voltage, there’s no upper   bound on the time it will take for resolution.  In other words,   if you specify a bound, <i>e.g.</i>, \(t_{\textrm{D}}\), on the   time available for resolution, there’s a range of initial   Q voltages that won’t be resolved within that time.</p> <p>If the system goes metastable at some point in time, then   there’s a non-zero probability that the system will still   be metastable after some interval T, for any finite choice of   T.</p> <p>The good news is that the probability of being metastable at   the end of the interval decreases exponentially with increasing   T.</p> <p>Note that every bistable system has at least one metastable   state.  So metastability is the price we pay for building   storage elements from positive feedback loops.</p> <p>If you’d like to read a more thorough discussion of   synchronizers and related problems and learn about the   mathematics behind the exponential probabilities, please see   Chapter 10 of the Course Notes.</p> <div class="lecslide"><a name="30"><img class="lecslideimg" src="../../../contents/c6/c6s1/Slide31.png" alt=""></a></div> <p>Our approach to dealing with asynchronous inputs is to put the   potentially metastable value coming out of our D-register   synchronizer into <i>quarantine</i> by adding a second   register hooked to the output of the first register.</p> <p>If a transition on the input violates the dynamic discipline   and causes the first register to go metastable, it’s not   immediately an issue since the metastable value is stopped from   entering the system by the second register.  In fact, during the   first half of the clock cycle, the master latch in the second   register is closed, so the metastable value is being completely   ignored.</p> <p>It’s only at the next clock edge, an entire clock period   later, that the second D register will need a valid and stable   input.  There’s still some probability that the first   register will be metastable after an entire clock period, but we   can make that probability as low as we wish by choosing a   sufficiently long clock period.  In other words, the output of   the second register, which provides the signal used by the   internal combinational logic, will be stable and valid with a   probability of our choosing.  Validity is not 100% guaranteed,   but the failure times are measured in years or decades, so   it’s not an issue in practice.  Without the second   register, the system might see a metastability failure every   handful of hours — the exact failure rate depends on the   transition frequencies and gains in the circuit.</p> <p>What happens if our clock period is short but we want a long   quarantine time?  We can use multiple quarantine registers in   series — it’s the total delay between when the first   register goes metastable and when the synchronized input is used   by the internal logic that determines the failure   probability.</p> <p>The bottom line: we can use synchronizing registers to   quarantine potentially metastable signals for some period of   time.  Since the probability of still being metastable decreases   exponentially with the quarantine time, we can reduce the   failure probability to any desired level.  Not 100%   guaranteed, but close enough that metastability is not a   practical issue if we use our quarantine strategy.</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c6/index.htm">Back<span>Finite State Machines</span></a></li>     <li id="continue_btn"><a href="../../../contents/c6/c6s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

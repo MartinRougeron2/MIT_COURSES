@@ -1,0 +1,317 @@
+1
+00:00:00,780 --> 00:00:06,720
+If we want our system to be modular and expandable,
+how should its design accommodate components
+
+2
+00:00:06,720 --> 00:00:10,240
+that the user might add at a later time?
+
+3
+00:00:10,240 --> 00:00:14,459
+For many years the approach was to provide
+a way to plug additional printed circuit boards
+
+4
+00:00:14,459 --> 00:00:19,020
+into the main "motherboard" that holds the
+CPU, memory, and the initial collection of
+
+5
+00:00:19,020 --> 00:00:20,720
+I/O components.
+
+6
+00:00:20,720 --> 00:00:26,020
+The socket on the motherboard connects the
+circuitry on the add-in card to the signals
+
+7
+00:00:26,020 --> 00:00:30,240
+on the motherboard that allow the CPU to communicate
+with the add-in card.
+
+8
+00:00:30,240 --> 00:00:35,829
+These signals include power and a clock signal
+used to time the communication, along with
+
+9
+00:00:35,829 --> 00:00:37,909
+the following.
+
+10
+00:00:37,909 --> 00:00:42,399
+* Address wires to select different communication
+end points on the add-in card.
+
+11
+00:00:42,399 --> 00:00:47,960
+The end points might include memory locations,
+control registers, diagnostic ports, etc.
+
+12
+00:00:47,960 --> 00:00:51,840
+* Data wires for transferring data to and
+from the CPU.
+
+13
+00:00:51,840 --> 00:00:58,950
+In older systems, there would many data wires
+to support byte- or word-width data transfers.
+
+14
+00:00:58,950 --> 00:01:03,441
+* Some number of control wires that tell the
+add-in card when a particular transfer has
+
+15
+00:01:03,441 --> 00:01:08,420
+started and that allow the add-in card to
+indicate when it has responded.
+
+16
+00:01:08,420 --> 00:01:12,750
+If there are multiple slots for plugging in
+multiple add-in cards, the same signals might
+
+17
+00:01:12,750 --> 00:01:18,450
+be connected to all the cards and the address
+wires would be used to sort out which transfers
+
+18
+00:01:18,450 --> 00:01:21,560
+were intended for which cards.
+
+19
+00:01:21,560 --> 00:01:25,450
+Collectively these signals are referred to
+as the system bus.
+
+20
+00:01:25,450 --> 00:01:32,259
+"Bus" is system-architect jargon for a collection
+of wires used to transfer data using a pre-determined
+
+21
+00:01:32,259 --> 00:01:34,289
+communication protocol.
+
+22
+00:01:34,289 --> 00:01:38,158
+Here's an example of how a bus transaction
+might work.
+
+23
+00:01:38,158 --> 00:01:43,390
+The CLK signal is used to time when signals
+are placed on the bus wires (at the assertion
+
+24
+00:01:43,390 --> 00:01:49,299
+edge of CLK) and when they're read by the
+recipient (at the sample edge of the CLK).
+
+25
+00:01:49,299 --> 00:01:54,450
+The timing of the clock waveform is designed
+to allow enough time for the signals to propagate
+
+26
+00:01:54,450 --> 00:01:58,649
+down the bus and reach valid logic levels
+at all the receivers.
+
+27
+00:01:58,649 --> 00:02:03,310
+The component initiating the transaction is
+called the bus master who is said to "own"
+
+28
+00:02:03,310 --> 00:02:04,789
+the bus.
+
+29
+00:02:04,789 --> 00:02:10,489
+Most buses provide a mechanism for transferring
+ownership from one component to another.
+
+30
+00:02:10,489 --> 00:02:15,930
+The master sets the bus lines to indicate
+the desired operation (read, write, block
+
+31
+00:02:15,930 --> 00:02:21,099
+transfer, etc.), the address of the recipient,
+and, in the case of a write operation, the
+
+32
+00:02:21,099 --> 00:02:24,700
+data to be sent to the recipient.
+
+33
+00:02:24,700 --> 00:02:29,319
+The intended recipient, called the slave,
+is watching the bus lines looking for its
+
+34
+00:02:29,319 --> 00:02:31,900
+address at each sample edge.
+
+35
+00:02:31,900 --> 00:02:37,069
+When it sees a transaction for itself, the
+slave performs the requested operation, using
+
+36
+00:02:37,069 --> 00:02:41,379
+a bus signal to indicate when the operation
+is complete.
+
+37
+00:02:41,379 --> 00:02:47,879
+On completion it may use the data wires to
+return information to the master.
+
+38
+00:02:47,879 --> 00:02:52,720
+The bus itself may include circuitry to look
+for transactions where the slave isn't responding
+
+39
+00:02:52,720 --> 00:02:57,720
+and, after an appropriate interval,
+generate an error response so the master can
+
+40
+00:02:57,720 --> 00:02:59,430
+take the appropriate action.
+
+41
+00:02:59,430 --> 00:03:04,430
+This sort of bus architecture proved to be
+a very workable design for accommodating add-in
+
+42
+00:03:04,430 --> 00:03:12,060
+cards as long as the rate of transactions
+wasn't too fast, say less than 50 Mhz.
+
+43
+00:03:12,060 --> 00:03:17,409
+But as system speeds increased, transaction
+rates had to increase to keep system performance
+
+44
+00:03:17,409 --> 00:03:22,939
+at acceptable levels, so the time for each
+transaction got smaller.
+
+45
+00:03:22,939 --> 00:03:27,989
+With less time for signaling on the bus wires,
+various effects began loom large.
+
+46
+00:03:27,989 --> 00:03:33,079
+If the clock had too short a period, there
+wasn't enough time for the master to see the
+
+47
+00:03:33,079 --> 00:03:38,170
+assertion edge, enable its drivers,
+have the signal propagate down a long bus
+
+48
+00:03:38,170 --> 00:03:42,980
+to the intended receiver and be stable at
+each receiver for long enough before the sample
+
+49
+00:03:42,980 --> 00:03:44,550
+edge.
+
+50
+00:03:44,550 --> 00:03:49,079
+Another problem was that the clock signal
+would arrive at different cards at different
+
+51
+00:03:49,079 --> 00:03:50,140
+times.
+
+52
+00:03:50,140 --> 00:03:55,049
+So a card with an early-arriving clock might
+decide it was its turn to start driving the
+
+53
+00:03:55,049 --> 00:03:59,719
+bus signals, while a card with a late-arriving
+clock might still be driving the bus from
+
+54
+00:03:59,719 --> 00:04:01,349
+the previous cycle.
+
+55
+00:04:01,349 --> 00:04:05,409
+These momentary conflicts between drivers
+could add huge amounts of electrical noise
+
+56
+00:04:05,409 --> 00:04:07,750
+to the system.
+
+57
+00:04:07,750 --> 00:04:13,110
+Another big issue is that energy would reflect
+off all the small impedance discontinuities
+
+58
+00:04:13,110 --> 00:04:15,280
+caused by the bus connectors.
+
+59
+00:04:15,280 --> 00:04:19,570
+If there were many connectors, there would
+be many small echoes which would could corrupt
+
+60
+00:04:19,570 --> 00:04:22,550
+the signal seen by various receivers.
+
+61
+00:04:22,550 --> 00:04:26,331
+The equations in the upper right show how
+much of the signal energy is transmitted and
+
+62
+00:04:26,331 --> 00:04:30,229
+how much is reflected at each discontinuity.
+
+63
+00:04:30,229 --> 00:04:35,870
+The net effect was like trying to talk very
+fast while yelling into the Grand Canyon.
+
+64
+00:04:35,870 --> 00:04:41,060
+The echoes could distort the message beyond
+recognition unless sufficient time was allocated
+
+65
+00:04:41,060 --> 00:04:44,750
+between words for the echoes to die away.
+
+66
+00:04:44,750 --> 00:04:50,460
+Eventually buses were relegated to relatively
+low-speed communication tasks and a different
+
+67
+00:04:50,460 --> 00:04:53,470
+approach had to be developed for high-speed
+communication.

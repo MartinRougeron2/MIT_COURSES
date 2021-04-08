@@ -1,0 +1,352 @@
+1
+00:00:00,459 --> 00:00:05,140
+Now let's think a bit about what happens if
+there's an error and one or more of the bits
+
+2
+00:00:05,140 --> 00:00:07,710
+in our encoded data gets corrupted.
+
+3
+00:00:07,710 --> 00:00:12,760
+We'll focus on single-bit errors, but much
+of what we discuss can be generalized to multi-bit
+
+4
+00:00:12,760 --> 00:00:13,760
+errors.
+
+5
+00:00:13,760 --> 00:00:18,929
+For example, consider encoding the results
+of some unpredictable event, e.g., flipping
+
+6
+00:00:18,929 --> 00:00:19,929
+a fair coin.
+
+7
+00:00:19,929 --> 00:00:26,329
+There are two outcomes: "heads", encoded as,
+say, 0, and "tails" encoded as 1.
+
+8
+00:00:26,329 --> 00:00:31,109
+Now suppose some error occurs during processing
+- for example, the data is corrupted while
+
+9
+00:00:31,109 --> 00:00:36,650
+being transmitted from Bob to Alice:
+Bob intended to send the message "heads",
+
+10
+00:00:36,650 --> 00:00:41,760
+but the 0 was corrupted and become a 1 during
+transmission, so Alice receives 1, which she
+
+11
+00:00:41,760 --> 00:00:43,750
+interprets as "tails".
+
+12
+00:00:43,750 --> 00:00:48,359
+So this simple encoding doesn't work very
+well if there's the possibility of single-bit
+
+13
+00:00:48,359 --> 00:00:50,160
+errors.
+
+14
+00:00:50,160 --> 00:00:53,920
+To help with our discussion, we'll introduce
+the notion of "Hamming distance", defined
+
+15
+00:00:53,920 --> 00:00:59,480
+as the number of positions in which the corresponding
+digits differ in two encodings of the same
+
+16
+00:00:59,480 --> 00:01:00,480
+length.
+
+17
+00:01:00,480 --> 00:01:06,280
+For example, here are two 7-bit encodings,
+which differ in their third and fifth positions,
+
+18
+00:01:06,280 --> 00:01:09,930
+so the Hamming distance between the encodings
+is 2.
+
+19
+00:01:09,930 --> 00:01:14,479
+If someone tells us the Hamming distance of
+two encodings is 0, then the two encodings
+
+20
+00:01:14,479 --> 00:01:16,250
+are identical.
+
+21
+00:01:16,250 --> 00:01:21,400
+Hamming distance is a handy tool for measuring
+how encodings differ.
+
+22
+00:01:21,400 --> 00:01:24,070
+How does this help us think about single-bit
+errors?
+
+23
+00:01:24,070 --> 00:01:28,930
+A single-bit error changes exactly one of
+the bits of an encoding, so the Hamming distance
+
+24
+00:01:28,930 --> 00:01:34,740
+between a valid binary code word and the same
+code word with a single-bit error is 1.
+
+25
+00:01:34,740 --> 00:01:39,970
+The difficulty with our simple encoding is
+that the two valid code words ("0" and "1")
+
+26
+00:01:39,970 --> 00:01:42,270
+also have a Hamming distance of 1.
+
+27
+00:01:42,270 --> 00:01:47,340
+So a single-bit error changes one valid code
+word into another valid code word.
+
+28
+00:01:47,340 --> 00:01:51,908
+We'll show this graphically, using an arrow
+to indicate that two encodings differ by a
+
+29
+00:01:51,908 --> 00:01:56,899
+single bit, i.e., that the Hamming distance
+between the encodings is 1.
+
+30
+00:01:56,899 --> 00:02:01,750
+The real issue here is that when Alice receives
+a 1, she can't distinguish between an uncorrupted
+
+31
+00:02:01,750 --> 00:02:06,799
+encoding of tails and a corrupted encoding
+of heads - she can't detect that an error
+
+32
+00:02:06,799 --> 00:02:08,030
+occurred.
+
+33
+00:02:08,030 --> 00:02:10,940
+Let's figure how to solve her problem!
+
+34
+00:02:10,940 --> 00:02:15,390
+The insight is to come up with a set of valid
+code words such that a single-bit error does
+
+35
+00:02:15,390 --> 00:02:18,440
+NOT produce another valid code word.
+
+36
+00:02:18,440 --> 00:02:23,360
+What we need are code words that differ by
+at least two bits, i.e., we want the minimum
+
+37
+00:02:23,360 --> 00:02:28,310
+Hamming distance between any two code words
+to be at least 2.
+
+38
+00:02:28,310 --> 00:02:32,840
+If we have a set of code words where the minimum
+Hamming distance is 1, we can generate the
+
+39
+00:02:32,840 --> 00:02:38,020
+set we want by adding a parity bit to each
+of the original code words.
+
+40
+00:02:38,020 --> 00:02:40,620
+There's "even parity" and "odd parity."
+
+41
+00:02:40,620 --> 00:02:45,481
+Using even parity, the additional parity bit
+is chosen so that the total number of 1 bits
+
+42
+00:02:45,481 --> 00:02:48,350
+in the new code word are even.
+
+43
+00:02:48,350 --> 00:02:54,060
+For example, our original encoding for "heads"
+was 0, adding an even parity bit gives us
+
+44
+00:02:54,060 --> 00:02:55,610
+00.
+
+45
+00:02:55,610 --> 00:03:00,400
+Adding an even parity bit to our original
+encoding for "tails" gives us 11.
+
+46
+00:03:00,400 --> 00:03:05,670
+The minimum Hamming distance between code
+words has increased from 1 to 2.
+
+47
+00:03:05,670 --> 00:03:08,060
+How does this help?
+
+48
+00:03:08,060 --> 00:03:14,030
+Consider what happens when there's a single-bit
+error: 00 would be corrupted to 01 or 10,
+
+49
+00:03:14,030 --> 00:03:16,510
+neither of which is a valid code word.
+
+50
+00:03:16,510 --> 00:03:17,510
+Aha!
+
+51
+00:03:17,510 --> 00:03:20,820
+We can detect that a single-bit error has
+occurred.
+
+52
+00:03:20,820 --> 00:03:25,820
+Similarly, single-bit errors for 11 would
+also be detected.
+
+53
+00:03:25,820 --> 00:03:31,900
+Note that the valid code words 00 and 11 both
+have an even number of 1-bits, but that the
+
+54
+00:03:31,900 --> 00:03:36,540
+corrupted code words 01 or 10 have an odd
+number of 1-bits.
+
+55
+00:03:36,540 --> 00:03:40,510
+We say that corrupted code words have a "parity
+error".
+
+56
+00:03:40,510 --> 00:03:45,150
+It's easy to perform a parity check: simply
+count the number of 1s in the code word.
+
+57
+00:03:45,150 --> 00:03:51,260
+If it's even, a single-bit error has NOT occurred;
+if it's odd, a single-bit error HAS occurred.
+
+58
+00:03:51,260 --> 00:03:55,570
+We'll see in a couple of chapters that the
+Boolean function exclusive-or can be used
+
+59
+00:03:55,570 --> 00:03:58,150
+to perform parity checks.
+
+60
+00:03:58,150 --> 00:04:02,450
+Note that parity won't help us if there's
+an even number of bit errors, where a corrupted
+
+61
+00:04:02,450 --> 00:04:07,630
+code word would have an even number of 1-bits
+and hence appear to be okay.
+
+62
+00:04:07,630 --> 00:04:12,060
+Parity is useful for detecting single-bit
+errors; we'll need a more sophisticated encoding
+
+63
+00:04:12,060 --> 00:04:14,750
+to detect more errors.
+
+64
+00:04:14,750 --> 00:04:20,478
+In general, to detect some number E of errors,
+we need a minimum Hamming distance of E+1
+
+65
+00:04:20,478 --> 00:04:22,169
+between code words.
+
+66
+00:04:22,169 --> 00:04:26,659
+We can see this graphically below which shows
+how errors can corrupt the valid code words
+
+67
+00:04:26,659 --> 00:04:31,620
+000 and 111, which have a Hamming distance
+of 3.
+
+68
+00:04:31,620 --> 00:04:37,000
+In theory this means we should be able to
+detect up to 2-bit errors.
+
+69
+00:04:37,000 --> 00:04:41,290
+Each arrow represents a single-bit error and
+we can see from the diagram that following
+
+70
+00:04:41,290 --> 00:04:47,750
+any path of length 2 from either 000 or 111
+doesn't get us to the other valid code word.
+
+71
+00:04:47,750 --> 00:04:54,189
+In other words, assuming we start with either
+000 or 111, we can detect the occurrence of
+
+72
+00:04:54,189 --> 00:04:56,520
+up to 2 errors.
+
+73
+00:04:56,520 --> 00:05:00,979
+Basically our error detection scheme relies
+on choosing code words far enough apart, as
+
+74
+00:05:00,979 --> 00:05:05,930
+measured by Hamming distance, so that E errors
+can't corrupt one valid code word so that
+
+75
+00:05:05,930 --> 00:05:07,819
+it looks like another valid code word.

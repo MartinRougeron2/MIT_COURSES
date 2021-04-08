@@ -1,0 +1,577 @@
+1
+00:00:00,500 --> 00:00:02,880
+On our to-do list from
+the previous section
+
+2
+00:00:02,880 --> 00:00:07,000
+is figuring out how to build AND
+and OR gates with many inputs.
+
+3
+00:00:07,000 --> 00:00:08,760
+These will be needed
+when creating circuit
+
+4
+00:00:08,760 --> 00:00:11,470
+implementations using a
+sum-of-products equation
+
+5
+00:00:11,470 --> 00:00:13,320
+as our template.
+
+6
+00:00:13,320 --> 00:00:16,510
+Let’s assume our gate library
+only has 2-input gates
+
+7
+00:00:16,510 --> 00:00:19,770
+and figure how to build wider
+gates using the 2-input gates
+
+8
+00:00:19,770 --> 00:00:21,590
+as building blocks.
+
+9
+00:00:21,590 --> 00:00:24,320
+We’ll work on creating
+3- and 4-input gates,
+
+10
+00:00:24,320 --> 00:00:27,640
+but the approach we use can
+be generalized to create AND
+
+11
+00:00:27,640 --> 00:00:31,230
+and OR gates of
+any desired width.
+
+12
+00:00:31,230 --> 00:00:34,020
+The approach shown here relies
+on the associative property
+
+13
+00:00:34,020 --> 00:00:35,770
+of the AND operator.
+
+14
+00:00:35,770 --> 00:00:37,630
+This means we can
+perform an N-way
+
+15
+00:00:37,630 --> 00:00:42,150
+AND by doing pair-wise ANDs
+in any convenient order.
+
+16
+00:00:42,150 --> 00:00:45,490
+The OR and XOR operations
+are also associative,
+
+17
+00:00:45,490 --> 00:00:48,860
+so the same approach will work
+for designing wide OR and XOR
+
+18
+00:00:48,860 --> 00:00:52,770
+circuits from the
+corresponding 2-input gate.
+
+19
+00:00:52,770 --> 00:00:57,050
+Simply substitute 2-input OR
+gates or 2-input XOR gates
+
+20
+00:00:57,050 --> 00:01:02,120
+for the 2-input AND gates shown
+below and you’re good to go!
+
+21
+00:01:02,120 --> 00:01:05,340
+Let’s start by designing a
+circuit that computes the AND
+
+22
+00:01:05,340 --> 00:01:08,690
+of three inputs A, B, and C.
+
+23
+00:01:08,690 --> 00:01:12,450
+In the circuit shown here,
+we first compute (A AND B),
+
+24
+00:01:12,450 --> 00:01:17,180
+then AND that result with C.
+
+25
+00:01:17,180 --> 00:01:20,630
+Using the same strategy, we
+can build a 4-input AND gate
+
+26
+00:01:20,630 --> 00:01:23,680
+from three 2-input AND gates.
+
+27
+00:01:23,680 --> 00:01:26,650
+Essentially we’re building
+a chain of AND gates,
+
+28
+00:01:26,650 --> 00:01:32,860
+which implement an N-way AND
+using N-1 2-input AND gates.
+
+29
+00:01:32,860 --> 00:01:35,660
+We can also associate the
+four inputs a different way:
+
+30
+00:01:35,660 --> 00:01:39,540
+computing (A AND B) in
+parallel with (C AND D),
+
+31
+00:01:39,540 --> 00:01:43,810
+then combining those two
+results using a third AND gate.
+
+32
+00:01:43,810 --> 00:01:47,200
+Using this approach, we’re
+building a tree of AND gates.
+
+33
+00:01:47,200 --> 00:01:50,450
+Which approach is
+best: chains or trees?
+
+34
+00:01:50,450 --> 00:01:53,390
+First we have to decide
+what we mean by “best”.
+
+35
+00:01:53,390 --> 00:01:55,810
+When designing circuits
+we’re interested in cost,
+
+36
+00:01:55,810 --> 00:01:59,170
+which depends on the number of
+components, and performance,
+
+37
+00:01:59,170 --> 00:02:01,600
+which we characterize
+by the propagation delay
+
+38
+00:02:01,600 --> 00:02:03,250
+of the circuit.
+
+39
+00:02:03,250 --> 00:02:05,920
+Both strategies require the
+same number of components
+
+40
+00:02:05,920 --> 00:02:08,240
+since the total number
+of pair-wise ANDs
+
+41
+00:02:08,240 --> 00:02:10,750
+is the same in both cases.
+
+42
+00:02:10,750 --> 00:02:13,630
+So it’s a tie when
+considering costs.
+
+43
+00:02:13,630 --> 00:02:16,710
+Now consider propagation delay.
+
+44
+00:02:16,710 --> 00:02:20,530
+The chain circuit in the middle
+has a tPD of 3 gate delays,
+
+45
+00:02:20,530 --> 00:02:23,670
+and we can see that the
+tPD for an N-input chain
+
+46
+00:02:23,670 --> 00:02:26,560
+will be N-1 gate delays.
+
+47
+00:02:26,560 --> 00:02:29,282
+The propagation delay
+of chains grows linearly
+
+48
+00:02:29,282 --> 00:02:30,365
+with the number of inputs.
+
+49
+00:02:33,110 --> 00:02:34,670
+The tree circuit
+on the bottom has
+
+50
+00:02:34,670 --> 00:02:38,670
+a tPD of 2 gates,
+smaller than the chain.
+
+51
+00:02:38,670 --> 00:02:41,370
+The propagation delay of
+trees grows logarithmically
+
+52
+00:02:41,370 --> 00:02:42,980
+with the number of inputs.
+
+53
+00:02:42,980 --> 00:02:44,680
+Specifically, the
+propagation delay
+
+54
+00:02:44,680 --> 00:02:50,470
+of tree circuits built using
+2-input gates grows as log2(N).
+
+55
+00:02:50,470 --> 00:02:52,350
+When N is large,
+tree circuits can
+
+56
+00:02:52,350 --> 00:02:54,660
+have dramatically
+better propagation delay
+
+57
+00:02:54,660 --> 00:02:56,910
+than chain circuits.
+
+58
+00:02:56,910 --> 00:02:58,570
+The propagation
+delay is an upper
+
+59
+00:02:58,570 --> 00:03:01,780
+bound on the worst-case
+delay from inputs to outputs
+
+60
+00:03:01,780 --> 00:03:03,830
+and is a good measure
+of performance
+
+61
+00:03:03,830 --> 00:03:07,370
+assuming that all inputs
+arrive at the same time.
+
+62
+00:03:07,370 --> 00:03:10,500
+But in large circuits,
+A, B, C and D
+
+63
+00:03:10,500 --> 00:03:12,670
+might arrive at
+different times depending
+
+64
+00:03:12,670 --> 00:03:16,370
+on the tPD of the circuit
+generating each one.
+
+65
+00:03:16,370 --> 00:03:18,770
+Suppose input D
+arrives considerably
+
+66
+00:03:18,770 --> 00:03:21,250
+after the other inputs.
+
+67
+00:03:21,250 --> 00:03:24,330
+If we used the tree circuit
+to compute the AND of all four
+
+68
+00:03:24,330 --> 00:03:26,760
+inputs, the additional
+delay in computing Z
+
+69
+00:03:26,760 --> 00:03:30,630
+is two gate delays
+after the arrival of D.
+
+70
+00:03:30,630 --> 00:03:32,730
+However, if we use
+the chain circuit,
+
+71
+00:03:32,730 --> 00:03:34,750
+the additional
+delay in computing Z
+
+72
+00:03:34,750 --> 00:03:37,560
+might be as little
+as one gate delay.
+
+73
+00:03:37,560 --> 00:03:40,300
+The moral of this story:
+it’s hard to know which
+
+74
+00:03:40,300 --> 00:03:43,540
+implementation of a subcircuit,
+like the 4-input AND shown
+
+75
+00:03:43,540 --> 00:03:48,010
+here, will yield the smallest
+overall tPD unless we know
+
+76
+00:03:48,010 --> 00:03:50,590
+the tPD of the circuits
+that compute the values
+
+77
+00:03:50,590 --> 00:03:52,730
+for the input signals.
+
+78
+00:03:52,730 --> 00:03:55,650
+In designing CMOS circuits,
+the individual gates
+
+79
+00:03:55,650 --> 00:03:59,120
+are naturally inverting, so
+instead of using AND and OR
+
+80
+00:03:59,120 --> 00:04:01,830
+gates, for the best
+performance we want to the use
+
+81
+00:04:01,830 --> 00:04:04,610
+the NAND and NOR
+gates shown here.
+
+82
+00:04:04,610 --> 00:04:07,540
+NAND and NOR gates can be
+implemented as a single CMOS
+
+83
+00:04:07,540 --> 00:04:10,470
+gate involving one pullup
+circuit and one pulldown
+
+84
+00:04:10,470 --> 00:04:12,070
+circuit.
+
+85
+00:04:12,070 --> 00:04:14,630
+AND and OR gates
+require two CMOS gates
+
+86
+00:04:14,630 --> 00:04:17,060
+in their implementation,
+e.g., a NAND gate
+
+87
+00:04:17,060 --> 00:04:19,128
+followed by an INVERTER.
+
+88
+00:04:19,128 --> 00:04:21,670
+We’ll talk about how to build
+sum-of-products circuitry using
+
+89
+00:04:21,670 --> 00:04:25,090
+NANDs and NORs in
+the next section.
+
+90
+00:04:25,090 --> 00:04:28,550
+Note that NAND and NOR
+operations are not associative:
+
+91
+00:04:28,550 --> 00:04:36,080
+NAND(A,B,C) is not equal
+to NAND(NAND(A,B),C).
+
+92
+00:04:36,080 --> 00:04:39,390
+So we can’t build a NAND gate
+with many inputs by building
+
+93
+00:04:39,390 --> 00:04:42,040
+a tree of 2-input NANDs.
+
+94
+00:04:42,040 --> 00:04:45,570
+We’ll talk about this
+in the next section too!
+
+95
+00:04:45,570 --> 00:04:48,150
+We’ve mentioned the
+exclusive-or operation,
+
+96
+00:04:48,150 --> 00:04:51,670
+sometimes called
+XOR, several times.
+
+97
+00:04:51,670 --> 00:04:53,830
+This logic function
+is very useful
+
+98
+00:04:53,830 --> 00:04:56,310
+when building circuitry
+for arithmetic or parity
+
+99
+00:04:56,310 --> 00:04:57,790
+calculations.
+
+100
+00:04:57,790 --> 00:05:01,650
+As you’ll see in Lab 2,
+implementing a 2-input XOR gate
+
+101
+00:05:01,650 --> 00:05:04,800
+will take many more NFETs
+and PFETs than required
+
+102
+00:05:04,800 --> 00:05:07,570
+for a 2-input NAND or NOR.
+
+103
+00:05:07,570 --> 00:05:10,210
+We know we can come up with
+a sum-of-products expression
+
+104
+00:05:10,210 --> 00:05:12,290
+for any truth table
+and hence build
+
+105
+00:05:12,290 --> 00:05:15,690
+a circuit implementation
+using INVERTERs, AND gates,
+
+106
+00:05:15,690 --> 00:05:17,200
+and OR gates.
+
+107
+00:05:17,200 --> 00:05:18,860
+It turns out we
+can build circuits
+
+108
+00:05:18,860 --> 00:05:22,610
+with the same functionality
+using only 2-INPUT NAND gates.
+
+109
+00:05:22,610 --> 00:05:26,530
+We say the the 2-INPUT
+NAND is a universal gate.
+
+110
+00:05:26,530 --> 00:05:29,020
+Here we show how to implement
+the sum-of-products building
+
+111
+00:05:29,020 --> 00:05:31,910
+blocks using just
+2-input NAND gates.
+
+112
+00:05:31,910 --> 00:05:34,690
+In a minute we’ll show a
+more direct implementation
+
+113
+00:05:34,690 --> 00:05:36,860
+for sum-of-products
+using only NANDs,
+
+114
+00:05:36,860 --> 00:05:40,000
+but these little schematics are
+a proof-of-concept showing that
+
+115
+00:05:40,000 --> 00:05:43,520
+NAND-only equivalent
+circuits exist.
+
+116
+00:05:43,520 --> 00:05:45,510
+2-INPUT NOR gates
+are also universal,
+
+117
+00:05:45,510 --> 00:05:48,510
+as shown by these
+little schematics.
+
+118
+00:05:48,510 --> 00:05:50,690
+Inverting logic takes a
+little getting used to,
+
+119
+00:05:50,690 --> 00:05:54,020
+but its the key to designing
+low-cost high-performance
+
+120
+00:05:54,020 --> 00:05:56,130
+circuits in CMOS.

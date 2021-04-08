@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>1.1 Annotated Slides | 1 Basics of Information | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="1.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 1.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c1/c1s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c1/index.htm">1 Basics of Information</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            1.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            1.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="selected">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c1/index.htm">&lt;<span>Basics of Information</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c1/c1s1/index.htm">1.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c1/c1s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L01: Basics of Information</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">What is Information?</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Quantifying Information</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Information Conveyed by Data</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Example: Information Content</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Probability and Information Content</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Entropy</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Meaning of Entropy</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Encodings</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Encodings as Binary Trees</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">Fixed-length Encodings</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Encoding Postive Integers</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Hexadecimal Notation</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Encoding Signed Integers</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Two’s Complement Encoding</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">More Two’s Complement</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Variable-length Encodings</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Example: Variable-length Encoding</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Huffman’s Algorithm</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Can We Do Better?</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Error Detection</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Hamming Distance</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Hamming Distance and Bit Errors</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Single-bit Error Detection</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">Parity Check</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">Detecting Multi-bit Errors</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">Error Correction</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Summary</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <p>In order to build circuits that manipulate, transmit or store   information, we are going to need some engineering tools to help   us determine if we’re choosing a good representation for   the information — that’s the subject of this   chapter.  We’ll study different ways of encoding   information as bits and learn the mathematics that help us   determine if our encoding is a good one.  We’ll also look   into what we can do if our representation gets corrupted by   errors — it would be nice to detect that something bad has   happened and possibly even correct the problem.</p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide02.png" alt=""></a></div> <p>Let’s start by asking “what is information?”   From our engineering perspective, we’ll define information   as data communicated or received that resolves uncertainty about   a particular fact or circumstance.  In other words, after   receiving the data we’ll know more about that particular   fact or circumstance.  The greater the uncertainty resolved by   the data, the more information the data has conveyed.</p> <p>Let’s look at an example: a card has been chosen at   random from a normal deck of 52 playing cards.  Without any data   about the chosen card, there are 52 possibilities for the type   of the card.  Now suppose you receive one of the following   pieces of data about the choice.</p> <ul>     <li>You learn the suit of the card is Heart.  This narrows the     choice to down to one of 13 cards.</li>     <li>You learn instead the card is <i>not</i> the Ace of Spades.     This still leaves 51 cards that it might be.</li>     <li>You learn instead that the card is a face card, that is, a     Jack, Queen or King.  So the choice is one of 12 cards.</li>     <li>You learn instead that the card is the <i>suicide king</i>.     This is actually a particular card: the King of Hearts where     the king is sticking the sword through his head.  No     uncertainty here!  We know exactly what the choice was.</li> </ul> <p>Which of the possible pieces of data conveys the most   information?  In other words, which data resolves the most   uncertainty about the chosen card?  Similarly, which data   conveys the least amount of information?  We’ll answer   these questions in the next section.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide03.png" alt=""></a></div> <p>Mathematicians like to model uncertainty about a particular   circumstance by introducing the concept of a random variable.   For our application, we’ll always be dealing with   circumstances where there are a finite number N of distinct   choices, so we’ll be using a discrete random variable \(X\)   that can take on one of the N possible values from the set   \(\{x_1, x_2, ..., x_N\}\).  The probability that \(X\) will take on   the value \(x_1\) is given by the probability \(p_1\), the value   \(x_2\) by probability \(p_2\), and so on.  The smaller the   probability, the more uncertain it is that \(X\) will take on that   particular value.</p> <p>Claude Shannon, in his seminal work on the theory of   information, defined the information received when learning that   \(X\) had taken on the value \(x_i\) as    \[\begin{equation} I(x_i)=\log_2 \frac{1}{p_i} \textrm{bits}.   \end{equation}\]    Note that the uncertainty of a choice is inversely proportional   its probability, so the term inside of the log is basically the   uncertainty of that particular choice.  We use the \(\log_2\) to   measure the magnitude of the uncertainty in bits where a bit is   a quantity that can take on the value 0 or 1.  Think of the   information content as the number of bits we would require to   encode this choice.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide04.png" alt=""></a></div> <p>Suppose the data we receive doesn’t resolve all the   uncertainty.  For example, when earlier we received the data   that the card was a Heart: some of uncertainty has been resolved   since we know more about the card than we did before the   receiving the data, but we don’t yet know the exact card,   so some uncertainty still remains.  We can slightly modify   Equation (1) as follows    \[\begin{equation}   I(\textrm{data})=\log_2\frac{1}{p_{\textrm{data}}} \textrm{ bits}.   \end{equation}\]    In our example, the probability of learning that a card chosen   randomly from a 52-card deck is a Heart is \(13/52 = 0.25\), the   number of Hearts over the total number of choices.  So the   information content is computed as    \[\begin{equation*}   I(\textrm{heart}) = \log_2\frac{1}{p_{\textrm{heart}}} = \log_2 \frac{1}{0.25} = 2 \textrm{ bits}.   \end{equation*}\]</p> <p>This example is one we encounter often: we receive partial   information about \(N\) equally-probable choices (each choice has   probability \(1/N\)) that narrows the number of choices down to   \(M\).  The probability of receiving such information is \(M(1/N)\),   so the information content is    \[\begin{equation}   I(\textrm{N choices \(\rightarrow\) M choices}) = \log_2 \frac{1}{M(1/N)} = \log_2 \frac{N}{M} \textrm{ bits}.   \end{equation}\]</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide05.png" alt=""></a></div> <p>Let’s look at some examples.</p> <ul>     <li>If we learn the result (heads or tails) of a flip of a fair     coin, we go from 2 choices to a single choice.  So, using our     equation, the information received is \(\log_2(2/1) = 1\) bit.     This makes sense: it would take us one bit to encode which of     the two possibilities actually happened, say, “1”     for heads and “0” for tails.</li>     <li>Reviewing the example from earlier, learning that a card     drawn from a fresh deck is a Heart gives us \(\log_2(52/13) = 2\)     bits of information.  Again this makes sense: it would take us     two bits to encode which of the four possible card suits had     turned up.</li>     <li>Finally consider what information we get from rolling two     dice, one red and one green.  Each die has six faces, so there     are 36 possible combinations.  Once we learn the exact outcome     of the roll, we’ve received \(\log_2(36/1) = 5.17\) bits of     information.</li> </ul> <p>Hmm.  What do those fractional bits mean?  Our digital system   only deals in whole bits!  So to encode a single outcome,   we’d need to use 6 bits.  But suppose we wanted to record   the outcome of 10 successive rolls.  At 6 bits/roll we would   need a total of 60 bits.  What this formula is telling us is   that we would need not 60 bits, but only 52 bits to   unambiguously encode the results.  Whether we can come up with   an encoding that achieves this lower bound is an interesting   question that we’ll take up later in this chapter.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide06.png" alt=""></a></div> <p>To wrap up, let’s return to our initial example.   Here’s a table showing the different choices for the data   received, along with the probability of that event and the   computed information content.</p> <p>The results line up nicely with our intuition: the more   uncertainty is resolved by the data, the more information we   have received.  We can use Equation (2) to provide an exact   answer to the questions at the end of the first slide.  We get   the most information when we learn that the card is the suicide   King and the least information when we learn that the card is   not the Ace of Spades.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide07.png" alt=""></a></div> <p>In the next section we’re going to start our discussion   on how to actually engineer the bit encodings we’ll use to   encode information, but first we’ll need a way to evaluate   the efficacy of an encoding.  The <i>entropy</i>, \(H(X)\), of a   discrete random variable \(X\) is average amount of information   received when learning the value of \(X\):</p> <p>\[\begin{equation} \label{eq:entropy} H(X) = E(I(X)) = \sum_i   p_i \log_2 \frac{1}{p_i} \end{equation}\] Shannon followed   Boltzmann’s lead in using \(H\), the upper-case variant of   the Greek letter \(\eta\) (eta), for “entropy” since   \(E\) was already used for “expected value,” the   mathematicians’ name for “average.” We compute   the expected value in the usual way: we take the weighted sum,   where the amount of information received when learning of a   particular choice \(i\), \(log_2(1/p_i)\) is weighted by the   probability of that choice actually happening.</p> <p>Here’s an example.  We have a random variable that can   take on one of four values \(\{A,B,C,D\}\).  The probabilities of   each choice are shown in the table, along with the associated   information content.</p> <p>Now we’ll compute the entropy using Equation (4):    \[\begin{equation*} \begin{split} H(X) &amp; = (1/3)(1.58) +   (1/2)(1) + (1/12)(3.58) + (1/12)(3.58) \\ &amp; = 1.626 \textrm{   bits.}  \end{split} \end{equation*}\]    This is telling us that a clever encoding scheme should, on the   average, be able to do better than simply encoding each symbol   using 2 bits to represent which of the four possible values is   next.  Food for thought!  We’ll discuss this further in   our discussion of variable-length encodings.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide08.png" alt=""></a></div> <p>So, what is the entropy telling us?  Suppose we have a sequence   of data describing a sequence of values of the random variable   \(X\).</p> <p>If, on the average, we use less than \(H(X)\) bits transmit each   piece of data in the sequence, we will not be sending enough   information to resolve the uncertainty about the values.  In   other words, the entropy is a lower bound on the number of bits   we need to transmit.  Getting less than this number of bits   wouldn’t be good if the goal was to unambiguously describe   the sequence of values — we’d have failed at our   job!</p> <p>On the other hand, if we send, on the average, more than \(H(X)\)   bits to describe the sequence of values, we will not be making   the most effective use of our resources, since the same   information might have been able to be represented with fewer   bits.  This okay, but perhaps with some insights we could do   better.</p> <p>Finally, if we send on the average exactly \(H(X)\) bits then   we’d have the perfect encoding.  Alas, perfection is, as   always, a tough goal, so most of the time we’ll have to   settle for getting close.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide09.png" alt=""></a></div> <p>Next we turn our attention to encoding data as sequences of   0’s and 1’s, <i>i.e.</i>, a string of bits.   An <i>encoding</i> is an unambiguous mapping between bit strings   and the members of the set of data to be encoded.</p> <p>For example, suppose we have a set of four symbols   \(\{A,B,C,D\}\) and we want to use bit strings to encode messages   constructed of these symbols, <i>e.g.</i>, “ABBA.”   If we choose to encode the message one character at a time, our   encoding would assign a unique bit string to each symbol.  The   figure above shows some trial encodings.</p> <p>Since we have four symbols, we might choose a unique two-bit   string for each: “A” could be “00,” B =   “01,” C = “10,” and D =   “11,” as shown in the first encoding in the figure   above.  This is called a <i>fixed-length encoding</i> since the   bit strings used to represent the symbols all have the same   length.  The encoding for the message “ABBA” would   be “00 01 01 00”.  And we can run the   process backwards: given a bit string and the encoding key, we   can look up the next bits in the bit string, using the key to   determine the symbol they represent.  “00” would be   decoded as “A,” “01” as B and so on.</p> <p>As shown in the second encoding in the table, we can use   a <i>variable-length encoding</i>, where the symbols are encoded   using bit strings of different lengths.  here “A” is   encoded as “01,” “B” as “1”,   “C” as “000” and “D” =   “001.”.  “ABBA” would be encoded as   “01 1 1 01.” We’ll see that   carefully constructed variable-length encodings are useful for   the efficient encoding of messages where the symbols occur with   different probabilities.</p> <p>Finally consider the third encoding in the table.  We have to   be careful that the encoding is unambiguous!  Using this   encoding, “ABBA” would be encoded as   “0 1 1 0.” Looking good since that   encoding is shorter than either of the previous two encodings.   Now let’s try to decode this bit string — oops.   Using the encoding key, we can unfortunately arrive at several   decodings: “ABBA” of course, but also   “ADA” or “ABC” depending on how we group   the bits.  This attempt at specifying an encoding has failed   since the message cannot be interpreted unambiguously.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide10.png" alt=""></a></div> <p>Graphically we can represent an unambiguous encoding as a   binary tree, labeling the branches from each tree node with   “0” and “1,” placing the symbols to be   encoded as the leaves of the tree.  If you build a binary tree   for a proposed encoding and find that there are no symbols   labeling interior nodes and exactly one symbol at each leaf,   then your encoding is good to go!</p> <p>For example, consider the encoding shown on the left of the   figure.  It just takes a second to draw the corresponding binary   tree.  The symbol “B” is distance 1 from the root of   the tree, along an arc labeled “0”.  “A”   is distance two, and “C” and “D” are   distance 3.</p> <p>If we receive an encoded message, <i>e.g.</i>,   “01111,” we can decode it by using successive bits   of the encoding to identify a path from the root of tree,   descending step-by-step until we come to leaf, then repeating   the process starting at the root again, until all the bits in   the encoded message have been consumed.  So the message from the   sheep is decoded as follows:</p> <ul>     <li>“0” takes us from the root to the leaf     “B”, which is our first decoded symbol.</li>     <li>Then “1-1” takes us to “Ak” and</li>     <li>the next “1-1” results in a second     “A.”</li> </ul> <p>The final decoded message, “BAA,” is not totally   unexpected, at least from an American sheep.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide11.png" alt=""></a></div> <p>If the symbols we are trying to encode occur with equal   probability (or if we have no <i>a priori</i> reason to believe   otherwise), then we’ll use a fixed-length encoding, where   all leaves in the encoding’s binary tree are the same   distance from the root.  Fixed-length encodings have the   advantage of supporting random access, where we can figure out   the Nth symbol of the message by simply skipping over the   required number of bits.  For example, in a message encoded   using the fixed-length code shown here, if we wanted to   determine the third symbol in the encoded message, we would skip   the 4 bits used to encode the first two symbols and start   decoding with the 5th bit of message.</p> <p>Mr. Blue is telling us about the entropy for random variables   that have N equally-probable outcomes.  In this case, each   element of the sum in the entropy formula is simply   \((1/N)*\log_2(N)\), and, since there are N elements in the   sequence, the resulting entropy is just \(\log_2(N)\).</p> <p>Let’s look at some simple examples.  In binary-coded   decimal, each digit of a decimal number is encoded separately.   Since there are 10 different decimal digits, we’ll need to   use a 4-bit code to represent the 10 possible choices.  The   associated entropy is \(\log_2(10)\), which is 3.322 bits.  We can   see that our chosen encoding is inefficient in the sense that   we’d use more than the minimum number of bits necessary to   encode, say, a number with 1000 decimal digits: our encoding   would use 4000 bits, although the entropy suggests we *might* be   able to find a shorter encoding, say, 3400 bits, for messages of   length 1000.</p> <p>Another common encoding is ASCII, the code used to represent   English text in computing and communication.  ASCII has 94   printing characters, so the associated entropy is \(\log_2(94)\)   or 6.555 bits, so we would use 7 bits in our fixed-length   encoding for each character.</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide12.png" alt=""></a></div> <p>One of the most important encodings is the one we use to   represent numbers.  Let’s start by thinking about a   representation for unsigned integers, numbers starting at 0 and   counting up from there.  Drawing on our experience with   representing decimal numbers, <i>i.e.</i>, representing numbers   in <i>base 10</i> using the 10 decimal digits, our binary   representation of numbers will use a <i>base 2</i>   representation using the two binary digits.</p> <p>The formula for converting an N-bit binary representation of a   numeric value into the corresponding integer is shown below —   just multiply each binary digit by its corresponding weight in   the base-2 representation.  For example, here’s a 12-bit   binary number, with the weight of each binary digit shown above.   We can compute its value as \(0*2^{11}\) plus \(1*2^{10}\) plus   \(1*2^9\), and so on.  Keeping only the non-zero terms and   expanding the powers-of-two gives us the sum</p> <p>1024 + 512 + 256 + 128 + 64 + 16</p> <p>which, expressed in base-10, sums to the number 2000.</p> <p>With this N-bit representation, the smallest number that can be   represented is 0 (when all the binary digits are 0) and the   largest number is \(2^N - 1\) (when all the binary digits are 1).   Many digital systems are designed to support operations on   binary-encoded numbers of some fixed size, <i>e.g.</i>, choosing   a 32-bit or a 64-bit representation, which means that they would   need multiple operations when dealing with numbers too large to   be represented as a single 32-bit or 64-bit binary string.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide13.png" alt=""></a></div> <p>Long strings of binary digits are tedious and error-prone to   transcribe, so let’s find a more convenient notation,   ideally one where it will be easy to recover the original bit   string without too many calculations.  A good choice is to use a   representation based on a radix that’s some higher power   of 2, so each digit in our representation corresponds to some   short contiguous string of binary bits.  A popular choice these   days is a radix-16 representation, called hexadecimal or   “hex” for short, where each group of 4 binary digits   is represented using a single hex digit.</p> <p>Since there are 16 possible combinations of 4 binary bits,   we’ll need 16 hexadecimal <i>digits</i>: we’ll   borrow the ten digits “0” through “9”   from the decimal representation, and then simply use the first   six letters of the alphabet, “A” through   “F” for the remaining digits.  The translation   between 4-bit binary and hexadecimal is shown in the table to   the left below.</p> <p>To convert a binary number to hex, group the binary digits into   sets of 4, starting with the least-significant bit (that’s   the bit with weight \(2^0\)).  Then use the table to convert each   4-bit pattern into the corresponding hex digit:   “0000” is the hex digit “0”,   “1101” is the hex digit “D,” and   “0111” is the hex digit “7”.  The   resulting hex representation is “7D0.” To prevent   any confusion, we’ll use a special prefix “0x”   to indicate when a number is being shown in hex, so we’d   write “0x7D0” as the hex representation for the   binary number “0111 1101 0000.” This notation   convention is used by many programming languages for entering   binary bit strings.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide14.png" alt=""></a></div> <p>Our final challenge is figuring out how to represent signed   integers,   <i>e.g.</i>, what should be our representation for the number   -2000?</p> <p>In decimal notation, the convention is to precede the number   with a “+” or “-” to indicate whether   it’s positive or negative, usually omitting the   “+” to simplify the notation for positive numbers.   We could adopt a similar notation — called <i>signed     magnitude</i> — in binary, by allocating a separate bit at   the front of the binary string to indicate the sign, say   “0” for positive numbers and “1” for   negative numbers.  So the signed-magnitude representation for   -2000 would be an initial “1” to indicate a negative   number, followed by the representation for 2000 (as described on   the previous two slides).</p> <p>However there are some complications in using a   signed-magnitude representation.  There are two possible binary   representations for zero: “+0” and “-0”.   This makes the encoding slightly inefficient but, more   importantly, the circuitry for doing addition of   signed-magnitude numbers is different than the circuitry for   doing subtraction.  Of course, we’re used to that — in   elementary school we learned one technique for addition and   another for subtraction.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide15.png" alt=""></a></div> <p>To keep the circuitry simple, most modern digital systems use   the two’s complement binary representation for signed   integers.  In this representation, the high-order bit of an   N-bit two’s complement number has a negative weight, as   shown in the figure.  Thus all negative numbers have a 1 in the   high-order bit and, in that sense, the high-order bit is serving   as the <i>sign bit</i> — if it’s 1, the represented   number is negative.</p> <p>The most negative N-bit number has a 1-bit in the high-order   position, representing the value \(-2^{N-1}\).  The most positive   N-bit number has a 0 in the negative-weight high-order bit and   1’s for all the positive-weight bits, representing the   value \(2^{N-1}-1\).  This gives us the range of possible values,   <i>e.g.</i>, in an 8-bit two’s complement   representation, the most negative number is \(-2^7 = -128\) and   the most positive number is \(2^7 - 1 = 127\).</p> <p>If all N bits are 1, think of that as the sum of the most   negative number with the most positive number, <i>i.e.</i>,   \(-2^{N-1} + 2^{N-1}-1\), which equals -1.  And, of course, if all   N bits are 0, that’s the unique representation of 0.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide16.png" alt=""></a></div> <p>Let’s see what happens when we add the N-bit values for   -1 and 1, keeping an N-bit answer.  In the rightmost column, 1   plus 1 is 0, carry the 1.  In the second column, the carry of 1   plus 1 plus 0 is 0, carry the 1.  And so on — the result is all   zero’s, the representation for 0...  perfect!  Notice that   we just used ordinary binary addition, even when one or both of   the operands are negative.  Two’s complement is perfect   for N-bit arithmetic!</p> <p>To compute B - A, we can just use addition and compute B +   (-A).  So now we just need to figure out the two’s   complement representation for -A, given the two’s   complement representation for A.  Well, we know that A + (-A) =   0 and using the example above, we can rewrite 0 as 1 + (-1).   Reorganizing terms, we see that -A equals 1 plus the quantity   (-1) - A.  As we saw above, the two’s complement   representation for -1 is all 1-bits, so we can write that   subtraction as all 1’s minus the individual bits of A:   \(A_0\), \(A_1\), ... up to \(A_{N-1}\).  If a particular bit \(A_i\) is   0, then \(1-A_i = 1\) and if \(A_i\) is 1, then \(1-A_i = 0\).  So in   each column, the result is the bitwise complement of \(A_i\),   which we’ll write using the C-language bitwise complement   operator tilde.  So we see that -A equals the bitwise complement   of A plus 1.  Ta-dah!</p> <p>To practice your skill with two’s complement, try your   hand at the following exercises.  All you need to remember is   how to do binary addition and two’s complement negation   (which is <i>bitwise complement and add 1</i>).</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide17.png" alt=""></a></div> <p>Fixed-length encodings work well when all the possible choices   have the same information content, <i>i.e.</i>, all the choices   have an equal probability of occurring.  If those choices   don’t have the same information content, we can do better.   To see how, consider the expected length of an encoding,   computed by considering each \(x_i\) to be encoded, and weighting   the length of its encoding by \(p_i\), the probability of its   occurrence.  By “doing better” we mean that we can   find encodings that have a shorter expected length than a   fixed-length encoding.  Ideally we’d like the expected   length of the encoding for the \(x_i\) to match the entropy H(X),   which is the expected information content.</p> <p>We know that if \(x_i\) has a higher probability (<i>i.e.</i>, a   larger \(p_i\)), that is has a smaller information content, so   we’d like to use shorter encodings.  If \(x_i\) has a lower   probability, then we’d use a longer encoding.</p> <p>So we’ll be constructing encodings where the \(x_i\) may   have different length codes — we call these variable-length   encodings.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide18.png" alt=""></a></div> <p>Here’s an example we’ve seen before.  There are   four possible choices to encode (A, B, C, and D), each with the   specified probability.  The table shows a suggested encoding   where we’ve followed the advice from the previous slide:   high-probability choices that convey little information   (<i>e.g.</i>, B) are given shorter encodings, while   low-probability choices that convey more information   (<i>e.g.</i>, C or D) are given longer encodings.</p> <p>Let’s diagram this encoding as a binary tree.  Since the   symbols all appear as the leaves of the tree, we can see that   the encoding is unambiguous.  Let’s try decoding the   following encoded data.  We’ll use the tree as follows:   start at the root of the tree and use bits from the encoded data   to traverse the tree as directed, stopping when we reach a   leaf.</p> <p>Starting at the root, the first encoded bit is 0, which takes   us down the left branch to the leaf B.  So B is the first symbol   of the decoded data.  Starting at the root again, 1 takes us   down the right branch, 0 the left branch from there, and 0 the   left branch below that, arriving at the leaf C, the second   symbol of the decoded data.  Continuing on: 11 gives us A, 0   decodes as B, 11 gives us A again, and, finally, 101 gives us D.   The entire decoded message is “BCABAD.”</p> <p>The expected length of this encoding is easy to compute: the   length of A’s encoding (2 bits) times its probability   (1/3), plus the length of B’s encoding (1 bit) times 1/2,   plus the contributions for C and D, each 3 times 1/12.  This   adds up to 1 and 2/3 bits.</p> <p>How did we do?  If we had used a fixed-length encoding for our   four possible symbols, we’d have needed 2 bits each, so   we’d need 2000 bits to encode 1000 symbols.  Using our   variable-length encoding, the expected length for 1000 symbols   would be 1667.  The lower bound on the number of bits needed to   encode 1000 symbols is 1000 times the entropy H(X), which is   1626 bits, so the variable-length code got us closer to our   goal, but not quite all the way there.</p> <p>Could another variable-length encoding have done better?  In   general, it would be nice to have a systematic way to generate   the best-possible variable-length code, and that’s the   subject of the next video.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide19.png" alt=""></a></div> <p>Given a set of symbols and their probabilities, Huffman’s   Algorithm tells us how to construct an optimal variable-length   encoding.  By “optimal” we mean that, assuming   we’re encoding each symbol one-at-a-time, no other   variable-length code will have a shorter expected length.</p> <p>The algorithm builds the binary tree for the encoding from the   bottom up.  Start by choosing the two symbols with the smallest   probability (which means they have highest information content   and should have the longest encoding).  If anywhere along the   way, two symbols have the same probability, simply choose one   arbitrarily.  In our running example, the two symbols with the   lowest probability are C and D.</p> <p>Combine the symbols as a binary subtree, with one branch   labeled “0” and the other “1.” It   doesn’t matter which labels go with which branch.  Remove   C and D from our list of symbols, and replace them with the   newly constructed subtree, whose root has the associated   probability of 1/6, the sum of the probabilities of its two   branches.</p> <p>Now continue, at each step choosing the two symbols and/or   subtrees with the lowest probabilities, combining the choices   into a new subtree.  At this point in our example, the symbol A   has the probability 1/3, the symbol B the probability 1/2 and   the C/D subtree probability 1/6.  So we’ll combine A with   the C/D subtree.</p> <p>On the final step we only have two choices left: B and the   A/C/D subtree, which we combine in a new subtree, whose root   then becomes the root of the tree representing the optimal   variable-length code.  Happily, this is the code we’ve   been using all along!</p> <p>As mentioned above, we can produce a number of different   variable-length codes by swapping the “0” and   “1” labels on any of the subtree branches.  But all   those encodings would have the same expected length, which is   determined by the distance of each symbol from the root of the   tree, not the labels along the path from root to leaf.  So all   these different encodings are equivalent in terms of their   efficiency.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide20.png" alt=""></a></div> <p>“Optimal” sounds pretty good!  Does that mean we   can’t do any better?  Well, not by encoding symbols   one-at-a-time.  But if we want to encode long sequences of   symbols, we can reduce the expected length of the encoding by   working with, say, pairs of symbols instead of only single   symbols.  The table below shows the probability of pairs of   symbols from our example.  If we use Huffman’s Algorithm   to build the optimal variable-length code using these   probabilities, it turns out the expected length when encoding   pairs is 1.646 bits/symbol.  This is a small improvement on the   1.667 bits/symbols when encoding each symbol individually.  And   we’d do even better if we encoded sequences of length 3,   and so on.</p> <p>Modern file compression algorithms use an adaptive algorithm to   determine on-the-fly which sequences occur frequently and hence   should have short encodings.  They work quite well when the data   has many repeating sequences, <i>e.g.</i>, natural language data   where some letter combinations or even whole words occur again   and again.  Compression can achieve dramatic reductions from the   original file size.  If you’d like to learn more, look up   “LZW” on Wikipedia to read the Lempel-Ziv-Welch data   compression algorithm.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide21.png" alt=""></a></div> <p>Now let’s think a bit about what happens if there’s   an error and one or more of the bits in our encoded data gets   corrupted.  We’ll focus on single-bit errors, but much of   what we discuss can be generalized to multi-bit errors.</p> <p>For example, consider encoding the results from some   unpredictable event, <i>e.g.</i>, flipping a fair coin.  There   are two outcomes: <i>heads</i>, encoded as, say, 0,   and <i>tails</i> encoded as 1.  Now suppose some error occurs   during processing, <i>e.g.</i>, the data is corrupted while   being transmitted from Bob to Alice: Bob intended to send the   message   <i>heads</i>, but the 0 was corrupted and become a 1 during   transmission, so Alice receives 1, which she interprets   as <i>tails</i>.  Note that Alice can’t distinguish   between receiving a message of <i>heads</i> that has an error   and an uncorrupted message of <i>tails</i> — she cannot   detect that an error has occurred. So this simple encoding   doesn’t work very well if there’s the possibility of   single-bit errors.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide22.png" alt=""></a></div> <p>To help with our discussion, we’ll introduce the notion   of <i>Hamming distance</i>, defined as the number of positions   in which the corresponding digits differ in two encodings of the   same length.  For example, here are two 7-bit encodings, which   differ in their third and fifth positions, so the Hamming   distance between the encodings is 2.  If someone tells us the   Hamming distance of two encodings is 0, then the two encodings   are identical.  Hamming distance is a handy tool for measuring   how to encodings differ.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide23.png" alt=""></a></div> <p>How does this help us think about single-bit errors?  A   single-bit error changes exactly one of the bits of an encoding,   so the Hamming distance between a valid binary code word and the   same code word with a single-bit error is 1.</p> <p>The difficulty with our simple encoding is that the two valid   code words (“0” and “1”) also have a   Hamming distance of 1.  So a single-bit error changes one valid   code word into another valid code word.  We’ll show this   graphically, using an arrow to indicate that two encodings   differ by a single bit, <i>i.e.</i>, that the Hamming distance   between the encodings is 1.</p> <p>The real issue here is that when Alice receives a 1, she   can’t distinguish between an uncorrupted encoding of tails   and a corrupted encoding of heads — she can’t detect that   an error occurred.  Let’s figure how to solve her   problem!</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide24.png" alt=""></a></div> <p>The insight is to come up with a set of valid code words such   that a single-bit error does NOT produce another valid code   word.  What we need are code words that differ by at least two   bits, <i>i.e.</i>, we want the minimum Hamming distance between   any two code words to be at least 2.</p> <p>If we have a set of code words where the minimum Hamming   distance is 1, we can generate the set we want by adding a   parity bit to each of the original code words.   There’s <i>even parity</i> and <i>odd parity</i> —   using even parity, the additional parity bit is chosen so that   the total number of 1 bits in the new code word are even.</p> <p>For example, our original encoding for <i>heads</i> was 0,   adding an even parity bit gives us 00.  Adding an even parity   bit to our original encoding for <i>tails</i> gives us 11.  The   minimum Hamming distance between code words has increased from 1   to 2.</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide25.png" alt=""></a></div> <p>How does this help?  Consider what happens when there’s a   single-bit error: 00 would be corrupted to 01 or 10, neither of   which is a valid code word — aha! we can detect that a   single-bit error has occurred.  Similarly single-bit errors for   11 would also be detected.  Note that the valid code words 00   and 11 both have an even number of 1-bits, but that the   corrupted code words 01 or 10 have an odd number of 1-bits.  We   say that corrupted code words have a <i>parity error</i>.</p> <p>It’s easy to perform a parity check: simply count the   number of 1s in the code word.  If it’s even, a single-bit   error has NOT occurred; if it’s odd, a single-bit error   HAS occurred.  We’ll see in a couple of chapters that the   Boolean function exclusive-or can be used to perform parity   checks.</p> <p>Note that parity won’t help us if there’s an even   number of bit errors, where a corrupted code word would have an   even number of 1-bits and hence appear to be okay.  Parity is   useful for detecting single-bit errors; we’ll need a more   sophisticated encoding to detect more errors.</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide26.png" alt=""></a></div> <p>In general, to detect some number \(E\) of errors, we need a   minimum Hamming distance of \(E+1\) between code words.  We can   see this graphically below which shows how errors can corrupt   the valid code words 000 and 111, which have a Hamming distance   of 3.  In theory this means we should be able to detect up to   2-bit errors.</p> <p>Each arrow represents a single-bit error and we can see from   the diagram that following any path of length 2 from either 000   or 111 doesn’t get us to the other valid code word.  In   other words, assuming we start with either 000 or 111, we can   detect the occurrence of up to 2 errors.</p> <p>Basically our error detection scheme relies on choosing code   words far enough apart, as measured by Hamming distance, so that   \(E\) errors can’t corrupt one valid code word so that it   looks like another valid code word.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide27.png" alt=""></a></div> <p>Is there any chance we can not only detect a single-bit error   but also correct the error to recover the original data?  Sure!   Here’s how.</p> <p>By increasing the Hamming distance between valid code words to   3, we guarantee that the sets of code words produced by   single-bit errors don’t overlap.  The set of code words   produced by corrupting 000 (100, 010, or 001) has no code words   in common with the set of code words produced by corrupting 111   (110, 101, or 011).  Assuming that at most one error occurred,   we can deduce the original code word from whatever code word we   receive.  For example if we receive 001, we deduce that the   original code word was 000 and there has been a single-bit   error.</p> <p>Again we can generalize this insight: if we want to correct up   to \(E\) errors, the minimum Hamming distance between valid code   words must be at least \(2E + 1\).  For example, to correct   single-bit errors we need valid code words with a minimum   Hamming distance of 3.</p> <p>Coding theory is a research area devoted to developing   algorithms to generate code words that have the necessary error   detection and correction properties.  You can take entire   courses on this topic!  But we’ll stop here with our basic   insights: by choosing code words far enough apart (as measured   by Hamming distance) we can ensure that we can detect and even   correct errors that have corrupted our encoded data.  Pretty   neat!</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c1/c1s1/Slide28.png" alt=""></a></div> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c1/index.htm">Back<span>Basics of Information</span></a></li>     <li id="continue_btn"><a href="../../../contents/c1/c1s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

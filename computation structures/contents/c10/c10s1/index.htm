@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>10.1 Annotated Slides | 10 Assembly Language, Models of Computation | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="10.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 10.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c10/c10s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c10/index.htm">10 Assembly Language, Models of Computation</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            10.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            10.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="selected">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c10/index.htm">&lt;<span>Assembly Language, Models of Computation</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c10/c10s1/index.htm">10.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c10/c10s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L10a: Assembly Language</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Beta ISA Summary</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Programming Languages</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Assembly Language</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Example UASM Source File</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">How Does It Get Assembled?</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Registers Are Predefined Symbols</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Labels and Offsets</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Mighty Macroinstructions</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Assembly of Instructions</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">Example Assembly</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">UASM Macros for Beta Instructions</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Pseudoinstructions</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Factorial with Pseudoinstructions</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Raw Data</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">UASM Expressions and Layout</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Summary: Assembly Language</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Universality?</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Models of Computation</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">FSM Limitations</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Turing Machines</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Other Models of Computation</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Computability?</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Turing Machines Galore!</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">The Universal Function</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">Universality</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">Turing Universality</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Coded Algorithms: Key to CS</a></li>     <li style="margin-bottom:0.1em;"><a href="#28">Uncomputability!</a></li>     <li style="margin-bottom:0.1em;"><a href="#29">Why f<sub>H</sub> is Uncomputable</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide02.png" alt=""></a></div> <p>In the previous lecture we developed the instruction set   architecture for the Beta, the computer system we’ll be   building throughout this part of the course.  The Beta   incorporates two types of storage or memory.  In the CPU   datapath there are 32 general-purpose registers, which can be   read to supply source operands for the ALU or written with the   ALU result.  In the CPU’s control logic there is a   special-purpose register called the program counter, which   contains the address of the memory location holding the next   instruction to be executed.</p> <p>The datapath and control logic are connected to a large main   memory with a maximum capacity of \(2^{32}\) bytes, organized as   \(2^{30}\) 32-bit words.  This memory holds both data and   instructions.</p> <p>Beta instructions are 32-bit values comprised of various   fields.  The 6-bit OPCODE field specifies the operation to be   performed.  The 5-bit Ra, Rb, and Rc fields contain register   numbers, specifying one of the 32 general-purpose registers.   There are two instruction formats: one specifying an opcode and   three registers, the other specifying an opcode, two registers,   and a 16-bit signed constant.</p> <p>There three classes of instructions.  The ALU instructions   perform an arithmetic or logic operation on two operands,   producing a result that is stored in the destination register.   The operands are either two values from the general-purpose   registers, or one register value and a constant.  The yellow   highlighting indicates instructions that use the second   instruction format.</p> <p>The Load/Store instructions access main memory, either loading   a value from main memory into a register, or storing a register   value to main memory.</p> <p>And, finally, there are branches and jumps whose execution may   change the program counter and hence the address of the next   instruction to be executed.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide03.png" alt=""></a></div> <p>To program the Beta we’ll need to load main memory with   binary-encoded instructions.  Figuring out each encoding is   clearly the job for a computer, so we’ll create a simple   programming language that will let us specify the opcode and   operands for each instruction.  So instead of writing the binary   at the top of slide, we’ll write assembly language   statements to specify instructions in symbolic form.  Of course   we still have think about which registers to use for which   values and write sequences of instructions for more complex   operations.</p> <p>By using a high-level language we can move up one more level   abstraction and describe the computation we want in terms of   variables and mathematical operations rather than registers and   ALU functions.</p> <p>In this lecture we’ll describe the assembly language   we’ll use for programming the Beta.  And in the next   lecture we’ll figure out how to translate high-level   languages, such as C, into assembly language.</p> <p>The layer cake of abstractions gets taller yet: we could write   an interpreter for say, Python, in C and then write our   application programs in Python.  Nowadays, programmers often   choose the programming language that’s most suitable for   expressing their computations, then, after perhaps many layers   of translation, come up with a sequence of instructions that the   Beta can actually execute.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide04.png" alt=""></a></div> <p>Okay, back to assembly language, which we’ll use to   shield ourselves from the bit-level representations of   instructions and from having to know the exact location of   variables and instructions in memory.  A program called the   “assembler” reads a text file containing the   assembly language program and produces an array of 32-bit words   that can be used to initialize main memory.</p> <p>We’ll learn the UASM assembly language, which is built   into BSim, our simulator for the Beta ISA.  UASM is really just   a fancy calculator!  It reads arithmetic expressions and   evaluates them to produce 8-bit values, which it then adds   sequentially to the array of bytes which will eventually be   loaded into the Beta’s memory.  UASM supports several   useful language features that make it easier to write assembly   language programs.  Symbols and labels let us give names to   particular values and addresses.  And macros let us create   shorthand notations for sequences of expressions that, when   evaluated, will generate the binary representations for   instructions and data.</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide05.png" alt=""></a></div> <p>Here’s an example UASM source file.  Typically we write   one UASM statement on each line and can use spaces, tabs and   newlines to make the source as readable as possible.   We’ve added some color coding to help in our   explanation.</p> <p>Comments (shown in green) allow us to add text annotations to   the program.  Good comments will help remind you how your   program works.  You really don’t want to have figure out   from scratch what a section of code does each time you need to   modify or debug it!  There are two ways to add comments to the   code.  “//” starts a comment, which then occupies   the rest of the source line.  Any characters after   “//” are ignored by the assembler, which will start   processing statements again at the start of the next line in the   source file.  You can also enclose comment text using the   delimiters “/*” and “*/” and the   assembler will ignore everything in-between.  Using this second   type of comment, you can “comment-out” many lines of   code by placing “/*” at the start and, many lines   later, end the comment section with “*/”.</p> <p>Symbols (shown in red) are symbolic names for constant values.   Symbols make the code easier to understand, <i>e.g.</i>, we can   use N as the name for an initial value for some computation, in   this case the value 12.  Subsequent statements can refer to this   value using the symbol N instead of entering the value 12   directly.  When reading the program, we’ll know that N   means this particular initial value.  So if later we want to   change the initial value, we only have to change the definition   of the symbol N rather than find all the 12’s in our   program and change them.  In fact some of the other appearances   of 12 might not refer to this initial value and so to be sure we   only changed the ones that did, we’d have to read and   understand the whole program to make sure we only edited the   right 12’s.  You can imagine how error-prone that might   be!  So using symbols is a practice you want to follow!</p> <p>Note that all the register names are shown in red.  We’ll   define the symbols R0 through R31 to have the values 0 through   31.  Then we’ll use those symbols to help us understand   which instruction operands are intended to be   registers, <i>e.g.</i>, by writing R1, and which operands are   numeric values, <i>e.g.</i>, by writing the number 1.  We could   just use numbers everywhere, but the code would be much harder   to read and understand.</p> <p>A label (shown in yellow) is a symbol whose value are the   address of a particular location in the program.  Here, the   label “loop” will be our name for the location of   the MUL instruction in memory.  In the BNE at the end of the   code, we use the label “loop” to specify the MUL   instruction as the branch target.  So if R1 is non-zero, we want   to branch back to the MUL instruction and start another   iteration.</p> <p>We’ll use indentation for most UASM statements to make it   easy to spot the labels defined by the program.  Indentation   isn’t required, it’s just another habit assembly   language programmers use to keep their programs readable.</p> <p>We use macro invocations (shown in blue) when we want to write   Beta instructions.  When the assembler encounters a macro, it   “expands” the macro, replacing it with a string of   text provided by in the macro’s definition.  During   expansion, the provided arguments are textually inserted into   the expanded text at locations specified in the macro   definition.  Think of a macro as shorthand for a longer text   string we could have typed in.  We’ll see how all this   works in the next video segment.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide06.png" alt=""></a></div> <p>Let’s follow along as the assembler processes our source   file.  The assembler maintains a symbol table that maps symbols' names to their numeric values.  Initially the symbol table is   loaded with mappings for all the register symbols.</p> <p>The assembler reads the source file line-by-line, defining   symbols and labels, expanding macros, or evaluating expressions   to generate bytes for the output array.  Whenever the assembler   encounters a use of a symbol or label, it’s replaced by   the corresponding numeric value found in the symbol table.</p> <p>The first line, N = 12, defines the value of the symbol N to be   12, so the appropriate entry is made in the symbol table.</p> <p>Advancing to the next line, the assembler encounters an   invocation of the ADDC macro with the arguments   “r31”, “N”, and “r1”.  As   we’ll see in a couple of slides, this triggers a series of   nested macro expansions that eventually lead to generating a   32-bit binary value to be placed in memory location 0.  The   32-bit value is formatted here to show the instruction fields   and the destination address is shown in brackets.</p> <p>The next instruction is processed in the same way, generating a   second 32-bit word.</p> <p>On the fourth line, the label loop is defined to have the value   of the location in memory that’s about to filled (in this   case, location 8).  So the appropriate entry is made in the   symbol table and the MUL macro is expanded into the 32-bit word   to be placed in location 8.</p> <p>The assembler processes the file line-by-line until it reaches   the end of the file.  Actually the assembler makes two passes   through the file.  On the first pass it loads the symbol table   with the values from all the symbol and label definitions.   Then, on the second pass, it generates the binary output.  The   two-pass approach allows a statement to refer to symbol or label   that is defined later in the file, <i>e.g.</i>, a forward branch   instruction could refer to the label for an instruction later in   the program.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide07.png" alt=""></a></div> <p>As we saw in the previous slide, there’s nothing magic   about the register symbols — they are just symbolic names   for the values 0 through 31.  So when processing ADDC(r31,N,r1),   UASM replaces the symbols with their values and actually expands   ADDC(31,12,1).</p> <p>UASM is very simple.  It simply replaces symbols with their   values, expands macros and evaluates expressions.  So if you use   a register symbol where a numeric value is expected, the value   of the symbol is used as the numeric constant.  Probably not   what the programmer intended.</p> <p>Similarly, if you use a symbol or expression where a register   number is expected, the low-order 5 bits of the value is used as   the register number, in this example, as the Rb register number.   Again probably not what the programmer intended.</p> <p>The moral of the story is that when writing UASM assembly   language programs, you have to keep your wits about you and   recognize that the interpretation of an operand is determined by   the opcode macro, not by the way you wrote the operand.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide08.png" alt=""></a></div> <p>Recall from Lecture 9 that branch instructions use the 16-bit   constant field of the instruction to encode the address of the   branch target as a word offset from the location of the branch   instruction.  Well, actually the offset is calculated from the   instruction immediately following the branch, so an offset of -1   would refer to the branch itself.</p> <p>The calculation of the offset is a bit tedious to do by hand   and would, of course, change if we added or removed instructions   between the branch instruction and branch target.  Happily   macros for the branch instructions incorporate the necessary   formula to compute the offset from the address of the branch and   the address of the branch target.  So we just specify the   address of the branch target, usually with a label, and let UASM   do the heavy lifting.</p> <p>Here we see that BNE branches backwards by three instructions   (remember to count from the instruction following the branch) so   the offset is -3.  The 16-bit two’s complement   representation of -3 is the value placed in the constant field   of the BNE instruction.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide09.png" alt=""></a></div> <p>Let’s take a closer look at how macros work in UASM.   Here we see the definition of the macro “consec”   which has a single parameter “n”.  The body of the   macro is a sequence of four expressions.  When there’s an   invocation of the “consec” macro, in this example   with the argument 37, the body of the macro is expanded   replacing all occurrences of “n” with the argument   37.  The resulting text is then processed as if it had appeared   in place of the macro invocation.  In this example, the four   expressions are evaluated to give a sequence of four values that   will be placed in the next four bytes of the output array.</p> <p>Macro expansions may contain other macro invocations, which   themselves will be expanded, continuing until all that’s   left are expressions to be evaluated.  Here we see the macro   definition for WORD, which assembles its argument into two   consecutive bytes.  And for the macro LONG, which assembles its   argument into four consecutive bytes, using the WORD macro to   process the low 16 bits of the value, then the high 16 bits of   the value.</p> <p>These two UASM statements cause the constant 0xDEADBEEF to   converted to 4 bytes, which are deposited in the output array   starting at index 0x100.</p> <p>Note that the Beta expects the least-significant byte of a   multi-byte value to be stored at the lowest byte address.  So   the least-significant byte 0xEF is placed at address 0x100 and   the most-significant byte 0xDE is placed at address 0x103.  This   is the “little-endian” convention for multi-byte   values: the least-significant byte comes first.  Intel’s   x86 architecture is also little-endian.</p> <p>There is a symmetrical “big-endian” convention   where the most-significant byte comes first. Both conventions   are in active use and, in fact, some ISAs can be configured to   use either convention!  There’s no “right   answer” for which convention to use, but the fact that   there two conventions means that we have to be alert for the   need to convert the representation of multi-byte values when   moving values between one ISA and another, <i>e.g.</i>, when we   send a data file to another user.</p> <p>As you can imagine there are strong advocates for both schemes   who are happy to defend their point of view at great length.   Given the heat of the discussion, it’s appropriate that   the names for the conventions were drawn from Jonathan   Swift’s “Gulliver’s Travels” in which a   civil war is fought over whether to open a soft-boiled egg at   its big end or its little end.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide10.png" alt=""></a></div> <p>Let’s look at the macros used to assemble Beta   instructions.  The BETAOP helper macro supports the 3-register   instruction format, taking as arguments the values to be placed   in the OPCODE, Ra, Rb, and Rc fields.  The “.align   4” directive is a bit of administrative bookkeeping to   ensure that instructions will have a byte address that’s a   multiple of 4, <i>i.e.</i>, that they span exactly one 32-bit   word in memory.  That’s followed by an invocation of the   LONG macro to generate the 4 bytes of binary data representing   the value of the expression shown here.  The expression is where   the actual assembly of the fields takes place.  Each field is   limited to requisite number of bits using the modulo operator   (%), then shifted left (&lt;&lt;) to the correct position in the   32-bit word.</p> <p>And here are the helper macros for the instructions that use a   16-bit constant as the second operand.</p> <p>Let’s follow the assembly of an ADDC instruction to see   how this works.  The ADDC macro expands into an invocation of   the BETAOPC helper macro, passing along the correct value for   the ADDC opcode, along with the three operands.</p> <p>The BETAOPC macro does the following arithmetic: The OP   argument, in this case the value 0x30, is shifted left to occupy   the high-order 6 bits of the instruction.  Then the RA argument,   in this case 15, is placed in its proper location.  The 16-bit   constant -32768 is positioned in the low 16 bits of the   instruction. And, finally, the Rc argument, in this case 0, is   positioned in the Rc field of the instruction.</p> <p>You can see why we call this processing “assembling an   instruction”.  The binary representation of an instruction   is assembled from the binary values for each of the instruction   fields.  It’s not a complicated process, but it requires a   lot of shifting and masking, tasks that we’re happy to let   a computer handle.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide11.png" alt=""></a></div> <p>Here’s the entire sequence of macro expansions that   assemble this ADDC instruction into an appropriate 32-bit binary   value in main memory.</p> <p>You can see that the knowledge of Beta instruction formats and   opcode values is built into the bodies of the macro definitions.   The UASM processing is actually quite general — with a   different set of macro definitions it could process assembly   language programs for almost any ISA!</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide12.png" alt=""></a></div> <p>All the macro definitions for the Beta ISA are provided in the   beta.uasm file, which is included in each of the assembly   language lab assignments.  Note that we include some convenience   macros to define shorthand representations that provide common   default values for certain operands.  For example, except for   procedure calls, we don’t care about the PC+4 value saved   in the destination register by branch instructions, so almost   always would specify R31 as the Rc register, effectively   discarding the PC+4 value saved by branches.  So we define   two-argument branch macros that automatically provide R31 as the   destination register.  Saves some typing, and, more importantly,   it makes it easier to understand the assembly language   program.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide13.png" alt=""></a></div> <p>Here are a whole set of convenience macros intended to make   programs more readable.  For example, unconditional branches can   be written using the BR() macro rather than the more cumbersome   BEQ(R31,...). And it’s more readable to use branch-false   (BF) and branch-true (BT) macros when testing the results of a   compare instruction.</p> <p>And note the PUSH and POP macros at the bottom of page.  These   expand into multi-instruction sequences, in this case to add and   remove values from a stack data structure pointed to by the SP   register.</p> <p>We call these macros “pseudo instructions” since   they let us provide the programmer with what appears a larger   instruction set, although underneath the covers we’ve just   using the same small instruction repertoire developed in Lecture   9.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide14.png" alt=""></a></div> <p>In this example we’ve rewritten the original code we had   for the factorial computation using pseudo instructions.  For   example, CMOVE is a pseudo instruction for moving small   constants into a register.  It’s easier for us to read and   understand the intent of a “constant move” operation   than an “add a value to 0” operation provided by the   ADDC expansion of CMOVE.  Anything we can do to remove the   cognitive clutter will be very beneficial in the long run.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide15.png" alt=""></a></div> <p>So far we’ve talked about assembling instructions.  What   about data?  How do we allocate and initialize data storage and   how do we get those values into registers so that they can be   used as operands?</p> <p>Here we see a program that allocates and initializes two memory   locations using the LONG macro.  We’ve used labels to   remember the addresses of these locations for later   reference.</p> <p>When the program is assembled the values of the label N and   factN are 0 and 4 respectively, the addresses of the memory   locations holding the two data values.</p> <p>To access the first data value, the program uses a LD   instruction, in this case one of convenience macros that   supplies R31 as the default value of the Ra field.  The   assembler replaces the reference to the label N with its value 0   from the symbol table. When the LD is executed, it computes the   memory address by adding the constant (0) to the value of the Ra   register (which is R31 and hence the value is 0) to get the   address (0) of the memory location from which to fetch the value   to be placed in R1.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide16.png" alt=""></a></div> <p>The constants needed as values for data words and instruction   fields can be written as expressions.  These expressions are   evaluated by the assembler as it assembles the program and the   resulting value is used as needed.  Note that the expressions   are evaluated at the time the assembler runs.  By the time the   program runs on the Beta, the resulting value is used.  The   assembler does NOT generate ADD and MUL instructions to compute   the value during program execution.  If a value is needed for an   instruction field or initial data value, the assembler has to be   able to perform the arithmetic itself.  If you need the program   to compute a value during execution, you have to write the   necessary instructions as part of your program.</p> <p>One last UASM feature: there’s a special symbol   “.”, called “dot”, whose value is the   address of the next main memory location to be filled by the   assembler when it generates binary data.  Initially   “.” is 0 and it’s incremented each time a new   byte value is generated.</p> <p>We can set the value of “.” to tell the assembler   where in memory we wish to place a value.  In this example, the   constant 0xDEADBEEF is placed into location 0x100 of main   memory.  And we can use “.” in expressions to   compute the values for other symbols, as shown here when   defining the value for the symbol “k”.  In fact, the   label definition “k:” is exactly equivalent to the   UASM statement “k = .”</p> <p>We can even increment the value of “.” to skip over   locations, <i>e.g.</i>, if we wanted to leave space for an un   initialized array.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide17.png" alt=""></a></div> <p>And that’s assembly language!  We use assembly language   as a convenient notation for generating the binary encoding for   instructions and data.  We let the assembler build the bit-level   representations we need and to keep track of the addresses where   these values are stored in main memory.</p> <p>UASM itself provides support for values, symbols, labels and macros.</p> <p>Values can be written as constants or expressions involving constants.</p> <p>We use symbols to give meaningful names to values so that our   programs will be more readable and more easily modified.   Similarly, we use labels to give meaningful names to addresses   in main memory and then use the labels in referring to data   locations in LD or ST instructions, or to instruction locations   in branch instructions.</p> <p>Macros hide the details of how instructions are assembled from   their component fields.</p> <p>And we can use “.” to control where the assembler   places values in main memory.</p> <p>The assembler is itself a program that runs on our computer.   That raises an interesting “chicken and egg   problem”: how did the first assembler program get   assembled into binary so it could run on a computer?  Well, it   was hand-assembled into binary.  I suspect it processed a very   simple language indeed, with the bells and whistles of symbols,   labels, macros, expression evaluation, etc. added only after   basic instructions could be assembled by the program.  And   I’m sure they were very careful not to lose the binary so   they wouldn’t have to do the hand-assembly a second   time!</p> <p> </p> <hr> <hr> <p> </p> <p> </p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide18.png" alt=""></a></div> <p> </p> <p>An interesting question for computer architects is what   capabilities must be included in the ISA?  When we studied   Boolean gates in Part 1 of the course, we were able to prove   that NAND were universal, <i>i.e.</i>, that we could implement   any Boolean function using only circuits constructed from NAND   gates.</p> <p>We can ask the corresponding question of our ISA: is it   universal, <i>i.e.</i>, can it be used to perform any computation?   what problems can we solve with a von Neumann computer?  Can the   Beta solve any problem FSMs can solve?  Are there problems FSMs   can’t solve?  If so, can the Beta solve those problems?  Do   the answers to these questions depend on the particular ISA?</p> <p>To provide some answers, we need a mathematical model of   computation.  Reasoning about the model, we should be able to   prove what can be computed and what can’t.  And hopefully   we can ensure that the Beta ISA has the functionality needed to   perform any computation.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide19.png" alt=""></a></div> <p>The roots of computer science stem from the evaluation of many   alternative mathematical models of computation to determine the   classes of computation each could represent. An elusive goal was   to find a universal model, capable of representing *all*   realizable computations.  In other words if a computation could   be described using some other well-formed model, we should also   be able to describe the same computation using the universal   model.</p> <p>One candidate model might be finite state machines (FSMs),   which can be built using sequential logic.  Using Boolean logic   and state transition diagrams we can reason about how an FSM   will operate on any given input, predicting the output with 100%   certainty.</p> <p>Are FSMs the universal digital computing device?  In other   words, can we come up with FSM implementations that implement   all computations that can be solved by any digital device?</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide20.png" alt=""></a></div> <p>Despite their usefulness and flexibility, there are common   problems that cannot be solved by any FSM.  For example, can we   build an FSM to determine if a string of parentheses (properly   encoded into a binary sequence) is well-formed?  A parenthesis   string is well-formed if the parentheses balance, <i>i.e.</i>,   for every open parenthesis there is a matching close parenthesis   later in the string.  In the example shown here, the input   string on the top is well-formed, but the input string on the   bottom is not.  After processing the input string, the FSM would   output a 1 if the string is well-formed, 0 otherwise.</p> <p>Can this problem be solved using an FSM?  No, it can’t.   The difficulty is that the FSM uses its internal state to encode   what it knows about the history of the inputs.  In the paren   checker, the FSM would need to count the number of unbalanced   open parens seen so far, so it can determine if future input   contains the required number of close parens.  But in a finite   state machine there are only a fixed number of states, so a   particular FSM has a maximum count it can reach.  If we feed the   FSM an input with more open parens than it has the states to   count, it won’t be able to check if the input string is   well-formed.</p> <p>The “finite-ness” of FSMs limits their ability to   solve problems that require unbounded counting.  Hmm, what other   models of computation might we consider? Mathematics to the   rescue, in this case in the form of a British mathematician   named Alan Turing.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide21.png" alt=""></a></div> <p>In the early 1930’s Alan Turing was one of many   mathematicians studying the limits of proof and computation.  He   proposed a conceptual model consisting of an FSM combined with a   infinite digital tape that could read and written under the   control of the FSM.  The inputs to some computation would be   encoded as symbols on the tape, then the FSM would read the   tape, changing its state as it performed the computation, then   write the answer onto the tape and finally halting.  Nowadays,   this model is called a Turing Machine (TM). Turing Machines,   like other models of the time, solved the “finite”   problem of FSMs.</p> <p>So how does all this relate to computation? Assuming the   non-blank input on the tape occupies a finite number of adjacent   cells, it can be expressed as a large integer.  Just construct a   binary number using the bit encoding of the symbols from the   tape, alternating between symbols to the left of the tape head   and symbols to the right of the tape head.  Eventually all the   symbols will be incorporated into the (very large) integer   representation.</p> <p>So both the input and output of the TM can be thought of as   large integers, and the TM itself as implementing an integer   function that maps input integers to output integers.</p> <p>The FSM brain of the Turing Machine can be characterized by its   truth table.  And we can systematically enumerate all the   possible FSM truth tables, assigning an index to each truth   table as it appears in the enumeration.  Note that indices get   very large very quickly since they essentially incorporate all   the information in the truth table.  Fortunately we have a very   large supply of integers!</p> <p>We’ll use the index for a TM’s FSM to identify the   TM as well.  So we can talk about TM 347 running on input 51,   producing the answer 42.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide22.png" alt=""></a></div> <p>There are many other models of computation, each of which   describes a class of integer functions where a computation is   performed on an integer input to produce an integer answer.   Kleene, Post and Turing were all students of Alonzo Church at   Princeton University in the mid-1930’s.  They explored   many other formulations for modeling computation: recursive   functions, rule-based systems for string rewriting, and the   lambda calculus.  They were all particularly intrigued with   proving the existence of problems unsolvable by realizable   machines.  Which, of course, meant characterizing the problems   that could be solved by realizable machines.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide23.png" alt=""></a></div> <p>It turned out that each model was capable of computing   <i>exactly</i> the same set of integer functions!  This was   proved by coming up with constructions that translated the steps   in a computation between the various models.  It was possible to   show that if a computation could be described by one model, an   equivalent description exists in the other model.  This lead to   a notion of computability that was independent of the   computation scheme chosen.  This notion is formalized by   Church’s Thesis, which says that every discrete function   computable by any realizable machine is computable by some   Turing Machine.  So if we say the function f(x) is computable,   that’s equivalent to saying that there’s a TM that   given x as an input on its tape will write f(x) as an output on   the tape and halt.</p> <p>As yet there’s no proof of Church’s Thesis, but   it’s universally accepted that it’s true.  In   general “computable” is taken to mean   “computable by some TM”.</p> <p>If you’re curious about the existence of uncomputable   functions, please see the optional video at the end of this   lecture.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide24.png" alt=""></a></div> <p>Okay, we’ve decided that Turing Machines can model any   realizable computation.  In other words for every computation we   want to perform, there’s a (different) Turing Machine that   will do the job.  But how does this help us design a   general-purpose computer?  Or are there some computations that   will require a special-purpose machine no matter what?</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide25.png" alt=""></a></div> <p>What we’d like to find is a universal function U: it   would take two arguments, k and j, and then compute the result   of running \(T_k\) on input j.  Is U computable, <i>i.e.</i>, is   there a universal Turing Machine \(T_U\)?  If so, then instead of   many ad-hoc TMs, we could just use \(T_U\) to compute the results   for any computable function.</p> <p>Surprise!  U is computable and \(T_U\) exists.  If fact there are   infinitely many universal TMs, some quite simple - the smallest   known universal TM has 4 states and uses 6 tape symbols.  A   universal machine is capable of performing any computation that   can be performed by any TM!</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide26.png" alt=""></a></div> <p>What’s going on here?  k encodes a “program”   - a description of some arbitrary TM that performs a particular   computation.  j encodes the input data on which to perform that   computation.  \(T_U\) “interprets” the program,   emulating the steps \(T_k\) will take to process the input and   write out the answer.  The notion of interpreting a coded   representation of a computation is a key idea and forms the   basis for our stored program computer.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide27.png" alt=""></a></div> <p>The Universal Turing Machine is the paradigm for modern   general-purpose computers.  Given an ISA we want to know if   it’s equivalent to a universal Turing Machine.  If so, it   can emulate every other TM and hence compute any computable   function.</p> <p>How do we show our computer is Turing Universal?  Simply   demonstrate that it can emulate some known Universal Turing   Machine.  The finite memory on actual computers will mean we can   only emulate UTM operations on inputs up to a certain size, but   within this limitation we can show our computer can perform any   computation that fits into memory.</p> <p>As it turns out this is not a high bar: so long as the ISA has   conditional branches and some simple arithmetic, it will be   Turing Universal.</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide28.png" alt=""></a></div> <p>This notion of encoding a program in a way that allows it to be   data to some other program is a key idea in computer   science.</p> <p>We often translate a program Px written to run on some abstract   high-level machine (eg, a program in C or Java) into, say, an   assembly language program Py that can be interpreted by our CPU.   This translation is called compilation.</p> <p>Much of software engineering is based on the idea of taking a   program and using it as as component in some larger program.</p> <p>Given a strategy for compiling programs, that opens the door to   designing new programming languages that let us express our   desired computation using data structures and operations   particularly suited to the task at hand.</p> <p>So what have we learned from the mathematicians’ work on   models of computation?  Well, it’s nice to know that the   computing engine we’re planning to build will be able to   perform any computation that can be performed on any realizable   machine.  And the development of the universal Turing Machine   model paved the way for modern stored-program computers.  The   bottom line: we’re good to go with the Beta ISA!</p> <div class="lecslide"><a name="28"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide29.png" alt=""></a></div> <p>We’ve discussed computable functions.  Are there uncomputable functions?</p> <p>Yes, there are well-defined discrete functions that cannot be   computed by any TM, <i>i.e.</i>, no algorithm can compute f(x)   for arbitrary finite x in a finite number of steps.  It’s   not that we don’t know the algorithm, we can actually   prove that no algorithm exists.  So the finite memory   limitation of FSMs wasn't the only barrier as to whether   we can solve a problem.</p> <p>The most famous uncomputable function is the so-called Halting   function.  When TMs undertake a computation there two possible   outcomes.  Either the TM writes an answer onto the tape and   halts, or the TM loops forever.  The Halting function tells   which outcome we’ll get: given two integer arguments k and   j, the Halting function determines if the kth TM halts when   given a tape containing j as the input.</p> <div class="lecslide"><a name="29"><img class="lecslideimg" src="../../../contents/c10/c10s1/Slide30.png" alt=""></a></div> <p>Let’s quickly sketch an argument as to why the Halting   function is not computable.  Well, suppose it was computable,   then it would be equivalent to some TM, say \(T_H\).</p> <p>So we can use \(T_H\) to build another TM, \(T_N\) (the   “N” stands for nasty!) that processes its single   argument and either LOOPs or HALTs.  \(T_N[X]\) is designed to   loop if TM X given input X halts.  And vice versa: \(T_N[X]\)   halts if TM X given input X loops.  The idea is that \(T_N[X]\)   does the opposite of whatever \(T_X[X]\) does.  \(T_N\) is easy to   implement assuming that we have \(T_H\) to answer the “halts   or loops” question.</p> <p>Now consider what happens if we give N as the argument to   \(T_N\).  From the definition of \(T_N\), \(T_N[N]\) will LOOP if the   halting function tells us that \(T_N[N]\) halts.  And \(T_N[N]\)   will HALT if the halting function tells us that \(T_N[N]\) loops.   Obviously \(T_N[N]\) can’t both LOOP and HALT at the same   time!  So if the Halting function is computable and \(T_H\)   exists, we arrive at this impossible behavior for \(T_N[N]\).   This tells us that \(T_H\) cannot exist and hence that the Halting   function is not computable.</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c10/index.htm">Back<span>Assembly Language, Models of Computation</span></a></li>     <li id="continue_btn"><a href="../../../contents/c10/c10s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

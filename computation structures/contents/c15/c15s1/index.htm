@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>15.1 Annotated Slides | 15 Pipelining the Beta | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="15.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 15.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c15/c15s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c15/index.htm">15 Pipelining the Beta</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            15.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            15.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="selected">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c15/index.htm">&lt;<span>Pipelining the Beta</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c15/c15s1/index.htm">15.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c15/c15s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L15: Pipelining the Beta</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Reminder: Single-Cycle Beta</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Single-Cycle Beta Performance</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Pipelined Implementation</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Why Isn’t This a 20-Minute Lecture?</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Pipeline Hazards</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Simplified Unpipelined Beta Datapath</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">5-Stage Pipelined Datapath</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Pipelined Control</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Pipelined Execution Example</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">Example: Cycle 1</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Example: Cycle 2</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Example: Cycle 3</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Example: Cycle 4</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Example: Cycle 5</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Pipeline Diagrams</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Data Hazards</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Resolving Hazards I</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Resolving Data Hazards I</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Stall Logic</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Resolving Data Hazards II</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Bypass Logic</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Fully Bypassed Pipeline</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Load-to-Use Stalls</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">Summary: Pipelining with Data Hazards</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">Compilers Can Help</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">Or Take the Lazy Route...</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Control Hazards I</a></li>     <li style="margin-bottom:0.1em;"><a href="#28">Control Hazards II</a></li>     <li style="margin-bottom:0.1em;"><a href="#29">Resolving Control Hazards</a></li>     <li style="margin-bottom:0.1em;"><a href="#30">Resolving Control Hazards with Stalls</a></li>     <li style="margin-bottom:0.1em;"><a href="#31">Stall Logic for Control Hazards</a></li>     <li style="margin-bottom:0.1em;"><a href="#32">ISA Issues: Simple vs. Complex Branches</a></li>     <li style="margin-bottom:0.1em;"><a href="#33">Resolving Hazards II</a></li>     <li style="margin-bottom:0.1em;"><a href="#34">Resolving Hazards with Speculation I</a></li>     <li style="margin-bottom:0.1em;"><a href="#35">Resolving Hazards with Speculation II</a></li>     <li style="margin-bottom:0.1em;"><a href="#36">Speculation Logic For Control Hazards</a></li>     <li style="margin-bottom:0.1em;"><a href="#37">Branch Prediction</a></li>     <li style="margin-bottom:0.1em;"><a href="#38">Branch Delay Slots I</a></li>     <li style="margin-bottom:0.1em;"><a href="#39">Branch Delay Slots II</a></li>     <li style="margin-bottom:0.1em;"><a href="#40">Exceptions</a></li>     <li style="margin-bottom:0.1em;"><a href="#41">When Can Exceptions Happen?</a></li>     <li style="margin-bottom:0.1em;"><a href="#42">Resolving Exceptions</a></li>     <li style="margin-bottom:0.1em;"><a href="#43">Exception Handling Logic</a></li>     <li style="margin-bottom:0.1em;"><a href="#44">Multiple Exceptions?</a></li>     <li style="margin-bottom:0.1em;"><a href="#45">Asynchronous Interrupts</a></li>     <li style="margin-bottom:0.1em;"><a href="#46">Exception + Interrupt Handling Logic</a></li>     <li style="margin-bottom:0.1em;"><a href="#47">5-Stage Beta: Final Version</a></li>     <li style="margin-bottom:0.1em;"><a href="#48">Reminder: Resolving Hazards</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide02.png" alt=""></a></div> <p>In this lecture, we’re going to use the circuit   pipelining techniques we learned earlier in the course to   improve the performance of the 32-bit Beta CPU design we   developed earlier in the course.  This CPU design executes one   Beta instruction per clock cycle.  Hopefully you remember the   design!  If not, you might find it worthwhile to review   “Building the Beta”.</p> <p>At the beginning of the clock cycle, this circuit loads a new   value into the program counter, which is then sent to main   memory as the address of the instruction to be executed this   cycle.  When the 32-bit word containing the binary encoding of   the instruction is returned by the memory, the opcode field is   decoded by the control logic to determine the control signals   for the rest of the data path.  The operands are read from the   register file and routed to the ALU to perform the desired   operation.  For memory operations, the output of the ALU serves   as the memory address and, in the case of load instructions, the   main memory supplies the data to be written into the register   file at the end of the cycle.  PC+4 and ALU values can also be   written to the register file.</p> <p>The clock period of the Beta is determined by the cumulative   delay through all the components involved in instruction   execution.  Today’s question is: how can we make this   faster?</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide03.png" alt=""></a></div> <p>We can characterize the time spent executing a program as the   product of three terms.  The first term is the total number of   instructions executed.  Since the program usually contains loops   and procedure calls, many of the encoded instructions will be   executed many times.  We want the total count of instructions   executed, not the static size of the program as measured by the   number of encoded instructions in memory.  The second term is   the average number of clock cycles it takes to execute a single   instruction.  And the third term is the duration of a single   clock cycle.</p> <p>As CPU designers it’s the last two terms which are under   our control: the cycles per instruction (CPI) and the clock   period (\(t_{\textrm{CLK}}\)).  To affect the first term, we would   need to change the ISA or write a better compiler!</p> <p>Our design for the Beta was able to execute every instruction   in a single clock cycle, so our CPI is 1.  As we discussed in   the previous slide, \(t_{\textrm{CLK}}\) is determined by the   longest path through the Beta circuitry.  For example, consider   the execution of an OP-class instruction, which involves two   register operands and an ALU operation.  The arrow shows all the   components that are involved in the execution of the   instruction.  Aside from a few MUXes, the main memory, register   file, and ALU must all have time to do their thing.</p> <p>The worst-case execution time is for the LD instruction.  In   one clock cycle we need to fetch the instruction from main   memory (\(t_{\textrm{IFETCH}}\)), read the operands from the register file   (\(t_{\textrm{RF}}\)), perform the address addition in the ALU (\(t_{\textrm{ALU}}\)), read   the requested location from main memory (\(t_{\textrm{MEM}}\)), and finally   write the memory data to the destination register (\(t_{\textrm{WB}}\)).</p> <p>The component delays add up and the result is a fairly long   clock period and hence it will take a long time to run the   program.  And our two example execution paths illustrate another   issue: we’re forced to choose the clock period to   accommodate the worst-case execution time, even though we may be   able to execute some instructions faster since their execution   path through the circuitry is shorter.  We’re making all   the instructions slower just because there’s one   instruction that has a long critical path.</p> <p>So why not have simple instructions execute in one clock cycle   and more complex instructions take multiple cycles instead of   forcing all instructions to execute in a single, long clock   cycle?  As we’ll see in the next few slides, we have a   good answer to this question, one that will allow us to execute   *all* instructions with a short clock period.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide04.png" alt=""></a></div> <p>We’re going to use pipelining to address these issues.   We’re going to divide the execution of an instruction into   a sequence of steps, where each step is performed in successive   stages of the pipeline.  So it will take multiple clock cycles   to execute an instruction as it travels through the stages of   the execution pipeline.  But since there are only one or two   components in each stage of the pipeline, the clock period can   be much shorter and the throughput of the CPU can be much   higher.</p> <p>The increased throughput is the result of overlapping the   execution of consecutive instructions.  At any given time, there   will be multiple instructions in the CPU, each at a different   stage of its execution.  The time to execute all the steps for a   particular instruction (<i>i.e.</i>, the instruction latency)   may be somewhat higher than in our unpipelined implementation.   But we will finish the last step of executing some instruction   in each clock cycle, so the instruction throughput is 1 per   clock cycle.  And since the clock cycle of our pipelined CPU is   quite a bit shorter, the instruction throughput is quite a bit   higher.</p> <p>All this sounds great, but, not surprisingly, there are few   issues we’ll have to deal with.</p> <p>There are many ways to pipeline the execution of an   instruction.  We’re going to look at the design of the   classic 5-stage instruction execution pipeline, which was widely   used in the integrated circuit CPU designs of the   1980’s.</p> <p>The 5 pipeline stages correspond to the steps of executing an   instruction in a von-Neumann stored-program architecture.  The   first stage (IF) is responsible for fetching the binary-encoded   instruction from the main memory location indicated by the   program counter.</p> <p>The 32-bit instruction is passed to the register file stage   (RF) where the required register operands are read from the   register file.</p> <p>The operand values are passed to the ALU stage (ALU), which   performs the requested operation.</p> <p>The memory stage (MEM) performs the second access to main   memory to read or write the data for LD, LDR, or ST   instructions, using the value from the ALU stage as the memory   address.  For load instructions, the output of the MEM stage is   the read data from main memory.  For all other instructions, the   output of the MEM stage is simply the value from the ALU   stage.</p> <p>In the final write-back stage (WB), the result from the earlier   stages is written to the destination register in the register   file.</p> <p>Looking at the execution path from the previous slide, we see   that each of the main components of the unpipelined design is   now in its own pipeline stage. So the clock period will now be   determined by the slowest of these components.</p> <p>Having divided instruction execution into five stages, would we   expect the clock period to be one fifth of its original value?   Well, that would only happen if we were able to divide the   execution so that each stage performed exactly one fifth of the   total work.  In real life, the major components have somewhat   different latencies, so the improvement in instruction   throughput will be a little less than the factor of 5 a perfect   5-stage pipeline could achieve.  If we have a slow   component, <i>e.g.</i>, the ALU, we might choose to pipeline   that component into further stages, or, interleave multiple ALUs   to achieve the same effect.  But for this lecture, we’ll   go with the 5-stage pipeline described above.</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide05.png" alt=""></a></div> <p>So why isn’t this a 20-minute lecture?  After all we know   how pipeline combinational circuits: we can build a valid   k-stage pipeline by drawing k contours across the circuit   diagram and adding a pipeline register wherever a contour   crosses a signal.  What’s the big deal here?</p> <p>Well, is this circuit combinational?  No!  There’s state   in the registers and memories.  This means that the result of   executing a given instruction may depend on the results from   earlier instructions.  There are loops in the circuit where data   from later pipeline stages affects the execution of earlier   pipeline stages.  For example, the write to the register file at   the end of the WB stage will change values read from the   register file in the RF stage.  In other words, there are   execution dependencies between instructions and these   dependencies will need to be taken into account when we’re   trying to pipeline instruction execution.  We’ll be   addressing these issues as we examine the operation of our   execution pipeline.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide06.png" alt=""></a></div> <p>Sometimes execution of a given instruction will depend on the   results of executing a previous instruction.  Two are two types   of problematic dependencies.</p> <p>The first, termed a data hazard, occurs when the execution of   the current instruction depends on data produced by an earlier   instruction. For example, an instruction that reads R0 will   depend on the execution of an earlier instruction that wrote   R0.</p> <p>The second, termed a control hazard, occurs when a branch,   jump, or exception changes the order of execution.  For example,   the choice of which instruction to execute after a BNE depends   on whether the branch is taken or not.</p> <p>Instruction execution triggers a hazard when the instruction on   which it depends is also in the pipeline, <i>i.e.</i>, the   earlier instruction hasn’t finished execution!   We’ll need to adjust execution in our pipeline to avoid   these hazards.</p> <p>Here’s our plan of attack:</p> <p>We’ll start by designing a 5-stage pipeline that works   with sequences of instructions that don’t trigger   hazards, <i>i.e.</i>, where instruction execution doesn’t   depend on earlier instructions still in the pipeline.</p> <p>Then we’ll fix our pipeline to deal correctly with data hazards.</p> <p>And finally, we’ll address control hazards.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide07.png" alt=""></a></div> <p>Let’s start by redrawing and simplifying the Beta data   path so that it will be easier to reason about when we add   pipelining.</p> <p>The first simplification is to focus on sequential execution   and so leave out the branch addressing and PC MUX logic.  Our   simplified Beta always executes the next instruction from PC+4.   We’ll add back the branch and jump logic when we discuss   control hazards.</p> <p>The second simplification is to have the register file appear   twice in the diagram so that we can tease apart the read and   write operations that occur at different stages of instruction   execution.  The top Register File shows the combinational read   ports, used when reading the register operands in the RF   stage.  The bottom Register File shows the clocked write port,   used to write the result into the destination register at the   end of the WB stage.  Physically, there’s only one set of   32 registers, we’ve just drawn the read and write circuity   as separate components in the diagram.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide08.png" alt=""></a></div> <p>If we add pipeline registers to the simplified diagram, we see   that execution proceeds through the five stages from top to   bottom.  If we consider execution of instruction sequences with   no data hazards, information is flowing down the pipeline and   the pipeline will correctly overlap the execution of all the   instructions in the pipeline.</p> <p>The diagram shows the components needed to implement each of   the five stages.  The IF stage contains the program counter and   the main memory interface for fetching instructions. The RF   stage has the register file and operand multiplexers.  The ALU   stage uses the operands and computes the result.  The MEM stage   handles the memory access for load and store operations.  And   the WB stage writes the result into the destination   register.</p> <p>In each clock cycle, each stage does its part in the execution   of a particular instruction.  In a given clock cycle, there are   5 instructions in the pipeline.</p> <p>Note that data accesses to main memory span almost two clock   cycles.  Data accesses are initiated at the beginning of the MEM   stage and returning data is only needed just before the end of   the WB stage.  The memory is itself pipelined and can   simultaneously finish the access from an earlier instruction   while starting an access for the next instruction.</p> <p>This simplified diagram isn’t showing how the control   logic is split across the pipeline stages.  How does that   work?</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide09.png" alt=""></a></div> <p>Note that we’ve included instruction registers as part of   each pipeline stage, so that each stage can compute the control   signals it needs from its instruction register.  The encoded   instruction is simply passed from one stage to the next as the   instruction flows through the pipeline.</p> <p>Each stage computes its control signals from the opcode field   of its instruction register.  The RF stage needs the RA,   RB, and literal fields from its instruction register.  And the   WB stage needs the RC field from its instruction register.  The   required logic is very similar to the unpipelined   implementation, it’s just been split up and moved to the   appropriate pipeline stage.</p> <p>We’ll see that we will have to add some additional   control logic to deal correctly with pipeline hazards.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide10.png" alt=""></a></div> <p>Our simplified diagram isn’t so simple anymore!  To see   how the pipeline works, let’s follow along as it executes   this sequence of six instructions.  Note that the instructions   are reading and writing from different registers, so there are   no potential data hazards.  And there are no branches and jumps,   so there are no potential control hazards.  Since there are no   potential hazards, the instruction executions can be overlapped   and their overlapped execution in the pipeline will work   correctly.</p> <p>Okay, here we go!</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide11.png" alt=""></a></div> <p>During cycle 1, the IF stage sends the value from the program   counter to main memory to fetch the first instruction (the green   LD instruction), which will be stored in the RF-stage   instruction register at the end of the cycle.  Meanwhile,   it’s also computing PC+4, which will be the next value of   the program counter.  We’ve colored the next value blue to   indicate that it’s the address of the blue instruction in   the sequence.</p> <p>We’ll add the appropriately colored label on the right of   each pipeline stage to indicate which instruction the stage is   processing.</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide12.png" alt=""></a></div> <p>At the start of cycle 2, we see that values in the PC and   instruction registers for the RF stage now correspond to the   green instruction.  During the cycle the register file will be   reading the register operands, in this case R1, which is needed   for the green instruction.  Since the green instruction is a LD,   ASEL is 0 and BSEL is 1, selecting the appropriate values to be   written into the A and B operand registers at the end of the   cycle.</p> <p>Concurrently, the IF stage is fetching the blue instruction   from main memory and computing an updated PC value for the next   cycle.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide13.png" alt=""></a></div> <p>In cycle 3, the green instruction is now in the ALU stage,   where the ALU is adding the values in its operand registers (in   this case the value of R1 and the constant 4) and the result   will be stored in Y_MEM register at the end of the cycle.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide14.png" alt=""></a></div> <p>In cycle 4, we’re overlapping the execution of four   instructions. The MEM stage initiates a memory read for the   green LD instruction.  Note that the read data will first become   available in the WB stage - it’s not available to CPU in   the current clock cycle.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide15.png" alt=""></a></div> <p>In cycle 5, the results of the main memory read initiated in   cycle 4 are available for writing to the register file in the WB   stage.  So execution of the green LD instruction will be   complete when the memory data is written to R2 at the end of   cycle 5.</p> <p>Meanwhile, the MEM stage is initiating a memory read for the   blue LD instruction.</p> <p>The pipeline continues to complete successive instructions in   successive clock cycles.  The latency for a particular   instruction is 5 clock cycles.  The throughput of the pipelined   CPU is 1 instruction/cycle.  This is the same as the unpipelined   implementation, except that the clock period is shorter because   each pipeline stage has fewer components.</p> <p>Note that the effects of the green LD, <i>i.e.</i>, filling R2   with a new value, don’t happen until the rising edge of   the clock at the end of cycle 5.  In other words, the results of   the green LD aren’t available to other instructions until   cycle 6.  If there were instructions in the pipeline that read   R2 before cycle 6, they would have gotten an old value!  This is   an example of a data hazard.  Not a problem for us, since our   instruction sequence didn’t trigger this data hazard.</p> <p>Tackling data hazards is our next task.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide16.png" alt=""></a></div> <p>The data path diagram isn’t all that useful in   diagramming the pipelined execution of an instruction sequence   since we need a new copy of the diagram for each clock cycle.  A   more compact and easier-to-read diagram of pipelined execution   is provided by the pipeline diagrams we met back in Part 1 of   the course.</p> <p>There’s one row in the diagram for each pipeline stage   and one column for each cycle of execution.  Entries in the   table show which instruction is in each pipeline stage at each   cycle.  In normal operation, a particular instruction moves   diagonally through the diagram as it proceeds through the five   pipeline stages.</p> <p>To understand data hazards, let’s first remind ourselves   of when the register file is read and written for a particular   instruction.  Register reads happen when the instruction is in   the RF stage, <i>i.e.</i>, when we’re reading the   instruction’s register operands.  Register writes happen   at the end of the cycle when the instruction is in the WB stage.   For example, for the first LD instruction, we read R1 during   cycle 2 and write R2 at the end of cycle 5.  Or consider the   register file operations in cycle 6: we’re reading R12 and   R13 for the MUL instruction in the RF stage, and writing R4 at   the end of the cycle for the LD instruction in the WB stage.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide17.png" alt=""></a></div> <p>Okay, now let’s see what happens when there are data   hazards.  In this instruction sequence, the ADDC instruction   writes its result in R2, which is immediately read by the   following SUBC instruction.  Correct execution of the SUBC   instruction clearly depends on the results of the ADDC   instruction.  This what we’d call a read-after-write   dependency.</p> <p>This pipeline diagram shows the cycle-by-cycle execution where   we’ve circled the cycles during which ADDC writes R2 and   SUBC reads R2.</p> <p>Oops!  ADDC doesn’t write R2 until the end of cycle 5,   but SUBC is trying to read the R2 value in cycle 3.  The value   in R2 in the register file in cycle 3 doesn’t yet reflect   the execution of the ADDC instruction.  So as things stand the   pipeline would *not* correctly execute this instruction   sequence.  This instruction sequence has triggered a data   hazard.</p> <p>We want the pipelined CPU to generate the same program results   as the unpipelined CPU, so we’ll need to figure out a   fix.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide18.png" alt=""></a></div> <p>There are three general strategies we can pursue to fix   pipeline hazards.  Any of the techniques will work, but as   we’ll see they have different tradeoffs for instruction   throughput and circuit complexity.</p> <p>The first strategy is to stall instructions in the RF stage   until the result they need has been written to the register   file.  “Stall” means that we don’t reload the   instruction register at the end of the cycle, so we’ll try   to execute the same instruction in the next cycle.  If we stall   one pipeline stage, all earlier stages must also be stalled   since they are blocked by the stalled instruction.  If an   instruction is stalled in the RF stage, the IF stage is also   stalled.  Stalling will always work, but has a negative impact   on instruction throughput.  Stall for too many cycles and   you’ll lose the performance advantages of pipelined   execution!</p> <p>The second strategy is to route the needed value to earlier   pipeline stages as soon as its computed.  This called bypassing   or forwarding.  As it turns out, the value we need often exists   somewhere in the pipelined data path, it just hasn’t been   written yet to the register file.  If the value exists and can   be forwarded to where it’s needed, we won’t need to   stall.  We’ll be able to use this strategy to avoid   stalling on most types of data hazards.</p> <p>The third strategy is called speculation.  We’ll make an   intelligent guess for the needed value and continue execution.   Once the actual value is determined, if we guessed correctly,   we’re all set.  If we guessed incorrectly, we have to back   up execution and restart with the correct value.  Obviously   speculation only makes sense if it’s possible to make   accurate guesses.  We’ll be able to use this strategy to   avoid stalling on control hazards.</p> <p>Let’s see how the first two strategies work when dealing   with our data hazard.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide19.png" alt=""></a></div> <p>Applying the stall strategy to our data hazard, we need to   stall the SUBC instruction in the RF stage until the ADDC   instruction writes its result in R2.  So in the pipeline   diagram, SUBC is stalled three times in the RF stage until it   can finally access the R2 value from the register file in cycle   6.</p> <p>Whenever the RF stage is stalled, the IF stage is also stalled.   You can see that in the diagram too.  But when RF is stalled,   what should the ALU stage do in the next cycle?  The RF stage   hasn’t finished its job and so can’t pass along its   instruction!  The solution is for the RF stage to make-up an   innocuous instruction for the ALU stage, what’s called a   NOP instruction, short for “no operation”.  A NOP   instruction has no effect on the CPU state, <i>i.e.</i>, it   doesn’t change the contents of the register file or main   memory.  For example any OP-class or OPC-class instruction that   has R31 as its destination register is a NOP.</p> <p>The NOPs introduced into the pipeline by the stalled RF stage   are shown in red.  Since the SUBC is stalled in the RF stage for   three cycles, three NOPs are introduced into the pipeline.  We   sometimes refer to these NOPs as “bubbles” in the   pipeline.</p> <p>How does the pipeline know when to stall?  It can compare the   register numbers in the RA and RB fields of the instruction in   the RF stage with the register numbers in the RC field of   instructions in the ALU, MEM, and WB stage.  If there’s a   match, there’s a data hazard and the RF stage should be   stalled.  The stall will continue until there’s no hazard   detected.  There are a few details to take care of: some   instructions don’t read both registers, the ST instruction   doesn’t use its RC field, and we don’t want R31 to   match since it’s always okay to read R31 from the register   file.</p> <p>Stalling will ensure correct pipelined execution, but it does   increase the effective CPI.  This will lead to longer execution   times if the increase in CPI is larger than the decrease in   cycle time afforded by pipelining.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide20.png" alt=""></a></div> <p>To implement stalling, we only need to make two simple changes   to our pipelined data path.  We generate a new control signal,   STALL, which, when asserted, disables the loading of the three   pipeline registers at the input of the IF and RF stages, which   means they’ll have the same value next cycle as they do   this cycle.  We also introduce a mux to choose the instruction   to be sent along to the ALU stage.  If STALL is 1, we choose a   NOP instruction, <i>e.g.</i>, an ADD with R31 as its   destination.  If STALL is 0, the RF stage is not stalled, so we   pass its current instruction to the ALU.</p> <p>And here we see how to compute STALL as described in the   previous slide.</p> <p>The additional logic needed to implement stalling is pretty   modest, so the real design tradeoff is about increased CPI due   to stalling vs. decreased cycle time due to pipelining.</p> <p>So we have a solution, although it carries some potential   performance costs.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide21.png" alt=""></a></div> <p>Now let’s consider our second strategy: bypassing, which   is applicable if the data we need in the RF stage is somewhere   in the pipelined data path.</p> <p>In our example, even though ADDC doesn’t write R2 until   the end of cycle 5, the value that will be written is computed   during cycle 3 when the ADDC is in the ALU stage.  In cycle 3,   the output of the ALU is the value needed by the SUBC   that’s in the RF stage in the same cycle.</p> <p>So, if we detect that the RA field of the instruction in the RF   stage is the same as the RC field of the instruction in the ALU   stage, we can use the output of the ALU in place of the (stale)   RA value being read from the register file.  No stalling   necessary!</p> <p>In our example, in cycle 3 we want to route the output of the   ALU to the RF stage to be used as the value for R2.  We show   this with a red “bypass arrow” showing data being   routed from the ALU stage to the RF stage.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide22.png" alt=""></a></div> <p>To implement bypassing, we’ll add a many-input   multiplexer to the read ports of the register file so we can   select the appropriate value from other pipeline stages.  Here   we show the combinational bypass paths from the ALU, MEM, and WB   stages.  For the bypassing example of previous slides, we use   the blue bypass path during cycle 3 to get the correct value for   R2.</p> <p>The bypass MUXes are controlled by logic that’s matching   the number of the source register to the number of the   destination registers in the ALU, MEM, and WB stages, with the   usual complications of dealing with R31.</p> <p>What if there are multiple matches, <i>i.e.</i>, if the RF   stage is trying to read a register that’s the destination   for, say, the instructions in both the ALU and MEM stages?  No   problem! We want to select the result from the most recent   instruction, so we’d choose the ALU match if there is one,   then the MEM match, then the WB match, then, finally, the output   of the register file.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide23.png" alt=""></a></div> <p>Here’s a diagram showing all the bypass paths we’ll   need.  Note that branches and jumps write their PC+4 value into   the register file, so we’ll need to bypass from the PC+4   values in the various stages as well as the ALU values.</p> <p>Note that the bypassing is happening at the end of the   cycle, <i>e.g.</i>, after the ALU has computed its answer.  To   accommodate the extra t_PD of the bypass MUX, we’ll have   to extend the clock period by a small amount.  So once again   there’s a design tradeoff - the increased CPI of stalling   vs the slightly increased cycle time of bypassing.  And, of   course, in the case of bypassing there’s the extra area   needed for the necessary wiring and MUXes.</p> <p>We can cut back on the costs by reducing the amount of   bypassing, say, to only bypassing ALU results from the ALU stage   and use stalling to deal with all the other data hazards.</p> <p>If we implement full bypassing, do we still need the STALL logic?</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide24.png" alt=""></a></div> <p>As it turns out, we do!  There’s one data hazard that   bypassing doesn’t completely address.  Consider trying to   immediately the use the result of a LD instruction.  In the   example shown here, the SUBC is trying to use the value the   immediately preceding LD is writing to R2.  This is called a   load-to-use hazard.</p> <p>Recalling that LD data isn’t available in the data path   until the cycle when LD reaches the WB stage, even with full   bypassing we’ll need to stall SUBC in the RF stage until   cycle 5, introducing two NOPs into the pipeline.  Without   bypassing from the WB stage, we need to stall until cycle 6.</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide25.png" alt=""></a></div> <p>In summary, we have two strategies for dealing with data hazards.</p> <p>We can stall the IF and RF stages until the register values   needed by the instruction in the RF stage are available in the   register file.  The required hardware is simple, but the NOPs   introduced into the pipeline waste CPU cycles and result in an   higher effective CPI.</p> <p>Or we can use bypass paths to route the required values to the   RF stage assuming they exist somewhere in the pipelined data   path.  This approach requires more hardware than stalling, but   doesn’t reduce the effective CPI.  Even if we implement   bypassing, we’ll still need stalls to deal with   load-to-use hazards.</p> <p>Can we keep adding pipeline stages in the hopes of further   reducing the clock period?  More pipeline stages mean more   instructions in the pipeline at the same time, which in turn   increases the chance of a data hazard and the necessity of   stalling, thus increasing CPI.</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide26.png" alt=""></a></div> <p>Compilers can help reduce dependencies by reorganizing the   assembly language code they produce.  Here’s the   load-to-use hazard example we saw earlier.  Even with full   bypassing, we’d need to stall for 2 cycles.</p> <p>But if the compiler (or assembly language programmer!) notices   that the MUL and XOR instructions are independent of the SUBC   instruction and hence can be moved before the SUBC, the   dependency is now such that the LD is naturally in the WB stage   when the ST is in the RF stage, so no stalls are needed.</p> <p>This optimization only works when the compiler can find   independent instructions to move around.  Unfortunately there   are plenty of programs where such instructions are hard to   find.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide27.png" alt=""></a></div> <p>Then there’s one final approach we could take - change   the ISA so that data hazards are part of the ISA, <i>i.e.</i>,   just explain that writes to the destination register happen with   a 3-instruction delay!  If NOPs are needed, make the programmer   add them to the program.  Simplify the hardware at the   “small” cost of making the compilers work   harder.</p> <p>You can imagine exactly how much the compiler writers will like   this suggestion.  Not to mention assembly language programmers!   And you can change the ISA again when you add more pipeline   stages!</p> <p>This is how a compiler writer views CPU architects who   unilaterally change the ISA to save a few logic gates :)</p> <p>The bottom line is that successful ISAs have very long   lifetimes and so shouldn’t include tradeoffs driven by   short-term implementation considerations.  Best not to go   there.</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide28.png" alt=""></a></div> <p>Now let’s turn our attention to control hazards,   illustrated by the code fragment shown here.  Which instruction   should be executed after the BNE?  If the value in R3 is   non-zero, ADDC should be executed.  If the value in R3 is zero,   the next instruction should be SUB.  If the current instruction   is an explicit transfer of control (<i>i.e.</i>, JMPs or   branches), the choice of the next instruction depends on the   execution of the current instruction.</p> <p>What are the implications of this dependency on our execution   pipeline?</p> <div class="lecslide"><a name="28"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide29.png" alt=""></a></div> <p>How does the unpipelined implementation determine the next   instruction?</p> <p>For branches (BEQ or BNE), the value to be loaded into the   program counter depends on (1) the opcode, <i>i.e.</i>, whether   the instruction is a BEQ or a BNE, (2) the current value of the   program counter since that’s used in the offset   calculation, and (3) the value stored in the register specified   by the RA field of the instruction since that’s the value   tested by the branch.</p> <p>For JMP instructions, the next value of the program counter   depends once again on the opcode field and the value of the RA   register.</p> <p>For all other instructions, the next PC value depends only on the   opcode of the instruction and the value PC+4.</p> <p>Exceptions also change the program counter. We’ll deal   with them later in the lecture.</p> <p>The control hazard is triggered by JMP and branches since their   execution depends on the value in the RA register, <i>i.e.</i>,   they need to read from the register file, which happens in the   RF pipeline stage.  Our bypass mechanisms ensure that   we’ll use the correct value for the RA register even if   it’s not yet been written into the register file.  What   we’re concerned about here is that the address of the   instruction following the JMP or branch will be loaded into   program counter at the end of the cycle when the JMP or branch   is in the RF stage.  But what should the IF stage be doing while   all this is going on in RF stage?</p> <div class="lecslide"><a name="29"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide30.png" alt=""></a></div> <p>The answer is that in the case of JMPs and taken branches, we   don’t know what the IF stage should be doing until those   instructions are able to access the value of the RA register in   the RF stage.</p> <p>One solution is to stall the IF stage until the RF stage can   compute the necessary result.  This was the first of our general   strategies for dealing with hazards.  How would this work?</p> <div class="lecslide"><a name="30"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide31.png" alt=""></a></div> <p>If the opcode in the RF stage is JMP, BEQ, or BNE, stall the IF   stage for one cycle.  In the example code shown here, assume   that the value in R3 is non-zero when the BNE is   executed, <i>i.e.</i>, that the instruction following BNE should   be the ADDC at the top of the loop.</p> <p>The pipeline diagram shows the effect we’re trying to   achieve: a NOP is inserted into the pipeline in cycles 4 and 8.   Then execution resumes in the next cycle after the RF stage   determines what instruction comes next.  Note, by the way, that   we’re relying on our bypass logic to deliver the correct   value for R3 from the MEM stage since the ADDC instruction that   wrote into R3 is still in the pipeline, <i>i.e.</i>, we have a   data hazard to deal with too!</p> <p>Looking at, say, the WB stage in the pipeline diagram, we see   it takes 4 cycles to execute one iteration of our 3-instruction   loop.  So the effective CPI is 4/3, an increase of 33%.  Using   stall to deal with control hazards has had an impact on the   instruction throughput of our execution pipeline.</p> <div class="lecslide"><a name="31"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide32.png" alt=""></a></div> <p>We’ve already seen the logic needed to introduce NOPs   into the pipeline.  In this case, we add a mux to the   instruction path in the IF stage, controlled by the IRSrc_IF   select signal.  We use the superscript on the control signals to   indicate which pipeline stage holds the logic they control.</p> <p>If the opcode in the RF stage is JMP, BEQ, or BNE we set   IRSrc_IF to 1, which causes a NOP to replace the instruction   that was being read from main memory.  And, of course,   we’ll be setting the PCSEL control signals to select the   correct next PC value, so the IF stage will fetch the desired   follow-on instruction in the next cycle.</p> <p>If we replace an instruction with NOP, we say we   “annulled” the instruction.</p> <div class="lecslide"><a name="32"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide33.png" alt=""></a></div> <p>The branch instructions in the Beta ISA make their branch   decision in the RF stage since they only need the value in   register RA.</p> <p>But suppose the ISA had a branch where the branch decision was   made in ALU stage.</p> <p>When the branch decision is made in the ALU stage, we need to   introduce two NOPs into the pipeline, replacing the now unwanted   instructions in the RF and IF stages.  This would increase the   effective CPI even further.  But the tradeoff is that the more   complex branches may reduce the number of instructions in the   program.</p> <p>If we annul instructions in all the earlier pipeline stages,   this is called “flushing the pipeline”.  Since   flushing the pipeline has a big impact on the effective CPI, we   do it when it’s the only way to ensure the correct   behavior of the execution pipeline.</p> <div class="lecslide"><a name="33"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide34.png" alt=""></a></div> <p>We can be smarter about when we choose to flush the pipeline   when executing branches.  If the branch is not taken, it turns   out that the pipeline has been doing the right thing by fetching   the instruction following the branch.  Starting execution of an   instruction even when we’re unsure whether we really want   it executed is called “speculation”.</p> <p>Speculative execution is okay if we’re able to annul the   instruction before it has an effect on the CPU   state, <i>e.g.</i>, by writing into the register file or main   memory.  Since these state changes (called “side   effects”) happen in the later pipeline stages, an   instruction can progress through the IF, RF, and ALU stages   before we have to make a final decision about whether it should   be annulled.</p> <div class="lecslide"><a name="34"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide35.png" alt=""></a></div> <p>How does speculation help with control hazards?  Guessing that   the next value of the program counter is PC+4 is correct for all   but JMPs and taken branches.</p> <p>Here’s our example again, but this time let’s   assume that the BNE is not taken, <i>i.e.</i>, that the value in   R3 is zero.  The SUB instruction enters the pipeline at the   start of cycle 4.  At the end of cycle 4, we know whether or not   to annul the SUB.  If the branch is not taken, we want to   execute the SUB instruction, so we just let it continue down the   pipeline.</p> <p>In other words, instead of always annulling the instruction   following branch, we only annul it if the branch was taken.  If   the branch is not taken, the pipeline has speculated correctly   and no instructions need to be annulled.</p> <div class="lecslide"><a name="35"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide36.png" alt=""></a></div> <p>However if the BNE is taken, the SUB is annulled at the end of   cycle 4 and a NOP is executed in cycle 5.  So we only introduce   a bubble in the pipeline when there’s a taken branch.   Fewer bubbles will decrease the impact of annulment on the   effective CPI.</p> <div class="lecslide"><a name="36"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide37.png" alt=""></a></div> <p>We’ll be using the same data path circuitry as before,   we’ll just be a bit more clever about when the value of   the IRSrc_IF control signal is set to 1.  Instead of setting it   to 1 for all branches, we only set it to 1 when the branch is   taken.</p> <div class="lecslide"><a name="37"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide38.png" alt=""></a></div> <p>Our naive strategy of always speculating that the next   instruction comes from PC+4 is wrong for JMPs and taken   branches.  Looking at simulated execution traces, we’ll   see that this error in speculation leads to about 10% higher   effective CPI.  Can we do better?</p> <p>This is an important question for CPUs with deep pipelines.   For example, Intel’s Nehalem processor from 2009 resolves   the more complex x86 branch instructions quite late in the   pipeline.  Since Nehalem is capable of executing multiple   instructions each cycle, flushing the pipeline in Nehalem   actually annuls the execution of many instructions, resulting in   a considerable hit on the CPI.</p> <p>Like many modern processor implementations, Nehalem has a much   more sophisticated speculation mechanism.  Rather than always   guessing the next instruction is at PC+4, it only does that for   non-branch instructions.  For branches, it predicts the behavior   of each individual branch based on what the branch did last time   it was executed and some knowledge of how the branch is being   used.  For example, backward branches at the end of loops, which   are taken for all but the final iteration of the loop, can be   identified by their negative branch offset values.  Nehalem can   even determine if there’s correlation between branch   instructions, using the results of an another, earlier branch to   speculate on the branch decision of the current branch.  With   these sophisticated strategies, Nehalem’s speculation is   correct 95% to 99% of the time, greatly reducing the impact of   branches on the effective CPI.</p> <div class="lecslide"><a name="38"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide39.png" alt=""></a></div> <p>There’s also the lazy option of changing the ISA to deal   with control hazards.  For example, we could change the ISA to   specify that the instruction following a jump or branch is   always executed.  In other words the transfer of control happens   *after* the next instruction.  This change ensures that the   guess of PC+4 as the address of the next instruction is always   correct!</p> <p>In the example shown here, assuming we changed the ISA, we can   reorganize the execution order of the loop to place the MUL   instruction after the BNE instruction, in the so-called   “branch delay slot”.  Since the instruction in the   branch delay slot is always executed, the MUL instruction will   be executed during each iteration of the loop.</p> <p>The resulting execution is shown in this pipeline diagram.   Assuming we can find an appropriate instruction to place in the   branch delay slot, the branch will have zero impact on the   effective CPI.</p> <div class="lecslide"><a name="39"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide40.png" alt=""></a></div> <p>Are branch delay slots a good idea?  Seems like they reduce the   negative impact that branches might have on instruction   throughput.</p> <p>The downside is that only half the time can we find   instructions to move to the branch delay slot.  The other half   of the time we have to fill it with an explicit NOP instruction,   increasing the size of the code.  And if we make the branch   decision later in the pipeline, there are more branch delay   slots, which would be even harder to fill.  In practice, it   turns out that branch prediction works better than delay slots   in reducing the impact of branches.</p> <p>So, once again we see that it’s problematic to alter the   ISA to improve the throughput of pipelined execution.  ISAs   outlive implementations, so it’s best not to change the   execution semantics to deal with performance issues created by a   particular implementation.</p> <div class="lecslide"><a name="40"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide41.png" alt=""></a></div> <p>Now let’s figure out how exceptions impact pipelined   execution.  When an exception occurs because of an illegal   instruction or an external interrupt, we need to store the   current PC+4 value in the XP register and load the program   counter with the address of the appropriate exception   handler.</p> <p>Exceptions cause control flow hazards since they are   effectively implicit branches.</p> <p>In an unpipelined implementation, exceptions affect the   execution of the current instruction.  We want to achieve   exactly the same effect in our pipelined implementation.  So   first we have to identify which one of the instructions in our   pipeline is affected, then ensure that instructions that came   earlier in the code complete correctly and that we annul the   affected instruction and any following instructions that are in   the pipeline.</p> <p>Since there are multiple instructions in the pipeline, we have   a bit of sorting out to do.</p> <div class="lecslide"><a name="41"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide42.png" alt=""></a></div> <p>When, during pipelined execution, do we determine that an   instruction will cause an exception?  An obvious example is   detecting an illegal opcode when we decode the instruction in   the RF stage.  But we can also generate exceptions in other   pipeline stages.  For example, the ALU stage can generate an   exception if the second operand of a DIV instruction is 0. Or   the MEM stage may detect that the instruction is attempting to   access memory with an illegal address.  Similarly the IF stage   can generate a memory exception when fetching the next   instruction.</p> <p>In each case, instructions that follow the one that caused the   exception may already be in the pipeline and will need to be   annulled.  The good news is that since register values are only   updated in the WB stage, annulling an instruction only requires   replacing it with a NOP.  We won’t have to restore any   changed values in the register file or main memory.</p> <div class="lecslide"><a name="42"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide43.png" alt=""></a></div> <p>Here’s our plan.  If an instruction causes an exception   in stage i, replace that instruction with this BNE instruction,   whose only side effect is writing the PC+4 value into the XP   register.  Then flush the pipeline by annulling instructions in   earlier pipeline stages.  And, finally, load the program counter   with the address of the exception handler.</p> <p>In this example, assume that LD will generate a memory   exception in the MEM stage, which occurs in cycle 4.  The arrows   show how the instructions in the pipeline are rewritten for   cycle 5, at which point the IF stage is working on fetching the   first instruction in the exception handler.</p> <div class="lecslide"><a name="43"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide44.png" alt=""></a></div> <p>Here are the changes required to the execution pipeline.  We   modify the muxes in the instruction path so that they can   replace an actual instruction with either NOP if the instruction   is to be annulled, or BNE if the instruction caused the   exception.</p> <div class="lecslide"><a name="44"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide45.png" alt=""></a></div> <p>Since the pipeline is executing multiple instructions at the   same time, we have to worry about what happens if multiple   exceptions are detected during execution.  In this example   assume that LD will cause a memory exception in the MEM stage   and note that it is followed by an instruction with an illegal   opcode.</p> <p>Looking at the pipeline diagram, the invalid opcode is detected   in the RF stage during cycle 3, causing the illegal instruction   exception process to begin in cycle 4.  But during that cycle,   the MEM stage detects the illegal memory access from the LD   instruction and so causes the memory exception process to begin   in cycle 5.  Note that the exception caused by the earlier   instruction (LD) overrides the exception caused by the later   illegal opcode even though the illegal opcode exception was   detected first.  That’s the correct behavior since once   the execution of LD is abandoned, the pipeline should behave as   if none of the instructions that come after the LD were   executed.</p> <p>If multiple exceptions are detected in the *same* cycle, the   exception from the instruction furthest down the pipeline should   be given precedence.</p> <div class="lecslide"><a name="45"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide46.png" alt=""></a></div> <p>External interrupts also behave as implicit branches, but it   turns out they are a bit easier to handle in our pipeline.   We’ll treat external interrupts as if they were an   exception that affected the IF stage.  Let’s assume the   external interrupt occurs in cycle 2.  This means that the SUB   instruction will be replaced by our magic BNE to capture the   PC+4 value and we’ll force the next PC to be the address   of the interrupt handler.  After the interrupt handler   completes, we’ll want to resume execution of the   interrupted program at the SUB instruction, so we’ll code   the handler to correct the value saved in the XP register so   that it points to the SUB instruction.</p> <p>This is all shown in the pipeline diagram.  Note that the ADD,   LD, and other instructions that came before SUB in the program   are unaffected by the interrupt.</p> <div class="lecslide"><a name="46"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide47.png" alt=""></a></div> <p>We can use the existing instruction-path muxes to deal with   interrupts, since we’re treating them as IF-stage   exceptions.  We simply have to adjust the logic for IRSrc_IF to   also make it 1 when an interrupt is requested.</p> <div class="lecslide"><a name="47"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide48.png" alt=""></a></div> <p>So here’s the final version of our 5-stage pipelined data path.</p> <p>To deal with data hazards we’ve added stall logic to the   IF and RF input registers.  We’ve also added bypass muxes   on the output of the register file read ports so we can route   values from later in the data path if we need to access a   register value that’s been computed but not yet written to   the register file.  We also made a provision to insert NOPs into   the pipeline after the RF stage if the IF and RF stages are   stalled.</p> <p>To deal with control hazards, we speculate that the next   instruction is at PC+4.  But for JMPs and taken branches, that   guess is wrong so we added a provision for annulling the   instruction in the IF stage.</p> <p>To deal with exceptions and interrupts we added instruction   muxes in all but the final pipeline stage.  An instruction that   causes an exception is replaced by our magic BNE instruction to   capture its PC+4 value.  And instructions in earlier stages are   annulled.</p> <p>All this extra circuitry has been added to ensure that   pipelined execution gives the same result as unpipelined   execution.  The use of bypassing and branch prediction ensures   that data and control hazards have only a small negative impact   on the effective CPI.  This means that the much shorter clock   period translates to a large increase in instruction   throughput.</p> <div class="lecslide"><a name="48"><img class="lecslideimg" src="../../../contents/c15/c15s1/Slide49.png" alt=""></a></div> <p>It’s worth remembering the strategies we used to deal   with hazards: stalling, bypassing and speculation.  Most   execution issues can be dealt with using one of these   strategies, so keep these in mind if you ever need to design a   high-performance pipelined system.</p> <p>This completes our discussion of pipelining.  We’ll   explore other avenues to higher processor performance in a later lecture discussing parallel processing.</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c15/index.htm">Back<span>Pipelining the Beta</span></a></li>     <li id="continue_btn"><a href="../../../contents/c15/c15s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

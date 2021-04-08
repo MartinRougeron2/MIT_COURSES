@@ -1,0 +1,280 @@
+1
+00:00:00,930 --> 00:00:06,190
+In order to satisfy the static discipline,
+a circuit must produce outputs that are better
+
+2
+00:00:06,190 --> 00:00:08,540
+than the acceptable inputs.
+
+3
+00:00:08,540 --> 00:00:13,830
+This ensures that if you concatenate multiple
+gates together, for example one buffer followed
+
+4
+00:00:13,830 --> 00:00:19,320
+by another buffer, then the input to each
+gate will be valid even if a small amount
+
+5
+00:00:19,320 --> 00:00:22,980
+of noise was introduced by the previous gate.
+
+6
+00:00:22,980 --> 00:00:27,850
+So taking a closer look at that, what that
+means is that if I have a valid input at my
+
+7
+00:00:27,850 --> 00:00:33,640
+first buffer, and I am guaranteeing that the
+output that I produce is slightly better than
+
+8
+00:00:33,640 --> 00:00:39,070
+my original input, then even if a little bit
+of noise was introduced, the input to the
+
+9
+00:00:39,070 --> 00:00:43,720
+second buffer is still going to be considered
+a valid input.
+
+10
+00:00:43,720 --> 00:00:50,579
+More concretely, to satisfy the static discipline,
+a valid low output must be less than a valid
+
+11
+00:00:50,579 --> 00:00:52,200
+low input.
+
+12
+00:00:52,200 --> 00:00:57,070
+The way that we specify this is that is that
+Vol il.
+
+13
+00:00:57,070 --> 00:01:01,950
+Also, a valid high output must be greater
+than a valid high input.
+
+14
+00:01:01,950 --> 00:01:06,240
+So Voh must be greater than Vih.
+
+15
+00:01:06,240 --> 00:01:13,330
+If we put this all together, we have Vol
+il and Vih oh
+
+16
+00:01:13,330 --> 00:01:18,101
+and of course we want our low inputs to be
+less than or equal to our high inputs, so
+
+17
+00:01:18,101 --> 00:01:22,920
+Vil ih.
+
+18
+00:01:22,920 --> 00:01:26,920
+Another way to think about this is to look
+at the orange and green arrows which show
+
+19
+00:01:26,920 --> 00:01:31,810
+the ranges of valid inputs which are wider
+than the ranges of valid outputs.
+
+20
+00:01:31,810 --> 00:01:36,310
+The other thing that is shown here are the
+noise margins which correspond to the area
+
+21
+00:01:36,310 --> 00:01:40,310
+of valid inputs but invalid outputs.
+
+22
+00:01:40,310 --> 00:01:45,630
+As we said earlier, a valid input must always
+produce a valid output.
+
+23
+00:01:45,630 --> 00:01:52,020
+A valid input has Vin il
+if its low or Vin > Vih
+
+24
+00:01:52,020 --> 00:01:54,210
+if its high.
+
+25
+00:01:54,210 --> 00:02:03,820
+A valid output has Vout ol
+if its low and Vout > Voh
+
+26
+00:02:03,820 --> 00:02:10,239
+if its high.
+
+27
+00:02:10,239 --> 00:02:15,950
+In this problem, we want to determine whether
+specifications 1, 2, and 3 (which provide
+
+28
+00:02:15,950 --> 00:02:22,400
+0.3 volt noise margins) satisfy the static
+discipline given the voltage transfer curve
+
+29
+00:02:22,400 --> 00:02:23,930
+shown here.
+
+30
+00:02:23,930 --> 00:02:28,689
+For each specification, we need to check the
+following two constraints:
+
+31
+00:02:28,689 --> 00:02:39,579
+1) Is Vol il ih
+oh - satisfying this constraint
+
+32
+00:02:39,579 --> 00:02:43,700
+guarantees that the outputs produced are better
+in quality than the inputs.
+
+33
+00:02:43,700 --> 00:02:50,680
+The second constraint is: Does a valid input
+produce a valid output?
+
+34
+00:02:50,680 --> 00:02:55,530
+Since this curve shows an inverting function,
+this translates to:
+
+35
+00:02:55,530 --> 00:03:01,680
+a) Does a valid input (where Vin
+il) always produce a valid high
+
+36
+00:03:01,680 --> 00:03:05,620
+output (where Vout > Voh)?
+
+37
+00:03:05,620 --> 00:03:13,049
+And b) Does a valid high input (where Vin
+> Vih) always produce a valid low
+
+38
+00:03:13,049 --> 00:03:17,189
+output (where Vout ol)?
+
+39
+00:03:17,189 --> 00:03:23,430
+If all of these constraints are satisfied,
+then that specification obeys the static discipline.
+
+40
+00:03:23,430 --> 00:03:25,799
+If not, it doesn't.
+
+41
+00:03:25,799 --> 00:03:34,339
+For all three specifications, we see that
+indeed Vol il ih
+
+42
+00:03:34,339 --> 00:03:40,599
+oh, so the first constraint
+is satisfied for all three specifications.
+
+43
+00:03:40,599 --> 00:03:47,650
+Now let's check the second constraint.
+
+44
+00:03:47,650 --> 00:03:56,699
+For specification #1: If Vin il
+which is equal to 0.4, then Vout
+
+45
+00:03:56,699 --> 00:04:04,559
+= 5 which is greater than Voh which
+is 4.9, so a valid low input produces a valid
+
+46
+00:04:04,559 --> 00:04:06,939
+high output.
+
+47
+00:04:06,939 --> 00:04:13,879
+If Vin > Vih which equals
+4.6 then Vout equals 0 which is
+
+48
+00:04:13,879 --> 00:04:22,010
+less than Vol which is 0.1, so
+a valid high input produces a valid low output.
+
+49
+00:04:22,010 --> 00:04:34,539
+Since all of the constraints are satisfied,
+specification #1 satisfies the static discipline.
+
+50
+00:04:34,539 --> 00:04:44,300
+For specification #2: If Vin out >= 4 which is not greater
+
+51
+00:04:44,300 --> 00:04:47,490
+than> Voh which is 4.4.
+
+52
+00:04:47,490 --> 00:04:54,729
+So this specification does not satisfy the
+static discipline.
+
+53
+00:04:54,729 --> 00:05:04,080
+For specification #3: If Vin out >= 4 which in this case
+
+54
+00:05:04,080 --> 00:05:07,740
+is greater than Voh which is 3.9.
+
+55
+00:05:07,740 --> 00:05:10,770
+So the first part of the constraint checks
+out.
+
+56
+00:05:10,770 --> 00:05:15,229
+Now we need to check what happens when we
+have a valid high input.
+
+57
+00:05:15,229 --> 00:05:24,039
+In this case, if Vin > 3.6 then
+Vout ol
+
+58
+00:05:24,039 --> 00:05:28,949
+or 1.1, so this part of the constraint checks
+out as well.
+
+59
+00:05:28,949 --> 00:05:35,659
+Since all the constraints are satisfied, that
+means that specification #3 also satisfies
+
+60
+00:05:35,659 --> 00:05:36,830
+the static discipline.

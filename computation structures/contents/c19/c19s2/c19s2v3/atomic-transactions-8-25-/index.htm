@@ -1,0 +1,1545 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>Atomic Transactions | 19.2 Topic Videos | 19.2 Topic Videos | 19 Concurrency and Synchronization | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="Atomic Transactions" name="WT.cg_s">
+    <meta content="Media Resource:" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | Atomic Transactions" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/courses_new.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/jquery.jscrollpane.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/media_tabs.css">
+	<link href="../../../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c19/c19s2/c19s2v3/atomic-transactions-8-25-/">
+	<link rel="apple-touch-icon" href="../../../../../common/images/apple-touch-icon.png">
+	
+	
+      
+	
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/bubble-popup-offline.js"></script>
+	
+	
+	
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#tabs").tabs();
+        IpadScroller();
+      });
+    </script>
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center_media">
+      	<div id="grid">
+      		<div id="left">
+        		<nav id="breadcrumb_media" aria-label="Breadcrumb">
+                	<p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/c19/index.htm">19 Concurrency and Synchronization</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/c19/c19s2/index.htm">19.2 Topic Videos</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/c19/c19s2/c19s2v3/index.htm">19.2.3 Atomic Transactions (8:25)</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            Atomic Transactions
+         
+    
+</p>
+
+            	</nav>
+            	<div class="clear"></div>
+        		<div id="media_title">
+        		<h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            Atomic Transactions
+        </span>
+    </h1>
+        		</div>
+           		<div class="clear"></div>
+           		<div id="course_wrapper_media">
+           			<nav id="course_nav" aria-label="Course">
+           				<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="selected">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="selected">
+				 		<a href="../../../../../contents/c19/c19s2/index.htm" class="selected">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+           			</nav>
+           			<main id="course_inner_media" aria-labelledby="media_title">
+      					 
+        <div class="" id="parent-fieldname-text">
+            
+            
+        </div>
+    
+      					     
+    
+    
+
+
+
+<script type="text/javascript">var caption_embed_1 ={'English - US': '/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c19/c19s2/c19s2v3/atomic-transactions-8-25-/776ZuSOo6hg.srt'}</script>     
+     <div id="media-embed">
+         <div class="attention_message" id="embed_1">
+<p>Flash and JavaScript are required for this feature.</p>
+<p>Download the video from <a href="https://archive.org/download/MIT6.004S17/MIT6_004S17_19-02-03_300k.mp4">Internet Archive</a>.</p>
+</div>
+     </div>
+    
+     <script type="text/javascript">ocw_embed_chapter_media('embed_1', 'https://www.youtube.com/v/776ZuSOo6hg', 'youtube', '/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c19/c19s2/c19s2v3/atomic-transactions-8-25-', 'https://img.youtube.com/vi/776ZuSOo6hg/0.jpg',0,0, 'https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c19/c19s2/c19s2v3/atomic-transactions-8-25-/776ZuSOo6hg.srt')</script>
+	 
+	 
+	 		
+	 		<div id="transcript1"></div>
+				 <script type="text/javascript">createThreePlayParams(2, 3636203, "embed_1", 0, 0)</script>
+			 
+	
+
+     
+ 
+
+
+<script type="text/javascript">
+		window.onload=function(){
+		init();
+		
+		}
+		var tabLinks = new Array();
+		var contentDivs = new Array();
+		function init() {
+		  // Grab the tab links and content divs from the page
+		  var tabListItems = document.getElementById('tabs').childNodes;
+		  for ( var i = 0; i < tabListItems.length; i++ ) {
+			if ( tabListItems[i].nodeName == "LI" ) {
+			  var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
+			  var id = getHash( tabLink.getAttribute('href') );
+			  tabLinks[id] = tabLink;
+			  contentDivs[id] = document.getElementById( id );
+			}
+		  }
+		  // Assign onclick events to the tab links, and
+		  // highlight the first tab
+		  var i = 0;
+		  for ( var id in tabLinks ) {
+			tabLinks[id].onclick = showTab;
+			tabLinks[id].onfocus = function() { this.blur() };
+			if ( i == 0 ) tabLinks[id].className = 'selected';
+			i++;
+		  }
+		  // Hide all content divs except the first
+		  var i = 0;
+		  for ( var id in contentDivs ) {
+			if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
+			i++;
+		  }
+		}
+		function showTab() {
+		  var selectedId = getHash( this.getAttribute('href') );
+		  // Highlight the selected tab, and dim all others.
+		  // Also show the selected content div, and hide all others.
+		  for ( var id in contentDivs ) {
+			if ( id == selectedId ) {
+			  tabLinks[id].className = 'selected';
+			  contentDivs[id].className = 'tabContent';
+			} else {
+			  tabLinks[id].className = '';
+			  contentDivs[id].className = 'tabContent hide';
+			}
+		  }
+		  // Stop the browser following the link
+		  return false;
+		}
+		function getFirstChildWithTagName( element, tagName ) {
+		  for ( var i = 0; i < element.childNodes.length; i++ ) {
+			if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
+		  }
+		}
+		function getHash( url ) {
+		  var hashPos = url.lastIndexOf ( '#' );
+		  return url.substring( hashPos + 1 );
+		}
+ </script>	
+ 
+
+  <div id="media_tabs">
+     
+        <ul id="tabs">
+            <li class="first">
+                <a href="#vid_about" class="selected">Transcript</a>
+            </li>
+            <li class="">
+                <a href="#vid_index" class="">Download this Video</a>
+            </li>
+        </ul>
+   
+        <div id="vid_about" itemprop="description" class="tabContent">
+<ul><li><a class="transcript-link" title="Open in a new window." alt="Open in a new window." style="text-decoration: none; font-size: 1.0em;" target="_blank" text-decoration: none font-size: href="../../../../../contents/c19/c19s2/c19s2v3/atomic-transactions-8-25-/776ZuSOo6hg.pdf"> Download English-US transcript (PDF)</a></li></ul>
+<p><span m="729">Let's</span> <span m="1001">take</span> <span m="1273">a</span> <span m="1545">moment</span> <span m="1817">to</span> <span m="2089">look</span> <span m="2361">at</span> <span m="2633">a</span> <span m="2905">different</span> <span m="3177">example.</span></p>
+<p><span m="3450">Automated</span> <span m="3860">teller</span> <span m="4270">machines</span> <span m="4680">allow</span> <span m="5090">bank</span> <span m="5500">customers</span> <span m="5910">to</span> <span m="6320">perform</span> <span m="6730">a</span> <span m="7140">variety</span> <span m="7550">of</span> <span m="7960">transactions:</span> <span m="8370">deposits,</span> <span m="8780">withdrawals,</span> <span m="9566">transfers,</span> <span m="10352">etc.</span></p>
+<p><span m="11139">Let's</span> <span m="11500">consider</span> <span m="11861">what</span> <span m="12223">happens</span> <span m="12584">when</span> <span m="12946">two</span> <span m="13307">customers</span> <span m="13668">try</span> <span m="14030">to</span> <span m="14391">withdraw</span> <span m="14753">$50</span> <span m="15114">from</span> <span m="15475">the</span> <span m="15837">same</span> <span m="16198">account</span> <span m="16560">at</span> <span m="16817">the</span> <span m="17074">same</span> <span m="17331">time.</span></p>
+<p><span m="17589">A</span> <span m="17940">portion</span> <span m="18292">of</span> <span m="18644">the</span> <span m="18996">bank's</span> <span m="19348">code</span> <span m="19700">for</span> <span m="20052">a</span> <span m="20404">withdrawal</span> <span m="20756">transaction</span> <span m="21108">is</span> <span m="21460">shown</span> <span m="21812">in</span> <span m="22164">the</span> <span m="22516">upper</span> <span m="22868">right.</span></p>
+<p><span m="23220">This</span> <span m="23573">code</span> <span m="23927">is</span> <span m="24281">responsible</span> <span m="24635">for</span> <span m="24989">adjusting</span> <span m="25343">the</span> <span m="25697">account</span> <span m="26051">balance</span> <span m="26405">to</span> <span m="26759">reflect</span> <span m="27113">the</span> <span m="27467">amount</span> <span m="27821">of</span> <span m="28175">the</span> <span m="28529">withdrawal.</span></p>
+<p><span m="29529">Presumably</span> <span m="29799">the</span> <span m="30070">check</span> <span m="30341">to</span> <span m="30612">see</span> <span m="30883">if</span> <span m="31154">there</span> <span m="31424">is</span> <span m="31695">sufficient</span> <span m="31966">funds</span> <span m="32237">has</span> <span m="32508">already</span> <span m="32779">happened.</span></p>
+<p><span m="33050">What's</span> <span m="33587">supposed</span> <span m="34125">to</span> <span m="34662">happen?</span></p>
+<p><span m="35200">Let's</span> <span m="35530">assume</span> <span m="35861">that</span> <span m="36191">the</span> <span m="36522">bank</span> <span m="36852">is</span> <span m="37183">using</span> <span m="37513">a</span> <span m="37844">separate</span> <span m="38175">process</span> <span m="38505">to</span> <span m="38836">handle</span> <span m="39166">each</span> <span m="39497">transaction,</span> <span m="39827">so</span> <span m="40158">the</span> <span m="40489">two</span> <span m="40909">withdrawal</span> <span m="41329">transactions</span> <span m="41749">cause</span> <span m="42169">two</span> <span m="42589">different</span> <span m="43009">processes</span> <span m="43429">to</span> <span m="43849">be</span> <span m="44269">created,</span> <span m="44689">each</span> <span m="45109">of</span> <span m="45529">which</span> <span m="45949">will</span> <span m="46370">run</span> <span m="47024">the</span> <span m="47679">Debit</span> <span m="48334">code.</span></p>
+<p><span m="48989">If</span> <span m="49345">each</span> <span m="49702">of</span> <span m="50058">the</span> <span m="50415">calls</span> <span m="50771">to</span> <span m="51128">Debit</span> <span m="51484">run</span> <span m="51841">to</span> <span m="52197">completion</span> <span m="52554">without</span> <span m="52910">interruption,</span> <span m="53267">we</span> <span m="53623">get</span> <span m="53980">the</span> <span m="54336">desired</span> <span m="54693">outcome:</span> <span m="55050">the</span> <span m="55395">first</span> <span m="55741">transaction</span> <span m="56087">debits</span> <span m="56432">the</span> <span m="56778">account</span> <span m="57124">by</span> <span m="57470">$50,</span> <span m="57815">then</span> <span m="58161">the</span> <span m="58507">second</span> <span m="58852">transaction</span> <span m="59198">does</span> <span m="59544">the</span> <span m="59890">same.</span></p>
+<p><span m="61210">The</span> <span m="61551">net</span> <span m="61893">result</span> <span m="62235">is</span> <span m="62577">that</span> <span m="62918">you</span> <span m="63260">and</span> <span m="63602">your</span> <span m="63944">friend</span> <span m="64285">have</span> <span m="64627">$100</span> <span m="64969">and</span> <span m="65311">the</span> <span m="65652">balance</span> <span m="65994">is</span> <span m="66336">$100</span> <span m="66678">less.</span></p>
+<p><span m="67020">So</span> <span m="67507">far,</span> <span m="67995">so</span> <span m="68482">good.</span></p>
+<p><span m="68970">But</span> <span m="69358">what</span> <span m="69746">if</span> <span m="70134">the</span> <span m="70522">process</span> <span m="70911">for</span> <span m="71299">the</span> <span m="71687">first</span> <span m="72075">transaction</span> <span m="72464">is</span> <span m="72852">interrupted</span> <span m="73240">just</span> <span m="73628">after</span> <span m="74017">it's</span> <span m="74405">read</span> <span m="74793">the</span> <span m="75181">balance?</span></p>
+<p><span m="75570">The</span> <span m="76009">second</span> <span m="76448">process</span> <span m="76887">subtracts</span> <span m="77326">$50</span> <span m="77765">from</span> <span m="78204">the</span> <span m="78643">balance,</span> <span m="79082">completing</span> <span m="79521">that</span> <span m="79960">transaction.</span></p>
+<p><span m="80400">Now</span> <span m="80800">the</span> <span m="81200">first</span> <span m="81600">process</span> <span m="82000">resumes,</span> <span m="82400">using</span> <span m="82800">the</span> <span m="83200">now</span> <span m="83600">out-of-date</span> <span m="84000">balance</span> <span m="84400">it</span> <span m="84800">loaded</span> <span m="85200">just</span> <span m="85600">before</span> <span m="86000">being</span> <span m="86830">interrupted.</span></p>
+<p><span m="87660">The</span> <span m="87930">net</span> <span m="88200">result</span> <span m="88470">is</span> <span m="88740">that</span> <span m="89010">you</span> <span m="89280">and</span> <span m="89550">your</span> <span m="89820">friend</span> <span m="90090">have</span> <span m="90360">$100,</span> <span m="90630">but</span> <span m="90900">the</span> <span m="91170">balance</span> <span m="91440">has</span> <span m="91710">only</span> <span m="91980">been</span> <span m="92250">debited</span> <span m="92520">by</span> <span m="93785">$50.</span></p>
+<p><span m="95050">The</span> <span m="95252">moral</span> <span m="95454">of</span> <span m="95656">the</span> <span m="95858">story</span> <span m="96061">is</span> <span m="96263">that</span> <span m="96465">we</span> <span m="96667">need</span> <span m="96870">to</span> <span m="97072">be</span> <span m="97274">careful</span> <span m="97476">when</span> <span m="97678">writing</span> <span m="97881">code</span> <span m="98083">that</span> <span m="98285">reads</span> <span m="98487">and</span> <span m="98690">writes</span> <span m="99058">shared</span> <span m="99426">data</span> <span m="99794">since</span> <span m="100162">other</span> <span m="100530">processes</span> <span m="100898">might</span> <span m="101266">modify</span> <span m="101635">the</span> <span m="102003">data</span> <span m="102371">in</span> <span m="102739">the</span> <span m="103107">middle</span> <span m="103475">of</span> <span m="103843">our</span> <span m="104211">execution.</span></p>
+<p><span m="104580">When,</span> <span m="105035">say,</span> <span m="105490">updating</span> <span m="105946">a</span> <span m="106401">shared</span> <span m="106856">memory</span> <span m="107312">location,</span> <span m="107767">we'll</span> <span m="108222">need</span> <span m="108678">to</span> <span m="109133">LD</span> <span m="109588">the</span> <span m="110044">current</span> <span m="110499">value,</span> <span m="110954">modify</span> <span m="111410">it,</span> <span m="111913">then</span> <span m="112416">ST</span> <span m="112920">the</span> <span m="113423">updated</span> <span m="113926">value.</span></p>
+<p><span m="114430">We</span> <span m="114738">would</span> <span m="115046">like</span> <span m="115354">to</span> <span m="115662">ensure</span> <span m="115970">that</span> <span m="116278">no</span> <span m="116586">other</span> <span m="116895">processes</span> <span m="117203">access</span> <span m="117511">the</span> <span m="117819">shared</span> <span m="118127">location</span> <span m="118435">between</span> <span m="118743">the</span> <span m="119051">start</span> <span m="119360">of</span> <span m="119764">the</span> <span m="120168">LD</span> <span m="120573">and</span> <span m="120977">the</span> <span m="121382">completion</span> <span m="121786">of</span> <span m="122191">the</span> <span m="122595">ST.</span></p>
+<p><span m="123000">The</span> <span m="123497">LD/modify/ST</span> <span m="123994">code</span> <span m="124491">sequence</span> <span m="124989">is</span> <span m="125486">what</span> <span m="125983">we</span> <span m="126480">call</span> <span m="126978">a</span> <span m="127475">"critical</span> <span m="127972">section".</span></p>
+<p><span m="128470">We</span> <span m="128766">need</span> <span m="129063">to</span> <span m="129360">arrange</span> <span m="129657">that</span> <span m="129954">other</span> <span m="130251">processes</span> <span m="130548">attempting</span> <span m="130845">to</span> <span m="131141">execute</span> <span m="131438">the</span> <span m="131735">same</span> <span m="132032">critical</span> <span m="132329">section</span> <span m="132626">are</span> <span m="132923">delayed</span> <span m="133220">until</span> <span m="133851">our</span> <span m="134483">execution</span> <span m="135115">is</span> <span m="135747">complete.</span></p>
+<p><span m="136379">This</span> <span m="136762">constraint</span> <span m="137146">is</span> <span m="137530">called</span> <span m="137914">"mutual</span> <span m="138297">exclusion",</span> <span m="138681">i.e.,</span> <span m="139065">only</span> <span m="139449">one</span> <span m="139832">process</span> <span m="140216">at</span> <span m="140600">a</span> <span m="140984">time</span> <span m="141367">can</span> <span m="141751">be</span> <span m="142135">executing</span> <span m="142519">code</span> <span m="143262">in</span> <span m="144006">the</span> <span m="144749">same</span> <span m="145493">critical</span> <span m="146236">section.</span></p>
+<p><span m="146980">Once</span> <span m="147404">we've</span> <span m="147829">identified</span> <span m="148253">critical</span> <span m="148678">sections,</span> <span m="149103">we'll</span> <span m="149527">use</span> <span m="149952">semaphores</span> <span m="150376">to</span> <span m="150801">guarantee</span> <span m="151226">they</span> <span m="151650">execute</span> <span m="152075">atomically,</span> <span m="152500">i.e.,</span> <span m="152876">that</span> <span m="153252">once</span> <span m="153628">execution</span> <span m="154004">of</span> <span m="154380">the</span> <span m="154756">critical</span> <span m="155132">section</span> <span m="155508">begins,</span> <span m="155884">no</span> <span m="156260">other</span> <span m="156636">process</span> <span m="157012">will</span> <span m="157388">be</span> <span m="157764">able</span> <span m="158140">to</span> <span m="158591">enter</span> <span m="159042">the</span> <span m="159493">critical</span> <span m="159944">section</span> <span m="160395">until</span> <span m="160846">the</span> <span m="161297">execution</span> <span m="161748">is</span> <span m="162199">complete.</span></p>
+<p><span m="162650">The</span> <span m="163019">combination</span> <span m="163388">of</span> <span m="163757">the</span> <span m="164126">semaphore</span> <span m="164496">to</span> <span m="164865">enforce</span> <span m="165234">the</span> <span m="165603">mutual</span> <span m="165972">exclusion</span> <span m="166342">constraint</span> <span m="166711">and</span> <span m="167080">the</span> <span m="167449">critical</span> <span m="167819">section</span> <span m="168265">of</span> <span m="168711">code</span> <span m="169158">implement</span> <span m="169604">what's</span> <span m="170050">called</span> <span m="170497">a</span> <span m="170943">"transaction".</span></p>
+<p><span m="171390">A</span> <span m="171722">transaction</span> <span m="172055">can</span> <span m="172387">perform</span> <span m="172720">multiple</span> <span m="173053">reads</span> <span m="173385">and</span> <span m="173718">writes</span> <span m="174050">of</span> <span m="174383">shared</span> <span m="174716">data</span> <span m="175048">with</span> <span m="175381">the</span> <span m="175713">guarantee</span> <span m="176046">that</span> <span m="176379">none</span> <span m="176704">of</span> <span m="177030">the</span> <span m="177356">data</span> <span m="177682">will</span> <span m="178008">be</span> <span m="178334">read</span> <span m="178660">or</span> <span m="178986">written</span> <span m="179312">by</span> <span m="179638">other</span> <span m="179964">processes</span> <span m="180290">while</span> <span m="180616">the</span> <span m="180942">transaction</span> <span m="181268">is</span> <span m="181594">in</span> <span m="181920">progress.</span></p>
+<p><span m="182920">Here's</span> <span m="183225">the</span> <span m="183531">original</span> <span m="183837">code</span> <span m="184142">to</span> <span m="184448">Debit,</span> <span m="184754">which</span> <span m="185060">we'll</span> <span m="185365">modify</span> <span m="185671">by</span> <span m="185977">adding</span> <span m="186282">a</span> <span m="186588">LOCK</span> <span m="186894">semaphore.</span></p>
+<p><span m="187200">In</span> <span m="187461">this</span> <span m="187723">case,</span> <span m="187985">the</span> <span m="188247">resource</span> <span m="188508">controlled</span> <span m="188770">by</span> <span m="189032">the</span> <span m="189294">semaphore</span> <span m="189555">is</span> <span m="189817">the</span> <span m="190079">right</span> <span m="190341">to</span> <span m="190602">run</span> <span m="190864">the</span> <span m="191126">code</span> <span m="191388">in</span> <span m="191650">the</span> <span m="192289">critical</span> <span m="192929">section.</span></p>
+<p><span m="193569">By</span> <span m="193944">initializing</span> <span m="194319">LOCK</span> <span m="194694">to</span> <span m="195069">1,</span> <span m="195444">we're</span> <span m="195819">saying</span> <span m="196194">that</span> <span m="196569">at</span> <span m="196944">most</span> <span m="197319">one</span> <span m="197694">process</span> <span m="198069">can</span> <span m="198444">execute</span> <span m="198819">the</span> <span m="199194">critical</span> <span m="199569">section</span> <span m="199941">at</span> <span m="200314">a</span> <span m="200687">time.</span></p>
+<p><span m="201060">A</span> <span m="201498">process</span> <span m="201936">running</span> <span m="202374">the</span> <span m="202812">Debit</span> <span m="203250">code</span> <span m="203688">WAITs</span> <span m="204126">on</span> <span m="204564">the</span> <span m="205002">LOCK</span> <span m="205440">semaphore.</span></p>
+<p><span m="205879">If</span> <span m="206215">the</span> <span m="206552">value</span> <span m="206889">of</span> <span m="207225">LOCK</span> <span m="207562">is</span> <span m="207899">1,</span> <span m="208236">the</span> <span m="208572">WAIT</span> <span m="208909">will</span> <span m="209246">decrement</span> <span m="209582">value</span> <span m="209919">of</span> <span m="210256">LOCK</span> <span m="210593">to</span> <span m="210929">0</span> <span m="211266">and</span> <span m="211603">let</span> <span m="211939">the</span> <span m="212276">process</span> <span m="212613">enter</span> <span m="212950">the</span> <span m="213576">critical</span> <span m="214202">section.</span></p>
+<p><span m="214829">This</span> <span m="215290">is</span> <span m="215752">called</span> <span m="216214">acquiring</span> <span m="216675">the</span> <span m="217137">lock.</span></p>
+<p><span m="217599">If</span> <span m="217878">the</span> <span m="218157">value</span> <span m="218437">of</span> <span m="218716">LOCK</span> <span m="218996">is</span> <span m="219275">0,</span> <span m="219555">some</span> <span m="219834">other</span> <span m="220114">process</span> <span m="220393">has</span> <span m="220672">acquired</span> <span m="220952">the</span> <span m="221231">lock</span> <span m="221511">and</span> <span m="221790">is</span> <span m="222070">executing</span> <span m="222349">the</span> <span m="222629">critical</span> <span m="223102">section</span> <span m="223575">and</span> <span m="224048">our</span> <span m="224521">execution</span> <span m="224994">is</span> <span m="225467">suspended</span> <span m="225940">until</span> <span m="226413">the</span> <span m="226886">LOCK</span> <span m="227359">value</span> <span m="227832">is</span> <span m="228305">non-zero.</span></p>
+<p><span m="228779">When</span> <span m="229115">the</span> <span m="229451">process</span> <span m="229788">completes</span> <span m="230124">execution</span> <span m="230461">of</span> <span m="230797">the</span> <span m="231134">critical</span> <span m="231470">section,</span> <span m="231806">it</span> <span m="232143">releases</span> <span m="232479">the</span> <span m="232816">LOCK</span> <span m="233152">with</span> <span m="233489">a</span> <span m="233867">call</span> <span m="234246">to</span> <span m="234624">SIGNAL,</span> <span m="235003">which</span> <span m="235382">will</span> <span m="235760">allow</span> <span m="236139">other</span> <span m="236518">processes</span> <span m="236896">to</span> <span m="237275">enter</span> <span m="237654">the</span> <span m="238032">critical</span> <span m="238411">section.</span></p>
+<p><span m="238790">If</span> <span m="239078">there</span> <span m="239367">are</span> <span m="239656">multiple</span> <span m="239944">WAITing</span> <span m="240233">processes,</span> <span m="240522">only</span> <span m="240810">one</span> <span m="241099">will</span> <span m="241388">be</span> <span m="241676">able</span> <span m="241965">to</span> <span m="242254">acquire</span> <span m="242542">the</span> <span m="242831">lock,</span> <span m="243120">and</span> <span m="243409">the</span> <span m="243743">others</span> <span m="244077">will</span> <span m="244412">still</span> <span m="244746">have</span> <span m="245081">to</span> <span m="245415">wait</span> <span m="245750">their</span> <span m="246084">turn.</span></p>
+<p><span m="246419">Used</span> <span m="246827">in</span> <span m="247236">this</span> <span m="247644">manner,</span> <span m="248053">semaphores</span> <span m="248461">are</span> <span m="248870">implementing</span> <span m="249278">a</span> <span m="249687">mutual</span> <span m="250095">exclusion</span> <span m="250504">constraint,</span> <span m="250912">i.e.,</span> <span m="251321">there's</span> <span m="251730">a</span> <span m="252178">guarantee</span> <span m="252626">that</span> <span m="253074">two</span> <span m="253522">executions</span> <span m="253970">of</span> <span m="254419">the</span> <span m="254867">critical</span> <span m="255315">section</span> <span m="255763">cannot</span> <span m="256211">overlap.</span></p>
+<p><span m="256660">Note</span> <span m="256962">that</span> <span m="257265">if</span> <span m="257567">multiple</span> <span m="257870">processes</span> <span m="258172">need</span> <span m="258475">to</span> <span m="258777">execute</span> <span m="259080">the</span> <span m="259382">critical</span> <span m="259685">section,</span> <span m="259987">they</span> <span m="260290">may</span> <span m="260592">run</span> <span m="260895">in</span> <span m="261197">any</span> <span m="261500">order</span> <span m="261997">and</span> <span m="262495">the</span> <span m="262992">only</span> <span m="263490">guarantee</span> <span m="263987">is</span> <span m="264485">that</span> <span m="264982">their</span> <span m="265480">executions</span> <span m="265977">will</span> <span m="266475">not</span> <span m="266972">overlap.</span></p>
+<p><span m="267470">There</span> <span m="267960">are</span> <span m="268450">some</span> <span m="268940">interesting</span> <span m="269430">engineering</span> <span m="269920">issues</span> <span m="270410">to</span> <span m="270900">consider.</span></p>
+<p><span m="271390">There's</span> <span m="271710">the</span> <span m="272031">question</span> <span m="272352">of</span> <span m="272672">the</span> <span m="272993">granularity</span> <span m="273314">of</span> <span m="273634">the</span> <span m="273955">lock,</span> <span m="274276">i.e.,</span> <span m="274596">what</span> <span m="274917">shared</span> <span m="275238">data</span> <span m="275558">is</span> <span m="275879">controlled</span> <span m="276200">by</span> <span m="276653">the</span> <span m="277106">lock?</span></p>
+<p><span m="277560">In</span> <span m="277887">our</span> <span m="278215">bank</span> <span m="278542">example,</span> <span m="278870">should</span> <span m="279197">there</span> <span m="279525">be</span> <span m="279852">one</span> <span m="280180">lock</span> <span m="280507">controlling</span> <span m="280835">access</span> <span m="281162">to</span> <span m="281490">the</span> <span m="281817">balance</span> <span m="282145">for</span> <span m="282472">all</span> <span m="282800">accounts?</span></p>
+<p><span m="283890">That</span> <span m="284204">would</span> <span m="284518">mean</span> <span m="284833">that</span> <span m="285147">no</span> <span m="285461">one</span> <span m="285776">could</span> <span m="286090">access</span> <span m="286405">any</span> <span m="286719">balance</span> <span m="287033">while</span> <span m="287348">a</span> <span m="287662">transaction</span> <span m="287976">was</span> <span m="288291">in</span> <span m="288605">progress.</span></p>
+<p><span m="288920">That</span> <span m="289221">would</span> <span m="289522">mean</span> <span m="289824">that</span> <span m="290125">transactions</span> <span m="290427">accessing</span> <span m="290728">different</span> <span m="291030">accounts</span> <span m="291331">would</span> <span m="291632">have</span> <span m="291934">to</span> <span m="292235">run</span> <span m="292537">one</span> <span m="292838">after</span> <span m="293140">the</span> <span m="293632">other</span> <span m="294125">even</span> <span m="294617">though</span> <span m="295110">they're</span> <span m="295602">accessing</span> <span m="296095">different</span> <span m="296587">data.</span></p>
+<p><span m="297080">So</span> <span m="297463">one</span> <span m="297846">lock</span> <span m="298229">for</span> <span m="298612">all</span> <span m="298995">the</span> <span m="299378">balances</span> <span m="299761">would</span> <span m="300144">introduce</span> <span m="300527">unnecessary</span> <span m="300910">precedence</span> <span m="301293">constraints,</span> <span m="301676">greatly</span> <span m="302060">slowing</span> <span m="302594">the</span> <span m="303128">rate</span> <span m="303663">at</span> <span m="304197">which</span> <span m="304732">transactions</span> <span m="305266">could</span> <span m="305801">be</span> <span m="306335">processed.</span></p>
+<p><span m="306870">Since</span> <span m="307218">the</span> <span m="307566">guarantee</span> <span m="307915">we</span> <span m="308263">need</span> <span m="308612">is</span> <span m="308960">that</span> <span m="309309">we</span> <span m="309657">shouldn't</span> <span m="310006">permit</span> <span m="310354">multiple</span> <span m="310703">simultaneous</span> <span m="311051">transactions</span> <span m="311400">on</span> <span m="311663">the</span> <span m="311926">same</span> <span m="312189">account,</span> <span m="312452">it</span> <span m="312715">would</span> <span m="312978">make</span> <span m="313241">more</span> <span m="313504">sense</span> <span m="313767">to</span> <span m="314030">have</span> <span m="314293">a</span> <span m="314556">separate</span> <span m="314820">lock</span> <span m="315146">for</span> <span m="315472">each</span> <span m="315798">account,</span> <span m="316124">and</span> <span m="316450">change</span> <span m="316776">the</span> <span m="317102">Debit</span> <span m="317428">code</span> <span m="317754">to</span> <span m="318080">acquire</span> <span m="318406">the</span> <span m="318732">account's</span> <span m="319058">lock</span> <span m="319384">before</span> <span m="319710">proceeding.</span></p>
+<p><span m="321790">That</span> <span m="322215">will</span> <span m="322640">only</span> <span m="323065">delay</span> <span m="323490">transactions</span> <span m="323915">that</span> <span m="324340">truly</span> <span m="324765">overlap,</span> <span m="325190">an</span> <span m="325615">important</span> <span m="326040">efficiency</span> <span m="326465">consideration</span> <span m="326890">for</span> <span m="327349">a</span> <span m="327808">large</span> <span m="328267">system</span> <span m="328726">processing</span> <span m="329185">many</span> <span m="329645">thousands</span> <span m="330104">of</span> <span m="330563">mostly</span> <span m="331022">non-overlapping</span> <span m="331481">transactions</span> <span m="331940">each</span> <span m="332400">second.</span></p>
+<p><span m="333400">Of</span> <span m="333860">course,</span> <span m="334321">having</span> <span m="334782">per-account</span> <span m="335243">locks</span> <span m="335704">would</span> <span m="336165">mean</span> <span m="336626">a</span> <span m="337087">lot</span> <span m="337548">of</span> <span m="338009">locks!</span></p>
+<p><span m="338470">If</span> <span m="338753">that's</span> <span m="339036">a</span> <span m="339319">concern,</span> <span m="339602">we</span> <span m="339885">can</span> <span m="340168">adopt</span> <span m="340451">a</span> <span m="340735">compromise</span> <span m="341018">strategy</span> <span m="341301">of</span> <span m="341584">having</span> <span m="341867">locks</span> <span m="342150">that</span> <span m="342433">protect</span> <span m="342716">groups</span> <span m="343000">of</span> <span m="343429">accounts,</span> <span m="343858">e.g.,</span> <span m="344287">accounts</span> <span m="344716">with</span> <span m="345146">same</span> <span m="345575">last</span> <span m="346004">three</span> <span m="346433">digits</span> <span m="346863">in</span> <span m="347292">the</span> <span m="347721">account</span> <span m="348150">number.</span></p>
+<p><span m="348580">That</span> <span m="348889">would</span> <span m="349198">mean</span> <span m="349508">we'd</span> <span m="349817">only</span> <span m="350126">need</span> <span m="350436">1000</span> <span m="350745">locks,</span> <span m="351054">which</span> <span m="351364">would</span> <span m="351673">allow</span> <span m="351982">up</span> <span m="352292">to</span> <span m="352601">1000</span> <span m="352910">transactions</span> <span m="353220">to</span> <span m="354136">happen</span> <span m="355053">simultaneously.</span></p>
+<p><span m="355970">The</span> <span m="356228">notion</span> <span m="356487">of</span> <span m="356746">transactions</span> <span m="357005">on</span> <span m="357263">shared</span> <span m="357522">data</span> <span m="357781">is</span> <span m="358040">so</span> <span m="358298">useful</span> <span m="358557">that</span> <span m="358816">we</span> <span m="359075">often</span> <span m="359333">use</span> <span m="359592">a</span> <span m="359851">separate</span> <span m="360110">system</span> <span m="360551">called</span> <span m="360992">a</span> <span m="361433">database</span> <span m="361874">that</span> <span m="362315">provides</span> <span m="362756">the</span> <span m="363197">desired</span> <span m="363638">functionality.</span></p>
+<p><span m="364080">Database</span> <span m="364543">systems</span> <span m="365006">are</span> <span m="365470">engineered</span> <span m="365933">to</span> <span m="366396">provide</span> <span m="366860">low-latency</span> <span m="367323">access</span> <span m="367786">to</span> <span m="368250">shared</span> <span m="368713">data,</span> <span m="369176">providing</span> <span m="369640">the</span> <span m="370517">appropriate</span> <span m="371395">transactional</span> <span m="372272">semantics.</span></p>
+<p><span m="373150">The</span> <span m="373536">design</span> <span m="373922">and</span> <span m="374309">implementation</span> <span m="374695">of</span> <span m="375081">databases</span> <span m="375468">and</span> <span m="375854">transactions</span> <span m="376240">is</span> <span m="376627">pretty</span> <span m="377013">interesting.</span></p>
+<p><span m="377400">To</span> <span m="377850">follow</span> <span m="378301">up,</span> <span m="378752">I</span> <span m="379203">recommend</span> <span m="379654">reading</span> <span m="380105">about</span> <span m="380556">databases</span> <span m="381007">on</span> <span m="381458">the</span> <span m="381909">web.</span></p>
+<p><span m="382360">Returning</span> <span m="382746">to</span> <span m="383132">our</span> <span m="383518">producer/consumer</span> <span m="383904">example,</span> <span m="384290">we</span> <span m="384676">see</span> <span m="385063">that</span> <span m="385449">if</span> <span m="385835">multiple</span> <span m="386221">producers</span> <span m="386607">are</span> <span m="386993">trying</span> <span m="387380">to</span> <span m="387661">insert</span> <span m="387942">characters</span> <span m="388223">into</span> <span m="388504">the</span> <span m="388785">buffer</span> <span m="389066">at</span> <span m="389347">the</span> <span m="389628">same</span> <span m="389909">time,</span> <span m="390190">it's</span> <span m="390526">possible</span> <span m="390862">that</span> <span m="391198">their</span> <span m="391535">execution</span> <span m="391871">may</span> <span m="392207">overlap</span> <span m="392543">in</span> <span m="392880">a</span> <span m="393216">way</span> <span m="393552">that</span> <span m="393888">causes</span> <span m="394225">characters</span> <span m="394561">to</span> <span m="394897">be</span> <span m="395233">overwritten</span> <span m="395570">and/or</span> <span m="396272">the</span> <span m="396975">index</span> <span m="397678">to</span> <span m="398381">be</span> <span m="399084">improperly</span> <span m="399787">incremented.</span></p>
+<p><span m="400490">We</span> <span m="400815">just</span> <span m="401140">saw</span> <span m="401465">this</span> <span m="401790">bug</span> <span m="402115">in</span> <span m="402440">the</span> <span m="402765">bank</span> <span m="403090">example:</span> <span m="403415">the</span> <span m="403740">producer</span> <span m="404065">code</span> <span m="404390">contains</span> <span m="404715">a</span> <span m="405040">critical</span> <span m="405365">section</span> <span m="405691">of</span> <span m="405984">code</span> <span m="406278">that</span> <span m="406572">accesses</span> <span m="406865">the</span> <span m="407159">FIFO</span> <span m="407453">buffer</span> <span m="407746">and</span> <span m="408040">we</span> <span m="408334">need</span> <span m="408627">to</span> <span m="408921">ensure</span> <span m="409215">that</span> <span m="409508">the</span> <span m="409802">critical</span> <span m="410096">section</span> <span m="410390">is</span> <span m="411260">executed</span> <span m="412130">atomically.</span></p>
+<p><span m="413000">Here</span> <span m="413362">we've</span> <span m="413725">added</span> <span m="414088">a</span> <span m="414451">third</span> <span m="414814">semaphore,</span> <span m="415177">called</span> <span m="415540">LOCK,</span> <span m="415902">to</span> <span m="416265">implement</span> <span m="416628">the</span> <span m="416991">necessary</span> <span m="417354">mutual</span> <span m="417717">exclusion</span> <span m="418080">constraint</span> <span m="418531">for</span> <span m="418982">the</span> <span m="419434">critical</span> <span m="419885">section</span> <span m="420337">of</span> <span m="420788">code</span> <span m="421240">that</span> <span m="421691">inserts</span> <span m="422142">characters</span> <span m="422594">into</span> <span m="423045">the</span> <span m="423497">FIFO</span> <span m="423948">buffer.</span></p>
+<p><span m="424400">With</span> <span m="424770">this</span> <span m="425140">modification,</span> <span m="425510">the</span> <span m="425880">system</span> <span m="426250">will</span> <span m="426620">now</span> <span m="426990">work</span> <span m="427360">correctly</span> <span m="427730">when</span> <span m="428100">there</span> <span m="428470">are</span> <span m="428840">multiple</span> <span m="429210">producer</span> <span m="429580">processes.</span></p>
+<p><span m="430580">There's</span> <span m="430855">a</span> <span m="431131">similar</span> <span m="431406">issue</span> <span m="431682">with</span> <span m="431958">multiple</span> <span m="432233">consumers,</span> <span m="432509">so</span> <span m="432785">we've</span> <span m="433060">used</span> <span m="433336">the</span> <span m="433611">same</span> <span m="433887">LOCK</span> <span m="434163">to</span> <span m="434438">protect</span> <span m="434714">the</span> <span m="434990">critical</span> <span m="435419">section</span> <span m="435848">for</span> <span m="436277">reading</span> <span m="436706">from</span> <span m="437135">the</span> <span m="437564">buffer</span> <span m="437993">in</span> <span m="438422">the</span> <span m="438851">RCV</span> <span m="439280">code.</span></p>
+<p><span m="439710">Using</span> <span m="440102">the</span> <span m="440495">same</span> <span m="440888">LOCK</span> <span m="441281">for</span> <span m="441674">producers</span> <span m="442067">and</span> <span m="442460">consumers</span> <span m="442852">will</span> <span m="443245">work,</span> <span m="443638">but</span> <span m="444031">does</span> <span m="444424">introduce</span> <span m="444817">unnecessary</span> <span m="445210">precedence</span> <span m="445754">constraints</span> <span m="446298">since</span> <span m="446843">producers</span> <span m="447387">and</span> <span m="447932">consumers</span> <span m="448476">use</span> <span m="449021">different</span> <span m="449565">indices,</span> <span m="450110">i.e.,</span> <span m="450672">IN</span> <span m="451235">for</span> <span m="451797">producers</span> <span m="452360">and</span> <span m="452922">OUT</span> <span m="453485">for</span> <span m="454047">consumers.</span></p>
+<p><span m="454610">To</span> <span m="454993">solve</span> <span m="455377">this</span> <span m="455761">problem</span> <span m="456145">we</span> <span m="456528">could</span> <span m="456912">use</span> <span m="457296">two</span> <span m="457680">locks:</span> <span m="458063">one</span> <span m="458447">for</span> <span m="458831">producers</span> <span m="459215">and</span> <span m="459598">one</span> <span m="459982">for</span> <span m="460366">consumers.</span></p>
+<p><span m="460750">Semaphores</span> <span m="461038">are</span> <span m="461327">a</span> <span m="461616">pretty</span> <span m="461904">handy</span> <span m="462193">swiss</span> <span m="462482">army</span> <span m="462770">knife</span> <span m="463059">when</span> <span m="463348">it</span> <span m="463636">comes</span> <span m="463925">to</span> <span m="464214">dealing</span> <span m="464502">with</span> <span m="464791">synchronization</span> <span m="465080">issues.</span></p>
+<p><span m="466400">When</span> <span m="466763">WAIT</span> <span m="467127">and</span> <span m="467490">SIGNAL</span> <span m="467854">appear</span> <span m="468217">in</span> <span m="468581">different</span> <span m="468945">processes,</span> <span m="469308">the</span> <span m="469672">semaphore</span> <span m="470035">ensures</span> <span m="470399">the</span> <span m="470762">correct</span> <span m="471126">execution</span> <span m="471490">timing</span> <span m="472333">between</span> <span m="473176">processes.</span></p>
+<p><span m="474020">In</span> <span m="474323">our</span> <span m="474626">example,</span> <span m="474929">we</span> <span m="475232">used</span> <span m="475535">two</span> <span m="475838">semaphores</span> <span m="476141">to</span> <span m="476445">ensure</span> <span m="476748">that</span> <span m="477051">consumers</span> <span m="477354">can't</span> <span m="477657">read</span> <span m="477960">from</span> <span m="478263">an</span> <span m="478566">empty</span> <span m="478870">buffer</span> <span m="479407">and</span> <span m="479944">that</span> <span m="480481">producers</span> <span m="481018">can't</span> <span m="481555">write</span> <span m="482092">into</span> <span m="482629">a</span> <span m="483166">full</span> <span m="483703">buffer.</span></p>
+<p><span m="484240">We</span> <span m="484595">also</span> <span m="484951">used</span> <span m="485306">semaphores</span> <span m="485662">to</span> <span m="486018">ensure</span> <span m="486373">that</span> <span m="486729">execution</span> <span m="487085">of</span> <span m="487440">critical</span> <span m="487796">sections</span> <span m="488151">--</span> <span m="488507">in</span> <span m="488863">our</span> <span m="489218">example,</span> <span m="489574">updates</span> <span m="489930">of</span> <span m="490225">the</span> <span m="490521">indices</span> <span m="490817">IN</span> <span m="491113">and</span> <span m="491409">OUT</span> <span m="491705">--</span> <span m="492000">were</span> <span m="492296">guaranteed</span> <span m="492592">to</span> <span m="492888">be</span> <span m="493184">atomic.</span></p>
+<p><span m="493480">In</span> <span m="493806">other</span> <span m="494133">words,</span> <span m="494460">that</span> <span m="494787">the</span> <span m="495114">sequence</span> <span m="495441">of</span> <span m="495768">reads</span> <span m="496095">and</span> <span m="496421">writes</span> <span m="496748">needed</span> <span m="497075">to</span> <span m="497402">increment</span> <span m="497729">a</span> <span m="498056">shared</span> <span m="498383">index</span> <span m="498710">would</span> <span m="499042">not</span> <span m="499375">be</span> <span m="499708">interrupted</span> <span m="500040">by</span> <span m="500373">another</span> <span m="500706">process</span> <span m="501038">between</span> <span m="501371">the</span> <span m="501704">initial</span> <span m="502036">read</span> <span m="502369">of</span> <span m="502702">the</span> <span m="503034">index</span> <span m="503367">and</span> <span m="503700">the</span> <span m="503963">final</span> <span m="504226">write.</span></p>
+</div>
+        <div id="vid_index" itemprop="description" class="tabContent hide">
+<h2 class="subhead">Free Downloads</h2>
+<h3 class="subsubhead">Video</h3>
+<ul>
+<li>Internet Archive (<a href="https://archive.org/download/MIT6.004S17/MIT6_004S17_19-02-03_300k.mp4">MP4 - 11MB</a>)</li>
+</ul>
+<br>
+<h3 class="subsubhead">Caption</h3>
+<ul>
+<li>English-US (<a href="../../../../../contents/c19/c19s2/c19s2v3/atomic-transactions-8-25-/776ZuSOo6hg.srt">SRT</a>)</li>
+</ul>
+</div>
+    
+   </div>  
+
+
+
+
+      					 
+        <div class="" id="parent-fieldname-bottom_html_area">
+            
+            
+        </div>
+    
+               </main><!--Course_inner_media tag close -->
+           		</div>
+<!--Course_wrapper tag close -->
+            </div>
+<!--left tag close -->
+            <aside id="right">
+                <!--Begin Right Portion -->
+                    <div>
+    
+
+
+
+</div>
+
+                	<div>
+    
+
+
+
+</div>
+
+
+        <div class="" id="parent-fieldname-rsi_top_html_area">
+            
+            
+        </div>
+    
+
+<!-- RSI google ad space-->
+
+
+
+<div id="google_ads">    
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script type="text/javascript">var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];</script>
+    <script type="text/javascript">
+googletag.cmd.push(function() {googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_A_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_A_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_B_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_B_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_C_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_C_DL').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+ googletag.enableServices();
+});</script>
+    <script language="javascript" type="text/javascript">
+googletag.cmd.push(function() {googletag.pubads().set("TYPE","HOUSE");googletag.pubads().set("DEPARTMENT","6");googletag.pubads().set("CRS_BEG2","00");googletag.pubads().set("CRS_END","4");googletag.pubads().set("SESSION","S");googletag.pubads().set("YEAR","17");})
+</script>
+    
+    <div id="VIDEO_INDIVIDUAL_SLOT_A_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_A_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_B_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_B_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_C_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_C_DL'); });</script>
+    </div>
+</div>
+
+<!-- End RSI ads--> 
+
+
+<div>
+    
+
+
+
+</div>
+
+            </aside><!--Right div close -->
+            <div class="clear"></div>
+        </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

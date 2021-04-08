@@ -1,0 +1,403 @@
+1
+00:00:00,500 --> 00:00:05,000
+User-mode programs need to communicate with
+the OS to request service or get access to
+
+2
+00:00:05,000 --> 00:00:08,370
+useful OS data like the time of day.
+
+3
+00:00:08,370 --> 00:00:12,889
+But if they're running in a different MMU
+context than the OS, they don't have direct
+
+4
+00:00:12,889 --> 00:00:15,200
+access to OS code and data.
+
+5
+00:00:15,200 --> 00:00:20,910
+And that might be bad idea in any case:
+the OS is usually responsible for implementing
+
+6
+00:00:20,910 --> 00:00:26,300
+security and access policies and other users
+of the system would be upset if any random
+
+7
+00:00:26,300 --> 00:00:31,070
+user program could circumvent those protections.
+
+8
+00:00:31,070 --> 00:00:36,330
+What's needed is the ability for user-mode
+programs to call OS code at specific entry
+
+9
+00:00:36,330 --> 00:00:43,300
+points, using registers or the user-mode virtual
+memory to send or receive information.
+
+10
+00:00:43,300 --> 00:00:49,160
+We'd use these "supervisor calls" to access
+a well-documented and secure OS application
+
+11
+00:00:49,160 --> 00:00:50,350
+programming interface (API).
+
+12
+00:00:50,350 --> 00:00:57,260
+An example of such an interface is POSIX (https://en.wikipedia.org/wiki/POSIX),
+a standard interface implemented by many Unix-like
+
+13
+00:00:57,260 --> 00:01:00,170
+operating systems.
+
+14
+00:01:00,170 --> 00:01:05,630
+As it turns out, we have a way of transferring
+control from a user-mode program to a specific
+
+15
+00:01:05,630 --> 00:01:10,550
+OS handler - just execute an illegal instruction!
+
+16
+00:01:10,550 --> 00:01:15,400
+We'll adopt the convention of using illegal
+instructions with an opcode field of 1 to
+
+17
+00:01:15,400 --> 00:01:17,840
+serve as supervisor calls.
+
+18
+00:01:17,840 --> 00:01:23,680
+The low order bits of these SVC instructions
+will contain an index indicating which SVC
+
+19
+00:01:23,680 --> 00:01:25,230
+service we're trying to access.
+
+20
+00:01:25,230 --> 00:01:29,210
+Let's see how this would work.
+
+21
+00:01:29,210 --> 00:01:32,520
+Here's our user-mode/kernel-mode diagram again.
+
+22
+00:01:32,520 --> 00:01:37,990
+Note that the user-mode programs contain supervisor
+calls with different indices, which when executed
+
+23
+00:01:37,990 --> 00:01:44,049
+are intended to serve as requests for different
+OS services.
+
+24
+00:01:44,049 --> 00:01:50,360
+When an SVC instruction is executed, the hardware
+detects the opcode field of 1 as an illegal
+
+25
+00:01:50,360 --> 00:01:55,079
+instruction and triggers an exception that
+runs the OS IllOp handler, as we saw in the
+
+26
+00:01:55,079 --> 00:01:57,270
+previous segment.
+
+27
+00:01:57,270 --> 00:02:02,310
+The handler saves the process state in the
+temporary storage area, then dispatches to
+
+28
+00:02:02,310 --> 00:02:06,550
+the appropriate handler based on the opcode
+field.
+
+29
+00:02:06,550 --> 00:02:12,200
+This handler can access the user's registers
+in the temporary storage area, or using the
+
+30
+00:02:12,200 --> 00:02:18,600
+appropriate OS subroutines can access the
+contents of any user-mode virtual address.
+
+31
+00:02:18,600 --> 00:02:23,250
+If information is to be returned to the user,
+the return values can be stored in the temporary
+
+32
+00:02:23,250 --> 00:02:29,290
+storage area, overwriting, say, the saved
+contents of the user's R0 register.
+
+33
+00:02:29,290 --> 00:02:35,690
+Then, when the handler completes, the potentially-updated
+saved register values are reloaded into the
+
+34
+00:02:35,690 --> 00:02:40,230
+CPU registers
+and execution of the user-mode program resumes
+
+35
+00:02:40,230 --> 00:02:43,790
+at the instruction following the supervisor
+call.
+
+36
+00:02:43,790 --> 00:02:49,349
+In the previous segment we saw how the illegal
+instruction handler uses a dispatch table
+
+37
+00:02:49,349 --> 00:02:55,329
+to choose the appropriate sub-handler depending
+on the opcode field of the illegal instruction.
+
+38
+00:02:55,329 --> 00:03:01,480
+In this slide we see the sub-handler for SVC
+instructions, i.e., those with an opcode field
+
+39
+00:03:01,480 --> 00:03:03,070
+of 1.
+
+40
+00:03:03,070 --> 00:03:07,980
+This code uses the low-order bits of the instruction
+to access another dispatch table to select
+
+41
+00:03:07,980 --> 00:03:12,909
+the appropriate code for each of the eight
+possible SVCs.
+
+42
+00:03:12,909 --> 00:03:17,220
+Our Tiny OS only has a meagre selection of
+simple services.
+
+43
+00:03:17,220 --> 00:03:23,569
+A real OS would have SVCs for accessing files,
+dealing with network connections, managing
+
+44
+00:03:23,569 --> 00:03:27,590
+virtual memory, spawning new processes, and
+so on.
+
+45
+00:03:27,590 --> 00:03:32,970
+Here's the code for resuming execution of
+the user-mode process when the SVC handler
+
+46
+00:03:32,970 --> 00:03:37,099
+is done:
+simply restore the saved values for the registers
+
+47
+00:03:37,099 --> 00:03:43,849
+and JMP to resume execution at the instruction
+following the SVC instruction.
+
+48
+00:03:43,849 --> 00:03:49,310
+There are times when for some reason the SVC
+request cannot be completed and the request
+
+49
+00:03:49,310 --> 00:03:51,700
+should be retried in the future.
+
+50
+00:03:51,700 --> 00:03:58,370
+For example, the ReadCh SVC returns the next
+character typed by the user, but if no character
+
+51
+00:03:58,370 --> 00:04:03,050
+has yet been typed, the OS cannot complete
+the request at this time.
+
+52
+00:04:03,050 --> 00:04:09,951
+In this case, the SVC handler should branch
+to I_Wait, which arranges for the SVC instruction
+
+53
+00:04:09,951 --> 00:04:15,849
+to be re-executed next time this process runs
+and then calls Scheduler() to run the next
+
+54
+00:04:15,849 --> 00:04:17,279
+process.
+
+55
+00:04:17,279 --> 00:04:22,370
+This gives all the other processes a chance
+to run before the SVC is tried again, hopefully
+
+56
+00:04:22,370 --> 00:04:25,530
+this time successfully.
+
+57
+00:04:25,530 --> 00:04:30,470
+You can see that this code also serves as
+the implementation for two different SVCs!
+
+58
+00:04:30,470 --> 00:04:36,210
+A process can give up the remainder of its
+current execution time slice by calling the
+
+59
+00:04:36,210 --> 00:04:38,850
+Yield() SVC.
+
+60
+00:04:38,850 --> 00:04:44,380
+This simply causes the OS to call Scheduler(),
+suspending execution of the current process
+
+61
+00:04:44,380 --> 00:04:49,970
+until its next turn in the round-robin scheduling
+process.
+
+62
+00:04:49,970 --> 00:04:54,590
+And to stop execution, a process can call
+the Halt() SVC.
+
+63
+00:04:54,590 --> 00:04:59,060
+Looking at the implementation, we can see
+that "halt" is a bit of misnomer.
+
+64
+00:04:59,060 --> 00:05:04,750
+What really happens is that the system arranges
+to re-execute the Halt() SVC each time the
+
+65
+00:05:04,750 --> 00:05:11,030
+process is scheduled, which then causes the
+OS to schedule the next process for execution.
+
+66
+00:05:11,030 --> 00:05:17,250
+The process appears to halt since the instruction
+following the Halt() SVC is never executed.
+
+67
+00:05:17,250 --> 00:05:20,830
+Adding new SVC handlers is straightforward.
+
+68
+00:05:20,830 --> 00:05:25,940
+First we need to define new SVC macros for
+use in user-mode programs.
+
+69
+00:05:25,940 --> 00:05:32,110
+In this example, we're defining SVCs for getting
+and setting the time of day.
+
+70
+00:05:32,110 --> 00:05:36,900
+Since these are the eighth and ninth SVCs,
+we need to make a small adjustment to the
+
+71
+00:05:36,900 --> 00:05:42,690
+SVC dispatch code and then add the appropriate
+entries to the end of the dispatch table.
+
+72
+00:05:42,690 --> 00:05:46,880
+The code for the new handlers is equally straightforward.
+
+73
+00:05:46,880 --> 00:05:52,300
+The handler can access the value of the program's
+R0 by looking at the correct entry in the
+
+74
+00:05:52,300 --> 00:05:55,710
+UserMState temporary holding area.
+
+75
+00:05:55,710 --> 00:06:01,660
+It just takes a few instructions to implement
+the desired operations.
+
+76
+00:06:01,660 --> 00:06:07,100
+The SVC mechanism provides controlled access
+to OS services and data.
+
+77
+00:06:07,100 --> 00:06:12,759
+As we'll see in a few lectures, it'll be useful
+that SVC handlers can't be interrupted since
+
+78
+00:06:12,759 --> 00:06:17,110
+they are running in supervisor mode where
+interrupts are disabled.
+
+79
+00:06:17,110 --> 00:06:24,259
+So, for example, if we need to increment a
+value in main memory, using a LD/ADDC/ST sequence,
+
+80
+00:06:24,259 --> 00:06:29,740
+but we want to ensure no other process execution
+intervenes between the LD and the ST,
+
+81
+00:06:29,740 --> 00:06:37,640
+we can encapsulate the required functionality
+as an SVC, which is guaranteed to be uninterruptible.
+
+82
+00:06:37,640 --> 00:06:42,139
+We've made an excellent start at exploring
+the implementation of a simple time-shared
+
+83
+00:06:42,139 --> 00:06:43,770
+operating system.
+
+84
+00:06:43,770 --> 00:06:48,699
+We'll continue the exploration in the next
+lecture when we see how the OS deals with
+
+85
+00:06:48,699 --> 00:06:50,860
+external input/output devices.

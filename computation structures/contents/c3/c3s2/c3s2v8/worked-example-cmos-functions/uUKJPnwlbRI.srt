@@ -1,0 +1,88 @@
+1
+00:00:00,799 --> 00:00:07,809
+CMOS gates consist of an output node connected
+to a pull-up circuit that contains only PFETs
+
+2
+00:00:07,809 --> 00:00:11,769
+and a pull-down circuit that contains only
+NFETs.
+
+3
+00:00:11,769 --> 00:00:17,289
+In our example, our gate computes F(A,B,C,D).
+
+4
+00:00:17,289 --> 00:00:22,330
+It is observed that F(1,0,1,1) = 1.
+
+5
+00:00:22,330 --> 00:00:29,470
+With that information, what can you say about
+the value of F(1,0,0,0)?
+
+6
+00:00:29,470 --> 00:00:35,489
+All CMOS gates are inverting which means that
+if all your inputs are 0, then only the PFETs
+
+7
+00:00:35,489 --> 00:00:39,629
+in the pull-up are on, and so the output = 1.
+
+8
+00:00:39,629 --> 00:00:45,250
+If all your inputs are 1, then only the NFETs
+in the pull-down circuitry are on, and the
+
+9
+00:00:45,250 --> 00:00:47,550
+output = 0.
+
+10
+00:00:47,550 --> 00:00:56,870
+If we are told that F(1,0,1,1) = 1 and we
+want to find out what F(1,0,0,0) is, we notice
+
+11
+00:00:56,870 --> 00:01:01,510
+that the difference between the first set
+of inputs and the second is that the third
+
+12
+00:01:01,510 --> 00:01:08,270
+and fourth inputs have been changed from 1
+to 0 while the others remain unchanged.
+
+13
+00:01:08,270 --> 00:01:14,620
+Changing an input from 1 to 0 will turn more
+PFETs on, and more NFETs off, which means
+
+14
+00:01:14,620 --> 00:01:20,160
+that there are more possibilities of the pull-up
+circuitry to pull the output up to high, and
+
+15
+00:01:20,160 --> 00:01:25,310
+fewer chances of the pull-down circuitry pulling
+the output down to 0.
+
+16
+00:01:25,310 --> 00:01:32,180
+Since, we were already producing a high output
+with even fewer PFETs turned on, we are guaranteed
+
+17
+00:01:32,180 --> 00:01:38,590
+that by turning more PFETs on and turning
+some NFETs off, the only thing we can do is
+
+18
+00:01:38,590 --> 00:01:40,910
+maintain our high output.
+
+19
+00:01:40,910 --> 00:01:44,440
+So F(1,0,0,0) = 1.

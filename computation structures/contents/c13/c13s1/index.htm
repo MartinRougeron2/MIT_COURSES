@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>13.1 Annotated Slides | 13 Building the Beta | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="13.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 13.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c13/c13s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c13/index.htm">13 Building the Beta</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            13.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            13.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="selected">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c13/index.htm">&lt;<span>Building the Beta</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c13/c13s1/index.htm">13.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c13/c13s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L13: Building the Beta</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">CPU Design Tradeoffs</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Processor Performance</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Reminder: Beta ISA</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Approach: Incremental Featurism</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Multi-ported Register File</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Register File Timing</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">ALU Instructions</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Instruction Fetch/Decode</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">ALU Op Datapath I</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">ALU Op Datapath II</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">ALU Operations (with constant) I</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">ALU Operations (with constant) II</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Load Instruction I</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Load Instruction II</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Store Instruction I</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Store Instruction II</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">JMP Instruction I</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">JMP Instruction II</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">BEQ/BNE Instructions I</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">BEQ/BNE Instructions II</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Load Relative Instruction</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">LDR Instruction I</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">LDR Instruction II</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">Exceptions</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">Exception Processing</a></li>     <li style="margin-bottom:0.1em;"><a href="#26">Exception Implementation</a></li>     <li style="margin-bottom:0.1em;"><a href="#27">Exceptions I</a></li>     <li style="margin-bottom:0.1em;"><a href="#28">Exceptions II</a></li>     <li style="margin-bottom:0.1em;"><a href="#29">Beta: Our “Final Answer”</a></li>     <li style="margin-bottom:0.1em;"><a href="#30">Control Logic</a></li>     <li style="margin-bottom:0.1em;"><a href="#31">Beta Inside!</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide02.png" alt=""></a></div> <p>Today we’re going to describe the datapath and control   logic needed to execute Beta instructions.  In an upcoming lab   assignment, we’ll ask you to build a working   implementation using our standard cell library.  When   you’re done, you’ll have designed and debugged a   32-bit reduced-instruction set computer!  Not bad...</p> <p>Before tackling a design task, it’s useful to understand   the goals for the design.  Functionality, of course; in our case   the correct execution of instructions from the Beta ISA.  But   there are other goals we should think about.</p> <p>An obvious goal is to maximize performance, as measured by the   number of instructions executed per second.  This is usually   expressed in MIPS, an acronym for “Millions of   Instructions Per Second”.  When the Intel 8080 was   introduced in 1974, it executed instructions at 0.29 MIPS or   290,000 instructions per second as measured by the Dhrystone   benchmark.  Modern multi-core processors are rated between   10,000 and 100,000 MIPS.</p> <p>Another goal might be to minimize the manufacturing cost, which   in integrated circuit manufacturing is proportional to the size   of the circuit.</p> <p>Or we might want have the best performance for a given price.   In our increasingly mobile world, the best performance per watt   might be an important goal.</p> <p>One of the interesting challenges in computer engineering is   deciding exactly how to balance performance against cost and   power efficiency.  Clearly the designers of the Apple Watch have   a different set of design goals then the designers of high-end   desktop computers.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide03.png" alt=""></a></div> <p>The performance of a processor is inversely proportional to the   length of time it takes to run a program.  The shorter the   execution time, the higher the performance.  The execution time   is determined by three factors.</p> <p>First, the number of instructions in the program.</p> <p>Second, the number of clock cycles our sequential circuit   requires to execute a particular instruction.  Complex   instructions, <i>e.g.</i>, adding two values from main memory,   may make a program shorter, but may also require many clock   cycles to perform the necessary memory and datapath   operations.</p> <p>Third, the amount of time needed for each clock cycle, as   determined by the propagation delay of the digital logic in the   datapath.</p> <p>So to increase the performance we could reduce the number of   instructions to be executed.  Or we can try to minimize the   number of clock cycles needed on the average to execute our   instructions.  There’s obviously a bit of a tradeoff   between these first two options: more computation per   instruction usually means it will take more time to execute the   instruction.  Or we can try to keep our logic simple, minimizing   its propagation delay in the hopes of having a short clock   period.</p> <p>Today we’ll focus on an implementation for the Beta ISA   that executes one instruction every clock cycle.  The   combinational paths in our circuit will be fairly long, but, as   we learned in Part 1 of the course, this gives us the   opportunity to use pipelining to increase our   implementation’s throughput.  We’ll talk about the   implementation of a pipelined processor in some upcoming   lectures.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide04.png" alt=""></a></div> <p>Here’s a quick refresher on the Beta ISA.  The Beta has   thirty-two 32-bit registers that hold values for use by the   datapath.  The first class of ALU instructions, which have 0b10   as the top 2 bits of the opcode field, perform an operation on   two register operands (Ra and Rb), storing the result back into   a specified destination register (Rc).  There’s a 6-bit   opcode field to specify the operation and three 5-bit register   fields to specify the registers to use as source and   destination.  The second class of ALU instructions, which have   0b11 in the top 2 bits of the opcode, perform the same set of   operations where the second operand is constant in the range   -32768 to +32767.</p> <p>The operations include arithmetic operations, comparisons,   boolean operations, and shifts.  In assembly language, we use a   “C” suffix added to the mnemonics shown here to   indicate that the second operand is a constant.</p> <p>This second instruction format is also used by the instructions   that access memory and change the normally sequential execution   order.</p> <p>The use of just two instruction formats will make it very easy   to build the logic responsible for translating the encoded   instructions into the signals needed to control the operation of   the datapath.  In fact, we’ll be able to use many of the   instruction bits as-is!</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide05.png" alt=""></a></div> <p>We’ll build our datapath incrementally, starting with the   logic needed to perform the ALU instructions, then add   additional logic to execute the memory and branch instructions.   Finally, we’ll need to add logic to handle what happens   when an exception occurs and execution has to be suspended   because the current instruction cannot be executed   correctly.</p> <p>We’ll be using the digital logic gates we learned about   in Part 1 of the course.  In particular, we’ll need   multi-bit registers to hold state information from one   instruction to the next.  Recall that these memory elements load   new values at the rising edge of the clock signal, then store   that value until the next rising clock edge.</p> <p>We’ll use a lot of multiplexers in our design to select   between alternative values in the datapath.</p> <p>The actual computations will be performed by the arithmetic and   logic unit (ALU) that we designed at the end of Part 1.  It has   logic to perform the arithmetic, comparison, boolean and shift   operations listed on the previous slide.  It takes in two 32-bit   operands and produces a 32-bit result.</p> <p>And, finally, we’ll use several different memory   components to implement register storage in the datapath and   also for main memory, where instructions and data are   stored.</p> <p>You might find it useful to review the chapters on   combinational and sequential logic in Part 1 of the course.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide06.png" alt=""></a></div> <p>The Beta ISA specifies thirty-two 32-bit registers as part of   the datapath.  These are shown as the magenta rectangles in the   diagram above.  These are implemented as load-enabled registers,   which have an EN signal that controls when the register is   loaded with a new value.  If EN is 1, the register will be   loaded from the D input at the next rising clock edge.  If EN is   0, the register is reloaded with its current value and hence its   value is unchanged.  It might seem easier to add enabling logic   to the clock signal, but this is almost never a good idea since   any glitches in that logic might generate false edges that would   cause the register to load a new value at the wrong time.   Always remember the mantra: NO GATED CLOCKS!</p> <p>There are multiplexers (shown underneath the registers) that   let us select a value from any of the 32 registers.  Since we   need two operands for the datapath logic, there are two such   multiplexers.  Their select inputs (RA1 and RA2) function as   addresses, determining which register values will be selected as   operands.  And, finally, there’s a decoder that determines   which of the 32 register load enables will be 1 based on the   5-bit WA input.</p> <p>For convenience, we’ll package all this functionality up   into a single component called a “register file”.   The register file has two read ports, which given a 5-bit   address input, deliver the selected register value on the   read-data ports.  The two read ports operate independently.   They can read from different registers or, if the addresses are   the same, read from the same register.</p> <p>The signals on the left of the register file include a 5-bit   value (WA) that selects a register to be written with the   specified 32-bit write data (WD).  If the write enable signal   (WE) is 1 at the rising edge of the clock (CLK) signal, the   selected register will be loaded with the supplied write   data.</p> <p>Note that in the BETA ISA, reading from register address 31   should always produce a zero value.  The register file has   internal logic to ensure that happens.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide07.png" alt=""></a></div> <p>Here’s a timing diagram that shows the register file in   operation.  To read a value from the register file, supply a   stable address input (RA) on one of read ports.  After the   register file’s propagation delay, the value of the   selected register will appear on the corresponding read data   port (RD).</p> <p>Not surprisingly, the register file write operation is very   similar to writing an ordinary D-register.  The write address   (WA), write data (WD) and write enable (WE) signals must all be   valid and stable for some specified setup time before the rising   edge of the clock.  And must remain stable and valid for the   specified hold time after the rising clock edge.  If those   timing constraints are met, the register file will reliably   update the value of the selected register.</p> <p>When a register value is written at the rising clock edge, if   that value is selected by a read address, the new data will   appear after the propagation delay on the corresponding data   port.  In other words, the read data value changes if either the   read address changes or the value of the selected register   changes.</p> <p>Can we read and write the same register in a single clock   cycle? Yes!  If the read address becomes valid at the beginning   of the cycle, the old value of the register will be appear on   the data port for the rest of the cycle.  Then, the write occurs   at the *end* of the cycle and the new register value will be   available in the next clock cycle.</p> <p>Okay, that’s a brief run-though of the components   we’ll be using.  Let’s get started on the   design!</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide08.png" alt=""></a></div> <p>Our first task is to work on the datapath logic needed to   execute ALU instructions with two register operands.  Each   instruction requires the same processing steps:</p> <p>Fetch, where the 32-bit encoded instruction is read from main   memory from the location specified by the program counter   (PC).</p> <p>Decode, where the opcode field (instruction bits [31:26]) is   used to determine the values for the datapath control   signals.</p> <p>Read, where the contents of the registers specified by the RA   and RB fields (instruction bits [20:16] and [15:11]) are read   from the register file.</p> <p>Execute, where the requested operation is performed on the two   operand values.  We’ll also need to compute the next value   for the PC.</p> <p>And Write-back, where the result of the operation is written to   the register file in the register specified by the RC field   (instruction bits [25:21]).</p> <p>The system’s clock signal is connected to the register   file and the PC register.  At the rising edge of the clock, the   new values computed during the Execute phase are written to   these registers.  The rising clock edge thus marks the end of   execution for the current instruction and the beginning of   execution for the next instruction.  The period of the   clock, <i>i.e.</i>, the time between rising clock edges, needs   to be long enough to accommodate the cumulative propagation   delay of the logic that implements the 5 steps described here.   Since one instruction is executed each clock cycle, the   frequency of the clock tells us the rate at which instructions   are executed.  If the clock period was 10ns, the clock frequency   would be 100 MHz and our Beta would be executing instructions at   100 MIPS!</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide09.png" alt=""></a></div> <p>Here’s a sketch showing the hardware needed for the Fetch   and Decode steps.</p> <p>The current value of the PC register is routed to main memory   as the address of the instruction to be fetched.</p> <p>For ALU instructions, the address of the next instruction is   simply the address of the current instruction plus 4.   There’s an adder dedicated to performing the   “PC+4” computation and that value is routed back to   be used as the next value of the PC.  We’ve also included   a MUX used to select the initial value for the PC when the RESET   signal is 1.</p> <p>After the memory propagation delay, the instruction bits   (ID[31:0]) are available and the processing steps can begin.   Some of the instruction fields can be used directly as-is.  To   determine the values for other control signals, we’ll need   some logic that computes their values from the bits of the   opcode field.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide10.png" alt=""></a></div> <p>Now let’s fill in the datapath logic needed to execute   ALU instructions with two register operands.  The instruction   bits for the 5-bit RA, RB and RC fields can be connected   directly to the appropriate address inputs of the register file.   The RA and RB fields supply the addresses for the two read ports   and the RC field supplies the address for the write port.</p> <p>The outputs of the read data ports are routed to the inputs of   the ALU to serve as the two operands.  The ALUFN control signals   tell the ALU what operation to perform.  These control signals   are determined by control logic from the 6-bit opcode field.   For specificity, let’s assume that the control logic is   implemented using a read-only memory (ROM), where the opcode   bits are used as the ROM’s address and the ROM’s   outputs are the control signals.  Since there are 6 opcode bits,   we’ll need \(2^6 = 64\) locations in the ROM.  We’ll   program the contents of the ROM to supply the correct control   signal values for each of the 64 possible opcodes.</p> <p>The output of the ALU is routed back to the write data port of   the register file, to be written into the RC register at the end   of the cycle.  We’ll need another control signal, WERF   (“write-enable register file”), that should have the   value 1 when we want to write into the RC register.  Let me   introduce you to Werf, the 6.004 mascot, who, of course, is   named after her favorite control signal, which she’s   constantly mentioning.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide11.png" alt=""></a></div> <p>Let’s follow the flow of data as we execute the ALU   instruction.  After the instruction has been fetched, supplying   the RA and RB instruction fields, the RA and RB register values   appear on the read data ports of the register file.</p> <p>The control logic has decoded the opcode bits and supplied the   appropriate ALU function code.  You can find a listing of the   possible function codes in the upper right-hand corner of the   Beta Diagram handout.</p> <p>The result of the ALU’s computation is sent back to the   register file to be written into the RC register.  Of course,   we’ll need to set WERF to 1 to enable the write.</p> <p>Here we see one of the major advantages of a   reduced-instruction set computer architecture: the datapath   logic required for execution is very straightforward!</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide12.png" alt=""></a></div> <p>The other form of ALU instructions uses a constant as the   second ALU operand.  The 32-bit operand is formed by   sign-extending the 16-bit two’s complement constant stored   in the literal field (bits [15:0]) of the instruction.  In order   to select the sign-extended constant as the second operand, we   added a MUX to the datapath.  When its BSEL control signal is 0,   the output of the register file is selected as the operand.   When BSEL is 1, the sign-extended constant is selected as the   operand.  The rest of the datapath logic is the same as   before.</p> <p>Note that no logic gates are needed to perform sign-extension   — it’s all done with wiring!  To sign-extend a   two’s complement number, we just need to replicate the   high-order, or sign, bit as many times as necessary.  You might   find it useful to review the discussion of two’s   complement in Lecture 1 of Part 1 of the course.  So to form a   32-bit operand from a 16-bit constant, we just replicate   its high-order bit (ID[15]) sixteen times as we make the   connection to the BSEL MUX.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide13.png" alt=""></a></div> <p>During execution of ALU-with-constant instructions, the flow of   data is much as it was before.  The one difference is that the   control logic sets the BSEL control signal to 1, selecting the   sign-extended constant as the second ALU operand.</p> <p>As before, the control logic generates the appropriate ALU   function code and the output of the ALU is routed to the   register file to be written back to the RC register.</p> <p>Amazingly, this datapath is sufficient to execute most of the   instructions in the Beta ISA!  We just have the memory and   branch instruction left to implement.  That’s our next   task.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide14.png" alt=""></a></div> <p>The LD and ST instructions access main memory.  Note that it's   the same main memory that holds the instructions, even though   for drafting convenience we show it as two separate boxes in   our datapath diagram.  In the form we show it here, main memory   has three ports: two read ports for fetching instructions and   reading load data, and one write port used by the ST instruction   to write data into main memory.</p> <p>The address calculation is exactly the same computation as   performed by the ADDC instruction: the contents of the RA   register are added to the sign-extended 16-bit literal from the   low-order 16 bits of the instruction.  So we’ll simply   reuse the existing datapath hardware to compute the address.</p> <p>For the LD instruction the output of the ALU is routed to main   memory as the address of the location we wish to access.  After   the memory’s propagation delay, the contents of the   addressed location is returned by the memory and we need to   route that back to the register file to be written into the RC   register.</p> <p>The memory has two control signals: MOE (memory output enable),   which we set to 1 when we want to read a value from the memory.   And MWE (memory write enable) which is set to 1 when we want   main memory to store the value on its write data (WD) port into   the addressed memory location.</p> <p>We need to add another MUX to select which value to write back   to the register file: the output of the ALU or the data   returning from main memory.  We’ve used a 3-to-1 MUX and   we’ll see the use for the other MUX input when we get to   the implementation of branches and jumps.  The two-bit WDSEL   signal is used to select the source of the write-back value.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide15.png" alt=""></a></div> <p>Let’s follow the flow of data when executing the LD   instruction.  The ALU operands are chosen just as they are for   the ADDC instruction and the ALU is requested to perform an ADD   operation.</p> <p>The ALU result is connected to the address port of main memory,   whose control signals are set for a read operation.  The   WDSEL control signals are set to 2 to route the returning data   to the register file.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide16.png" alt=""></a></div> <p>Execution of the ST instruction is very similar to the   execution of the LD instruction, with one extra complication.   The value to be written to memory comes from the RC register,   but the RC instruction field is not connected a register file   read address.</p> <p>Happily, the RB register address isn’t being used by the   ST instruction since the second ALU operand comes from the   literal field.  So we’ll use a MUX to enable the RC field   to be selected as the address for the register file’s   second read port.  When the RA2SEL control signal is 0, the RB   field is selected as the address.  When RA2SEL is 1, the RC   field is selected.</p> <p>The output from the second read data port is connected to the   write data port of main memory.</p> <p>The ST instruction is the only instruction that does not write   a result into the register file.  So the WERF control signal   will be 0 when executing ST.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide17.png" alt=""></a></div> <p>Here’s the flow of data when executing ST.  The operands   are selected as for LD and the ALU performs the address   computation with the result sent to main memory as the   address.</p> <p>Meanwhile the RC field is selected as the address for the   second register file read port and the value from the RC   register becomes the write data for main memory.  By setting the   MWR control signal to 1, the main memory will write the WD data   into the selected memory location at the end of the cycle.</p> <p>The WERF control signal is set to zero since we won’t be   writing a value into the register file.  And, since we’re   not writing to the register file, we don’t care about the   value for the WDSEL signal.</p> <p>Of course, the logic will need to supply some value for WDSEL.   The “don’t care” annotation is telling the   logic designer that she’s welcome to supply whatever value   is most convenient.  This is particularly useful when using   Karnaugh maps to optimize the control logic, where the value can   be chosen as either 0 or 1, whichever results in the best   minimization of the logic equations.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide18.png" alt=""></a></div> <p>We’re on the home stretch now.  For all the instructions   up until now, the next instruction has come from the location   following the current instruction — hence the   “PC+4” logic.  Branches and JMPs change that by   altering the value in the PC.</p> <p>The JMP instruction simply takes the value in the RA register   and makes it the next PC value.  The PCSEL MUX in the upper   left-hand corner lets the control logic select the source of the   next PC value.  When PCSEL is 0, the incremented PC value is   chosen.  When PCSEL is 2, the value of the RA register is   chosen.  We’ll see how the other inputs to the PCSEL MUX   are used in just a moment.</p> <p>The JMP and branch instructions also cause the address of the   following instruction, <i>i.e.</i>, the PC+4 value, to be   written to the RC register.  When WDSEL is 0, the   “0” input of the WDSEL MUX is used to select the   PC+4 value as the write-back data.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide19.png" alt=""></a></div> <p>Here’s how the data flow works.  The output of the PC+4   adder is is routed to the register file and WERF is set to 1 to   enable that value to be written at the end of the cycle.</p> <p>Meanwhile, the value of RA register coming out of the register   file is connected to the “2” input of the PCSEL   MUX. So setting PCSEL to 2 will select the value in the RA   register as the next value for the PC.</p> <p>The rest of the control signals are “don’t   cares”, except, of course for the memory write enable   (MWR), which can never be “don’t care” lest we   cause an accidental write to some memory location.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide20.png" alt=""></a></div> <p>The branch instruction requires an additional adder to compute   the target address by adding the scaled offset from the   instruction’s literal field to the current PC+4 value.   Remember that we scale the offset by a factor of 4 to convert it   from the word offset stored in the literal to the byte offset   required for the PC.  The output of the offset adder becomes the   “1” input to the PCSEL MUX, where, if the branch is   taken, it will become the next value of the PC.</p> <p>Note that multiplying by 4 is easily accomplished by shifting   the literal two bits to the left, which inserts two 0-bits at   the low-order end of the value.  And, like before, the   sign-extension just requires replicating bit ID[15], in this   case fourteen times.  So implementing this complicated-looking   expression requires care in wiring up the input to the offset   adder, but no additional logic!</p> <p>We do need some logic to determine if we should branch or not.   The 32-bit NOR gate connected to the first read port of the   register file tests the value of the RA register.  The   NOR’s output Z will be 1 if all the bits of the RA   register value are 0, and 0 otherwise.</p> <p>The Z value can be used by the control logic to determine the   correct value for PCSEL.  If Z indicates the branch is taken,   PCSEL will be 1 and the output of the offset adder becomes the   next value of the PC.  If the branch is not taken, PCSEL will be   0 and execution will continue with the next instruction at   PC+4.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide21.png" alt=""></a></div> <p>As in the JMP instruction, the PC+4 value is routed to the   register file to be written into the RC register at end of the   cycle.</p> <p>Meanwhile, the value of Z is computed from the value of the RA   register while the branch offset adder computes the address of   the branch target.</p> <p>The output of the offset adder is routed to the PCSEL MUX where   the value of the 3-bit PCSEL control signal, computed by the   control logic based on Z, determines whether the next PC value   is the branch target or the PC+4 value.</p> <p>The remaining control signals are unused and set to their   default “don’t care” values.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide22.png" alt=""></a></div> <p>We have one last instruction to introduce: the LDR or   load-relative instruction.  LDR behaves like a normal LD   instruction except that the memory address is taken from the   branch offset adder.</p> <p>Why would it be useful to load a value from a location near the   LDR instruction?  Normally such addresses would refer to the   neighboring instructions, so why would we want to load the   binary encoding of an instruction into a register to be used as   data?</p> <p>The use case for LDR is accessing large constants that have to   be stored in main memory because they are too large to fit into   the 16-bit literal field of an instruction.  In the example   shown here, the compiled code needs to load the constant 123456.   So it uses an LDR instruction that refers to a nearby location   C1: that has been initialized with the required value.  Since   this read-only constant is part of the program, it makes sense   to store it with the instructions for the program, usually just   after the code for a procedure.  Note that we have to be careful   to place the storage location so that it won’t be executed   as an instruction!</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide23.png" alt=""></a></div> <p>To route the output of the offset adder to the main memory   address port, we’ll add ASEL MUX so we can select either   the RA register value (when ASEL=0) or the output of the offset   adder (when ASEL=1) as the first ALU operand.</p> <p>For LDR, ASEL will be 1, and we’ll then ask the ALU   compute the Boolean operation “A”, <i>i.e.</i>, the   boolean function whose output is just the value of the first   operand.  This value then appears on the ALU output, which is   connected to the main memory address port and the remainder of   the execution proceeds just like it did for LD.</p> <p>This seems a bit complicated! Mr. Blue has a good question: why   not just put the ASEL MUX on the wire leading to the main memory   address port and bypass the ALU altogether?</p> <p>The answer has to do with the amount of time needed to compute   the memory address.  If we moved the ASEL MUX here, the data   flow for LD and ST addresses would then pass through two MUXes:   the BSEL MUX and the ASEL MUX, slowing down the arrival of the   address by a small amount.  This may not seem like a big deal,   but the additional time would have to be added the clock period,   thus slowing down every instruction by a little bit.  When   executing billions of instructions, a little extra time on each   instruction really impacts the overall performance of the   processor.</p> <p>By placing the ASEL MUX where we did, its propagation delay   overlaps that of the BSEL MUX, so the increased functionality it   provides comes with no cost in performance.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide24.png" alt=""></a></div> <p>Here’s the data flow for the LDR instruction.  The output   of the offset adder is routed through the ASEL MUX to the ALU.   The ALU performs the Boolean computation “A” and the   result becomes the address for main memory.</p> <p>The returning data is routed through the WDSEL MUX so it can be   written into the RC register at the end of the cycle.</p> <p>The remaining control signals are given their usual default values.</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide25.png" alt=""></a></div> <p>One last bit of housekeeping, then we’re done!  What   should our hardware do if for some reason an instruction   can’t be executed?  For example, if a programming error   has led to trying to execute some piece of data as an   instruction and the opcode field doesn’t correspond to a   Beta instruction (a so-called “illop” or illegal   operation).  Or maybe the memory address is larger than the   actual amount of main memory.  Or maybe one of the operand values   is not acceptable, <i>e.g.</i>, if the B operand for a DIV   instruction is 0.</p> <p>In modern computers, the accepted strategy is cease execution   of the running program and transfer control to some error   handler code.  The error handler might store the program state   onto disk for later debugging.  Or, for an unimplemented but   legal opcode, it might emulate the missing instruction in   software and resume execution as if the instruction had been   implemented in hardware!</p> <p>There’s also the need to deal with external events, like   those associated with input and output.  Here we’d like to   interrupt the execution of the current program, run some code to   deal with the external event, then resume execution as if the   interrupt had never happened.</p> <p>To deal with these cases, we’ll add hardware to treat   exceptions like forced procedure calls to special code to handle   the situation, arranging to save the PC+4 value of the   interrupted program so that the handler can resume execution if   it wishes.</p> <p>This is a very powerful feature since it allows us to transfer   control to software to handle most any circumstance beyond the   capability of our modest hardware.  As we’ll see in Part 3   of the course, the exception hardware will be our key to   interfacing running programs to the operating system (OS) and to   allow the OS to deal with external events without any awareness   on the part of the running program.</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide26.png" alt=""></a></div> <p>So our plan is to interrupt the running program, acting like   the current instruction was actually a procedure call to the   handler code.  When it finishes execution, the handler can, if   appropriate, use the normal procedure return sequence to resume   execution of the user program.</p> <p>We’ll use the term “exception” to refer to   exceptions caused by executing the current program.  Such   exceptions are “synchronous” in the sense that they   are triggered by executing a particular instruction.  In other   words, if the program was re-run with the same data, the same   exception would occur.</p> <p>We’ll use the term “interrupt” to refer to   asynchronous exceptions resulting from external events whose   timing is unrelated to the currently running program.</p> <div class="lecslide"><a name="26"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide27.png" alt=""></a></div> <p>The implementation for both types of exceptions is the same.   When an exception is detected, the Beta hardware will behave as   if the current instruction was a taken BR to either location 0x4   (for synchronous exceptions) or location 0x8 (for asynchronous   interrupts).  Presumably the instructions in those locations   will jump to the entry points of the appropriate handler   routines.</p> <p>We’ll save the PC+4 value of the interrupted program into   R30, a register dedicated to that purpose.  We’ll call   that register XP (“exception pointer”) to remind   ourselves of how we’re using it.  Since interrupts in   particular can happen at any point during a program’s   execution, thus overwriting the contents of XP at any time, user   programs can’t use the XP register to hold values since   those values might disappear at any moment!</p> <p>Here’s how this scheme works: suppose we don’t   include hardware to implement the DIV instruction, so it’s   treated as an illegal opcode.  The exception hardware forces a   procedure call to location 0x4, which then branches to the Illop   handler shown here.  The PC+4 value of the DIV instruction has   been saved in the XP register, so the handler can fetch the   illegal instruction and, if it can, emulate its operation in   software.  When handler is complete, it can resume execution of   the original program at the instruction following DIV by   performing a JMP(XP).</p> <p>Pretty neat!</p> <div class="lecslide"><a name="27"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide28.png" alt=""></a></div> <p>To handle exceptions, we only need a few simple changes to the   datapath.</p> <p>We’ve added a MUX controlled by the WASEL signal to   choose the write-back address for the register file.  When WASEL   is 1, write-back will occur to the XP register, <i>i.e.</i>,   register 30.  When WASEL is 0, write-back will occur   normally, <i>i.e.</i>, to the register specified by the RC field   of the current instruction.</p> <p>The remaining two inputs of the PCSEL MUX are set to the   constant addresses for the exception handlers.  In our case, 0x4   for illegal operations, and 0x8 for interrupts.</p> <div class="lecslide"><a name="28"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide29.png" alt=""></a></div> <p>Here’s the flow of control during an exception.  The PC+4   value for the interrupted instruction is routed through the   WDSEL MUX to be written into the XP register.  Meanwhile the   control logic chooses either 3 or 4 as the value of PCSEL to   select the appropriate next instruction that will initiate the   handling the exception.</p> <p>The remaining control signals are forced to their   “don’t care” values, since we no longer care   about completing execution of the instruction we had fetched   from main memory at the beginning of the cycle.</p> <p>Note that the interrupted instruction has not been executed.   So if the exception handler wishes to execute the interrupted   instruction, it will have to subtract 4 from the value in the XP   register before performing a JMP(XP) to resume execution of the   interrupted program.</p> <div class="lecslide"><a name="29"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide30.png" alt=""></a></div> <p>Okay, we’re done!  Here’s the final datapath for   executing instructions and handling exceptions.  Please take a   moment to remind yourself of what each datapath component   does, <i>i.e.</i>, why it was added to the datapath.  Similarly,   you should understand how the control signals affect the   operation of the datapath.</p> <p>At least to my eye, this seems like a very modest amount of   hardware to achieve all this functionality!  It’s so   modest in fact, that I will ask you to actually complete the logic   design for the Beta in an upcoming lab assignment :)</p> <p>How does our design compare to the processor you’re using   to view this course online?  Modern processors have many   additional complexities to increase performance: pipelined   execution, the ability to execute more than one instruction per   cycle, fancier memory systems to reduce average memory access   time, etc.  We’ll cover some of these enhancements in   upcoming lectures.  The bottom line: the Beta hardware might   occupy 1 or 2 sq mm on a modern integrated circuit, while a   modern Intel processor occupies 300 to 600 sq mm.  Clearly all   that extra circuitry is there for a reason!  If you’re   curious, I’d recommend taking a course on advanced   processor architecture.</p> <div class="lecslide"><a name="30"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide31.png" alt=""></a></div> <p>Here we’ve gathered up all the control signal settings   for each class of instructions, including the settings needed   for exceptions and during reset.  Wherever possible, we’ve   specified “don’t care” for control signals   whose value does not affect the actions of the datapath needed   for a particular instruction.</p> <p>Note that the memory write enable signal always has a defined   value, ensuring that we only write to the memory during ST   instructions.  Similarly, the write enable for the register file   is well-defined, except during RESET when presumably we’re   restarting the processor and don’t care about preserving   any register values.</p> <p>As mentioned previously, a read-only memory (ROM) indexed by   the 6-bit opcode field is the easiest way to generate the   appropriate control signals for the current instruction.  The Z   and IRQ inputs to the control logic will affect the control   signals and this can be accomplished with a small amount of   logic to process the ROM outputs.</p> <p>One can always have fun with Karnuagh maps to generate a   minimal implementation using ordinary logic gates.  The result   will be much smaller, both in terms of size and propagation   delay, but requires a lot more design work!  My recommendation:   start with the ROM implementation and get everything else   working.  Then come back later when you feel like hacking logic   gates :)</p> <div class="lecslide"><a name="31"><img class="lecslideimg" src="../../../contents/c13/c13s1/Slide32.png" alt=""></a></div> <p>So that’s what it takes to design the hardware for a   simple 32-bit computer.  Of course, we made the job easy for   ourselves by choosing a simple binary encoding for our   instructions and limiting the hardware functionality to   efficiently executing the most common operations.  Less common   and more complex functionality can be left to software.  The   exception mechanism gave us a powerful tool for transferring   control to software when the hardware couldn’t handle the   task.</p> <p>Have fun completing the hardware design of your Beta.   Thousands of MIT students have enjoyed that “Yes!”   moment when their design works for the first time.  For their   efforts we reward them with the “Beta Inside”   sticker you see here, which you can see on laptops as you walk   around the Institute.</p> <p>Good luck!</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c13/index.htm">Back<span>Building the Beta</span></a></li>     <li id="continue_btn"><a href="../../../contents/c13/c13s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

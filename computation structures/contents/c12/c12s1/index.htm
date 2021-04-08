@@ -1,0 +1,1300 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>12.1 Annotated Slides | 12 Procedures and Stacks | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="12.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 12.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c12/c12s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c12/index.htm">12 Procedures and Stacks</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            12.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            12.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="selected">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c12/index.htm">&lt;<span>Procedures and Stacks</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c12/c12s1/index.htm">12.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c12/c12s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L12: Procedures and Stacks</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Procedures: A Software Abstraction</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Implementing Procedures</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">Procedure Calling Convention</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Procedure Linkage: First Try</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Procedure Storage Needs</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Activation Records</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Insight: We Need a Stack!</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Stack Implementation</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Stack Management Macros</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">Fun With Stacks</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Solving Procedure Linkage Problems</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Stack Frames as Activation Records</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Stack Frame Details</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Argument Order &amp; BP Usage</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Procedure Linkage: The Contract</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Procedure Linkage Templates</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Putting It All Together: Factorial</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Recursion?</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Stack Detective</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Summary of Dedicated Registers</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Summary</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide02.png" alt=""></a></div> <p>One of the most useful abstractions provided by high-level   languages is the notion of a procedure or subroutine, which is a   sequence of instructions that perform a specific task.</p> <p>A procedure has a single named entry point, which can be used   to refer to the procedure in other parts of the program.  In the   example here, this code is defining the GCD procedure, which is   declared to return an integer value.</p> <p>Procedures have zero or more formal parameters, which are the   names the code inside the procedure will use to refer the values   supplied when the procedure is invoked by a “procedure   call”.  A procedure call is an expression that has the   name of the procedure followed by parenthesized list of values   called “arguments” that will be matched up with the   formal parameters.  For example, the value of the first argument   will become the value of the first formal parameter while the   procedure is executing.</p> <p>The body of the procedure may define additional variables,   called “local variables”, since they can only be   accessed by statements in the procedure body.  Conceptually, the   storage for local variables only exists while the procedure is   executing.  They are allocated when the procedure is invoked and   deallocated when the procedure returns.</p> <p>The procedure may return a value that’s the result of the   procedure’s computation.  It’s legal to have   procedures that do not return a value, in which case the   procedures would only be executed for their “side   effects”, <i>e.g.</i>, changes they make to shared   data.</p> <p>Here we see another procedure, COPRIMES, that invokes the GCD   procedure to compute the greatest common divisor of two numbers.   To use GCD, the programmer of COPRIMES only needed to know the   input/output behavior of GCD, <i>i.e.</i>, the number and types   of the arguments and what type of value is returned as a result.   The procedural abstraction has hidden the implementation of GCD,   while still making its functionality available as a “black   box”.</p> <p>This is a very powerful idea: encapsulating a complex   computation so that it can be used by others.  Every high-level   language comes with a collection of pre-built procedures, called   “libraries”, which can be used to perform arithmetic   functions (<i>e.g.</i>, square root or cosine), manipulate   collections of data (<i>e.g.</i>, lists or dictionaries), read   data from files, and so on — the list is nearly endless!  Much   of the expressive power and ease-of-use provided by high-level   languages comes from their libraries of “black   boxes”.</p> <p>The procedural abstraction is at the heart of object-oriented   languages, which encapsulate data and procedures as black boxes   called objects that support specific operations on their   internal data.  For example, a LIST object has procedures   (called “methods” in this context) for indexing into   the list to read or change a value, adding new elements to the   list, inquiring about the length of the list, and so on.  The   internal representation of the data and the algorithms used to   implement the methods are hidden by the object abstraction.   Indeed, there may be several different LIST implementations to   choose from depending on which operations you need to be   particularly efficient.</p> <p>Okay, enough about the virtues of the procedural abstraction!   Let’s turn our attention to how to implement procedures   using the Beta ISA.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide03.png" alt=""></a></div> <p>A possible implementation is to “inline” the   procedure, where we replace the procedure call with a copy of   the statements in the procedure’s body, substituting   argument values for references to the formal parameters.  In   this approach we’re treating procedures very much like   UASM macros, <i>i.e.</i>, a simple notational shorthand for   making a copy of the procedure’s body.</p> <p>Are there any problems with this approach?  One obvious issue   is the potential increase in the code size.  For example, if we   had a lengthy procedure that was called many times, the final   expanded code would be huge!  Enough so that inlining   isn’t a practical solution except in the case of short   procedures where optimizing compilers do sometimes decide to   inline the code.</p> <p>A bigger difficulty is apparent when we consider a recursive   procedure where there’s a nested call to the procedure   itself.  During execution the recursion will terminate for some   values of the arguments and the recursive procedure will   eventually return an answer.  But at compile time, the inlining   process would not terminate and so the inlining scheme fails if   the language allows recursion.</p> <p>The second option is to “link” to the procedure.   In this approach there is a single copy of the procedure code   which we arrange to be run for each procedure call — all the   procedure calls are said to link to the procedure code.</p> <p>Here the body of the procedure is translated once into Beta   instructions and the first instruction is identified as the   procedure’s entry point.  The procedure call is compiled   into a set of instructions that evaluate the argument   expressions and save the values in an agreed-upon location.   Then we’ll use a BR instruction to transfer control to the   entry point of the procedure.  Recall that the BR instruction   not only changes the PC but saves the address of the instruction   following the branch in a specified register.  This saved   address is the “return address” where we want   execution to resume when procedure execution is complete.</p> <p>After branching to the entry point, the procedure code runs,   stores the result in an agreed-upon location and then resumes   execution of the calling program by jumping to the supplied   return address.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide04.png" alt=""></a></div> <p>To complete this implementation plan we need a “calling   convention” that specifies where to store the argument   values during procedure calls and where the procedure should   store the return value.  It’s tempting to simply allocate   specific memory locations for the job: how about using   registers?  We could pass the argument value in registers   starting, say, with R1.  The return address could be stored in   another register, say R28.  As we can see, with this convention   the BR and JMP instructions are just what we need to implement   procedure call and return.  It’s usual to call the   register holding the return address the “linkage   pointer”.  And finally the procedure can use, say, R0 to   hold the return value.</p> <p>Let’s see how this would work when executing the   procedure call fact(3).  As shown on the right, fact(3) requires   a recursive call to compute fact(2), and so on.  Our goal is to   have a uniform calling convention where all procedure calls and   procedure bodies use the same convention for storing arguments,   return addresses and return values.  In particular, we’ll   use the same convention when compiling the recursive call   fact(n-1) as we did for the initial call to fact(3).</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide05.png" alt=""></a></div> <p>Okay.  In the code shown on the right we’ve used our   proposed convention when compiling the Beta code for fact().   Let’s take a quick tour.</p> <p>To compile the initial call fact(3) the compiler generated a   CMOVE instruction to put the argument value in R1 and then a BR   instruction to transfer control to fact’s entry point   while remembering the return address in R28.</p> <p>The first statement in the body of fact tests the value of the   argument using CMPLEC and BT instructions.</p> <p>When n is greater than 0, the code performs a recursive call to   fact, saving the value of the recursive argument n-1 in R1 as   our convention requires.  Note that we had to first save the   value of the original argument n because we’ll need it for   the multiplication after the recursive call returns its value in   R0.</p> <p>If n is not greater than 0, the value 1 is placed in R0.  Then   the two possible execution paths merge, each having generated   the appropriate return value in R0, and finally there’s a   JMP to return control to the caller.  The JMP instruction knows   to find the return address in R28, just where the BR put it as   part of the original procedure call.</p> <p>Some of you may have noticed that there are some difficulties   with this particular implementation.  The code is correct in the   sense that it faithfully implements procedure call and return   using our proposed convention.  The problem is that during   recursive calls we’ll be overwriting register values we   need later.</p> <p>For example, note that following our calling convention, the   recursive call also uses R28 to store the return address.  When   executed, the code for the original call stored the address of   the HALT instruction in R28.  Inside the procedure, the   recursive call will store the address of the MUL instruction in   R28.  Unfortunately that overwrites the original return   address.</p> <p>Even the attempt to save the value of the argument N in R2 is   doomed to fail since during the execution of the recursive call   R2 will be overwritten.</p> <p>The crux of the problem is that each recursive call needs to   remember the value of its argument and return   address, <i>i.e.</i>, we need two storage locations for each   active call to fact().  And while executing fact(3), when we   finally get to calling fact(0) there are four nested active   calls, so we’ll need 4*2 = 8 storage locations.  In fact,   the amount of storage needed varies with the depth of the   recursion.  Obviously we can’t use just two registers (R2   and R28) to hold all the values we need to save.</p> <p>One fix is to disallow recursion!  And, in fact, some of the   early programming languages such as FORTRAN did just that.  But   let’s see if we can solve the problem another way.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide06.png" alt=""></a></div> <p>The problem we need to solve is where to store the values   needed by procedure: its arguments, its return address, its   return value.  The procedure may also need storage for its local   variables and space to save the values of the caller’s   registers before they get overwritten by the procedure.   We’d like to avoid any limitations on the number of   arguments, the number of local variables, etc.</p> <p>So we’ll need a block of storage for each active   procedure call, what we’ll call the “activation   record”.  As we saw in the factorial example, we   can’t statically allocate a single block of storage for a   particular procedure since recursive calls mean we’ll have   many active calls to that procedure at points during the   execution.</p> <p>What we need is a way to dynamically allocate storage for an   activation record when the procedure is called, which can then   be reclaimed when the procedure returns.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide07.png" alt=""></a></div> <p>Let’s see how activation records come and go as execution proceeds.</p> <p>The first activation record is for the call fact(3).   It’s created at the beginning of the procedure and holds,   among other things, the value of the argument n and the return   address where execution should resume after the fact(3)   computation is complete.</p> <p>During the execution of fact(3), we need to make a recursive   call to compute fact(2).  So that procedure call also gets an   activation record with the appropriate values for the argument   and return address.  Note that the original activation record is   kept since it contains information needed to complete the   computation of fact(3) after the call to fact(2) returns.  So   now we have two active procedure calls and hence two activation   records.</p> <p>fact(2) requires computing fact(1), which, in turn, requires   computing fact(0).  At this point there are four active   procedure calls and hence four activation records.</p> <p>The recursion terminates with fact(0), which returns the value   1 to its caller.  At this point we’ve finished execution   of fact(0) and so its activation record is no longer needed and   can be discarded.</p> <p>fact(1) now finishes its computation returning 1 to its caller.   We no longer need its activation record.  Then fact(2)   completes, returning 2 to its caller and its activation can be   discarded.  And so on...</p> <p>Note that the activation record of a nested procedure call is   always discarded before the activation record of the caller.   That makes sense: the execution of the caller can’t   complete until the nested procedure call returns.  What we need   is a storage scheme that efficiently supports the allocation and   deallocation of activation records as shown here.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide08.png" alt=""></a></div> <p>Early compiler writers recognized that activation records are   allocated and deallocated in last-in first-out (LIFO) order.  So   they invented the “stack”, a data structure that   implements a PUSH operation to add a record to the top of the   stack and a POP operation to remove the top element.  New   activation records are PUSHed onto the stack during procedure   calls and the POPed from the stack when the procedure call   returns.  Note that stack operations affect the top   (<i>i.e.</i>, most recent) record on the stack.</p> <p>C procedures only need to access the top activation record on   the stack.  Other programming languages, <i>e.g.</i> Java,   support accesses to other active activation records.  The stack   supports both modes of operation.</p> <p>One final technical note: some programming languages support   closures (<i>e.g.</i>, Javascript) or continuations   (<i>e.g.</i>, Python’s yield statement), where the   activation records need to be preserved even after the procedure   returns. In these cases, the simple LIFO behavior of the stack   is no longer sufficient and we’ll need another scheme for   allocating and deallocating activation records.  But   that’s a topic for another course!</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide09.png" alt=""></a></div> <p>Here’s how we’ll implement the stack on the Beta:</p> <p>We’ll dedicate one of the Beta registers, R29, to be the   “stack pointer” that will be used to manage stack   operations.</p> <p>When we PUSH a word onto the stack, we’ll increment the   stack pointer.  So the stack grows to successively higher   addresses as words are PUSHed onto the stack.</p> <p>We’ll adopt the convention that SP points to   (<i>i.e.</i>, its value is the address of) the first unused   stack location, the location that will be filled by next PUSH.   So locations with addresses lower than the value in SP   correspond to words that have been previously allocated.</p> <p>Words can be PUSHed to or POPed from the stack at any point in   execution, but we’ll impose the rule that code sequences   that PUSH words onto the stack must POP those words at the end   of execution.  So when a code sequence finishes execution, SP   will have the same value as it had before the sequence started.   This is called the “stack discipline” and ensures   that intervening uses of the stack don’t affect later   stack references.</p> <p>We’ll allocate a large region of memory to hold the stack   located so that the stack can grow without overwriting other   program storage.  Most systems require that you specify a   maximum stack size when running a program and will signal an   execution error if the program attempts to PUSH too many items   onto the stack.</p> <p>For our Beta stack implementation, we’ll use existing   instructions to implement stack operations, so for us the stack   is strictly a set of software conventions.  Other ISAs provide   instructions specifically for stack operations.</p> <p>There are many other sensible stack conventions, so   you’ll need to read up on the conventions adopted by the   particular ISA or programming language you’ll be   using.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide10.png" alt=""></a></div> <p>We’ve added some convenience macros to UASM to support stacks.</p> <p>The PUSH macro expands into two instructions.  The ADDC   increments the stack pointer, allocating a new word at the top   of stack, and then initializes the new top-of-stack from a   specified register value with a ST instruction.</p> <p>The POP macro LDs the value at the top of the stack into the   specified register, then uses a SUBC instruction to decrement   the stack pointer, deallocating that word from the stack.</p> <p>Note that the order of the instructions in the PUSH and POP   macro is very important.  As we’ll see in the next   lecture, interrupts can cause the Beta hardware to stop   executing the current program between any two instructions, so   we have to be careful about the order of operations.  So for   PUSH, we first allocate the word on the stack, then initialize   it.  If we did it the other way around and execution was   interrupted between the initialization and allocation, code run   during the interrupt which uses the stack might unintentionally   overwrite the initialized value.  But, assuming all code follows   stack discipline, allocation followed by initialization is   always safe.</p> <p>The same reasoning applies to the order of the POP   instructions.  We first access the top-of-stack one last time to   retrieve its value, then we deallocate that location.</p> <p>We can use the ALLOCATE macro to reserve a number of stack   locations for later use.  Sort of like PUSH but without the   initialization.</p> <p>DEALLOCATE performs the opposite operation, removing N words   from the stack.</p> <p>In general, if we see a PUSH or ALLOCATE in an assembly   language program, we should be able to find the corresponding   POP or DEALLOCATE, which would indicate that stack discipline is   maintained.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide11.png" alt=""></a></div> <p>We’ll use stacks to save values we’ll need later.   For example, if we need to use some registers for a computation   but don’t know if the register’s current values are   needed later in the program, we can PUSH their current values   onto the stack and then are free to use the registers in our   code.  After we’re done, we can use POP to restore the   saved values.</p> <p>Note that we POP data off the stack in the opposite order that   the data was PUSHed, <i>i.e.</i>, we need to follow the last-in   first-out discipline imposed by the stack operations.</p> <p>Now that we have the stack data structure, we’ll use it   to solve our problems with allocating and deallocating   activation records during procedure calls.</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide12.png" alt=""></a></div> <p>We’ll use the stack to hold a procedure’s   activation record.  That includes the values of the arguments to   the procedure call.  We’ll allocate words on the stack to   hold the values of the procedure’s local variables,   assuming we don’t keep them in registers.  And we’ll   use the stack to save the return address (passed in LP) so the   procedure can make nested procedure calls without overwriting   its return address.</p> <p>The responsibility for allocating and deallocating the   activation record will be shared between the calling procedure   (the “caller”) and the called procedure (the   “callee”).</p> <p>The caller is responsible for evaluating the argument   expressions and saving their values in the activation record   being built on the stack.  We’ll adopt the convention that   argument values are pushed in reverse order, <i>i.e.</i>, the   first argument will be the last to be pushed on the stack.   We’ll explain why we made this choice in a couple of   slides...</p> <p>The code compiled for a procedure involves a sequence of   expression evaluations, each followed by a PUSH to save the   calculated value on the stack. So when the callee starts   execution, the top of the stack contains the value of the first   argument, the next word down the value of the second argument,   and so on.</p> <p>After the argument values, if any, have been pushed on the   stack, there’s a BR to transfer control to the   procedure’s entry point, saving the address of the   instruction following the BR in the linkage pointer, R28, a   register that we’ll dedicate to that task.</p> <p>When the callee returns and execution resumes in the caller, a   DEALLOCATE is used to remove all the argument values from the   stack, preserving stack discipline.</p> <p>So that’s the code the compiler generates for the   procedure.  The rest of the work happens in the called   procedure.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide13.png" alt=""></a></div> <p>The code at the start of the called procedure completes the   allocation of the activation record.  Since when we’re   done the activation record will occupy a bunch of consecutive   words on the stack, we’ll sometimes refer to the   activation record as a “stack frame” to remind us of   where it lives.</p> <p>The first action is to save the return address found in the LP   register.  This frees up LP to be used by any nested procedure   calls in the body of the callee.</p> <p>In order to make it easy to access values stored in the   activation record, we’ll dedicate another register called   the “base pointer” (BP = R27) which will point to   the stack frame we’re building.  So as we enter the   procedure, the code saves the pointer to the caller’s   stack frame, and then uses the current value of the stack   pointer to make BP point to the current stack frame.   We’ll see how we use BP in just a moment.</p> <p>Now the code will allocate words in the stack frame to hold the   values for the callee’s local variables, if any.</p> <p>Finally, the callee needs to save the values of any registers   it will use when executing the rest of its code.  These saved   values can be used to restore the register values just before   returning to the caller.  This is called the “callee   saves” convention where the callee guarantees that all   register values will be preserved across the procedure call.   With this convention, the code in the caller can assume any   values it placed in registers before a nested procedure call   will still be there when the nested call returns.</p> <p>Note that dedicating a register as the base pointer isn’t   strictly necessary.  All accesses to the values on the stack can   be made relative to the stack pointer, but the offsets from SP   will change as values are PUSHed and POPed from the   stack, <i>e.g.</i>, during procedure calls.  It will be easier   to understand the generated code if we use BP for all stack   frame references.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide14.png" alt=""></a></div> <p>Let’s return to the question about the order of argument   values in the stack frame.  We adopted the convention of PUSHing   the values in reverse order, <i>i.e.</i>, where the value of the   first argument is the last one to be PUSHED.</p> <p>So, why PUSH argument values in reverse order?</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide15.png" alt=""></a></div> <p>With the arguments PUSHed in reverse order, the first argument   (labeled “arg 0”) will be at a fixed offset from the   base pointer regardless of the number of argument values pushed   on the stack.  The compiler can use a simple formula to the   determine the correct BP offset value for any particular   argument.  So the first argument is at offset -12, the second at   -16, and so on.</p> <p>Why is this important?  Some languages, such as C, support   procedure calls with a variable number of arguments.  Usually   the procedure can determine from, say, the first argument, how   many additional arguments to expect.  The canonical example is   the C printf function where the first argument is a format   string that specifies how a sequence of values should be   printed.  So a call to printf includes the format string   argument plus a varying number of additional arguments.  With   our calling convention the format string will always be in the   same location relative to BP, so the printf code can find it   without knowing the number of additional arguments in the   current call.</p> <p>The local variables are also at fixed offsets from BP.  The   first local variable is at offset 0, the second at offset 4, and   so on.</p> <p>So we see that having a base pointer makes it easy to access   the values of the arguments and local variables using fixed   offsets that can be determined at compile time.  The stack above   the local variables is available for other uses, <i>e.g.</i>,   building the activation record for a nested procedure call!</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide16.png" alt=""></a></div> <p>Okay, here’s our final contract for how procedure calls will work:</p> <p>The calling procedure (“caller”) will</p> <p>PUSH the argument values onto the stack in reverse order.</p> <p>Branch to the entry point of the callee, putting the return   address into the linkage pointer.</p> <p>When the callee returns, remove the argument values from the stack.</p> <p>The called procedure (“callee”) will</p> <p>Perform the promised computation, leaving the result in R0.</p> <p>Jump to the return address when the computation has finished.</p> <p>Remove any items it has placed on the stack, leaving the stack   as it was when the procedure was entered.  Note that the   arguments were PUSHed on the stack by the caller, so it will be   up to the caller to remove them.</p> <p>Preserve the values in all registers except R0, which holds the   return value.  So the caller can assume any values placed in   registers before a nested call will be there when the nested   call returns.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide17.png" alt=""></a></div> <p>We saw the code template for procedure calls on an earlier slide.</p> <p>Here’s the template for the entry point to a procedure F.   The code saves the caller’s LP and BP values, initializes   BP for the current stack frame and allocates words on the stack   to hold any local variable values.  The final step is to PUSH   the value of any registers (besides R0) that will be used by the   remainder of the procedure’s code.</p> <p>The template for the exit sequence mirrors the actions of the   entry sequence, restoring all the values saved by the entry   sequence, performing the POP operations in the reverse of the   order of the PUSH operations in the entry sequence.  Note that   in moving the BP value into SP we’ve reset the stack to   its state at the point of the MOVE(SP,BP) in the entry sequence.   This implicitly undoes the effect of the ALLOCATE statement in   the entry sequence, so we don’t need a matching DEALLOCATE   in the exit sequence.</p> <p>The last instruction in the exit sequence transfers control   back to the calling procedure.</p> <p>With practice you’ll become familiar with these code   templates.  Meanwhile, you can refer back to this slide whenever   you need to generate code for a procedure call.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide18.png" alt=""></a></div> <p>Here’s the code our compiler would generate for the C   implementation of factorial shown on the left.</p> <p>The entry sequence saves the caller’s LP and BP, then   initializes BP for the current stack frame.  The value of R1 is   saved so we can use R1 in code that follows.</p> <p>The exit sequence restores all the saved values, including that   for R1.  The code for the body of the procedure has arranged for   R0 to contain the return value by the time execution reaches the   exit sequence.</p> <p>The nested procedure call passes the argument value on the   stack and removes it after the nested call returns.</p> <p>The remainder of the code is generated using the templates we   saw in the previous lecture.  Aside from computing and pushing   the values of the arguments, there are approximately 10   instructions needed to implement the linking approach to a   procedure call.  That’s not much for a procedure of any   size, but might be significant for a trivial procedure.  As   mentioned earlier, some optimizing compilers can make the   tradeoff of inlining small non-recursive procedures saving this   small amount of overhead.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide19.png" alt=""></a></div> <p>So have we solved the activation record storage issue for   recursive procedures?</p> <p>Yes!  A new stack frame is allocated for each procedure call. In   each frame we see the storage for the argument and return   address [CLICK].  And as the nested calls return the stack   frames will be deallocated in inverse order.</p> <p>Interestingly we can learn a lot about the current state of   execution by looking at the active stack frames. The current   value of BP, along with the older values saved in the activation   records, allow us to identify the active procedure calls and   determine their arguments, the values of any local variables for   active calls, and so on.  If we print out all this information   at any given time we would have a “stack trace”   showing the progress of the computation.  In fact, when a problem occurs, many language runtimes will print out the stack   trace to help the programmer determine what happened.</p> <p>And, of course, if you can interpret the information in the   stack frames, you can show you understand our conventions for   procedure call and return.  Don’t be surprised to find   such a question on a quiz :)</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide20.png" alt=""></a></div> <p>Let’s practice our newfound skill and see what we can   determine about a running program which we’ve stopped   somewhere in the middle of its execution.  We’re told that   a computation of fact() is in progress and that the PC of the   next instruction to be executed is 0x40.  We’re also given   the stack dump shown on right.</p> <p>Since we’re in the middle of a fact computation, we know   that current stack frame (and possibly others) is an activation   record for the fact function.  Using the code on the previous   slide we can determine the layout of the stack frame and   generate the annotations shown on the right of the stack dump.   With the annotations, it’s easy to see that the argument   to current active call is the value 3.</p> <p>Now we want to know the argument to original call to fact.   We’ll have to label the other stack frames using the saved   BP values.  Looking at the saved LP values for each frame   (always found at an offset of -8 from the frame’s BP), we   see that many of the saved values are 0x40, which must be the   return address for the recursive fact calls.</p> <p>Looking through the stack frames we find the first return   address that’s *not* 0x40, which must an return address to   code that’s not part of the fact procedure.  This means   we’ve found the stack frame created by the original call   to fact and can see that argument to the original call is 6.</p> <p>What’s the location of the BR that made the original   call?  Well the saved LP in the stack frame of the original call   to fact is 0x80.  That’s the address of the instruction   following the original call, so the BR that made the original   call is one instruction earlier, at location 0x7C.  To answer   these questions you have to be good at hex arithmetic!</p> <p>What instruction is about to be executed?  We were told its   address is 0x40, which we notice is the saved LP value for all   the recursive fact calls.  So 0x40 must be the address of the   instruction following the BR(fact,LP) instruction in the fact   code.  Looking back a few slides at the fact code, we see   that’s a DEALLOCATE(1) instruction.</p> <p>What value is in BP?  Hmm.  We know BP is the address of the   stack location containing the saved R1 value in the current   stack frame.  So the saved BP value in the current stack frame   is the address of the saved R1 value in the *previous* stack   frame.  So the saved BP value gives us the address of a   particular stack location, from which we can derive the address   of all the other locations!  Counting forward, we find that the   value in BP must be 0x13C.</p> <p>What value is in SP?  Since we’re about to execute the   DEALLOCATE to remove the argument of the nested call from the   stack, that argument must still be on the stack right after the   saved R1 value.  Since the SP points to first unused stack   location, it points to the location after that word, so it has   the value 0x144.</p> <p>Finally, what value is is R0?  Since we’ve just returned   from a call to fact(2) the value in R0 must the result from that   recursive call, which is 2.</p> <p>Wow!  You can learn a lot from the stacked activation records   and a little deduction!  Since the state of the computation is   represented by the values of the PC, the registers, and main   memory, once we’re given that information we can tell   exactly what the program has been up to.  Pretty neat...</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide21.png" alt=""></a></div> <p>Wrapping up, we’ve been dedicating some registers to help   with our various software conventions.  To summarize:</p> <p>R31 is always zero, as defined by the ISA.</p> <p>We’ll also dedicate R30 to a particular function in the   ISA when we discuss the implementation of the Beta in the next   lecture.  Meanwhile, don’t use R30 in your code!</p> <p>The remaining dedicated registers are connected with our   software conventions:</p> <p>R29 (SP) is used as the stack pointer,</p> <p>R28 (LP) is used as the linkage pointer, and</p> <p>R27 (BP) is used as the base pointer.</p> <p>As you practice reading and writing code, you’ll grow   familiar with these dedicated registers.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c12/c12s1/Slide22.png" alt=""></a></div> <p>In thinking about how to implement procedures, we discovered   the need for an activation record to store the information   needed by any active procedure call.</p> <p>An activation record is created by the caller and callee at the   start of a procedure call. And the record can be discarded when   the procedure is complete.</p> <p>The activation records hold argument values, saved LP and BP   values along with the caller’s values in any other of the   registers.  Storage for the procedure’s local variables is   also allocated in the activation record.</p> <p>We use BP to point to the current activation record, giving   easy access to the values of the arguments and local variables.</p> <p>We adopted a “callee saves” convention where the   called procedure is obligated to preserve the values in all   registers except for R0.</p> <p>Taken together, these conventions allow us to have procedures   with arbitrary numbers of arguments and local variables, with   nested and recursive procedure calls.  We’re now ready to   compile and execute any C program!</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c12/index.htm">Back<span>Procedures and Stacks</span></a></li>     <li id="continue_btn"><a href="../../../contents/c12/c12s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

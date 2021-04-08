@@ -1,0 +1,118 @@
+1
+00:00:01,020 --> 00:00:03,470
+Let's look at a concrete example.
+
+2
+00:00:03,470 --> 00:00:08,109
+This graph shows the voltage transfer characteristic
+for a particular device and we're wondering
+
+3
+00:00:08,109 --> 00:00:11,100
+if we can use this device as a combinational
+inverter.
+
+4
+00:00:11,100 --> 00:00:19,620
+In other words, can we pick values for the
+voltage thresholds V_OL, V_IL, V_IH and V_OH
+
+5
+00:00:19,620 --> 00:00:25,890
+so that the shown VTC meets the constraints
+imposed on a combinational device?
+
+6
+00:00:25,890 --> 00:00:32,049
+An inverter outputs a digital 1 when its input
+is a digital 0 and vice versa.
+
+7
+00:00:32,049 --> 00:00:37,210
+In fact this device does produce a high output
+voltage when its input voltage is low, so
+
+8
+00:00:37,210 --> 00:00:40,550
+there's a chance that this will work out.
+
+9
+00:00:40,550 --> 00:00:46,400
+The lowest output voltage produced by the
+device is 0.5V, so if the device is to produce
+
+10
+00:00:46,400 --> 00:00:55,230
+a legal digital output of 0, we have to choose
+V_OL to be at least 0.5V.
+
+11
+00:00:55,230 --> 00:01:01,680
+We want the inverter to produce a valid digital
+0 whenever its input is valid digital 1.
+
+12
+00:01:01,680 --> 00:01:07,189
+Looking at the VTC, we see that if the input
+is higher than 3V, the output will be less
+
+13
+00:01:07,189 --> 00:01:12,819
+than or equal to V_OL, so let's set V_IH to
+3V.
+
+14
+00:01:12,819 --> 00:01:17,729
+We could set it to a higher value than 3V,
+but we'll make it as low as possible to leave
+
+15
+00:01:17,729 --> 00:01:22,039
+room for a generous high noise margin.
+
+16
+00:01:22,039 --> 00:01:27,469
+That takes care of two of the four signal
+thresholds, V_OL and V_IH.
+
+17
+00:01:27,469 --> 00:01:32,170
+The other two thresholds are related to these
+two by the noise margin N as shown by these
+
+18
+00:01:32,170 --> 00:01:34,219
+two equations.
+
+19
+00:01:34,219 --> 00:01:43,848
+Can we find a value for N such that V_OUT
+>= V_OH when V_IN <= V_IL?
+
+20
+00:01:43,848 --> 00:01:53,598
+If we chose N = 0.5V, then the formulas tell
+us that V_IL = 1V and V_OH = 3.5V.
+
+21
+00:01:53,598 --> 00:01:58,200
+Plotting these thresholds on the graph and
+adding the forbidden regions, we see that
+
+22
+00:01:58,200 --> 00:02:02,419
+happily the VTC is, in fact, legal!
+
+23
+00:02:02,419 --> 00:02:07,369
+So we can use this device as a combinational
+inverter if we use the signaling specification
+
+24
+00:02:07,369 --> 00:02:16,530
+with V_OL = 0.5V, V_IL = 1V, V_IH = 3V and
+V_OH = 3.5V.
+
+25
+00:02:16,530 --> 00:02:17,200
+We're good to go!

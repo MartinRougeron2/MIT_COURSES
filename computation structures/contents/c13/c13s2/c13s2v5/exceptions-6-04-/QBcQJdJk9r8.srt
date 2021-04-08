@@ -1,0 +1,567 @@
+1
+00:00:00,500 --> 00:00:03,950
+One last bit of housekeeping,
+then we’re done!
+
+2
+00:00:03,950 --> 00:00:07,310
+What should our hardware do if
+for some reason an instruction
+
+3
+00:00:07,310 --> 00:00:09,050
+can’t be executed?
+
+4
+00:00:09,050 --> 00:00:12,250
+For example, if a programming
+error has led to trying
+
+5
+00:00:12,250 --> 00:00:16,040
+to execute some piece of data
+as an instruction and the opcode
+
+6
+00:00:16,040 --> 00:00:19,480
+field doesn’t correspond to a
+Beta instruction (a so-called
+
+7
+00:00:19,480 --> 00:00:22,620
+“illop” or illegal operation).
+
+8
+00:00:22,620 --> 00:00:25,610
+Or maybe the memory address is
+larger than the actual amount
+
+9
+00:00:25,610 --> 00:00:27,260
+main memory.
+
+10
+00:00:27,260 --> 00:00:29,120
+Or maybe one of
+the operand values
+
+11
+00:00:29,120 --> 00:00:32,880
+is not acceptable,
+e.g., if the B operand
+
+12
+00:00:32,880 --> 00:00:36,910
+for a DIV instruction is 0.
+
+13
+00:00:36,910 --> 00:00:39,210
+In modern computers,
+the accepted strategy
+
+14
+00:00:39,210 --> 00:00:41,840
+is cease execution of
+the running program
+
+15
+00:00:41,840 --> 00:00:45,720
+and transfer control to
+some error handler code.
+
+16
+00:00:45,720 --> 00:00:48,130
+The error handler might
+store the program state
+
+17
+00:00:48,130 --> 00:00:50,520
+onto disk for later debugging.
+
+18
+00:00:50,520 --> 00:00:53,680
+Or, for an unimplemented
+but legal opcode,
+
+19
+00:00:53,680 --> 00:00:56,900
+it might emulate the missing
+instruction in software
+
+20
+00:00:56,900 --> 00:00:59,580
+and resume execution as
+if the instruction had
+
+21
+00:00:59,580 --> 00:01:02,860
+been implemented in hardware!
+
+22
+00:01:02,860 --> 00:01:05,750
+There’s also the need to
+deal with external events,
+
+23
+00:01:05,750 --> 00:01:09,050
+like those associated
+with input and output.
+
+24
+00:01:09,050 --> 00:01:11,540
+Here we’d like to interrupt
+the execution of the current
+
+25
+00:01:11,540 --> 00:01:15,200
+program, run some code to
+deal with the external event,
+
+26
+00:01:15,200 --> 00:01:20,300
+then resume execution as if the
+interrupt had never happened.
+
+27
+00:01:20,300 --> 00:01:22,950
+To deal with these cases,
+we’ll add hardware to treat
+
+28
+00:01:22,950 --> 00:01:26,600
+exceptions like forced procedure
+calls to special code to handle
+
+29
+00:01:26,600 --> 00:01:28,210
+the situation,
+
+30
+00:01:28,210 --> 00:01:32,220
+arranging to save the PC+4
+value of the interrupted program
+
+31
+00:01:32,220 --> 00:01:36,710
+so that the handler can
+resume execution if it wishes.
+
+32
+00:01:36,710 --> 00:01:38,910
+This is a very powerful
+feature since it
+
+33
+00:01:38,910 --> 00:01:42,110
+allows us to transfer
+control to software to handle
+
+34
+00:01:42,110 --> 00:01:44,900
+most any circumstance
+beyond the capability
+
+35
+00:01:44,900 --> 00:01:47,300
+of our modest hardware.
+
+36
+00:01:47,300 --> 00:01:49,220
+As we’ll see in Part
+3 of the course,
+
+37
+00:01:49,220 --> 00:01:52,380
+the exception hardware will be
+our key to interfacing running
+
+38
+00:01:52,380 --> 00:01:56,290
+programs to the operating
+system (OS) and to allow the OS
+
+39
+00:01:56,290 --> 00:01:59,560
+to deal with external
+events without any awareness
+
+40
+00:01:59,560 --> 00:02:02,910
+on the part of the
+running program.
+
+41
+00:02:02,910 --> 00:02:05,950
+So our plan is to interrupt
+the running program,
+
+42
+00:02:05,950 --> 00:02:08,370
+acting like the current
+instruction was actually
+
+43
+00:02:08,370 --> 00:02:11,270
+a procedure call to
+the handler code.
+
+44
+00:02:11,270 --> 00:02:15,350
+When it finishes execution, the
+handler can, if appropriate,
+
+45
+00:02:15,350 --> 00:02:18,000
+use the normal procedure
+return sequence
+
+46
+00:02:18,000 --> 00:02:21,420
+to resume execution
+of the user program.
+
+47
+00:02:21,420 --> 00:02:24,360
+We’ll use the term “exception”
+to refer to exceptions caused
+
+48
+00:02:24,360 --> 00:02:26,730
+by executing the
+current program.
+
+49
+00:02:26,730 --> 00:02:29,560
+Such exceptions are
+“synchronous” in the sense that
+
+50
+00:02:29,560 --> 00:02:33,640
+they are triggered by executing
+a particular instruction.
+
+51
+00:02:33,640 --> 00:02:37,370
+In other words, if the program
+was re-run with the same data,
+
+52
+00:02:37,370 --> 00:02:40,200
+the same exception would occur.
+
+53
+00:02:40,200 --> 00:02:43,110
+We’ll use the term “interrupt”
+to refer to asynchronous
+
+54
+00:02:43,110 --> 00:02:46,430
+exceptions resulting from
+external events whose timing is
+
+55
+00:02:46,430 --> 00:02:50,090
+unrelated to the
+currently running program.
+
+56
+00:02:50,090 --> 00:02:52,730
+The implementation for
+both types of exceptions
+
+57
+00:02:52,730 --> 00:02:54,420
+is the same.
+
+58
+00:02:54,420 --> 00:02:57,190
+When an exception is
+detected, the Beta hardware
+
+59
+00:02:57,190 --> 00:03:00,770
+will behave as if the current
+instruction was a taken BR
+
+60
+00:03:00,770 --> 00:03:04,350
+to either location 0x4 (for
+synchronous exceptions)
+
+61
+00:03:04,350 --> 00:03:08,300
+or location 0x8 (for
+asynchronous interrupts).
+
+62
+00:03:08,300 --> 00:03:10,940
+Presumably the instructions
+in those locations
+
+63
+00:03:10,940 --> 00:03:13,810
+will jump to the entry points
+of the appropriate handler
+
+64
+00:03:13,810 --> 00:03:16,200
+routines.
+
+65
+00:03:16,200 --> 00:03:20,290
+We’ll save the PC+4 value of the
+interrupted program into R30,
+
+66
+00:03:20,290 --> 00:03:24,170
+a register dedicated
+to that purpose.
+
+67
+00:03:24,170 --> 00:03:28,280
+We’ll call that register XP
+(“exception pointer”) to remind
+
+68
+00:03:28,280 --> 00:03:30,680
+ourselves of how we’re using it.
+
+69
+00:03:30,680 --> 00:03:33,850
+Since interrupts in particular
+can happen at any point during
+
+70
+00:03:33,850 --> 00:03:37,850
+a program’s execution, thus
+overwriting the contents of XP
+
+71
+00:03:37,850 --> 00:03:42,460
+at any time, user programs can’t
+use the XP register to hold
+
+72
+00:03:42,460 --> 00:03:47,630
+values since those values
+might disappear at any moment!
+
+73
+00:03:47,630 --> 00:03:49,510
+Here’s how this scheme works:
+
+74
+00:03:49,510 --> 00:03:52,370
+suppose we don’t include
+hardware to implement the DIV
+
+75
+00:03:52,370 --> 00:03:56,890
+instruction, so it’s treated
+as an illegal opcode.
+
+76
+00:03:56,890 --> 00:03:59,390
+The exception hardware
+forces a procedure call
+
+77
+00:03:59,390 --> 00:04:03,280
+to location 0x4, which then
+branches to the Illop handler
+
+78
+00:04:03,280 --> 00:04:05,240
+shown here.
+
+79
+00:04:05,240 --> 00:04:09,470
+The PC+4 value of the DIV
+instruction has been saved
+
+80
+00:04:09,470 --> 00:04:13,060
+in the XP register, so the
+handler can fetch the illegal
+
+81
+00:04:13,060 --> 00:04:16,810
+instruction and, if it
+can, emulate its operation
+
+82
+00:04:16,810 --> 00:04:18,690
+in software.
+
+83
+00:04:18,690 --> 00:04:22,060
+When handler is complete,
+it can resume execution
+
+84
+00:04:22,060 --> 00:04:24,830
+of the original program at
+the instruction following
+
+85
+00:04:24,830 --> 00:04:27,740
+DIV by performing a JMP(XP).
+
+86
+00:04:27,740 --> 00:04:29,830
+Pretty neat!
+
+87
+00:04:29,830 --> 00:04:32,910
+To handle exceptions, we only
+need a few simple changes
+
+88
+00:04:32,910 --> 00:04:34,960
+to the datapath.
+
+89
+00:04:34,960 --> 00:04:38,440
+We’ve added a MUX controlled
+by the WASEL signal to choose
+
+90
+00:04:38,440 --> 00:04:41,680
+the write-back address
+for the register file.
+
+91
+00:04:41,680 --> 00:04:46,140
+When WASEL is 1, write-back
+will occur to the XP register,
+
+92
+00:04:46,140 --> 00:04:48,720
+i.e., register 30.
+
+93
+00:04:48,720 --> 00:04:53,130
+When WASEL is 0, write-back
+will occur normally, i.e.,
+
+94
+00:04:53,130 --> 00:04:55,740
+to the register
+specified by the RC field
+
+95
+00:04:55,740 --> 00:04:58,520
+of the current instruction.
+
+96
+00:04:58,520 --> 00:05:01,230
+The remaining two
+inputs of the PCSEL MUX
+
+97
+00:05:01,230 --> 00:05:03,600
+are set to the constant
+addresses for the exception
+
+98
+00:05:03,600 --> 00:05:04,750
+handlers.
+
+99
+00:05:04,750 --> 00:05:08,550
+In our case, 0x4 for illegal
+operations, and 0x8 for
+
+100
+00:05:08,550 --> 00:05:10,920
+interrupts.
+
+101
+00:05:10,920 --> 00:05:14,280
+Here’s the flow of control
+during an exception.
+
+102
+00:05:14,280 --> 00:05:17,410
+The PC+4 value for the
+interrupted instruction is
+
+103
+00:05:17,410 --> 00:05:20,740
+routed through the WDSEL MUX
+to be written into the XP
+
+104
+00:05:20,740 --> 00:05:22,330
+register.
+
+105
+00:05:22,330 --> 00:05:24,420
+Meanwhile the
+control logic chooses
+
+106
+00:05:24,420 --> 00:05:28,160
+either 3 or 4 as
+the value of PCSEL
+
+107
+00:05:28,160 --> 00:05:31,920
+to select the appropriate next
+instruction that will initiate
+
+108
+00:05:31,920 --> 00:05:34,930
+the handling the exception.
+
+109
+00:05:34,930 --> 00:05:37,510
+The remaining control signals
+are forced to their “don’t
+
+110
+00:05:37,510 --> 00:05:41,380
+care” values, since we no longer
+care about completing execution
+
+111
+00:05:41,380 --> 00:05:44,150
+of the instruction we had
+fetched from main memory
+
+112
+00:05:44,150 --> 00:05:46,980
+at the beginning of the cycle.
+
+113
+00:05:46,980 --> 00:05:49,420
+Note that the interrupted
+instruction has not
+
+114
+00:05:49,420 --> 00:05:50,900
+been executed.
+
+115
+00:05:50,900 --> 00:05:52,610
+So if the exception
+handler wishes
+
+116
+00:05:52,610 --> 00:05:55,030
+to execute the
+interrupted instruction,
+
+117
+00:05:55,030 --> 00:05:58,930
+it will have to subtract 4 from
+the value in the XP register
+
+118
+00:05:58,930 --> 00:06:02,690
+before performing a
+JMP(XP) to resume execution
+
+119
+00:06:02,690 --> 00:06:05,030
+of the interrupted program.

@@ -1,0 +1,371 @@
+1
+00:00:00,650 --> 00:00:05,800
+We're now in a position to define our what
+it means to be a digital processing element.
+
+2
+00:00:05,800 --> 00:00:10,490
+We say a device is a "combinational device"
+if it meets the following four criteria:
+
+3
+00:00:10,490 --> 00:00:17,300
+First, it should have digital inputs, by which
+we mean the device uses our signaling convention,
+
+4
+00:00:17,300 --> 00:00:23,750
+interpreting input voltages below V_L as the
+digital value 0, and voltages above V_H as
+
+5
+00:00:23,750 --> 00:00:25,869
+the digital value 1.
+
+6
+00:00:25,869 --> 00:00:32,348
+Second, the device's outputs should also be
+digital, producing outputs of 0 by generating
+
+7
+00:00:32,348 --> 00:00:37,360
+voltages less than or equal to V_L and outputs
+of 1 by generating voltages greater than or
+
+8
+00:00:37,360 --> 00:00:39,910
+equal to V_H.
+
+9
+00:00:39,910 --> 00:00:44,690
+With these two criteria, we should be able
+to hook the output of one combinational device
+
+10
+00:00:44,690 --> 00:00:49,900
+to the input of another and expect the signals
+passing between them to be interpreted correctly
+
+11
+00:00:49,900 --> 00:00:51,950
+as 0's and 1's.
+
+12
+00:00:51,950 --> 00:00:57,810
+Next, a combinational device is required to
+have a functional specification that details
+
+13
+00:00:57,810 --> 00:01:04,540
+the value of each output for every possible
+combination of digital values on the inputs.
+
+14
+00:01:04,540 --> 00:01:10,060
+In the example, the device has three digital
+inputs, and since each input can take on one
+
+15
+00:01:10,060 --> 00:01:17,150
+of two digital values, there are 2*2*2 or
+eight possible input configurations.
+
+16
+00:01:17,150 --> 00:01:21,820
+So the functional specification simply has
+to tell us the value of the output Y when
+
+17
+00:01:21,820 --> 00:01:29,440
+the inputs are 000, and the output when the
+inputs are 001, and so on, for all 8 input
+
+18
+00:01:29,440 --> 00:01:30,440
+patterns.
+
+19
+00:01:30,440 --> 00:01:34,479
+A simple table with eight rows would do the
+trick.
+
+20
+00:01:34,479 --> 00:01:40,930
+Finally, a combinational device has a timing
+specification that tells us how long it takes
+
+21
+00:01:40,930 --> 00:01:45,070
+for the output of the device to reflect changes
+in its input values.
+
+22
+00:01:45,070 --> 00:01:51,840
+At a minimum, there must a specification of
+the propagation delay, called t_PD, that is
+
+23
+00:01:51,840 --> 00:01:57,860
+an upper bound on the time from when the inputs
+reach stable and valid digital values, to
+
+24
+00:01:57,860 --> 00:02:03,229
+when the output is guaranteed to have a stable
+and valid output value.
+
+25
+00:02:03,229 --> 00:02:09,149
+Collectively, we call these four criteria
+the "static discipline," which must be satisfied
+
+26
+00:02:09,149 --> 00:02:12,540
+by all combinational devices.
+
+27
+00:02:12,540 --> 00:02:16,920
+In order to build larger combinational systems
+from combinational components, we'll follow
+
+28
+00:02:16,920 --> 00:02:19,920
+the composition rules set forth below.
+
+29
+00:02:19,920 --> 00:02:25,650
+First, each component of the system must itself
+be a combinational device.
+
+30
+00:02:25,650 --> 00:02:31,680
+Second, each input of each component must
+be connected a system input, or to exactly
+
+31
+00:02:31,680 --> 00:02:37,220
+one output of another device, or to a constant
+voltage representing the value 0 or the value
+
+32
+00:02:37,220 --> 00:02:38,590
+1.
+
+33
+00:02:38,590 --> 00:02:45,480
+Finally, the interconnected components cannot
+contain any directed cycles, i.e., paths through
+
+34
+00:02:45,480 --> 00:02:49,810
+the system from its inputs to its outputs
+will only visit a particular component at
+
+35
+00:02:49,810 --> 00:02:52,290
+most once.
+
+36
+00:02:52,290 --> 00:02:57,989
+Our claim is that systems built using these
+composition rules will themselves be combinational
+
+37
+00:02:57,989 --> 00:02:59,299
+devices.
+
+38
+00:02:59,299 --> 00:03:05,269
+In other words, we can build big combinational
+devices out of combinational components.
+
+39
+00:03:05,269 --> 00:03:10,159
+Unlike our flaky analog system from the start
+of the chapter, the system can be of any size
+
+40
+00:03:10,159 --> 00:03:14,319
+and still be expected to obey the static discipline.
+
+41
+00:03:14,319 --> 00:03:17,560
+Why is this true?
+
+42
+00:03:17,560 --> 00:03:22,480
+To see why the claim is true, consider the
+following system built from the combinational
+
+43
+00:03:22,480 --> 00:03:26,469
+devices A, B and C.
+Let's see if we can show that the overall
+
+44
+00:03:26,469 --> 00:03:31,040
+system, as indicated by the containing blue
+box, will itself be combinational.
+
+45
+00:03:31,040 --> 00:03:37,110
+We'll do this by showing that the overall
+system does, in fact, obey the static discipline.
+
+46
+00:03:37,110 --> 00:03:41,879
+First, does the overall system have digital
+inputs?
+
+47
+00:03:41,879 --> 00:03:42,889
+Yes!
+
+48
+00:03:42,889 --> 00:03:47,099
+The system's inputs are inputs to some of
+the component devices.
+
+49
+00:03:47,099 --> 00:03:51,849
+Since the components are combinational, and
+hence have digital inputs, the overall system
+
+50
+00:03:51,849 --> 00:03:53,589
+has digital inputs.
+
+51
+00:03:53,589 --> 00:03:58,569
+In this case, the system is inheriting its
+properties from the properties of its components.
+
+52
+00:03:58,569 --> 00:04:03,189
+Second, does the overall system have digital
+outputs?
+
+53
+00:04:03,189 --> 00:04:05,829
+Yes, by the same reasoning.
+
+54
+00:04:05,829 --> 00:04:09,939
+All the system's outputs are connected to
+one of the components and since the components
+
+55
+00:04:09,939 --> 00:04:14,189
+are combinational, the outputs are digital.
+
+56
+00:04:14,189 --> 00:04:20,120
+Third, can we derive a functional specification
+for the overall system, i.e., can we specify
+
+57
+00:04:20,120 --> 00:04:25,220
+the expected output values for each combination
+of digital input values?
+
+58
+00:04:25,220 --> 00:04:30,979
+Yes, we can by incrementally propagating information
+about the current input values through the
+
+59
+00:04:30,979 --> 00:04:33,159
+component modules.
+
+60
+00:04:33,159 --> 00:04:39,150
+In the example shown, since A is combinational,
+we can determine the value on its output given
+
+61
+00:04:39,150 --> 00:04:44,520
+the value on its inputs by using A's functional
+specification.
+
+62
+00:04:44,520 --> 00:04:49,650
+Now we know the values on all of B's inputs
+and can use its functional specification to
+
+63
+00:04:49,650 --> 00:04:52,080
+determine its output value.
+
+64
+00:04:52,080 --> 00:04:57,991
+Finally, since we've now determined the values
+on all of C's inputs, we can compute its output
+
+65
+00:04:57,991 --> 00:05:00,780
+value using C's functional specification.
+
+66
+00:05:00,780 --> 00:05:06,620
+In general, since there are no cycles in the
+circuit, we can determine the value of every
+
+67
+00:05:06,620 --> 00:05:11,960
+internal signal by evaluating the behavior
+of the combinational components in an order
+
+68
+00:05:11,960 --> 00:05:15,680
+that's determined by the circuit topology.
+
+69
+00:05:15,680 --> 00:05:23,400
+Finally, can we derive the system's propagation
+delay, t_PD, using the t_PDs of the components?
+
+70
+00:05:23,400 --> 00:05:29,270
+Again, since there are no cycles, we can enumerate
+the finite-length paths from system inputs
+
+71
+00:05:29,270 --> 00:05:31,170
+to system outputs.
+
+72
+00:05:31,170 --> 00:05:37,020
+Then, we can compute the t_PD along a particular
+path by summing the t_PDs of the components
+
+73
+00:05:37,020 --> 00:05:39,060
+along the path.
+
+74
+00:05:39,060 --> 00:05:44,760
+The t_PD of the overall system will be the
+maximum of the path t_PDs considering all
+
+75
+00:05:44,760 --> 00:05:52,909
+the possible paths from inputs to outputs,
+i.e, the t_PD of the longest such path.
+
+76
+00:05:52,909 --> 00:05:58,880
+So the overall system does in fact obey the
+static discipline and so it is indeed a combinational
+
+77
+00:05:58,880 --> 00:06:00,220
+device. Pretty neat!
+
+78
+00:06:00,220 --> 00:06:05,400
+We can use our composition
+rules to build combinational devices of arbitrary
+
+79
+00:06:05,400 --> 00:06:05,860
+complexity.

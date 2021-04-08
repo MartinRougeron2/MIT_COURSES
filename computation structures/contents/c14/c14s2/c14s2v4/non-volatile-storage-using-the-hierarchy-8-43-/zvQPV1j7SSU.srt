@@ -1,0 +1,543 @@
+1
+00:00:00,890 --> 00:00:05,649
+Non-volatile memories are used to maintain
+system state even when the system is powered
+
+2
+00:00:05,649 --> 00:00:06,790
+down.
+
+3
+00:00:06,790 --> 00:00:12,160
+In flash memories, long-term storage is achieved
+by storing charge on an well-insulated conductor
+
+4
+00:00:12,160 --> 00:00:16,920
+called a floating gate, where it will remain
+stable for years.
+
+5
+00:00:16,920 --> 00:00:22,190
+The floating gate is incorporated in a standard
+MOSFET, placed between the MOSFET's gate and
+
+6
+00:00:22,190 --> 00:00:24,130
+the MOSFET's channel.
+
+7
+00:00:24,130 --> 00:00:29,619
+If there is no charge stored on the floating
+gate, the MOSFET can be turned on, i.e., be
+
+8
+00:00:29,619 --> 00:00:35,190
+made to conduct, by placing a voltage V_1
+on the gate terminal, creating an inversion
+
+9
+00:00:35,190 --> 00:00:40,210
+layer that connects the MOSFET's source and
+drain terminals.
+
+10
+00:00:40,210 --> 00:00:45,219
+If there is a charge stored on the floating
+gate, a higher voltage V_2 is required to
+
+11
+00:00:45,219 --> 00:00:46,800
+turn on the MOSFET.
+
+12
+00:00:46,800 --> 00:00:51,469
+By setting the gate terminal to a voltage
+between V_1 and V_2, we can determine if the
+
+13
+00:00:51,469 --> 00:00:55,989
+floating gate is charged by testing to see
+if the MOSFET is conducting.
+
+14
+00:00:55,989 --> 00:01:01,030
+In fact, if we can measure the current flowing
+through the MOSFET, we can determine how much
+
+15
+00:01:01,030 --> 00:01:06,360
+charge is stored on the floating gate, making
+it possible to store multiple bits of information
+
+16
+00:01:06,360 --> 00:01:11,700
+in one flash cell by varying the amount of
+charge on its floating gate.
+
+17
+00:01:11,700 --> 00:01:17,270
+Flash cells can be connected in parallel or
+series to form circuits resembling CMOS NOR
+
+18
+00:01:17,270 --> 00:01:22,750
+or NAND gates, allowing for a variety of access
+architectures suitable for either random or
+
+19
+00:01:22,750 --> 00:01:26,039
+sequential access.
+
+20
+00:01:26,039 --> 00:01:30,860
+Flash memories are very dense, approaching
+the areal density of DRAMs, particularly when
+
+21
+00:01:30,860 --> 00:01:35,250
+each cell holds multiple bits of information.
+
+22
+00:01:35,250 --> 00:01:39,939
+Read access times for NOR flash memories are
+similar to that of DRAMs, several tens of
+
+23
+00:01:39,939 --> 00:01:41,710
+nanoseconds.
+
+24
+00:01:41,710 --> 00:01:47,420
+Read times for NAND flash memories are much
+longer, on the order of 10 microseconds.
+
+25
+00:01:47,420 --> 00:01:51,610
+Write times for all types of flash memories
+are quite long since high voltages have to
+
+26
+00:01:51,610 --> 00:01:58,969
+be used to force electrons to cross the insulating
+barrier surrounding the floating gate.
+
+27
+00:01:58,969 --> 00:02:03,530
+Flash memories can only be written some number
+of times before the insulating layer is damaged
+
+28
+00:02:03,530 --> 00:02:08,699
+to the point that the floating gate will no
+longer reliably store charge.
+
+29
+00:02:08,699 --> 00:02:13,070
+Currently the number of guaranteed writes
+varies between 100,000 and
+
+30
+00:02:13,070 --> 00:02:19,060
+To work around this limitation, flash chips
+contain clever address mapping algorithms
+
+31
+00:02:19,060 --> 00:02:23,709
+so that writes to the same address actually
+are mapped to different flash cells on each
+
+32
+00:02:23,709 --> 00:02:26,320
+successive write.
+
+33
+00:02:26,320 --> 00:02:31,290
+The bottom line is that flash memories are
+a higher-performance but higher-cost replacement
+
+34
+00:02:31,290 --> 00:02:37,530
+for the hard-disk drive, the long-time technology
+of choice for non-volatile storage.
+
+35
+00:02:37,530 --> 00:02:43,540
+A hard-disk drive (HDD) contains one or more
+rotating platters coated with a magnetic material.
+
+36
+00:02:43,540 --> 00:02:48,460
+The platters rotate at speeds ranging from
+5400 to 15000 RPM.
+
+37
+00:02:48,460 --> 00:02:55,010
+A read/write head positioned above the surface
+of a platter can detect or change the orientation
+
+38
+00:02:55,010 --> 00:02:59,320
+of the magnetization of the magnetic material
+below.
+
+39
+00:02:59,320 --> 00:03:04,049
+The read/write head is mounted an actuator
+that allows it to be positioned over different
+
+40
+00:03:04,049 --> 00:03:06,319
+circular tracks.
+
+41
+00:03:06,319 --> 00:03:11,230
+To read a particular sector of data, the head
+must be positioned radially over the correct
+
+42
+00:03:11,230 --> 00:03:17,220
+track, then wait for the platter to rotate
+until it's over the desired sector.
+
+43
+00:03:17,220 --> 00:03:23,049
+The average total time required to correctly
+position the head is on the order of 10 milliseconds,
+
+44
+00:03:23,049 --> 00:03:26,019
+so hard disk access times are quite long.
+
+45
+00:03:26,019 --> 00:03:30,629
+However, once the read/write head is in the
+correct position, data can be transferred
+
+46
+00:03:30,629 --> 00:03:33,739
+at the respectable rate of 100 megabytes/second.
+
+47
+00:03:33,739 --> 00:03:39,019
+If the head has to be repositioned between
+each access, the effective transfer rate drops
+
+48
+00:03:39,019 --> 00:03:44,770
+1000-fold, limited by the time it takes to
+reposition the head.
+
+49
+00:03:44,770 --> 00:03:50,930
+Hard disk drives provide cost-effective non-volatile
+storage for terabytes of data, albeit at the
+
+50
+00:03:50,930 --> 00:03:53,849
+cost of slow access times.
+
+51
+00:03:53,849 --> 00:03:57,459
+This completes our whirlwind tour of memory
+technologies.
+
+52
+00:03:57,459 --> 00:04:03,720
+If you'd like to learn a bit more, Wikipedia
+has useful articles on each type of device.
+
+53
+00:04:03,720 --> 00:04:08,579
+SRAM sizes and access times have kept pace
+with the improvements in the size and speed
+
+54
+00:04:08,579 --> 00:04:10,239
+of integrated circuits.
+
+55
+00:04:10,239 --> 00:04:15,970
+Interestingly, although capacities and transfer
+rates for DRAMs and HDDs have improved, their
+
+56
+00:04:15,970 --> 00:04:19,019
+initial access times have not improved nearly
+as rapidly.
+
+57
+00:04:19,019 --> 00:04:25,190
+Thankfully over the past decade flash memories
+have helped to fill the performance gap between
+
+58
+00:04:25,190 --> 00:04:28,670
+processor speeds and HDDs.
+
+59
+00:04:28,670 --> 00:04:34,830
+But the gap between processor cycle times
+and DRAM access times has continued to widen,
+
+60
+00:04:34,830 --> 00:04:40,770
+increasing the challenge of designing low-latency
+high-capacity memory systems.
+
+61
+00:04:40,770 --> 00:04:46,290
+The capacity of the available memory technologies
+varies over 10 orders of magnitude, and the
+
+62
+00:04:46,290 --> 00:04:50,530
+variation in latencies varies over 8 orders
+of magnitude.
+
+63
+00:04:50,530 --> 00:04:57,200
+This creates a considerable challenge in figuring
+out how to navigate the speed vs size tradeoffs.
+
+64
+00:04:57,200 --> 00:05:02,320
+Each transition in memory hierarchy shows
+the same fundamental design choice: we can
+
+65
+00:05:02,320 --> 00:05:06,180
+pick smaller-and-faster or larger-and-slower.
+
+66
+00:05:06,180 --> 00:05:12,170
+This is a bit awkward actually - can we figure
+how to get the best of both worlds?
+
+67
+00:05:12,170 --> 00:05:17,110
+We want our system to behave as if it had
+a large, fast, and cheap main memory.
+
+68
+00:05:17,110 --> 00:05:21,530
+Clearly we can't achieve this goal using any
+single memory technology.
+
+69
+00:05:21,530 --> 00:05:27,700
+Here's an idea: can we use a hierarchical
+system of memories with different tradeoffs
+
+70
+00:05:27,700 --> 00:05:32,820
+to achieve close to the same results as a
+large, fast, cheap memory?
+
+71
+00:05:32,820 --> 00:05:37,780
+Could we arrange for memory locations we're
+using often to be stored, say, in SRAM and
+
+72
+00:05:37,780 --> 00:05:40,960
+have those accesses be low latency?
+
+73
+00:05:40,960 --> 00:05:45,659
+Could the rest of the data could be stored
+in the larger and slower memory components,
+
+74
+00:05:45,659 --> 00:05:47,550
+moving the between the levels when necessary?
+
+75
+00:05:47,550 --> 00:05:52,180
+Let's follow this train of thought and see
+where it leads us.
+
+76
+00:05:52,180 --> 00:05:54,600
+There are two approaches we might take.
+
+77
+00:05:54,600 --> 00:05:59,520
+The first is to expose the hierarchy, providing
+some amount of each type of storage and let
+
+78
+00:05:59,520 --> 00:06:05,100
+the programmer decide how best to allocate
+the various memory resources for each particular
+
+79
+00:06:05,100 --> 00:06:06,880
+computation.
+
+80
+00:06:06,880 --> 00:06:11,430
+The programmer would write code that moved
+data into fast storage when appropriate, then
+
+81
+00:06:11,430 --> 00:06:16,830
+back to the larger and slower memories when
+low-latency access was no longer required.
+
+82
+00:06:16,830 --> 00:06:21,841
+There would only be a small amount of the
+fastest memory, so data would be constantly
+
+83
+00:06:21,841 --> 00:06:26,940
+in motion as the focus of the computation
+changed.
+
+84
+00:06:26,940 --> 00:06:29,820
+This approach has had notable advocates.
+
+85
+00:06:29,820 --> 00:06:35,530
+Perhaps the most influential was Seymour Cray,
+the "Steve Jobs" of supercomputers.
+
+86
+00:06:35,530 --> 00:06:40,880
+Cray was the architect of the world's fastest
+computers in each of three decades, inventing
+
+87
+00:06:40,880 --> 00:06:46,690
+many of the technologies that form the foundation
+of high-performance computing.
+
+88
+00:06:46,690 --> 00:06:52,480
+His insight to managing the memory hierarchy
+was to organize data as vectors and move vectors
+
+89
+00:06:52,480 --> 00:06:55,740
+in and out of fast memory under program control.
+
+90
+00:06:55,740 --> 00:07:00,880
+This was actually a good data abstraction
+for certain types of scientific computing
+
+91
+00:07:00,880 --> 00:07:06,030
+and his vector machines had the top computing
+benchmarks for many years.
+
+92
+00:07:06,030 --> 00:07:11,910
+The second alternative is to hide the hierarchy
+and simply tell the programmer they have a
+
+93
+00:07:11,910 --> 00:07:15,680
+large, uniform address space to use as they
+wish.
+
+94
+00:07:15,680 --> 00:07:20,780
+The memory system would, behind the scenes,
+move data between the various levels of the
+
+95
+00:07:20,780 --> 00:07:25,810
+memory hierarchy, depending on the usage patterns
+it detected.
+
+96
+00:07:25,810 --> 00:07:30,780
+This would require circuitry to examine each
+memory access issued by the CPU to determine
+
+97
+00:07:30,780 --> 00:07:34,990
+where in the hierarchy to find the requested
+location.
+
+98
+00:07:34,990 --> 00:07:40,340
+And then, if a particular region of addresses
+was frequently accessed - say, when fetching
+
+99
+00:07:40,340 --> 00:07:43,810
+instructions in a loop -
+the memory system would arrange for those
+
+100
+00:07:43,810 --> 00:07:48,540
+accesses to be mapped to the fastest memory
+component and automatically move the loop
+
+101
+00:07:48,540 --> 00:07:49,900
+instructions there.
+
+102
+00:07:49,900 --> 00:07:55,250
+All of this machinery would be transparent
+to the programmer: the program would simply
+
+103
+00:07:55,250 --> 00:08:01,110
+fetch instructions and access data and the
+memory system would handle the rest.
+
+104
+00:08:01,110 --> 00:08:05,410
+Could the memory system automatically arrange
+for the right data to be in the right place
+
+105
+00:08:05,410 --> 00:08:07,590
+at the right time?
+
+106
+00:08:07,590 --> 00:08:10,580
+Cray was deeply skeptical of this approach.
+
+107
+00:08:10,580 --> 00:08:14,450
+He famously quipped "that you can't fake what
+you haven't got".
+
+108
+00:08:14,450 --> 00:08:18,750
+Wouldn't the programmer, with her knowledge
+of how data was going to be used by a particular
+
+109
+00:08:18,750 --> 00:08:24,440
+program, be able to do a better job by explicitly
+managing the memory hierarchy?
+
+110
+00:08:24,440 --> 00:08:30,190
+It turns out that when running general-purpose
+programs, it is possible to build an automatically
+
+111
+00:08:30,190 --> 00:08:37,090
+managed, low-latency, high-capacity hierarchical
+memory system that appears as one large, uniform
+
+112
+00:08:37,090 --> 00:08:38,090
+memory.
+
+113
+00:08:38,090 --> 00:08:41,510
+What's the insight that makes this possible?
+
+114
+00:08:41,510 --> 00:08:43,140
+That's the topic of the next section.

@@ -1,0 +1,439 @@
+1
+00:00:00,280 --> 00:00:05,230
+In this exercise, we will learn how semaphores
+can be used to ensure that different precedence
+
+2
+00:00:05,230 --> 00:00:09,099
+constraints in our programs can be satisfied.
+
+3
+00:00:09,099 --> 00:00:13,751
+Before diving into the use of semaphores to
+enforce our precedence requirements, let's
+
+4
+00:00:13,751 --> 00:00:16,890
+review what tools we have available to us.
+
+5
+00:00:16,890 --> 00:00:21,590
+You can think of a semaphore as a shared resource
+that is limited in quantity.
+
+6
+00:00:21,590 --> 00:00:27,520
+If we have a semaphore S that is initialized
+to 0 then it represents the fact that currently
+
+7
+00:00:27,520 --> 00:00:30,160
+resource S is not available.
+
+8
+00:00:30,160 --> 00:00:36,329
+If S equals 1, then that means that exactly
+one S resource is available for use.
+
+9
+00:00:36,329 --> 00:00:41,910
+If S equals 2, then there are 2 S resources
+available, and so on.
+
+10
+00:00:41,910 --> 00:00:47,480
+In order to make use of the shared resource,
+a process must first grab that resource.
+
+11
+00:00:47,480 --> 00:00:53,520
+This is achieved by adding a wait(S) call
+before the code that requires the resource.
+
+12
+00:00:53,520 --> 00:00:58,940
+As long as the value of S equals 0, the code
+that is waiting for this resource is stalled
+
+13
+00:00:58,940 --> 00:01:03,440
+meaning that it can't get past the wait(S)
+command.
+
+14
+00:01:03,440 --> 00:01:09,640
+To get past the wait(S) call, the value of
+semaphore S must be greater than 0, indicating
+
+15
+00:01:09,640 --> 00:01:12,439
+that the resource is available.
+
+16
+00:01:12,439 --> 00:01:18,049
+Grabbing the resource is achieved by decrementing
+the value of the semaphore by 1.
+
+17
+00:01:18,049 --> 00:01:22,259
+Analogous to the wait(S) command, we have
+a signal(S) command.
+
+18
+00:01:22,259 --> 00:01:28,420
+A signal of semaphore S indicates that one
+additional S resource has become available.
+
+19
+00:01:28,420 --> 00:01:32,259
+The signal(S) command increments the value
+of S by 1.
+
+20
+00:01:32,259 --> 00:01:37,899
+The result of this is that a process that
+is waiting on S will now be able to grab it
+
+21
+00:01:37,899 --> 00:01:40,610
+and proceed with the next line of code.
+
+22
+00:01:40,610 --> 00:01:46,240
+Now, lets consider two processes, P1 and P2,
+that run concurrently.
+
+23
+00:01:46,240 --> 00:01:51,439
+P1 has two sections of code where section
+A is followed by section B.
+
+24
+00:01:51,439 --> 00:01:58,020
+Similarly, P2 has two sections which are C
+followed by D.
+
+25
+00:01:58,020 --> 00:02:03,950
+Within each process execution proceeds sequentially,
+so we are guaranteed that A will always precede
+
+26
+00:02:03,950 --> 00:02:09,478
+B, and C will always precede D.
+Let's also assume that there is no looping
+
+27
+00:02:09,478 --> 00:02:12,870
+and that each process runs exactly once.
+
+28
+00:02:12,870 --> 00:02:17,640
+We want to consider how we can make use of
+different semaphores to ensure any necessary
+
+29
+00:02:17,640 --> 00:02:20,269
+precedence constraints in the code.
+
+30
+00:02:20,269 --> 00:02:25,680
+Suppose that the constraint that we need to
+satisfy is that the section B code completes
+
+31
+00:02:25,680 --> 00:02:29,870
+before the section C code begins execution.
+
+32
+00:02:29,870 --> 00:02:35,750
+We can achieve this using semaphore S by first
+initializing the semaphore to 0 in shared
+
+33
+00:02:35,750 --> 00:02:36,880
+memory.
+
+34
+00:02:36,880 --> 00:02:43,680
+Next, in order to ensure that section C code
+does not begin running too early, we add a
+
+35
+00:02:43,680 --> 00:02:47,890
+wait(S) call before the section C code.
+
+36
+00:02:47,890 --> 00:02:52,640
+As long as S = 0, the code in process P2 will
+not get to run.
+
+37
+00:02:52,640 --> 00:02:59,160
+P1 on the other hand, will not be constrained
+in this way, so section A code can begin running
+
+38
+00:02:59,160 --> 00:03:00,799
+right away.
+
+39
+00:03:00,799 --> 00:03:05,349
+Since section B follows section A, it will
+be executed after section A.
+
+40
+00:03:05,349 --> 00:03:13,299
+Once B completes, process P1 needs to signal
+our semaphore to indicate that it is now okay
+
+41
+00:03:13,299 --> 00:03:16,269
+for process P2 to begin its execution.
+
+42
+00:03:16,269 --> 00:03:23,930
+The signal(S) call will set S = 1, which will
+allow P2 to finally move beyond the wait(S)
+
+43
+00:03:23,930 --> 00:03:25,030
+command.
+
+44
+00:03:25,030 --> 00:03:30,579
+Next, lets consider a slightly more complicated
+constraint where section D precedes section
+
+45
+00:03:30,579 --> 00:03:39,810
+A, OR section B precedes section C.
+In other words, P1 and P2 cannot overlap.
+
+46
+00:03:39,810 --> 00:03:45,799
+One has to run followed by the other but either
+of them can be the one to run first.
+
+47
+00:03:45,799 --> 00:03:51,180
+To achieve this we want to use our S semaphore
+as a mutual exclusion semaphore.
+
+48
+00:03:51,180 --> 00:03:57,579
+A mutual exclusion semaphore, or mutex, ensures
+that only one complete block of code can run
+
+49
+00:03:57,579 --> 00:04:00,459
+at a time without getting interrupted.
+
+50
+00:04:00,459 --> 00:04:06,319
+This can be achieved by initializing our semaphore
+S to 1 and having a wait(S) statement at the
+
+51
+00:04:06,319 --> 00:04:08,579
+top of both processes.
+
+52
+00:04:08,579 --> 00:04:14,799
+Since S is initialized to 1, only one of the
+two processes will be able to grab the S semaphore.
+
+53
+00:04:14,799 --> 00:04:19,100
+Whichever process happens to grab it first
+is the one that will run first.
+
+54
+00:04:19,100 --> 00:04:22,980
+There is one last piece of code we need to
+add to complete our requirements which is
+
+55
+00:04:22,980 --> 00:04:27,970
+that at the end of both processes' code, we
+must signal(S).
+
+56
+00:04:27,970 --> 00:04:34,009
+If we do not signal(S) then only the process
+that happened to grab the S semaphore first
+
+57
+00:04:34,009 --> 00:04:38,570
+will get to run while the other is stuck waiting
+for the S semaphore.
+
+58
+00:04:38,570 --> 00:04:44,720
+If at the end of the process, we signal S,
+then S gets incremented back to 1 thus allowing
+
+59
+00:04:44,720 --> 00:04:47,400
+the next process to execute.
+
+60
+00:04:47,400 --> 00:04:51,450
+Note that because this code does not loop,
+there is no concern about the first process
+
+61
+00:04:51,450 --> 00:04:53,980
+grabbing the S semaphore again.
+
+62
+00:04:53,980 --> 00:04:57,460
+Finally, lets consider one last set of constraints.
+
+63
+00:04:57,460 --> 00:05:03,750
+In this case, we want to ensure that the first
+section of both processes P1 and P2 run before
+
+64
+00:05:03,750 --> 00:05:07,539
+the second section of processes P1 and P2.
+
+65
+00:05:07,539 --> 00:05:13,030
+In other words A must precede B and D, and
+C must precede B and D.
+
+66
+00:05:13,030 --> 00:05:18,910
+The constraint that A must precede B, and
+C must precede D is satisfied by default because
+
+67
+00:05:18,910 --> 00:05:21,910
+the code is always executed in order.
+
+68
+00:05:21,910 --> 00:05:28,509
+This means that our constraint reduces to
+A preceding D, and C preceding B.
+
+69
+00:05:28,509 --> 00:05:37,080
+To achieve this, we need to use two semaphores,
+say S and T and initialize them to 0.
+
+70
+00:05:37,080 --> 00:05:41,810
+After the first section of a process completes,
+it should signal to the other process that
+
+71
+00:05:41,810 --> 00:05:47,241
+it may begin its second section of code provided
+that it has already completed its first section
+
+72
+00:05:47,241 --> 00:05:48,241
+of code.
+
+73
+00:05:48,241 --> 00:05:53,180
+To ensure that it has already completed its
+first section of code, we place the signal
+
+74
+00:05:53,180 --> 00:05:57,590
+calls between the two sections of code in
+each process.
+
+75
+00:05:57,590 --> 00:06:02,660
+In addition to signaling the other process
+that it may proceed, each of the processes
+
+76
+00:06:02,660 --> 00:06:06,949
+needs to wait for the semaphore that the other
+process is signaling.
+
+77
+00:06:06,949 --> 00:06:12,259
+This combination of signal and wait ensures
+that sections A and C of the code will run
+
+78
+00:06:12,259 --> 00:06:18,169
+before sections B and D.
+Since the semaphores are initialized to 0,
+
+79
+00:06:18,169 --> 00:06:24,060
+the wait(S) will not complete until P1 calls
+signal(S) at which point it has already completed
+
+80
+00:06:24,060 --> 00:06:29,610
+section A.
+Similarly, the wait(T) will not complete until
+
+81
+00:06:29,610 --> 00:06:35,950
+P2 calls signal(T) at which point it has already
+completed section C.
+
+82
+00:06:35,950 --> 00:06:41,009
+So once the processes can get past their wait
+commands, we are guaranteed that both first
+
+83
+00:06:41,009 --> 00:06:44,040
+sections of code have already run.
+
+84
+00:06:44,040 --> 00:06:50,539
+We have also not forced any additional constraints
+by requiring A to run before C or C to run
+
+85
+00:06:50,539 --> 00:06:54,520
+before A, and so on.
+
+86
+00:06:54,520 --> 00:06:59,030
+Of course we could have swapped our use of
+the S and T semaphores and ended up with exactly
+
+87
+00:06:59,030 --> 00:07:00,470
+the same behavior.
+
+88
+00:07:00,470 --> 00:07:05,759
+Note, however, that we cannot swap the signal
+and wait commands around.
+
+89
+00:07:05,759 --> 00:07:11,150
+If we tried to call wait before signal, then
+both processes would get deadlocked waiting
+
+90
+00:07:11,150 --> 00:07:13,960
+for a semaphore that never gets signaled.
+
+91
+00:07:13,960 --> 00:07:19,200
+This highlights the fact that when using semaphores
+you must always be very careful to not only
+
+92
+00:07:19,200 --> 00:07:25,110
+worry about satisfying the desired requirements,
+but also ensuring that there is no possibility
+
+93
+00:07:25,110 --> 00:07:31,280
+of ending up in a deadlock situation where
+one or more processes can never run to completion.

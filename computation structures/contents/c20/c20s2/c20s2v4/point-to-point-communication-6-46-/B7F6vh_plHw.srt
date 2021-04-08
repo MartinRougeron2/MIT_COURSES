@@ -1,0 +1,437 @@
+1
+00:00:01,040 --> 00:00:06,100
+Network technologies were developed to connect
+components (in this case individual computer
+
+2
+00:00:06,100 --> 00:00:13,769
+systems) separated by larger distances, i.e.,
+distances measured in meters instead of centimeters.
+
+3
+00:00:13,769 --> 00:00:17,650
+Communicating over these larger distances
+led to different design tradeoffs.
+
+4
+00:00:17,650 --> 00:00:23,020
+In early networks, information was sent as
+a sequence of bits over the shared communication
+
+5
+00:00:23,020 --> 00:00:24,020
+medium.
+
+6
+00:00:24,020 --> 00:00:28,960
+The bits were organized into packets, each
+containing the address of the destination.
+
+7
+00:00:28,960 --> 00:00:34,520
+Packets also included a checksum used to detect
+errors in transmission and the protocol supported
+
+8
+00:00:34,520 --> 00:00:39,520
+the ability to request the retransmission
+of corrupted packets.
+
+9
+00:00:39,520 --> 00:00:44,520
+The software controlling the network is divided
+into a "stack" of modules, each implementing
+
+10
+00:00:44,520 --> 00:00:47,330
+a different communication abstraction.
+
+11
+00:00:47,330 --> 00:00:52,250
+The lowest-level physical layer is responsible
+for transmitting and receiving an individual
+
+12
+00:00:52,250 --> 00:00:54,400
+packet of bits.
+
+13
+00:00:54,400 --> 00:01:00,130
+Bit errors are detected and corrected, and
+packets with uncorrectable errors are discarded.
+
+14
+00:01:00,130 --> 00:01:04,819
+There are different physical-layer modules
+available for the different types of physical
+
+15
+00:01:04,819 --> 00:01:06,350
+networks.
+
+16
+00:01:06,350 --> 00:01:10,490
+The network layer deals with the addressing
+and routing of packets.
+
+17
+00:01:10,490 --> 00:01:15,280
+Clever routing algorithms find the shortest
+communication path through the multi-hop network
+
+18
+00:01:15,280 --> 00:01:20,760
+and deal with momentary or long-term outages
+on particular network links.
+
+19
+00:01:20,760 --> 00:01:25,370
+The transport layer is responsible for providing
+the reliable communication of a stream of
+
+20
+00:01:25,370 --> 00:01:30,390
+data, dealing with the issues of discarded
+or out-of-order packets.
+
+21
+00:01:30,390 --> 00:01:36,330
+In an effort to optimize network usage and
+limit packet loses due to network congestion,
+
+22
+00:01:36,330 --> 00:01:42,000
+the transport layer deals with flow control,
+i.e., the rate at which packets are sent.
+
+23
+00:01:42,000 --> 00:01:47,590
+A key idea in the networking community is
+the notion of building a reliable communication
+
+24
+00:01:47,590 --> 00:01:51,729
+channel on top of a "best efforts" packet
+network.
+
+25
+00:01:51,729 --> 00:01:55,939
+Higher layers of the protocol are designed
+so that its possible to recover from errors
+
+26
+00:01:55,939 --> 00:01:57,280
+in the lower layers.
+
+27
+00:01:57,280 --> 00:02:04,119
+This has proven to be much more cost-effective
+and robust than trying to achieve 100% reliability
+
+28
+00:02:04,119 --> 00:02:06,400
+at each layer.
+
+29
+00:02:06,400 --> 00:02:10,799
+As we saw in the previous section, there are
+a lot of electrical issues when trying to
+
+30
+00:02:10,799 --> 00:02:15,760
+communicate over a shared wire with multiple
+drivers and receivers.
+
+31
+00:02:15,760 --> 00:02:21,200
+Slowing down the rate of communication helps
+to solve the problems, but "slow" isn't in
+
+32
+00:02:21,200 --> 00:02:25,629
+the cards for today's high-performance systems.
+
+33
+00:02:25,629 --> 00:02:30,489
+Experience in the network world has shown
+that the fastest and least problematic communication
+
+34
+00:02:30,489 --> 00:02:36,569
+channels have a single driver communicating
+with a single receiver, what's called a point-to-point
+
+35
+00:02:36,569 --> 00:02:37,790
+link.
+
+36
+00:02:37,790 --> 00:02:41,040
+Using differential signaling is particularly
+robust.
+
+37
+00:02:41,040 --> 00:02:44,739
+With differential signaling, the receiver
+measures the voltage difference across the
+
+38
+00:02:44,739 --> 00:02:47,010
+two signaling wires.
+
+39
+00:02:47,010 --> 00:02:51,029
+Electrical effects that might induce voltage
+noise on one signaling wire will affect the
+
+40
+00:02:51,029 --> 00:02:57,950
+other in equal measure, so the voltage difference
+will be largely unaffected by most noise.
+
+41
+00:02:57,950 --> 00:03:02,620
+Almost all high-performance communication
+links use differential signaling.
+
+42
+00:03:02,620 --> 00:03:07,419
+If we're sending digital data, does that mean
+we also have to send a separate clock signal
+
+43
+00:03:07,419 --> 00:03:12,689
+so the receiver knows when to sample the signal
+to determine the next bit?
+
+44
+00:03:12,689 --> 00:03:16,379
+With some cleverness, it turns out that we
+can recover the timing information from the
+
+45
+00:03:16,379 --> 00:03:21,510
+received signal assuming we know the nominal
+clock period at the transmitter.
+
+46
+00:03:21,510 --> 00:03:25,879
+If the transmitter changes the bit its sending
+at the rising edge of the transmitter's clock,
+
+47
+00:03:25,879 --> 00:03:30,769
+then the receiver can use the transitions
+in the received waveform to infer the timing
+
+48
+00:03:30,769 --> 00:03:33,139
+for some of the clock edges.
+
+49
+00:03:33,139 --> 00:03:36,980
+Then the receiver can use its knowledge of
+the transmitter's nominal clock period to
+
+50
+00:03:36,980 --> 00:03:40,689
+infer the location of the remaining clock
+edges.
+
+51
+00:03:40,689 --> 00:03:45,829
+It does this by using a phase-locked loop
+to generate a local facsimile of the transmitter's
+
+52
+00:03:45,829 --> 00:03:52,379
+clock, using any received transitions to correct
+the phase and period of the local clock.
+
+53
+00:03:52,379 --> 00:03:56,629
+The transmitter adds a training sequence of
+bits at the front of packet to ensure that
+
+54
+00:03:56,629 --> 00:04:01,620
+the receiver's phased-lock loop is properly
+synchronized before the packet data itself
+
+55
+00:04:01,620 --> 00:04:03,040
+is transmitted.
+
+56
+00:04:03,040 --> 00:04:08,499
+A unique bit sequence is used to separate
+the training signal from the packet data so
+
+57
+00:04:08,499 --> 00:04:11,809
+the receiver can tell exactly where the packet
+starts
+
+58
+00:04:11,809 --> 00:04:16,339
+even if it missed a few training bits while
+the clocks were being properly synchronized.
+
+59
+00:04:16,339 --> 00:04:20,899
+Once the receiver knows the timing of the
+clock edges, it can then sample the incoming
+
+60
+00:04:20,899 --> 00:04:27,040
+waveform towards the end of each clock period
+to determine the transmitted bit.
+
+61
+00:04:27,040 --> 00:04:31,650
+To keep the local clock in sync with the transmitter's
+clock, the incoming waveform needs to have
+
+62
+00:04:31,650 --> 00:04:34,130
+reasonably frequent transitions.
+
+63
+00:04:34,130 --> 00:04:39,190
+But if the transmitter is sending say, all
+zeroes, how can we guarantee frequent-enough
+
+64
+00:04:39,190 --> 00:04:41,500
+clock edges?
+
+65
+00:04:41,500 --> 00:04:47,510
+The trick, invented by IBM, is for the transmitter
+to take the stream of message bits and re-encode
+
+66
+00:04:47,510 --> 00:04:52,540
+them into a bit stream that is guaranteed
+to have transitions no matter what the message
+
+67
+00:04:52,540 --> 00:04:54,290
+bits are.
+
+68
+00:04:54,290 --> 00:05:01,190
+The most commonly used encoding is 8b10b,
+where 8 message bits are encoded into 10 transmitted
+
+69
+00:05:01,190 --> 00:05:07,180
+bits, where the encoding guarantees a transition
+at least every 6 bit times.
+
+70
+00:05:07,180 --> 00:05:12,800
+Of course, the receiver has to reverse the
+8b10b encoding to recover the actual message
+
+71
+00:05:12,800 --> 00:05:14,160
+bits.
+
+72
+00:05:14,160 --> 00:05:16,210
+Pretty neat!
+
+73
+00:05:16,210 --> 00:05:21,400
+The benefit of this trick is that we truly
+only need to send a single stream of bits.
+
+74
+00:05:21,400 --> 00:05:25,900
+The receiver will be able to recover both
+the timing information and the data without
+
+75
+00:05:25,900 --> 00:05:29,580
+also needing to transmit a separate clock
+signal.
+
+76
+00:05:29,580 --> 00:05:33,750
+Using these lessons, networks have evolved
+from using shared communication channels to
+
+77
+00:05:33,750 --> 00:05:36,560
+using point-to-point links.
+
+78
+00:05:36,560 --> 00:05:42,670
+Today local-area networks use 10, 100, or
+1000 BaseT wiring which includes separate
+
+79
+00:05:42,670 --> 00:05:48,470
+differential pairs for sending and receiving,
+i.e., each sending or receiving channel is
+
+80
+00:05:48,470 --> 00:05:53,090
+unidirectional with a single driver and single
+receiver.
+
+81
+00:05:53,090 --> 00:05:58,000
+The network uses separate switches and routers
+to receive packets from a sender and then
+
+82
+00:05:58,000 --> 00:06:01,890
+forward the packets over a point-to-point
+link to the next switch,
+
+83
+00:06:01,890 --> 00:06:09,210
+and so on, across multiple point-to-point
+links until the packet arrives at its destination.
+
+84
+00:06:09,210 --> 00:06:14,580
+System-level connections have evolved to use
+the same communication strategy: point-to-point
+
+85
+00:06:14,580 --> 00:06:19,140
+links with switches for routing packets to
+their intended destination.
+
+86
+00:06:19,140 --> 00:06:24,110
+Note that communication along each link is
+independent, so a network with many links
+
+87
+00:06:24,110 --> 00:06:28,610
+can actually support a lot of communication
+bandwidth.
+
+88
+00:06:28,610 --> 00:06:33,020
+With a small amount of packet buffering in
+the switches to deal with momentary contention
+
+89
+00:06:33,020 --> 00:06:37,090
+for a particular link,
+this is a very effective strategy for moving
+
+90
+00:06:37,090 --> 00:06:42,510
+massive amounts of information from one component
+to the next.
+
+91
+00:06:42,510 --> 00:06:45,740
+In the next section, we'll look at some of
+the more interesting details.

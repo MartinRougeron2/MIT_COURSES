@@ -1,0 +1,402 @@
+1
+00:00:01,000 --> 00:00:04,100
+Here's a failed attempt at pipelining a circuit.
+
+2
+00:00:04,100 --> 00:00:07,450
+For what value of K is the circuit a K-pipeline?
+
+3
+00:00:07,450 --> 00:00:12,920
+Well, let's count the number of registers
+along each path from system inputs to system
+
+4
+00:00:12,920 --> 00:00:14,620
+outputs.
+
+5
+00:00:14,620 --> 00:00:19,080
+The top path through the A and C components
+has 2 registers.
+
+6
+00:00:19,080 --> 00:00:22,630
+As does the bottom path through the B and
+C components.
+
+7
+00:00:22,630 --> 00:00:27,190
+But the middle path through all three components
+has only 1 register.
+
+8
+00:00:27,190 --> 00:00:30,279
+Oops, this not a well-formed K-pipeline.
+
+9
+00:00:30,279 --> 00:00:33,360
+Why do we care?
+
+10
+00:00:33,360 --> 00:00:38,079
+We care because this pipelined circuit does
+not compute the same answer as the original
+
+11
+00:00:38,079 --> 00:00:39,870
+unpipelined circuit.
+
+12
+00:00:39,870 --> 00:00:44,989
+The problem is that successive generations
+of inputs get mixed together during processing.
+
+13
+00:00:44,989 --> 00:00:50,090
+For example, during cycle i+1, the B module
+is computing with the current value of the
+
+14
+00:00:50,090 --> 00:00:54,690
+X input but the previous value of the Y input.
+
+15
+00:00:54,690 --> 00:00:57,960
+This can't happen with a well-formed K-pipeline.
+
+16
+00:00:57,960 --> 00:01:02,770
+So we need to develop a technique for pipelining
+a circuit that guarantees the result will
+
+17
+00:01:02,770 --> 00:01:05,390
+be well-formed.
+
+18
+00:01:05,390 --> 00:01:09,990
+Here's our strategy that will ensure if we
+add a pipeline register along one path from
+
+19
+00:01:09,990 --> 00:01:16,400
+system inputs to system outputs, we will add
+pipeline registers along every path.
+
+20
+00:01:16,400 --> 00:01:22,220
+Step 1 is to draw a contour line that crosses
+every output in the circuit and mark its endpoints
+
+21
+00:01:22,220 --> 00:01:26,930
+as the terminal points for all the other contours
+we'll add.
+
+22
+00:01:26,930 --> 00:01:32,200
+During Step 2 continue to draw contour lines
+between the two terminal points across the
+
+23
+00:01:32,200 --> 00:01:35,240
+signal connections between modules.
+
+24
+00:01:35,240 --> 00:01:40,850
+Make sure that every signal connection crosses
+the new contour line in the same direction.
+
+25
+00:01:40,850 --> 00:01:45,270
+This means that system inputs will be one
+side of the contour and system outputs will
+
+26
+00:01:45,270 --> 00:01:47,479
+be on the other side.
+
+27
+00:01:47,479 --> 00:01:52,170
+These contours demarcate pipeline stages.
+
+28
+00:01:52,170 --> 00:01:58,000
+Place a pipeline register wherever a signal
+connection intersects the pipelining contours.
+
+29
+00:01:58,000 --> 00:02:03,480
+Here we've marked the location of pipeline
+registers with large black dots.
+
+30
+00:02:03,480 --> 00:02:07,790
+By drawing the contours from terminal point
+to terminal point we guarantee that we cross
+
+31
+00:02:07,790 --> 00:02:13,420
+every input-output path, thus ensuring our
+pipeline will be well-formed.
+
+32
+00:02:13,420 --> 00:02:17,090
+Now we can compute the system's clock period
+by looking for the pipeline stage with the
+
+33
+00:02:17,090 --> 00:02:22,470
+longest register-to-register or input-to-register
+propagation delay.
+
+34
+00:02:22,470 --> 00:02:27,720
+With these contours and assuming ideal zero-delay
+pipeline registers, the system clock must
+
+35
+00:02:27,720 --> 00:02:33,590
+have a period of 8 ns to accommodate the operation
+of the C module.
+
+36
+00:02:33,590 --> 00:02:38,380
+This gives a system throughput of 1 output
+every 8 ns.
+
+37
+00:02:38,380 --> 00:02:45,420
+Since we drew 3 contours, this is a 3-pipeline
+and the system latency is 3 times 8 ns or
+
+38
+00:02:45,420 --> 00:02:47,160
+24 ns total.
+
+39
+00:02:47,160 --> 00:02:51,730
+Our usual goal in pipelining a circuit is
+to achieve maximum throughput using the fewest
+
+40
+00:02:51,730 --> 00:02:53,769
+possible registers.
+
+41
+00:02:53,769 --> 00:02:59,130
+So our strategy is to find the slowest system
+component (in our example, the C component)
+
+42
+00:02:59,130 --> 00:03:02,840
+and place pipeline registers on its inputs
+and outputs.
+
+43
+00:03:02,840 --> 00:03:07,209
+So we drew contours that pass on either side
+of the C module.
+
+44
+00:03:07,209 --> 00:03:12,460
+This sets the clock period at 8 ns, so we
+position the contours so that longest path
+
+45
+00:03:12,460 --> 00:03:16,940
+between any two pipeline registers is at most
+8.
+
+46
+00:03:16,940 --> 00:03:21,310
+There are often several choices for how to
+draw a contour while maintaining the same
+
+47
+00:03:21,310 --> 00:03:23,190
+throughput and latency.
+
+48
+00:03:23,190 --> 00:03:27,850
+For example, we could have included the E
+module in the same pipeline stage as the F
+
+49
+00:03:27,850 --> 00:03:28,970
+module.
+
+50
+00:03:28,970 --> 00:03:32,989
+Okay, let's review our pipelining strategy.
+
+51
+00:03:32,989 --> 00:03:36,239
+First we draw a contour across all the outputs.
+
+52
+00:03:36,239 --> 00:03:40,849
+This creates a 1-pipeline, which, as you can
+see, will always have the same throughput
+
+53
+00:03:40,849 --> 00:03:44,680
+and latency as the original combinational
+circuit.
+
+54
+00:03:44,680 --> 00:03:50,310
+Then we draw our next contour, trying to isolate
+the slowest component in the system.
+
+55
+00:03:50,310 --> 00:03:55,840
+This creates a 2-pipeline with a clock period
+of 2 and hence a throughput of 1/2, or double
+
+56
+00:03:55,840 --> 00:03:58,459
+that of the 1-pipeline.
+
+57
+00:03:58,459 --> 00:04:03,450
+We can add additional contours, but note that
+the 2-pipeline had the smallest possible clock
+
+58
+00:04:03,450 --> 00:04:08,820
+period, so after that additional contours
+add stages and hence increase the system's
+
+59
+00:04:08,820 --> 00:04:11,700
+latency without increasing its throughput.
+
+60
+00:04:11,700 --> 00:04:17,149
+Not illegal, just not a worthwhile investment
+in hardware.
+
+61
+00:04:17,149 --> 00:04:22,630
+Note that the signal connection between the
+A and C module now has two back-to-back pipelining
+
+62
+00:04:22,630 --> 00:04:23,630
+registers.
+
+63
+00:04:23,630 --> 00:04:28,720
+Nothing wrong with that; it often happens
+when we pipeline a circuit where the input-output
+
+64
+00:04:28,720 --> 00:04:30,410
+paths are of different lengths.
+
+65
+00:04:30,410 --> 00:04:36,650
+So our pipelining strategy will be to pipeline
+implementations with increased throughput,
+
+66
+00:04:36,650 --> 00:04:39,159
+usually at the cost of increased latency.
+
+67
+00:04:39,159 --> 00:04:44,311
+Sometimes we get lucky and the delays of each
+pipeline stage are perfectly balanced, in
+
+68
+00:04:44,311 --> 00:04:47,190
+which case the latency will not increase.
+
+69
+00:04:47,190 --> 00:04:53,190
+Note that a pipelined circuit will NEVER have
+a smaller latency than the unpipelined circuit.
+
+70
+00:04:53,190 --> 00:04:57,300
+Notice that once we've isolated the slowest
+component, we can't increase the throughput
+
+71
+00:04:57,300 --> 00:04:58,810
+any further.
+
+72
+00:04:58,810 --> 00:05:03,340
+How do we continue to improve the performance
+of circuits in light of these performance
+
+73
+00:05:03,340 --> 00:05:05,280
+bottlenecks?
+
+74
+00:05:05,280 --> 00:05:09,020
+One solution is to use pipelined components
+if they're available!
+
+75
+00:05:09,020 --> 00:05:14,210
+Suppose we're able to replace the original
+A component with a 2-stage pipelined version
+
+76
+00:05:14,210 --> 00:05:15,970
+A-prime.
+
+77
+00:05:15,970 --> 00:05:21,220
+We can redraw our pipelining contours, making
+sure we account for the internal pipeline
+
+78
+00:05:21,220 --> 00:05:23,460
+registers in the A-prime component.
+
+79
+00:05:23,460 --> 00:05:28,250
+This means that 2 of our contours have to
+pass through the A-prime component, guaranteeing
+
+80
+00:05:28,250 --> 00:05:32,860
+that we'll add pipeline registers elsewhere
+in the system that will account for the two-cycle
+
+81
+00:05:32,860 --> 00:05:36,370
+delay introduced by A-prime.
+
+82
+00:05:36,370 --> 00:05:42,860
+Now the maximum propagation delay in any stage
+is 1 ns, doubling the throughput from 1/2
+
+83
+00:05:42,860 --> 00:05:45,490
+to 1/1.
+
+84
+00:05:45,490 --> 00:05:49,510
+This is a 4-pipeline so the latency will be
+4 ns.
+
+85
+00:05:49,510 --> 00:05:51,030
+This is great!
+
+86
+00:05:51,030 --> 00:05:55,380
+But what can we do if our bottleneck component
+doesn't have a pipelined substitute.
+
+87
+00:05:55,380 --> 00:05:58,419
+We'll tackle that question in the next section.

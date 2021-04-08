@@ -1,0 +1,1063 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>Stirling's Formula | 3.1 Sums &amp; Products | 3.1 Sums &amp; Products | Unit 3: Counting | Mathematics for Computer Science | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-042j-mathematics-for-computer-science-spring-2015" name="WT.cg_n">
+    <meta content="Stirling's Formula" name="WT.cg_s">
+    <meta content="Media Resource:" name="Description">
+    <meta content="Meyer, Albert R." name="Author">
+    <meta content="Chlipala, Adam" name="Author">
+    <meta content="6.042J,6.042,18.062J,18.062,formal logic notation,proof methods,induction,sets,relations,graph theory,integer congruences,asymptotic notation,growth of functions,permutations,combinations,counting,discrete probability,Computer Science,Applied Mathematics,Probability and Statistics" name="keywords">
+    <meta content="6.042J Mathematics for Computer Science | Stirling's Formula" name="Search_Display">
+    <meta content="Computer Science" itemprop="about">
+    <meta content="Applied Mathematics" itemprop="about">
+    <meta content="Probability and Statistics" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/courses_new.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/jquery.jscrollpane.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../../../common/styles/media_tabs.css">
+	<link href="../../../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/counting/tp8-2/vertical-356e14210c43/stirling-s-formula/">
+	<link rel="apple-touch-icon" href="../../../../../common/images/apple-touch-icon.png">
+	
+	
+      
+	
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="../../../../../common/scripts/bubble-popup-offline.js"></script>
+	
+	
+	
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#tabs").tabs();
+        IpadScroller();
+      });
+    </script>
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center_media">
+      	<div id="grid">
+      		<div id="left">
+        		<nav id="breadcrumb_media" aria-label="Breadcrumb">
+                	<p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/index.htm">Mathematics for Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/counting/index.htm">Unit 3: Counting</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/counting/tp8-2/index.htm">3.1 Sums &amp; Products</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../../../contents/counting/tp8-2/vertical-356e14210c43/index.htm">3.1.9 Stirling's Formula: Video</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            Stirling's Formula
+         
+    
+</p>
+
+            	</nav>
+            	<div class="clear"></div>
+        		<div id="media_title">
+        		<h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            Stirling's Formula
+        </span>
+    </h1>
+        		</div>
+           		<div class="clear"></div>
+           		<div id="course_wrapper_media">
+           			<nav id="course_nav" aria-label="Course">
+           				<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/readings/index.htm">
+		                  Readings  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/lecture-slides/index.htm">
+		                  Lecture Slides  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/in-class-questions/index.htm">
+		                  In-Class Questions  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/assignments/index.htm">
+		                  Assignments  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/exams/index.htm">
+		                  Exams  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="proofs" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuproofs'); toggleClass('proofs'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/proofs/index.htm" class="">
+		                  Unit 1: Proofs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuproofs" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp1-1/index.htm" class="">1.1 Intro to Proofs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp1-2/index.htm" class="">1.2 Proof Methods</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp2-1/index.htm" class="">1.3 Well Ordering Principle</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp2-2/index.htm" class="">1.4 Logic &amp; Propositions</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp3-1/index.htm" class="">1.5 Quantifiers &amp; Predicate Logic</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp3-2/index.htm" class="">1.6  Sets</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp3-3/index.htm" class="">1.7 Binary Relations</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp4-1/index.htm" class="">1.8  Induction</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp4-2/index.htm" class="">1.9  State Machines - Invariants</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/recursive-definition/index.htm" class="">1.10 Recursive Definition</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/proofs/tp4-3/index.htm" class="">1.11  Infinite Sets</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="structures" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menustructures'); toggleClass('structures'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/structures/index.htm" class="">
+		                  Unit 2: Structures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menustructures" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp5-1/index.htm" class="">2.1  GCDs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp5-2/index.htm" class="">2.2  Congruences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp6-1/index.htm" class="">2.3  Euler's Theorem</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp6-2/index.htm" class="">2.4  RSA Encryption</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp6-3/index.htm" class="">2.5  Digraphs: Walks &amp; Paths</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp7-1/index.htm" class="">2.6 Directed Acyclic Graphs (DAGs) &amp; Scheduling</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/partial-orders-and-equivalence/index.htm" class="">2.7 Partial Orders and Equivalence</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp7-2/index.htm" class="">2.8  Degrees &amp; Isomorphism</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp7-3/index.htm" class="">2.9 Coloring &amp; Connectivity</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/tp8-1/index.htm" class="">2.10 Trees</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/structures/stable-matching/index.htm" class="">2.11 Stable Matching</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="counting" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menucounting'); toggleClass('counting'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../../../contents/counting/index.htm" class="">
+		                  Unit 3: Counting  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menucounting" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../../../contents/counting/tp8-2/index.htm" class="selected">3.1 Sums &amp; Products</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp8-3/index.htm" class="">3.2 Asymptotics</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp9-1/index.htm" class="">3.3 Counting with Bijections</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp9-2/index.htm" class="">3.4 Repetitions &amp; Binomial Theorem</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/counting/tp10-1/index.htm" class="">3.5 Pigeonhole Principle, Inclusion-Exclusion</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="probability" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuprobability'); toggleClass('probability'); return false">
+		                  <img src="../../../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../../../contents/probability/index.htm" class="">
+		                  Unit 4: Probability  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuprobability" class="">
+					               
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp11-2/index.htm" class="">4.1 Intro to Discrete Probability</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp12-1/index.htm" class="">4.2 Conditional Probability</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp12-2/index.htm" class="">4.3 Independence &amp; Causality</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp12-3/index.htm" class="">4.4 Random Variables, Density Functions</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp13-1/index.htm" class="">4.5 Expectation</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp13-2/index.htm" class="">4.6 Deviation: Markov &amp; Chebyshev Bounds</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/tp14-1/index.htm" class="">4.7 Sampling &amp; Confidence</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../../../contents/probability/random-walks-pagerank/index.htm" class="">4.8 Random Walks &amp; Pagerank</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../../../contents/resource-index/index.htm">
+		                  Resource Index  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+           			</nav>
+           			<main id="course_inner_media" aria-labelledby="media_title">
+      					 
+        <div class="" id="parent-fieldname-text">
+            
+            
+        </div>
+    
+      					     
+    
+    
+
+
+
+<script type="text/javascript">var caption_embed_1 ={'English - US': '/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/counting/tp8-2/vertical-356e14210c43/stirling-s-formula/lU_QT5GSuxI.srt'}</script>     
+     <div id="media-embed">
+         <div class="attention_message" id="embed_1">
+<p>Flash and JavaScript are required for this feature.</p>
+<p>Download the video from <a href="https://itunes.apple.com/us/itunes-u/id1077791636">iTunes U</a> or the <a href="https://archive.org/download/MIT6.042JS15/MIT6_042JS15_stirling_video_ipod.mp4">Internet Archive</a>.</p>
+</div>
+     </div>
+    
+     <script type="text/javascript">ocw_embed_chapter_media('embed_1', 'https://www.youtube.com/v/lU_QT5GSuxI', 'youtube', '/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/counting/tp8-2/vertical-356e14210c43/stirling-s-formula', 'https://img.youtube.com/vi/lU_QT5GSuxI/0.jpg',0,0, 'https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/counting/tp8-2/vertical-356e14210c43/stirling-s-formula/lU_QT5GSuxI.srt')</script>
+	 
+	 
+	 		
+	 		<div id="transcript1"></div>
+				 <script type="text/javascript">createThreePlayParams(2, 820141, "embed_1", 0, 0)</script>
+			 
+	
+
+     
+ 
+
+
+<script type="text/javascript">
+		window.onload=function(){
+		init();
+		
+		}
+		var tabLinks = new Array();
+		var contentDivs = new Array();
+		function init() {
+		  // Grab the tab links and content divs from the page
+		  var tabListItems = document.getElementById('tabs').childNodes;
+		  for ( var i = 0; i < tabListItems.length; i++ ) {
+			if ( tabListItems[i].nodeName == "LI" ) {
+			  var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
+			  var id = getHash( tabLink.getAttribute('href') );
+			  tabLinks[id] = tabLink;
+			  contentDivs[id] = document.getElementById( id );
+			}
+		  }
+		  // Assign onclick events to the tab links, and
+		  // highlight the first tab
+		  var i = 0;
+		  for ( var id in tabLinks ) {
+			tabLinks[id].onclick = showTab;
+			tabLinks[id].onfocus = function() { this.blur() };
+			if ( i == 0 ) tabLinks[id].className = 'selected';
+			i++;
+		  }
+		  // Hide all content divs except the first
+		  var i = 0;
+		  for ( var id in contentDivs ) {
+			if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
+			i++;
+		  }
+		}
+		function showTab() {
+		  var selectedId = getHash( this.getAttribute('href') );
+		  // Highlight the selected tab, and dim all others.
+		  // Also show the selected content div, and hide all others.
+		  for ( var id in contentDivs ) {
+			if ( id == selectedId ) {
+			  tabLinks[id].className = 'selected';
+			  contentDivs[id].className = 'tabContent';
+			} else {
+			  tabLinks[id].className = '';
+			  contentDivs[id].className = 'tabContent hide';
+			}
+		  }
+		  // Stop the browser following the link
+		  return false;
+		}
+		function getFirstChildWithTagName( element, tagName ) {
+		  for ( var i = 0; i < element.childNodes.length; i++ ) {
+			if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
+		  }
+		}
+		function getHash( url ) {
+		  var hashPos = url.lastIndexOf ( '#' );
+		  return url.substring( hashPos + 1 );
+		}
+ </script>	
+ 
+
+  <div id="media_tabs">
+     
+        <ul id="tabs">
+            <li class="first">
+                <a href="#vid_about" class="selected">Transcript</a>
+            </li>
+            <li class="">
+                <a href="#vid_index" class="">Download this Video</a>
+            </li>
+        </ul>
+   
+        <div id="vid_about" itemprop="description" class="tabContent">
+<ul><li><a class="transcript-link" title="Open in a new window." alt="Open in a new window." style="text-decoration: none; font-size: 1.0em;" target="_blank" text-decoration: none font-size: href="../../../../../contents/counting/tp8-2/vertical-356e14210c43/stirling-s-formula/lU_QT5GSuxI.pdf"> Download English-US transcript (PDF)</a></li></ul>
+<p><span m="1350">PROFESSOR: Our</span> <span m="1480">method</span> <span m="1830">for</span> <span m="1990">estimating</span> <span m="2540">sums</span> <span m="3090">can</span> <span m="3270">also</span> <span m="3620">be</span> <span m="3810">used</span> <span m="4120">to</span> <span m="4230">estimate</span> <span m="4820">products,</span> <span m="5680">basically</span> <span m="6200">by</span> <span m="7010">taking</span> <span m="7340">logs</span> <span m="7770">to</span> <span m="7900">turn</span> <span m="8119">a</span> <span m="8160">product</span> <span m="8640">into</span> <span m="8780">a</span> <span m="8970">sum.</span> <span m="9480">And</span> <span m="9710">we're</span> <span m="9800">going</span> <span m="9940">to</span> <span m="9980">use</span> <span m="10290">that</span> <span m="10510">to</span> <span m="10600">come</span> <span m="10810">up</span> <span m="10960">with</span> <span m="11100">another</span> <span m="11390">important</span> <span m="11850">estimate</span> <span m="12270">of</span> <span m="12390">a</span> <span m="12460">quantity</span> <span m="12960">that</span> <span m="13220">will</span> <span m="13810">come</span> <span m="14070">up,</span> <span m="14460">really,</span> <span m="14750">very</span> <span m="15070">regularly</span> <span m="16040">called</span> <span m="16440">n</span> <span m="16600">factorial.</span> </p>
+<p><span m="17310">S</span> <span m="17530">n</span> <span m="17910">factorial</span> <span m="19180">is</span> <span m="19600">the</span> <span m="19760">product</span> <span m="20290">of</span> <span m="20470">the</span> <span m="20560">first</span> <span m="20930">n</span> <span m="21110">integers,</span> <span m="21640">1</span> <span m="21840">times</span> <span m="22090">2</span> <span m="22380">up through</span> <span m="22750">n</span> <span m="22890">minus</span> <span m="23200">1</span> <span m="23400">times</span> <span m="23700">n.</span> <span m="24240">In</span> <span m="24430">concise</span> <span m="24960">product</span> <span m="25400">notation,</span> <span m="25950">it's</span> <span m="26120">the</span> <span m="26210">product--</span> <span m="27270">that's</span> <span m="27530">pi,</span> <span m="27900">capital</span> <span m="28340">pi, for</span> <span m="28700">product--</span> <span m="29330">from</span> <span m="29570">i</span> <span m="29710">equals</span> <span m="29960">1</span> <span m="30200">to</span> <span m="30310">n</span> <span m="30600">of</span> <span m="30870">i.</span> <span m="31970">And</span> <span m="32250">its</span> <span m="32450">standard</span> <span m="32830">abbreviation</span> <span m="33520">is</span> <span m="33670">to</span> <span m="33820">write</span> <span m="34030">it</span> <span m="34140">as</span> <span m="34290">n!</span> <span m="35070">pronounced</span> <span m="35560">n</span> <span m="35740">factorial.</span> </p>
+<p><span m="37660">So</span> <span m="38160">what</span> <span m="38330">I'd</span> <span m="38450">like</span> <span m="38650">to</span> <span m="38750">do</span> <span m="38890">is</span> <span m="39010">get</span> <span m="39130">an</span> <span m="39220">asymptotic</span> <span m="40540">estimate</span> <span m="41010">for</span> <span m="41150">n</span> <span m="41270">factorial.</span> <span m="41740">Again,</span> <span m="41930">n</span> <span m="42080">factorial</span> <span m="42540">is</span> <span m="42600">one</span> <span m="42740">of</span> <span m="42780">these</span> <span m="42940">quantities</span> <span m="43350">where</span> <span m="43470">there</span> <span m="43670">isn't</span> <span m="43960">any</span> <span m="44870">exact</span> <span m="45310">formula</span> <span m="46030">that</span> <span m="46460">doesn't</span> <span m="46800">have</span> <span m="47020">those</span> <span m="47520">ellipses</span> <span m="48060">in</span> <span m="48190">it.</span> <span m="48880">There's</span> <span m="49270">no</span> <span m="49860">short</span> <span m="51280">formula</span> <span m="51820">with</span> <span m="52200">basic</span> <span m="52540">operations</span> <span m="53280">fixed</span> <span m="53750">size</span> <span m="54090">of</span> <span m="54200">formula</span> <span m="54960">that</span> <span m="55080">expresses</span> <span m="55610">n</span> <span m="55850">factorial.</span> <span m="56450">But</span> <span m="56600">we</span> <span m="56720">get</span> <span m="56880">a</span> <span m="56950">nice</span> <span m="57530">formula</span> <span m="58130">for</span> <span m="58590">a</span> <span m="58870">tight</span> <span m="59310">asymptotic</span> <span m="60010">estimate.</span> </p>
+<p><span m="61070">So</span> <span m="61640">as</span> <span m="61790">I</span> <span m="61860">said,</span> <span m="62050">the</span> <span m="62140">first</span> <span m="62420">trick</span> <span m="62880">is</span> <span m="63210">to</span> <span m="63810">turn</span> <span m="64209">the</span> <span m="64590">product</span> <span m="65170">into</span> <span m="65349">a</span> <span m="65510">sum</span> <span m="65850">by</span> <span m="66000">taking</span> <span m="66490">logs.</span> <span m="67270">So</span> <span m="67470">log</span> <span m="67880">of</span> <span m="67970">n</span> <span m="68100">factorial</span> <span m="68980">is the</span> <span m="69270">log</span> <span m="69640">of</span> <span m="69770">1--</span> <span m="70200">the</span> <span m="70320">product</span> <span m="70710">of</span> <span m="70800">1</span> <span m="70970">through</span> <span m="71210">n.</span> <span m="71390">But</span> <span m="71530">a</span> <span m="71590">log</span> <span m="71870">of</span> <span m="71930">a</span> <span m="72060">product</span> <span m="72610">is</span> <span m="72850">the</span> <span m="72910">sum</span> <span m="73260">of</span> <span m="73390">the</span> <span m="73470">logs,</span> <span m="74420">so</span> <span m="74680">it's</span> <span m="74810">simply</span> <span m="75140">log</span> <span m="75410">of</span> <span m="75530">1</span> <span m="75730">plus</span> <span m="76000">log</span> <span m="76230">of</span> <span m="76340">2 up</span> <span m="76760">through</span> <span m="77220">log</span> <span m="77670">of n.</span> <span m="79100">And</span> <span m="80500">expressed</span> <span m="80980">in</span> <span m="81050">sum</span> <span m="81270">notation,</span> <span m="81760">it's</span> <span m="81920">the</span> <span m="82000">sum</span> <span m="82240">from</span> <span m="82450">i</span> <span m="82540">equals</span> <span m="82740">1</span> <span m="82960">to</span> <span m="83290">n</span> <span m="83350">of</span> <span m="84330">log</span> <span m="84580">of</span> <span m="84680">i.</span> </p>
+<p><span m="85870">Now,</span> <span m="86490">the</span> <span m="86780">integral</span> <span m="87250">method</span> <span m="87710">gives</span> <span m="88000">us</span> <span m="88180">a</span> <span m="88260">way</span> <span m="88570">to</span> <span m="88720">estimate</span> <span m="89700">this</span> <span m="90140">sum</span> <span m="90920">by</span> <span m="91100">bracketing</span> <span m="91760">it</span> <span m="91940">between</span> <span m="93270">the</span> <span m="93450">values</span> <span m="93930">of</span> <span m="94030">some</span> <span m="94230">integrals,</span> <span m="94770">namely</span> <span m="95720">restating</span> <span m="96320">the</span> <span m="97190">integral</span> <span m="97570">method</span> <span m="97960">for</span> <span m="98150">sum--</span> <span m="98630">for</span> <span m="99190">bounding</span> <span m="99670">integrals</span> <span m="100100">by</span> <span m="100260">sums.</span> <span m="100730">This</span> <span m="100910">time,</span> <span m="101080">we're</span> <span m="101160">looking</span> <span m="101390">at</span> <span m="101450">an</span> <span m="101580">increasing</span> <span m="102160">function</span> <span m="102980">because</span> <span m="103270">it's</span> <span m="104570">log</span> <span m="104870">of</span> <span m="104970">x.</span> </p>
+<p><span m="106080">Let</span> <span m="106390">f</span> <span m="107260">be</span> <span m="107540">a</span> <span m="107820">weakly</span> <span m="108260">increasing</span> <span m="108730">function</span> <span m="109220">from</span> <span m="109900">positive</span> <span m="110400">reals</span> <span m="110690">the</span> <span m="110780">positive</span> <span m="111290">reals.</span> <span m="111720">I'm</span> <span m="111930">interested</span> <span m="112410">in</span> <span m="112600">the</span> <span m="112690">sum</span> <span m="113050">from</span> <span m="113310">i</span> <span m="113430">equals</span> <span m="113720">1</span> <span m="114130">to</span> <span m="114250">n</span> <span m="114510">of</span> <span m="114630">f</span> <span m="114880">of</span> <span m="115010">i.</span> <span m="115830">And</span> <span m="116040">I</span> <span m="116070">want</span> <span m="116290">to</span> <span m="116410">relate it</span> <span m="116810">and</span> <span m="117050">bound it</span> <span m="117480">by</span> <span m="117610">the</span> <span m="117770">integral</span> <span m="118220">from</span> <span m="118490">0--</span> <span m="118790">from</span> <span m="119040">1</span> <span m="119230">to</span> <span m="119350">n</span> <span m="119560">of</span> <span m="119700">f</span> <span m="119980">of</span> <span m="120550">x</span> <span m="121510">where,</span> <span m="121900">in</span> <span m="122020">this</span> <span m="122240">case,</span> <span m="122650">the</span> <span m="122660">particular</span> <span m="123190">f</span> <span m="123510">that</span> <span m="123640">we're</span> <span m="123820">interested</span> <span m="124250">in</span> <span m="124410">is</span> <span m="124610">f</span> <span m="124800">of</span> <span m="124970">x</span> <span m="125340">is</span> <span m="125500">log</span> <span m="125810">x.</span> </p>
+<p><span m="127430">And</span> <span m="127970">the</span> <span m="128110">theorem</span> <span m="128430">says</span> <span m="128889">that</span> <span m="129440">with</span> <span m="130039">increasing</span> <span m="130580">functions</span> <span m="131150">s</span> <span m="131440">is</span> <span m="131610">bracketed</span> <span m="132170">between</span> <span m="132500">the</span> <span m="132620">integral</span> <span m="133100">plus</span> <span m="133700">the</span> <span m="133790">last</span> <span m="134160">term</span> <span m="134400">in</span> <span m="134480">the</span> <span m="134570">sum</span> <span m="135220">and</span> <span m="135510">the</span> <span m="135650">integral</span> <span m="136090">plus</span> <span m="136430">the</span> <span m="136510">first</span> <span m="136870">term</span> <span m="137100">in</span> <span m="137190">the</span> <span m="137270">sum.</span> <span m="137560">Remember,</span> <span m="138130">since</span> <span m="138470">the</span> <span m="138560">function is</span> <span m="138940">weakly</span> <span m="139300">increasing,</span> <span m="139840">f</span> <span m="140030">of</span> <span m="140160">1</span> <span m="140680">is</span> <span m="140960">smaller</span> <span m="141430">than</span> <span m="141570">f</span> <span m="141780">of n.</span> <span m="142240">So</span> <span m="142750">that's</span> <span m="142930">the way</span> <span m="143150">you</span> <span m="143260">remember</span> <span m="143600">which</span> <span m="143830">way</span> <span m="143960">the</span> <span m="144080">bounds</span> <span m="144470">go.</span> </p>
+<p><span m="145440">So</span> <span m="145750">s</span> <span m="145980">is</span> <span m="146090">between</span> <span m="146530">I</span> <span m="146680">plus</span> <span m="146980">f</span> <span m="147150">of</span> <span m="147280">1</span> <span m="147800">and</span> <span m="148040">I</span> <span m="148250">plus</span> <span m="148610">f</span> <span m="148820">of</span> <span m="148960">n</span> <span m="149570">by</span> <span m="149770">our</span> <span m="149940">general</span> <span m="150710">formula</span> <span m="151510">for</span> <span m="152620">applying</span> <span m="153120">integral</span> <span m="153580">bounds</span> <span m="153980">to</span> <span m="154110">sums.</span> <span m="155760">Well,</span> <span m="156290">what</span> <span m="156490">that</span> <span m="156690">tells</span> <span m="156960">us</span> <span m="157100">then</span> <span m="157260">is</span> <span m="157420">that</span> <span m="157610">the</span> <span m="157700">sum</span> <span m="158770">from</span> <span m="158930">1</span> <span m="159090">to</span> <span m="159180">n</span> <span m="159340">of</span> <span m="159440">log</span> <span m="159750">of</span> <span m="159890">i,</span> <span m="160120">which</span> <span m="160360">is</span> <span m="160440">what</span> <span m="160580">we're</span> <span m="160740">interested</span> <span m="161160">in,</span> <span m="161300">is</span> <span m="161480">bracketed</span> <span m="161970">between</span> <span m="162320">the</span> <span m="162430">integral</span> <span m="162870">from</span> <span m="163060">1</span> <span m="163260">to</span> <span m="163380">n</span> <span m="163550">of</span> <span m="163670">log</span> <span m="163980">x</span> <span m="165470">and</span> <span m="165710">the</span> <span m="165820">integral</span> <span m="166300">from</span> <span m="166550">1--</span> <span m="167140">well,</span> <span m="167420">it's</span> <span m="167640">plus</span> <span m="168370">log</span> <span m="168650">of</span> <span m="168710">0,</span> <span m="169100">but--</span> <span m="169500">log</span> <span m="169720">of</span> <span m="169810">1</span> <span m="170020">rather,</span> <span m="170300">but</span> <span m="170460">that's</span> <span m="170670">0.</span> <span m="171750">And</span> <span m="171960">the</span> <span m="172080">integral</span> <span m="172490">from</span> <span m="172630">1</span> <span m="172810">to</span> <span m="172900">n of</span> <span m="173170">log</span> <span m="173400">of</span> <span m="173490">x</span> <span m="174250">plus</span> <span m="174600">the</span> <span m="174700">last</span> <span m="175050">term,</span> <span m="175270">which</span> <span m="175450">is</span> <span m="175560">log</span> <span m="175810">of</span> <span m="175890">n.</span> </p>
+<p><span m="178520">In</span> <span m="178630">case</span> <span m="178850">you</span> <span m="178940">don't</span> <span m="179100">remember</span> <span m="179510">from</span> <span m="180470">first</span> <span m="180690">term</span> <span m="180840">calculus,</span> <span m="181470">the</span> <span m="181600">integral</span> <span m="182480">of</span> <span m="182580">log</span> <span m="182900">of</span> <span m="183030">x</span> <span m="183680">is,</span> <span m="183890">in</span> <span m="183990">fact--</span> <span m="185120">has</span> <span m="185420">the</span> <span m="185530">indefinite</span> <span m="185960">integral</span> <span m="186170">is</span> <span m="186500">x</span> <span m="186840">log</span> <span m="187130">of</span> <span m="187210">x</span> <span m="187420">over</span> <span m="187680">e,</span> <span m="187890">which</span> <span m="188100">you</span> <span m="188180">can</span> <span m="188340">easily</span> <span m="188660">check</span> <span m="188930">by</span> <span m="189350">differentiating</span> <span m="190500">x</span> <span m="191090">log</span> <span m="191420">x</span> <span m="191660">over</span> <span m="191950">e.</span> <span m="192620">ln</span> <span m="192750">means</span> <span m="193060">natural</span> <span m="193510">log,</span> <span m="194030">remember.</span> <span m="195420">In</span> <span m="195920">computer</span> <span m="196250">science,</span> <span m="196620">L-O-G,</span> <span m="197280">log</span> <span m="197630">means</span> <span m="197870">log</span> <span m="198070">to</span> <span m="198180">the</span> <span m="198260">base</span> <span m="198560">2</span> <span m="198920">unless</span> <span m="199230">you</span> <span m="199650">explicitly</span> <span m="200320">put</span> <span m="200580">some</span> <span m="200790">base</span> <span m="201100">on it</span> <span m="201380">like</span> <span m="201660">log,</span> <span m="202130">L-O-G,</span> <span m="202620">sub</span> <span m="202890">10.</span> </p>
+<p><span m="203700">So</span> <span m="203850">ln</span> <span m="204110">is</span> <span m="204210">the</span> <span m="204290">natural</span> <span m="204710">log</span> <span m="205050">from</span> <span m="205210">calculus.</span> <span m="206390">And</span> <span m="207210">plugging</span> <span m="207650">in</span> <span m="208130">this</span> <span m="208440">value</span> <span m="208960">for</span> <span m="209650">the</span> <span m="209800">indefinite</span> <span m="210300">integral</span> <span m="211140">of</span> <span m="211500">log</span> <span m="211800">of</span> <span m="211900">x</span> <span m="212410">and</span> <span m="212920">using</span> <span m="213260">the</span> <span m="213550">bounds</span> <span m="213880">1,</span> <span m="214090">n,</span> <span m="214590">what</span> <span m="214820">we</span> <span m="214960">come</span> <span m="215180">up</span> <span m="215360">with</span> <span m="215560">is</span> <span m="216290">that</span> <span m="216500">the</span> <span m="216580">sum</span> <span m="217320">of</span> <span m="217510">the</span> <span m="217610">logs</span> <span m="218140">is</span> <span m="218370">bounded</span> <span m="218940">between</span> <span m="219550">n</span> <span m="219880">times</span> <span m="220200">log</span> <span m="220480">n</span> <span m="220590">over</span> <span m="220820">e</span> <span m="221600">and</span> <span m="221880">n</span> <span m="222150">times</span> <span m="222430">log</span> <span m="222910">n</span> <span m="223090">over</span> <span m="223330">e</span> <span m="223680">plus</span> <span m="224440">log</span> <span m="224670">of</span> <span m="224760">n.</span> </p>
+<p><span m="225950">It's</span> <span m="226120">a</span> <span m="226180">pretty</span> <span m="226450">tight</span> <span m="226780">bounds.</span> <span m="227840">What</span> <span m="228110">that</span> <span m="228290">means</span> <span m="228560">is</span> <span m="228700">that</span> <span m="228870">informally</span> <span m="229550">speaking,</span> <span m="230130">the</span> <span m="230330">sum</span> <span m="230850">of</span> <span m="231090">the</span> <span m="231190">logs</span> <span m="231970">is</span> <span m="232230">about</span> <span m="232830">this</span> <span m="233070">term</span> <span m="233400">plus</span> <span m="233710">that</span> <span m="233980">term.</span> <span m="234350">Plus,</span> <span m="234740">let's</span> <span m="234960">take</span> <span m="235140">the</span> <span m="235280">average</span> <span m="235790">value</span> <span m="236210">of</span> <span m="236330">that</span> <span m="236570">term,</span> <span m="236780">which</span> <span m="236990">is</span> <span m="237120">half</span> <span m="237430">this</span> <span m="237640">term.</span> <span m="238620">So</span> <span m="239110">we</span> <span m="239300">could</span> <span m="239450">say</span> <span m="239650">that</span> <span m="239840">the</span> <span m="239930">sum</span> <span m="240210">of</span> <span m="240340">logs</span> <span m="240770">is</span> <span m="240910">approximately</span> <span m="241860">equal.</span> <span m="242110">That's a</span> <span m="242380">little</span> <span m="242630">vague,</span> <span m="243050">but live</span> <span m="243250">with</span> <span m="243410">it.</span> <span m="244560">n</span> <span m="244890">log</span> <span m="245270">n over</span> <span m="245530">e</span> <span m="245740">plus</span> <span m="247020">half</span> <span m="247310">of</span> <span m="247440">log</span> <span m="247760">n.</span> </p>
+<p><span m="248790">Well,</span> <span m="248960">now,</span> <span m="249300">if</span> <span m="249480">I'm</span> <span m="249630">interested,</span> <span m="249990">remember,</span> <span m="250430">in</span> <span m="250600">an</span> <span m="250720">estimate</span> <span m="251210">for</span> <span m="251720">n</span> <span m="251870">factorial--</span> <span m="252640">so</span> <span m="252690">let's</span> <span m="252910">exponentiate</span> <span m="253760">both</span> <span m="253970">sides.</span> <span m="255230">So</span> <span m="255360">taking</span> <span m="255910">e</span> <span m="256380">to</span> <span m="257339">this</span> <span m="257720">sum</span> <span m="258110">gives</span> <span m="258360">me</span> <span m="258560">a</span> <span m="258630">product</span> <span m="259339">of</span> <span m="259550">e</span> <span m="259839">to</span> <span m="260700">this</span> <span m="260990">times</span> <span m="261380">e</span> <span m="261529">to</span> <span m="261600">that.</span> <span m="261980">Well,</span> <span m="262200">e</span> <span m="262410">to</span> <span m="262520">this</span> <span m="263410">is--</span> <span m="264180">really,</span> <span m="264580">it's</span> <span m="264980">e</span> <span m="265360">to</span> <span m="265540">the</span> <span m="266300">log</span> <span m="266780">of</span> <span m="266980">n</span> <span m="267190">over</span> <span m="267530">e</span> <span m="267830">to</span> <span m="267970">the</span> <span m="268190">nth</span> <span m="268570">power,</span> <span m="269780">which</span> <span m="270090">means</span> <span m="270340">it's</span> <span m="270500">n</span> <span m="270670">over</span> <span m="270970">e</span> <span m="271080">to</span> <span m="271170">the</span> <span m="271360">n.</span> <span m="272010">And</span> <span m="272230">this</span> <span m="272470">is</span> <span m="273160">e</span> <span m="273400">to</span> <span m="273520">the</span> <span m="273650">log</span> <span m="274010">of</span> <span m="274170">n</span> <span m="275260">to</span> <span m="275450">the</span> <span m="275740">power</span> <span m="276100">half,</span> <span m="276920">or</span> <span m="277490">square</span> <span m="277910">root</span> <span m="278050">of</span> <span m="278160">n.</span> <span m="279070">So</span> <span m="279280">we</span> <span m="279410">wind</span> <span m="279770">up</span> <span m="279970">with</span> <span m="280540">n</span> <span m="280750">factorial</span> <span m="281390">is</span> <span m="281510">approximately</span> <span m="282370">equal</span> <span m="282670">to</span> <span m="282780">the</span> <span m="282890">square</span> <span m="283230">root</span> <span m="283340">of</span> <span m="283460">n</span> <span m="284030">times</span> <span m="284330">n</span> <span m="284480">over</span> <span m="284670">e</span> <span m="284820">to</span> <span m="284900">the</span> <span m="285080">n.</span> </p>
+<p><span m="285260">Now,</span> <span m="285490">this</span> <span m="285770">approximately</span> <span m="286540">equal</span> <span m="286920">is</span> <span m="287210">imprecise.</span> <span m="288360">It's</span> <span m="288630">not</span> <span m="288870">asymptotically</span> <span m="289790">equal</span> <span m="290530">because</span> <span m="291180">we</span> <span m="291260">were</span> <span m="291330">doing an</span> <span m="291550">arithmetic</span> <span m="292290">average</span> <span m="292770">of</span> <span m="292870">0</span> <span m="293330">and</span> <span m="293480">log</span> <span m="293870">n</span> <span m="294030">over</span> <span m="294270">2.</span> <span m="294860">In</span> <span m="295040">addition,</span> <span m="295700">it's</span> <span m="295850">very</span> <span m="296110">dangerous</span> <span m="296640">when</span> <span m="296760">you</span> <span m="296830">have</span> <span m="297060">two</span> <span m="297210">things</span> <span m="297520">that</span> <span m="297610">are</span> <span m="297710">approximately</span> <span m="298430">equal</span> <span m="298720">to</span> <span m="298830">exponentiate</span> <span m="299760">them</span> <span m="300550">and</span> <span m="300690">expect</span> <span m="301130">that</span> <span m="301220">they're</span> <span m="301350">still</span> <span m="301580">approximately</span> <span m="302200">equal.</span> <span m="302600">Often,</span> <span m="302860">they</span> <span m="303020">aren't.</span> </p>
+<p><span m="303740">But</span> <span m="304180">nevertheless,</span> <span m="304690">this</span> <span m="304890">is</span> <span m="304970">a</span> <span m="305040">kind</span> <span m="305220">of a</span> <span m="305330">heuristic</span> <span m="306330">derivation</span> <span m="307200">of</span> <span m="308310">some</span> <span m="308620">kind</span> <span m="308860">of</span> <span m="309200">asymptotic</span> <span m="309930">estimate</span> <span m="310410">that</span> <span m="310510">we</span> <span m="310650">would</span> <span m="310770">expect</span> <span m="311190">that</span> <span m="311300">n</span> <span m="311430">factorial</span> <span m="312050">was</span> <span m="312340">roughly</span> <span m="312810">like</span> <span m="313470">the</span> <span m="313570">square</span> <span m="313860">root</span> <span m="313940">of</span> <span m="314060">n</span> <span m="314230">times</span> <span m="314520">n</span> <span m="314640">over</span> <span m="314900">e</span> <span m="315260">to</span> <span m="315400">the</span> <span m="315590">nth</span> <span m="315880">power.</span> <span m="316600">And</span> <span m="316760">it</span> <span m="316860">turns</span> <span m="317180">out</span> <span m="317410">that</span> <span m="317550">it's--</span> <span m="318120">that</span> <span m="318280">this</span> <span m="318750">heuristic</span> <span m="319500">gives</span> <span m="319770">a</span> <span m="319830">pretty</span> <span m="320100">accurate</span> <span m="320600">answer.</span> </p>
+<p><span m="321450">A</span> <span m="321590">precise</span> <span m="322070">approximation</span> <span m="322860">is</span> <span m="323040">that n</span> <span m="323300">factorial</span> <span m="323820">is</span> <span m="323930">actually</span> <span m="324380">asymptotically</span> <span m="325160">equal</span> <span m="325900">to</span> <span m="326030">the</span> <span m="326140">square</span> <span m="326550">root</span> <span m="326670">of</span> <span m="326770">2</span> <span m="326990">pi</span> <span m="327280">n</span> <span m="328370">times</span> <span m="328910">n</span> <span m="329070">over</span> <span m="329330">e</span> <span m="329520">to</span> <span m="329660">the</span> <span m="329850">n.</span> <span m="330500">And</span> <span m="330770">we're</span> <span m="330790">not</span> <span m="330930">going</span> <span m="331030">to</span> <span m="331090">prove</span> <span m="331440">that.</span> <span m="331750">It</span> <span m="331910">requires</span> <span m="333120">elementary</span> <span m="333590">calculus,</span> <span m="334140">but</span> <span m="334360">more</span> <span m="334630">than</span> <span m="334780">we</span> <span m="334890">want</span> <span m="335060">to</span> <span m="335130">take</span> <span m="335370">time</span> <span m="335640">for.</span> </p>
+<p><span m="336960">And</span> <span m="337200">this</span> <span m="337780">crucial</span> <span m="338150">formula</span> <span m="338690">that</span> <span m="338900">we</span> <span m="339010">will</span> <span m="339170">be</span> <span m="339320">using</span> <span m="339630">very</span> <span m="339910">regularly</span> <span m="340500">to</span> <span m="340560">estimate</span> <span m="341070">the</span> <span m="341150">size</span> <span m="341440">of</span> <span m="341540">n</span> <span m="341650">factorial</span> <span m="342780">is</span> <span m="343060">called</span> <span m="343360">Stirling's</span> <span m="343970">Formula,</span> <span m="344980">and</span> <span m="345260">it's</span> <span m="345420">one</span> <span m="345850">to</span> <span m="346280">have</span> <span m="346490">on</span> <span m="346590">your</span> <span m="346750">crib</span> <span m="346950">sheets</span> <span m="347600">if</span> <span m="347870">you</span> <span m="348000">haven't</span> <span m="348380">memorized</span> <span m="349010">it.</span> </p>
+</div>
+        <div id="vid_index" itemprop="description" class="tabContent hide">
+<h2 class="subhead">Free Downloads</h2>
+<h3 class="subsubhead">Video</h3>
+<ul>
+<li>iTunes U (<a href="https://itunes.apple.com/us/itunes-u/id1077791636">MP4 - 10.6MB</a>)</li>
+<li>Internet Archive (<a href="https://archive.org/download/MIT6.042JS15/MIT6_042JS15_stirling_video_ipod.mp4">MP4 - 10.6MB</a>)</li>
+</ul>
+<br>
+<h3 class="subsubhead">Caption</h3>
+<ul>
+<li>English-US (<a href="../../../../../contents/counting/tp8-2/vertical-356e14210c43/stirling-s-formula/lU_QT5GSuxI.srt">SRT</a>)</li>
+</ul>
+</div>
+    
+   </div>  
+
+
+
+
+      					 
+        <div class="" id="parent-fieldname-bottom_html_area">
+            
+            
+        </div>
+    
+               </main><!--Course_inner_media tag close -->
+           		</div>
+<!--Course_wrapper tag close -->
+            </div>
+<!--left tag close -->
+            <aside id="right">
+                <!--Begin Right Portion -->
+                    <div>
+    
+
+
+
+</div>
+
+                	<div>
+    
+
+
+
+</div>
+
+
+        <div class="" id="parent-fieldname-rsi_top_html_area">
+            
+            
+        </div>
+    
+
+<!-- RSI google ad space-->
+
+
+
+<div id="google_ads">    
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script type="text/javascript">var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];</script>
+    <script type="text/javascript">
+googletag.cmd.push(function() {googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_A_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_A_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_B_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_B_DL').addService(googletag.pubads());googletag.defineSlot('/1064917/VIDEO_INDIVIDUAL_SLOT_C_DL', [[300, 250], [300, 300], [180, 200], [180, 150], [160, 600]], 'VIDEO_INDIVIDUAL_SLOT_C_DL').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+ googletag.enableServices();
+});</script>
+    <script language="javascript" type="text/javascript">
+googletag.cmd.push(function() {googletag.pubads().set("TYPE","HOUSE");googletag.pubads().set("DEPARTMENT","6");googletag.pubads().set("CRS_BEG2","04");googletag.pubads().set("CRS_END","2J");googletag.pubads().set("SESSION","S");googletag.pubads().set("YEAR","15");})
+</script>
+    
+    <div id="VIDEO_INDIVIDUAL_SLOT_A_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_A_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_B_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_B_DL'); });</script>
+    </div>
+    <div id="VIDEO_INDIVIDUAL_SLOT_C_DL">
+    	<script>googletag.cmd.push(function() { googletag.display('VIDEO_INDIVIDUAL_SLOT_C_DL'); });</script>
+    </div>
+</div>
+
+<!-- End RSI ads--> 
+
+
+<div>
+    
+
+
+
+</div>
+
+            </aside><!--Right div close -->
+            <div class="clear"></div>
+        </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

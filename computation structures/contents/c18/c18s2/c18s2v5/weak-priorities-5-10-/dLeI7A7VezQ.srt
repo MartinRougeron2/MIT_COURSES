@@ -1,0 +1,361 @@
+1
+00:00:00,410 --> 00:00:03,400
+Suppose we have a real-time system supporting
+three devices:
+
+2
+00:00:03,400 --> 00:00:07,910
+a keyboard whose interrupt handler has a service
+time of 800 us,
+
+3
+00:00:07,910 --> 00:00:15,389
+a disk with a service time of 500 us,
+and a printer with a service time of 400 us.
+
+4
+00:00:15,389 --> 00:00:18,949
+What is the worst-case latency seen by each
+device?
+
+5
+00:00:18,949 --> 00:00:24,140
+For now we'll assume that requests are infrequent,
+i.e., that each request only happens once
+
+6
+00:00:24,140 --> 00:00:26,250
+in each scenario.
+
+7
+00:00:26,250 --> 00:00:29,560
+Requests can arrive at any time and in any
+order.
+
+8
+00:00:29,560 --> 00:00:34,730
+If we serve the requests in first-come-first-served
+order, each device might be delayed by the
+
+9
+00:00:34,730 --> 00:00:37,170
+service of all other devices.
+
+10
+00:00:37,170 --> 00:00:41,280
+So the start of the keyboard handler might
+be delayed by the execution of the disk and
+
+11
+00:00:41,280 --> 00:00:46,710
+printer handlers, a worst-case latency of
+900 us.
+
+12
+00:00:46,710 --> 00:00:51,579
+The start of the disk handler might be delayed
+by the keyboard and printer handlers, a worst-case
+
+13
+00:00:51,579 --> 00:00:54,449
+latency of 1200 us.
+
+14
+00:00:54,449 --> 00:00:58,680
+And the printer handler might be delayed by
+the keyboard and disk handlers, a worst-case
+
+15
+00:00:58,680 --> 00:01:02,090
+latency of 1300 us.
+
+16
+00:01:02,090 --> 00:01:06,450
+In this scenario we see that long-running
+handlers have a huge impact on the worst-case
+
+17
+00:01:06,450 --> 00:01:09,789
+latency seen by the other devices.
+
+18
+00:01:09,789 --> 00:01:13,500
+What are the possibilities for reducing the
+worst-case latencies?
+
+19
+00:01:13,500 --> 00:01:19,390
+Is there a better scheduling algorithm than
+first-come-first-served?
+
+20
+00:01:19,390 --> 00:01:24,030
+One strategy is to assign priorities to the
+pending requests and to serve the requests
+
+21
+00:01:24,030 --> 00:01:25,850
+in priority order.
+
+22
+00:01:25,850 --> 00:01:30,140
+If the handlers are uninterruptible, the priorities
+will be used to select the *next* task to
+
+23
+00:01:30,140 --> 00:01:33,470
+be run at the completion of the current task.
+
+24
+00:01:33,470 --> 00:01:38,780
+Note that under this strategy, the current
+task always runs to completion even if a higher-priority
+
+25
+00:01:38,780 --> 00:01:41,270
+request arrives while it's executing.
+
+26
+00:01:41,270 --> 00:01:45,820
+This is called a "nonpreemptive" or "weak"
+priority system.
+
+27
+00:01:45,820 --> 00:01:50,920
+Using a weak priority system, the worst-case
+latency seen by each device is the worst-case
+
+28
+00:01:50,920 --> 00:01:55,340
+service time of all the other devices
+(since that handler may have just started
+
+29
+00:01:55,340 --> 00:02:00,500
+running when the new request arrives),
+plus the service time of all higher-priority
+
+30
+00:02:00,500 --> 00:02:02,800
+devices (since they'll be run first).
+
+31
+00:02:02,800 --> 00:02:07,840
+In our example, suppose we assigned the highest
+priority to the disk, the next priority to
+
+32
+00:02:07,840 --> 00:02:11,670
+the printer, and the lowest priority to the
+keyboard.
+
+33
+00:02:11,670 --> 00:02:15,610
+The worst-case latency of the keyboard is
+unchanged since it has the lowest priority
+
+34
+00:02:15,610 --> 00:02:20,590
+and hence can be delayed by the higher-priority
+disk and printer handlers.
+
+35
+00:02:20,590 --> 00:02:24,850
+The disk handler has the highest priority
+and so will always be selected for execution
+
+36
+00:02:24,850 --> 00:02:27,880
+after the current handler completes.
+
+37
+00:02:27,880 --> 00:02:32,910
+So its worst-case latency is the worst-case
+service time for the currently-running handler,
+
+38
+00:02:32,910 --> 00:02:34,840
+which in this case is the keyboard.
+
+39
+00:02:34,840 --> 00:02:39,140
+So the worst-case latency for the disk is
+800 us.
+
+40
+00:02:39,140 --> 00:02:44,360
+This is a considerable improvement over the
+first-come-first-served scenario.
+
+41
+00:02:44,360 --> 00:02:49,840
+Finally the worst-case scenario for the printer
+is 1300 us since it may have to wait for the
+
+42
+00:02:49,840 --> 00:02:53,930
+keyboard handler to finish (which can take
+up to 800 us)
+
+43
+00:02:53,930 --> 00:03:00,830
+and then for a higher-priority disk request
+to be serviced (which takes 500 us).
+
+44
+00:03:00,830 --> 00:03:05,510
+How should priorities be assigned given hard
+real-time constraints?
+
+45
+00:03:05,510 --> 00:03:12,240
+We'll assume each device has a service deadline
+D after the arrival of its service request.
+
+46
+00:03:12,240 --> 00:03:17,640
+If not otherwise specified, assume D is the
+time until the *next* request for the same
+
+47
+00:03:17,640 --> 00:03:18,640
+device.
+
+48
+00:03:18,640 --> 00:03:22,460
+This is a reasonably conservative assumption
+that prevents the system from falling further
+
+49
+00:03:22,460 --> 00:03:24,610
+and further behind.
+
+50
+00:03:24,610 --> 00:03:29,790
+For example, it makes sense that the keyboard
+handler should finish processing one character
+
+51
+00:03:29,790 --> 00:03:31,760
+before the next arrives.
+
+52
+00:03:31,760 --> 00:03:36,709
+"Earliest Deadline" is a strategy for assigning
+priorities that is guaranteed to meet the
+
+53
+00:03:36,709 --> 00:03:41,209
+deadlines if any priority assignment can meet
+the deadlines.
+
+54
+00:03:41,209 --> 00:03:44,640
+It's very simple: Sort the requests by their
+deadlines.
+
+55
+00:03:44,640 --> 00:03:49,459
+Assign the highest priority to the earliest
+deadline, second priority to the next deadline,
+
+56
+00:03:49,459 --> 00:03:51,290
+and so on.
+
+57
+00:03:51,290 --> 00:03:56,650
+A weak priority system will choose the pending
+request with the highest priority, i.e., the
+
+58
+00:03:56,650 --> 00:04:00,270
+request that has the earliest deadline.
+
+59
+00:04:00,270 --> 00:04:02,380
+Earliest Deadline has an intuitive appeal.
+
+60
+00:04:02,380 --> 00:04:05,510
+Imagine standing in a long security line at
+the airport.
+
+61
+00:04:05,510 --> 00:04:10,720
+It would make sense to prioritize the processing
+of passengers who have the earliest flights
+
+62
+00:04:10,720 --> 00:04:16,738
+assuming that there's enough time to process
+everyone before their flight leaves.
+
+63
+00:04:16,738 --> 00:04:20,500
+Processing 10 people whose flights leave in
+30 minutes before someone whose flight leaves
+
+64
+00:04:20,500 --> 00:04:25,200
+in 5 min will cause that last person to miss
+their flight.
+
+65
+00:04:25,200 --> 00:04:30,060
+But if that person is processed first, the
+other passengers may be slightly delayed but
+
+66
+00:04:30,060 --> 00:04:32,510
+everyone will make their flight.
+
+67
+00:04:32,510 --> 00:04:37,070
+This is the sort of scheduling problem that
+Earliest Deadline and a weak priority system
+
+68
+00:04:37,070 --> 00:04:39,360
+can solve.
+
+69
+00:04:39,360 --> 00:04:43,130
+It's outside the scope of our discussion,
+but it's interesting to think about what should
+
+70
+00:04:43,130 --> 00:04:47,090
+happen if some flights are going to be missed.
+
+71
+00:04:47,090 --> 00:04:51,800
+If the system is overloaded, prioritizing
+by earliest deadline may mean that everyone
+
+72
+00:04:51,800 --> 00:04:53,520
+will miss their flights!
+
+73
+00:04:53,520 --> 00:04:57,970
+In this scenario it might be better to assign
+priorities to the minimize the total number
+
+74
+00:04:57,970 --> 00:04:59,650
+of missed flights.
+
+75
+00:04:59,650 --> 00:05:04,250
+This gets complicated in a hurry since the
+assignment of priorities now depends on exactly
+
+76
+00:05:04,250 --> 00:05:08,150
+what requests are pending and how long it
+will take them to be serviced.
+
+77
+00:05:08,150 --> 00:05:10,120
+An intriguing problem to think about!

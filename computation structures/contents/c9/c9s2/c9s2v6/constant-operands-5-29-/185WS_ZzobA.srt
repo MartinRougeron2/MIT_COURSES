@@ -1,0 +1,334 @@
+1
+00:00:01,300 --> 00:00:06,630
+ISA designers receive many requests for what
+are affectionately known as "features" - additional
+
+2
+00:00:06,630 --> 00:00:10,890
+instructions that, in theory, will make the
+ISA better in some way.
+
+3
+00:00:10,890 --> 00:00:15,599
+Dealing with such requests is the moment to
+apply our quantitive approach in order to
+
+4
+00:00:15,599 --> 00:00:20,749
+be able to judge the tradeoffs between cost
+and benefits.
+
+5
+00:00:20,749 --> 00:00:27,489
+Our first "feature request" is to allow small
+constants as the second operand in ALU instructions.
+
+6
+00:00:27,489 --> 00:00:32,140
+So if we replaced the 5-bit "rb" field, we
+would have room in the instruction to include
+
+7
+00:00:32,140 --> 00:00:37,890
+a 16-bit constant as bits [15:0] of the instruction.
+
+8
+00:00:37,890 --> 00:00:42,420
+The argument in favor of this request is that
+small constants appear frequently in many
+
+9
+00:00:42,420 --> 00:00:47,750
+programs and it would make programs shorter
+if we didn't have use load operations to read
+
+10
+00:00:47,750 --> 00:00:50,539
+constant values from main memory.
+
+11
+00:00:50,539 --> 00:00:54,410
+The argument against the request is that we
+would need additional control and datapath
+
+12
+00:00:54,410 --> 00:00:58,839
+logic to implement the feature, increasing
+the hardware cost and probably decreasing
+
+13
+00:00:58,839 --> 00:01:00,570
+the performance.
+
+14
+00:01:00,570 --> 00:01:05,250
+So our strategy is to modify our benchmark
+programs to use the ISA augmented with this
+
+15
+00:01:05,250 --> 00:01:10,080
+feature and measure the impact on a simulated
+execution.
+
+16
+00:01:10,080 --> 00:01:14,390
+Looking at the results, we find that there
+is compelling evidence that small constants
+
+17
+00:01:14,390 --> 00:01:19,730
+are indeed very common as the second operands
+to many operations.
+
+18
+00:01:19,730 --> 00:01:23,220
+Note that we're not so much interested in
+simply looking at the code.
+
+19
+00:01:23,220 --> 00:01:27,550
+Instead we want to look at what instructions
+actually get executed while running the benchmark
+
+20
+00:01:27,550 --> 00:01:28,550
+programs.
+
+21
+00:01:28,550 --> 00:01:33,580
+This will take into account that instructions
+executed during each iteration of a loop might
+
+22
+00:01:33,580 --> 00:01:40,130
+get executed 1000's of times even though they
+only appear in the program once.
+
+23
+00:01:40,130 --> 00:01:44,880
+Looking at the results, we see that over half
+of the arithmetic instructions have a small
+
+24
+00:01:44,880 --> 00:01:47,860
+constant as their second operand.
+
+25
+00:01:47,860 --> 00:01:51,210
+Comparisons involve small constants 80% of
+the time.
+
+26
+00:01:51,210 --> 00:01:55,590
+This probably reflects the fact that during
+execution comparisons are used in determining
+
+27
+00:01:55,590 --> 00:01:58,150
+whether we've reached the end of a loop.
+
+28
+00:01:58,150 --> 00:02:04,530
+And small constants are often found in address
+calculations done by load and store operations.
+
+29
+00:02:04,530 --> 00:02:10,139
+Operations involving constant operands are
+clearly a common case, one well worth optimizing.
+
+30
+00:02:10,139 --> 00:02:14,750
+Adding support for small constant operands
+to the ISA resulted in programs that were
+
+31
+00:02:14,750 --> 00:02:17,170
+measurably smaller and faster.
+
+32
+00:02:17,170 --> 00:02:21,100
+So: feature request approved!
+
+33
+00:02:21,100 --> 00:02:24,850
+Here we see the second of the two Beta instruction
+formats.
+
+34
+00:02:24,850 --> 00:02:30,060
+It's a modification of the first format where
+we've replaced the 5-bit "rb" field with a
+
+35
+00:02:30,060 --> 00:02:34,319
+16-bit field holding a constant in two's complement
+format.
+
+36
+00:02:34,319 --> 00:02:42,340
+This will allow us to represent constant operands
+in the range of 0x8000 (decimal -32768) to
+
+37
+00:02:42,340 --> 00:02:50,880
+0x7FFF (decimal 32767).
+
+38
+00:02:50,880 --> 00:02:56,090
+Here's an example of the add-constant (ADDC)
+instruction which adds the contents of R1
+
+39
+00:02:56,090 --> 00:03:00,880
+and the constant -3, writing the result into
+R3.
+
+40
+00:03:00,880 --> 00:03:05,080
+We can see that the second operand in the
+symbolic representation is now a constant
+
+41
+00:03:05,080 --> 00:03:11,260
+(or, more generally, an expression that can
+evaluated to get a constant value).
+
+42
+00:03:11,260 --> 00:03:16,930
+One technical detail needs discussion: the
+instruction contains a 16-bit constant, but
+
+43
+00:03:16,930 --> 00:03:20,390
+the datapath requires a 32-bit operand.
+
+44
+00:03:20,390 --> 00:03:26,470
+How does the datapath hardware go about converting
+from, say, the 16-bit representation of -3
+
+45
+00:03:26,470 --> 00:03:30,959
+to the 32-bit representation of -3?
+
+46
+00:03:30,959 --> 00:03:36,480
+Comparing the 16-bit and 32-bit representations
+for various constants, we see that if the
+
+47
+00:03:36,480 --> 00:03:42,820
+16-bit two's-complement constant is negative
+(i.e., its high-order bit is 1), the high
+
+48
+00:03:42,820 --> 00:03:48,060
+sixteen bits of the equivalent 32-bit constant
+are all 1's.
+
+49
+00:03:48,060 --> 00:03:53,630
+And if the 16-bit constant is non-negative
+(i.e., its high-order bit is 0), the high
+
+50
+00:03:53,630 --> 00:03:57,540
+sixteen bits of the 32-bit constant are all
+0's.
+
+51
+00:03:57,540 --> 00:04:03,530
+Thus the operation the hardware needs to perform
+is "sign extension" where the sign-bit of
+
+52
+00:04:03,530 --> 00:04:09,280
+the 16-bit constant is replicated sixteen
+times to form the high half of the 32-bit
+
+53
+00:04:09,280 --> 00:04:10,340
+constant.
+
+54
+00:04:10,340 --> 00:04:15,560
+The low half of the 32-bit constant is simply
+the 16-bit constant from the instruction.
+
+55
+00:04:15,560 --> 00:04:19,940
+No additional logic gates will be needed to
+implement sign extension - we can do it all
+
+56
+00:04:19,940 --> 00:04:21,720
+with wiring.
+
+57
+00:04:21,720 --> 00:04:26,779
+Here are the fourteen ALU instructions in
+their "with constant" form, showing the same
+
+58
+00:04:26,779 --> 00:04:33,300
+instruction mnemonics but with a "C" suffix
+indicate the second operand is a constant.
+
+59
+00:04:33,300 --> 00:04:38,808
+Since these are additional instructions, these
+have different opcodes than the original ALU
+
+60
+00:04:38,808 --> 00:04:39,808
+instructions.
+
+61
+00:04:39,808 --> 00:04:44,490
+Finally, note that if we need a constant operand
+whose representation does NOT fit into 16
+
+62
+00:04:44,490 --> 00:04:49,539
+bits, then we have to store the constant as
+a 32-bit value in a main memory location and
+
+63
+00:04:49,539 --> 00:04:54,759
+load it into a register for use just like
+we would any variable value.
+
+64
+00:04:54,759 --> 00:04:58,830
+To give some sense for the additional datapath
+hardware that will be needed, let's update
+
+65
+00:04:58,830 --> 00:05:04,089
+our implementation sketch to add support for
+constants as the second ALU operand.
+
+66
+00:05:04,089 --> 00:05:08,279
+We don't have to add much hardware:
+just a multiplexer which selects either the
+
+67
+00:05:08,279 --> 00:05:14,419
+"rb" register value or the sign-extended constant
+from the 16-bit field in the instruction.
+
+68
+00:05:14,419 --> 00:05:19,560
+The BSEL control signal that controls the
+multiplexer is 1 for the ALU-with-constant
+
+69
+00:05:19,560 --> 00:05:23,289
+instructions and 0 for the regular ALU instructions.
+
+70
+00:05:23,289 --> 00:05:28,739
+We'll put the hardware implementation details
+aside for now and revisit them in a few lectures.

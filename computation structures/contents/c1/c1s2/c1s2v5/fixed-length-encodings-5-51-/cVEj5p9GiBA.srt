@@ -1,0 +1,325 @@
+1
+00:00:01,060 --> 00:00:06,060
+If the symbols we are trying to encode occur
+with equal probability (or if we have no a
+
+2
+00:00:06,060 --> 00:00:11,391
+priori reason to believe otherwise), then
+we'll use a fixed-length encoding, where all
+
+3
+00:00:11,391 --> 00:00:17,259
+leaves in the encoding's binary tree are the
+same distance from the root.
+
+4
+00:00:17,259 --> 00:00:20,810
+Fixed-length encodings have the advantage
+of supporting random access, where we can
+
+5
+00:00:20,810 --> 00:00:25,749
+figure out the Nth symbol of the message by
+simply skipping over the required number of
+
+6
+00:00:25,749 --> 00:00:26,890
+bits.
+
+7
+00:00:26,890 --> 00:00:32,150
+For example, in a message encoded using the
+fixed-length code shown here, if we wanted
+
+8
+00:00:32,150 --> 00:00:36,840
+to determine the third symbol in the encoded
+message, we would skip the 4 bits used to
+
+9
+00:00:36,840 --> 00:00:43,170
+encode the first two symbols and start decoding
+with the 5th bit of message.
+
+10
+00:00:43,170 --> 00:00:48,650
+Mr. Blue is telling us about the entropy for
+random variables that have N equally-probable
+
+11
+00:00:48,650 --> 00:00:49,990
+outcomes.
+
+12
+00:00:49,990 --> 00:00:57,610
+In this case, each element of the sum in the
+entropy formula is simply (1/N)*log2(N), and,
+
+13
+00:00:57,610 --> 00:01:03,830
+since there are N elements in the sequence,
+the resulting entropy is just log2(N).
+
+14
+00:01:03,830 --> 00:01:06,040
+Let's look at some simple examples.
+
+15
+00:01:06,040 --> 00:01:11,420
+In binary-coded decimal, each digit of a decimal
+number is encoded separately.
+
+16
+00:01:11,420 --> 00:01:16,100
+Since there are 10 different decimal digits,
+we'll need to use a 4-bit code to represent
+
+17
+00:01:16,100 --> 00:01:18,479
+the 10 possible choices.
+
+18
+00:01:18,479 --> 00:01:24,890
+The associated entropy is log2(10), which
+is 3.322 bits.
+
+19
+00:01:24,890 --> 00:01:30,020
+We can see that our chosen encoding is inefficient
+in the sense that we'd use more than the minimum
+
+20
+00:01:30,020 --> 00:01:35,640
+number of bits necessary to encode, say, a
+number with 1000 decimal digits: our encoding
+
+21
+00:01:35,640 --> 00:01:40,749
+would use 4000 bits, although the entropy
+suggests we *might* be able to find a shorter
+
+22
+00:01:40,749 --> 00:01:46,959
+encoding, say, 3400 bits, for messages of
+length 1000.
+
+23
+00:01:46,959 --> 00:01:51,860
+Another common encoding is ASCII, the code
+used to represent English text in computing
+
+24
+00:01:51,860 --> 00:01:53,340
+and communication.
+
+25
+00:01:53,340 --> 00:02:02,799
+ASCII has 94 printing characters, so the associated
+entropy is log2(94) or 6.555 bits, so we would
+
+26
+00:02:02,799 --> 00:02:08,350
+use 7 bits in our fixed-length encoding for
+each character.
+
+27
+00:02:08,350 --> 00:02:12,590
+One of the most important encodings is the
+one we use to represent numbers.
+
+28
+00:02:12,590 --> 00:02:17,260
+Let's start by thinking about a representation
+for unsigned integers, numbers starting at
+
+29
+00:02:17,260 --> 00:02:19,780
+0 and counting up from there.
+
+30
+00:02:19,780 --> 00:02:24,410
+Drawing on our experience with representing
+decimal numbers, i.e., representing numbers
+
+31
+00:02:24,410 --> 00:02:29,180
+in "base 10" using the 10 decimal digits,
+our binary representation of numbers will
+
+32
+00:02:29,180 --> 00:02:34,329
+use a "base 2" representation using the two
+binary digits.
+
+33
+00:02:34,329 --> 00:02:38,780
+The formula for converting an N-bit binary
+representation of a numeric value into the
+
+34
+00:02:38,780 --> 00:02:44,450
+corresponding integer is shown below – just
+multiply each binary digit by its corresponding
+
+35
+00:02:44,450 --> 00:02:47,280
+weight in the base-2 representation.
+
+36
+00:02:47,280 --> 00:02:52,390
+For example, here's a 12-bit binary number,
+with the weight of each binary digit shown
+
+37
+00:02:52,390 --> 00:02:53,450
+above.
+
+38
+00:02:53,450 --> 00:03:02,790
+We can compute its value as 0*2^11 plus 1*2^10
+plus 1*2^9, and so on.
+
+39
+00:03:02,790 --> 00:03:08,870
+Keeping only the non-zero terms and expanding
+the powers-of-two gives us the sum 1024 +
+
+40
+00:03:08,870 --> 00:03:22,150
+512 + 256 + 128 + 64 + 16 which, expressed
+in base-10, sums to the number 2000.
+
+41
+00:03:22,150 --> 00:03:27,140
+With this N-bit representation, the smallest
+number that can be represented is 0 (when
+
+42
+00:03:27,140 --> 00:03:34,090
+all the binary digits are 0) and the largest
+number is 2^N – 1 (when all the binary digits
+
+43
+00:03:34,090 --> 00:03:36,099
+are 1).
+
+44
+00:03:36,099 --> 00:03:41,000
+Many digital systems are designed to support
+operations on binary-encoded numbers of some
+
+45
+00:03:41,000 --> 00:03:47,379
+fixed size, e.g., choosing a 32-bit or a 64-bit
+representation, which means that they would
+
+46
+00:03:47,379 --> 00:03:52,469
+need multiple operations when dealing with
+numbers too large to be represented as a single
+
+47
+00:03:52,469 --> 00:03:56,180
+32-bit or 64-bit binary string.
+
+48
+00:03:56,180 --> 00:04:01,019
+Long strings of binary digits are tedious
+and error-prone to transcribe, so let's find
+
+49
+00:04:01,019 --> 00:04:06,090
+a more convenient notation, ideally one where
+it will be easy to recover the original bit
+
+50
+00:04:06,090 --> 00:04:08,079
+string without too many calculations.
+
+51
+00:04:08,079 --> 00:04:14,420
+A good choice is to use a representation based
+on a radix that's some higher power of 2,
+
+52
+00:04:14,420 --> 00:04:19,470
+so each digit in our representation corresponds
+to some short contiguous string of binary
+
+53
+00:04:19,470 --> 00:04:20,589
+bits.
+
+54
+00:04:20,589 --> 00:04:26,250
+A popular choice these days is a radix-16
+representation, called hexadecimal or "hex"
+
+55
+00:04:26,250 --> 00:04:32,259
+for short, where each group of 4 binary digits
+is represented using a single hex digit.
+
+56
+00:04:32,259 --> 00:04:39,600
+Since there are 16 possible combinations of
+4 binary bits, we'll need 16 hexadecimal "digits":
+
+57
+00:04:39,600 --> 00:04:44,330
+we'll borrow the ten digits "0" through "9"
+from the decimal representation, and then
+
+58
+00:04:44,330 --> 00:04:50,340
+simply use the first six letters of the alphabet,
+"A" through "F", for the remaining digits.
+
+59
+00:04:50,340 --> 00:04:57,150
+The translation between 4-bit binary and hexadecimal
+is shown in the table to the left below.
+
+60
+00:04:57,150 --> 00:05:02,840
+To convert a binary number to "hex", group
+the binary digits into sets of 4, starting
+
+61
+00:05:02,840 --> 00:05:07,830
+with the least-significant bit (that's the
+bit with weight 2^0).
+
+62
+00:05:07,830 --> 00:05:14,280
+Then use the table to convert each 4-bit pattern
+into the corresponding hex digit: "0000" is
+
+63
+00:05:14,280 --> 00:05:22,430
+the hex digit "0", "1101" is the hex digit
+"D", and "0111" is the hex digit "7".
+
+64
+00:05:22,430 --> 00:05:26,840
+The resulting hex representation is "7D0".
+
+65
+00:05:26,840 --> 00:05:32,170
+To prevent any confusion, we'll use a special
+prefix "0x" to indicate when a number is being
+
+66
+00:05:32,170 --> 00:05:41,380
+shown in hex, so we'd write "0x7D0" as the
+hex representation for the binary number "0111
+
+67
+00:05:41,380 --> 00:05:45,159
+1101 0000".
+
+68
+00:05:45,159 --> 00:05:50,320
+This notation convention is used by many programming
+languages for entering binary bit strings.

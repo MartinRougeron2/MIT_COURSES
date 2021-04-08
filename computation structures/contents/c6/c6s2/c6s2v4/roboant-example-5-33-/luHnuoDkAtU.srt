@@ -1,0 +1,362 @@
+1
+00:00:00,480 --> 00:00:01,990
+Surprise!
+
+2
+00:00:01,990 --> 00:00:07,060
+We've just been given a robotic ant that has
+an FSM for its brain.
+
+3
+00:00:07,060 --> 00:00:12,879
+The inputs to the FSM come from the ant's
+two antennae, labeled L and R.
+
+4
+00:00:12,879 --> 00:00:18,570
+An antenna input is 1 if the antenna is touching
+something, otherwise its 0.
+
+5
+00:00:18,570 --> 00:00:22,279
+The outputs of the FSM control the ant's motion.
+
+6
+00:00:22,279 --> 00:00:27,690
+We can make it step forward by setting the
+F output to 1, and turn left or right by asserting
+
+7
+00:00:27,690 --> 00:00:31,689
+the TL or TR outputs respectively.
+
+8
+00:00:31,689 --> 00:00:36,910
+If the ant tries to both turn and step forward,
+the turn happens first.
+
+9
+00:00:36,910 --> 00:00:40,760
+Note that the ant can turn when its antenna
+are touching something, but it can't move
+
+10
+00:00:40,760 --> 00:00:42,640
+forward.
+
+11
+00:00:42,640 --> 00:00:47,109
+We've been challenged to design an ant brain
+that will let it find its way out of a simple
+
+12
+00:00:47,109 --> 00:00:50,489
+maze like the one shown here.
+
+13
+00:00:50,489 --> 00:00:56,680
+We remember reading that if the maze doesn't
+have any unconnected walls (i.e.,no islands),
+
+14
+00:00:56,680 --> 00:01:01,649
+we can escape using the "right hand rule"
+where we put our right hand on the wall and
+
+15
+00:01:01,649 --> 00:01:05,010
+walk so that our hand stays on the wall.
+
+16
+00:01:05,010 --> 00:01:08,820
+Let's try to implement this strategy.
+
+17
+00:01:08,820 --> 00:01:12,880
+We'll assume that initially our ant is lost
+in space.
+
+18
+00:01:12,880 --> 00:01:17,760
+The only sensible strategy to walk forward
+until we find a maze wall.
+
+19
+00:01:17,760 --> 00:01:23,420
+So our initial state, labeled LOST, asserts
+the F output, causing the ant to move forward
+
+20
+00:01:23,420 --> 00:01:28,539
+until at least one of the antennae touches
+something, i.e., at least one of the L or
+
+21
+00:01:28,539 --> 00:01:32,770
+R inputs is a 1.
+
+22
+00:01:32,770 --> 00:01:37,270
+So now the ant finds itself in one of these
+three situations.
+
+23
+00:01:37,270 --> 00:01:41,509
+To implement the "right hand rule", the ant
+should turn left (counterclockwise) until
+
+24
+00:01:41,509 --> 00:01:45,070
+it's antennae have just cleared the wall.
+
+25
+00:01:45,070 --> 00:01:50,560
+To do this, we'll add a rotate-counterclockwise
+state, which asserts the turn-left output
+
+26
+00:01:50,560 --> 00:01:55,430
+until both L and R are 0.
+
+27
+00:01:55,430 --> 00:02:00,010
+Now the ant is standing with a wall to its
+right and we can start the process of following
+
+28
+00:02:00,010 --> 00:02:02,030
+the wall with its right antenna.
+
+29
+00:02:02,030 --> 00:02:06,540
+So we have the ant step forward and right,
+assuming that it will immediately touch the
+
+30
+00:02:06,540 --> 00:02:07,960
+wall again.
+
+31
+00:02:07,960 --> 00:02:12,609
+The WALL1 state asserts both the turn-right
+and forward outputs, then checks the right
+
+32
+00:02:12,609 --> 00:02:16,250
+antenna to see what to do next.
+
+33
+00:02:16,250 --> 00:02:22,049
+If the right antenna does touch, as expected,
+the ant turns left to free the antenna and
+
+34
+00:02:22,049 --> 00:02:24,190
+then steps forward.
+
+35
+00:02:24,190 --> 00:02:29,950
+The WALL2 state asserts both the turn-left
+and forward outputs, then checks the antennae.
+
+36
+00:02:29,950 --> 00:02:34,260
+If the right antenna is still touching, it
+needs to continue turning.
+
+37
+00:02:34,260 --> 00:02:39,520
+If the left antenna touches, it's run into
+a corner and needs to reorient itself so the
+
+38
+00:02:39,520 --> 00:02:45,799
+new wall is on its right, the situation we
+dealt with the rotate-counterclockwise state.
+
+39
+00:02:45,799 --> 00:02:50,420
+Finally, if both antennae are free, the ant
+should be in the state of the previous slide:
+
+40
+00:02:50,420 --> 00:02:55,900
+standing parallel to the wall, so we return
+the WALL1 state.
+
+41
+00:02:55,900 --> 00:03:01,219
+Our expectation is that the FSM will alternate
+between the WALL1 and WALL2 states as the
+
+42
+00:03:01,219 --> 00:03:02,640
+ant moves along the wall.
+
+43
+00:03:02,640 --> 00:03:08,340
+If it reaches an inside corner, it rotates
+to put the new wall on its right and keeps
+
+44
+00:03:08,340 --> 00:03:09,340
+going.
+
+45
+00:03:09,340 --> 00:03:13,079
+What happens when it reaches an outside corner?
+
+46
+00:03:13,079 --> 00:03:19,329
+When the ant is in the WALL1 state, it moves
+forward and turns right, then checks its right
+
+47
+00:03:19,329 --> 00:03:23,480
+antenna, expecting the find the wall its traveling
+along.
+
+48
+00:03:23,480 --> 00:03:25,961
+But if its an outside corner, there's no wall
+to touch!
+
+49
+00:03:25,961 --> 00:03:31,319
+The correct strategy in this case is to keep
+turning right and stepping forward until the
+
+50
+00:03:31,319 --> 00:03:34,849
+right antenna touches the wall that's around
+the corner.
+
+51
+00:03:34,849 --> 00:03:39,500
+The CORNER state implements this strategy,
+transitioning to the WALL2 state when the
+
+52
+00:03:39,500 --> 00:03:41,590
+ant reaches the wall again.
+
+53
+00:03:41,590 --> 00:03:44,230
+Hey, this might even work!
+
+54
+00:03:44,230 --> 00:03:46,250
+Let's try it out…
+
+55
+00:03:46,250 --> 00:03:48,959
+Meet the Roboant simulator.
+
+56
+00:03:48,959 --> 00:03:54,609
+On the left we see a text representation of
+the transition table for the FSM brain.
+
+57
+00:03:54,609 --> 00:04:00,689
+Each action line specifies an input pattern,
+which, if it matches, will set the next state
+
+58
+00:04:00,689 --> 00:04:03,980
+and output signals as specified.
+
+59
+00:04:03,980 --> 00:04:08,499
+This particular version of Roboant allows
+the ant to drop or pickup breadcrumbs, and
+
+60
+00:04:08,499 --> 00:04:13,609
+to sense breadcrumbs it comes across - these
+inputs and outputs aren't needed for this
+
+61
+00:04:13,609 --> 00:04:15,310
+demo.
+
+62
+00:04:15,310 --> 00:04:20,500
+The input pattern specifies a value for the
+current state and antenna inputs.
+
+63
+00:04:20,500 --> 00:04:26,090
+The simulator highlights the row in the table
+that matches the current inputs.
+
+64
+00:04:26,090 --> 00:04:33,409
+As you can see, initially the ant is the LOST
+state with neither antennae touching.
+
+65
+00:04:33,409 --> 00:04:38,730
+On the right is a map showing our green ant
+standing in a maze with blue walls.
+
+66
+00:04:38,730 --> 00:04:41,730
+We can select several different mazes to try.
+
+67
+00:04:41,730 --> 00:04:46,630
+To see the ant in action, let's click the
+STEP button several times.
+
+68
+00:04:46,630 --> 00:04:52,090
+After a few steps, the ant hits the wall,
+then rotates counterclockwise to free its
+
+69
+00:04:52,090 --> 00:04:53,640
+antenna.
+
+70
+00:04:53,640 --> 00:04:57,510
+Now it starts following the wall until it
+reaches a corner, at which point it keeps
+
+71
+00:04:57,510 --> 00:05:02,530
+turning right and stepping until it's once
+again in contact with the wall.
+
+72
+00:05:02,530 --> 00:05:08,660
+Now we'll let it run and watch as the FSM
+patiently pursues the programmed strategy,
+
+73
+00:05:08,660 --> 00:05:13,500
+responding to inputs and generating the appropriate
+output responses.
+
+74
+00:05:13,500 --> 00:05:19,040
+With more sensors and actuators, you can see
+that fairly sophisticated behaviors and responses
+
+75
+00:05:19,040 --> 00:05:21,220
+would be possible.
+
+76
+00:05:21,220 --> 00:05:27,790
+In essence this is exactly what modern robots
+do - they too have FSM brains full of pre-programmed
+
+77
+00:05:27,790 --> 00:05:31,470
+behaviors that let them perform their assigned
+tasks.
+
+78
+00:05:31,470 --> 00:05:32,300
+Neat!

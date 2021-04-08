@@ -1,0 +1,375 @@
+1
+00:00:00,459 --> 00:00:05,600
+We can tweak the design of the DM cache a
+little to take advantage of locality and save
+
+2
+00:00:05,600 --> 00:00:09,280
+some of the overhead of tag fields and valid
+bits.
+
+3
+00:00:09,280 --> 00:00:15,080
+We can increase the size of the data field
+in a cache from 1 word to 2 words, or 4 words,
+
+4
+00:00:15,080 --> 00:00:16,079
+etc.
+
+5
+00:00:16,079 --> 00:00:19,949
+The number of data words in each cache line
+is called the "block size" and is always a
+
+6
+00:00:19,949 --> 00:00:22,150
+power of two.
+
+7
+00:00:22,150 --> 00:00:24,679
+Using a larger block size makes sense.
+
+8
+00:00:24,679 --> 00:00:29,849
+If there's a high probability of accessing
+nearby words, why not fetch a larger block
+
+9
+00:00:29,849 --> 00:00:36,000
+of words on a cache miss, trading the increased
+cost of the miss against the increased probability
+
+10
+00:00:36,000 --> 00:00:38,690
+of future hits.
+
+11
+00:00:38,690 --> 00:00:45,300
+Compare the 16-word DM cache shown here with
+a block size of 4 with a different 16-word
+
+12
+00:00:45,300 --> 00:00:48,350
+DM cache with a block size of 1.
+
+13
+00:00:48,350 --> 00:00:55,640
+In this cache for every 128 bits of data there
+are 27 bits of tags and valid bit, so ~17%
+
+14
+00:00:55,640 --> 00:01:02,710
+of the SRAM bits are overhead in the sense
+that they're not being used to store data.
+
+15
+00:01:02,710 --> 00:01:07,940
+In the cache with block size 1, for every
+32 bits of data there are 27 bits of tag and
+
+16
+00:01:07,940 --> 00:01:12,710
+valid bit, so ~46% of the SRAM bits are overhead.
+
+17
+00:01:12,710 --> 00:01:18,930
+So a larger block size means we'll be using
+the SRAM more efficiently.
+
+18
+00:01:18,930 --> 00:01:24,420
+Since there are 16 bytes of data in each cache
+line, there are now 4 offset bits.
+
+19
+00:01:24,420 --> 00:01:28,850
+The cache uses the high-order two bits of
+the offset to select which of the 4 words
+
+20
+00:01:28,850 --> 00:01:33,299
+to return to the CPU on a cache hit.
+
+21
+00:01:33,299 --> 00:01:38,850
+There are 4 cache lines, so we'll need two
+cache line index bits from the incoming address.
+
+22
+00:01:38,850 --> 00:01:46,130
+And, finally, the remaining 26 address bits
+are used as the tag field.
+
+23
+00:01:46,130 --> 00:01:50,890
+Note that there's only a single valid bit
+for each cache line, so either the entire
+
+24
+00:01:50,890 --> 00:01:54,289
+4-word block is present in the cache or it's
+not.
+
+25
+00:01:54,289 --> 00:01:59,240
+Would it be worth the extra complication to
+support caching partial blocks?
+
+26
+00:01:59,240 --> 00:02:00,890
+Probably not.
+
+27
+00:02:00,890 --> 00:02:04,850
+Locality tells us that we'll probably want
+those other words in the near future, so having
+
+28
+00:02:04,850 --> 00:02:08,600
+them in the cache will likely improve the
+hit ratio.
+
+29
+00:02:08,600 --> 00:02:12,470
+What's the tradeoff between block size and
+performance?
+
+30
+00:02:12,470 --> 00:02:16,440
+We've argued that increasing the block size
+from 1 was a good idea.
+
+31
+00:02:16,440 --> 00:02:19,250
+Is there a limit to how large blocks should
+be?
+
+32
+00:02:19,250 --> 00:02:23,800
+Let's look at the costs and benefits of an
+increased block size.
+
+33
+00:02:23,800 --> 00:02:29,410
+With a larger block size we have to fetch
+more words on a cache miss and the miss penalty
+
+34
+00:02:29,410 --> 00:02:33,520
+grows linearly with increasing block size.
+
+35
+00:02:33,520 --> 00:02:38,460
+Note that since the access time for the first
+word from DRAM is quite high, the increased
+
+36
+00:02:38,460 --> 00:02:42,980
+miss penalty isn't as painful as it might
+be.
+
+37
+00:02:42,980 --> 00:02:47,160
+Increasing the block size past 1 reduces the
+miss ratio since we're bringing words into
+
+38
+00:02:47,160 --> 00:02:52,040
+the cache that will then be cache hits on
+subsequent accesses.
+
+39
+00:02:52,040 --> 00:02:56,890
+Assuming we don't increase the overall cache
+capacity, increasing the block size means
+
+40
+00:02:56,890 --> 00:03:02,220
+we'll make a corresponding reduction in the
+number of cache lines.
+
+41
+00:03:02,220 --> 00:03:06,620
+Reducing the number of lines impacts the number
+of separate address blocks that can be accommodated
+
+42
+00:03:06,620 --> 00:03:08,390
+in the cache.
+
+43
+00:03:08,390 --> 00:03:12,731
+As we saw in the discussion on the size of
+the working set of a running program, there
+
+44
+00:03:12,731 --> 00:03:16,730
+are a certain number of separate regions we
+need to accommodate to achieve a high hit
+
+45
+00:03:16,730 --> 00:03:20,490
+ratio: program, stack, data, etc.
+
+46
+00:03:20,490 --> 00:03:25,130
+So we need to ensure there are a sufficient
+number of blocks to hold the different addresses
+
+47
+00:03:25,130 --> 00:03:27,450
+in the working set.
+
+48
+00:03:27,450 --> 00:03:33,400
+The bottom line is that there is an optimum
+block size that minimizes the miss ratio and
+
+49
+00:03:33,400 --> 00:03:38,130
+increasing the block size past that point
+will be counterproductive.
+
+50
+00:03:38,130 --> 00:03:44,120
+Combining the information in these two graphs,
+we can use the formula for AMAT to choose
+
+51
+00:03:44,120 --> 00:03:49,460
+the block size the gives us the best possible
+AMAT.
+
+52
+00:03:49,460 --> 00:03:55,430
+In modern processors, a common block size
+is 64 bytes (16 words).
+
+53
+00:03:55,430 --> 00:03:59,570
+DM caches do have an Achilles heel.
+
+54
+00:03:59,570 --> 00:04:04,440
+Consider running the 3-instruction LOOPA code
+with the instructions located starting at
+
+55
+00:04:04,440 --> 00:04:10,710
+word address 1024 and the data starting at
+word address 37 where the program is making
+
+56
+00:04:10,710 --> 00:04:16,120
+alternating accesses to instruction and data,
+e.g., a loop of LD instructions.
+
+57
+00:04:16,120 --> 00:04:22,419
+Assuming a 1024-line DM cache with a block
+size of 1, the steady state hit ratio will
+
+58
+00:04:22,419 --> 00:04:28,610
+be 100% once all six locations have been loaded
+into the cache since each location is mapped
+
+59
+00:04:28,610 --> 00:04:31,800
+to a different cache line.
+
+60
+00:04:31,800 --> 00:04:37,030
+Now consider the execution of the same program,
+but this time the data has been relocated
+
+61
+00:04:37,030 --> 00:04:40,419
+to start at word address 2048.
+
+62
+00:04:40,419 --> 00:04:45,509
+Now the instructions and data are competing
+for use of the same cache lines.
+
+63
+00:04:45,509 --> 00:04:51,099
+For example, the first instruction (at address
+1024) and the first data word (at address
+
+64
+00:04:51,099 --> 00:04:58,710
+2048) both map to cache line 0, so only one
+them can be in the cache at a time.
+
+65
+00:04:58,710 --> 00:05:04,550
+So fetching the first instruction fills cache
+line 0 with the contents of location 1024,
+
+66
+00:05:04,550 --> 00:05:10,020
+but then the first data access misses and
+then refills cache line 0 with the contents
+
+67
+00:05:10,020 --> 00:05:13,180
+of location 2048.
+
+68
+00:05:13,180 --> 00:05:17,749
+The data address is said to "conflict" with
+the instruction address.
+
+69
+00:05:17,749 --> 00:05:21,190
+The next time through the loop, the first
+instruction will no longer be in the cache
+
+70
+00:05:21,190 --> 00:05:25,770
+and it's fetch will cause a cache miss, called
+a "conflict miss".
+
+71
+00:05:25,770 --> 00:05:32,370
+So in the steady state, the cache will never
+contain the word requested by the CPU.
+
+72
+00:05:32,370 --> 00:05:34,550
+This is very unfortunate!
+
+73
+00:05:34,550 --> 00:05:38,960
+We were hoping to design a memory system that
+offered the simple abstraction of a flat,
+
+74
+00:05:38,960 --> 00:05:41,220
+uniform address space.
+
+75
+00:05:41,220 --> 00:05:46,430
+But in this example we see that simply changing
+a few addresses results in the cache hit ratio
+
+76
+00:05:46,430 --> 00:05:50,590
+dropping from 100% to 0%.
+
+77
+00:05:50,590 --> 00:05:54,979
+The programmer will certainly notice her program
+running 10 times slower!
+
+78
+00:05:54,979 --> 00:06:00,599
+So while we like the simplicity of DM caches,
+we'll need to make some architectural changes
+
+79
+00:06:00,599 --> 00:06:03,909
+to avoid the performance problems caused by
+conflict misses.

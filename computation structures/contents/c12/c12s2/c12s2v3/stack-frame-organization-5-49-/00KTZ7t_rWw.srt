@@ -1,0 +1,376 @@
+1
+00:00:00,250 --> 00:00:04,059
+We'll use the stack to hold a procedure's
+activation record.
+
+2
+00:00:04,059 --> 00:00:07,310
+That includes the values of the arguments
+to the procedure call.
+
+3
+00:00:07,310 --> 00:00:12,550
+We'll allocate words on the stack to hold
+the values of the procedure's local variables,
+
+4
+00:00:12,550 --> 00:00:14,950
+assuming we don't keep them in registers.
+
+5
+00:00:14,950 --> 00:00:20,080
+And we'll use the stack to save the return
+address (passed in LP) so the procedure can
+
+6
+00:00:20,080 --> 00:00:25,420
+make nested procedure calls without overwriting
+its return address.
+
+7
+00:00:25,420 --> 00:00:30,400
+The responsibility for allocating and deallocating
+the activation record will be shared between
+
+8
+00:00:30,400 --> 00:00:35,860
+the calling procedure (the "caller") and the
+called procedure (the "callee").
+
+9
+00:00:35,860 --> 00:00:40,579
+The caller is responsible for evaluating the
+argument expressions and saving their values
+
+10
+00:00:40,579 --> 00:00:44,210
+in the activation record being built on the
+stack.
+
+11
+00:00:44,210 --> 00:00:48,890
+We'll adopt the convention that the arguments
+are pushed in reverse order, i.e., the first
+
+12
+00:00:48,890 --> 00:00:52,480
+argument will be the last to be pushed on
+the stack.
+
+13
+00:00:52,480 --> 00:00:57,280
+We'll explain why we made this choice in a
+couple of slides…
+
+14
+00:00:57,280 --> 00:01:02,289
+The code compiled for a procedure involves
+a sequence of expression evaluations, each
+
+15
+00:01:02,289 --> 00:01:07,330
+followed by a PUSH to save the calculated
+value on the stack.
+
+16
+00:01:07,330 --> 00:01:13,200
+So when the callee starts execution, the top
+of the stack contains the value of the first
+
+17
+00:01:13,200 --> 00:01:19,420
+argument, the next word down the value of
+the second argument, and so on.
+
+18
+00:01:19,420 --> 00:01:24,810
+After the argument values, if any, have been
+pushed on the stack, there's a BR to transfer
+
+19
+00:01:24,810 --> 00:01:29,520
+control to the procedure's entry point,
+saving the address of the instruction following
+
+20
+00:01:29,520 --> 00:01:36,180
+the BR in the linkage pointer, R28, a register
+that we'll dedicate to that purpose.
+
+21
+00:01:36,180 --> 00:01:41,940
+When the callee returns and execution resumes
+in the caller, a DEALLOCATE is used to remove
+
+22
+00:01:41,940 --> 00:01:47,158
+all the argument values from the stack, preserving
+stack discipline.
+
+23
+00:01:47,158 --> 00:01:50,939
+So that's the code the compiler generates
+for the procedure.
+
+24
+00:01:50,939 --> 00:01:54,560
+The rest of the work happens in the called
+procedure.
+
+25
+00:01:54,560 --> 00:01:58,900
+The code at the start of the called procedure
+completes the allocation of the activation
+
+26
+00:01:58,900 --> 00:02:00,040
+record.
+
+27
+00:02:00,040 --> 00:02:04,610
+Since when we're done the activation record
+will occupy a bunch of consecutive words on
+
+28
+00:02:04,610 --> 00:02:10,360
+the stack, we'll sometimes refer to the activation
+record as a "stack frame" to remind us of
+
+29
+00:02:10,360 --> 00:02:11,870
+where it lives.
+
+30
+00:02:11,870 --> 00:02:16,099
+The first action is to save the return address
+found in the LP register.
+
+31
+00:02:16,099 --> 00:02:22,530
+This frees up LP to be used by any nested
+procedure calls in the body of the callee.
+
+32
+00:02:22,530 --> 00:02:27,281
+In order to make it easy to access values
+stored in the activation record, we'll dedicate
+
+33
+00:02:27,281 --> 00:02:33,890
+another register called the "base pointer"
+(BP = R27) which will point to the stack frame
+
+34
+00:02:33,890 --> 00:02:35,680
+we're building.
+
+35
+00:02:35,680 --> 00:02:41,450
+So as we enter the procedure, the code saves
+the pointer to the caller's stack frame, and
+
+36
+00:02:41,450 --> 00:02:47,980
+then uses the current value of the stack pointer
+to make BP point to the current stack frame.
+
+37
+00:02:47,980 --> 00:02:50,800
+We'll see how we use BP in just a moment.
+
+38
+00:02:50,800 --> 00:02:55,720
+Now the code will allocate words in the stack
+frame to hold the values for the callee's
+
+39
+00:02:55,720 --> 00:02:57,690
+local variables, if any.
+
+40
+00:02:57,690 --> 00:03:02,950
+Finally, the callee needs to save the values
+of any registers it will use when executing
+
+41
+00:03:02,950 --> 00:03:04,599
+the rest of its code.
+
+42
+00:03:04,599 --> 00:03:09,760
+These saved values can be used to restore
+the register values just before returning
+
+43
+00:03:09,760 --> 00:03:11,060
+to the caller.
+
+44
+00:03:11,060 --> 00:03:17,170
+This is called the "callee saves" convention
+where the callee guarantees that all register
+
+45
+00:03:17,170 --> 00:03:20,940
+values will be preserved across the procedure
+call.
+
+46
+00:03:20,940 --> 00:03:25,720
+With this convention, the code in the caller
+can assume any values it placed in registers
+
+47
+00:03:25,720 --> 00:03:31,630
+before a nested procedure call will still
+be there when the nested call returns.
+
+48
+00:03:31,630 --> 00:03:36,329
+Note that dedicating a register as the base
+pointer isn't strictly necessary.
+
+49
+00:03:36,329 --> 00:03:40,970
+All accesses to the values on the stack can
+be made relative to the stack pointer, but
+
+50
+00:03:40,970 --> 00:03:46,840
+the offsets from SP will change as values
+are PUSHed and POPed from the stack, e.g.,
+
+51
+00:03:46,840 --> 00:03:49,120
+during procedure calls.
+
+52
+00:03:49,120 --> 00:03:56,819
+It will be easier to understand the generated
+code if we use BP for all stack frame references.
+
+53
+00:03:56,819 --> 00:04:01,470
+Let's return to the question about the order
+of argument values in the stack frame.
+
+54
+00:04:01,470 --> 00:04:05,739
+We adopted the convention of PUSHing the values
+in reverse order, i.e., where the value of
+
+55
+00:04:05,739 --> 00:04:09,250
+the first argument is the last one to be PUSHED.
+
+56
+00:04:09,250 --> 00:04:14,200
+So, why PUSH argument values in reverse order?
+
+57
+00:04:14,200 --> 00:04:18,880
+With the arguments PUSHed in reverse order,
+the first argument (labeled "arg 0") will
+
+58
+00:04:18,880 --> 00:04:23,220
+be at a fixed offset from the base pointer
+regardless of the number of argument values
+
+59
+00:04:23,220 --> 00:04:25,259
+pushed on the stack.
+
+60
+00:04:25,259 --> 00:04:29,740
+The compiler can use a simple formula to the
+determine the correct BP offset value for
+
+61
+00:04:29,740 --> 00:04:31,350
+any particular argument.
+
+62
+00:04:31,350 --> 00:04:38,060
+So the first argument is at offset -12, the
+second at -16, and so on.
+
+63
+00:04:38,060 --> 00:04:40,310
+Why is this important?
+
+64
+00:04:40,310 --> 00:04:45,590
+Some languages, such as C, support procedure
+calls with a variable number of arguments.
+
+65
+00:04:45,590 --> 00:04:49,680
+Usually the procedure can determine from,
+say, the first argument, how many additional
+
+66
+00:04:49,680 --> 00:04:51,940
+arguments to expect.
+
+67
+00:04:51,940 --> 00:04:57,000
+The canonical example is the C printf function
+where the first argument is a format string
+
+68
+00:04:57,000 --> 00:05:00,780
+that specifies how a sequence of values should
+be printed.
+
+69
+00:05:00,780 --> 00:05:06,180
+So a call to printf includes the format string
+argument plus a varying number of additional
+
+70
+00:05:06,180 --> 00:05:07,750
+arguments.
+
+71
+00:05:07,750 --> 00:05:12,410
+With our calling convention the format string
+will always be in the same location relative
+
+72
+00:05:12,410 --> 00:05:17,530
+to BP, so the printf code can find it without
+knowing the number of additional arguments
+
+73
+00:05:17,530 --> 00:05:20,240
+in the current call.
+
+74
+00:05:20,240 --> 00:05:24,340
+The local variables are also at fixed offsets
+from BP.
+
+75
+00:05:24,340 --> 00:05:29,889
+The first local variable is at offset 0, the
+second at offset 4, and so on.
+
+76
+00:05:29,889 --> 00:05:35,140
+So, we see that having a base pointer makes
+it easy to access the values of the arguments
+
+77
+00:05:35,140 --> 00:05:40,460
+and local variables using fixed offsets that
+can be determined at compile time.
+
+78
+00:05:40,460 --> 00:05:45,770
+The stack above the local variables is available
+for other uses, e.g., building the activation
+
+79
+00:05:45,770 --> 00:05:47,639
+record for a nested procedure call!

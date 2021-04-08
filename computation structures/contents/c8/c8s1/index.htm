@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>8.1 Annotated Slides | 8 Design Tradeoffs | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="8.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 8.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c8/c8s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c8/index.htm">8 Design Tradeoffs</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            8.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            8.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="selected">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c8/index.htm">&lt;<span>Design Tradeoffs</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c8/c8s1/index.htm">8.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c8/c8s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L08: Design Tradeoffs</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Optimizing Your Design</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">CMOS Static Power Dissipation</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">CMOS Dynamic Power Dissipation I</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">CMOS Dynamic Power Dissipation II</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">How Can We Reduce Power?</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Fewer Transitions → Lower Power</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Improving Speed: Adder Example</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Performance/Cost Analysis</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Carry-Select Adders</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">32-Bit Carry-Select Adder</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Wanted: Faster Carry Logic!</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">Carry Look-Ahead Adders (CLA)</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">8-Bit CLA (generate G &amp; P)</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">8-Bit CLA (carry generation)</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">8-Bit CLA (complete)</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">Binary Multiplication</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Combinational Multiplier</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">2's Complement Multiplication</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">2's Complement Multiplier</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Increase Throughput with Pipelining</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Carry-Save Pipelined Multiplier</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Reduce Area with Sequential Logic</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">Summary</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <p>In this lecture, we’re going to look into   optimizing digital systems to make them smaller, faster, higher   performance, more energy efficient, and so on.  It would be   wonderful if we could achieve all these goals at the same time   and for some circuits we can.  But, in general, optimizing in   one dimension usually means doing less well in another.  In   other words, there are design tradeoffs to be made.</p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide02.png" alt=""></a></div> <p>Making tradeoffs correctly requires that we have a clear   understanding of our design goals for the system.  Consider two   different design teams: one is charged with building a high-end   graphics card for gaming, the other with building the Apple   watch.</p> <p>The team building the graphics card is mostly concerned with   performance and, within limits, is willing to trade off cost and   power consumption to achieve their performance goals.  Graphics   cards have a set size, so there’s a high priority in   making the system small enough to meet the required size, but   there’s little to be gained in making it smaller than   that.</p> <p>The team building the watch has very different goals.  Size and   power consumption are critical since it has to fit on a wrist and   run all day without leaving scorch marks on the wearer’s   wrist!</p> <p>Suppose both teams are thinking about pipelining part of their   logic for increased performance.  Pipelining registers are an   obvious additional cost.  The overlapped execution and higher   \(t_{\textrm{CLK}}\) made possible by pipelining would increase   the power consumption and the need to dissipate that power   somehow.  You can imagine the two teams might come to very   different conclusions about the correct course of action!</p> <p>This chapter takes a look at some of the possible tradeoffs.   But as designers you’ll have to pick and choose which   tradeoffs are right for your design. This is the sort of design   challenge on which good engineers thrive!  Nothing is more   satisfying than delivering more than anyone thought possible   within the specified constraints.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide03.png" alt=""></a></div> <p>Our first optimization topic is power dissipation, where the   usual goal is to either meet a certain power budget, or to   minimize power consumption while meeting all the other design   targets.</p> <p>In CMOS circuits, there are several sources of power   dissipation, some under our control, some not.</p> <p>Static power dissipation is power that is consumed even when   the circuit is idle, i.e., no nodes are changing value.  Using   our simple switch model for the operation of MOSFETs, we’d   expect CMOS circuits to have zero static power dissipation.  And   in the early days of CMOS, we came pretty close to meeting that   ideal.  But as the physical dimensions of the MOSFET have shrunk   and the operating voltages have been lowered, there are two   sources of static power dissipation in MOSFETs that have begun   to loom large.</p> <p>We’ll discuss the effects as they appear in n-channel   MOSFETs, but keep in mind that they appear in p-channel MOSFETs   too.</p> <p>The first effect depends on the thickness of the MOSFET’s   gate oxide, shown as the thin yellow layer in the MOSFET diagram   on the left.  In each new generation of integrated circuit   technology, the thickness of this layer has shrunk, as part of   the general reduction in all the physical dimensions.  The   thinner insulating layer means stronger electrical fields that   cause a deeper inversion layer that leads to NFETs that carry   more current, producing faster gate speeds.  Unfortunately the   layers are now thin enough that electrons can tunnel through the   insulator, creating a small flow of current from the gate to the   substrate.  With billions of NFETs in a single circuit, even   tiny currents can add up to non-negligible power drain.</p> <p>The second effect is caused by current flowing between the   drain and source of a NFET that is, in theory, not conducting   because \(V_{\textrm{GS}}\) is less than the threshold voltage.   Appropriately this effect is called sub-threshold conduction and   is exponentially related to \(V_{\textrm{GS}}\) -   \(V_{\textrm{TH}}\) (a negative value when the NFET is off).  So   as \(V_{\textrm{TH}}\) has been reduced in each new generation of   technology, \(V_{\textrm{GS}} - V_{\textrm{TH}}\) is less negative   and the sub-threshold conduction has increased.</p> <p>One fix has been to change the geometry of the NFET so the   conducting channel is a tall, narrow fin with the gate terminal   wrapped around 3 sides, sometimes referred to as a tri-gate   configuration.  This has reduced the sub-threshold conduction by   an order of magnitude or more, solving this particular problem   for now.</p> <p>Neither of these effects is under the control of the system   designer, except of course, if they’re free to choose an   older manufacturing process!  We mention them here so that   you’re aware that newer technologies often bring   additional costs that then become part of the trade-off   process.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide04.png" alt=""></a></div> <p>A designer does have some control over the dynamic power   dissipation of the circuit, the amount of power spent causing   nodes to change value during a sequence of computations.  Each   time a node changes from 0-to-1 or 1-to-0, currents flow through   the MOSFET pullup and pulldown networks, charging and   discharging the output node’s capacitance and thus   changing its voltage.</p> <p>Consider the operation of an inverter.  As the voltage of the   input changes, the pullup and pulldown networks turn on and off,   connecting the inverter’s output node to VDD or ground.   This charges or discharges the capacitance of the output node   changing its voltage.  We can compute the energy dissipated by   integrating the instantaneous power associated with the current   flow through the pullups and pulldowns over the time taken by   the output transition.</p> <p>The power dissipated across the resistance of the MOSFET   channel is simply \(I_{\textrm{DS}}\) times \(V_{\textrm{DS}}\).   Here’s the energy integral for the 1-to-0 transition of   the output node, where we’re measuring \(I_{\textrm{DS}}\)   using the equation for the current flowing out of the output   node’s capacitor: \(I = C dV/dt\).  Assuming that the input   signal is a clock signal of period \(t_{\textrm{CLK}}\) and that   each transition is taking half a clock cycle, we can work   through the math to determine that energy dissipated through the   pulldown network is \(0.5 f C V_{\textrm{DD}}^2\), where the   frequency \(f\) tells us the number of such transitions per   second, \(C\) is the nodal capacitance, and \(V_{\textrm{DD}}\) (the   power supply voltage) is the starting voltage of the nodal   capacitor.</p> <p>There’s a similar integral for the current dissipated by the pullup network when charging the capacitor and it yields the   same result.</p> <p>So one complete cycle of charging then discharging dissipates   \(f C V^2\) joules.  Note that all this energy has come from the   power supply — the first half is dissipated when the   output node is charged and the other half stored as energy in   the capacitor.  Then the capacitor’s energy is dissipated   as it discharges.</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide05.png" alt=""></a></div> <p>These results are summarized in the lower left.  We’ve   added the calculation for the energy dissipation of an entire   circuit assuming N of the circuit’s nodes change each   clock cycle.</p> <p>How much energy could be consumed by a modern integrated   circuit?  Here’s a quick back-of-the-envelope estimate for   a current generation CPU chip.  It’s operating at, say, 1   GHz and will have 100 million internal nodes that could change   each clock cycle.  Each nodal capacitance is around 1 femtofarad and the power supply is about 1V.  With these numbers, the   estimated power consumption is 100 watts.  We all know how hot a   100W light bulb gets!  You can see it would be hard to keep the   CPU from overheating.</p> <p>This is way too much energy to be dissipated in many   applications, and modern CPUs intended, say, for laptops only   dissipate a fraction of this energy.  So the CPU designers must   have some tricks up their sleeve, some of which we’ll see   in a minute.</p> <p>But first notice how important it’s been to be able to   reduce the power supply voltage in modern integrated circuits.   If we’re able to reduce the power supply voltage from 3.3V   to 1V, that alone accounts for more than a factor of 10 in power   dissipation.  So the newer circuit can be say, 5 times larger   and 2 times faster with the same power budget!</p> <p>Newer technologies trends are shown here.  The net effect is   that newer chips would naturally dissipate more power if we   could afford to have them do so.  We have to be very clever in   how we use more and faster MOSFETs in order not to run up   against the power dissipation constraints we face.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide06.png" alt=""></a></div> <p>To see what we can do to reduce power consumption, consider the   following diagram of an arithmetic and logic unit (ALU) like the   one you’ll design in the final lab in this part of the   course.  There are four independent component modules,   performing the separate arithmetic, Boolean, shifting and   comparison operations typically found in an ALU.  Some of the   ALU control signals are used to select the desired result in a   particular clock cycle, basically ignoring the answers produced   by the other modules.</p> <p>Of course, just because the other answers aren’t selected   doesn’t mean we didn’t dissipate energy in computing   them.  This suggests an opportunity for saving power!  Suppose   we could somehow “turn off” modules whose outputs we   didn’t need?  One way to prevent them from dissipating   power is to prevent the module’s inputs from changing,   thus ensuring that no internal nodes would change and hence   reducing the dynamic power dissipation of the “off”   module to zero.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide07.png" alt=""></a></div> <p>One idea is to put latches on the inputs to each module, only   opening a module’s input latch if an answer was required   from that module in the current cycle.  If a module’s   latch stayed closed, its internal nodes would remain unchanged,   eliminating the module’s dynamic power dissipation.  This   could save a substantial amount of power.  For example, the   shifter circuitry has many internal nodes and so has a large   dynamic power dissipation.  But there are comparatively few   shift operations in most programs, so with our proposed fix,   most of the time those energy costs wouldn’t be   incurred.</p> <p>A more draconian approach to power conservation is to literally   turn off unused portions of the circuit by switching off their   power supply.  This is more complicated to achieve, so this   technique is usually reserved for special power-saving modes of   operation, where we can afford the time it takes to reliably   power the circuity back up.</p> <p>Another idea is to slow the clock (reducing the frequency of   nodal transitions) when there’s nothing for the circuit to   do.  This is particularly effective for devices that interact   with the real world, where the time scales for significant   external events are measured in milliseconds.  The device can   run slowly until an external event needs attention, then speed   up the clock while it deals with the event.</p> <p>All of these techniques and more are used in modern mobile   devices to conserve battery power without limiting the ability   to deliver bursts of performance.  There is much more innovation   waiting to be done in this area, something you may be asked to   tackle as designers!</p> <p>One last question is whether computation has to consume energy. There have been some interesting theoretical speculations about   this question — see section 6.5 of the course notes to   read more.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide08.png" alt=""></a></div> <p>The most straightforward way to improve performance is to   reduce the propagation delay of a circuit.  Let’s look at   a perennial performance bottleneck: the ripple-carry adder.</p> <p>To fix it, we first have to figure out the path from inputs to   outputs that has the largest propagation delay, i.e., the path   that’s determining the overall \(t_{\textrm{PD}}\).  In this   case that path is the long carry chain following the carry-in to   carry-out path through each full adder module.  To trigger the   path add -1 and 1 by setting the A inputs to all 1’s and   the B input to all 0’s except for the low-order bit which   is 1.  The final answer is 0, but notice that each full adder   has to wait for the carry-in from the previous stage before it   produces 0 on its sum output and generates a carry-out for the   next full adder.  The carry really does ripple through the   circuit as each full adder in turn does its thing.</p> <p>To total propagation delay along this path is N-1 times the   carry-in to carry-out delay of each full adder, plus the delay   to produce the final bit of the sum.</p> <p>How would the overall latency change if we, say, doubled the   size of the operands, i.e., made N twice as large?  It’s   useful to summarize the dependency of the latency on N using the   “order-of” notation to give us the big picture.   Clearly as N gets larger the delay of the XOR gate at the end   becomes less significant, so the order-of notation ignores terms   that are relatively less important as N grows.</p> <p>In this example, the latency is \(\Theta(N)\), which tells us   that the latency would be expected to essentially double if we   made N twice as large.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide09.png" alt=""></a></div> <p>The order-of notation, which theoreticians call asymptotic   analysis, tells us the term that would dominate the result as N   grows.  The yellow box contains the official definition, but an   example might make it easier to understand what’s   happening.</p> <p>Suppose we want to characterize the growth in the value of the   equation \(n^2 + 2n + 3\) as \(n\) gets larger.  The dominant term   is clearly \(n^2\) and the value of our equation is bounded above   and below by simple multiples of \(n^2\), except for finitely many   values of n.  The lower bound is always true for \(n\) greater   than or equal to 0.  And in this case, the upper bound   doesn’t hold only for \(n\) equal to 0, 1, 2, or 3.  For all   other positive values of \(n\) the upper inequality is true.  So   we’d say that this equation was \(\Theta(n^2)\).</p> <p>There are actually two variants for the order-of notation.  We   use the \(\Theta()\) notation to indicate that \(g(n)\) is bounded   above AND below by multiples of \(f(n)\).  The \(O()\) notation is   used when \(g(n)\) is only bounded above by a multiple of   \(f(n)\).</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide10.png" alt=""></a></div> <p>Here’s a first attempt at improving the latency of our   addition circuit.  The trouble with the ripple-carry adder is   that the high-order bits have to wait for the carry-in from the   low-order bits.  Is there a way in which we can get high half   the adder working in parallel with the low half?</p> <p>Suppose we wanted to build a 32-bit adder.  Let’s make   two copies of the high 16 bits of the adder, one assuming the   carry-in from the low 16 bits is 0, and the other assuming the   carry-in is 1.  So now we have three 16-bit adders, all of which   can operate in parallel on newly arriving A and B inputs. Once   the 16-bit additions are complete, we can use the actual   carry-out from the low-half to select the answer from the   particular high-half adder that used the matching carry-in   value.  This type of adder is appropriately named the   carry-select adder.</p> <p>The latency of this carry-select adder is just a little more   than the latency of a 16-bit ripple-carry addition.  This is   approximately half the latency of the original 32-bit   ripple-carry adder.  So at a cost of about 50% more circuitry,   we’ve halved the latency!</p> <p>As a next step, we could apply the same strategy to halve the   latency of the 16-bit adders.  And then again to halve the   latency of the 8-bit adders used in the previous step.  At each   step we halve the adder latency and add a MUX delay.  After   \(\log_2(N)\) steps, \(N\) will be 1 and we’re done.</p> <p>At this point the latency would be some constant cost to do a   1-bit addition, plus \(\log_2(N)\) times the MUX latency to select the   right answers.  So the overall latency of the carry-select adder   is \(\Theta(\log N)\).  Note that \(\log_2 N\) and \(\log N\)only   differ by a constant factor, so we ignore the base of the log in   order-of notation.</p> <p>The carry-select adder shows a clear performance-size tradeoff   available to the designer.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide11.png" alt=""></a></div> <p>Since adders play a big role in many digital systems,   here’s a more carefully engineered version of a 32-bit   carry-select adder.  You could try this in your ALU design!</p> <p>The size of the adder blocks has been chosen so that the trial   sums and the carry-in from the previous stage arrive at the   carry-select MUX at approximately the same time.  Note that   since the select signal for the MUXes is heavily loaded   we’ve included a buffer to make the select signal   transitions faster.</p> <p>This carry-select adder is about two-and-a-half times faster   than a 32-bit ripple-carry adder at the cost of about twice as   much circuitry.  A great design to remember when you’re   looking to double the speed of your ALU!</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide12.png" alt=""></a></div> <p>Here’s another approach to improving the latency of our   adder, this time focusing just on the carry logic.  Early on in   the course, we learned that by going from a chain of logic gates   to a tree of logic gates, we could go from a linear latency to a   logarithmic latency.  Let’s try to do that here.</p> <p>We’ll start by rewriting the equations for the carry-out   from the full adder module.  The final form of the rewritten   equation has two terms.  The G, or generate, term is true when   the inputs will cause the module to generate a carry-out right   away, without having to wait for the carry-in to arrive.  The P,   or propagate, term is true if the module will generate a   carry-out only if there’s a carry-in.</p> <p>So there only two ways to get a carry-out from the module:   it’s either generated by the current module or the   carry-in is propagated from the previous module.</p> <p>Actually, it’s usual to change the logic for the P term   from “A OR B” to “A XOR B”. This   doesn’t change the truth table for the carry-out but will   allow us to express the sum output as “P XOR   carry-in”.  Here’s the schematic for the reorganized   full adder module.  The little sum-of-products circuit for the   carry-out can be implemented using 3 2-input NAND gates, which   is a bit more compact than the implementation for the three   product terms we suggested in Lab 2.  Time to update your full   adder circuit!</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide13.png" alt=""></a></div> <p>Now consider two adjacent adder modules in a larger adder   circuit: we’ll use the label H to refer to the high-order   module and the label L to refer to the low-order module.</p> <p>We can use the generate and propagate information from each of   the modules to develop equations for the carry-out from the pair   of modules treated as a single block.</p> <p>We’ll generate a carry-out from the block when a   carry-out is generated by the H module, or when a carry-out is   generated by the L module and propagated by the H module.  And   we’ll propagate the carry-in through the block only if the   L module propagates its carry-in to the intermediate carry-out   and H module propagates that to the final carry-out.  So we have   two simple equations requiring only a couple of logic gates to   implement.</p> <p>Let’s use these equations to build a generate-propagate   (GP) module and hook it to the H and L modules as shown.  The G   and P outputs of the GP module tell us under what conditions   we’ll get a carry-out from the two individual modules   treated as a single, larger block.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide14.png" alt=""></a></div> <p>We can use additional layers of GP modules to build a tree of   logic that computes the generate and propagate logic for adders   with any number of inputs.  For an adder with N inputs, the tree   will contain a total of N-1 GP modules and have a latency   that’s \(\Theta(\log N)\).</p> <p>In the next step, we’ll see how to use the generate and   propagate information to quickly compute the carry-in for each   of the original full adder modules.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide15.png" alt=""></a></div> <p>Once we’re given the carry-in \(C_0\) for the low-order   bit, we can hierarchically compute the carry-in for each full   adder module.</p> <p>Given the carry-in to a block of adders, we simply pass it   along as the carry-in to the low-half of the block.  The   carry-in for the high-half of the block is computed the using   the generate and propagate information from the low-half of the   block.</p> <p>We can use these equations to build a C module and arrange the   C modules in a tree as shown to use the \(C_0\) carry-in to   hierarchically compute the carry-in to each layer of   successively smaller blocks, until we finally reach the full   adder modules.  For example, these equations show how \(C_4\) is   computed from \(C_0\), and \(C_6\) is computed from \(C_4\).</p> <p>Again the total propagation delay from the arrival of the \(C_0\)   input to the carry-ins for each full adder is \(\Theta(\log   N)\).</p> <p>Notice that the \(G_L\) and \(P_L\) inputs to a particular C module   are the same as two of the inputs to the GP module in the same   position in the GP tree.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide16.png" alt=""></a></div> <p>We can combine the GP module and C module to form a single   carry-lookahead module that passes generate and propagate   information up the tree and carry-in information down the tree.   The schematic at the top shows how to wire up the tree of   carry-lookahead modules.</p> <p>And now we get to the payoff for all this hard work!  The   combined propagation delay to hierarchically compute the   generate and propagate information on the way up and the   carry-in information on the way down is \(\Theta(\log N)\), which   is then the latency for the entire adder since computing the sum   outputs only takes one additional XOR delay.  This is a   considerable improvement over the \(\Theta(N)\) latency of the   ripple-carry adder.</p> <p>A final design note: we no longer need the carry-out circuitry   in the full adder module, so it can be removed.</p> <p>Variations on this generate-propagate strategy form the basis   for the fastest-known adder circuits. If you’d like to   learn more, look up “Kogge-Stone adders” on   Wikipedia.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide17.png" alt=""></a></div> <p>One of the biggest and slowest circuits in an arithmetic and   logic unit is the multiplier.  We’ll start by developing a   straightforward implementation and then, in the next section,   look into tradeoffs to make it either smaller or faster.</p> <p>Here’s the multiplication operation for two unsigned   4-bit operands broken down into its component operations.  This   is exactly how we learned to do it in primary school.  We take   each digit of the multiplier (the B operand) and use our   memorized multiplication tables to multiply it with each digit   of the multiplicand (the A operand), dealing with any carries   into the next column as we process the multiplicand   right-to-left.  The output from this step is called a partial   product, and then we repeat the step for the remaining bits of   the multiplier.  Each partial product is shifted one digit to   the left, reflecting the increasing weight of the multiplier   digits.</p> <p>In our case the digits are just single bits, i.e.,   they’re 0 or 1 and the multiplication table is pretty   simple!  In fact, the 1-bit-by-1-bit binary multiplication   circuit is just a 2-input AND gate.  And look Mom, no   carries!</p> <p>The partial products are N bits wide since there are no   carries.  If the multiplier has M bits, there will be M partial   products.  And when we add the partial products together,   we’ll get an N+M bit result if we account for the possible   carry-out from the high-order bit.</p> <p>The easy part of the multiplication is forming the partial   products — it just requires some AND gates.  The more   expensive operation is adding together the M N-bit partial   products.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide18.png" alt=""></a></div> <p>Here’s the schematic for the combinational logic needed   to implement the 4x4 multiplication, which would be easy to   extend for larger multipliers (we’d need more rows) or   larger multiplicands (we’d need more columns).</p> <p>The M*N 2-input AND gates compute the bits of the M partial   products.  The adder modules add the current row’s partial   product with the sum of the partial products from the earlier   rows.  Actually there are two types of adder modules. The full   adder is used when the modules needs three inputs.  The simpler   half adder is used when only two inputs are needed.</p> <p>The longest path through this circuit takes a moment to figure   out.  Information is always moving either down a row or left to   the adjacent column.  Since there are M rows and, in any   particular row, N columns, there are at most N+M modules along   any path from input to output.  So the latency is \(\Theta(N)\),   since M and N differ by just some constant factor.</p> <p>Since this is a combinational circuit, the throughput is just   1/latency.  And the total amount of hardware is   \(\Theta(N^2)\).</p> <p>In the next section, we’ll investigate how to reduce the   hardware costs, or, separately, how to increase the   throughput.</p> <p>But before we do that, let’s take a moment to see how the   circuit would change if the operands were two’s complement   integers instead of unsigned integers.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide19.png" alt=""></a></div> <p>With a two’s complement multiplier and multiplicand, the   high-order bit of each has negative weight.  So when adding   together the partial products, we’ll need to sign-extend   each of the N-bit partial products to the full N+M-bit width of   the addition.  This will ensure that a negative partial product   is properly treated when doing the addition.  And, of course,   since the high-order bit of the multiplier has a negative   weight, we’d subtract instead of add the last partial   product.</p> <p>Now for the clever bit.  We’ll add 1’s to various   of the columns and then subtract them later, with the goal of   eliminating all the extra additions caused by the   sign-extension.  We’ll also rewrite the subtraction of the   last partial product as first complementing the partial product   and then adding 1.  This is all a bit mysterious but...</p> <p>Here in step 3 we see the effect of all the step 2   machinations.  Let’s look at the high order bit of the   first partial product X3Y0.  If that partial product is   non-negative, X3Y0 is a 0, so all the sign-extension bits are 0   and can be removed.  The effect of adding a 1 in that position   is to simply complement X3Y0.</p> <p>On the other hand, if that partial product is negative, X3Y0 is   1, and all the sign-extension bits are 1.  Now when we add a 1   in that position, we complement the X3Y0 bit back to 0, but we   also get a carry-out.  When that’s added to the first   sign-extension bit (which is itself a 1), we get zero with   another carry-out.  And so on, with all the sign-extension bits   eventually getting flipped to 0 as the carry ripples to the end.   Again the net effect of adding a 1 in that position is to simply   complement X3Y0.</p> <p>We do the same for all the other sign-extended partial   products, leaving us with the results shown here.</p> <p>In the final step we do a bit of arithmetic on the remaining   constants to end up with this table of work to be done.  Somewhat   to our surprise, this isn’t much different than the   original table for the unsigned multiplication.  There are a few   partial product bits that need to be complemented, and two   1-bits that need to be added to particular columns.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide20.png" alt=""></a></div> <p>The resulting circuitry is shown here.  We’ve changed   some of the AND gates to NAND gates to perform the necessary   complements.  And we’ve changed the logic necessary to   deal with the two 1-bits that needed to be added in.</p> <p>The colored elements show the changes made from the original   unsigned multiplier circuitry.  Basically, the circuit for   multiplying two’s complement operands has the same   latency, throughput and hardware costs as the original   circuitry.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide21.png" alt=""></a></div> <p>Let’s see if we can improve the throughput of the   original combinational multiplier design.  We’ll use our   patented pipelining process to divide the processing into stages   with the expectation of achieving a smaller clock period and   higher throughput.  The number to beat is approximately 1 output   every 2N, where N is the number of bits in each of the   operands.</p> <p>Our first step is to draw a contour across all the outputs.   This creates a 1-pipeline, which gets us started but   doesn’t improve the throughput.</p> <p>Let’s add another contour, dividing the computations   about in half.  If we’re on the right track, we hope to   see some improvement in the throughput.  And indeed we do: the   throughput has doubled.  Yet both the before and after   throughputs are \(\Theta(1/N)\).  Is there any hope of a   dramatically better throughput?</p> <p>The necessary insight is that as long as an entire row is   inside a single pipeline stage, the latency of the stage will be   \(\Theta(N)\) since we have to leave time for the N-bit   ripple-carry add to complete.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide22.png" alt=""></a></div> <p>There are several ways to tackle this problem.  The technique   illustrated here will be useful in our next task.  In this   schematic we’ve redrawn the carry chains.  Carry-outs are   still connected to a module one column to the left, but, in this   case, a module that’s down a row.  So all the additions   that need to happen in a specific column still happen in that   column, we’ve just reorganized which row does the   adding.</p> <p>Let’s pipeline this revised diagram, creating stages with   approximately two modules' worth of propagation delay.</p> <p>The horizontal contours now break the long carry chains and the   latency of each stage is now constant, independent of N.</p> <p>Note that we had to add \(\Theta(N)\) extra rows to take care of propagating the carries all the way to the end — the extra   circuitry is shown in the grey box.</p> <p>To achieve a latency that’s independent of N in each   stage, we’ll need \(\Theta(N)\) contours.  This means the   latency is constant, which in order-of notation we write as   \(\Theta(1)\). But this means the clock period is now   independent of N, as is the throughput — they are both   \(\Theta(1)\).  With \(\Theta(N)\) contours, there are \(\Theta(N)\) pipeline   stages, so the system latency is \(\Theta(N)\).  The hardware cost is   still \(\Theta(N^2)\).  So the pipelined carry-save multiplier has   dramatically better throughput than the original circuit,   another design tradeoff we can remember for future use.</p> <p>We’ll use the carry-save technique in our next   optimization, which is to implement the multiplier using only   \(\Theta(N)\) hardware.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide23.png" alt=""></a></div> <p>This sequential multiplier design computes a single partial   product in each step and adds it to the accumulating sum.  It   will take \(\Theta(N)\) steps to perform the complete   multiplication.</p> <p>In each step, the next bit of the multiplier, found in the   low-order bit of the B register, is ANDed with the multiplicand   to form the next partial product.  This is sent to the N-bit   carry-save adder to be added to the accumulating sum in the P   register.  The value in the P register and the output of the   adder are in “carry-save format”.  This means there   are 32 data bits, but, in addition, 31 saved carries, to be   added to the appropriate column in the next cycle.  The output   of the carry-save adder is saved in the P register, then in   preparation for the next step both P and B are shifted right by   1 bit.  So each cycle one bit of the accumulated sum is retired   to the B register since it can no longer be affected by the   remaining partial products.  Think of it this way: instead of   shifting the partial products left to account for the weight of   the current multiplier bit, we’re shifting the accumulated   sum right!</p> <p>The clock period needed for the sequential logic is quite   small, and, more importantly is independent of N.  Since   there’s no carry propagation, the latency of the   carry-save adder is very small, i.e., only enough time for the   operation of a single full adder module.</p> <p>After \(\Theta(N)\) steps, we’ve generated the necessary   partial products, but will need to continue for another \(\Theta(N)\)   steps to finish propagating the carries through the carry-save   adder.</p> <p>But even at 2N steps, the overall latency of the multiplier is   still \(\Theta(N)\).  And at the end of the 2N steps, we produce the   answer in the P and B registers combined, so the throughput is   \(\Theta(1/N)\).  The big change is in the hardware cost at \(\Theta(N)\), a   dramatic improvement over the \(\Theta(N^2)\) hardware cost of the   original combinational multiplier.</p> <p>This completes our little foray into multiplier designs.   We’ve seen that with a little cleverness we can create   designs with \(\Theta(1)\) throughput, or designs with only   \(\Theta(N)\) hardware.  The technique of carry-save addition is   useful in many situations and its use can improve throughput at   constant hardware cost, or save hardware at a constant   throughput.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c8/c8s1/Slide24.png" alt=""></a></div> <p>This discussion of design tradeoffs completes Part 1 of the   course.  We’ve covered a lot of ground in the last eight   lectures.</p> <p>We started by looking at the mathematics underlying information   theory and used it to help evaluate various alternative ways of   effectively using sequences of bits to encode information   content.  Then we turned our attention to adding   carefully-chosen redundancies to our encoding to ensure that we   could detect and even correct errors that corrupted our   bit-level encodings.</p> <p>Next we learned how analog signaling accumulates errors as we   added processing elements to our system.  We solved the problem   by using voltages “digitally” choosing two ranges of   voltages to encode the bit values 0 and 1.  We had different   signaling specifications for outputs and inputs, adding noise   margins to make our signaling more robust.  Then we developed   the static discipline for combinational devices and were led to   the conclusion that our devices had to be non-linear and exhibit   gains &gt; 1.</p> <p>In our study of combinational logic, we fist learned about the   MOSFET, a voltage-controlled switch.  We developed a technique   for using MOSFETs to build CMOS combinational logic gates, which   met all the criteria of the static discipline.  Then we   discussed systematic ways of synthesizing larger combinational   circuits that could implement any functionality we could express   in the form of a truth table.</p> <p>To be able to perform sequences of operations, we first   developed a reliable bistable storage element based on a   positive feedback loop.  To ensure the storage elements worked   correctly we imposed the dynamic discipline which required   inputs to the storage elements to be stable just before and   after the time the storage element was transitioned to   “memory mode”.  We introduced finite-state machines   as a useful abstraction for designing sequential logic.  And   then we figured out how to deal with asynchronous inputs in way   that minimized the chance of incorrect operation due to   metastability.</p> <p>In the last two lectures we developed latency and throughput as   performance measures for digital systems and discussed ways of   achieving maximum throughput under various constraints.  We   discussed how it’s possible to make tradeoffs to achieve   goals of minimizing power dissipation and increasing performance   through decreased latency or increased throughput.</p> <p>Whew!  That’s a lot of information in a short amount of time.</p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c8/index.htm">Back<span>Design Tradeoffs</span></a></li>     <li id="continue_btn"><a href="../../../contents/c8/c8s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

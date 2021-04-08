@@ -1,0 +1,1099 @@
+1
+00:00:00,500 --> 00:00:02,300
+There are many
+approaches to building
+
+2
+00:00:02,300 --> 00:00:05,500
+a general-purpose computer that
+can be easily re-programmed
+
+3
+00:00:05,500 --> 00:00:07,110
+for new problems.
+
+4
+00:00:07,110 --> 00:00:10,160
+Almost all modern computers are
+based on the “stored program”
+
+5
+00:00:10,160 --> 00:00:13,320
+computer architecture developed
+by John von Neumann in 1945,
+
+6
+00:00:13,320 --> 00:00:18,450
+which is now commonly referred
+to as the “von Neumann model”.
+
+7
+00:00:18,450 --> 00:00:21,000
+The von Neumann model
+has three components.
+
+8
+00:00:21,000 --> 00:00:24,900
+There’s a central processing
+unit (aka the CPU) that
+
+9
+00:00:24,900 --> 00:00:29,800
+contains a datapath and control
+FSM as described previously.
+
+10
+00:00:29,800 --> 00:00:32,140
+The CPU is connected
+to a read/write memory
+
+11
+00:00:32,140 --> 00:00:36,370
+that holds some number W
+of words, each with N bits.
+
+12
+00:00:36,370 --> 00:00:39,530
+Nowadays, even small
+memories have a billion words
+
+13
+00:00:39,530 --> 00:00:42,590
+and the width of each
+location is at least 32 bits
+
+14
+00:00:42,590 --> 00:00:44,610
+(usually more).
+
+15
+00:00:44,610 --> 00:00:47,850
+This memory is often referred to
+as “main memory” to distinguish
+
+16
+00:00:47,850 --> 00:00:50,710
+it from other memories
+in the system.
+
+17
+00:00:50,710 --> 00:00:54,400
+You can think of it as an array:
+when the CPU wishes to operate
+
+18
+00:00:54,400 --> 00:00:57,970
+on values in memory , it sends
+the memory an array index,
+
+19
+00:00:57,970 --> 00:01:01,950
+which we call the address, and,
+after a short delay (currently
+
+20
+00:01:01,950 --> 00:01:05,920
+10’s of nanoseconds) the memory
+will return the N-bit value
+
+21
+00:01:05,920 --> 00:01:08,050
+stored at that address.
+
+22
+00:01:08,050 --> 00:01:10,200
+Writes to main memory
+follow the same protocol
+
+23
+00:01:10,200 --> 00:01:12,340
+except, of course,
+the data flows
+
+24
+00:01:12,340 --> 00:01:14,270
+in the opposite direction.
+
+25
+00:01:14,270 --> 00:01:16,290
+We’ll talk about memory
+technologies a couple
+
+26
+00:01:16,290 --> 00:01:18,200
+of lectures from now.
+
+27
+00:01:18,200 --> 00:01:20,430
+And, finally, there are
+input/output devices
+
+28
+00:01:20,430 --> 00:01:22,490
+that enable the computer
+system to communicate
+
+29
+00:01:22,490 --> 00:01:26,080
+with the outside world or
+to access data storage that,
+
+30
+00:01:26,080 --> 00:01:28,980
+unlike main memory, will
+remember values even when
+
+31
+00:01:28,980 --> 00:01:29,570
+turned off.
+
+32
+00:01:32,220 --> 00:01:33,920
+The key idea is
+to use main memory
+
+33
+00:01:33,920 --> 00:01:37,460
+to hold the instructions
+for the CPU as well as data.
+
+34
+00:01:37,460 --> 00:01:40,480
+Both instructions and data are,
+of course, just binary data
+
+35
+00:01:40,480 --> 00:01:42,940
+stored in main memory.
+
+36
+00:01:42,940 --> 00:01:45,830
+Interpreted as an
+instruction, a value in memory
+
+37
+00:01:45,830 --> 00:01:48,900
+can be thought of as a set of
+fields containing one or bits
+
+38
+00:01:48,900 --> 00:01:51,220
+encoding information
+about the actions
+
+39
+00:01:51,220 --> 00:01:54,140
+to be performed by the CPU.
+
+40
+00:01:54,140 --> 00:01:57,430
+The opcode field indicates
+the operation to be performed
+
+41
+00:01:57,430 --> 00:02:00,790
+(e.g., ADD, XOR, COMPARE).
+
+42
+00:02:00,790 --> 00:02:04,660
+Subsequent fields specify which
+registers supply the source
+
+43
+00:02:04,660 --> 00:02:06,960
+operands and the
+destination register
+
+44
+00:02:06,960 --> 00:02:09,639
+where the result is stored.
+
+45
+00:02:09,639 --> 00:02:11,930
+The CPU interprets the
+information in the instruction
+
+46
+00:02:11,930 --> 00:02:15,670
+fields and performs the
+requested operation.
+
+47
+00:02:15,670 --> 00:02:18,260
+It would then move on to the
+next instruction in memory,
+
+48
+00:02:18,260 --> 00:02:21,650
+executing the stored
+program step-by-step.
+
+49
+00:02:21,650 --> 00:02:23,540
+The goal of this
+chapter is to discuss
+
+50
+00:02:23,540 --> 00:02:27,160
+the details of what operations
+we want the CPU to perform,
+
+51
+00:02:27,160 --> 00:02:31,070
+how many registers we
+should have, and so on.
+
+52
+00:02:31,070 --> 00:02:34,430
+Of course, some values in
+memory are not instructions!
+
+53
+00:02:34,430 --> 00:02:36,250
+They might be binary
+data representing
+
+54
+00:02:36,250 --> 00:02:40,770
+numeric values, strings
+of characters, and so on.
+
+55
+00:02:40,770 --> 00:02:43,700
+The CPU will read these values
+into its temporary registers
+
+56
+00:02:43,700 --> 00:02:47,140
+when it needs to operate on them
+and write newly computed values
+
+57
+00:02:47,140 --> 00:02:49,420
+back into memory.
+
+58
+00:02:49,420 --> 00:02:52,150
+Mr. Blue is asking a
+good question: how do we
+
+59
+00:02:52,150 --> 00:02:54,590
+know which words in
+memory are instructions
+
+60
+00:02:54,590 --> 00:02:56,070
+and which are data?
+
+61
+00:02:56,070 --> 00:02:58,630
+After all, they’re
+both binary values!
+
+62
+00:02:58,630 --> 00:03:02,240
+The answer is that we can’t tell
+by looking at the values — it’s
+
+63
+00:03:02,240 --> 00:03:05,910
+how they are used by the CPU
+that distinguishes instructions
+
+64
+00:03:05,910 --> 00:03:06,960
+from data.
+
+65
+00:03:06,960 --> 00:03:09,060
+If a value is loaded
+into the datapath,
+
+66
+00:03:09,060 --> 00:03:11,120
+it’s being used as data.
+
+67
+00:03:11,120 --> 00:03:13,410
+If a value is loaded
+by the control logic,
+
+68
+00:03:13,410 --> 00:03:16,160
+it’s being used an instruction.
+
+69
+00:03:16,160 --> 00:03:18,870
+So this is the digital
+system we’ll build to perform
+
+70
+00:03:18,870 --> 00:03:20,520
+computations.
+
+71
+00:03:20,520 --> 00:03:23,030
+We’ll start with a datapath
+that contains some number
+
+72
+00:03:23,030 --> 00:03:25,230
+of registers to
+hold data values.
+
+73
+00:03:25,230 --> 00:03:28,150
+We’ll be able to select which
+registers will supply operands
+
+74
+00:03:28,150 --> 00:03:30,870
+for the arithmetic and
+logic unit that will perform
+
+75
+00:03:30,870 --> 00:03:32,710
+an operation.
+
+76
+00:03:32,710 --> 00:03:35,870
+The ALU produces a result
+and other status signals.
+
+77
+00:03:35,870 --> 00:03:37,750
+The ALU result can
+be written back
+
+78
+00:03:37,750 --> 00:03:40,170
+to one of the registers
+for later use.
+
+79
+00:03:40,170 --> 00:03:43,500
+We’ll provide the datapath with
+means to move data to and from
+
+80
+00:03:43,500 --> 00:03:44,870
+main memory.
+
+81
+00:03:44,870 --> 00:03:46,360
+There will be a
+control unit that
+
+82
+00:03:46,360 --> 00:03:49,750
+provides the necessary control
+signals to the datapath.
+
+83
+00:03:49,750 --> 00:03:52,040
+In the example
+datapath shown here,
+
+84
+00:03:52,040 --> 00:03:54,710
+the control unit would
+provide ASEL and BSEL
+
+85
+00:03:54,710 --> 00:03:57,780
+to select two register
+values as operands
+
+86
+00:03:57,780 --> 00:03:59,880
+and DEST to select
+the register where
+
+87
+00:03:59,880 --> 00:04:02,900
+the ALU result will be written.
+
+88
+00:04:02,900 --> 00:04:06,320
+If the datapath had, say,
+32 internal registers,
+
+89
+00:04:06,320 --> 00:04:10,040
+ASEL, BSEL and DEST
+would be 5-bit values,
+
+90
+00:04:10,040 --> 00:04:13,210
+each specifying a particular
+register number in the range
+
+91
+00:04:13,210 --> 00:04:13,790
+0 to 31.
+
+92
+00:04:13,790 --> 00:04:18,350
+The control unit also
+provides the FN function code
+
+93
+00:04:18,350 --> 00:04:22,000
+that controls the operation
+performed by the ALU.
+
+94
+00:04:22,000 --> 00:04:24,250
+The ALU we designed in
+Part 1 of the course
+
+95
+00:04:24,250 --> 00:04:26,480
+requires a 6-bit
+function code to select
+
+96
+00:04:26,480 --> 00:04:30,970
+between a variety of arithmetic,
+boolean and shift operations.
+
+97
+00:04:30,970 --> 00:04:33,640
+The control unit would load
+values from main memory
+
+98
+00:04:33,640 --> 00:04:36,380
+to be interpreted
+as instructions.
+
+99
+00:04:36,380 --> 00:04:38,130
+The control unit
+contains a register,
+
+100
+00:04:38,130 --> 00:04:41,770
+called the “program counter”,
+that keeps track of the address
+
+101
+00:04:41,770 --> 00:04:45,420
+in main memory of the next
+instruction to be executed.
+
+102
+00:04:45,420 --> 00:04:48,450
+The control unit also
+contains a (hopefully small)
+
+103
+00:04:48,450 --> 00:04:50,930
+amount of logic to translate
+the instruction fields
+
+104
+00:04:50,930 --> 00:04:53,880
+into the necessary
+control signals.
+
+105
+00:04:53,880 --> 00:04:56,330
+Note the control unit
+receives status signals
+
+106
+00:04:56,330 --> 00:04:58,980
+from the datapath that will
+enable programs to execute
+
+107
+00:04:58,980 --> 00:05:01,130
+different sequences
+of instructions
+
+108
+00:05:01,130 --> 00:05:05,360
+if, for example, a particular
+data value was zero.
+
+109
+00:05:05,360 --> 00:05:08,410
+The datapath serves as the
+brawn of our digital system
+
+110
+00:05:08,410 --> 00:05:12,340
+and is responsible for storing
+and manipulating data values.
+
+111
+00:05:12,340 --> 00:05:14,680
+The control unit serves as
+the brain of our system,
+
+112
+00:05:14,680 --> 00:05:17,240
+interpreting the program
+stored in main memory
+
+113
+00:05:17,240 --> 00:05:19,760
+and generating the necessary
+sequence of control
+
+114
+00:05:19,760 --> 00:05:22,500
+signals for the datapath.
+
+115
+00:05:22,500 --> 00:05:25,460
+Instructions are the
+fundamental unit of work.
+
+116
+00:05:25,460 --> 00:05:28,410
+They’re fetched by the control
+unit and executed one after
+
+117
+00:05:28,410 --> 00:05:31,030
+another in the order
+they are fetched.
+
+118
+00:05:31,030 --> 00:05:33,140
+Each instruction
+specifies the operation
+
+119
+00:05:33,140 --> 00:05:34,880
+to be performed along
+with the registers
+
+120
+00:05:34,880 --> 00:05:38,280
+to supply the source operands
+and destination register where
+
+121
+00:05:38,280 --> 00:05:40,890
+the result will be stored.
+
+122
+00:05:40,890 --> 00:05:43,790
+In a von Neumann machine,
+instruction execution
+
+123
+00:05:43,790 --> 00:05:46,000
+involves the steps shown here:
+
+124
+00:05:46,000 --> 00:05:48,250
+the instruction is
+loaded from the memory
+
+125
+00:05:48,250 --> 00:05:50,930
+location whose address is
+specified by the program
+
+126
+00:05:50,930 --> 00:05:52,080
+counter.
+
+127
+00:05:52,080 --> 00:05:54,610
+When the requested data
+is returned by the memory,
+
+128
+00:05:54,610 --> 00:05:56,460
+the instruction
+fields are converted
+
+129
+00:05:56,460 --> 00:05:59,310
+to the appropriate control
+signals for the datapath,
+
+130
+00:05:59,310 --> 00:06:02,610
+selecting the source operands
+from the specified registers,
+
+131
+00:06:02,610 --> 00:06:05,680
+directing the ALU to perform
+the specified operation,
+
+132
+00:06:05,680 --> 00:06:10,090
+and storing the result in the
+specified destination register.
+
+133
+00:06:10,090 --> 00:06:12,120
+The final step in
+executing an instruction
+
+134
+00:06:12,120 --> 00:06:13,940
+is updating the
+value of the program
+
+135
+00:06:13,940 --> 00:06:17,650
+counter to be the address
+of the next instruction.
+
+136
+00:06:17,650 --> 00:06:21,140
+This execution loop is
+performed again and again.
+
+137
+00:06:21,140 --> 00:06:23,380
+Modern machines can execute
+up more than a billion
+
+138
+00:06:23,380 --> 00:06:25,700
+instructions per second!
+
+139
+00:06:25,700 --> 00:06:28,690
+The discussion so far
+has been a bit abstract.
+
+140
+00:06:28,690 --> 00:06:31,100
+Now it’s time to roll up our
+sleeves and figure out what
+
+141
+00:06:31,100 --> 00:06:34,090
+instructions we want
+our system to support.
+
+142
+00:06:34,090 --> 00:06:36,920
+The specification of instruction
+fields and their meaning
+
+143
+00:06:36,920 --> 00:06:39,290
+along with the details
+of the datapath design
+
+144
+00:06:39,290 --> 00:06:42,540
+are collectively called the
+instruction set architecture
+
+145
+00:06:42,540 --> 00:06:45,010
+(ISA) of the system.
+
+146
+00:06:45,010 --> 00:06:48,390
+The ISA is a detailed functional
+specification of the operations
+
+147
+00:06:48,390 --> 00:06:50,470
+and storage
+mechanisms and serves
+
+148
+00:06:50,470 --> 00:06:52,430
+as a contract
+between the designers
+
+149
+00:06:52,430 --> 00:06:54,850
+of the digital hardware
+and the programmers who
+
+150
+00:06:54,850 --> 00:06:57,170
+will write the programs.
+
+151
+00:06:57,170 --> 00:06:59,880
+Since the programs are stored
+in main memory and can hence be
+
+152
+00:06:59,880 --> 00:07:02,130
+changed, we’ll
+call them software,
+
+153
+00:07:02,130 --> 00:07:04,450
+to distinguish them from
+the digital logic which,
+
+154
+00:07:04,450 --> 00:07:06,900
+once implemented,
+doesn’t change.
+
+155
+00:07:06,900 --> 00:07:10,190
+It’s the combination of hardware
+and software that determine
+
+156
+00:07:10,190 --> 00:07:12,950
+the behavior of our system.
+
+157
+00:07:12,950 --> 00:07:15,670
+The ISA is a new
+layer of abstraction:
+
+158
+00:07:15,670 --> 00:07:17,753
+we can write programs
+for the system
+
+159
+00:07:17,753 --> 00:07:19,170
+without knowing
+the implementation
+
+160
+00:07:19,170 --> 00:07:21,460
+details of the hardware.
+
+161
+00:07:21,460 --> 00:07:23,940
+As hardware
+technology improves we
+
+162
+00:07:23,940 --> 00:07:28,180
+can build faster systems without
+having to change the software.
+
+163
+00:07:28,180 --> 00:07:31,840
+You can see here that over
+a fifteen year timespan,
+
+164
+00:07:31,840 --> 00:07:35,530
+the hardware for executing
+the Intel x86 instruction set
+
+165
+00:07:35,530 --> 00:07:38,750
+went from executing 300,000
+instructions per second
+
+166
+00:07:38,750 --> 00:07:42,400
+to executing 5 billion
+instructions per second.
+
+167
+00:07:42,400 --> 00:07:46,280
+Same software as before, we’ve
+just taken advantage of smaller
+
+168
+00:07:46,280 --> 00:07:50,150
+and faster MOSFETs to build
+more complex circuits and faster
+
+169
+00:07:50,150 --> 00:07:52,330
+execution engines.
+
+170
+00:07:52,330 --> 00:07:54,780
+But a word of
+caution is in order!
+
+171
+00:07:54,780 --> 00:07:58,130
+It’s tempting to make choices
+in the ISA that reflect
+
+172
+00:07:58,130 --> 00:08:00,970
+the constraints of current
+technologies, e.g.,
+
+173
+00:08:00,970 --> 00:08:02,890
+the number of
+internal registers,
+
+174
+00:08:02,890 --> 00:08:05,590
+the width of the operands,
+or the maximum size of main
+
+175
+00:08:05,590 --> 00:08:07,180
+memory.
+
+176
+00:08:07,180 --> 00:08:10,150
+But it will be hard to change
+the ISA when technology
+
+177
+00:08:10,150 --> 00:08:13,440
+improves since there’s a
+powerful economic incentive
+
+178
+00:08:13,440 --> 00:08:16,890
+to ensure that old software
+can run on new machines,
+
+179
+00:08:16,890 --> 00:08:20,520
+which means that a particular
+ISA can live for decades
+
+180
+00:08:20,520 --> 00:08:23,700
+and span many generations
+of technology.
+
+181
+00:08:23,700 --> 00:08:26,550
+If your ISA is successful,
+you’ll have to live with any
+
+182
+00:08:26,550 --> 00:08:30,320
+bad choices you made
+for a very long time.
+
+183
+00:08:30,320 --> 00:08:32,860
+Designing an ISA is hard!
+
+184
+00:08:32,860 --> 00:08:35,350
+What are the operations
+that should be supported?
+
+185
+00:08:35,350 --> 00:08:37,030
+How many internal registers?
+
+186
+00:08:37,030 --> 00:08:38,659
+How much main memory?
+
+187
+00:08:38,659 --> 00:08:40,390
+Should we design the
+instruction encoding
+
+188
+00:08:40,390 --> 00:08:44,110
+to minimize program size or to
+keep the logic in the control
+
+189
+00:08:44,110 --> 00:08:45,970
+unit as simple as possible?
+
+190
+00:08:45,970 --> 00:08:47,450
+Looking into our
+crystal ball, what
+
+191
+00:08:47,450 --> 00:08:50,320
+can we say about the computation
+and storage capabilities
+
+192
+00:08:50,320 --> 00:08:53,070
+of future technologies?
+
+193
+00:08:53,070 --> 00:08:56,580
+We’ll answer these questions by
+taking a quantitative approach.
+
+194
+00:08:56,580 --> 00:08:59,060
+First we’ll choose a set
+of benchmark programs,
+
+195
+00:08:59,060 --> 00:09:02,310
+chosen as representative of
+the many types of programs we
+
+196
+00:09:02,310 --> 00:09:04,750
+expect to run on our system.
+
+197
+00:09:04,750 --> 00:09:06,440
+So some of benchmark
+programs will
+
+198
+00:09:06,440 --> 00:09:09,170
+perform scientific and
+engineering computations,
+
+199
+00:09:09,170 --> 00:09:11,470
+some will manipulate
+large data sets
+
+200
+00:09:11,470 --> 00:09:13,910
+or perform database
+operations, some
+
+201
+00:09:13,910 --> 00:09:16,860
+will require specialized
+computations for graphics
+
+202
+00:09:16,860 --> 00:09:19,500
+or communications, and so on.
+
+203
+00:09:19,500 --> 00:09:21,970
+Happily, after many
+decades of computer use,
+
+204
+00:09:21,970 --> 00:09:24,070
+several standardized
+benchmark suites
+
+205
+00:09:24,070 --> 00:09:26,200
+are available for us to use.
+
+206
+00:09:26,200 --> 00:09:28,550
+We’ll then implement the
+benchmark programs using
+
+207
+00:09:28,550 --> 00:09:32,210
+our instruction set and simulate
+their execution on our proposed
+
+208
+00:09:32,210 --> 00:09:33,610
+datapath.
+
+209
+00:09:33,610 --> 00:09:36,690
+We’ll evaluate the results to
+measure how well the system
+
+210
+00:09:36,690 --> 00:09:38,120
+performs.
+
+211
+00:09:38,120 --> 00:09:40,550
+But what do we mean by “well”?
+
+212
+00:09:40,550 --> 00:09:42,100
+That’s where it
+gets interesting:
+
+213
+00:09:42,100 --> 00:09:45,500
+“well” could refer to execution
+speed, energy consumption,
+
+214
+00:09:45,500 --> 00:09:49,170
+circuit size, system cost, etc.
+
+215
+00:09:49,170 --> 00:09:50,720
+If you’re designing
+a smart watch,
+
+216
+00:09:50,720 --> 00:09:53,090
+you’ll make different choices
+than if you’re designing
+
+217
+00:09:53,090 --> 00:09:57,260
+a high-performance graphics
+card or a data-center server.
+
+218
+00:09:57,260 --> 00:10:00,340
+Whatever metric you choose to
+evaluate your proposed system,
+
+219
+00:10:00,340 --> 00:10:03,170
+there’s an important design
+principle we can follow:
+
+220
+00:10:03,170 --> 00:10:06,060
+identify the common
+operations and focus on them
+
+221
+00:10:06,060 --> 00:10:08,190
+as you optimize your design.
+
+222
+00:10:08,190 --> 00:10:10,240
+For example, in
+general-purpose computing,
+
+223
+00:10:10,240 --> 00:10:12,840
+almost all programs
+spend a lot of their time
+
+224
+00:10:12,840 --> 00:10:15,960
+on simple arithmetic
+operations and accessing values
+
+225
+00:10:15,960 --> 00:10:17,320
+in main memory.
+
+226
+00:10:17,320 --> 00:10:19,780
+So those operations
+should be made as fast
+
+227
+00:10:19,780 --> 00:10:22,370
+and energy efficient
+as possible.
+
+228
+00:10:22,370 --> 00:10:25,120
+Now, let’s get to work designing
+our own instruction set
+
+229
+00:10:25,120 --> 00:10:29,210
+and execution engine, a
+system we’ll call the Beta.

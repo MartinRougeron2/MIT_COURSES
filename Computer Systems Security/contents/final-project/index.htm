@@ -1,0 +1,667 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>Final Project | Computer Systems Security | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-858-computer-systems-security-fall-2014" name="WT.cg_n">
+    <meta content="Final Project" name="WT.cg_s">
+    <meta content="This section provides details on the final project for the course, including due dates, an introduction, deliverables, and suggested project ideas." name="Description">
+    <meta content="Zeldovich, Nickolai" name="Author">
+    <meta content="6.858,computer system design,secure computer systems,threat model,computer systems security,operating system,operating system security,capabilities,information flow control,language security,network protocols,hardware security,web,web application security,secure web server,web application,Computer Design and Engineering,Software Design and Engineering" name="keywords">
+    <meta content="6.858 Computer Systems Security | Final Project" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Software Design and Engineering" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../common/styles/courses_new.css">
+	<link href="../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-858-computer-systems-security-fall-2014/final-project/">
+	<link rel="apple-touch-icon" href="../../common/images/apple-touch-icon.png">
+	
+	
+      
+	
+	<script type="text/javascript" src="../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../common/scripts/bubble-popup-offline.js"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../contents/index.htm">Computer Systems Security</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            Final Project
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            Final Project
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/readings/index.htm">
+		                  Readings  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/lecture-notes/index.htm">
+		                  Lecture Notes  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/video-lectures/index.htm">
+		                  Lecture Videos  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/labs/index.htm">
+		                  Labs  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/exams/index.htm">
+		                  Exams  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="selected">
+			   			<a href="../../contents/final-project/index.htm">
+		                  Final Project  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../contents/related-resources/index.htm">
+		                  Related Resources  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<p class="instruction">This course makes use of Athena, MIT's UNIX-based computing environment. OCW does not provide access to this environment.</p> <p><strong>Idea discussions due:</strong> One day after Lecture 13</p> <p><strong>Proposals due:</strong> Two days after Quiz 1</p> <p><strong>Presentations due:</strong> Lecture 24 (in class)</p> <p><strong>Code and write-up due:</strong> Two days after Lecture 24 (5:00pm)</p> <h2 class="subhead">Introduction</h2> <p>In this lab, you will work on a final project of your own choice. Unlike in previous labs, you will work in groups of 3–4 for the final project. You will be required to turn in both your code and a short write-up describing the design and implementation of your project, and to make a short in-class presentation about your work. We will post your write-up and code on the web site after the end of the semester, unless you explicitly talk to us about why you want to keep yours confidential.</p> <p>The primary requirement is that your project be something interesting. Your project should also have something to do with security, but that's relatively easy, and it's much more important for your project to be interesting.</p> <p>We encourage students to choose any project idea that you might think is interesting. If you are not sure, we provides you with two kinds of ideas. First, we present two reasonably well-defined starting points for projects. Second, we give a list of half-baked ideas that we think could turn into an interesting project, but we haven't given them too much thought.</p> <p>We encourage final projects that leverage multiple classes you might be taking, or that involve other research or projects you are already working on. For example, if you are also taking <em><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-828-operating-system-engineering-fall-2012/index.htm">6.828 Operating System Engineering</a></em> or 6.S897 (elections and voting technology), it would be fine with us to have a single project that counts for both 6.858 and another class. Same for other upper-level course-6 classes or MEng and AUP projects.</p> <p>Most of the <a href="http://css.csail.mit.edu/6.858/2013/projects.html">final projects from last year are posted online</a>. Several final projects from previous years ended up being subsequently published as research papers (e.g., <img alt="This resource may not render correctly in a screen reader." src="../../common/images/inacessible.gif"><a href="http://people.csail.mit.edu/nickolai/papers/kim-userfs.pdf">UserFS (PDF)</a>, <img alt="This resource may not render correctly in a screen reader." src="../../common/images/inacessible.gif"><a href="http://people.csail.mit.edu/nickolai/papers/chandra-bstore.pdf">BStore (PDF)</a>, and <img alt="This resource may not render correctly in a screen reader." src="../../common/images/inacessible.gif"><a href="http://people.csail.mit.edu/nickolai/papers/mao-lxfi.pdf">LXFI (PDF)</a>). If this sounds interesting to you, try to pick an ambitious class project that you might want to continue working on afterwards!</p> <h2 class="subhead">Deliverables</h2> <p>There are four concrete steps to the final project, as follows:</p> <h3 class="subsubhead">1. Form a Group</h3> <p>Decide on the project you would like to work on, and post a short summary of your idea (one to two paragraphs). Discuss ideas with others. Use these discussions to help find other students interested in similar ideas for forming a group. Course staff will provide feedback on project ideas; if you'd like more detailed feedback, come chat with us in person.</p> <h3 class="subsubhead">2. Project Proposal</h3> <p>Discuss your proposed idea with course staff over the next week, before the proposal deadline, to flesh out the exact problem you will be addressing, how you will go about doing it, and what tools you might need in the process. By the proposal deadline, you must submit a one-to-two-page proposal describing:</p> <ul>     <li>Your group members list</li>     <li>The problem you want to address</li>     <li>How you plan to address it</li>     <li>What are you proposing to specifically design and implement</li> </ul> <p> </p> <h3 class="subsubhead">3. Project Presentation</h3> <p>Prepare a short in-class presentation about the work that you have done for your final project. We will provide a projector that you can use to demonstrate your project. Depending on the number of groups and the kinds of projects that each group chooses, we may decide to limit the total number of presentations, and some groups might end up not presenting in class.</p> <h3 class="subsubhead">4. Write-up and Code</h3> <p>Write a document describing the design and implementation of your project, and turn it in along with your project's code by the final deadline. The document should be about 2–3 pages of text that helps us understand what problem you solved, and what your code does. The code and writeups will be posted online after the end of the semester. Take a look at the list of writeups from past years (<a href="http://css.csail.mit.edu/6.858/2012/projects.html">2012</a> and <a href="http://css.csail.mit.edu/6.858/2013/projects.html">2013</a>) to get a sense of what this writeup should look like.</p> <h2 class="subhead">Well-defined Starting Points</h2> <p>We provide two starting points if you want a well-defined project. One involves building a defensive system, namely an encrypted file system that allows users to share data through an untrusted server. The other involves finding vulnerabilities in existing systems, namely in various MIT services that IS&amp;T runs.</p> <h2 class="subhead">Encrypted File System</h2> <p>Your goal for this project idea is to develop a file system that allows users to store data on an untrusted file server. The file server should not be able to obtain the user's plaintext data (i.e., your file system should encrypt the data), and the file server should not be able to corrupt the data either (i.e., your file system should authenticate the data it gets back from the file server).</p> <p>Your file system should support many users, and allow users to share files with one another. For each file, it should be possible to control the set of users who can read, and who can write, to that file.</p> <p>At a minimum, your file system should meet the following requirements:</p> <ul>     <li>Users can create, delete, read, write, rename files.</li>     <li>The file system should support directories, much like the Unix file system.</li>     <li>Users should be able to set permissions on files and directories, which also requires that your file system be able to name users.</li>     <li>File names (and directory names) should be treated as confidential.</li>     <li>Users should not be able to modify files or directories without being detected, unless they are authorized to do so.</li>     <li>If the server is not malicious, unauthorized users should not be able to corrupt the file system.</li>     <li>The file server should not be able to read file content, file names, or directory names.</li>     <li>The server should not be able to take data from one file and supply it in response to a client reading a different file.</li>     <li>A malicious file server should not be able to create or delete files or directories without being detected.</li> </ul> <p>The final result of this project should be a functional file system implementation that meets the above requirements. You can implement your prototype in any language you want, such as Python or C++ or Go. You can decide how the file system client and server should be run. One reasonable design would be to have the file system client provide a minimal shell environment that allows users to perform the operations described in the above requirements.</p> <p>As a challenge, you may want to think about providing freshness guarantees: that is, that a client should always see the latest version of a file, or at least that a client should never see an older version of a file after it sees a newer one. The <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="https://www.usenix.org/legacy/events/osdi04/tech/full_papers/li_j/li_j.pdf">SUNDR file system (PDF)</a> may provide some inspiration for this, although it is a rather complicated system. You can choose to implement some limited freshness guarantees, unlike SUNDR's ideal fork consistency.</p> <p>As another challenge, you may want to think about integrating your file system with the OS of your choosing. You may find <a href="http://fuse.sourceforge.net/">FUSE</a> helpful for this.</p> <h2 class="subhead">Looking for Vulnerabilities</h2> <p>If you are interested in a more attack-oriented final project, your goal for this project is to pick an interesting service provided by MIT's IS&amp;T (or any other computing service at MIT, such as those provided by SIPB), and try to find vulnerabilities in it. We will judge your project based on what kinds of vulnerabilities you find. Beware that there's no guarantee of success with this (or any other attack-oriented) project, because you may accidentally choose a very secure service, and might end up finding no vulnerabilities, which can potentially result in a failing grade. However, if you have an interesting approach to finding vulnerabilities (e.g., you have designed a new tool for finding bugs), you may receive a good grade even without finding real vulnerabilities.</p> <p><strong>Important:</strong> In any attack-oriented project, you must be very careful to avoid disrupting existing services, inconveniencing users of those services, compromising the security of that service, or taking advantage of any vulnerabilities you find. If you are ever in doubt, please get in touch with us. If you discover real vulnerabilities in a service, please get in touch both with the operators of that service and with us. Please don't exploit the vulnerability to gain any additional privileges on a service, and don't announce it widely before the service operators have a chance to understand it.</p> <p>Your grade in this project depends on how interesting the vulnerabilities are that you have found, or how interesting the techniques are that you used to discover those vulnerabilities. For example, obtaining passwords through traditional brute-forcing techniques is not interesting. The general scale of work expected should be comparable to the amount of work involved in building a file system (see project above). Of course, much of your work will involve reading and understanding an existing system, and carefully constructing proof-of-concent exploits to demonstrate the vulnerabilities that you discovered, and the total amount of resulting code may be minimal; think back to how much time you spent on lab 1, and how many lines of code your final exploits were.</p> <h2 class="subhead">Half-baked Project Ideas</h2> <p>If you are interested in working on something other than the two projects proposed above, here are some half-baked ideas. Use them to come up with more well-defined projects; we expect the final work to be comparable in terms of total effort to the two well-defined projects listed above. Of course, we encourage you to come up with your own ideas for what you would like to work on; there's no need to restrict yourself to this list.</p> <ul>     <li>Get the concolic execution system from lab 3 to work on real-world Python web applications, and try to find real bugs.</li>     <li>Write an interesting web application in Ur / Web.</li>     <li>Modify Linux to keep track of the last process and user that modified each file. Perhaps log a warning or raise an alarm when a file is modified by an application that hasn't written to that file before.</li>     <li>Build a static analysis tool to find bugs in real web applications. It would be great to have a static analysis tool for Python programs, even if it's not perfectly sound, much like the PHP static analysis tool we discussed in lecture. In addition to the standard XSS bugs, can you find bugs where application developers forget to perform permission checks, or inadvertently leak sensitive data? Such a tool might also be useful to find non-security bugs in Python programs. One existing tool that's quite limited is <a href="http://pypi.python.org/pypi/pylint">PyLint</a>.</li>     <li>Find bugs in real C code. Take a look at some recent research papers on finding real bugs in the Linux kernel and other C-based programs, involving <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://people.csail.mit.edu/nickolai/papers/wang-kint.pdf">integer errors (PDF)</a> or <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://people.csail.mit.edu/nickolai/papers/wang-stack.pdf">undefined behavior (PDF)</a>. We can give you access to our source code to these tools; you can apply them to existing software to see what bugs you can find, and also think about ways to extend the tools to make them more accurate, to make them find other kinds of bugs, etc.</li>     <li>Extend program analysis tools used by Linux kernel developers, such as <a href="https://sparse.wiki.kernel.org/index.php/Main_Page">sparse</a> and <a href="http://repo.or.cz/w/smatch.git">smatch</a>, to catch different kinds of bugs in the kernel.</li>     <li>Use the <a href="http://klee.llvm.org/">KLEE</a> symbolic execution system to build an analysis tool that finds interesting bugs in C programs.</li>     <li>Explore the extent to which covert channels / side channels matter, e.g. in shared VMs like EC2, vs. shared OS, vs. other environments. See <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="https://cseweb.ucsd.edu/~hovav/dist/cloudsec.pdf">this paper (PDF) </a>for some background information.</li>     <li>Add Capsicum support to Linux. There has been some <a href="http://lwn.net/Articles/604015/">recent work</a> toward capsicum on linux <a href="http://lwn.net/Articles/603929/">proposed</a>.</li>     <li>Port an interesting application to use Capsicum (on FreeBSD).</li>     <li>Build an interesting application on top of Webathena (<a href="https://webathena.mit.edu/">site</a>, <a href="https://github.com/davidben/webathena">code</a>), or extend it to support non-DES enctypes (AES, etc).</li>     <li>Implement Kerberos for Android. We can put you in touch with some folks at the Kerberos Consortium that are working on this. It would be interesting to implement a Kerberos ticket caching service, accessed via Android intents, so that an application can use Kerberos tickets for a specific service without being able to steal the user's entire TGS ticket.</li>     <li>Implement progressive authentication: instead of requiring the user to log in to do anything, require different levels of credentials for specific tasks. For example, on Athena, perhaps running a web browser should not require any credentials, but accessing your personal files (or your browser accessing your google.com cookie that gives access to gmail) should require your Kerberos password, etc. The same would apply on an Android phone: checking the weather or the map should not require any credentials, but accessing the mail app should prompt for a PIN, swipe pattern, or password. <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="https://www.microsoft.com/en-us/research/publication/progressive-authentication-deciding-authenticate-mobile-phones/">A paper from Microsoft Research (PDF)</a> might give you some things to think about, although it may not be worthwhile to implement all of the environment monitoring done in that work.</li>     <li>Examine the security of Android applications. Look at some previous studies for inspiration (<img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://usenix.org/events/sec11/tech/full_papers/Enck.pdf">one (PDF)</a>, <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://usenix.org/events/sec11/tech/full_papers/Felt.pdf">two (PDF)</a>).</li>     <li>Improve sandboxing for Android applications. Is there something that you could do to prevent a malicious application from exploiting kernel bugs? Consider <a href="http://lwn.net/Articles/441232/">recent improvements to seccomp</a>, using <a href="http://www.linux-kvm.org/">Linux KVM</a>, or using Native Client.</li>     <li>Look for weaknesses in random number generation, or improve the random number generation. Some hints for where to start: <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="https://factorable.net/weakkeys12.extended.pdf">Mining your Ps and Qs (PDF)</a>, <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://cseweb.ucsd.edu/~hovav/dist/earlyentropy.pdf">Boot-time Entropy (PDF)</a>, <a href="https://news.ycombinator.com/item?id=6548893">Ted T'so on Linux PRNG design</a>, <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://eprint.iacr.org/2012/251.pdf">Theoretical weaknesses in the Linux PRNG (PDF)</a>.</li>     <li>Audit interactions between Android applications, perhaps by tracing all intents sent via the reference monitor. When something goes wrong, can your system tell the user why an application might be broken?</li>     <li>Implement an <a href="http://www.schneier.com/paper-clueless-agents.html">environmental key generation system</a>.</li>     <li>Build a password manager for Android applications, perhaps by implementing a virtual keyboard that can automatically enter passwords into an application. The virtual keyboard can know exactly what application it's entering passwords into, which can guard against phishing-style attacks.</li>     <li>Provide more fine-grained network access control in Android, to protect an internal corporate network from possibly-malicious applications on a phone.</li>     <li>Implement an efficient version of Baggy bounds checking on top of <a href="http://clang.llvm.org/">Clang</a> and <a href="http://llvm.org/">LLVM</a>.</li>     <li>Use DynamoRIO's binary instrumentation to implement some cool security mechanism for unmodified binaries. For example, you could implement a binary-level taint tracking system that prevents secret files from being sent out over the network. You can look at <a href="http://css.csail.mit.edu/6.858/2010/labs/lab2.html">a previous lab</a> we used to have involving DynamoRIO from a few years ago.</li>     <li>Use <a href="http://pdos.csail.mit.edu/resin/">Resin's taint tracking for Python</a> to enforce some interesting properties in zoobar.</li>     <li>Find an interesting use for trusted hardware, and figure out how to expose trusted hardware safely to applications. Linux should already have a basic device driver for a TPM.</li>     <li>Write a tool to help privilege-separating Python applications, and apply it to the Zoobar labs or other real applications.</li>     <li>Implement more flexible protection mechanisms for Linux (so that any user can create additional protection domains -- sub-users -- to run code with less privileges, without having to be root). You can build upon a class project from a previous year, <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://people.csail.mit.edu/nickolai/papers/kim-userfs.pdf">UserFS (PDF)</a>.</li>     <li>Improve the security of HTTPS in web browsers in the face of possibly compromised CAs. For example, define a new URL syntax that includes the server's certificate public key in the URL itself, so that one site can unambiguously include a link to another site without relying on CAs. Or, include the CA name in the URL, so that another CA cannot subvert security. See <a href="https://www.eff.org/observatory">SSL observatory</a>, <a href="http://perspectives-project.org/">perspectives</a>, and <a href="http://patrol.psyced.org/">CertPatrol</a>.</li>     <li>Auditing support for web applications. For instance, suppose someone broke into your blog or forum, added a user account for themselves, changed permissions, and posted garbage messages. How can you track down all of the changes made by the attacker? Could be done with the help of a language runtime, such as Resin.</li>     <li>The Tor Project has some<a href="http://www.torproject.org/getinvolved/volunteer.html.en#Projects"> ideas for possible Tor-related projects</a>.</li>     <li>Analyze the Bitcoin transaction graph. How hard is it to anonymize Bitcoin exchanges? Here's one recent <img src="../../common/images/inacessible.gif" alt="This resource may not render correctly in a screen reader."><a href="http://eprint.iacr.org/2012/584.pdf">paper (PDF)</a> analyzing the Bitcoin data set, which might give you ideas for other things to try.</li>     <li>Implement one of <a href="http://safecurves.cr.yp.to/">Daniel J. Bernstein's ECC curves (e.g., Curve3617) in OpenSSL / OpenSSH</a>.</li> </ul> <p> </p>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>

@@ -1,0 +1,520 @@
+1
+00:00:00,500 --> 00:00:03,350
+Let’s try using the latch
+as the memory component
+
+2
+00:00:03,350 --> 00:00:06,170
+in our sequential logic system.
+
+3
+00:00:06,170 --> 00:00:08,790
+To load the encoding of the
+new state into the latch,
+
+4
+00:00:08,790 --> 00:00:12,350
+we open the latch by setting
+the latch’s gate input HIGH,
+
+5
+00:00:12,350 --> 00:00:15,480
+letting the new value propagate
+to the latch’s Q output,
+
+6
+00:00:15,480 --> 00:00:18,010
+which represents
+the current state.
+
+7
+00:00:18,010 --> 00:00:19,810
+This updated value
+propagates through
+
+8
+00:00:19,810 --> 00:00:22,340
+the combinational logic,
+updating the new state
+
+9
+00:00:22,340 --> 00:00:23,740
+information.
+
+10
+00:00:23,740 --> 00:00:26,300
+Oops, if the gate
+stays HIGH too long,
+
+11
+00:00:26,300 --> 00:00:29,210
+we’ve created a loop in our
+system and our plan to load
+
+12
+00:00:29,210 --> 00:00:33,100
+the latch with new state goes
+awry as the new state value
+
+13
+00:00:33,100 --> 00:00:36,770
+starts to change rapidly as
+information propagates around
+
+14
+00:00:36,770 --> 00:00:38,810
+and around the loop.
+
+15
+00:00:38,810 --> 00:00:41,780
+So to make this work, we need
+to carefully time the interval
+
+16
+00:00:41,780 --> 00:00:43,870
+when G is HIGH.
+
+17
+00:00:43,870 --> 00:00:46,590
+It has to be long enough
+to satisfy the constraints
+
+18
+00:00:46,590 --> 00:00:48,090
+of the dynamic discipline,
+
+19
+00:00:48,090 --> 00:00:51,070
+but it has to be short enough
+that the latch closes again
+
+20
+00:00:51,070 --> 00:00:54,040
+before the new state information
+has a chance to propagate
+
+21
+00:00:54,040 --> 00:00:56,120
+all the way around the loop.
+
+22
+00:00:56,120 --> 00:00:57,360
+Hmm.
+
+23
+00:00:57,360 --> 00:01:00,670
+I think Mr. Blue is right: this
+sort of tricky system timing
+
+24
+00:01:00,670 --> 00:01:04,010
+would likely be error-prone
+since the exact timing
+
+25
+00:01:04,010 --> 00:01:07,450
+of signals is almost
+impossible to guarantee.
+
+26
+00:01:07,450 --> 00:01:10,110
+We have upper and lower
+bounds on the timing of signal
+
+27
+00:01:10,110 --> 00:01:13,470
+transitions but no guarantees
+of exact intervals.
+
+28
+00:01:13,470 --> 00:01:15,510
+To make this work, we
+want to a load signal
+
+29
+00:01:15,510 --> 00:01:20,160
+that marks an instant in
+time, not an interval.
+
+30
+00:01:20,160 --> 00:01:23,190
+Here’s an analogy that will help
+us understand what’s happening
+
+31
+00:01:23,190 --> 00:01:25,190
+and what we can do about it.
+
+32
+00:01:25,190 --> 00:01:28,720
+Imagine a line cars waiting
+at a toll booth gate.
+
+33
+00:01:28,720 --> 00:01:30,780
+The sequence of cars
+represents the sequence
+
+34
+00:01:30,780 --> 00:01:32,710
+of states in our
+sequential logic
+
+35
+00:01:32,710 --> 00:01:36,560
+and the gated toll both
+represents the latch.
+
+36
+00:01:36,560 --> 00:01:39,460
+Initially the gate is closed and
+the cars are waiting patiently
+
+37
+00:01:39,460 --> 00:01:41,620
+to go through the toll booth.
+
+38
+00:01:41,620 --> 00:01:43,290
+When the gate
+opens, the first car
+
+39
+00:01:43,290 --> 00:01:45,710
+proceeds out of the toll both.
+
+40
+00:01:45,710 --> 00:01:48,770
+But you can see that the timing
+of when to close the gate
+
+41
+00:01:48,770 --> 00:01:50,280
+is going to be tricky.
+
+42
+00:01:50,280 --> 00:01:52,470
+It has to be open long
+enough for the first car
+
+43
+00:01:52,470 --> 00:01:56,280
+to make it through, but not too
+long lest the other cars also
+
+44
+00:01:56,280 --> 00:01:57,910
+make it through.
+
+45
+00:01:57,910 --> 00:01:59,940
+This is exactly
+the issue we faced
+
+46
+00:01:59,940 --> 00:02:02,190
+with using the latch
+as our memory component
+
+47
+00:02:02,190 --> 00:02:04,570
+in our sequential logic.
+
+48
+00:02:04,570 --> 00:02:09,580
+So how do we ensure only one car
+makes it through the open gate?
+
+49
+00:02:09,580 --> 00:02:12,110
+One solution is
+to use TWO gates!
+
+50
+00:02:12,110 --> 00:02:16,550
+Here’s the plan: Initially Gate
+1 is open allowing exactly one
+
+51
+00:02:16,550 --> 00:02:20,640
+car to enter the toll
+booth and Gate 2 is closed.
+
+52
+00:02:20,640 --> 00:02:22,530
+Then at a particular
+point in time,
+
+53
+00:02:22,530 --> 00:02:25,820
+we close Gate 1
+while opening Gate 2.
+
+54
+00:02:25,820 --> 00:02:28,350
+This lets the car in the
+toll booth proceed on,
+
+55
+00:02:28,350 --> 00:02:31,600
+but prevents any other
+car from passing through.
+
+56
+00:02:31,600 --> 00:02:33,620
+We can repeat this
+two-step process
+
+57
+00:02:33,620 --> 00:02:36,640
+to deal with each
+car one-at-time.
+
+58
+00:02:36,640 --> 00:02:38,750
+The key is that at
+no time is there
+
+59
+00:02:38,750 --> 00:02:42,060
+a path through both gates.
+
+60
+00:02:42,060 --> 00:02:44,900
+This is the same arrangement
+as the escapement mechanism
+
+61
+00:02:44,900 --> 00:02:46,910
+in a mechanical clock.
+
+62
+00:02:46,910 --> 00:02:49,850
+The escapement ensures that the
+gear attached to the clock’s
+
+63
+00:02:49,850 --> 00:02:52,450
+spring only advances
+one tooth at a time,
+
+64
+00:02:52,450 --> 00:02:55,470
+preventing the spring from
+spinning the gear wildly
+
+65
+00:02:55,470 --> 00:02:59,100
+causing a whole day
+to pass at once!
+
+66
+00:02:59,100 --> 00:03:01,510
+If we observed the
+toll booth’s output,
+
+67
+00:03:01,510 --> 00:03:04,680
+we would see a car emerge
+shortly after the instant
+
+68
+00:03:04,680 --> 00:03:07,360
+in time when Gate 2 opens.
+
+69
+00:03:07,360 --> 00:03:09,100
+The next car would
+emerge shortly
+
+70
+00:03:09,100 --> 00:03:12,900
+after the next time
+Gate 2 opens, and so on.
+
+71
+00:03:12,900 --> 00:03:14,750
+Cars would proceed
+through the toll booth
+
+72
+00:03:14,750 --> 00:03:19,180
+at a rate set by the interval
+between Gate 2 openings.
+
+73
+00:03:19,180 --> 00:03:21,980
+Let’s apply this solution
+to design a memory component
+
+74
+00:03:21,980 --> 00:03:24,410
+for our sequential logic.
+
+75
+00:03:24,410 --> 00:03:26,940
+Taking our cue from
+the 2-gate toll both,
+
+76
+00:03:26,940 --> 00:03:29,750
+we’ll design a new component,
+called a D register,
+
+77
+00:03:29,750 --> 00:03:32,560
+using two back-to-back latches.
+
+78
+00:03:32,560 --> 00:03:35,030
+The load signal for a D
+register is typically called
+
+79
+00:03:35,030 --> 00:03:38,970
+the register’s “clock”, but the
+register’s D input and Q output
+
+80
+00:03:38,970 --> 00:03:42,200
+play the same roles as
+they did for the latch.
+
+81
+00:03:42,200 --> 00:03:44,480
+First we’ll describe the
+internal structure of the D
+
+82
+00:03:44,480 --> 00:03:48,250
+register, then we’ll describe
+what it does and look in detail
+
+83
+00:03:48,250 --> 00:03:50,470
+at how it does it.
+
+84
+00:03:50,470 --> 00:03:53,330
+The D input is connected to
+what we call the master latch
+
+85
+00:03:53,330 --> 00:03:57,670
+and the Q output is
+connected to the slave latch.
+
+86
+00:03:57,670 --> 00:04:00,720
+Note that the clock signal is
+inverted before it’s connected
+
+87
+00:04:00,720 --> 00:04:03,580
+to the gate input
+of the master latch.
+
+88
+00:04:03,580 --> 00:04:07,470
+So when the master latch is
+open, the slave is closed,
+
+89
+00:04:07,470 --> 00:04:08,710
+and vice versa.
+
+90
+00:04:08,710 --> 00:04:11,620
+This achieves the escapement
+behavior we saw on the previous
+
+91
+00:04:11,620 --> 00:04:15,540
+slide: at no time is there
+active path from the register’s
+
+92
+00:04:15,540 --> 00:04:18,680
+D input to the
+register’s Q output.
+
+93
+00:04:18,680 --> 00:04:21,160
+The delay introduced by the
+inverter on the clock signal
+
+94
+00:04:21,160 --> 00:04:23,430
+might give us cause for concern.
+
+95
+00:04:23,430 --> 00:04:26,720
+When there’s a rising 0-to-1
+transition on the clock signal,
+
+96
+00:04:26,720 --> 00:04:29,920
+might there be a brief interval
+when the gate signal is HIGH
+
+97
+00:04:29,920 --> 00:04:33,210
+for both latches since there
+will be a small delay before
+
+98
+00:04:33,210 --> 00:04:36,490
+the inverter’s output
+transitions from 1 to 0?
+
+99
+00:04:36,490 --> 00:04:39,070
+Actually the inverter
+isn’t necessary:
+
+100
+00:04:39,070 --> 00:04:42,150
+Mr Blue is looking at a slightly
+different latch schematic
+
+101
+00:04:42,150 --> 00:04:44,280
+where the latch is
+open when G is LOW
+
+102
+00:04:44,280 --> 00:04:46,520
+and closed when G is high.
+
+103
+00:04:46,520 --> 00:04:49,920
+Just what we need
+for the master latch!
+
+104
+00:04:49,920 --> 00:04:52,440
+By the way, you’ll sometimes
+hear a register called
+
+105
+00:04:52,440 --> 00:04:55,620
+a flip-flop because of the
+bistable nature of the positive
+
+106
+00:04:55,620 --> 00:04:58,710
+feedback loops in the latches.
+
+107
+00:04:58,710 --> 00:05:01,200
+That’s the internal
+structure of the D register.
+
+108
+00:05:01,200 --> 00:05:04,160
+In the next section we’ll
+take a step-by-step tour
+
+109
+00:05:04,160 --> 00:05:06,630
+of the register in operation.

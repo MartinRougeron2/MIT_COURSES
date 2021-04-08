@@ -1,0 +1,341 @@
+1
+00:00:00,959 --> 00:00:06,660
+We are given this circuit which consists of
+nine combinational modules connected as shown.
+
+2
+00:00:06,660 --> 00:00:12,059
+The number in each block corresponds to the
+propagation delay (in microseconds) of that
+
+3
+00:00:12,059 --> 00:00:13,349
+block.
+
+4
+00:00:13,349 --> 00:00:17,949
+The first question we want to ask ourselves
+is what are the latency and throughput of
+
+5
+00:00:17,949 --> 00:00:20,689
+this combinational circuit?
+
+6
+00:00:20,689 --> 00:00:26,950
+The longest path through this circuit passes
+through two 3 microsecond modules, one 2 microsecond
+
+7
+00:00:26,950 --> 00:00:30,609
+module, and two 1 microsecond modules.
+
+8
+00:00:30,609 --> 00:00:40,270
+Therefore the latency = 2(3) + 1(2) + 2(1)
+= 10 microseconds.
+
+9
+00:00:40,270 --> 00:00:48,019
+The throughput is 1/Latency = 1/(10 microseconds).
+
+10
+00:00:48,019 --> 00:00:52,329
+Now we want to pipeline this circuit for maximum
+throughput.
+
+11
+00:00:52,329 --> 00:00:58,210
+Recall that the clock period must allow enough
+time for the propagation delay of the pipeline
+
+12
+00:00:58,210 --> 00:01:05,220
+register, plus the propagation delay of any
+combinational logic between the pipeline registers,
+
+13
+00:01:05,220 --> 00:01:08,649
+plus the setup time of the pipeline register.
+
+14
+00:01:08,649 --> 00:01:14,090
+Since our pipeline registers are ideal, the
+propagation delay and setup time of the pipeline
+
+15
+00:01:14,090 --> 00:01:21,310
+registers is 0, so our clock period will be
+equal to the longest combinational logic delay
+
+16
+00:01:21,310 --> 00:01:24,539
+between any pair of pipeline registers.
+
+17
+00:01:24,539 --> 00:01:30,259
+To minimize the clock period, we want to add
+pipeline contours so that each pipeline stage
+
+18
+00:01:30,259 --> 00:01:36,149
+can be clocked at the rate of our slowest
+component which is 3 microseconds.
+
+19
+00:01:36,149 --> 00:01:42,340
+This means that within a single pipeline stage
+all combinational paths must have at most
+
+20
+00:01:42,340 --> 00:01:45,140
+a propagation delay of 3 microseconds.
+
+21
+00:01:45,140 --> 00:01:51,220
+Recall, that when pipelining a circuit, all
+outputs must have a pipeline register on them,
+
+22
+00:01:51,220 --> 00:01:57,100
+so our first contour is drawn so as to cross
+the single output C(X).
+
+23
+00:01:57,100 --> 00:02:01,700
+Each pipeline stage should have at most a
+latency of 3 microseconds.
+
+24
+00:02:01,700 --> 00:02:07,100
+This means that the bottom right 1 microsecond
+module and the 3 microsecond module above
+
+25
+00:02:07,100 --> 00:02:13,030
+it must be in separate pipeline stages so
+our next contour crosses between them.
+
+26
+00:02:13,030 --> 00:02:18,270
+We then complete that contour by joining each
+end of the contour to one of the two ends
+
+27
+00:02:18,270 --> 00:02:20,940
+of our original output contour.
+
+28
+00:02:20,940 --> 00:02:25,910
+Every time a wire is crossed, that indicates
+that we are adding a pipeline register.
+
+29
+00:02:25,910 --> 00:02:32,590
+There is more than one way of doing this because
+for example, the bottom three 1 units could
+
+30
+00:02:32,590 --> 00:02:38,610
+all be in the same pipeline stage, or just
+the two rightmost bottom 1 unit components,
+
+31
+00:02:38,610 --> 00:02:42,060
+or just the single bottom right 1 unit component.
+
+32
+00:02:42,060 --> 00:02:46,020
+Let's try to pipeline this circuit in two
+different ways to make sure that we end up
+
+33
+00:02:46,020 --> 00:02:49,170
+with the same latency and throughput results.
+
+34
+00:02:49,170 --> 00:02:56,400
+For our first implementation, let's put the
+bottom right 1 unit in its own pipeline stage.
+
+35
+00:02:56,400 --> 00:03:02,040
+Next we have a pipeline stage that includes
+our second row 3 unit.
+
+36
+00:03:02,040 --> 00:03:06,840
+We can include the middle bottom 1 unit in
+this same pipeline stage because those two
+
+37
+00:03:06,840 --> 00:03:12,200
+units are independent of each other and can
+be executed in parallel.
+
+38
+00:03:12,200 --> 00:03:16,340
+Now we see that we have a bunch of 2 and 1
+unit components.
+
+39
+00:03:16,340 --> 00:03:22,120
+We want to isolate these from the top left
+3 unit component, so we draw our final contour
+
+40
+00:03:22,120 --> 00:03:24,810
+to isolate that 3 unit.
+
+41
+00:03:24,810 --> 00:03:30,840
+Note that at this point all the remaining
+2 and 1 unit modules add up to at most 3 microseconds
+
+42
+00:03:30,840 --> 00:03:34,290
+along any path in the second pipeline stage.
+
+43
+00:03:34,290 --> 00:03:39,900
+This means that we are done and we do not
+need to add any further pipeline stages.
+
+44
+00:03:39,900 --> 00:03:49,079
+So our pipelined circuit ended up with 4 pipeline
+stages and our clock period = 3 microseconds.
+
+45
+00:03:49,079 --> 00:03:59,280
+This means that our pipelined latency is 4
+* T = 4 * 3 = 12 microseconds.
+
+46
+00:03:59,280 --> 00:04:08,570
+Our throughput for the pipelined circuit is
+1/T = 1/(3 microseconds).
+
+47
+00:04:08,570 --> 00:04:13,290
+Note that the latency of the pipelined circuit
+is actually slower than the combinational
+
+48
+00:04:13,290 --> 00:04:14,480
+latency.
+
+49
+00:04:14,480 --> 00:04:20,089
+This occurs because our pipelined implementation
+has some unused cycles in the last pipeline
+
+50
+00:04:20,089 --> 00:04:21,089
+stage.
+
+51
+00:04:21,089 --> 00:04:26,009
+However, our throughput is significantly better
+as a result of being able to now have our
+
+52
+00:04:26,009 --> 00:04:31,669
+clock period equal to the length of the slowest
+component.
+
+53
+00:04:31,669 --> 00:04:36,610
+Recall that we said that this was not the
+only way that we could draw our contours.
+
+54
+00:04:36,610 --> 00:04:38,340
+Let's try an alternate solution.
+
+55
+00:04:38,340 --> 00:04:44,590
+For our second solution, let's try to merge
+the bottom three 1 units into one pipeline
+
+56
+00:04:44,590 --> 00:04:46,240
+stage.
+
+57
+00:04:46,240 --> 00:04:49,289
+Next we need to isolate our middle 3.
+
+58
+00:04:49,289 --> 00:04:54,479
+The remaining 2 and 1 unit components can
+all be merged into another pipeline stage.
+
+59
+00:04:54,479 --> 00:05:00,090
+Finally, the top left 3 ends up in its own
+pipeline stage.
+
+60
+00:05:00,090 --> 00:05:06,189
+As before we end up with 4 pipeline stages
+that can be clocked with a period of T = 3
+
+61
+00:05:06,189 --> 00:05:07,439
+microseconds.
+
+62
+00:05:07,439 --> 00:05:13,580
+This demonstrates that both component divisions
+end up with a latency of 12 microseconds and
+
+63
+00:05:13,580 --> 00:05:19,560
+a throughput of 1/(3 microseconds).
+
+64
+00:05:19,560 --> 00:05:25,310
+Now suppose you found pipelined replacements
+for the components marked 3 and 2 that had
+
+65
+00:05:25,310 --> 00:05:31,520
+3 and 2 stages, respectively, and could be
+clocked at a 1 microsecond period.
+
+66
+00:05:31,520 --> 00:05:36,710
+Using these replacements and pipelining for
+maximum throughput, what is the best achievable
+
+67
+00:05:36,710 --> 00:05:38,880
+performance?
+
+68
+00:05:38,880 --> 00:05:43,551
+With these new components that can each be
+clocked with a period of 1 microsecond, our
+
+69
+00:05:43,551 --> 00:05:47,389
+clock period T goes down to 1 microsecond.
+
+70
+00:05:47,389 --> 00:05:53,509
+The number of stages in our pipeline, however,
+now rises to 10 stages because these new components
+
+71
+00:05:53,509 --> 00:05:57,070
+each have multiple pipeline stages in them.
+
+72
+00:05:57,070 --> 00:06:05,710
+So our new latency is L = 10 * T = 10(1) = 10
+microseconds.
+
+73
+00:06:05,710 --> 00:06:11,779
+The throughput is 1/T = 1/(1 microsecond).

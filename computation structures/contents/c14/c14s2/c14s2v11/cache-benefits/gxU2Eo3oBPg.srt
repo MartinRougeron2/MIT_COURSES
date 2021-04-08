@@ -1,0 +1,795 @@
+1
+00:00:00,350 --> 00:00:05,979
+We are going to compare the behavior of 3
+different cache configurations on a benchmark
+
+2
+00:00:05,979 --> 00:00:11,450
+program to better understand the impact of
+the cache configuration on the performance
+
+3
+00:00:11,450 --> 00:00:13,490
+of the benchmark.
+
+4
+00:00:13,490 --> 00:00:18,950
+The first cache we will consider is a 64-line
+direct mapped cache.
+
+5
+00:00:18,950 --> 00:00:25,320
+The second is a 2-way set associative cache
+that uses the LRU, or least recently used,
+
+6
+00:00:25,320 --> 00:00:29,840
+replacement strategy, and has a total of 64
+lines.
+
+7
+00:00:29,840 --> 00:00:36,280
+The third is a 4-way set associative cache
+that uses the LRU replacement strategy, and
+
+8
+00:00:36,280 --> 00:00:39,979
+also has a total of 64 lines.
+
+9
+00:00:39,979 --> 00:00:45,910
+Note that all three caches have the same capacity
+in that they can store a total of 64 words
+
+10
+00:00:45,910 --> 00:00:47,600
+of data.
+
+11
+00:00:47,600 --> 00:00:54,760
+In a direct mapped cache any particular memory
+address maps to exactly one line in the cache.
+
+12
+00:00:54,760 --> 00:00:59,249
+Let's assume that our data is 32 bits, or
+4 bytes wide.
+
+13
+00:00:59,249 --> 00:01:04,500
+This means that consecutive addresses are
+4 bytes apart, so we treat the bottom two
+
+14
+00:01:04,500 --> 00:01:11,390
+address bits as always being 00 so that our
+address is on a data word boundary.
+
+15
+00:01:11,390 --> 00:01:17,320
+Next, we want to determine which cache line
+this particular address maps to.
+
+16
+00:01:17,320 --> 00:01:24,408
+Since there are 64 lines in this cache, we
+need 6 bits to select one of the 64 lines.
+
+17
+00:01:24,408 --> 00:01:27,260
+These 6 bits are called the index.
+
+18
+00:01:27,260 --> 00:01:36,860
+In this example, the index is 000011, so this
+particular address maps to line 3 of the cache.
+
+19
+00:01:36,860 --> 00:01:42,070
+The data that gets stored in the cache is
+the tag portion of the address of the line
+
+20
+00:01:42,070 --> 00:01:45,130
+plus the 32 bits of data.
+
+21
+00:01:45,130 --> 00:01:50,450
+The tag is used for comparison when checking
+if a particular address is in the cache or
+
+22
+00:01:50,450 --> 00:01:51,450
+not.
+
+23
+00:01:51,450 --> 00:01:55,710
+It uniquely identifies the particular memory
+address.
+
+24
+00:01:55,710 --> 00:02:00,540
+In addition, each cache line has a valid bit
+that lets you know whether the data in the
+
+25
+00:02:00,540 --> 00:02:03,640
+cache is currently valid or not.
+
+26
+00:02:03,640 --> 00:02:08,630
+This is important upon startup because without
+this bit there is no way to know whether the
+
+27
+00:02:08,630 --> 00:02:13,150
+data in the cache is garbage or real data.
+
+28
+00:02:13,150 --> 00:02:18,829
+In a 2-way set associative cache, the cache
+is divided into 2 sets each with half the
+
+29
+00:02:18,829 --> 00:02:20,800
+number of lines.
+
+30
+00:02:20,800 --> 00:02:24,360
+So we have two sets with 32 lines each.
+
+31
+00:02:24,360 --> 00:02:30,320
+Since there are only 32 lines, we now only
+need a 5 bit index to select the line.
+
+32
+00:02:30,320 --> 00:02:36,660
+However, any given index can map to two distinct
+locations, one in each set.
+
+33
+00:02:36,660 --> 00:02:42,170
+This also means that when the tag comparisons
+are done, two comparisons are required, one
+
+34
+00:02:42,170 --> 00:02:43,880
+per set.
+
+35
+00:02:43,880 --> 00:02:50,480
+In a 4-way set associative cache, the cache
+is divided into 4 sets each with 16 lines.
+
+36
+00:02:50,480 --> 00:02:54,730
+The width of the index is now 4 bits to select
+the cache line.
+
+37
+00:02:54,730 --> 00:03:00,740
+Here, selecting a line identifies one of 4
+words as possible locations for reading or
+
+38
+00:03:00,740 --> 00:03:04,210
+writing the associated data.
+
+39
+00:03:04,210 --> 00:03:10,190
+This also implies that 4 tags need to be compared
+when trying to read from the cache to determine
+
+40
+00:03:10,190 --> 00:03:15,590
+if the desired address is stored in the cache
+or not.
+
+41
+00:03:15,590 --> 00:03:23,230
+The test program begins by defining a few
+constants, J, A, B, and N.
+
+42
+00:03:23,230 --> 00:03:26,890
+J specifies the address where the program
+lives.
+
+43
+00:03:26,890 --> 00:03:33,450
+A is the starting address of data region 1,
+and B is the starting address of data region
+
+44
+00:03:33,450 --> 00:03:34,450
+2.
+
+45
+00:03:34,450 --> 00:03:39,010
+Finally, N specifies the size of the data
+regions.
+
+46
+00:03:39,010 --> 00:03:44,850
+Since one word consists of 4 bytes, 16 bytes
+of data mean that there are 4 data elements
+
+47
+00:03:44,850 --> 00:03:47,340
+per region.
+
+48
+00:03:47,340 --> 00:03:55,310
+Next the assembler is told that the beginning
+of the program is at address 0x1000.
+
+49
+00:03:55,310 --> 00:04:00,700
+The green rectangle identifies the outer loop,
+and the yellow rectangle identifies the inner
+
+50
+00:04:00,700 --> 00:04:02,610
+loop of the code.
+
+51
+00:04:02,610 --> 00:04:08,590
+Before entering the outer loop, a loop counter,
+which is stored in register R6 is initialized
+
+52
+00:04:08,590 --> 00:04:10,930
+to 1,000.
+
+53
+00:04:10,930 --> 00:04:16,540
+Then each time through the outer loop, R6
+is decremented by 1 and the loop is repeated
+
+54
+00:04:16,540 --> 00:04:19,390
+as long as R6 is not equal to 0.
+
+55
+00:04:19,390 --> 00:04:25,180
+The outer loop also resets R0 to N each time
+through the loop.
+
+56
+00:04:25,180 --> 00:04:29,680
+R0 is used to hold the desired array offset.
+
+57
+00:04:29,680 --> 00:04:35,460
+Since the last element of the array is stored
+at location N – 4, the first step of the
+
+58
+00:04:35,460 --> 00:04:39,080
+inner loop, is to decrement R0 by 4.
+
+59
+00:04:39,080 --> 00:04:47,681
+R1 is then loaded with the value at address
+A + N – 4 which is the address of A[3] because
+
+60
+00:04:47,681 --> 00:04:50,900
+array indeces begin at 0.
+
+61
+00:04:50,900 --> 00:04:54,650
+R2 is loaded with B[3].
+
+62
+00:04:54,650 --> 00:05:01,210
+As long as R0 is not equal to 0, the loop
+repeats itself, each time accessing the previous
+
+63
+00:05:01,210 --> 00:05:07,600
+element of each array until the first element
+(index 0) is loaded.
+
+64
+00:05:07,600 --> 00:05:12,980
+Then the outer loop decrements R6 and repeats
+the entire thing 1000 times.
+
+65
+00:05:12,980 --> 00:05:19,870
+Now that we understand the configuration of
+our three caches and the behavior of our test
+
+66
+00:05:19,870 --> 00:05:26,280
+benchmark, we can begin comparing the behavior
+of this benchmark on the three caches.
+
+67
+00:05:26,280 --> 00:05:31,430
+The first thing we want to ask ourselves is
+which of the three cache configurations gets
+
+68
+00:05:31,430 --> 00:05:34,130
+the highest hit ratio.
+
+69
+00:05:34,130 --> 00:05:40,260
+Here we are not asked to calculate an actual
+hit ratio, instead we just need to realize
+
+70
+00:05:40,260 --> 00:05:44,260
+that there are 3 distinct regions of data
+in this benchmark.
+
+71
+00:05:44,260 --> 00:05:51,909
+The first holds the instructions, the second
+holds array A, and the third holds array B.
+
+72
+00:05:51,909 --> 00:05:56,940
+If we think about the addresses of each of
+these regions in memory, we see that the first
+
+73
+00:05:56,940 --> 00:06:01,020
+instruction is at address 0x1000.
+
+74
+00:06:01,020 --> 00:06:07,380
+This will result in an index of 0 regardless
+of which cache you consider, so for all three
+
+75
+00:06:07,380 --> 00:06:13,010
+caches the first instruction would map to
+the first line of the cache.
+
+76
+00:06:13,010 --> 00:06:22,100
+Similarly the first element of arrays A and
+B are at address 0x2000 and 0x3000.
+
+77
+00:06:22,100 --> 00:06:27,410
+These addresses will also result in an index
+of 0 regardless of which of the three caches
+
+78
+00:06:27,410 --> 00:06:29,450
+you consider.
+
+79
+00:06:29,450 --> 00:06:37,450
+So we see that the 1st CMOVE, A[0], and B[0]
+would all map to line 0 of the cache.
+
+80
+00:06:37,450 --> 00:06:46,360
+Similarly, the 2nd CMOVE whose address is
+0x1004 would map to line 1 of the cache as
+
+81
+00:06:46,360 --> 00:06:51,919
+would array elements A[1] and B[1].
+
+82
+00:06:51,919 --> 00:06:57,440
+This tells us that if we use the direct mapped
+cache, or a 2-way set associative cache, then
+
+83
+00:06:57,440 --> 00:07:02,639
+we will have cache collisions between the
+instructions, and the array elements.
+
+84
+00:07:02,639 --> 00:07:07,790
+Collisions in the cache imply cache misses
+as we replace one piece of data with another
+
+85
+00:07:07,790 --> 00:07:09,330
+in the cache.
+
+86
+00:07:09,330 --> 00:07:15,449
+However, if we use a 4-way set associative
+cache then each region of memory can go in
+
+87
+00:07:15,449 --> 00:07:21,470
+a distinct set in the cache thus avoiding
+collisions and resulting in 100% hit rate
+
+88
+00:07:21,470 --> 00:07:24,610
+after the first time through the loop.
+
+89
+00:07:24,610 --> 00:07:29,230
+Note that the first time through the loop
+each instruction and data access will result
+
+90
+00:07:29,230 --> 00:07:34,130
+in a cache miss because the data needs to
+initially be brought into the cache.
+
+91
+00:07:34,130 --> 00:07:41,490
+But when the loop is repeated, the data is
+already there and results in cache hits.
+
+92
+00:07:41,490 --> 00:07:49,960
+Now suppose that we make a minor modification
+to our test program by changing B from 0x3000
+
+93
+00:07:49,960 --> 00:07:52,530
+to 0x2000.
+
+94
+00:07:52,530 --> 00:07:58,790
+This means that array A and array B now refer
+to same locations in memory.
+
+95
+00:07:58,790 --> 00:08:04,430
+We want to determine, which of the cache's
+hit rate will show a noticeable improvement
+
+96
+00:08:04,430 --> 00:08:06,980
+as a result of this change.
+
+97
+00:08:06,980 --> 00:08:12,290
+The difference between our original benchmark
+and this modified one is that we now have
+
+98
+00:08:12,290 --> 00:08:17,560
+two distinct regions of memory to access,
+one for the instructions, and one for the
+
+99
+00:08:17,560 --> 00:08:18,930
+data.
+
+100
+00:08:18,930 --> 00:08:24,020
+This means that the 2-way set associative
+cache will no longer experience collisions
+
+101
+00:08:24,020 --> 00:08:31,440
+in its cache, so its hit rate will be significantly
+better than with the original benchmark.
+
+102
+00:08:31,440 --> 00:08:37,870
+Now suppose that we change our benchmark once
+again, this time making J, A and B all equal
+
+103
+00:08:37,870 --> 00:08:42,209
+to 0, and changing N to be 64.
+
+104
+00:08:42,209 --> 00:08:47,649
+This means that we now have 16 elements in
+our arrays instead of 4.
+
+105
+00:08:47,649 --> 00:08:53,199
+It also means that the array values that we
+are loading for arrays A and B are actually
+
+106
+00:08:53,199 --> 00:08:56,960
+the same as the instructions of the program.
+
+107
+00:08:56,960 --> 00:09:01,540
+Another way of thinking about this is that
+we now only have one distinct region of memory
+
+108
+00:09:01,540 --> 00:09:02,889
+being accessed.
+
+109
+00:09:02,889 --> 00:09:08,339
+What we want to determine now, is the total
+number of cache misses that will occur for
+
+110
+00:09:08,339 --> 00:09:12,600
+each of the cache configurations.
+
+111
+00:09:12,600 --> 00:09:16,269
+Let's begin by considering the direct mapped
+cache.
+
+112
+00:09:16,269 --> 00:09:21,809
+In the direct mapped cache, we would want
+to first access the first CMOVE instruction.
+
+113
+00:09:21,809 --> 00:09:27,850
+Since this instruction is not yet in the cache,
+our first access is a cache miss.
+
+114
+00:09:27,850 --> 00:09:33,480
+We now bring the binary equivalent of this
+instruction into line 0 of our cache.
+
+115
+00:09:33,480 --> 00:09:38,839
+Next, we want to access the second CMOVE instruction.
+
+116
+00:09:38,839 --> 00:09:44,889
+Once again the instruction is not in our cache
+so we get another cache miss.
+
+117
+00:09:44,889 --> 00:09:51,079
+This results in our loading the 2nd CMOVE
+instruction to line 1 of our cache.
+
+118
+00:09:51,079 --> 00:09:58,290
+We continue in the same manner with the SUBC
+instruction and the first LD instruction.
+
+119
+00:09:58,290 --> 00:10:03,300
+Again we get cache misses for each of those
+instructions and that in turn causes us to
+
+120
+00:10:03,300 --> 00:10:06,240
+load those instructions into our cache.
+
+121
+00:10:06,240 --> 00:10:11,129
+Now, we are ready to execute our first load
+operation.
+
+122
+00:10:11,129 --> 00:10:15,949
+This operation wants to load A[15] into R1.
+
+123
+00:10:15,949 --> 00:10:23,980
+Because the beginning of array A is at address
+0, then A[15] maps to line 15 of our cache.
+
+124
+00:10:23,980 --> 00:10:28,949
+Since we have not yet loaded anything into
+line 15 of our cache, this means that our
+
+125
+00:10:28,949 --> 00:10:32,379
+first data access is a miss.
+
+126
+00:10:32,379 --> 00:10:35,149
+We continue with the second load instruction.
+
+127
+00:10:35,149 --> 00:10:40,139
+This instruction is not yet in the cache,
+so we get a cache miss and then load it into
+
+128
+00:10:40,139 --> 00:10:42,330
+line 4 of our cache.
+
+129
+00:10:42,330 --> 00:10:45,279
+We then try to access B[15].
+
+130
+00:10:45,279 --> 00:10:52,709
+B[15] corresponds to the same piece of data
+as A[15], so this data access is already in
+
+131
+00:10:52,709 --> 00:10:57,950
+the cache thus resulting in a data hit for
+B[15].
+
+132
+00:10:57,950 --> 00:11:04,519
+So far we have gotten 5 instruction misses,
+1 data miss and 1 data hit.
+
+133
+00:11:04,519 --> 00:11:09,189
+Next we need to access the BNE instruction.
+
+134
+00:11:09,189 --> 00:11:15,170
+Once again we get a cache miss which results
+in loading the BNE instruction into line 5
+
+135
+00:11:15,170 --> 00:11:17,019
+of our cache.
+
+136
+00:11:17,019 --> 00:11:27,230
+The inner loop is now repeated with R0 = 60
+which corresponds to element 14 of the arrays.
+
+137
+00:11:27,230 --> 00:11:32,709
+This time through the loop, all the instructions
+are already in the cache and result in instruction
+
+138
+00:11:32,709 --> 00:11:34,069
+hits.
+
+139
+00:11:34,069 --> 00:11:41,010
+A[14] which maps to line 14 of our cache results
+in a data miss because it is not yet present
+
+140
+00:11:41,010 --> 00:11:42,440
+in our cache.
+
+141
+00:11:42,440 --> 00:11:47,029
+So we bring A[14] into the cache.
+
+142
+00:11:47,029 --> 00:11:53,459
+Then as before, when we try to access B[14],
+we get a data hit because it corresponds to
+
+143
+00:11:53,459 --> 00:11:57,730
+the same piece of data as A[14].
+
+144
+00:11:57,730 --> 00:12:03,040
+So in total, we have now seen 6 instruction
+misses and 2 data misses.
+
+145
+00:12:03,040 --> 00:12:08,779
+The rest of the accesses have all been hits.
+
+146
+00:12:08,779 --> 00:12:14,850
+This process repeats itself with a data miss
+for array element A[i], and a data hit for
+
+147
+00:12:14,850 --> 00:12:22,209
+array element B[i] until we get to A[5] which
+actually results in a hit because it corresponds
+
+148
+00:12:22,209 --> 00:12:29,000
+to the location in memory that holds the BNE(R0,
+R) instruction which is already in the cache
+
+149
+00:12:29,000 --> 00:12:31,089
+at line 5.
+
+150
+00:12:31,089 --> 00:12:36,499
+From then on the remaining data accesses all
+result in hits.
+
+151
+00:12:36,499 --> 00:12:41,209
+At this point we have completed the inner
+loop and proceed to the remaining instructions
+
+152
+00:12:41,209 --> 00:12:43,170
+in the outer loop.
+
+153
+00:12:43,170 --> 00:12:48,679
+These instructions are the second SUBC and
+the second BNE instructions.
+
+154
+00:12:48,679 --> 00:12:55,679
+These correspond to the data that is in lines
+6 and 7 of the cache thus resulting in hits.
+
+155
+00:12:55,679 --> 00:13:02,110
+The loop then repeats itself 1000 times but
+each time through all the instructions and
+
+156
+00:13:02,110 --> 00:13:07,170
+all the data is in the cache so they all result
+in hits.
+
+157
+00:13:07,170 --> 00:13:11,790
+So the total number of misses that we get
+when executing this benchmark on a direct
+
+158
+00:13:11,790 --> 00:13:14,949
+mapped cache is 16.
+
+159
+00:13:14,949 --> 00:13:19,709
+These are known as compulsory misses which
+are misses that occur when you are first loading
+
+160
+00:13:19,709 --> 00:13:22,600
+the data into your cache.
+
+161
+00:13:22,600 --> 00:13:28,480
+Recall that the direct mapped cache has one
+set of 64 lines in the cache.
+
+162
+00:13:28,480 --> 00:13:35,730
+The 2-way set associative has 2 sets of 32
+lines each, and the 4-way set associative
+
+163
+00:13:35,730 --> 00:13:39,619
+has 4 sets of 16 lines each.
+
+164
+00:13:39,619 --> 00:13:45,660
+Since only 16 lines are required to fit all
+the instructions and data associated with
+
+165
+00:13:45,660 --> 00:13:52,269
+this benchmark, this means that effectively,
+only one set will be used in the set associative
+
+166
+00:13:52,269 --> 00:13:59,449
+caches, and because even in the 4-way set
+associative cache there are 16 lines, that
+
+167
+00:13:59,449 --> 00:14:04,410
+means that once the data is loaded into the
+cache it does not need to be replaced with
+
+168
+00:14:04,410 --> 00:14:10,999
+other data so after the first miss per line,
+the remaining accesses in the entire benchmark
+
+169
+00:14:10,999 --> 00:14:12,850
+will be hits.
+
+170
+00:14:12,850 --> 00:14:20,019
+So the total number of misses in the 2-way
+and 4-way set associative caches is also 16.

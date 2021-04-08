@@ -1,0 +1,412 @@
+1
+00:00:00,339 --> 00:00:04,200
+Let's finish up by looking at two extended
+examples.
+
+2
+00:00:04,200 --> 00:00:09,110
+The scenario for both examples is the control
+system for the International Space Station,
+
+3
+00:00:09,110 --> 00:00:15,810
+which has to handle three recurring tasks:
+supply ship guidance (SSG), gyroscope control
+
+4
+00:00:15,810 --> 00:00:19,200
+(G), and cabin pressure (CP).
+
+5
+00:00:19,200 --> 00:00:24,090
+For each device, the table shows us the time
+between successive requests (the period),
+
+6
+00:00:24,090 --> 00:00:29,300
+the service time for each request, and the
+service deadline for each request.
+
+7
+00:00:29,300 --> 00:00:34,510
+We'll first analyze the system assuming that
+it's using a weak priority system.
+
+8
+00:00:34,510 --> 00:00:39,510
+First question: What is the maximum service
+time for the cabin pressure task that still
+
+9
+00:00:39,510 --> 00:00:42,260
+allows all constraints to be met?
+
+10
+00:00:42,260 --> 00:00:48,930
+Well, the SSG task has a maximum allowable
+latency of 20 ms, i.e., it's service routine
+
+11
+00:00:48,930 --> 00:00:56,120
+must start execution within 20 ms if it is
+to meet its 25 ms deadline.
+
+12
+00:00:56,120 --> 00:01:02,660
+The G task has a maximum allowable latency
+of 10 ms if it's to meet its deadline.
+
+13
+00:01:02,660 --> 00:01:10,139
+So no other handler can take longer than 10
+ms to run or the G task will miss its deadline.
+
+14
+00:01:10,139 --> 00:01:11,579
+2.
+
+15
+00:01:11,579 --> 00:01:16,380
+Give a weak priority ordering that meets the
+constraints.
+
+16
+00:01:16,380 --> 00:01:20,810
+Using the earliest deadline strategy discussed
+earlier, the priority would be G with the
+
+17
+00:01:20,810 --> 00:01:27,399
+highest priority, SSG with the middle priority,
+and CP with the lowest priority.
+
+18
+00:01:27,399 --> 00:01:28,499
+3.
+
+19
+00:01:28,499 --> 00:01:32,669
+What fraction of time will the processor spend
+idle?
+
+20
+00:01:32,669 --> 00:01:37,450
+We need to compute the fraction of CPU cycles
+needed to service the recurring requests for
+
+21
+00:01:37,450 --> 00:01:38,889
+each task.
+
+22
+00:01:38,889 --> 00:01:45,950
+SSG takes 5/30 = 16.67% of the CPU cycles.
+
+23
+00:01:45,950 --> 00:01:50,459
+G takes 10/40 = 25% of the CPU cycles.
+
+24
+00:01:50,459 --> 00:01:55,119
+And CP takes 10/100 = 10% of the CPU cycles.
+
+25
+00:01:55,119 --> 00:02:02,189
+So servicing the task requests takes 51.67%
+of the cycles, leaving 48.33% of the cycles
+
+26
+00:02:02,189 --> 00:02:03,679
+unused.
+
+27
+00:02:03,679 --> 00:02:06,789
+So the astronauts will be able to play Minecraft
+in their spare time :)
+
+28
+00:02:06,789 --> 00:02:08,560
+4.
+
+29
+00:02:08,560 --> 00:02:14,510
+What is the worst-case delay for each task
+until completion of its service routine?
+
+30
+00:02:14,510 --> 00:02:19,930
+Each task might have to wait for the longest-running
+lower-priority handler to complete plus the
+
+31
+00:02:19,930 --> 00:02:26,209
+service times of any other higher-priority
+tasks plus, of course, its own service time.
+
+32
+00:02:26,209 --> 00:02:32,739
+SSG has the lowest priority, so it might have
+to wait for CP and G to complete (a total
+
+33
+00:02:32,739 --> 00:02:37,599
+of 20 ms), then add its own service time (5
+ms).
+
+34
+00:02:37,599 --> 00:02:43,120
+So it's worst-case completion time is 25 ms
+after the request.
+
+35
+00:02:43,120 --> 00:02:49,439
+G might to wait for CP to complete (10 ms),
+then add its own service time (10 ms) for
+
+36
+00:02:49,439 --> 00:02:50,741
+a worst-case completion time of 20 ms.
+
+37
+00:02:50,741 --> 00:03:00,411
+CP might have to wait for SSG to finish (5
+ms), then wait for G to run (10 ms), then
+
+38
+00:03:00,411 --> 00:03:07,980
+add its own service time (10 ms) for a worst-case
+completion time of 25 ms.
+
+39
+00:03:07,980 --> 00:03:12,650
+Let's redo the problem, this timing assuming
+a strong priority system where, as before,
+
+40
+00:03:12,650 --> 00:03:19,890
+G has the highest priority, SSG the middle
+priority, and CP the lowest priority.
+
+41
+00:03:19,890 --> 00:03:25,900
+What is the maximum service time for CP that
+still allows all constraints to be met?
+
+42
+00:03:25,900 --> 00:03:29,959
+This calculation is different in a strong
+priority system, since the service time of
+
+43
+00:03:29,959 --> 00:03:35,129
+CP is no longer constrained by the maximum
+allowable latency of the higher-priority tasks
+
+44
+00:03:35,129 --> 00:03:37,800
+-
+they'll simply preempt CP when they need to
+
+45
+00:03:37,800 --> 00:03:39,510
+run!
+
+46
+00:03:39,510 --> 00:03:45,340
+Instead we need to think about how much CPU
+time will be used by the SSG and G tasks in
+
+47
+00:03:45,340 --> 00:03:51,269
+the 100 ms interval between the CP request
+and its deadline.
+
+48
+00:03:51,269 --> 00:03:59,150
+In a 100 ms interval, there might be four
+SSG requests (at times 0, 30, 60, and 90)
+
+49
+00:03:59,150 --> 00:04:03,219
+and three G requests (at times 0, 40, and
+80).
+
+50
+00:04:03,219 --> 00:04:08,670
+Together these requests require a total of
+50 ms to service.
+
+51
+00:04:08,670 --> 00:04:15,639
+So the service time for CP can be up 50 ms
+and still meet the 100 ms deadline.
+
+52
+00:04:15,639 --> 00:04:16,639
+2.
+
+53
+00:04:16,639 --> 00:04:21,029
+What fraction of the time will the processor
+spend idle?
+
+54
+00:04:21,029 --> 00:04:26,840
+Assuming a 50 ms service time for CP, it now
+consumes 50% of the CPU.
+
+55
+00:04:26,840 --> 00:04:33,520
+The other request loads are as before, so
+91.67% of the CPU cycles will be spent servicing
+
+56
+00:04:33,520 --> 00:04:37,310
+requests, leaving 8.33% of idle time.
+
+57
+00:04:37,310 --> 00:04:38,310
+3.
+
+58
+00:04:38,310 --> 00:04:42,240
+What is the worst-case completion time for
+each task?
+
+59
+00:04:42,240 --> 00:04:46,960
+The G task has the highest priority, so its
+service routine runs immediately after the
+
+60
+00:04:46,960 --> 00:04:52,780
+request is received and its worst-case completion
+time is exactly its service time.
+
+61
+00:04:52,780 --> 00:04:58,389
+In the 25 ms interval between an SSG request
+and its deadline, there might be at most one
+
+62
+00:04:58,389 --> 00:05:01,389
+G request that will preempt execution.
+
+63
+00:05:01,389 --> 00:05:08,020
+So the worst-case completion time is one G
+service time (10 ms) plus the SSG service
+
+64
+00:05:08,020 --> 00:05:10,669
+time (5 ms).
+
+65
+00:05:10,669 --> 00:05:16,071
+Finally, from the calculation for problem
+1, we chose the service time for the CP task
+
+66
+00:05:16,071 --> 00:05:20,810
+so that it will complete just at its deadline
+of 100 ms,
+
+67
+00:05:20,810 --> 00:05:25,940
+taking into account the service time for multiple
+higher-priority requests.
+
+68
+00:05:25,940 --> 00:05:28,740
+We covered a lot of ground in this lecture!
+
+69
+00:05:28,740 --> 00:05:33,539
+We saw that the computation needed for user-mode
+programs to interact with external devices
+
+70
+00:05:33,539 --> 00:05:35,580
+was split into two parts.
+
+71
+00:05:35,580 --> 00:05:40,070
+On the device-side, the OS handles device
+interrupts and performs the task of moving
+
+72
+00:05:40,070 --> 00:05:43,190
+data between kernel buffers and the device.
+
+73
+00:05:43,190 --> 00:05:49,460
+On the application side, user-mode programs
+access the information via SVC calls to the
+
+74
+00:05:49,460 --> 00:05:51,400
+OS.
+
+75
+00:05:51,400 --> 00:05:56,310
+We worried about how to handle SVC requests
+that needed to wait for an I/O event before
+
+76
+00:05:56,310 --> 00:05:58,500
+the request could be satisfied.
+
+77
+00:05:58,500 --> 00:06:03,879
+Ultimately we came up with a sleep/wakeup
+mechanism that suspends execution of the process
+
+78
+00:06:03,879 --> 00:06:09,120
+until the some interrupt routine signals that
+the needed information has arrived,
+
+79
+00:06:09,120 --> 00:06:13,110
+causing the sleeping process to marked as
+active.
+
+80
+00:06:13,110 --> 00:06:20,229
+Then the SVC is retried the next time the
+now active process is scheduled for execution.
+
+81
+00:06:20,229 --> 00:06:25,729
+We discussed hard real-time constraints with
+their latencies, service times and deadlines.
+
+82
+00:06:25,729 --> 00:06:32,310
+Then we explored the implementation of interrupt
+systems using both weak and strong priorities.
+
+83
+00:06:32,310 --> 00:06:36,940
+Real-life computer systems usually implement
+strong priorities and support a modest number
+
+84
+00:06:36,940 --> 00:06:39,870
+of priority levels,
+using a weak priority system to deal with
+
+85
+00:06:39,870 --> 00:06:44,530
+multiple devices assigned to the same strong
+priority level.
+
+86
+00:06:44,530 --> 00:06:48,520
+This seems to work quite well in practice,
+allowing the systems to meet the variety of
+
+87
+00:06:48,520 --> 00:06:51,380
+real-time constraints imposed by their I/O
+devices.

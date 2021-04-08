@@ -1,0 +1,8498 @@
+1
+00:00:01,120 --> 00:00:03,490
+The following content is
+provided under a Creative
+
+2
+00:00:03,490 --> 00:00:04,880
+Commons license.
+
+3
+00:00:04,880 --> 00:00:07,090
+Your support will help
+MIT OpenCourseWare
+
+4
+00:00:07,090 --> 00:00:11,180
+continue to offer high-quality
+educational resources for free.
+
+5
+00:00:11,180 --> 00:00:13,750
+To make a donation or to
+view additional materials
+
+6
+00:00:13,750 --> 00:00:17,680
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:17,680 --> 00:00:18,586
+at OCW.MIT.edu.
+
+8
+00:00:23,752 --> 00:00:26,210
+PROFESSOR: I'm excited, because
+I'm going to get the chance
+
+9
+00:00:26,210 --> 00:00:30,260
+to co-teach today with--
+
+10
+00:00:30,260 --> 00:00:32,479
+I would say one of the
+students, but it's not really
+
+11
+00:00:32,479 --> 00:00:33,312
+one of the students.
+
+12
+00:00:33,312 --> 00:00:37,370
+But Larry Lessig has consented
+to join us in a few minutes.
+
+13
+00:00:37,370 --> 00:00:39,800
+So I'm going to be
+breezing through
+
+14
+00:00:39,800 --> 00:00:42,390
+a little faster than usual.
+
+15
+00:00:42,390 --> 00:00:46,320
+And then we'll co-teach this.
+
+16
+00:00:46,320 --> 00:00:47,360
+Blockchain and Money.
+
+17
+00:00:47,360 --> 00:00:47,960
+Here we are.
+
+18
+00:00:47,960 --> 00:00:49,520
+We're at smart contracts.
+
+19
+00:00:49,520 --> 00:00:51,320
+Everybody seems
+to be coming back,
+
+20
+00:00:51,320 --> 00:00:55,670
+which is a sign of your interest
+more than it is in my teaching.
+
+21
+00:00:55,670 --> 00:00:57,990
+But I thank you for being here.
+
+22
+00:00:57,990 --> 00:00:59,750
+We made it through
+the last three classes
+
+23
+00:00:59,750 --> 00:01:03,790
+together on bitcoin and the
+basics of that technology.
+
+24
+00:01:03,790 --> 00:01:05,630
+And in one class,
+we're going to try
+
+25
+00:01:05,630 --> 00:01:08,300
+to chew off a bit
+on smart contracts,
+
+26
+00:01:08,300 --> 00:01:13,370
+both the technology side, a
+little bit on the markets,
+
+27
+00:01:13,370 --> 00:01:18,260
+and then the law that Larry
+is going to take us through.
+
+28
+00:01:18,260 --> 00:01:21,453
+And so as I said,
+I want to start
+
+29
+00:01:21,453 --> 00:01:23,120
+with a little
+administrative, because we
+
+30
+00:01:23,120 --> 00:01:24,230
+are on the sixth class.
+
+31
+00:01:24,230 --> 00:01:28,210
+I'm going to review a bit about
+the projects very quickly.
+
+32
+00:01:28,210 --> 00:01:31,730
+We're going to do smart
+contracts, the design.
+
+33
+00:01:31,730 --> 00:01:33,590
+What design features?
+
+34
+00:01:33,590 --> 00:01:35,450
+Yes, we're going to
+go back a little bit
+
+35
+00:01:35,450 --> 00:01:39,340
+about hash functions and
+Merkle trees but not too much.
+
+36
+00:01:39,340 --> 00:01:43,310
+DApps, which are basically
+decentralized applications,
+
+37
+00:01:43,310 --> 00:01:45,430
+and token sales.
+
+38
+00:01:45,430 --> 00:01:47,990
+Larry's going to take
+us through legal issues,
+
+39
+00:01:47,990 --> 00:01:50,330
+and then we'll sum it all up.
+
+40
+00:01:50,330 --> 00:01:54,240
+So let me just, real fast on
+the administrative side again--
+
+41
+00:01:54,240 --> 00:01:56,840
+class participation, 30%.
+
+42
+00:01:56,840 --> 00:01:59,510
+That's why we're
+all here together.
+
+43
+00:01:59,510 --> 00:02:02,330
+That means, hopefully,
+reading the assignments
+
+44
+00:02:02,330 --> 00:02:03,710
+and participating.
+
+45
+00:02:03,710 --> 00:02:06,500
+About half of you
+have participated,
+
+46
+00:02:06,500 --> 00:02:09,199
+so I guess I'm going to
+go with a little bit more
+
+47
+00:02:09,199 --> 00:02:10,940
+cold calling starting Thursday.
+
+48
+00:02:10,940 --> 00:02:13,190
+I'm not going to do a bunch
+of it today, because Larry
+
+49
+00:02:13,190 --> 00:02:14,480
+and I are joining.
+
+50
+00:02:14,480 --> 00:02:15,860
+So you can ease off.
+
+51
+00:02:15,860 --> 00:02:19,550
+But really be conscious.
+
+52
+00:02:19,550 --> 00:02:22,190
+If you haven't been
+participating, try to get in
+
+53
+00:02:22,190 --> 00:02:25,990
+and join the conversation
+and discussion.
+
+54
+00:02:25,990 --> 00:02:28,790
+The two individual write-ups,
+I think we have seven.
+
+55
+00:02:28,790 --> 00:02:32,700
+But it's quite possible some
+of you have submitted already.
+
+56
+00:02:32,700 --> 00:02:36,890
+It's just meant to be
+critical business reasoning.
+
+57
+00:02:36,890 --> 00:02:40,070
+We are in a business school.
+
+58
+00:02:40,070 --> 00:02:43,720
+To the extent you just
+summarize some readings,
+
+59
+00:02:43,720 --> 00:02:47,220
+I'm sure we'll give
+you a pass on that.
+
+60
+00:02:47,220 --> 00:02:48,720
+But that's not what
+I'm looking for.
+
+61
+00:02:48,720 --> 00:02:50,690
+I'm really looking
+for critical reasoning
+
+62
+00:02:50,690 --> 00:02:53,380
+and thinking from a
+business perspective
+
+63
+00:02:53,380 --> 00:02:55,700
+of, why does this matter?
+
+64
+00:02:55,700 --> 00:02:57,620
+What are its strengths
+or its values
+
+65
+00:02:57,620 --> 00:03:01,280
+in terms of business reasoning
+and critical reasoning?
+
+66
+00:03:01,280 --> 00:03:07,540
+One by the 10th class, one by
+the 23rd, always before class.
+
+67
+00:03:07,540 --> 00:03:09,800
+What it likely means
+is we'll be getting
+
+68
+00:03:09,800 --> 00:03:12,200
+most of these on the
+8th, 9th, and 10th class.
+
+69
+00:03:12,200 --> 00:03:14,640
+I know how that
+works and so forth.
+
+70
+00:03:14,640 --> 00:03:15,580
+And that's OK.
+
+71
+00:03:15,580 --> 00:03:16,460
+That's OK.
+
+72
+00:03:16,460 --> 00:03:19,220
+But I'm just
+reminding you of that.
+
+73
+00:03:19,220 --> 00:03:21,540
+In terms of the
+group research paper,
+
+74
+00:03:21,540 --> 00:03:27,080
+again, Sabrina and Thalita
+stood up a Google App--
+
+75
+00:03:27,080 --> 00:03:28,970
+I think it's in Google, but--
+
+76
+00:03:28,970 --> 00:03:34,190
+where you can go in and team
+up in teams of three or four.
+
+77
+00:03:34,190 --> 00:03:37,620
+It's not required to do this by
+the eighth class next Tuesday,
+
+78
+00:03:37,620 --> 00:03:40,400
+but I'm strongly
+suggesting it to figure out
+
+79
+00:03:40,400 --> 00:03:44,300
+who your teams are and not sort
+of wait till the second half
+
+80
+00:03:44,300 --> 00:03:45,590
+of the semester.
+
+81
+00:03:45,590 --> 00:03:47,330
+And I'd like to
+encourage everybody
+
+82
+00:03:47,330 --> 00:03:50,528
+to choose an area for
+your use case by midway.
+
+83
+00:03:50,528 --> 00:03:52,070
+Again, you're not
+going to get graded
+
+84
+00:03:52,070 --> 00:03:55,010
+if it takes you another class
+or two to figure it out.
+
+85
+00:03:55,010 --> 00:03:59,060
+But I just think it's much
+better if you know your teams,
+
+86
+00:03:59,060 --> 00:04:02,400
+you know what your
+use case will be.
+
+87
+00:04:02,400 --> 00:04:05,450
+If it's not about finance--
+
+88
+00:04:05,450 --> 00:04:10,070
+one group has already asked
+me if that's all right.
+
+89
+00:04:10,070 --> 00:04:13,550
+I just want to know more
+detailed what it's going to be.
+
+90
+00:04:13,550 --> 00:04:17,180
+I'm probably going
+to say yes, but it
+
+91
+00:04:17,180 --> 00:04:18,589
+needs a little
+bit of preapproval
+
+92
+00:04:18,589 --> 00:04:20,180
+if it's outside of finance.
+
+93
+00:04:20,180 --> 00:04:22,310
+So any questions about
+the requirements?
+
+94
+00:04:22,310 --> 00:04:23,160
+I just wanted to--
+
+95
+00:04:25,980 --> 00:04:29,470
+So the study questions.
+
+96
+00:04:29,470 --> 00:04:33,090
+Today's smart contracts
+and basically how they
+
+97
+00:04:33,090 --> 00:04:36,840
+compare to regular contracts.
+
+98
+00:04:36,840 --> 00:04:42,900
+And what are the tokens that
+are used within that ecosystem?
+
+99
+00:04:42,900 --> 00:04:46,110
+And what are the platforms?
+
+100
+00:04:46,110 --> 00:04:51,270
+In a very similar sense to the
+internet, we have the internet.
+
+101
+00:04:51,270 --> 00:04:54,750
+And then above the internet,
+you have, you might say,
+
+102
+00:04:54,750 --> 00:04:55,570
+applications--
+
+103
+00:04:55,570 --> 00:04:59,200
+Facebook and other applications.
+
+104
+00:04:59,200 --> 00:05:02,310
+Well, this, too, has
+a series of platforms
+
+105
+00:05:02,310 --> 00:05:05,010
+and then decentralized
+applications
+
+106
+00:05:05,010 --> 00:05:08,810
+potentially on top of that.
+
+107
+00:05:08,810 --> 00:05:12,643
+And basically, a quick touch
+on decentralized applications.
+
+108
+00:05:12,643 --> 00:05:14,060
+Later in the
+semester, we're going
+
+109
+00:05:14,060 --> 00:05:17,300
+to take two sessions on
+initial coin offerings.
+
+110
+00:05:17,300 --> 00:05:21,980
+And thus, we're going to talk
+a lot about token economics.
+
+111
+00:05:21,980 --> 00:05:24,500
+So this will be just
+the first taste test,
+
+112
+00:05:24,500 --> 00:05:28,660
+and then we'll come
+back to it later.
+
+113
+00:05:28,660 --> 00:05:31,770
+And then the readings,
+hopefully, everybody
+
+114
+00:05:31,770 --> 00:05:34,800
+read through "Smart Contracts."
+
+115
+00:05:34,800 --> 00:05:37,050
+I thought the Chamber
+of Digital Commerce,
+
+116
+00:05:37,050 --> 00:05:38,850
+even though this is
+almost two years ago,
+
+117
+00:05:38,850 --> 00:05:43,260
+this paper was a very
+helpful sort of flavor
+
+118
+00:05:43,260 --> 00:05:47,400
+for what folks in
+commerce are thinking
+
+119
+00:05:47,400 --> 00:05:49,140
+and what developers
+were thinking.
+
+120
+00:05:49,140 --> 00:05:53,920
+And I love that Nick Szabo
+wrote the introduction to it.
+
+121
+00:05:53,920 --> 00:05:56,670
+And it's interesting
+to see and question,
+
+122
+00:05:56,670 --> 00:05:58,890
+why is it that it's
+two years later,
+
+123
+00:05:58,890 --> 00:06:01,890
+and many of those use cases
+are still being discussed
+
+124
+00:06:01,890 --> 00:06:05,940
+but haven't fully been adopted?
+
+125
+00:06:05,940 --> 00:06:07,480
+And then the "State
+of the Dapps,"
+
+126
+00:06:07,480 --> 00:06:10,712
+and then who are the
+competitors to Ethereum?
+
+127
+00:06:10,712 --> 00:06:11,670
+So don't you feel good?
+
+128
+00:06:11,670 --> 00:06:15,540
+I haven't asked anybody
+a cold question yet.
+
+129
+00:06:15,540 --> 00:06:18,810
+And then the optional
+readings, I don't know.
+
+130
+00:06:18,810 --> 00:06:20,040
+Did anybody actually go back?
+
+131
+00:06:20,040 --> 00:06:20,748
+They're optional.
+
+132
+00:06:20,748 --> 00:06:24,120
+Did anybody go back and read
+either Szabo's original piece
+
+133
+00:06:24,120 --> 00:06:26,350
+from 20 years ago
+on smart contracts?
+
+134
+00:06:26,350 --> 00:06:30,240
+Oh, a few of you are kind
+of into that rabbit hole
+
+135
+00:06:30,240 --> 00:06:31,580
+of blockchain and ether.
+
+136
+00:06:34,590 --> 00:06:37,740
+Brotish what did you think of--
+it's 20 years ago he wrote this
+
+137
+00:06:37,740 --> 00:06:38,760
+thing on--
+
+138
+00:06:38,760 --> 00:06:40,130
+Nick Szabo wrote this thing.
+
+139
+00:06:40,130 --> 00:06:41,850
+AUDIENCE: Actually,
+I spent more time
+
+140
+00:06:41,850 --> 00:06:43,340
+on the Ethereum white paper.
+
+141
+00:06:43,340 --> 00:06:43,590
+PROFESSOR: All right.
+
+142
+00:06:43,590 --> 00:06:46,095
+So what did you think about
+the Ethereum white paper one?
+
+143
+00:06:46,095 --> 00:06:47,887
+AUDIENCE: Yeah, I think
+it was pretty good.
+
+144
+00:06:47,887 --> 00:06:50,140
+It gave me a very good
+overview of the world potential
+
+145
+00:06:50,140 --> 00:06:51,203
+of the [INAUDIBLE].
+
+146
+00:06:51,203 --> 00:06:52,050
+PROFESSOR: Yeah.
+
+147
+00:06:52,050 --> 00:06:54,930
+And what's interesting is
+even if you didn't do it
+
+148
+00:06:54,930 --> 00:06:57,210
+for the class and you find
+yourself more and more
+
+149
+00:06:57,210 --> 00:07:01,170
+interested in this over the next
+couple of months or even later,
+
+150
+00:07:01,170 --> 00:07:03,540
+going back and reading
+the Ethereum white paper,
+
+151
+00:07:03,540 --> 00:07:06,840
+it's not highly technical
+in the first, I don't know,
+
+152
+00:07:06,840 --> 00:07:08,400
+10 or 15 pages.
+
+153
+00:07:08,400 --> 00:07:10,110
+It really gives a
+history of bitcoin.
+
+154
+00:07:10,110 --> 00:07:13,350
+It talks about
+distributed applications
+
+155
+00:07:13,350 --> 00:07:21,040
+and largely written at the
+time by a 19-year-old, as well.
+
+156
+00:07:21,040 --> 00:07:25,840
+It's a remarkable thing.
+
+157
+00:07:25,840 --> 00:07:29,470
+And then one of Larry's
+colleague, or maybe it's
+
+158
+00:07:29,470 --> 00:07:32,320
+two of them, but De
+Philippi paper, as well,
+
+159
+00:07:32,320 --> 00:07:34,520
+on the regulatory issues.
+
+160
+00:07:34,520 --> 00:07:36,610
+So let me talk a little
+bit about smart contracts
+
+161
+00:07:36,610 --> 00:07:40,960
+and laying groundwork before
+Larry gives us the law.
+
+162
+00:07:40,960 --> 00:07:44,650
+A smart contract is
+a set of promises
+
+163
+00:07:44,650 --> 00:07:47,350
+specified in a digital form.
+
+164
+00:07:47,350 --> 00:07:48,680
+I'm going to say four things.
+
+165
+00:07:48,680 --> 00:07:53,640
+It's just a set of
+promises in a digital form.
+
+166
+00:07:53,640 --> 00:07:57,070
+So it's not handwritten out.
+
+167
+00:07:57,070 --> 00:07:58,330
+It includes protocols.
+
+168
+00:07:58,330 --> 00:07:59,825
+What's a protocol?
+
+169
+00:07:59,825 --> 00:08:00,325
+Andrew.
+
+170
+00:08:05,955 --> 00:08:07,580
+AUDIENCE: Standard
+operating procedure.
+
+171
+00:08:07,580 --> 00:08:09,770
+PROFESSOR: Standard
+operating procedure.
+
+172
+00:08:09,770 --> 00:08:10,530
+I like that.
+
+173
+00:08:10,530 --> 00:08:14,450
+Anybody else give me
+another word for it, maybe?
+
+174
+00:08:14,450 --> 00:08:17,610
+An algorithm.
+
+175
+00:08:17,610 --> 00:08:21,480
+So a set of promises
+in digital form.
+
+176
+00:08:21,480 --> 00:08:25,970
+But it can include math,
+basically, if you wish
+
+177
+00:08:25,970 --> 00:08:30,560
+or standard operating
+procedures-- if-then statements
+
+178
+00:08:30,560 --> 00:08:32,380
+and so forth.
+
+179
+00:08:32,380 --> 00:08:36,375
+And the parties then perform
+against these promises.
+
+180
+00:08:36,375 --> 00:08:37,000
+And guess what?
+
+181
+00:08:37,000 --> 00:08:39,640
+Nick Szabo wrote that in 1996.
+
+182
+00:08:39,640 --> 00:08:41,770
+And I thought it was
+still probably the best
+
+183
+00:08:41,770 --> 00:08:44,140
+definition of smart contract.
+
+184
+00:08:44,140 --> 00:08:47,440
+He coined the
+phrase 22 years ago.
+
+185
+00:08:47,440 --> 00:08:49,900
+He might actually
+be Satoshi Nakamoto.
+
+186
+00:08:49,900 --> 00:08:52,330
+Three of the tables
+in here, you all
+
+187
+00:08:52,330 --> 00:08:53,770
+voted that it was Nick Szabo.
+
+188
+00:08:56,500 --> 00:08:58,990
+So I thought that's kind
+of the best definition
+
+189
+00:08:58,990 --> 00:09:02,650
+if you've got to
+just-- kind of a root.
+
+190
+00:09:02,650 --> 00:09:06,490
+Now, I would also say, however,
+that smart contracts may not
+
+191
+00:09:06,490 --> 00:09:07,657
+be so smart.
+
+192
+00:09:07,657 --> 00:09:09,490
+A lot of people have
+come to be calling them
+
+193
+00:09:09,490 --> 00:09:11,950
+dumb contracts that
+are just algorithms
+
+194
+00:09:11,950 --> 00:09:14,170
+that perform a function.
+
+195
+00:09:14,170 --> 00:09:17,920
+So don't think of them as
+artificial intelligence.
+
+196
+00:09:17,920 --> 00:09:23,710
+That's another class provided
+next semester by Simon Johnson.
+
+197
+00:09:23,710 --> 00:09:28,900
+Think of them almost
+as just dumb contracts.
+
+198
+00:09:28,900 --> 00:09:31,050
+And in a sense,
+they're mechanizing
+
+199
+00:09:31,050 --> 00:09:35,280
+what might otherwise be done
+amongst and between humans.
+
+200
+00:09:35,280 --> 00:09:38,280
+And smart contracts may or
+may not be really contracts.
+
+201
+00:09:38,280 --> 00:09:40,210
+And that's why Larry's
+going to speak to it.
+
+202
+00:09:40,210 --> 00:09:44,370
+So remember, even though Nick
+Szabo calls it smart contracts,
+
+203
+00:09:44,370 --> 00:09:47,010
+they may not be smart, and
+they may not be contracts.
+
+204
+00:09:50,430 --> 00:09:53,260
+So a little bit about
+the technical features.
+
+205
+00:09:53,260 --> 00:09:56,250
+Remember our three
+ways we did this.
+
+206
+00:09:56,250 --> 00:10:00,150
+What are the big technical
+features that we studied?
+
+207
+00:10:00,150 --> 00:10:01,270
+I'm sorry to do this.
+
+208
+00:10:01,270 --> 00:10:03,840
+Anton, what are the
+three big buckets?
+
+209
+00:10:03,840 --> 00:10:07,200
+Remember, we took three
+classes and three buckets
+
+210
+00:10:07,200 --> 00:10:08,070
+of information.
+
+211
+00:10:10,794 --> 00:10:12,525
+It can be one to three.
+
+212
+00:10:12,525 --> 00:10:13,490
+AUDIENCE: Cryptography.
+
+213
+00:10:13,490 --> 00:10:14,490
+PROFESSOR: Cryptography.
+
+214
+00:10:14,490 --> 00:10:14,990
+Great.
+
+215
+00:10:14,990 --> 00:10:15,810
+You got one.
+
+216
+00:10:15,810 --> 00:10:18,000
+Two other people will
+give me the others.
+
+217
+00:10:18,000 --> 00:10:19,890
+So cryptography.
+
+218
+00:10:19,890 --> 00:10:20,430
+Guess what?
+
+219
+00:10:20,430 --> 00:10:25,090
+Bitcoin and Ethereum all
+have the same cryptography.
+
+220
+00:10:25,090 --> 00:10:26,760
+It's not identical.
+
+221
+00:10:26,760 --> 00:10:29,970
+But for the purposes
+of design features,
+
+222
+00:10:29,970 --> 00:10:33,510
+it has cryptographic hashes,
+timestamps, block headers,
+
+223
+00:10:33,510 --> 00:10:35,760
+Merkle trees.
+
+224
+00:10:35,760 --> 00:10:38,760
+Though Ethereum has more than
+one Merkle tree, and bitcoin
+
+225
+00:10:38,760 --> 00:10:41,460
+has one.
+
+226
+00:10:41,460 --> 00:10:44,250
+And it has digital
+signatures and addresses.
+
+227
+00:10:44,250 --> 00:10:47,240
+So everything we
+talked about three
+
+228
+00:10:47,240 --> 00:10:51,950
+lectures ago about cryptography,
+both forms of blockchains.
+
+229
+00:10:51,950 --> 00:10:55,730
+Anybody want to give me
+what our second bucket was?
+
+230
+00:10:55,730 --> 00:10:57,950
+Geramo.
+
+231
+00:10:57,950 --> 00:10:59,310
+AUDIENCE: Decentralization.
+
+232
+00:10:59,310 --> 00:11:00,590
+PROFESSOR: Decentralization.
+
+233
+00:11:00,590 --> 00:11:02,570
+What else did we talk about?
+
+234
+00:11:02,570 --> 00:11:03,070
+Eilon.
+
+235
+00:11:03,070 --> 00:11:03,903
+AUDIENCE: Consensus.
+
+236
+00:11:03,903 --> 00:11:05,250
+PROFESSOR: Consensus.
+
+237
+00:11:05,250 --> 00:11:10,310
+So again, decentralized
+network consensus.
+
+238
+00:11:10,310 --> 00:11:12,740
+Ethereum actually
+uses proof of work
+
+239
+00:11:12,740 --> 00:11:15,770
+even there's some
+talk that Ether
+
+240
+00:11:15,770 --> 00:11:17,870
+will move to proof of stake.
+
+241
+00:11:17,870 --> 00:11:20,030
+But it's currently
+proof of work.
+
+242
+00:11:20,030 --> 00:11:22,280
+There is a native currency.
+
+243
+00:11:22,280 --> 00:11:29,750
+It's ETH, or "eh-th," or E-T-H,
+or Ether, instead of bitcoin.
+
+244
+00:11:29,750 --> 00:11:32,220
+And it has a network.
+
+245
+00:11:32,220 --> 00:11:36,080
+The third thing that
+we talked about, Alpha.
+
+246
+00:11:36,080 --> 00:11:37,520
+AUDIENCE: Transaction format.
+
+247
+00:11:37,520 --> 00:11:38,840
+PROFESSOR: Transaction format.
+
+248
+00:11:38,840 --> 00:11:42,290
+So we talked about
+transactions and script.
+
+249
+00:11:42,290 --> 00:11:43,240
+Well, guess what?
+
+250
+00:11:43,240 --> 00:11:48,030
+Ethereum does not have a
+transaction script or UTXO.
+
+251
+00:11:48,030 --> 00:11:52,850
+So that's the one place
+that Vatalik Buterin, who
+
+252
+00:11:52,850 --> 00:11:57,020
+designed all of this, said
+no, had to go a different way.
+
+253
+00:11:57,020 --> 00:12:00,070
+Instead of transaction
+inputs and outputs,
+
+254
+00:12:00,070 --> 00:12:02,260
+there's something called
+state transitions.
+
+255
+00:12:05,250 --> 00:12:06,518
+Isabella, ledgers.
+
+256
+00:12:06,518 --> 00:12:08,310
+What are the two
+different types of ledgers
+
+257
+00:12:08,310 --> 00:12:12,355
+that we talked about
+and set a class to?
+
+258
+00:12:12,355 --> 00:12:14,066
+AUDIENCE: Permissioned
+and public.
+
+259
+00:12:14,066 --> 00:12:17,010
+PROFESSOR: So
+permissioned and public
+
+260
+00:12:17,010 --> 00:12:20,660
+are two different
+types of blockchains.
+
+261
+00:12:20,660 --> 00:12:22,100
+Remind me your name again.
+
+262
+00:12:22,100 --> 00:12:23,053
+Stephanie.
+
+263
+00:12:23,053 --> 00:12:25,750
+AUDIENCE: Balance ledgers
+and transaction ledgers.
+
+264
+00:12:25,750 --> 00:12:26,625
+PROFESSOR: All right.
+
+265
+00:12:26,625 --> 00:12:28,440
+So balance ledger and
+transaction ledger.
+
+266
+00:12:28,440 --> 00:12:30,650
+You can keep a list
+of transactions.
+
+267
+00:12:30,650 --> 00:12:33,638
+And this goes back
+thousands of years.
+
+268
+00:12:33,638 --> 00:12:34,680
+This is not a blockchain.
+
+269
+00:12:34,680 --> 00:12:37,080
+Or you can keep balances.
+
+270
+00:12:37,080 --> 00:12:41,080
+Bitcoin is, in essence,
+a transaction ledger.
+
+271
+00:12:41,080 --> 00:12:45,730
+Ethereum and many of
+the other smart contract
+
+272
+00:12:45,730 --> 00:12:48,490
+platforms are balance ledgers.
+
+273
+00:12:48,490 --> 00:12:53,500
+There's a lot of technological
+and mathematical reasons why,
+
+274
+00:12:53,500 --> 00:12:57,160
+which I'd be glad to
+do in office hours.
+
+275
+00:12:57,160 --> 00:13:00,220
+But because of that,
+when you're moving
+
+276
+00:13:00,220 --> 00:13:03,870
+from one set of balances, like--
+
+277
+00:13:03,870 --> 00:13:05,170
+is it Bo?
+
+278
+00:13:05,170 --> 00:13:11,260
+Bo has $100 at Bank of
+America to Bo having $101.
+
+279
+00:13:11,260 --> 00:13:13,150
+You need to have a transition.
+
+280
+00:13:13,150 --> 00:13:17,050
+It's called a state transition,
+which would mean add $1.
+
+281
+00:13:20,680 --> 00:13:24,580
+So Ethereum is account based
+and, in fact, doesn't even
+
+282
+00:13:24,580 --> 00:13:26,500
+have one programming language.
+
+283
+00:13:26,500 --> 00:13:28,840
+There's six or seven
+programming languages
+
+284
+00:13:28,840 --> 00:13:32,970
+you can write in, for
+those who are so inclined.
+
+285
+00:13:32,970 --> 00:13:38,570
+So I'm going to go through
+really quickly my analysis,
+
+286
+00:13:38,570 --> 00:13:40,370
+and many other
+people's, but my sort
+
+287
+00:13:40,370 --> 00:13:43,820
+of rendition of the difference
+between Ethereum and bitcoin.
+
+288
+00:13:43,820 --> 00:13:45,380
+But stop me if
+there's a question.
+
+289
+00:13:45,380 --> 00:13:46,750
+So the founder.
+
+290
+00:13:46,750 --> 00:13:49,400
+There's actually a founder.
+
+291
+00:13:49,400 --> 00:13:52,450
+The mythology around
+Vatalik Buterin
+
+292
+00:13:52,450 --> 00:13:54,870
+might not be as great
+as Satoshi Nakamoto.
+
+293
+00:13:54,870 --> 00:14:00,500
+But a 19-year-old journalist who
+was writing about bitcoin for--
+
+294
+00:14:00,500 --> 00:14:04,850
+was it Bitcoin Magazine, if I
+remember where he was writing--
+
+295
+00:14:04,850 --> 00:14:08,190
+said, we can build
+something on top
+
+296
+00:14:08,190 --> 00:14:11,630
+of it using Nick Szabo's
+thoughts about smart contracts,
+
+297
+00:14:11,630 --> 00:14:15,135
+about six years after bitcoin.
+
+298
+00:14:18,150 --> 00:14:19,860
+He made it Turing complete.
+
+299
+00:14:19,860 --> 00:14:23,670
+Does anyone want to remind the
+class what Turing complete is?
+
+300
+00:14:23,670 --> 00:14:24,720
+Did I see a hand up?
+
+301
+00:14:24,720 --> 00:14:25,890
+Yes.
+
+302
+00:14:25,890 --> 00:14:26,455
+Bold of you.
+
+303
+00:14:26,455 --> 00:14:27,663
+What's your first name again?
+
+304
+00:14:27,663 --> 00:14:28,390
+AUDIENCE: Alana.
+
+305
+00:14:28,390 --> 00:14:29,448
+PROFESSOR: Alana.
+
+306
+00:14:29,448 --> 00:14:31,490
+AUDIENCE: You could write
+pretty much any-- well,
+
+307
+00:14:31,490 --> 00:14:33,782
+you can write loops, but you
+write any kind of program,
+
+308
+00:14:33,782 --> 00:14:35,890
+like any form of
+logic is expressed.
+
+309
+00:14:35,890 --> 00:14:37,800
+PROFESSOR: So Alana
+says Turing complete
+
+310
+00:14:37,800 --> 00:14:39,150
+means you can write loops.
+
+311
+00:14:39,150 --> 00:14:43,440
+But what that really means
+for the business crowd is it
+
+312
+00:14:43,440 --> 00:14:46,260
+means you can write a program
+to do just about anything.
+
+313
+00:14:46,260 --> 00:14:48,180
+It's highly flexible.
+
+314
+00:14:48,180 --> 00:14:50,700
+I'm sure the technologist in
+here will say, well, maybe
+
+315
+00:14:50,700 --> 00:14:52,710
+there's something
+you can't do with it.
+
+316
+00:14:52,710 --> 00:14:55,170
+But the point in
+what Vatalik said
+
+317
+00:14:55,170 --> 00:14:58,920
+is we shouldn't just limit it
+to a scripting language that
+
+318
+00:14:58,920 --> 00:15:01,500
+was non-Turing
+complete that can just
+
+319
+00:15:01,500 --> 00:15:05,310
+move a little bit of
+peer-to-peer value around,
+
+320
+00:15:05,310 --> 00:15:11,100
+that he wanted to do basically
+a peer-to-peer virtual computer
+
+321
+00:15:11,100 --> 00:15:14,310
+that could move code
+and complete code.
+
+322
+00:15:14,310 --> 00:15:16,980
+And over the years,
+it's being able to be
+
+323
+00:15:16,980 --> 00:15:18,320
+written in a bunch of things.
+
+324
+00:15:18,320 --> 00:15:21,810
+But Solidity is the
+main program language.
+
+325
+00:15:21,810 --> 00:15:25,170
+And thus, it's account based
+rather than transaction
+
+326
+00:15:25,170 --> 00:15:27,510
+based because of the loops.
+
+327
+00:15:27,510 --> 00:15:31,620
+If you could loop and be Turing
+complete with transactions,
+
+328
+00:15:31,620 --> 00:15:34,770
+there is a vulnerability
+in attack factors
+
+329
+00:15:34,770 --> 00:15:38,320
+that he made it account based.
+
+330
+00:15:38,320 --> 00:15:42,015
+The transactions are
+stored in Merkle keys.
+
+331
+00:15:42,015 --> 00:15:42,640
+But guess what?
+
+332
+00:15:42,640 --> 00:15:45,220
+If you were really interested
+and wanted to learn everything
+
+333
+00:15:45,220 --> 00:15:48,670
+about Ethereum, there's at
+least four key Merkle trees
+
+334
+00:15:48,670 --> 00:15:52,780
+that get summarized up
+into the block headers.
+
+335
+00:15:52,780 --> 00:15:55,420
+There's the transactions,
+which, in essence,
+
+336
+00:15:55,420 --> 00:15:56,500
+aren't transactions.
+
+337
+00:15:56,500 --> 00:15:58,780
+They call them
+state transitions.
+
+338
+00:15:58,780 --> 00:16:01,480
+There's the state
+itself, something
+
+339
+00:16:01,480 --> 00:16:04,420
+called storage, which is
+really related to each one
+
+340
+00:16:04,420 --> 00:16:07,390
+of the individual Ethereum
+accounts, and then,
+
+341
+00:16:07,390 --> 00:16:09,670
+believe it or not,
+actually, receipts.
+
+342
+00:16:09,670 --> 00:16:12,700
+There's written records of
+receipts from every state
+
+343
+00:16:12,700 --> 00:16:14,530
+transition.
+
+344
+00:16:14,530 --> 00:16:19,400
+So there's a lot more complexity
+inside the Ethereum blockchain.
+
+345
+00:16:19,400 --> 00:16:23,510
+They run about 14 seconds a
+block instead of 10 minutes.
+
+346
+00:16:23,510 --> 00:16:26,600
+And that change is a
+bunch of the economics.
+
+347
+00:16:26,600 --> 00:16:32,010
+Proof of work, for some
+reason, which others can study.
+
+348
+00:16:32,010 --> 00:16:35,450
+Vatalik decided to use a
+different hash function.
+
+349
+00:16:35,450 --> 00:16:37,760
+It's still based on
+elliptic curves, I think,
+
+350
+00:16:37,760 --> 00:16:40,840
+but a different hash function.
+
+351
+00:16:40,840 --> 00:16:42,760
+What about the economics?
+
+352
+00:16:42,760 --> 00:16:47,680
+Well, it's called ETH or E-T-H.
+It's programmed in such a way
+
+353
+00:16:47,680 --> 00:16:52,210
+that you can't use
+ASICs, purposely
+
+354
+00:16:52,210 --> 00:16:55,840
+makes it that mining
+is more decentralized,
+
+355
+00:16:55,840 --> 00:16:57,580
+and you don't have
+the big factories.
+
+356
+00:17:00,280 --> 00:17:04,360
+The entire hash community,
+the entire mining community,
+
+357
+00:17:04,360 --> 00:17:05,770
+is much smaller.
+
+358
+00:17:05,770 --> 00:17:06,988
+In fact, I think it's about--
+
+359
+00:17:06,988 --> 00:17:07,780
+what would that be?
+
+360
+00:17:07,780 --> 00:17:10,270
+200,000 times smaller.
+
+361
+00:17:10,270 --> 00:17:15,280
+There's 260 terahashes per
+second as of yesterday.
+
+362
+00:17:15,280 --> 00:17:21,230
+And the bitcoin mining
+community has 54 exahashes.
+
+363
+00:17:21,230 --> 00:17:23,900
+That means lots more computers,
+a lot more electricity,
+
+364
+00:17:23,900 --> 00:17:28,490
+a lot more gnashing of
+teeth about resources.
+
+365
+00:17:28,490 --> 00:17:32,060
+Bitcoin started in
+January of 2009.
+
+366
+00:17:32,060 --> 00:17:36,920
+And nobody owned any bitcoin,
+whereas Ethereum started
+
+367
+00:17:36,920 --> 00:17:40,955
+with a presale and an ICO,
+which we'll be talking about,
+
+368
+00:17:40,955 --> 00:17:44,530
+about 72 million Ethereum.
+
+369
+00:17:44,530 --> 00:17:47,950
+Vatalik wanted to raise money
+he was maybe 19 years old.
+
+370
+00:17:47,950 --> 00:17:49,870
+He looped in with a
+venture capitalist
+
+371
+00:17:49,870 --> 00:17:54,460
+from Canada, Joe Lubin,
+who now runs ConsenSys.
+
+372
+00:17:54,460 --> 00:17:59,640
+Lubin took about 10% or 9
+and 1/2% of the offering.
+
+373
+00:17:59,640 --> 00:18:01,990
+They put 9 and 1/2%
+in a foundation
+
+374
+00:18:01,990 --> 00:18:04,720
+called the Ethereum Foundation.
+
+375
+00:18:04,720 --> 00:18:07,930
+And the other 80% was sold to
+the public for $18 million.
+
+376
+00:18:10,732 --> 00:18:12,670
+We'll talk later
+in the semester as
+
+377
+00:18:12,670 --> 00:18:15,100
+to whether that was really
+a securities offering.
+
+378
+00:18:15,100 --> 00:18:20,110
+I've publicly said I think
+so, but that was in 2014.
+
+379
+00:18:20,110 --> 00:18:23,170
+And in 2018, the Securities
+and Exchange Commission
+
+380
+00:18:23,170 --> 00:18:26,680
+has said regardless of why
+it might have been in '14,
+
+381
+00:18:26,680 --> 00:18:28,840
+it's now sufficiently
+decentralized
+
+382
+00:18:28,840 --> 00:18:31,300
+that we'll consider
+it not a security.
+
+383
+00:18:31,300 --> 00:18:33,280
+But in essence, they
+raised $18 million
+
+384
+00:18:33,280 --> 00:18:37,046
+and were off to the races.
+
+385
+00:18:37,046 --> 00:18:41,810
+Oh, and the 10% that Joe Lubin
+kept, if he still owned it,
+
+386
+00:18:41,810 --> 00:18:44,100
+would be worth about
+$2 billion now.
+
+387
+00:18:44,100 --> 00:18:48,180
+But he probably sold
+some of it along the way.
+
+388
+00:18:48,180 --> 00:18:50,090
+There are block rewards.
+
+389
+00:18:50,090 --> 00:18:53,690
+The monetary policy in
+Ethereum, if you remember,
+
+390
+00:18:53,690 --> 00:18:56,900
+it splits every four years.
+
+391
+00:18:56,900 --> 00:18:58,570
+There's the block reward splits.
+
+392
+00:18:58,570 --> 00:19:03,860
+Ethereum was set up that it
+was five Ether per block.
+
+393
+00:19:03,860 --> 00:19:06,050
+And then a year ago,
+they just announced
+
+394
+00:19:06,050 --> 00:19:07,760
+they were going to
+change the software
+
+395
+00:19:07,760 --> 00:19:10,040
+to three Ether per block.
+
+396
+00:19:10,040 --> 00:19:11,720
+And a month ago, they
+announced they're
+
+397
+00:19:11,720 --> 00:19:13,760
+going to change it to
+two Ether per block.
+
+398
+00:19:13,760 --> 00:19:18,500
+So the monetary policy of
+bitcoin is said to be immutable
+
+399
+00:19:18,500 --> 00:19:20,210
+and fixed forever.
+
+400
+00:19:20,210 --> 00:19:23,750
+But I would say that because
+Ethereum supposedly was fixed
+
+401
+00:19:23,750 --> 00:19:27,800
+and now, twice, they've
+changed the monetary policy,
+
+402
+00:19:27,800 --> 00:19:32,240
+there is a form that if all
+the miners and all the computer
+
+403
+00:19:32,240 --> 00:19:35,420
+nodes decide, they can
+change the monetary policy.
+
+404
+00:19:35,420 --> 00:19:39,050
+And Ethereum has shown that.
+
+405
+00:19:39,050 --> 00:19:41,750
+I think Ethereum's a
+bit more centralized
+
+406
+00:19:41,750 --> 00:19:44,990
+and has more leadership,
+because Vatalik Buterin
+
+407
+00:19:44,990 --> 00:19:49,820
+is an actual human who is
+willing to disclose who he is.
+
+408
+00:19:49,820 --> 00:19:52,730
+And he still has the sort
+of founder following.
+
+409
+00:19:52,730 --> 00:19:54,650
+And Satoshi Nakamoto went--
+
+410
+00:19:54,650 --> 00:19:57,440
+he ghosted all of
+us, in a sense.
+
+411
+00:19:57,440 --> 00:20:00,910
+And so thus, it's in some
+ways socially just more
+
+412
+00:20:00,910 --> 00:20:04,050
+decentralized.
+
+413
+00:20:04,050 --> 00:20:07,950
+And then fees are
+voluntary in bitcoin.
+
+414
+00:20:07,950 --> 00:20:12,880
+They're a necessary part
+to channel everything.
+
+415
+00:20:12,880 --> 00:20:13,380
+Emily.
+
+416
+00:20:13,380 --> 00:20:15,150
+AUDIENCE: Going back
+to monetary policy,
+
+417
+00:20:15,150 --> 00:20:17,360
+in practice, what
+does it actually mean
+
+418
+00:20:17,360 --> 00:20:20,850
+for a difference between bitcoin
+and Ethereum that it's fixed
+
+419
+00:20:20,850 --> 00:20:23,440
+but changing versus
+staying at the same rate?
+
+420
+00:20:23,440 --> 00:20:25,860
+PROFESSOR: So Emily asks,
+what does it mean in practice?
+
+421
+00:20:25,860 --> 00:20:33,300
+In practice, bitcoin has a much
+slower growth rate or inflation
+
+422
+00:20:33,300 --> 00:20:40,230
+rate, which is currently, if
+I'm not mistaken, about half.
+
+423
+00:20:40,230 --> 00:20:41,130
+What's that?
+
+424
+00:20:41,130 --> 00:20:42,190
+About 4%.
+
+425
+00:20:42,190 --> 00:20:46,590
+But it's about half of the
+inflation rate at Ethereum,
+
+426
+00:20:46,590 --> 00:20:49,830
+which is running
+in the 7% range.
+
+427
+00:20:49,830 --> 00:20:53,670
+Every one of the
+1,600 live tokens
+
+428
+00:20:53,670 --> 00:20:55,500
+that are right
+now Ott coins have
+
+429
+00:20:55,500 --> 00:20:57,210
+separate monetary policies.
+
+430
+00:20:57,210 --> 00:20:59,220
+And one could do a
+complete economic study
+
+431
+00:20:59,220 --> 00:21:00,660
+about what it means.
+
+432
+00:21:00,660 --> 00:21:02,970
+But in terms of
+Ethereum versus bitcoin,
+
+433
+00:21:02,970 --> 00:21:07,140
+Ethereum has a higher
+inflation rate.
+
+434
+00:21:07,140 --> 00:21:09,270
+And secondly,
+because they've shown
+
+435
+00:21:09,270 --> 00:21:13,650
+that they can form some
+consensus and change it,
+
+436
+00:21:13,650 --> 00:21:15,780
+I think it sends an
+interesting question
+
+437
+00:21:15,780 --> 00:21:21,780
+into that ecosystem as to how
+hard a monetary policy versus
+
+438
+00:21:21,780 --> 00:21:27,130
+a more human-based,
+flexible monetary policy.
+
+439
+00:21:27,130 --> 00:21:28,180
+Hugo.
+
+440
+00:21:28,180 --> 00:21:31,840
+AUDIENCE: So is it that the
+core developers of the Ethereum
+
+441
+00:21:31,840 --> 00:21:33,822
+blockchain decide?
+
+442
+00:21:33,822 --> 00:21:36,280
+I'm not familiar with how they
+make that decision to change
+
+443
+00:21:36,280 --> 00:21:37,520
+the monetary policy.
+
+444
+00:21:37,520 --> 00:21:41,350
+PROFESSOR: So the core
+developers of any coin
+
+445
+00:21:41,350 --> 00:21:44,560
+can propose to the
+various mining and nodes
+
+446
+00:21:44,560 --> 00:21:50,510
+to make a change, including
+the monetary policy.
+
+447
+00:21:50,510 --> 00:21:53,290
+Even in bitcoin,
+the monetary policy
+
+448
+00:21:53,290 --> 00:21:56,230
+could change if
+there was a proposal
+
+449
+00:21:56,230 --> 00:21:58,300
+from the core developers.
+
+450
+00:21:58,300 --> 00:22:01,480
+In the Ethereum case,
+they have done that twice.
+
+451
+00:22:01,480 --> 00:22:03,160
+The core development
+of Ethereum is
+
+452
+00:22:03,160 --> 00:22:07,720
+highly concentrated around
+the Ethereum Foundation.
+
+453
+00:22:07,720 --> 00:22:11,110
+ConsenSys, the company
+that Joe Lubin runs,
+
+454
+00:22:11,110 --> 00:22:15,970
+has some normative social
+standing in the community,
+
+455
+00:22:15,970 --> 00:22:18,070
+as well.
+
+456
+00:22:18,070 --> 00:22:20,650
+But it's been part of proposals.
+
+457
+00:22:20,650 --> 00:22:25,780
+And in reading the proposals, it
+goes back to Emily's question.
+
+458
+00:22:25,780 --> 00:22:28,540
+The core developers have said we
+should bring down the inflation
+
+459
+00:22:28,540 --> 00:22:29,350
+rate.
+
+460
+00:22:29,350 --> 00:22:32,570
+There's an active advocacy to
+bring down the inflation rate.
+
+461
+00:22:32,570 --> 00:22:35,000
+AUDIENCE: So you go by
+updating your node software?
+
+462
+00:22:35,000 --> 00:22:36,790
+PROFESSOR: Yes, in essence.
+
+463
+00:22:36,790 --> 00:22:39,880
+And it could lead to a
+hard fork, I believe.
+
+464
+00:22:42,588 --> 00:22:43,630
+So that's the background.
+
+465
+00:22:43,630 --> 00:22:45,172
+Let me just talk
+about the platforms.
+
+466
+00:22:45,172 --> 00:22:47,230
+We know about Ethereum.
+
+467
+00:22:47,230 --> 00:22:48,550
+We've just chatted about it.
+
+468
+00:22:48,550 --> 00:22:51,910
+Its actual current market
+value is $22 billion.
+
+469
+00:22:51,910 --> 00:22:54,490
+While we're not going to spend
+a lot of time in this class
+
+470
+00:22:54,490 --> 00:22:56,080
+this semester about
+market values,
+
+471
+00:22:56,080 --> 00:22:57,538
+I thought it would
+give you a sense
+
+472
+00:22:57,538 --> 00:22:58,870
+of how people think about it.
+
+473
+00:22:58,870 --> 00:23:02,240
+The other five that you
+did some reading about.
+
+474
+00:23:02,240 --> 00:23:05,260
+EOS, whose market value
+is about $5 billion,
+
+475
+00:23:05,260 --> 00:23:09,070
+is so new, because they just
+finished an initial coin
+
+476
+00:23:09,070 --> 00:23:10,900
+offering in July.
+
+477
+00:23:10,900 --> 00:23:12,770
+And they just went live in July.
+
+478
+00:23:12,770 --> 00:23:14,950
+But they raised $4.2 billion.
+
+479
+00:23:14,950 --> 00:23:19,900
+So my estimate, my prediction,
+is EOS is going to be real
+
+480
+00:23:19,900 --> 00:23:22,030
+and going to be around.
+
+481
+00:23:22,030 --> 00:23:25,360
+They've taken $1 billion
+of that $4.2 billion
+
+482
+00:23:25,360 --> 00:23:31,370
+and set up a Kickstarter
+sort of venture firm
+
+483
+00:23:31,370 --> 00:23:35,570
+literally so that they could
+maybe support some of you.
+
+484
+00:23:35,570 --> 00:23:39,110
+You could be knocking on
+the EOS venture firm's door
+
+485
+00:23:39,110 --> 00:23:40,610
+and saying fund me.
+
+486
+00:23:40,610 --> 00:23:41,750
+I've got a great idea.
+
+487
+00:23:41,750 --> 00:23:44,450
+And they'd have one
+condition, amongst others.
+
+488
+00:23:44,450 --> 00:23:47,570
+You'd have to use
+EOS as the platform.
+
+489
+00:23:47,570 --> 00:23:51,440
+So it's a self-reinforcing
+business model.
+
+490
+00:23:51,440 --> 00:23:54,320
+NEO is the other big
+one that I'd mention,
+
+491
+00:23:54,320 --> 00:23:58,640
+which was started two years ago
+out of China, a lot of people
+
+492
+00:23:58,640 --> 00:24:01,280
+think with the backing of
+the Chinese government.
+
+493
+00:24:01,280 --> 00:24:05,000
+Even if not officially,
+certainly with the verbal
+
+494
+00:24:05,000 --> 00:24:08,900
+and help of there.
+
+495
+00:24:08,900 --> 00:24:11,440
+Some people think of it
+as the Ethereum of China,
+
+496
+00:24:11,440 --> 00:24:14,420
+but it does use a
+different proof of work.
+
+497
+00:24:14,420 --> 00:24:15,670
+And those are the main ones.
+
+498
+00:24:15,670 --> 00:24:17,870
+Ethereum Classic is
+there because there
+
+499
+00:24:17,870 --> 00:24:25,660
+was a hard fork off of Ethereum
+after the DAO circumstance.
+
+500
+00:24:25,660 --> 00:24:29,490
+Any quick questions
+about the platforms?
+
+501
+00:24:29,490 --> 00:24:32,910
+And NEO and EOS
+are thought to be
+
+502
+00:24:32,910 --> 00:24:36,030
+a little bit higher
+throughput and faster because
+
+503
+00:24:36,030 --> 00:24:39,720
+of the different proof of
+work that each of them have.
+
+504
+00:24:39,720 --> 00:24:43,626
+So maybe they're more scalable
+than Ethereum long term.
+
+505
+00:24:43,626 --> 00:24:44,792
+AUDIENCE: [INAUDIBLE]
+
+506
+00:24:44,792 --> 00:24:45,750
+PROFESSOR: What's that?
+
+507
+00:24:45,750 --> 00:24:47,340
+AUDIENCE: [INAUDIBLE]
+
+508
+00:24:47,340 --> 00:24:49,810
+PROFESSOR: So Hugo is pointing
+out that neither one truly
+
+509
+00:24:49,810 --> 00:24:50,310
+use--
+
+510
+00:24:50,310 --> 00:24:55,710
+NEO and EOS truly use
+decentralized proof of work.
+
+511
+00:24:55,710 --> 00:25:00,630
+They use a delegated
+Byzantine fault tolerance.
+
+512
+00:25:00,630 --> 00:25:01,800
+This was from the reading.
+
+513
+00:25:01,800 --> 00:25:03,300
+We're not going to
+spend time on it.
+
+514
+00:25:03,300 --> 00:25:08,730
+But there was 12 use cases that
+the Digital Chamber of Commerce
+
+515
+00:25:08,730 --> 00:25:09,322
+came up with.
+
+516
+00:25:09,322 --> 00:25:11,280
+And we're going to study
+most of these, not all
+
+517
+00:25:11,280 --> 00:25:12,613
+of these, later in the semester.
+
+518
+00:25:15,390 --> 00:25:17,700
+Please tell me, Sean.
+
+519
+00:25:17,700 --> 00:25:19,890
+AUDIENCE: So from the
+growth perspective
+
+520
+00:25:19,890 --> 00:25:22,680
+across different
+platforms, do you
+
+521
+00:25:22,680 --> 00:25:27,520
+support multi programming
+language platforms as opposed
+
+522
+00:25:27,520 --> 00:25:31,962
+to single-language
+programming platforms?
+
+523
+00:25:31,962 --> 00:25:35,700
+Which one do you think
+has more potential?
+
+524
+00:25:35,700 --> 00:25:40,690
+PROFESSOR: The question is,
+do multi-language platforms
+
+525
+00:25:40,690 --> 00:25:44,230
+have more potential or less
+than single-language platforms?
+
+526
+00:25:44,230 --> 00:25:45,660
+I haven't done a real study.
+
+527
+00:25:45,660 --> 00:25:49,190
+My gut tells me that
+there's some trade-offs.
+
+528
+00:25:49,190 --> 00:25:51,010
+So a multi-language
+platform probably
+
+529
+00:25:51,010 --> 00:25:53,620
+allows for more
+development of apps,
+
+530
+00:25:53,620 --> 00:25:56,170
+just like on the
+internet, if you
+
+531
+00:25:56,170 --> 00:26:00,040
+can have more app development.
+
+532
+00:26:00,040 --> 00:26:02,770
+Though if you have only
+one single language,
+
+533
+00:26:02,770 --> 00:26:06,490
+you might have fewer
+vulnerabilities,
+
+534
+00:26:06,490 --> 00:26:10,060
+vulnerabilities either
+to attack or coming down.
+
+535
+00:26:10,060 --> 00:26:14,050
+So there's probably
+some trade-offs.
+
+536
+00:26:14,050 --> 00:26:19,870
+And I'm more into
+democratizing capital markets,
+
+537
+00:26:19,870 --> 00:26:22,550
+so probably my biases
+would be to the ones that
+
+538
+00:26:22,550 --> 00:26:24,560
+have multi-language potential.
+
+539
+00:26:24,560 --> 00:26:27,830
+But I can't say for sure
+whether it will necessarily
+
+540
+00:26:27,830 --> 00:26:32,330
+win, because there are some
+trade-offs, if that helps.
+
+541
+00:26:32,330 --> 00:26:36,170
+So we'll take a view of all of
+these later in the semester.
+
+542
+00:26:36,170 --> 00:26:39,790
+But what's interesting is none
+of them have yet taken off.
+
+543
+00:26:39,790 --> 00:26:45,440
+And in fact, if you
+look at the dApps today,
+
+544
+00:26:45,440 --> 00:26:47,690
+the decentralized
+applications which
+
+545
+00:26:47,690 --> 00:26:51,080
+run on a decentralized
+blockchain,
+
+546
+00:26:51,080 --> 00:26:53,510
+they generally
+have native tokens.
+
+547
+00:26:53,510 --> 00:26:55,880
+They don't have to have a
+native token, by the way.
+
+548
+00:26:55,880 --> 00:27:00,380
+You can run a dApp
+based on Ether.
+
+549
+00:27:00,380 --> 00:27:02,930
+You could run a dApp
+on an underlying token.
+
+550
+00:27:02,930 --> 00:27:07,260
+But they almost always have
+their own native token.
+
+551
+00:27:07,260 --> 00:27:10,200
+This is a list that I pulled
+off the internet yesterday
+
+552
+00:27:10,200 --> 00:27:11,550
+similar to your reading.
+
+553
+00:27:11,550 --> 00:27:15,090
+These are the actual dApps
+that are working the highest--
+
+554
+00:27:15,090 --> 00:27:19,520
+gaming, gambling,
+exchanges, and finance.
+
+555
+00:27:19,520 --> 00:27:25,200
+The most active dApp
+is a gambling site that
+
+556
+00:27:25,200 --> 00:27:28,050
+only has 1,500 users a day.
+
+557
+00:27:28,050 --> 00:27:29,550
+In the last 24 hours--
+
+558
+00:27:29,550 --> 00:27:33,000
+I pulled this down yesterday,
+so that was a Monday.
+
+559
+00:27:33,000 --> 00:27:35,670
+So this would have been
+Sunday night to Monday night.
+
+560
+00:27:35,670 --> 00:27:40,980
+There was only 1,500 users to
+the most active gambling site.
+
+561
+00:27:40,980 --> 00:27:42,960
+CryptoKitties that
+some of you might know
+
+562
+00:27:42,960 --> 00:27:46,890
+had 418 users in those 24 hours.
+
+563
+00:27:46,890 --> 00:27:53,360
+These are not economy
+wise use cases.
+
+564
+00:27:53,360 --> 00:27:55,810
+You would see numbers that
+were hundreds of thousands.
+
+565
+00:27:55,810 --> 00:27:59,440
+Or if it's like Facebook,
+there's two billion members.
+
+566
+00:27:59,440 --> 00:28:02,140
+And probably in any 24 hours,
+there's a half a billion
+
+567
+00:28:02,140 --> 00:28:04,390
+to a billion people that
+check in on Facebook.
+
+568
+00:28:04,390 --> 00:28:07,610
+So these are pretty
+limited at this stage.
+
+569
+00:28:07,610 --> 00:28:09,718
+But it has led to something
+called initial coin
+
+570
+00:28:09,718 --> 00:28:11,260
+offerings, which
+we're going to study
+
+571
+00:28:11,260 --> 00:28:13,270
+a bunch later in the semester.
+
+572
+00:28:13,270 --> 00:28:17,470
+Initial coin offerings raise
+money to build a network.
+
+573
+00:28:17,470 --> 00:28:22,290
+But the tokens are usually
+issued before they're usable.
+
+574
+00:28:22,290 --> 00:28:24,430
+And a token is some
+native currency
+
+575
+00:28:24,430 --> 00:28:27,620
+to be used on a network.
+
+576
+00:28:27,620 --> 00:28:32,160
+The development is open
+but highly centralized.
+
+577
+00:28:32,160 --> 00:28:35,310
+The promoters usually
+give themselves some skin
+
+578
+00:28:35,310 --> 00:28:38,130
+in the game or some vig.
+
+579
+00:28:38,130 --> 00:28:41,430
+In the Ethereum
+initial coin offering,
+
+580
+00:28:41,430 --> 00:28:43,180
+the Foundation kept 10%.
+
+581
+00:28:43,180 --> 00:28:44,580
+Joe Lubin kept 10%.
+
+582
+00:28:44,580 --> 00:28:46,950
+And the other 80% was
+sold to the public.
+
+583
+00:28:46,950 --> 00:28:52,290
+But some keep 60% or
+80% for themselves.
+
+584
+00:28:52,290 --> 00:28:56,160
+I mean, it's a whole wide
+range of economic incentives
+
+585
+00:28:56,160 --> 00:28:57,940
+and models.
+
+586
+00:28:57,940 --> 00:29:01,000
+And the tokens are usually
+fungible and transferable.
+
+587
+00:29:01,000 --> 00:29:03,820
+And thus, you can sort
+put them on an exchange
+
+588
+00:29:03,820 --> 00:29:07,000
+and try to sell them
+and promote them.
+
+589
+00:29:07,000 --> 00:29:08,500
+And again, we're
+going to come back.
+
+590
+00:29:08,500 --> 00:29:10,720
+But I thought if we're
+talking about smart contracts,
+
+591
+00:29:10,720 --> 00:29:14,740
+they tie into initial
+coin offerings.
+
+592
+00:29:14,740 --> 00:29:16,540
+Daniel.
+
+593
+00:29:16,540 --> 00:29:18,710
+AUDIENCE: If the tokens
+aren't functional,
+
+594
+00:29:18,710 --> 00:29:21,342
+what goes into their evaluation?
+
+595
+00:29:21,342 --> 00:29:23,050
+PROFESSOR: That is an
+excellent question.
+
+596
+00:29:23,050 --> 00:29:25,750
+Daniel says, what goes into
+the valuation of something
+
+597
+00:29:25,750 --> 00:29:28,050
+that is not functional?
+
+598
+00:29:28,050 --> 00:29:31,810
+And there are many
+things that go in.
+
+599
+00:29:31,810 --> 00:29:34,900
+Ultimately, it's
+in the anticipation
+
+600
+00:29:34,900 --> 00:29:39,010
+of the potential profit and
+appreciation in the future.
+
+601
+00:29:39,010 --> 00:29:41,770
+So if you were just
+to have a laundromat,
+
+602
+00:29:41,770 --> 00:29:44,560
+a corner laundromat
+here in Cambridge,
+
+603
+00:29:44,560 --> 00:29:47,650
+you probably would only pay
+for the laundromat token what
+
+604
+00:29:47,650 --> 00:29:53,920
+you thought the value was to do
+your laundry, $0.75 or whatever
+
+605
+00:29:53,920 --> 00:29:55,220
+the--
+
+606
+00:29:55,220 --> 00:29:59,290
+frankly, I don't know what the
+tokens go for in Cambridge.
+
+607
+00:29:59,290 --> 00:30:02,410
+You're going to tell me what
+a laundromat token goes for?
+
+608
+00:30:02,410 --> 00:30:05,650
+But if it's prefunctional
+and the laundromat has not
+
+609
+00:30:05,650 --> 00:30:11,190
+been built yet and you have
+confidence it will be built,
+
+610
+00:30:11,190 --> 00:30:12,440
+you'll probably discount back.
+
+611
+00:30:12,440 --> 00:30:17,845
+You might pay $0.50 instead
+of the $0.75, ultimately.
+
+612
+00:30:17,845 --> 00:30:20,220
+If you think it's going to be
+a really popular laundromat
+
+613
+00:30:20,220 --> 00:30:24,360
+and it's going to be the place
+to be seen by all MIT students
+
+614
+00:30:24,360 --> 00:30:28,270
+and you think that token
+might one day be worth $5,
+
+615
+00:30:28,270 --> 00:30:29,670
+then you're starting
+to speculate
+
+616
+00:30:29,670 --> 00:30:32,710
+on the community's interest.
+
+617
+00:30:32,710 --> 00:30:37,660
+So these tokens, if you
+really believe in them,
+
+618
+00:30:37,660 --> 00:30:39,480
+you're trying to pay
+for what others will
+
+619
+00:30:39,480 --> 00:30:41,280
+pay for them in the future.
+
+620
+00:30:41,280 --> 00:30:43,830
+And the economic equilibrium
+would be discounted.
+
+621
+00:30:43,830 --> 00:30:45,720
+So thus, you're buying
+it because you think
+
+622
+00:30:45,720 --> 00:30:48,357
+they'll appreciate in value.
+
+623
+00:30:48,357 --> 00:30:50,190
+AUDIENCE: Couldn't you
+make an argument sort
+
+624
+00:30:50,190 --> 00:30:52,710
+of following
+numismatics, how people
+
+625
+00:30:52,710 --> 00:30:56,320
+assign some aesthetic
+value to physical coins?
+
+626
+00:30:56,320 --> 00:30:58,890
+So, too, you could
+have an impulse
+
+627
+00:30:58,890 --> 00:31:00,182
+beyond speculation [INAUDIBLE].
+
+628
+00:31:00,182 --> 00:31:01,432
+PROFESSOR: Your first name is?
+
+629
+00:31:01,432 --> 00:31:02,130
+AUDIENCE: Isaac.
+
+630
+00:31:02,130 --> 00:31:02,838
+PROFESSOR: Isaac.
+
+631
+00:31:02,838 --> 00:31:08,400
+Isaac says maybe there could
+be a numismatic or other value
+
+632
+00:31:08,400 --> 00:31:09,090
+to it.
+
+633
+00:31:09,090 --> 00:31:10,380
+It's possible.
+
+634
+00:31:10,380 --> 00:31:13,140
+I mean, certainly,
+CryptoKitties caught
+
+635
+00:31:13,140 --> 00:31:16,620
+into the whole
+collectibles wave.
+
+636
+00:31:16,620 --> 00:31:20,550
+Let me try to wrap up so that
+I can hand it off to Larry.
+
+637
+00:31:20,550 --> 00:31:23,670
+So there's been
+$28 billion raised
+
+638
+00:31:23,670 --> 00:31:26,340
+per one website, Elementis.
+
+639
+00:31:26,340 --> 00:31:27,930
+Others that track
+it think it's only
+
+640
+00:31:27,930 --> 00:31:30,540
+between $20 and $25 billion.
+
+641
+00:31:30,540 --> 00:31:34,620
+There are no official arithmetic
+and no official records.
+
+642
+00:31:34,620 --> 00:31:38,880
+But the $28 billion raised
+in initial coin offerings,
+
+643
+00:31:38,880 --> 00:31:41,790
+this is a cut of a
+neat video that I just
+
+644
+00:31:41,790 --> 00:31:44,400
+took the last slide
+of from Elementis.
+
+645
+00:31:44,400 --> 00:31:46,140
+You can watch it in
+a minute and a half.
+
+646
+00:31:46,140 --> 00:31:50,250
+And over the years,
+it's geographically
+
+647
+00:31:50,250 --> 00:31:54,750
+dispersed with blue
+being Oceana, Australia,
+
+648
+00:31:54,750 --> 00:31:59,940
+and so forth, green being Asia,
+North America being orange.
+
+649
+00:31:59,940 --> 00:32:02,730
+But the biggest ones,
+EOS raised $4.2 billion.
+
+650
+00:32:02,730 --> 00:32:06,850
+Telegram, $1.7
+billion and the like.
+
+651
+00:32:06,850 --> 00:32:08,730
+These are not small figures.
+
+652
+00:32:08,730 --> 00:32:15,860
+There's been at least
+4,500 proposed initial coin
+
+653
+00:32:15,860 --> 00:32:16,400
+offerings.
+
+654
+00:32:16,400 --> 00:32:20,900
+Many of them didn't raise any
+money, but over 2,000 to 3,000
+
+655
+00:32:20,900 --> 00:32:22,670
+have raised money.
+
+656
+00:32:22,670 --> 00:32:24,290
+I'm going to use
+the 3,000 figure.
+
+657
+00:32:24,290 --> 00:32:29,110
+Less than half of them
+are even live today.
+
+658
+00:32:29,110 --> 00:32:32,110
+There's one study that
+shows that 59% fail
+
+659
+00:32:32,110 --> 00:32:35,070
+within the first nine months.
+
+660
+00:32:35,070 --> 00:32:39,510
+There are other studies that say
+between 1/4 and 3/4 are scams.
+
+661
+00:32:39,510 --> 00:32:42,690
+Christian Catalina
+here has a study
+
+662
+00:32:42,690 --> 00:32:46,060
+which I think is probably
+the most valid and reliable,
+
+663
+00:32:46,060 --> 00:32:48,720
+which says 25% are
+scams or frauds.
+
+664
+00:32:48,720 --> 00:32:52,746
+Statis has one that
+says 80% might be.
+
+665
+00:32:52,746 --> 00:32:54,347
+AUDIENCE: You said 59% fail.
+
+666
+00:32:54,347 --> 00:32:56,430
+Can you talk more about
+what "failure" means here?
+
+667
+00:32:56,430 --> 00:32:58,222
+Does that mean it just
+goes to 0 or there's
+
+668
+00:32:58,222 --> 00:33:01,057
+a technological deficiency?
+
+669
+00:33:01,057 --> 00:33:02,640
+PROFESSOR: Can I
+hold that until later
+
+670
+00:33:02,640 --> 00:33:06,480
+when we're going to dig
+into these in the class?
+
+671
+00:33:06,480 --> 00:33:10,710
+But broad definition of fail,
+so it's not just technology.
+
+672
+00:33:10,710 --> 00:33:14,400
+It means that you can't even
+find the website anymore.
+
+673
+00:33:14,400 --> 00:33:17,080
+They took your
+money, and they ran.
+
+674
+00:33:17,080 --> 00:33:23,520
+Or they still have a
+website, but it's not live.
+
+675
+00:33:23,520 --> 00:33:26,490
+It doesn't seem like there's
+a development team any longer.
+
+676
+00:33:26,490 --> 00:33:29,050
+So multiple
+definitions of failure.
+
+677
+00:33:29,050 --> 00:33:30,750
+So that brings us
+to legal issues.
+
+678
+00:33:30,750 --> 00:33:33,580
+And as Larry brings
+up his computer,
+
+679
+00:33:33,580 --> 00:33:37,090
+let me just introduce our guest
+lecturer, Larry Lessig, who's
+
+680
+00:33:37,090 --> 00:33:40,220
+an esteemed Harvard
+professor of law.
+
+681
+00:33:40,220 --> 00:33:41,140
+He was at Stanford.
+
+682
+00:33:41,140 --> 00:33:44,380
+He started something
+called the Center
+
+683
+00:33:44,380 --> 00:33:46,690
+for Internet and Society.
+
+684
+00:33:46,690 --> 00:33:50,290
+You clerked for
+Justice Scalia, so you
+
+685
+00:33:50,290 --> 00:33:53,440
+must have some real views on
+what's going on this week,
+
+686
+00:33:53,440 --> 00:33:55,300
+then.
+
+687
+00:33:55,300 --> 00:34:01,270
+And this incredible appellate
+court judge, Posner.
+
+688
+00:34:01,270 --> 00:34:04,720
+And Larry also-- his first of--
+
+689
+00:34:04,720 --> 00:34:06,712
+whatever you're up
+to, 9 or 10 books now?
+
+690
+00:34:06,712 --> 00:34:07,920
+LARRY LESSIG: It's something.
+
+691
+00:34:07,920 --> 00:34:08,560
+I don't know.
+
+692
+00:34:08,560 --> 00:34:10,690
+PROFESSOR: But his first
+was code and the law
+
+693
+00:34:10,690 --> 00:34:13,699
+that I referenced in
+our first lecture.
+
+694
+00:34:13,699 --> 00:34:15,150
+Larry is going to take it away.
+
+695
+00:34:15,150 --> 00:34:16,150
+LARRY LESSIG: OK, great.
+
+696
+00:34:16,150 --> 00:34:19,120
+So I'm really happy
+to be able to say
+
+697
+00:34:19,120 --> 00:34:22,840
+that I've taught business
+school students at MIT.
+
+698
+00:34:22,840 --> 00:34:26,179
+I mean, I'm a tech wannabe.
+
+699
+00:34:26,179 --> 00:34:30,429
+But I have never been allowed
+to be officially here,
+
+700
+00:34:30,429 --> 00:34:32,980
+so this is exciting.
+
+701
+00:34:32,980 --> 00:34:36,400
+But what I want to
+do is really address
+
+702
+00:34:36,400 --> 00:34:40,449
+what I've experienced
+as misperceptions
+
+703
+00:34:40,449 --> 00:34:43,000
+about the nature
+of the law as it
+
+704
+00:34:43,000 --> 00:34:46,360
+might interact with the issues
+around digital contracts.
+
+705
+00:34:46,360 --> 00:34:47,679
+So I teach contracts.
+
+706
+00:34:47,679 --> 00:34:50,230
+Contract law is one of the
+subjects which I've taught
+
+707
+00:34:50,230 --> 00:34:52,630
+since I started teaching.
+
+708
+00:34:52,630 --> 00:34:55,600
+And so I want to frame
+four points for you
+
+709
+00:34:55,600 --> 00:34:57,550
+about how to think
+about contract law
+
+710
+00:34:57,550 --> 00:35:02,055
+as it relates to these
+potential digital contracts.
+
+711
+00:35:02,055 --> 00:35:03,430
+But the first
+thing to do is just
+
+712
+00:35:03,430 --> 00:35:04,720
+to make sure we
+understand we're all
+
+713
+00:35:04,720 --> 00:35:06,040
+talking about the same thing.
+
+714
+00:35:06,040 --> 00:35:06,540
+OK.
+
+715
+00:35:06,540 --> 00:35:11,320
+So here's what the
+core of contract law
+
+716
+00:35:11,320 --> 00:35:14,640
+teaches us contracts are.
+
+717
+00:35:14,640 --> 00:35:17,130
+Contract is a promise
+or performance
+
+718
+00:35:17,130 --> 00:35:22,130
+given in exchange for a
+promise or performance.
+
+719
+00:35:22,130 --> 00:35:24,770
+"Given in exchange for"
+is really critical.
+
+720
+00:35:24,770 --> 00:35:26,960
+That's the quid pro
+quo that's sometimes
+
+721
+00:35:26,960 --> 00:35:30,950
+referred to as the
+consideration for the promise.
+
+722
+00:35:30,950 --> 00:35:32,532
+But notice here,
+this is mapping out
+
+723
+00:35:32,532 --> 00:35:33,740
+four different possibilities.
+
+724
+00:35:33,740 --> 00:35:36,800
+You can have a promise in
+exchange for a promise.
+
+725
+00:35:36,800 --> 00:35:40,780
+I promise to pay you $10,000
+if you promise to sing
+
+726
+00:35:40,780 --> 00:35:43,450
+an opera for me tomorrow.
+
+727
+00:35:43,450 --> 00:35:46,150
+Or it can be a promise
+for a performance.
+
+728
+00:35:46,150 --> 00:35:52,100
+I promise to pay you, Andy, $5
+if you sing a song for us now.
+
+729
+00:35:52,100 --> 00:35:54,110
+So it's the performance I want.
+
+730
+00:35:54,110 --> 00:35:56,110
+I don't want a promise
+from him, because we know
+
+731
+00:35:56,110 --> 00:35:58,780
+what Andy's promises are worth.
+
+732
+00:35:58,780 --> 00:36:00,670
+Or it could be a
+performance for a promise.
+
+733
+00:36:00,670 --> 00:36:05,350
+I'll sing if you promise
+to pay me after I'm done.
+
+734
+00:36:05,350 --> 00:36:07,330
+Or the really interesting
+one for our purposes
+
+735
+00:36:07,330 --> 00:36:11,260
+is a performance
+for a performance.
+
+736
+00:36:11,260 --> 00:36:14,790
+I'll sing if you pay me $5,000.
+
+737
+00:36:14,790 --> 00:36:17,290
+I didn't want a promise from
+you, because I don't trust you.
+
+738
+00:36:17,290 --> 00:36:18,730
+You're business school students.
+
+739
+00:36:18,730 --> 00:36:21,790
+So I just want the money.
+
+740
+00:36:21,790 --> 00:36:23,458
+But I'm not promising
+to do anything.
+
+741
+00:36:23,458 --> 00:36:25,250
+I'm actually going to
+do something for you.
+
+742
+00:36:25,250 --> 00:36:27,370
+Now, that's the one
+that we're going
+
+743
+00:36:27,370 --> 00:36:30,407
+to think about in the
+context of digital contracts.
+
+744
+00:36:30,407 --> 00:36:30,990
+Oh, I'm sorry.
+
+745
+00:36:30,990 --> 00:36:34,718
+Let me just fix one thing here.
+
+746
+00:36:34,718 --> 00:36:36,510
+Actually, I was going
+to make three points,
+
+747
+00:36:36,510 --> 00:36:37,880
+but then I decided I
+was going to make four.
+
+748
+00:36:37,880 --> 00:36:38,672
+So let me fix that.
+
+749
+00:36:38,672 --> 00:36:40,962
+Four points about contracts.
+
+750
+00:36:40,962 --> 00:36:42,420
+So the first point
+about contracts,
+
+751
+00:36:42,420 --> 00:36:45,035
+so think about this case.
+
+752
+00:36:45,035 --> 00:36:46,830
+All right.
+
+753
+00:36:46,830 --> 00:36:49,990
+It's not quite digital, but
+it's a physical contract
+
+754
+00:36:49,990 --> 00:36:55,640
+machine in the sense that it's
+a performance for a performance.
+
+755
+00:36:55,640 --> 00:36:59,630
+If you drop a dime
+into this machine,
+
+756
+00:36:59,630 --> 00:37:04,590
+then out will come Dr.
+Pepper or something else.
+
+757
+00:37:04,590 --> 00:37:05,090
+OK.
+
+758
+00:37:05,090 --> 00:37:08,960
+So there's no promises involved.
+
+759
+00:37:08,960 --> 00:37:10,940
+And we understand there's
+a mechanism that's
+
+760
+00:37:10,940 --> 00:37:14,180
+to produce this result.
+And obviously, these
+
+761
+00:37:14,180 --> 00:37:16,860
+have been here for a long time.
+
+762
+00:37:16,860 --> 00:37:19,070
+And these mechanisms
+provide real value,
+
+763
+00:37:19,070 --> 00:37:21,920
+because to the extent you
+don't have to hire somebody
+
+764
+00:37:21,920 --> 00:37:25,400
+to stand there handing
+out Dr. Peppers,
+
+765
+00:37:25,400 --> 00:37:28,490
+you can lower the cost
+of delivering Dr. Peppers
+
+766
+00:37:28,490 --> 00:37:30,230
+and increase the
+market for Dr. Pepper.
+
+767
+00:37:30,230 --> 00:37:32,450
+So this is the
+motivation-- lower
+
+768
+00:37:32,450 --> 00:37:34,430
+the transaction
+costs of engaging
+
+769
+00:37:34,430 --> 00:37:36,980
+in a particular kind
+of contract, which
+
+770
+00:37:36,980 --> 00:37:38,690
+is performance for performance.
+
+771
+00:37:38,690 --> 00:37:40,190
+Now, when you look
+at that contract,
+
+772
+00:37:40,190 --> 00:37:44,750
+you should ask yourself, what
+are the terms of this contract?
+
+773
+00:37:44,750 --> 00:37:45,250
+All right.
+
+774
+00:37:45,250 --> 00:37:47,710
+So some of them are express,
+and they're pretty obvious.
+
+775
+00:37:47,710 --> 00:37:48,830
+So this says $0.10.
+
+776
+00:37:48,830 --> 00:37:56,580
+It says if you pay $0.10,
+you will get the Dr. Pepper.
+
+777
+00:37:56,580 --> 00:37:58,020
+Or that's what you
+kind of expect.
+
+778
+00:37:58,020 --> 00:38:00,540
+There's a great cartoon I
+couldn't find where you come
+
+779
+00:38:00,540 --> 00:38:02,860
+to a machine that
+says deposit $0.50.
+
+780
+00:38:02,860 --> 00:38:04,920
+Deposits $0.50, and
+the light comes on.
+
+781
+00:38:04,920 --> 00:38:07,690
+It says, thank you very much.
+
+782
+00:38:07,690 --> 00:38:08,190
+Right.
+
+783
+00:38:08,190 --> 00:38:10,950
+So you think you know
+what this contract is,
+
+784
+00:38:10,950 --> 00:38:13,915
+but that joke hints
+that maybe you don't
+
+785
+00:38:13,915 --> 00:38:15,040
+know what that contract is.
+
+786
+00:38:15,040 --> 00:38:17,610
+But the express terms
+of the one we expect
+
+787
+00:38:17,610 --> 00:38:20,370
+go with a statement,
+the machine.
+
+788
+00:38:20,370 --> 00:38:23,630
+But then there's a whole
+bunch of implied terms.
+
+789
+00:38:23,630 --> 00:38:27,310
+So one implied term if this
+machine is in the United States
+
+790
+00:38:27,310 --> 00:38:31,270
+is that when you take the Dr.
+Pepper out and you drink it,
+
+791
+00:38:31,270 --> 00:38:34,000
+it's actually going
+to be safe to drink.
+
+792
+00:38:34,000 --> 00:38:35,770
+It's actually going
+to be Dr. Pepper.
+
+793
+00:38:35,770 --> 00:38:38,360
+It's actually not
+going to make you sick.
+
+794
+00:38:38,360 --> 00:38:42,350
+And none of that is written
+on the Dr. Pepper machine.
+
+795
+00:38:42,350 --> 00:38:45,590
+That's instead a
+term, a contract term,
+
+796
+00:38:45,590 --> 00:38:51,200
+that gets created by the law
+and gets imposed or wrapped
+
+797
+00:38:51,200 --> 00:38:56,310
+around the delivery
+of that drink.
+
+798
+00:38:56,310 --> 00:38:56,810
+OK.
+
+799
+00:38:56,810 --> 00:38:57,750
+That's their first point.
+
+800
+00:38:57,750 --> 00:38:59,125
+The second point
+is to think more
+
+801
+00:38:59,125 --> 00:39:01,220
+about what these
+implied terms imply.
+
+802
+00:39:03,970 --> 00:39:10,150
+Because if these implied terms
+are implied by a legal system,
+
+803
+00:39:10,150 --> 00:39:12,700
+then that means the
+legal system has
+
+804
+00:39:12,700 --> 00:39:16,340
+an interest in your contract.
+
+805
+00:39:16,340 --> 00:39:20,940
+Legal system is
+not undisinterested
+
+806
+00:39:20,940 --> 00:39:21,690
+in your contract.
+
+807
+00:39:21,690 --> 00:39:23,370
+So we should always
+think that our contract
+
+808
+00:39:23,370 --> 00:39:24,630
+is going to have two parties.
+
+809
+00:39:24,630 --> 00:39:28,080
+We call them the promisor
+and the promisee.
+
+810
+00:39:28,080 --> 00:39:29,910
+I've told you
+we've had contracts
+
+811
+00:39:29,910 --> 00:39:30,955
+that can be performance.
+
+812
+00:39:30,955 --> 00:39:32,580
+"The performancer"
+isn't really a word.
+
+813
+00:39:32,580 --> 00:39:34,710
+But let's just say
+promisor and promisee.
+
+814
+00:39:34,710 --> 00:39:36,160
+But there's always
+a third party,
+
+815
+00:39:36,160 --> 00:39:39,060
+which is the state, who is
+in the middle of the contract
+
+816
+00:39:39,060 --> 00:39:44,430
+in the sense that the state
+will police many contracts
+
+817
+00:39:44,430 --> 00:39:48,130
+and decide whether the state
+likes the contract or not.
+
+818
+00:39:48,130 --> 00:39:51,060
+And if the state doesn't
+like the contract,
+
+819
+00:39:51,060 --> 00:39:53,700
+then the state won't
+enforce the contract.
+
+820
+00:39:53,700 --> 00:39:55,440
+Or the state might
+actually punish you
+
+821
+00:39:55,440 --> 00:39:56,800
+because of the contract.
+
+822
+00:39:56,800 --> 00:40:01,380
+So for example, the state cares
+about the kinds of contracts.
+
+823
+00:40:01,380 --> 00:40:03,540
+You can have contracts
+for the sale of tables.
+
+824
+00:40:03,540 --> 00:40:05,800
+You can't have contracts
+for the sale of people.
+
+825
+00:40:05,800 --> 00:40:08,340
+But you can sell dogs for
+reasons I can't understand.
+
+826
+00:40:08,340 --> 00:40:11,310
+But the point is we are
+deciding which type of things
+
+827
+00:40:11,310 --> 00:40:14,610
+can be sold and which kind
+of things can't be sold.
+
+828
+00:40:14,610 --> 00:40:18,780
+The state cares about the
+effect of the contract.
+
+829
+00:40:18,780 --> 00:40:22,650
+If the contract is to
+render your corporation
+
+830
+00:40:22,650 --> 00:40:25,493
+vulnerable to
+bankruptcy, the state
+
+831
+00:40:25,493 --> 00:40:26,910
+might have an
+interest in deciding
+
+832
+00:40:26,910 --> 00:40:28,700
+whether that contract
+will be enforced
+
+833
+00:40:28,700 --> 00:40:30,450
+or not or whether it'll
+be allowed or not,
+
+834
+00:40:30,450 --> 00:40:34,140
+whether it's permissible
+under bankruptcy laws
+
+835
+00:40:34,140 --> 00:40:36,390
+to engage in that contract
+because of the risk
+
+836
+00:40:36,390 --> 00:40:37,610
+that it's going to create.
+
+837
+00:40:37,610 --> 00:40:41,900
+The state's going to care about
+the terms of the contract.
+
+838
+00:40:41,900 --> 00:40:48,700
+So if you're selling your labor
+in a state with a minimum wage
+
+839
+00:40:48,700 --> 00:40:50,110
+law, the state's going to care.
+
+840
+00:40:50,110 --> 00:40:54,100
+Does the term that
+specifies your wage equal
+
+841
+00:40:54,100 --> 00:40:56,680
+or exceed the minimum wage?
+
+842
+00:40:56,680 --> 00:40:59,530
+And states can obviously
+care-- the most important thing
+
+843
+00:40:59,530 --> 00:41:01,300
+for the state is whether
+and how the state
+
+844
+00:41:01,300 --> 00:41:03,440
+taxes the transaction
+in the contract.
+
+845
+00:41:03,440 --> 00:41:07,463
+So when does it tax
+the transaction?
+
+846
+00:41:07,463 --> 00:41:09,380
+What is the event that's
+going to manifest it?
+
+847
+00:41:09,380 --> 00:41:11,360
+And of course, the
+contract can try
+
+848
+00:41:11,360 --> 00:41:15,148
+to play with that sort of deal
+with whether it will be taxed.
+
+849
+00:41:15,148 --> 00:41:17,690
+And the state will care about
+how the contract deals with it.
+
+850
+00:41:17,690 --> 00:41:18,190
+OK.
+
+851
+00:41:18,190 --> 00:41:24,120
+So the point is to fight
+against the first real bias
+
+852
+00:41:24,120 --> 00:41:28,220
+that especially,
+let's say, tech people
+
+853
+00:41:28,220 --> 00:41:29,900
+and maybe business
+tech people bring
+
+854
+00:41:29,900 --> 00:41:32,563
+to the idea of contract law,
+which is that contracts are not
+
+855
+00:41:32,563 --> 00:41:33,230
+about the state.
+
+856
+00:41:33,230 --> 00:41:35,480
+They're about private parties.
+
+857
+00:41:35,480 --> 00:41:36,230
+That's not true.
+
+858
+00:41:36,230 --> 00:41:39,290
+They're about private
+parties and the state.
+
+859
+00:41:39,290 --> 00:41:41,470
+And the state is always
+going to be there.
+
+860
+00:41:41,470 --> 00:41:44,810
+Now, so if I say
+to you, I'm trying
+
+861
+00:41:44,810 --> 00:41:46,010
+to sell my parents' house.
+
+862
+00:41:46,010 --> 00:41:46,820
+I can't sell it.
+
+863
+00:41:46,820 --> 00:41:48,290
+So if I say to
+you, I'll offer you
+
+864
+00:41:48,290 --> 00:41:52,460
+$10,000 to anyone who will
+burn down my parents' house.
+
+865
+00:41:52,460 --> 00:41:54,752
+You're trying to
+accept that contract.
+
+866
+00:41:54,752 --> 00:41:56,960
+You're raising your hand,
+so you're trying to accept.
+
+867
+00:41:56,960 --> 00:41:59,510
+I want to say officially
+it's a joke so nobody gets
+
+868
+00:41:59,510 --> 00:42:00,953
+any uncertainty about this.
+
+869
+00:42:00,953 --> 00:42:02,870
+Now, you're going to ask
+a question, because I
+
+870
+00:42:02,870 --> 00:42:03,953
+didn't want you to accept.
+
+871
+00:42:03,953 --> 00:42:06,350
+Because if you accepted
+my offer, then that's it.
+
+872
+00:42:06,350 --> 00:42:06,980
+I'm stuck.
+
+873
+00:42:06,980 --> 00:42:09,230
+So now it's clear it's
+not really an offer,
+
+874
+00:42:09,230 --> 00:42:11,460
+and I can ask you a question.
+
+875
+00:42:11,460 --> 00:42:14,517
+AUDIENCE: So you said contracts
+cannot be between two parties.
+
+876
+00:42:14,517 --> 00:42:16,600
+They have to be between
+two parties and the state.
+
+877
+00:42:16,600 --> 00:42:17,308
+LARRY LESSIG: No.
+
+878
+00:42:17,308 --> 00:42:19,040
+So let me say it more clearly.
+
+879
+00:42:19,040 --> 00:42:22,610
+Contracts always have
+the state present,
+
+880
+00:42:22,610 --> 00:42:24,198
+so it's always
+between two parties
+
+881
+00:42:24,198 --> 00:42:25,240
+or three parties or four.
+
+882
+00:42:25,240 --> 00:42:26,900
+So you and I enter
+into a contract.
+
+883
+00:42:26,900 --> 00:42:29,870
+Not this one, but another one.
+
+884
+00:42:29,870 --> 00:42:33,350
+But the state is in
+the room and deciding
+
+885
+00:42:33,350 --> 00:42:36,450
+whether the state's going to
+allow the contract to happen.
+
+886
+00:42:36,450 --> 00:42:38,450
+So most contracts, the
+state doesn't care about.
+
+887
+00:42:38,450 --> 00:42:40,370
+But some contracts, the
+state's going to say,
+
+888
+00:42:40,370 --> 00:42:43,600
+hell no, we're not going
+to allow it, like this one.
+
+889
+00:42:43,600 --> 00:42:46,347
+If you didn't get that
+notice it was a joke
+
+890
+00:42:46,347 --> 00:42:48,430
+and you thought I was
+serious and you went and you
+
+891
+00:42:48,430 --> 00:42:51,097
+burned down my parents' house so
+that we could get the insurance
+
+892
+00:42:51,097 --> 00:42:53,410
+and not have to worry
+about selling the house,
+
+893
+00:42:53,410 --> 00:42:56,590
+and then you came to me, and
+you said, OK, pay the $10,000.
+
+894
+00:42:56,590 --> 00:42:58,240
+And I said, it was
+an obvious joke.
+
+895
+00:42:58,240 --> 00:43:00,850
+And you went to a court,
+and you said, force Lessig
+
+896
+00:43:00,850 --> 00:43:02,800
+to pay the $10,000.
+
+897
+00:43:02,800 --> 00:43:05,450
+The court will say this
+is an illegal contract.
+
+898
+00:43:05,450 --> 00:43:07,390
+I'm not going to
+enforce this contract.
+
+899
+00:43:07,390 --> 00:43:09,550
+So my point is the state,
+in a certain sense,
+
+900
+00:43:09,550 --> 00:43:12,830
+is the censor of this contract.
+
+901
+00:43:12,830 --> 00:43:15,640
+The state is in the room
+when we make this contract.
+
+902
+00:43:15,640 --> 00:43:17,170
+And the state's
+judgment about it
+
+903
+00:43:17,170 --> 00:43:20,390
+will decide whether
+we enforce it or not.
+
+904
+00:43:20,390 --> 00:43:22,260
+Is that clearer?
+
+905
+00:43:22,260 --> 00:43:24,802
+AUDIENCE: So you're not saying
+the state has to be there.
+
+906
+00:43:24,802 --> 00:43:27,010
+LARRY LESSIG: I'm not saying
+the state is technically
+
+907
+00:43:27,010 --> 00:43:28,600
+signing the document.
+
+908
+00:43:28,600 --> 00:43:30,550
+But I'm getting you
+to recognize the fact
+
+909
+00:43:30,550 --> 00:43:35,130
+that the contract is valuable
+to the extent it's enforceable.
+
+910
+00:43:35,130 --> 00:43:38,870
+And the state is the
+essential agent in enforcement
+
+911
+00:43:38,870 --> 00:43:40,365
+in the real world.
+
+912
+00:43:40,365 --> 00:43:42,740
+AUDIENCE: So I guess that's
+my question, because it seems
+
+913
+00:43:42,740 --> 00:43:46,510
+like nowadays, we can have
+contracts where the enforcement
+
+914
+00:43:46,510 --> 00:43:48,380
+is not the state.
+
+915
+00:43:48,380 --> 00:43:50,190
+I can put a contract
+out there that says,
+
+916
+00:43:50,190 --> 00:43:51,860
+hey, if you can
+factor this number,
+
+917
+00:43:51,860 --> 00:43:54,664
+give me the prime factors of
+it, I'll give you 10 Ether.
+
+918
+00:43:54,664 --> 00:43:55,456
+LARRY LESSIG: Yeah.
+
+919
+00:43:55,456 --> 00:43:57,950
+And what I started with
+when I was showing you
+
+920
+00:43:57,950 --> 00:44:01,100
+this picture was to
+say, actually, that's
+
+921
+00:44:01,100 --> 00:44:02,900
+been true for a while, right?
+
+922
+00:44:02,900 --> 00:44:05,925
+So in what sense
+is the state here?
+
+923
+00:44:05,925 --> 00:44:08,050
+Well, the state is here if
+when you put the dime in
+
+924
+00:44:08,050 --> 00:44:10,400
+and you get the drink out and
+the drink doesn't have Dr.
+
+925
+00:44:10,400 --> 00:44:12,467
+Pepper but it has
+gasoline in it,
+
+926
+00:44:12,467 --> 00:44:14,300
+the state would come
+in and say, whoa, wait.
+
+927
+00:44:14,300 --> 00:44:17,090
+You've breached the
+implied term that said
+
+928
+00:44:17,090 --> 00:44:19,110
+that this was safe to consume.
+
+929
+00:44:19,110 --> 00:44:21,980
+So the state is in
+this contract, too.
+
+930
+00:44:21,980 --> 00:44:24,680
+And so what I'm trying to
+lead to or get to the place
+
+931
+00:44:24,680 --> 00:44:27,770
+where we say, is there ever a
+place where the state is not
+
+932
+00:44:27,770 --> 00:44:33,950
+there, which is what I think
+your blockchain-like invocation
+
+933
+00:44:33,950 --> 00:44:34,760
+is.
+
+934
+00:44:34,760 --> 00:44:38,140
+So that's a question we're
+going to get to in a second.
+
+935
+00:44:38,140 --> 00:44:39,140
+Here's another contract.
+
+936
+00:44:42,380 --> 00:44:47,570
+We'll offer you $50,000 to
+lobby Congress to pass HR102.
+
+937
+00:44:47,570 --> 00:44:50,540
+This contract looks
+pretty normal to us.
+
+938
+00:44:50,540 --> 00:44:53,870
+You can imagine lobbyists
+have a contract like this
+
+939
+00:44:53,870 --> 00:44:55,440
+all the time.
+
+940
+00:44:55,440 --> 00:44:57,380
+In fact, in the middle
+of the 19th century,
+
+941
+00:44:57,380 --> 00:44:59,270
+the Supreme Court
+ruled this contract
+
+942
+00:44:59,270 --> 00:45:01,130
+was an illegal contract.
+
+943
+00:45:01,130 --> 00:45:04,590
+You weren't allowed to hire
+people to lobby Congress,
+
+944
+00:45:04,590 --> 00:45:05,090
+right?
+
+945
+00:45:05,090 --> 00:45:07,490
+So again, the
+background norm of what
+
+946
+00:45:07,490 --> 00:45:11,030
+is appropriate or not for the
+contract controlled what type
+
+947
+00:45:11,030 --> 00:45:12,270
+of contracting was allowed.
+
+948
+00:45:12,270 --> 00:45:12,770
+OK.
+
+949
+00:45:12,770 --> 00:45:15,020
+So that's about the
+type of contract.
+
+950
+00:45:15,020 --> 00:45:17,160
+But then think about the
+terms of the contract.
+
+951
+00:45:17,160 --> 00:45:20,090
+And so now, I want to
+get you to recognize
+
+952
+00:45:20,090 --> 00:45:25,430
+the way in which the terms
+that the law wants a contract
+
+953
+00:45:25,430 --> 00:45:30,383
+to have can be defeated
+or not by technology.
+
+954
+00:45:30,383 --> 00:45:32,550
+And the way I'm going to
+get you to think about that
+
+955
+00:45:32,550 --> 00:45:35,490
+is to think about not contract
+law but something that
+
+956
+00:45:35,490 --> 00:45:37,530
+will create the intuitions
+I want you to have.
+
+957
+00:45:37,530 --> 00:45:38,880
+Think about copyright law.
+
+958
+00:45:38,880 --> 00:45:40,440
+Everybody knows
+copyright law, right?
+
+959
+00:45:40,440 --> 00:45:43,720
+I hope you know something
+about copyright law.
+
+960
+00:45:43,720 --> 00:45:47,310
+So copyright law is a basic
+contract with the state.
+
+961
+00:45:47,310 --> 00:45:51,570
+But the state says, if
+you create something,
+
+962
+00:45:51,570 --> 00:45:54,360
+then you're going to get
+an exclusive right to it
+
+963
+00:45:54,360 --> 00:45:56,480
+or exclusive rights,
+a set of rights--
+
+964
+00:45:56,480 --> 00:45:59,520
+an inclusive right to copy,
+an exclusive right to sell it,
+
+965
+00:45:59,520 --> 00:46:03,330
+exclusive right to make
+derivative works of it--
+
+966
+00:46:03,330 --> 00:46:05,270
+for a period of time--
+
+967
+00:46:05,270 --> 00:46:10,530
+and in America right now,
+that's your life plus 70 years--
+
+968
+00:46:10,530 --> 00:46:13,620
+subject to fair
+use, meaning the law
+
+969
+00:46:13,620 --> 00:46:17,900
+says you can't control every
+use of my copyrighted work.
+
+970
+00:46:17,900 --> 00:46:21,480
+If you want to take a book
+of mine and quote a section
+
+971
+00:46:21,480 --> 00:46:24,720
+and write a review that says,
+see how idiotic Lessig is?
+
+972
+00:46:24,720 --> 00:46:25,940
+You can do that.
+
+973
+00:46:25,940 --> 00:46:28,020
+And I can't wrap the
+book in a contract that
+
+974
+00:46:28,020 --> 00:46:30,990
+says you're not allowed to quote
+it for purposes of criticizing.
+
+975
+00:46:30,990 --> 00:46:33,150
+I'm just not allowed to do that.
+
+976
+00:46:33,150 --> 00:46:36,450
+So copyright law, imagine
+this bundle of rights
+
+977
+00:46:36,450 --> 00:46:38,370
+that it was offering.
+
+978
+00:46:38,370 --> 00:46:41,870
+But now imagine something called
+DRM, Digital Rights Management.
+
+979
+00:46:41,870 --> 00:46:42,370
+All right.
+
+980
+00:46:42,370 --> 00:46:48,050
+So DRM is a set of code that we
+can wrap copyrighted material
+
+981
+00:46:48,050 --> 00:46:52,040
+in in the process of making
+it available to others
+
+982
+00:46:52,040 --> 00:46:56,183
+across networks
+and whatever else.
+
+983
+00:46:56,183 --> 00:46:57,600
+It's pretty trivial
+to see the way
+
+984
+00:46:57,600 --> 00:47:03,730
+DRM could, in effect, destroy
+the limitations on the term.
+
+985
+00:47:03,730 --> 00:47:06,550
+You can wrap it,
+encrypt it, make it
+
+986
+00:47:06,550 --> 00:47:08,860
+so that my ability to
+control it will be my ability
+
+987
+00:47:08,860 --> 00:47:13,370
+to control it, conceivably, as
+long as machines are running.
+
+988
+00:47:13,370 --> 00:47:15,640
+If it's a
+Microsoft-based system,
+
+989
+00:47:15,640 --> 00:47:17,360
+four years later, it
+won't be workable.
+
+990
+00:47:17,360 --> 00:47:20,680
+But the point is, in
+principle, it could be forever.
+
+991
+00:47:20,680 --> 00:47:22,630
+Same thing with fair use.
+
+992
+00:47:22,630 --> 00:47:26,110
+You can imagine it being
+wrapped in a way that
+
+993
+00:47:26,110 --> 00:47:30,470
+disables the capacity
+to engage in fair use.
+
+994
+00:47:30,470 --> 00:47:36,090
+So I make tons of
+presentations all the time
+
+995
+00:47:36,090 --> 00:47:39,030
+where I need to capture video.
+
+996
+00:47:39,030 --> 00:47:42,240
+And I was astonished
+to discover the latest
+
+997
+00:47:42,240 --> 00:47:46,850
+round of this operating
+system basically
+
+998
+00:47:46,850 --> 00:47:50,000
+makes it incredibly
+difficult to rip
+
+999
+00:47:50,000 --> 00:47:52,310
+video for the purpose
+of capturing even two
+
+1000
+00:47:52,310 --> 00:47:53,190
+seconds of it.
+
+1001
+00:47:53,190 --> 00:47:56,850
+So if you have a video program
+that is capturing your screen,
+
+1002
+00:47:56,850 --> 00:47:59,540
+this operating system
+will now disable it
+
+1003
+00:47:59,540 --> 00:48:01,790
+for any period of
+time that you're
+
+1004
+00:48:01,790 --> 00:48:03,110
+trying to capture the screen.
+
+1005
+00:48:03,110 --> 00:48:05,660
+They've built the technology
+so that, now, there
+
+1006
+00:48:05,660 --> 00:48:08,570
+is no capacity,
+technical capacity,
+
+1007
+00:48:08,570 --> 00:48:10,880
+to engage in fair
+use of copyrighted
+
+1008
+00:48:10,880 --> 00:48:13,880
+material on the Apple platform.
+
+1009
+00:48:13,880 --> 00:48:15,680
+Now, you might say,
+why should they
+
+1010
+00:48:15,680 --> 00:48:19,610
+be allowed to do that
+if the law intended
+
+1011
+00:48:19,610 --> 00:48:24,567
+that the contract gives you
+the free use of fair use?
+
+1012
+00:48:24,567 --> 00:48:26,150
+Why should they be
+allowed to do that?
+
+1013
+00:48:26,150 --> 00:48:29,540
+But that's the battle that's
+been going on about DRM
+
+1014
+00:48:29,540 --> 00:48:32,750
+ever since the beginning of
+the beginning of copyrighted
+
+1015
+00:48:32,750 --> 00:48:34,100
+work on the internet.
+
+1016
+00:48:34,100 --> 00:48:35,630
+So my point is to
+get you to realize
+
+1017
+00:48:35,630 --> 00:48:42,622
+the way the code becomes part
+of the law of this contract.
+
+1018
+00:48:42,622 --> 00:48:44,330
+And you have to ask
+yourself the question
+
+1019
+00:48:44,330 --> 00:48:49,340
+whether that law is respecting
+the law of the sovereign,
+
+1020
+00:48:49,340 --> 00:48:50,700
+the law of the jurisdiction.
+
+1021
+00:48:50,700 --> 00:48:54,170
+So when Apple and
+Disney get together
+
+1022
+00:48:54,170 --> 00:48:56,420
+and they sell this
+technology and they
+
+1023
+00:48:56,420 --> 00:48:59,840
+sell movies across
+the iTunes platform
+
+1024
+00:48:59,840 --> 00:49:02,710
+that make it
+practically impossible--
+
+1025
+00:49:02,710 --> 00:49:03,860
+there's not even code.
+
+1026
+00:49:03,860 --> 00:49:05,720
+I mean, if you go out
+there and you look,
+
+1027
+00:49:05,720 --> 00:49:08,095
+you can find everybody who
+says, yeah, with this version,
+
+1028
+00:49:08,095 --> 00:49:10,410
+nobody's yet found
+a way to break it.
+
+1029
+00:49:10,410 --> 00:49:12,650
+So right now, we're in a
+world where, right now, it's
+
+1030
+00:49:12,650 --> 00:49:15,260
+not possible for me to
+capture three seconds to put
+
+1031
+00:49:15,260 --> 00:49:17,840
+into a presentation.
+
+1032
+00:49:17,840 --> 00:49:20,420
+And the issue that
+raises is, to what extent
+
+1033
+00:49:20,420 --> 00:49:23,450
+is that consistent
+with copyright law
+
+1034
+00:49:23,450 --> 00:49:25,370
+if the technology
+now disables you
+
+1035
+00:49:25,370 --> 00:49:27,400
+from doing exactly what
+copyright law wants?
+
+1036
+00:49:27,400 --> 00:49:30,440
+So this is the trade-off
+to think about,
+
+1037
+00:49:30,440 --> 00:49:35,180
+the relationship between the
+policy that the law wants
+
+1038
+00:49:35,180 --> 00:49:38,130
+and the policy of
+the technology.
+
+1039
+00:49:38,130 --> 00:49:40,810
+And there's no reason to believe
+the policy of the technology
+
+1040
+00:49:40,810 --> 00:49:44,575
+will always be
+consistent with the law.
+
+1041
+00:49:44,575 --> 00:49:46,700
+And to the extent it's not
+consistent with the law,
+
+1042
+00:49:46,700 --> 00:49:47,660
+it challenges the law.
+
+1043
+00:49:47,660 --> 00:49:52,940
+It says to the law, OK,
+come out and get me.
+
+1044
+00:49:52,940 --> 00:49:54,920
+Now, that obviously
+is implicated
+
+1045
+00:49:54,920 --> 00:49:58,420
+in the context of
+smart contracts,
+
+1046
+00:49:58,420 --> 00:50:00,550
+because the biggest fear
+about smart contracts
+
+1047
+00:50:00,550 --> 00:50:05,230
+is that they enable a kind
+of transaction that can hide
+
+1048
+00:50:05,230 --> 00:50:07,910
+from the policy of the law.
+
+1049
+00:50:07,910 --> 00:50:12,070
+So the question for the law is,
+what will you do to step in?
+
+1050
+00:50:12,070 --> 00:50:14,390
+And this is, I think, where
+your question was going.
+
+1051
+00:50:14,390 --> 00:50:17,970
+How does the state appear in
+the middle of that contract?
+
+1052
+00:50:17,970 --> 00:50:21,760
+But let's take one more
+step before we get to that.
+
+1053
+00:50:21,760 --> 00:50:22,260
+OK.
+
+1054
+00:50:22,260 --> 00:50:23,450
+That's the second point.
+
+1055
+00:50:23,450 --> 00:50:26,240
+Here's the third point.
+
+1056
+00:50:26,240 --> 00:50:29,330
+There's often this intuition
+that, especially technologists,
+
+1057
+00:50:29,330 --> 00:50:31,720
+people have about what the
+particular aim of contract law
+
+1058
+00:50:31,720 --> 00:50:31,910
+is.
+
+1059
+00:50:31,910 --> 00:50:33,410
+So in the very
+beginning of me writing
+
+1060
+00:50:33,410 --> 00:50:35,410
+about the law of cyberspace,
+somebody from MIT--
+
+1061
+00:50:35,410 --> 00:50:37,460
+I won't name any
+names-- it wasn't Andy--
+
+1062
+00:50:37,460 --> 00:50:40,140
+showed up at the Harvard
+Law School and said,
+
+1063
+00:50:40,140 --> 00:50:42,328
+I've solved the problem
+of contract law.
+
+1064
+00:50:42,328 --> 00:50:43,370
+I said, what do you mean?
+
+1065
+00:50:43,370 --> 00:50:46,580
+He said, I have a system
+that will eliminate risks
+
+1066
+00:50:46,580 --> 00:50:48,562
+in contracts.
+
+1067
+00:50:48,562 --> 00:50:50,770
+And he was really disappointed
+when I said, you know,
+
+1068
+00:50:50,770 --> 00:50:54,380
+the objective of contract law
+is not to eliminate risks.
+
+1069
+00:50:54,380 --> 00:50:57,010
+The objective of contract
+law is just to allocate risk,
+
+1070
+00:50:57,010 --> 00:50:59,722
+to figure out who has
+the risk, so each of us
+
+1071
+00:50:59,722 --> 00:51:01,680
+can figure out what to
+do in light of the risk.
+
+1072
+00:51:01,680 --> 00:51:05,540
+So if I say I will buy
+10,000 bushels of corn
+
+1073
+00:51:05,540 --> 00:51:07,520
+from you at $350 a bushel--
+
+1074
+00:51:07,520 --> 00:51:09,680
+turns out that is the
+price of corn right now.
+
+1075
+00:51:09,680 --> 00:51:11,430
+He always looks up
+things on the internet.
+
+1076
+00:51:11,430 --> 00:51:13,000
+I figure I should look it
+up before I present it.
+
+1077
+00:51:13,000 --> 00:51:15,630
+So $350 is the price of a bushel
+of corn right now delivered
+
+1078
+00:51:15,630 --> 00:51:18,120
+September 1.
+
+1079
+00:51:18,120 --> 00:51:20,610
+What that's basically
+doing is it's allocating
+
+1080
+00:51:20,610 --> 00:51:22,510
+the risk of the price of corn.
+
+1081
+00:51:22,510 --> 00:51:24,390
+So if you're a
+farmer and you don't
+
+1082
+00:51:24,390 --> 00:51:28,080
+want to face the risk the price
+of corn is going to fall to $3,
+
+1083
+00:51:28,080 --> 00:51:30,480
+you enter into this contract.
+
+1084
+00:51:30,480 --> 00:51:33,600
+If you're a buyer, you
+accept this contract.
+
+1085
+00:51:33,600 --> 00:51:35,670
+But if the price of
+corn falls to $3,
+
+1086
+00:51:35,670 --> 00:51:37,210
+well, you're out of luck.
+
+1087
+00:51:37,210 --> 00:51:42,960
+So the point is it
+relocates the price change,
+
+1088
+00:51:42,960 --> 00:51:44,880
+reallocates the risk
+of price change,
+
+1089
+00:51:44,880 --> 00:51:47,500
+also reallocates the
+risk of delivery.
+
+1090
+00:51:47,500 --> 00:51:51,210
+So if I've got all this corn, I
+can place it in a certain place
+
+1091
+00:51:51,210 --> 00:51:55,260
+to shift the risk of delivery
+so that, once again, I
+
+1092
+00:51:55,260 --> 00:51:58,350
+use the contract to
+shift my risk of storage
+
+1093
+00:51:58,350 --> 00:52:00,810
+or my risk of delivery
+and you on the other side.
+
+1094
+00:52:00,810 --> 00:52:03,570
+So the objective of
+contract law, number one,
+
+1095
+00:52:03,570 --> 00:52:06,090
+is risk allocation.
+
+1096
+00:52:06,090 --> 00:52:06,590
+Number one.
+
+1097
+00:52:06,590 --> 00:52:12,755
+But allocation matters only if--
+
+1098
+00:52:12,755 --> 00:52:14,600
+trying to say only if for me--
+
+1099
+00:52:14,600 --> 00:52:17,120
+only if there is a
+system to process
+
+1100
+00:52:17,120 --> 00:52:23,470
+the breach of a contract, only
+if you've got a technology,
+
+1101
+00:52:23,470 --> 00:52:25,243
+let's say, for
+processing the breach.
+
+1102
+00:52:25,243 --> 00:52:26,660
+So if I have a
+contract with you--
+
+1103
+00:52:26,660 --> 00:52:30,480
+10,000 bushels of corn,
+$3.50, on September 1--
+
+1104
+00:52:30,480 --> 00:52:35,040
+and you don't deliver,
+that's a breach.
+
+1105
+00:52:35,040 --> 00:52:38,400
+My risk has only
+been reallocated
+
+1106
+00:52:38,400 --> 00:52:40,800
+if there's some way
+for me to enforce
+
+1107
+00:52:40,800 --> 00:52:42,330
+the contract at that point.
+
+1108
+00:52:42,330 --> 00:52:44,370
+So it requires the system.
+
+1109
+00:52:44,370 --> 00:52:46,290
+And the system we
+ordinarily take for granted
+
+1110
+00:52:46,290 --> 00:52:48,680
+is a legal system.
+
+1111
+00:52:48,680 --> 00:52:50,060
+And I say we take
+it for granted,
+
+1112
+00:52:50,060 --> 00:52:52,700
+meaning some people can
+take it for granted,
+
+1113
+00:52:52,700 --> 00:52:56,710
+like people in well-developed
+legal contexts.
+
+1114
+00:52:56,710 --> 00:52:59,250
+But that's also to emphasized
+other people can't take it
+
+1115
+00:52:59,250 --> 00:53:00,310
+for granted--
+
+1116
+00:53:00,310 --> 00:53:03,580
+so for example, people
+in developing worlds.
+
+1117
+00:53:03,580 --> 00:53:05,620
+They can't take the
+legal system for granted.
+
+1118
+00:53:05,620 --> 00:53:07,790
+They can't assume that if
+the contract is breached,
+
+1119
+00:53:07,790 --> 00:53:09,873
+they go into a court and
+say, enforce the contract
+
+1120
+00:53:09,873 --> 00:53:11,380
+or give me damages.
+
+1121
+00:53:11,380 --> 00:53:13,240
+Or if you've got a
+contract between somebody
+
+1122
+00:53:13,240 --> 00:53:15,982
+in Rwanda and
+somebody in Alaska,
+
+1123
+00:53:15,982 --> 00:53:17,440
+then there, too,
+there's a question
+
+1124
+00:53:17,440 --> 00:53:20,210
+of whether we've got sufficient
+infrastructure to develop.
+
+1125
+00:53:20,210 --> 00:53:24,010
+So the point I want to
+emphasize at the end
+
+1126
+00:53:24,010 --> 00:53:27,010
+of this little
+intervention is to suggest
+
+1127
+00:53:27,010 --> 00:53:30,730
+that this fact that it
+takes for granted the system
+
+1128
+00:53:30,730 --> 00:53:35,790
+of enforcement shows the real
+potential benefit of this class
+
+1129
+00:53:35,790 --> 00:53:39,220
+of contracting devices.
+
+1130
+00:53:39,220 --> 00:53:41,490
+Because if we think about
+this as a representation
+
+1131
+00:53:41,490 --> 00:53:44,100
+of a well-developed
+legal system and we
+
+1132
+00:53:44,100 --> 00:53:47,760
+think of first-world
+countries as having those
+
+1133
+00:53:47,760 --> 00:53:50,550
+and we compare third-world
+or developing world
+
+1134
+00:53:50,550 --> 00:53:53,490
+countries, which don't have
+these well-developed legal
+
+1135
+00:53:53,490 --> 00:53:58,335
+systems, you might say that
+first-world countries are
+
+1136
+00:53:58,335 --> 00:54:00,210
+better off relative to
+third-world countries,
+
+1137
+00:54:00,210 --> 00:54:01,960
+because they have the
+legal infrastructure
+
+1138
+00:54:01,960 --> 00:54:04,003
+to enable this risk
+allocation that will enable
+
+1139
+00:54:04,003 --> 00:54:06,420
+all sorts of market transactions
+to happen which otherwise
+
+1140
+00:54:06,420 --> 00:54:08,170
+wouldn't happen.
+
+1141
+00:54:08,170 --> 00:54:12,430
+But if we imagine
+infrastructure like
+
+1142
+00:54:12,430 --> 00:54:14,710
+blockchain-like
+infrastructures or Ethereum
+
+1143
+00:54:14,710 --> 00:54:18,190
+infrastructures
+to enter the mix,
+
+1144
+00:54:18,190 --> 00:54:20,530
+providing a technical
+infrastructure that
+
+1145
+00:54:20,530 --> 00:54:24,910
+doesn't require judges and
+lawyers but just requires code,
+
+1146
+00:54:24,910 --> 00:54:30,910
+then that can substitute for
+the legal infrastructure,
+
+1147
+00:54:30,910 --> 00:54:33,760
+provide the infrastructure
+the contract needs
+
+1148
+00:54:33,760 --> 00:54:36,520
+at a much lower cost,
+and thereby enable
+
+1149
+00:54:36,520 --> 00:54:41,380
+people to contract who otherwise
+wouldn't rationally contract,
+
+1150
+00:54:41,380 --> 00:54:45,730
+because they could never
+count on the infrastructure
+
+1151
+00:54:45,730 --> 00:54:49,730
+of the legal system to
+deliver what they need.
+
+1152
+00:54:49,730 --> 00:54:50,230
+OK.
+
+1153
+00:54:50,230 --> 00:54:52,510
+So the point is this
+picture is trying
+
+1154
+00:54:52,510 --> 00:54:57,430
+to say that one key value
+of these technologies
+
+1155
+00:54:57,430 --> 00:55:00,370
+is that they will be a
+substitute for a failed
+
+1156
+00:55:00,370 --> 00:55:03,460
+legal system or a legal system
+that's not yet developed.
+
+1157
+00:55:03,460 --> 00:55:05,890
+They will provide
+the infrastructure
+
+1158
+00:55:05,890 --> 00:55:09,350
+of a legal system or
+the legal systems.
+
+1159
+00:55:09,350 --> 00:55:11,110
+AUDIENCE: How can they
+really do anything?
+
+1160
+00:55:11,110 --> 00:55:13,540
+Because you can't make
+that contract like,
+
+1161
+00:55:13,540 --> 00:55:19,108
+I will pay you $3.50 per bushel
+on September 1 in Ethereum,
+
+1162
+00:55:19,108 --> 00:55:21,400
+because you're making a
+statement about the real world.
+
+1163
+00:55:21,400 --> 00:55:25,180
+The Ethereum blockchain
+cannot verify that I gave you
+
+1164
+00:55:25,180 --> 00:55:25,680
+the bushels.
+
+1165
+00:55:25,680 --> 00:55:26,388
+LARRY LESSIG: OK.
+
+1166
+00:55:26,388 --> 00:55:28,850
+So I've got two slides to get
+to your example [INAUDIBLE]..
+
+1167
+00:55:28,850 --> 00:55:29,350
+OK.
+
+1168
+00:55:29,350 --> 00:55:31,683
+AUDIENCE: There's ways to do
+it, but they're very risky,
+
+1169
+00:55:31,683 --> 00:55:32,500
+I should say.
+
+1170
+00:55:32,500 --> 00:55:33,333
+LARRY LESSIG: Right.
+
+1171
+00:55:33,333 --> 00:55:35,320
+But let's bracket it for just--
+
+1172
+00:55:35,320 --> 00:55:37,740
+I'm not sure if it's
+two, but it's n slides.
+
+1173
+00:55:37,740 --> 00:55:40,510
+But n is less than
+100, I promise.
+
+1174
+00:55:40,510 --> 00:55:43,240
+So just hold one second, OK?
+
+1175
+00:55:43,240 --> 00:55:45,000
+So if you say that
+one function here
+
+1176
+00:55:45,000 --> 00:55:49,240
+is to substitute for
+a failed legal system,
+
+1177
+00:55:49,240 --> 00:55:55,400
+that suggests that the
+other key opportunity here
+
+1178
+00:55:55,400 --> 00:55:59,810
+is to enable contracts where the
+transaction costs right now are
+
+1179
+00:55:59,810 --> 00:56:02,480
+otherwise too high.
+
+1180
+00:56:02,480 --> 00:56:05,530
+So this is a key opportunity
+to think of places where
+
+1181
+00:56:05,530 --> 00:56:09,400
+if you can lower the transaction
+costs of the contract,
+
+1182
+00:56:09,400 --> 00:56:11,343
+you will enable a
+contract which otherwise
+
+1183
+00:56:11,343 --> 00:56:12,260
+can't exist right now.
+
+1184
+00:56:12,260 --> 00:56:18,040
+So I'm on a scientific board
+for an insurance company.
+
+1185
+00:56:18,040 --> 00:56:20,830
+So I was meeting the
+president last week.
+
+1186
+00:56:20,830 --> 00:56:24,057
+And he was all excited
+about a new product which
+
+1187
+00:56:24,057 --> 00:56:26,140
+they were investing in,
+which was going to provide
+
+1188
+00:56:26,140 --> 00:56:28,390
+flight delay insurance.
+
+1189
+00:56:28,390 --> 00:56:32,770
+And this product was going to
+be completely blockchain driven.
+
+1190
+00:56:32,770 --> 00:56:35,410
+And this is what I'm trying
+to get to your point.
+
+1191
+00:56:35,410 --> 00:56:40,420
+It would trigger payments in a
+completely automatic way based
+
+1192
+00:56:40,420 --> 00:56:42,220
+on the information
+that's being reported
+
+1193
+00:56:42,220 --> 00:56:44,650
+from the n different sites
+that are reporting information
+
+1194
+00:56:44,650 --> 00:56:45,233
+about flights.
+
+1195
+00:56:45,233 --> 00:56:47,020
+So I buy the contract.
+
+1196
+00:56:47,020 --> 00:56:49,330
+It says, if my flight is
+delayed more than an hour,
+
+1197
+00:56:49,330 --> 00:56:51,250
+I get paid $200.
+
+1198
+00:56:51,250 --> 00:56:54,910
+And automatically,
+as he put it, it's
+
+1199
+00:56:54,910 --> 00:56:56,980
+a no-touch product,
+by which he meant
+
+1200
+00:56:56,980 --> 00:56:59,740
+no human needs to touch this
+product for this contract
+
+1201
+00:56:59,740 --> 00:57:01,185
+to be enabled.
+
+1202
+00:57:01,185 --> 00:57:02,560
+It's a kind of
+product that never
+
+1203
+00:57:02,560 --> 00:57:05,530
+would have been available
+before, because the transaction
+
+1204
+00:57:05,530 --> 00:57:07,742
+costs of engaging it
+were way too high.
+
+1205
+00:57:07,742 --> 00:57:09,700
+But now that we've lowered
+the transaction cost
+
+1206
+00:57:09,700 --> 00:57:11,800
+and have an infrastructure
+of trust, which
+
+1207
+00:57:11,800 --> 00:57:14,590
+is what the blockchain
+is providing here,
+
+1208
+00:57:14,590 --> 00:57:17,650
+there's a huge
+market that now is
+
+1209
+00:57:17,650 --> 00:57:20,350
+available for a contract
+that otherwise just
+
+1210
+00:57:20,350 --> 00:57:21,580
+wasn't there before.
+
+1211
+00:57:21,580 --> 00:57:24,190
+Now, that market depends on
+making a couple assumptions.
+
+1212
+00:57:24,190 --> 00:57:27,552
+You're not saying that
+there's 100% certainty
+
+1213
+00:57:27,552 --> 00:57:29,260
+that everything in
+that market is working
+
+1214
+00:57:29,260 --> 00:57:31,130
+the way it's supposed to work.
+
+1215
+00:57:31,130 --> 00:57:34,370
+But the point is you
+don't need 100% certainty
+
+1216
+00:57:34,370 --> 00:57:37,170
+for the vast majority of
+these kinds of contracts.
+
+1217
+00:57:37,170 --> 00:57:39,470
+If it gets it wrong
+every once in a while,
+
+1218
+00:57:39,470 --> 00:57:41,390
+that's good enough
+for government work
+
+1219
+00:57:41,390 --> 00:57:43,310
+or good enough
+for airplane work.
+
+1220
+00:57:43,310 --> 00:57:46,520
+And so that's going to
+be sufficient to enable
+
+1221
+00:57:46,520 --> 00:57:50,270
+the market, recognizing that
+even in the legal system
+
+1222
+00:57:50,270 --> 00:57:51,390
+market, guess what?
+
+1223
+00:57:51,390 --> 00:57:54,170
+It doesn't always
+get it right either.
+
+1224
+00:57:54,170 --> 00:57:56,860
+But it doesn't always enforce
+the contract well either.
+
+1225
+00:57:56,860 --> 00:57:59,030
+In fact, the costs
+are much, much higher
+
+1226
+00:57:59,030 --> 00:58:00,650
+to fail in the legal system.
+
+1227
+00:58:00,650 --> 00:58:01,340
+OK.
+
+1228
+00:58:01,340 --> 00:58:03,440
+So two kinds of
+transaction costs.
+
+1229
+00:58:03,440 --> 00:58:06,950
+One system transaction
+cost suggests
+
+1230
+00:58:06,950 --> 00:58:10,310
+that where you have less
+developed legal systems,
+
+1231
+00:58:10,310 --> 00:58:12,770
+the blockchain is going to
+provide a real opportunity,
+
+1232
+00:58:12,770 --> 00:58:15,260
+because you're going to
+lower the transaction
+
+1233
+00:58:15,260 --> 00:58:16,730
+costs for those systems.
+
+1234
+00:58:16,730 --> 00:58:19,390
+And the other is just
+contract transaction costs.
+
+1235
+00:58:19,390 --> 00:58:22,280
+There'll be a huge
+explosion of markets where,
+
+1236
+00:58:22,280 --> 00:58:26,060
+right now, the contract
+transaction costs are so high,
+
+1237
+00:58:26,060 --> 00:58:28,183
+and we can lower them
+and thereby enable
+
+1238
+00:58:28,183 --> 00:58:29,600
+a certain kind of
+transaction that
+
+1239
+00:58:29,600 --> 00:58:30,740
+otherwise wouldn't be there.
+
+1240
+00:58:30,740 --> 00:58:31,240
+OK.
+
+1241
+00:58:31,240 --> 00:58:32,750
+Final point I want to make.
+
+1242
+00:58:32,750 --> 00:58:36,250
+The other thing technologists
+always love to say
+
+1243
+00:58:36,250 --> 00:58:37,910
+is the great thing
+we will do when
+
+1244
+00:58:37,910 --> 00:58:42,100
+we do contract
+technology is they'll
+
+1245
+00:58:42,100 --> 00:58:44,860
+solve the clarity problem.
+
+1246
+00:58:44,860 --> 00:58:47,097
+Every term will be
+perfectly clear.
+
+1247
+00:58:47,097 --> 00:58:48,680
+Because you write
+those contracts out,
+
+1248
+00:58:48,680 --> 00:58:51,070
+and there's all sorts of
+ambiguity and vagueness,
+
+1249
+00:58:51,070 --> 00:58:52,060
+and it's a total mess.
+
+1250
+00:58:52,060 --> 00:58:55,500
+But when we've coded
+all of our contracts,
+
+1251
+00:58:55,500 --> 00:58:58,060
+our smart contracts,
+then we'll have
+
+1252
+00:58:58,060 --> 00:59:00,490
+perfect certainty for
+every single outcome,
+
+1253
+00:59:00,490 --> 00:59:02,987
+and that will be great.
+
+1254
+00:59:02,987 --> 00:59:04,570
+And the point I want
+to suggest to you
+
+1255
+00:59:04,570 --> 00:59:10,800
+is that, often, obscurity
+is a real value.
+
+1256
+00:59:10,800 --> 00:59:14,700
+Obscurity is what you want,
+because here's a way to see it.
+
+1257
+00:59:14,700 --> 00:59:16,210
+So imagine this is
+a decision tree.
+
+1258
+00:59:16,210 --> 00:59:17,430
+And it's really
+small, because I just
+
+1259
+00:59:17,430 --> 00:59:18,420
+stole it from the internet.
+
+1260
+00:59:18,420 --> 00:59:19,920
+And it doesn't have anything
+to do really with what
+
+1261
+00:59:19,920 --> 00:59:20,878
+I'm talking about here.
+
+1262
+00:59:20,878 --> 00:59:23,760
+But imagine a really
+complicated decision tree
+
+1263
+00:59:23,760 --> 00:59:26,850
+like this, which is to represent
+all the possible things that
+
+1264
+00:59:26,850 --> 00:59:28,950
+could happen with our deal.
+
+1265
+00:59:28,950 --> 00:59:30,240
+So I want to buy the house.
+
+1266
+00:59:30,240 --> 00:59:33,060
+But what happens if the
+house gets hit by a meteor?
+
+1267
+00:59:33,060 --> 00:59:35,040
+Or what happens if
+you go bankrupt?
+
+1268
+00:59:35,040 --> 00:59:37,980
+All of these possible outcomes.
+
+1269
+00:59:37,980 --> 00:59:40,950
+And in principle, we could
+say we should be negotiating
+
+1270
+00:59:40,950 --> 00:59:42,217
+every one of these blue dots.
+
+1271
+00:59:42,217 --> 00:59:44,300
+We should be saying, what
+happens if this happens?
+
+1272
+00:59:44,300 --> 00:59:46,230
+OK, then this is what you
+get, and this is what I get.
+
+1273
+00:59:46,230 --> 00:59:47,130
+What happens if that happens?
+
+1274
+00:59:47,130 --> 00:59:47,960
+What you get, what I get.
+
+1275
+00:59:47,960 --> 00:59:48,460
+OK.
+
+1276
+00:59:48,460 --> 00:59:50,730
+So imagine this
+blue dot here has
+
+1277
+00:59:50,730 --> 00:59:55,260
+a 0.002% chance of happening.
+
+1278
+00:59:55,260 --> 00:59:58,870
+So you know the chance of that
+happening is practically zero.
+
+1279
+00:59:58,870 --> 01:00:02,620
+And so what's the
+reasonable amount of time
+
+1280
+01:00:02,620 --> 01:00:06,420
+you should spend
+negotiating that term?
+
+1281
+01:00:06,420 --> 01:00:08,320
+Zero, right?
+
+1282
+01:00:08,320 --> 01:00:10,840
+Especially because if
+this term is something
+
+1283
+01:00:10,840 --> 01:00:14,775
+you know he's really
+worked up about
+
+1284
+01:00:14,775 --> 01:00:17,150
+and you could never come to
+an agreement about that term,
+
+1285
+01:00:17,150 --> 01:00:19,660
+it would be ridiculous that
+the whole contract fall apart
+
+1286
+01:00:19,660 --> 01:00:23,440
+because of this
+0.002% possibility.
+
+1287
+01:00:23,440 --> 01:00:26,650
+So what contracts
+do all the time
+
+1288
+01:00:26,650 --> 01:00:28,990
+is they create
+these fuzzy or vague
+
+1289
+01:00:28,990 --> 01:00:32,950
+or ambiguous places as a gamble.
+
+1290
+01:00:32,950 --> 01:00:35,210
+It's like, OK, we'll go forward.
+
+1291
+01:00:35,210 --> 01:00:39,730
+We're going to just gamble
+that this 0.002% outcome won't
+
+1292
+01:00:39,730 --> 01:00:41,740
+happen.
+
+1293
+01:00:41,740 --> 01:00:44,950
+Most of the time, in fact,
+you can work out how often
+
+1294
+01:00:44,950 --> 01:00:46,475
+it doesn't happen, right?
+
+1295
+01:00:46,475 --> 01:00:48,350
+So most of the time,
+that would be just fine.
+
+1296
+01:00:48,350 --> 01:00:52,360
+And if it turns out to
+happen, then what we'll do
+
+1297
+01:00:52,360 --> 01:00:55,090
+is ask somebody--
+
+1298
+01:00:55,090 --> 01:00:59,420
+namely, a judge-- to
+figure that term out.
+
+1299
+01:00:59,420 --> 01:01:02,050
+We'll say, what should that
+term be interpreted as?
+
+1300
+01:01:02,050 --> 01:01:04,240
+It was ambiguous, so what
+should the answer be?
+
+1301
+01:01:04,240 --> 01:01:05,490
+And the judge will look at it.
+
+1302
+01:01:05,490 --> 01:01:08,730
+And judge will say, well, it's
+fair that you win or he wins.
+
+1303
+01:01:08,730 --> 01:01:10,460
+So the point is
+there are many times
+
+1304
+01:01:10,460 --> 01:01:12,002
+when you ask the
+question, should you
+
+1305
+01:01:12,002 --> 01:01:14,750
+negotiate a term ex ante?
+
+1306
+01:01:14,750 --> 01:01:17,760
+And the answer to
+that question is no.
+
+1307
+01:01:17,760 --> 01:01:19,640
+And in those
+contexts, an ambiguity
+
+1308
+01:01:19,640 --> 01:01:24,230
+is a way to negotiate it ex
+post, meaning after the fact,
+
+1309
+01:01:24,230 --> 01:01:27,790
+ex post, by using the court.
+
+1310
+01:01:27,790 --> 01:01:31,710
+So as we think about these
+digital smart contracts,
+
+1311
+01:01:31,710 --> 01:01:35,120
+this is why smart contracts are
+referred to as dumb contracts.
+
+1312
+01:01:35,120 --> 01:01:37,100
+They're smart contracts
+for the equivalent
+
+1313
+01:01:37,100 --> 01:01:39,110
+of dropping a dime
+in and getting a Dr.
+
+1314
+01:01:39,110 --> 01:01:43,250
+Pepper, the sorts of things
+where the possibilities are
+
+1315
+01:01:43,250 --> 01:01:48,230
+really small and narrow, or,
+like my CEO was really excited,
+
+1316
+01:01:48,230 --> 01:01:49,670
+is your plane late?
+
+1317
+01:01:49,670 --> 01:01:51,230
+Yes, I get $50.
+
+1318
+01:01:51,230 --> 01:01:52,610
+No, I don't.
+
+1319
+01:01:52,610 --> 01:01:56,480
+Things where it's
+relatively clear.
+
+1320
+01:01:56,480 --> 01:01:59,360
+But there's a really
+important conceptual question
+
+1321
+01:01:59,360 --> 01:02:00,860
+about what happens
+when we're trying
+
+1322
+01:02:00,860 --> 01:02:05,510
+to use them for the kinds of
+contracts where what we want
+
+1323
+01:02:05,510 --> 01:02:07,190
+is ambiguity.
+
+1324
+01:02:07,190 --> 01:02:14,000
+Because if the very terms of
+deployment of the platform
+
+1325
+01:02:14,000 --> 01:02:20,573
+demand specifying all of the
+outcomes in this tree, then
+
+1326
+01:02:20,573 --> 01:02:22,490
+your basic thing is a
+whole bunch of contracts
+
+1327
+01:02:22,490 --> 01:02:24,980
+you're just not going to be
+able to have in this space,
+
+1328
+01:02:24,980 --> 01:02:29,570
+because the cost of specifying
+that tree will be higher
+
+1329
+01:02:29,570 --> 01:02:31,500
+than the benefit
+of those contracts.
+
+1330
+01:02:31,500 --> 01:02:34,670
+So it's a weird sense in
+which, on the one hand,
+
+1331
+01:02:34,670 --> 01:02:37,700
+I've said to you that
+this technology can
+
+1332
+01:02:37,700 --> 01:02:41,610
+lower the transaction
+costs of contracts.
+
+1333
+01:02:41,610 --> 01:02:43,550
+But for this kind
+of contract, it
+
+1334
+01:02:43,550 --> 01:02:47,710
+can actually increase the
+transaction costs of contract.
+
+1335
+01:02:47,710 --> 01:02:49,700
+Because for this
+kind of contract,
+
+1336
+01:02:49,700 --> 01:02:54,010
+if it reveals the ambiguities
+we need to negotiate about
+
+1337
+01:02:54,010 --> 01:02:55,990
+and those negotiating
+ambiguities are just
+
+1338
+01:02:55,990 --> 01:02:57,940
+too costly for us
+to negotiate, then
+
+1339
+01:02:57,940 --> 01:03:00,160
+it's going to block us
+from having that contract.
+
+1340
+01:03:00,160 --> 01:03:03,010
+It forces us to see the
+0.002%, and you and I
+
+1341
+01:03:03,010 --> 01:03:04,660
+have to come to terms on it.
+
+1342
+01:03:04,660 --> 01:03:09,480
+And we don't yet have a
+good way to fake ambiguity.
+
+1343
+01:03:09,480 --> 01:03:11,880
+I mean, the legal
+system fakes ambiguity,
+
+1344
+01:03:11,880 --> 01:03:14,370
+because we just say, oh, yeah,
+yeah, we didn't see that.
+
+1345
+01:03:14,370 --> 01:03:15,590
+They saw it.
+
+1346
+01:03:15,590 --> 01:03:17,640
+He knew it when they
+wrote the contract.
+
+1347
+01:03:17,640 --> 01:03:19,690
+But they don't have
+to admit they knew it.
+
+1348
+01:03:19,690 --> 01:03:25,110
+But the code has to admit it
+knows there's an ambiguity.
+
+1349
+01:03:25,110 --> 01:03:27,400
+And that's a hard thing to
+self consciously prevent.
+
+1350
+01:03:27,400 --> 01:03:27,900
+OK.
+
+1351
+01:03:27,900 --> 01:03:29,330
+So I've given you four ideas.
+
+1352
+01:03:29,330 --> 01:03:31,275
+Happy to take
+questions or abuse.
+
+1353
+01:03:31,275 --> 01:03:33,400
+Usually, I get abuse from
+business school students,
+
+1354
+01:03:33,400 --> 01:03:34,770
+but OK.
+
+1355
+01:03:34,770 --> 01:03:40,530
+AUDIENCE: So what if you can
+code into a contract the easy
+
+1356
+01:03:40,530 --> 01:03:43,497
+scenarios and then say else-if--
+
+1357
+01:03:43,497 --> 01:03:44,580
+LARRY LESSIG: Go to court.
+
+1358
+01:03:44,580 --> 01:03:47,820
+AUDIENCE: --go to court or
+some multinational court
+
+1359
+01:03:47,820 --> 01:03:50,598
+that is the Ethereum
+court or whatever.
+
+1360
+01:03:50,598 --> 01:03:51,390
+LARRY LESSIG: Yeah.
+
+1361
+01:03:51,390 --> 01:03:56,130
+And even the Ethereum court will
+have to have a court above it
+
+1362
+01:03:56,130 --> 01:03:58,760
+if it wants to avoid government
+saying, if you have anything
+
+1363
+01:03:58,760 --> 01:04:01,010
+to do with Ethereum, we're
+going to punish you, right?
+
+1364
+01:04:01,010 --> 01:04:03,093
+So this is the sense of
+which I wanted to suggest,
+
+1365
+01:04:03,093 --> 01:04:05,670
+to go back to your
+first question,
+
+1366
+01:04:05,670 --> 01:04:10,170
+that if you think about it as
+layers of an onion, peel layers
+
+1367
+01:04:10,170 --> 01:04:12,420
+back enough, and you're
+going to, in the end,
+
+1368
+01:04:12,420 --> 01:04:17,650
+have to get to a state
+in some sense, a state
+
+1369
+01:04:17,650 --> 01:04:19,860
+as an enforceable mechanism.
+
+1370
+01:04:19,860 --> 01:04:22,500
+And that enforceable
+mechanism doesn't
+
+1371
+01:04:22,500 --> 01:04:24,030
+have to be for every case.
+
+1372
+01:04:24,030 --> 01:04:26,190
+Again, 99% of the time,
+you drop the dime in,
+
+1373
+01:04:26,190 --> 01:04:27,690
+you get the Dr. Pepper.
+
+1374
+01:04:27,690 --> 01:04:30,740
+But there's a contingency where
+you drop the dime in, and out
+
+1375
+01:04:30,740 --> 01:04:32,220
+comes a bottle of gasoline.
+
+1376
+01:04:32,220 --> 01:04:34,053
+And then you need to
+go to somebody and say,
+
+1377
+01:04:34,053 --> 01:04:35,280
+you breached this contract.
+
+1378
+01:04:35,280 --> 01:04:36,300
+And that person--
+
+1379
+01:04:36,300 --> 01:04:39,390
+AUDIENCE: But if it's a contract
+between somebody in Alaska
+
+1380
+01:04:39,390 --> 01:04:41,190
+and somebody in
+Rwanda, you still
+
+1381
+01:04:41,190 --> 01:04:42,490
+have the question of
+which state you go to.
+
+1382
+01:04:42,490 --> 01:04:43,400
+What's the jurisdiction?
+
+1383
+01:04:43,400 --> 01:04:44,942
+So I feel like there
+would have to be
+
+1384
+01:04:44,942 --> 01:04:48,078
+some extranational extra-state.
+
+1385
+01:04:48,078 --> 01:04:48,870
+LARRY LESSIG: Yeah.
+
+1386
+01:04:48,870 --> 01:04:51,090
+So you will see in
+these types of contracts
+
+1387
+01:04:51,090 --> 01:04:54,180
+is there'll be a whole bunch
+of boilerplate that specifies
+
+1388
+01:04:54,180 --> 01:04:56,940
+choice of law, which turns out
+to be a relatively easy thing
+
+1389
+01:04:56,940 --> 01:04:59,720
+to do right now, choice
+of jurisdictions.
+
+1390
+01:04:59,720 --> 01:05:01,310
+For most countries,
+it's pretty easy.
+
+1391
+01:05:01,310 --> 01:05:02,768
+There are standard
+ways to do that.
+
+1392
+01:05:02,768 --> 01:05:04,770
+All of that will plug
+in automatically.
+
+1393
+01:05:04,770 --> 01:05:07,710
+But again, all of those
+are outside of the code.
+
+1394
+01:05:07,710 --> 01:05:10,550
+All of those are law.
+
+1395
+01:05:10,550 --> 01:05:11,940
+AUDIENCE: Comment
+and a question.
+
+1396
+01:05:11,940 --> 01:05:18,340
+So I don't trust Vatalik
+or other software engineers
+
+1397
+01:05:18,340 --> 01:05:22,020
+that they have the legal
+understanding and capacity
+
+1398
+01:05:22,020 --> 01:05:24,660
+to write legally
+binding contracts.
+
+1399
+01:05:24,660 --> 01:05:29,610
+So I trust the government
+or I trust the court.
+
+1400
+01:05:29,610 --> 01:05:31,500
+I don't trust a
+software engineer
+
+1401
+01:05:31,500 --> 01:05:36,850
+to write a proper code to
+protect me or my counterparty.
+
+1402
+01:05:36,850 --> 01:05:43,030
+So what is your take on
+those smart contracts?
+
+1403
+01:05:43,030 --> 01:05:45,210
+PROFESSOR: Can I add to that?
+
+1404
+01:05:45,210 --> 01:05:48,630
+Not only your take on
+whether to trust but what
+
+1405
+01:05:48,630 --> 01:05:54,000
+the courts in Europe and the US
+right now do if somebody says,
+
+1406
+01:05:54,000 --> 01:05:56,728
+I wrote the contract,
+and here's the code.
+
+1407
+01:05:56,728 --> 01:05:58,770
+LARRY LESSIG: Well, so
+when you say-- let me just
+
+1408
+01:05:58,770 --> 01:06:01,930
+me understand the
+question better.
+
+1409
+01:06:01,930 --> 01:06:02,430
+I'm sorry.
+
+1410
+01:06:02,430 --> 01:06:03,635
+Your name is--
+
+1411
+01:06:03,635 --> 01:06:04,260
+AUDIENCE: Hugo.
+
+1412
+01:06:04,260 --> 01:06:05,052
+LARRY LESSIG: Hugo.
+
+1413
+01:06:05,052 --> 01:06:06,590
+The way Hugo
+described it, I think,
+
+1414
+01:06:06,590 --> 01:06:10,410
+is nice, with a whole bunch of
+conditional statements, which
+
+1415
+01:06:10,410 --> 01:06:11,280
+is the code.
+
+1416
+01:06:11,280 --> 01:06:13,890
+So the code says,
+if the plane leaves
+
+1417
+01:06:13,890 --> 01:06:19,560
+more than 30 minutes late, then
+transfer $100 to his account.
+
+1418
+01:06:19,560 --> 01:06:21,840
+So you don't trust
+Vatalik's system
+
+1419
+01:06:21,840 --> 01:06:24,840
+to be able to implement
+that conditional?
+
+1420
+01:06:24,840 --> 01:06:25,800
+AUDIENCE: Yep.
+
+1421
+01:06:25,800 --> 01:06:29,220
+I don't understand-- I
+mean, I don't know the code.
+
+1422
+01:06:29,220 --> 01:06:31,260
+I don't know if it's breakable.
+
+1423
+01:06:31,260 --> 01:06:33,898
+I don't know if Jean can
+log in and change it.
+
+1424
+01:06:33,898 --> 01:06:35,190
+LARRY LESSIG: I'm sure she can.
+
+1425
+01:06:35,190 --> 01:06:39,540
+But the point is,
+for most people,
+
+1426
+01:06:39,540 --> 01:06:41,550
+this is true of everything.
+
+1427
+01:06:41,550 --> 01:06:43,110
+When I say to you,
+I'm a lawyer, I'm
+
+1428
+01:06:43,110 --> 01:06:47,130
+going to write the contract so
+you can sell your car to Andy,
+
+1429
+01:06:47,130 --> 01:06:48,817
+you can have the same questions.
+
+1430
+01:06:48,817 --> 01:06:50,400
+You can have the
+question whether Andy
+
+1431
+01:06:50,400 --> 01:06:53,070
+is going to have a way to
+flip the price so instead
+
+1432
+01:06:53,070 --> 01:06:56,340
+of $10,000, it's 15,000.
+
+1433
+01:06:56,340 --> 01:06:57,990
+So this uncertainty
+is everywhere.
+
+1434
+01:06:57,990 --> 01:07:00,510
+It might be Vatalik
+would say, actually,
+
+1435
+01:07:00,510 --> 01:07:04,500
+there's a more robust
+way to verify my code
+
+1436
+01:07:04,500 --> 01:07:06,772
+than Lessig's contract code.
+
+1437
+01:07:06,772 --> 01:07:08,980
+Because Lessig's contract
+code is written in English,
+
+1438
+01:07:08,980 --> 01:07:10,230
+and we have all sorts of--
+
+1439
+01:07:10,230 --> 01:07:12,390
+but my code, you can
+have independent people
+
+1440
+01:07:12,390 --> 01:07:13,230
+who verify it.
+
+1441
+01:07:13,230 --> 01:07:18,090
+So at the level of conditionals,
+I'm pretty confident.
+
+1442
+01:07:18,090 --> 01:07:20,290
+What I'm not
+confident about is--
+
+1443
+01:07:20,290 --> 01:07:26,550
+and I had the great pleasure
+in December of 2015 spending
+
+1444
+01:07:26,550 --> 01:07:29,610
+a weekend with them,
+watching that group.
+
+1445
+01:07:29,610 --> 01:07:31,830
+And it's this weird kind of--
+
+1446
+01:07:31,830 --> 01:07:35,040
+he is like the messiah
+figure, and there's
+
+1447
+01:07:35,040 --> 01:07:37,890
+12 people sitting on the
+floor around him listening
+
+1448
+01:07:37,890 --> 01:07:40,150
+to his every bit of wisdom.
+
+1449
+01:07:40,150 --> 01:07:42,690
+So it was inspirational
+and scary at the same time,
+
+1450
+01:07:42,690 --> 01:07:44,400
+because you see how
+much money is resting
+
+1451
+01:07:44,400 --> 01:07:45,870
+on this messiah's structure.
+
+1452
+01:07:45,870 --> 01:07:48,332
+But I have a lot of
+confidence in their ability
+
+1453
+01:07:48,332 --> 01:07:49,290
+to do the conditionals.
+
+1454
+01:07:49,290 --> 01:07:51,390
+But I'm not so
+confident that they yet
+
+1455
+01:07:51,390 --> 01:07:55,200
+thought through how it plugs
+into the bigger legal story.
+
+1456
+01:07:55,200 --> 01:07:57,450
+And that's part of what I
+was trying to pitch to them,
+
+1457
+01:07:57,450 --> 01:07:58,440
+that's what I'm trying--
+
+1458
+01:07:58,440 --> 01:07:59,857
+to him, and that's
+what I'm trying
+
+1459
+01:07:59,857 --> 01:08:02,926
+to pitch to you, that it's
+never going to be the case.
+
+1460
+01:08:02,926 --> 01:08:05,640
+I was at this conference in
+Australia where I met them.
+
+1461
+01:08:05,640 --> 01:08:08,140
+And so many of the people there
+were speaking the way people
+
+1462
+01:08:08,140 --> 01:08:09,723
+spoke about the
+internet 20 years ago.
+
+1463
+01:08:09,723 --> 01:08:12,250
+It's like, oh, there's
+the real world.
+
+1464
+01:08:12,250 --> 01:08:13,545
+We have governments.
+
+1465
+01:08:13,545 --> 01:08:14,670
+But we're going to create--
+
+1466
+01:08:14,670 --> 01:08:15,970
+like John Perry Barlow speak.
+
+1467
+01:08:15,970 --> 01:08:18,106
+We're going to create
+this virtual world where
+
+1468
+01:08:18,106 --> 01:08:19,689
+there is no governments,
+where we just
+
+1469
+01:08:19,689 --> 01:08:21,040
+live free of government.
+
+1470
+01:08:21,040 --> 01:08:26,200
+And it's so fucking naive
+about the way this stuff works,
+
+1471
+01:08:26,200 --> 01:08:29,470
+because it's always embedded
+in a real world which
+
+1472
+01:08:29,470 --> 01:08:30,687
+has a real government.
+
+1473
+01:08:30,687 --> 01:08:32,229
+And that real
+government is not going
+
+1474
+01:08:32,229 --> 01:08:35,260
+to look the other way if
+you're doing lots of damage
+
+1475
+01:08:35,260 --> 01:08:36,620
+or not paying your taxes.
+
+1476
+01:08:36,620 --> 01:08:38,500
+So the question isn't whether.
+
+1477
+01:08:38,500 --> 01:08:40,936
+The question is just
+how and how much.
+
+1478
+01:08:40,936 --> 01:08:42,269
+PROFESSOR: Can we go back there?
+
+1479
+01:08:42,269 --> 01:08:42,894
+AUDIENCE: Yeah.
+
+1480
+01:08:42,894 --> 01:08:46,360
+So I have a question about,
+what kind of implications
+
+1481
+01:08:46,360 --> 01:08:50,470
+do you think this technology
+has to broaden access
+
+1482
+01:08:50,470 --> 01:08:53,649
+to legal services in general,
+like letting people know when
+
+1483
+01:08:53,649 --> 01:08:56,304
+they're being taken advantage
+or being able to provide more
+
+1484
+01:08:56,304 --> 01:08:58,179
+standard versions of
+really common contracts,
+
+1485
+01:08:58,179 --> 01:09:00,734
+like employment contracts
+or lease contacts
+
+1486
+01:09:00,734 --> 01:09:01,609
+and things like that?
+
+1487
+01:09:01,609 --> 01:09:04,609
+Do you think that this is going
+to be a game changer for those?
+
+1488
+01:09:04,609 --> 01:09:06,340
+LARRY LESSIG: Absolutely.
+
+1489
+01:09:06,340 --> 01:09:10,359
+I mean, you've got to
+muster the political will
+
+1490
+01:09:10,359 --> 01:09:13,770
+to break the monopoly
+lawyers have in this space.
+
+1491
+01:09:13,770 --> 01:09:16,359
+And I'll tell you, we're going
+to fight hard against it.
+
+1492
+01:09:16,359 --> 01:09:20,260
+But there is no reason
+for 90% of what lawyers
+
+1493
+01:09:20,260 --> 01:09:23,080
+do to be done by lawyers.
+
+1494
+01:09:23,080 --> 01:09:26,050
+Just like if you
+buy a house and you
+
+1495
+01:09:26,050 --> 01:09:27,550
+have to have a
+lawyer who sits there
+
+1496
+01:09:27,550 --> 01:09:29,520
+and basically signs
+documents for you.
+
+1497
+01:09:29,520 --> 01:09:31,689
+You're like, why?
+
+1498
+01:09:31,689 --> 01:09:33,228
+And the answer is
+because the law
+
+1499
+01:09:33,228 --> 01:09:35,770
+has been written to require that
+person to sit there and sign
+
+1500
+01:09:35,770 --> 01:09:36,279
+documents.
+
+1501
+01:09:36,279 --> 01:09:36,700
+And why?
+
+1502
+01:09:36,700 --> 01:09:38,742
+Because the people who
+get paid to sign documents
+
+1503
+01:09:38,742 --> 01:09:40,680
+have corrupted the law.
+
+1504
+01:09:40,680 --> 01:09:42,370
+So there's lots to clean up.
+
+1505
+01:09:42,370 --> 01:09:44,760
+But if we can clean
+it up, absolutely.
+
+1506
+01:09:44,760 --> 01:09:48,439
+99% of this stuff
+ought to be automatic.
+
+1507
+01:09:48,439 --> 01:09:51,770
+And then let's get the lawyers
+to focus on the hard corner
+
+1508
+01:09:51,770 --> 01:09:54,475
+cases, not on everything
+that should be automatic.
+
+1509
+01:09:54,475 --> 01:09:55,850
+And that certainly
+should be true
+
+1510
+01:09:55,850 --> 01:10:00,060
+not just within a jurisdiction
+but across jurisdiction.
+
+1511
+01:10:00,060 --> 01:10:03,640
+AUDIENCE: Can I return to
+your insurance examples?
+
+1512
+01:10:03,640 --> 01:10:07,270
+I got the idea that you could
+write a smart contract that
+
+1513
+01:10:07,270 --> 01:10:11,140
+would pay you automatically
+if the plane was late.
+
+1514
+01:10:11,140 --> 01:10:14,600
+But then you said it
+puts it on a blockchain.
+
+1515
+01:10:14,600 --> 01:10:17,380
+Can you connect why he put it
+on the blockchain as opposed
+
+1516
+01:10:17,380 --> 01:10:21,460
+to just putting it on
+his disc and letting
+
+1517
+01:10:21,460 --> 01:10:22,990
+your credit card get credited?
+
+1518
+01:10:22,990 --> 01:10:25,870
+I mean, where did the
+blockchain enter into that?
+
+1519
+01:10:25,870 --> 01:10:27,790
+And why did he need
+a blockchain in order
+
+1520
+01:10:27,790 --> 01:10:31,233
+to maintain that statement?
+
+1521
+01:10:31,233 --> 01:10:33,400
+LARRY LESSIG: I think that
+the thing that he thought
+
+1522
+01:10:33,400 --> 01:10:34,900
+he was getting out
+of the blockchain
+
+1523
+01:10:34,900 --> 01:10:39,130
+is to increase the
+verifiability of third parties
+
+1524
+01:10:39,130 --> 01:10:41,750
+of the actual payments
+according to the data.
+
+1525
+01:10:41,750 --> 01:10:44,380
+So if I say to you, I'm
+going to be paying you
+
+1526
+01:10:44,380 --> 01:10:47,230
+$500 if your plane
+is an hour late
+
+1527
+01:10:47,230 --> 01:10:51,610
+and we have the data out there
+about the planes being late,
+
+1528
+01:10:51,610 --> 01:10:54,040
+if he did it inside of
+his insurance company,
+
+1529
+01:10:54,040 --> 01:10:56,140
+I wouldn't have any way
+to know that he paid you
+
+1530
+01:10:56,140 --> 01:10:58,060
+$500 for the plane being late.
+
+1531
+01:10:58,060 --> 01:11:00,880
+But if it's in a blockchain,
+there's at least conceptually
+
+1532
+01:11:00,880 --> 01:11:02,770
+a way in which we
+could be doing this--
+
+1533
+01:11:02,770 --> 01:11:04,300
+not that I'm
+reviewing it to you,
+
+1534
+01:11:04,300 --> 01:11:06,060
+but we could be signaling--
+
+1535
+01:11:06,060 --> 01:11:07,310
+AUDIENCE: That doesn't follow.
+
+1536
+01:11:07,310 --> 01:11:09,670
+So that depends on who
+maintains the blockchain.
+
+1537
+01:11:09,670 --> 01:11:12,220
+And then at the same
+time, it returns that.
+
+1538
+01:11:12,220 --> 01:11:14,290
+Suddenly, everybody
+knows the cash flow
+
+1539
+01:11:14,290 --> 01:11:16,480
+of that insurance
+company, which is likely
+
+1540
+01:11:16,480 --> 01:11:17,810
+not something he wants to do.
+
+1541
+01:11:17,810 --> 01:11:20,310
+LARRY LESSIG: Well, the cash
+flow of the insurance company's
+
+1542
+01:11:20,310 --> 01:11:23,020
+bigger than authenticating
+the truth about certain types
+
+1543
+01:11:23,020 --> 01:11:23,660
+of contracts.
+
+1544
+01:11:23,660 --> 01:11:24,160
+AUDIENCE: Well, let
+us know the cash flow
+
+1545
+01:11:24,160 --> 01:11:25,550
+of that part of the business.
+
+1546
+01:11:25,550 --> 01:11:28,780
+So I mean, he may not want that.
+
+1547
+01:11:28,780 --> 01:11:33,730
+I may not want everybody to
+know what planes I'm flying.
+
+1548
+01:11:33,730 --> 01:11:35,320
+So you've implied
+that there's now
+
+1549
+01:11:35,320 --> 01:11:38,610
+a public blockchain that does
+that to everyone to verify.
+
+1550
+01:11:38,610 --> 01:11:40,820
+LARRY LESSIG: Yeah.
+
+1551
+01:11:40,820 --> 01:11:42,290
+All I mean to argue--
+
+1552
+01:11:42,290 --> 01:11:43,700
+and I didn't
+interrogate him far.
+
+1553
+01:11:43,700 --> 01:11:45,700
+I was just taking his
+statement that he's doing.
+
+1554
+01:11:45,700 --> 01:11:47,825
+So I'm trying to think,
+why would he want to do it?
+
+1555
+01:11:47,825 --> 01:11:50,440
+Because I had the same kind
+of question you wanted to.
+
+1556
+01:11:50,440 --> 01:11:54,580
+And it's just that if you are
+trying to create credibility
+
+1557
+01:11:54,580 --> 01:11:55,700
+around your claim--
+
+1558
+01:11:55,700 --> 01:11:58,180
+but do I have a reason to
+trust this insurance company
+
+1559
+01:11:58,180 --> 01:11:59,972
+that, in fact, it's
+going to be doing this?
+
+1560
+01:11:59,972 --> 01:12:02,680
+Then there's some transparency
+that this enables--
+
+1561
+01:12:02,680 --> 01:12:05,200
+not necessarily the transparency
+of your credit card number
+
+1562
+01:12:05,200 --> 01:12:07,660
+or your name or the
+flights that you're taking,
+
+1563
+01:12:07,660 --> 01:12:10,870
+but that there was somebody who
+was on this who had a contract,
+
+1564
+01:12:10,870 --> 01:12:13,120
+and we then made
+this kind of payment.
+
+1565
+01:12:13,120 --> 01:12:15,100
+That would be a potential
+value that he has.
+
+1566
+01:12:15,100 --> 01:12:17,830
+Now, if there's no value
+from that, then you're right.
+
+1567
+01:12:17,830 --> 01:12:20,110
+The overhead of the
+blockchain or public
+
+1568
+01:12:20,110 --> 01:12:22,240
+or private or
+whatever is too high,
+
+1569
+01:12:22,240 --> 01:12:24,010
+and he just could do it inside.
+
+1570
+01:12:24,010 --> 01:12:26,320
+And for certain
+companies, like if you
+
+1571
+01:12:26,320 --> 01:12:29,080
+went to a credible insurance
+company, the credible insurance
+
+1572
+01:12:29,080 --> 01:12:31,880
+company, you probably trust
+that credible insurance company.
+
+1573
+01:12:31,880 --> 01:12:35,110
+But again, if you're a not
+credible insurance company,
+
+1574
+01:12:35,110 --> 01:12:39,020
+if you're a startup and you
+are out there in the market
+
+1575
+01:12:39,020 --> 01:12:40,610
+and you're saying,
+give me your money
+
+1576
+01:12:40,610 --> 01:12:42,050
+and I'll pay you if
+the plane's late,
+
+1577
+01:12:42,050 --> 01:12:44,050
+people are going to say,
+why should I trust you?
+
+1578
+01:12:44,050 --> 01:12:45,290
+And you're like, well, here.
+
+1579
+01:12:45,290 --> 01:12:46,707
+You don't really
+have to trust me.
+
+1580
+01:12:46,707 --> 01:12:48,590
+Here's the data.
+
+1581
+01:12:48,590 --> 01:12:51,710
+Here's the evidence in a more
+credible way than if I just
+
+1582
+01:12:51,710 --> 01:12:53,900
+published a report on
+my website that I'm
+
+1583
+01:12:53,900 --> 01:12:55,760
+doing what I say I'm doing.
+
+1584
+01:12:55,760 --> 01:12:56,983
+PROFESSOR: Let's try to--
+
+1585
+01:12:56,983 --> 01:12:59,793
+AUDIENCE: He has
+to escrow the $500.
+
+1586
+01:12:59,793 --> 01:13:02,210
+PROFESSOR: Andy, let's try to
+get a couple more questions.
+
+1587
+01:13:02,210 --> 01:13:05,570
+But my hunch is that it's
+probably a permission rather
+
+1588
+01:13:05,570 --> 01:13:07,130
+than permissionless blockchain.
+
+1589
+01:13:07,130 --> 01:13:09,380
+And it may be the
+insurance company
+
+1590
+01:13:09,380 --> 01:13:12,020
+wants to ride on the
+buzz of blockchain.
+
+1591
+01:13:12,020 --> 01:13:15,140
+But it's possible,
+also, that he thinks
+
+1592
+01:13:15,140 --> 01:13:17,930
+that there'll be more
+trust, that consumers
+
+1593
+01:13:17,930 --> 01:13:21,560
+will trust that if it's
+called a blockchain.
+
+1594
+01:13:21,560 --> 01:13:23,150
+But you did an interview.
+
+1595
+01:13:23,150 --> 01:13:24,580
+You can pick who you want to--
+
+1596
+01:13:24,580 --> 01:13:25,710
+LARRY LESSIG: Right here.
+
+1597
+01:13:25,710 --> 01:13:27,127
+AUDIENCE: So proof
+of performance,
+
+1598
+01:13:27,127 --> 01:13:30,420
+could this whole smart
+contract solve it?
+
+1599
+01:13:30,420 --> 01:13:33,350
+So for instance, some
+countries will receive--
+
+1600
+01:13:33,350 --> 01:13:38,960
+and I was talking to
+Leonardo about it in Cargill,
+
+1601
+01:13:38,960 --> 01:13:40,610
+in his company.
+
+1602
+01:13:40,610 --> 01:13:42,950
+They deliver wheat
+to some countries.
+
+1603
+01:13:42,950 --> 01:13:46,340
+And proof of performance
+is always delayed.
+
+1604
+01:13:46,340 --> 01:13:50,030
+And hence, it becomes
+a private issue.
+
+1605
+01:13:50,030 --> 01:13:53,288
+So could smart contracts
+solve something like that?
+
+1606
+01:13:53,288 --> 01:13:54,080
+LARRY LESSIG: Yeah.
+
+1607
+01:13:54,080 --> 01:13:58,820
+If you had an alternative way
+to credibly represent a fact--
+
+1608
+01:13:58,820 --> 01:14:02,540
+and again, this is kind of
+connected to Andy's point.
+
+1609
+01:14:02,540 --> 01:14:04,100
+Is there an alternative way?
+
+1610
+01:14:04,100 --> 01:14:06,910
+And is this the alternative way?
+
+1611
+01:14:06,910 --> 01:14:10,640
+Then you lower the transaction
+cost of that kind of contract,
+
+1612
+01:14:10,640 --> 01:14:15,560
+because I'm going to trust
+the contracting process more
+
+1613
+01:14:15,560 --> 01:14:20,750
+if I'm confident that, in fact,
+the fact that I'm not late
+
+1614
+01:14:20,750 --> 01:14:22,250
+doesn't penalize
+me, or you don't
+
+1615
+01:14:22,250 --> 01:14:23,750
+penalize me claiming I'm late.
+
+1616
+01:14:23,750 --> 01:14:26,870
+So to the extent you lower
+the cost of verifying
+
+1617
+01:14:26,870 --> 01:14:29,750
+facts in the world, you
+increase the opportunity
+
+1618
+01:14:29,750 --> 01:14:33,230
+for certain contracts to happen
+who otherwise wouldn't happen.
+
+1619
+01:14:33,230 --> 01:14:35,360
+And that's the only
+trade-off that I'm
+
+1620
+01:14:35,360 --> 01:14:37,550
+trying to emphasize by
+emphasizing the transaction
+
+1621
+01:14:37,550 --> 01:14:39,510
+cost part of these contracts.
+
+1622
+01:14:39,510 --> 01:14:42,820
+You had a question here?
+
+1623
+01:14:42,820 --> 01:14:44,368
+AUDIENCE: Oh, yeah.
+
+1624
+01:14:44,368 --> 01:14:46,660
+I was just saying maybe one
+of the benefits of applying
+
+1625
+01:14:46,660 --> 01:14:51,175
+blockchain here would be
+not for one-off transactions
+
+1626
+01:14:51,175 --> 01:14:52,800
+but for the insurance
+company, perhaps,
+
+1627
+01:14:52,800 --> 01:14:55,537
+to have an aggregate
+thousands of transactions
+
+1628
+01:14:55,537 --> 01:14:56,870
+where they've shown performance.
+
+1629
+01:14:56,870 --> 01:15:00,070
+And they can use this
+for commercial reasons
+
+1630
+01:15:00,070 --> 01:15:02,330
+to show that, yes,
+people get paid
+
+1631
+01:15:02,330 --> 01:15:05,570
+when they purchase our
+insurance and get credibility
+
+1632
+01:15:05,570 --> 01:15:08,938
+for particular products.
+
+1633
+01:15:08,938 --> 01:15:09,730
+LARRY LESSIG: Yeah.
+
+1634
+01:15:09,730 --> 01:15:11,540
+You would frame that
+as it would have
+
+1635
+01:15:11,540 --> 01:15:13,880
+to be that that would be
+a value it was providing.
+
+1636
+01:15:13,880 --> 01:15:15,350
+Otherwise, to
+Andy's point, there
+
+1637
+01:15:15,350 --> 01:15:18,307
+would be no reason
+to adopt this.
+
+1638
+01:15:18,307 --> 01:15:18,890
+PROFESSOR: OK.
+
+1639
+01:15:18,890 --> 01:15:21,017
+Go on the back right.
+
+1640
+01:15:21,017 --> 01:15:22,100
+I don't remember your name
+
+1641
+01:15:22,100 --> 01:15:24,200
+AUDIENCE: Kyle.
+
+1642
+01:15:24,200 --> 01:15:31,190
+So with, I guess, easier access
+to these derivative contracts,
+
+1643
+01:15:31,190 --> 01:15:33,920
+do you foresee a
+world where there's
+
+1644
+01:15:33,920 --> 01:15:37,992
+a lot more leverage
+in any type of market
+
+1645
+01:15:37,992 --> 01:15:39,200
+outside of financial markets?
+
+1646
+01:15:39,200 --> 01:15:43,152
+And do you foresee this creating
+kind of a risk in that way?
+
+1647
+01:15:43,152 --> 01:15:46,280
+LARRY LESSIG: Well, I mean,
+this is your expertise, right?
+
+1648
+01:15:46,280 --> 01:15:49,070
+Because, I mean, we already
+saw in the derivatives market
+
+1649
+01:15:49,070 --> 01:15:51,890
+the fact that the
+choice by policymakers
+
+1650
+01:15:51,890 --> 01:15:54,560
+was to allow it to be
+an invisible market
+
+1651
+01:15:54,560 --> 01:15:56,150
+and not to regulate that market.
+
+1652
+01:15:56,150 --> 01:16:00,487
+It created all sorts of risks
+that sensible people might
+
+1653
+01:16:00,487 --> 01:16:01,820
+think shouldn't have been there.
+
+1654
+01:16:01,820 --> 01:16:03,195
+And I think the
+same potential is
+
+1655
+01:16:03,195 --> 01:16:05,480
+here, which is, again, to
+come back to the point,
+
+1656
+01:16:05,480 --> 01:16:07,680
+don't expect there not
+to be government here.
+
+1657
+01:16:07,680 --> 01:16:10,910
+I mean, to the extent
+people realize this risk
+
+1658
+01:16:10,910 --> 01:16:13,850
+and don't have as much
+political corrupting power
+
+1659
+01:16:13,850 --> 01:16:15,880
+as Wall Street
+did in our system,
+
+1660
+01:16:15,880 --> 01:16:17,630
+we should expect
+governments [INAUDIBLE]..
+
+1661
+01:16:17,630 --> 01:16:19,640
+PROFESSOR: I would say yes.
+
+1662
+01:16:19,640 --> 01:16:23,300
+Even on bitcoin, you can create
+something called discrete log
+
+1663
+01:16:23,300 --> 01:16:28,460
+contracts to do contracts for
+differences or derivatives.
+
+1664
+01:16:28,460 --> 01:16:31,280
+But with smart contracts,
+you can put a lot of leverage
+
+1665
+01:16:31,280 --> 01:16:33,880
+into the system.
+
+1666
+01:16:33,880 --> 01:16:35,770
+And transactions
+can move quickly.
+
+1667
+01:16:35,770 --> 01:16:39,770
+So I think the state will
+have an interest, particularly
+
+1668
+01:16:39,770 --> 01:16:41,120
+if it grows.
+
+1669
+01:16:41,120 --> 01:16:43,370
+We probably only have time
+for two more questions.
+
+1670
+01:16:43,370 --> 01:16:46,490
+And I'm still wondering,
+how do courts currently look
+
+1671
+01:16:46,490 --> 01:16:50,670
+at these as a matter of law?
+
+1672
+01:16:50,670 --> 01:16:53,820
+In the late 1990s, I
+was honored to work
+
+1673
+01:16:53,820 --> 01:16:56,190
+with Senator John McCain
+on something which
+
+1674
+01:16:56,190 --> 01:16:58,622
+became the e-signature law.
+
+1675
+01:16:58,622 --> 01:17:01,080
+I was just playing point for
+the US Department of Treasury.
+
+1676
+01:17:01,080 --> 01:17:05,160
+It was really John McCain's
+law Congress was doing.
+
+1677
+01:17:05,160 --> 01:17:06,900
+But I'm wondering
+how the courts today
+
+1678
+01:17:06,900 --> 01:17:09,720
+would see these contracts.
+
+1679
+01:17:09,720 --> 01:17:12,840
+Do we need something
+like an e-signature law
+
+1680
+01:17:12,840 --> 01:17:18,642
+to have code accepted beyond
+what e-signature accepted?
+
+1681
+01:17:18,642 --> 01:17:19,350
+LARRY LESSIG: No.
+
+1682
+01:17:19,350 --> 01:17:22,170
+I think the e-signature
+infrastructure
+
+1683
+01:17:22,170 --> 01:17:24,487
+is going to be 99% of
+what this system is.
+
+1684
+01:17:24,487 --> 01:17:26,820
+PROFESSOR: You mean that which
+I worked on 20 years ago?
+
+1685
+01:17:26,820 --> 01:17:26,912
+LARRY LESSIG: Yeah.
+
+1686
+01:17:26,912 --> 01:17:28,410
+You solved 99% of the problem.
+
+1687
+01:17:28,410 --> 01:17:29,618
+PROFESSOR: Little did I know.
+
+1688
+01:17:29,618 --> 01:17:30,640
+LARRY LESSIG: Here, too.
+
+1689
+01:17:30,640 --> 01:17:31,140
+Yeah.
+
+1690
+01:17:31,140 --> 01:17:34,140
+I mean, that's why I
+wanted to wrap this
+
+1691
+01:17:34,140 --> 01:17:36,840
+around the idea of a
+soda pop machine, right?
+
+1692
+01:17:36,840 --> 01:17:39,610
+So it's nothing
+new, in some sense.
+
+1693
+01:17:39,610 --> 01:17:41,610
+Contract law has always
+dealt with machines that
+
+1694
+01:17:41,610 --> 01:17:44,290
+are delivering on obligations.
+
+1695
+01:17:44,290 --> 01:17:45,960
+It's just a more
+sophisticated set
+
+1696
+01:17:45,960 --> 01:17:48,540
+of proofs you're going to
+have to make in a court.
+
+1697
+01:17:48,540 --> 01:17:52,410
+But it's the same
+underlying plot.
+
+1698
+01:17:52,410 --> 01:17:55,700
+PROFESSOR: One more question.
+
+1699
+01:17:55,700 --> 01:17:56,280
+We're MIT.
+
+1700
+01:17:56,280 --> 01:17:57,870
+We're supposed to end
+five minutes early.
+
+1701
+01:17:57,870 --> 01:17:58,260
+LARRY LESSIG: Oh, OK.
+
+1702
+01:17:58,260 --> 01:17:59,160
+PROFESSOR: I don't know
+what you do at Harvard.
+
+1703
+01:17:59,160 --> 01:18:01,450
+LARRY LESSIG: I don't remember.
+
+1704
+01:18:01,450 --> 01:18:03,180
+PROFESSOR: It's Harvard Law.
+
+1705
+01:18:03,180 --> 01:18:05,500
+LARRY LESSIG: Right here.
+
+1706
+01:18:05,500 --> 01:18:08,460
+AUDIENCE: So I have a little
+bit of the opposite question
+
+1707
+01:18:08,460 --> 01:18:12,660
+from Elon, which is a lot of the
+contracts you're talking about,
+
+1708
+01:18:12,660 --> 01:18:14,220
+simple contracts, right?
+
+1709
+01:18:14,220 --> 01:18:16,200
+You've got individuals
+on one side.
+
+1710
+01:18:16,200 --> 01:18:18,620
+You've got large companies,
+like your insurance company,
+
+1711
+01:18:18,620 --> 01:18:19,570
+on the other.
+
+1712
+01:18:19,570 --> 01:18:21,610
+The insurance company
+can't, in fact,
+
+1713
+01:18:21,610 --> 01:18:24,210
+go through the
+entire decision tree
+
+1714
+01:18:24,210 --> 01:18:28,150
+and decide what every
+term is in their favor.
+
+1715
+01:18:28,150 --> 01:18:30,530
+And the law deals with
+that all the time.
+
+1716
+01:18:30,530 --> 01:18:33,230
+But here, you have another
+problem, which is now,
+
+1717
+01:18:33,230 --> 01:18:34,410
+it's going to be OK.
+
+1718
+01:18:34,410 --> 01:18:36,770
+It's going to be written
+in computer code.
+
+1719
+01:18:36,770 --> 01:18:39,140
+How are the judges
+going to deal with that?
+
+1720
+01:18:39,140 --> 01:18:41,630
+Now it's a language
+that is going
+
+1721
+01:18:41,630 --> 01:18:44,300
+to be even tougher to
+deal with that problem.
+
+1722
+01:18:44,300 --> 01:18:45,930
+LARRY LESSIG: Great question.
+
+1723
+01:18:45,930 --> 01:18:47,282
+And the answer is--
+
+1724
+01:18:47,282 --> 01:18:49,490
+so this is actually another
+version of your question.
+
+1725
+01:18:49,490 --> 01:18:51,890
+The answer to that is
+nobody knows right now.
+
+1726
+01:18:51,890 --> 01:18:55,250
+And so this issue gets raised
+in a lot of parallel contexts.
+
+1727
+01:18:55,250 --> 01:18:59,390
+For example, there's a Supreme
+Court Justice from California
+
+1728
+01:18:59,390 --> 01:19:04,880
+who's doing a lot of work about
+the question of black boxes
+
+1729
+01:19:04,880 --> 01:19:09,495
+that predict whether you are
+likely to commit a crime again.
+
+1730
+01:19:09,495 --> 01:19:11,370
+So if you're convicted
+of crime, the question
+
+1731
+01:19:11,370 --> 01:19:12,995
+is whether you're
+going to have parole.
+
+1732
+01:19:12,995 --> 01:19:15,840
+The parole process is supposed
+to decide your likelihood
+
+1733
+01:19:15,840 --> 01:19:17,520
+of committing a crime.
+
+1734
+01:19:17,520 --> 01:19:20,010
+So these companies have
+built these black boxes where
+
+1735
+01:19:20,010 --> 01:19:21,690
+you spit in every bit of data.
+
+1736
+01:19:21,690 --> 01:19:24,060
+And it comes out and says
+yes, you're a criminal,
+
+1737
+01:19:24,060 --> 01:19:25,553
+or no, you're not.
+
+1738
+01:19:25,553 --> 01:19:26,970
+And then the lawyers
+come forward,
+
+1739
+01:19:26,970 --> 01:19:29,640
+and they say, well, I want
+to interrogate the black box.
+
+1740
+01:19:29,640 --> 01:19:31,040
+I want to know what--
+
+1741
+01:19:31,040 --> 01:19:33,773
+And the courts are completely
+confused about this.
+
+1742
+01:19:33,773 --> 01:19:35,190
+Because on the one
+hand, they say,
+
+1743
+01:19:35,190 --> 01:19:37,725
+no, no, this is
+their trade secret.
+
+1744
+01:19:37,725 --> 01:19:39,850
+But on the other hand,
+they're like, wait a minute.
+
+1745
+01:19:39,850 --> 01:19:41,830
+You can't decide whether
+I have liberty or not
+
+1746
+01:19:41,830 --> 01:19:45,048
+based on these black boxes that
+just spit out numbers, right?
+
+1747
+01:19:45,048 --> 01:19:46,840
+So I've got to be able
+to interrogate them.
+
+1748
+01:19:46,840 --> 01:19:47,710
+Right.
+
+1749
+01:19:47,710 --> 01:19:51,100
+So this is the most
+important innovation that's
+
+1750
+01:19:51,100 --> 01:19:52,600
+got to happen in the law.
+
+1751
+01:19:52,600 --> 01:19:55,270
+Lawyers have to
+become technically
+
+1752
+01:19:55,270 --> 01:19:59,140
+sophisticated to be
+able to read code
+
+1753
+01:19:59,140 --> 01:20:01,630
+like they read legal contracts.
+
+1754
+01:20:01,630 --> 01:20:04,210
+They have to have a conceptual
+understanding of what
+
+1755
+01:20:04,210 --> 01:20:07,990
+code can do so they can
+think creatively about code
+
+1756
+01:20:07,990 --> 01:20:10,960
+like they think creatively
+about language, right?
+
+1757
+01:20:10,960 --> 01:20:13,900
+And one of the most
+important innovations
+
+1758
+01:20:13,900 --> 01:20:17,710
+that we, like the Berkman
+Center and people like that,
+
+1759
+01:20:17,710 --> 01:20:19,870
+are trying to push into
+the legal environment
+
+1760
+01:20:19,870 --> 01:20:23,680
+is to insist that just
+like lawyers now all study
+
+1761
+01:20:23,680 --> 01:20:27,280
+economics, because that's a core
+way of thinking about the law,
+
+1762
+01:20:27,280 --> 01:20:30,480
+we also should study
+basic code so we
+
+1763
+01:20:30,480 --> 01:20:33,910
+can think about this
+modality of regulation.
+
+1764
+01:20:33,910 --> 01:20:36,070
+Not expect people are
+going to be writing code,
+
+1765
+01:20:36,070 --> 01:20:38,230
+but at least that they
+can think through it.
+
+1766
+01:20:38,230 --> 01:20:39,280
+So I completely agree.
+
+1767
+01:20:39,280 --> 01:20:42,750
+That's a fudge space that
+I didn't talk about at all.
+
+1768
+01:20:42,750 --> 01:20:45,310
+But I think it's a really
+important problem, thinking
+
+1769
+01:20:45,310 --> 01:20:46,540
+about whether the
+legal system is going
+
+1770
+01:20:46,540 --> 01:20:47,665
+to be able to deal with it.
+
+1771
+01:20:47,665 --> 01:20:51,340
+Because if none of the
+lawyers understand it, yeah.
+
+1772
+01:20:51,340 --> 01:20:53,090
+Let me just end with
+one story about that.
+
+1773
+01:20:53,090 --> 01:20:55,990
+So when I first started
+doing this work, talking
+
+1774
+01:20:55,990 --> 01:20:58,150
+about code and--
+
+1775
+01:20:58,150 --> 01:21:01,620
+I went to Paris 20 years
+ago, and I gave a speech
+
+1776
+01:21:01,620 --> 01:21:02,650
+to some lawyer group.
+
+1777
+01:21:02,650 --> 01:21:04,810
+And I sat down after the speech.
+
+1778
+01:21:04,810 --> 01:21:09,160
+And the chairman of this legal
+group sat down next to me.
+
+1779
+01:21:09,160 --> 01:21:10,210
+And I introduced myself.
+
+1780
+01:21:10,210 --> 01:21:12,040
+And he stood up, and
+he grabbed my card.
+
+1781
+01:21:12,040 --> 01:21:13,580
+And he crushed it.
+
+1782
+01:21:13,580 --> 01:21:15,430
+And he threw it to the ground.
+
+1783
+01:21:15,430 --> 01:21:18,650
+And he said, I am
+not a technician.
+
+1784
+01:21:18,650 --> 01:21:20,750
+And his point was
+he, as a lawyer,
+
+1785
+01:21:20,750 --> 01:21:25,310
+could never accept the idea that
+what he needed to understand
+
+1786
+01:21:25,310 --> 01:21:27,150
+was code.
+
+1787
+01:21:27,150 --> 01:21:28,680
+That was forbidden.
+
+1788
+01:21:28,680 --> 01:21:30,530
+It was beneath him.
+
+1789
+01:21:30,530 --> 01:21:34,950
+And I think it's a hugely
+important cultural problem
+
+1790
+01:21:34,950 --> 01:21:37,160
+to integrate this
+form of knowledge.
+
+1791
+01:21:37,160 --> 01:21:39,650
+Because if we don't, then the
+problem you're talking about
+
+1792
+01:21:39,650 --> 01:21:42,080
+is really a huge problem.
+
+1793
+01:21:42,080 --> 01:21:44,130
+But I think we can, because
+we've seen lots of--
+
+1794
+01:21:44,130 --> 01:21:46,100
+PROFESSOR: So I
+want to thank you
+
+1795
+01:21:46,100 --> 01:21:50,030
+on behalf of the class,
+Blockchain and Money.
+
+1796
+01:21:50,030 --> 01:21:53,404
+[APPLAUSE]
+
+1797
+01:21:55,340 --> 01:22:00,230
+I also want to say you're much
+better than Christopher Lloyd.
+
+1798
+01:22:00,230 --> 01:22:02,360
+And if anybody wants
+to know the joke,
+
+1799
+01:22:02,360 --> 01:22:07,640
+watch that West Wing episode
+that Christopher Lloyd plays
+
+1800
+01:22:07,640 --> 01:22:08,960
+Professor Lawrence Lessig.
+
+1801
+01:22:08,960 --> 01:22:11,000
+So thank you.
+
+1802
+01:22:11,000 --> 01:22:13,030
+See you on Thursday.

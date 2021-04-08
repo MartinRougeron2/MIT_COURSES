@@ -1,0 +1,472 @@
+1
+00:00:01,010 --> 00:00:05,210
+What we'd like to do is to create a single
+abstraction that can be used to address all
+
+2
+00:00:05,210 --> 00:00:07,620
+our synchronization needs.
+
+3
+00:00:07,620 --> 00:00:13,760
+In the early 1960's, the Dutch computer scientist
+Edsger Dijkstra proposed a new abstract data
+
+4
+00:00:13,760 --> 00:00:19,470
+type called the semaphore, which has an integer
+value greater than or equal to 0.
+
+5
+00:00:19,470 --> 00:00:25,289
+A programmer can declare a semaphore as shown
+here, specifying its initial value.
+
+6
+00:00:25,289 --> 00:00:29,860
+The semaphore lives in a memory location shared
+by all the processes that need to synchronize
+
+7
+00:00:29,860 --> 00:00:32,409
+their operation.
+
+8
+00:00:32,409 --> 00:00:37,289
+The semaphore is accessed with two operations:
+WAIT and SIGNAL.
+
+9
+00:00:37,289 --> 00:00:41,960
+The WAIT operation will wait until the specified
+semaphore has a value greater than 0, then
+
+10
+00:00:41,960 --> 00:00:46,299
+it will decrement the semaphore value and
+return to the calling program.
+
+11
+00:00:46,299 --> 00:00:52,340
+If the semaphore value is 0 when WAIT is called,
+conceptually execution is suspended until
+
+12
+00:00:52,340 --> 00:00:55,600
+the semaphore value is non-zero.
+
+13
+00:00:55,600 --> 00:01:00,579
+In a simple (inefficient) implementation,
+the WAIT routine loops, periodically testing
+
+14
+00:01:00,579 --> 00:01:04,360
+the value of the semaphore, proceeding when
+its value is non-zero.
+
+15
+00:01:04,360 --> 00:01:08,830
+The SIGNAL operation increments the value
+of the specified semaphore.
+
+16
+00:01:08,830 --> 00:01:15,070
+If there any processes WAITing on that semaphore,
+exactly one of them may now proceed.
+
+17
+00:01:15,070 --> 00:01:19,890
+We'll have to be careful with the implementation
+of SIGNAL and WAIT to ensure that the "exactly
+
+18
+00:01:19,890 --> 00:01:24,430
+one" constraint is satisfied,
+i.e., that two processes both WAITing on the
+
+19
+00:01:24,430 --> 00:01:30,039
+same semaphore won't both think they can decrement
+it and proceed after a SIGNAL.
+
+20
+00:01:30,039 --> 00:01:35,860
+A semaphore initialized with the value K guarantees
+that the i_th call to SIGNAL will precede
+
+21
+00:01:35,860 --> 00:01:39,340
+(i+K)_th call to WAIT.
+
+22
+00:01:39,340 --> 00:01:43,259
+In a moment, we'll see some concrete examples
+that will make this clear.
+
+23
+00:01:43,259 --> 00:01:47,800
+Note that in 6.004, we're ruling out semaphores
+with negative values.
+
+24
+00:01:47,800 --> 00:01:55,380
+In the literature, you may see P(s) used in
+place of WAIT(s) and V(s) used in place of
+
+25
+00:01:55,380 --> 00:01:57,030
+SIGNAL(s).
+
+26
+00:01:57,030 --> 00:02:02,010
+These operation names are derived from the
+Dutch words for "test" and "increase".
+
+27
+00:02:02,010 --> 00:02:06,330
+Let's see how to use semaphores to implement
+precedence constraints.
+
+28
+00:02:06,330 --> 00:02:11,430
+Here are two processes, each running a program
+with 5 statements.
+
+29
+00:02:11,430 --> 00:02:16,280
+Execution proceeds sequentially within each
+process, so A1 executes before A2, and so
+
+30
+00:02:16,280 --> 00:02:17,380
+on.
+
+31
+00:02:17,380 --> 00:02:22,579
+But there are no constraints on the order
+of execution between the processes, so statement
+
+32
+00:02:22,579 --> 00:02:29,510
+B1 in Process B might be executed before or
+after any of the statements in Process A.
+
+33
+00:02:29,510 --> 00:02:34,910
+Even if A and B are running in a timeshared
+environment on a single physical processor,
+
+34
+00:02:34,910 --> 00:02:39,540
+execution may switch at any time between processes
+A and B.
+
+35
+00:02:39,540 --> 00:02:45,120
+Suppose we wish to impose the constraint that
+the execution of statement A2 completes before
+
+36
+00:02:45,120 --> 00:02:48,540
+execution of statement B4 begins.
+
+37
+00:02:48,540 --> 00:02:51,950
+The red arrow shows the constraint we want.
+
+38
+00:02:51,950 --> 00:02:57,180
+Here's the recipe for implementing this sort
+of simple precedence constraint using semaphores.
+
+39
+00:02:57,180 --> 00:03:04,239
+First, declare a semaphore (called "s" in
+this example) and initialize its value to
+
+40
+00:03:04,239 --> 00:03:05,870
+0.
+
+41
+00:03:05,870 --> 00:03:08,980
+Place a call to signal(s) at the start of
+the arrow.
+
+42
+00:03:08,980 --> 00:03:14,340
+In this example, signal(s) is placed after
+the statement A2 in process A.
+
+43
+00:03:14,340 --> 00:03:18,040
+Then place a call to wait(s) at the end of
+the arrow.
+
+44
+00:03:18,040 --> 00:03:23,730
+In this example, wait(s) is placed before
+the statement B4 in process B.
+
+45
+00:03:23,730 --> 00:03:28,650
+With these modifications, process A executes
+as before, with the signal to semaphore s
+
+46
+00:03:28,650 --> 00:03:31,959
+happening after statement A2 is executed.
+
+47
+00:03:31,959 --> 00:03:39,451
+Statements B1 through B3 also execute as before,
+but when the wait(s) is executed, execution
+
+48
+00:03:39,451 --> 00:03:45,668
+of process B is suspended until the signal(s)
+statement has finished execution.
+
+49
+00:03:45,668 --> 00:03:53,299
+This guarantees that execution of B4 will
+start only after execution of A2 has completed.
+
+50
+00:03:53,299 --> 00:03:59,609
+By initializing the semaphore s to 0, we enforced
+the constraint that the first call to signal(s)
+
+51
+00:03:59,609 --> 00:04:04,900
+had to complete before the first call to wait(s)
+would succeed.
+
+52
+00:04:04,900 --> 00:04:10,379
+Another way to think about semaphores is as
+a management tool for a shared pool of K resources,
+
+53
+00:04:10,379 --> 00:04:13,930
+where K is the initial value of the semaphore.
+
+54
+00:04:13,930 --> 00:04:17,980
+You use the SIGNAL operation to add or return
+resources to the shared pool.
+
+55
+00:04:17,980 --> 00:04:23,060
+And you use the WAIT operation to allocate
+a resource for your exclusive use.
+
+56
+00:04:23,060 --> 00:04:28,600
+At any given time, the value of the semaphore
+gives the number of unallocated resources
+
+57
+00:04:28,600 --> 00:04:31,570
+still available in the shared pool.
+
+58
+00:04:31,570 --> 00:04:36,440
+Note that the WAIT and SIGNAL operations can
+be in the same process, or they may be in
+
+59
+00:04:36,440 --> 00:04:42,150
+different processes, depending on when the
+resource is allocated and returned.
+
+60
+00:04:42,150 --> 00:04:46,000
+We can use semaphores to manage our N-character
+FIFO buffer.
+
+61
+00:04:46,000 --> 00:04:49,850
+Here we've defined a semaphore CHARS and initialized
+it to 0.
+
+62
+00:04:49,850 --> 00:04:54,320
+The value of CHARS will tell us how many characters
+are in the buffer.
+
+63
+00:04:54,320 --> 00:04:58,860
+So SEND does a signal(CHARS) after it has
+added a character to the buffer, indicating
+
+64
+00:04:58,860 --> 00:05:01,770
+the buffer now contains an additional character.
+
+65
+00:05:01,770 --> 00:05:07,510
+And RCV does a wait(CHARS) to ensure the buffer
+has at least one character before reading
+
+66
+00:05:07,510 --> 00:05:09,790
+from the buffer.
+
+67
+00:05:09,790 --> 00:05:14,560
+Since CHARS was initialized to 0, we've enforced
+the constraint that the i_th call to signal(CHARS)
+
+68
+00:05:14,560 --> 00:05:17,420
+precedes the completion of the i_th call to
+wait(CHARS).
+
+69
+00:05:17,420 --> 00:05:23,030
+In other words, RCV can't consume a character
+until it has been placed in the buffer by
+
+70
+00:05:23,030 --> 00:05:24,040
+SEND.
+
+71
+00:05:24,040 --> 00:05:29,160
+Does this mean our producer and consumer are
+now properly synchronized?
+
+72
+00:05:29,160 --> 00:05:32,800
+Using the CHARS semaphore, we implemented
+*one* of the two precedence constraints we
+
+73
+00:05:32,800 --> 00:05:36,790
+identified as being necessary for correct
+operation.
+
+74
+00:05:36,790 --> 00:05:40,780
+Next we'll see how to implement the other
+precedence constraint.
+
+75
+00:05:40,780 --> 00:05:46,460
+What keeps the producer from putting more
+than N characters into the N-character buffer?
+
+76
+00:05:46,460 --> 00:05:47,620
+Nothing.
+
+77
+00:05:47,620 --> 00:05:53,250
+Oops, the producer can start to overwrite
+characters placed in the buffer earlier even
+
+78
+00:05:53,250 --> 00:05:56,550
+though they haven't yet been read by the consumer.
+
+79
+00:05:56,550 --> 00:06:01,030
+This is called buffer overflow and the sequence
+of characters transmitted from producer to
+
+80
+00:06:01,030 --> 00:06:04,860
+consumer becomes hopelessly corrupted.
+
+81
+00:06:04,860 --> 00:06:09,400
+What we've guaranteed so far is that the consumer
+can read a character only after the producer
+
+82
+00:06:09,400 --> 00:06:15,250
+has placed it in the buffer, i.e., the consumer
+can't read from an empty buffer.
+
+83
+00:06:15,250 --> 00:06:20,780
+What we still need to guarantee is that the
+producer can't get too far ahead of the consumer.
+
+84
+00:06:20,780 --> 00:06:26,770
+Since the buffer holds at most N characters,
+the producer can't send the (i+N)th character
+
+85
+00:06:26,770 --> 00:06:31,270
+until the consumer has read the i_th character.
+
+86
+00:06:31,270 --> 00:06:37,110
+Here we've added a second semaphore, SPACES,
+to manage the number of spaces in the buffer.
+
+87
+00:06:37,110 --> 00:06:40,400
+Initially the buffer is empty, so it has N
+spaces.
+
+88
+00:06:40,400 --> 00:06:43,670
+The producer must WAIT for a space to be available.
+
+89
+00:06:43,670 --> 00:06:48,800
+When SPACES in non-zero, the WAIT succeeds,
+decrementing the number of available spaces
+
+90
+00:06:48,800 --> 00:06:54,440
+by one and then the producer fills that space
+with the next character.
+
+91
+00:06:54,440 --> 00:06:58,720
+The consumer signals the availability of another
+space after it reads a character from the
+
+92
+00:06:58,720 --> 00:07:00,230
+buffer.
+
+93
+00:07:00,230 --> 00:07:02,070
+There's a nice symmetry here.
+
+94
+00:07:02,070 --> 00:07:06,320
+The producer consumes spaces and produces
+characters.
+
+95
+00:07:06,320 --> 00:07:11,400
+The consumer consumes characters and produces
+spaces.
+
+96
+00:07:11,400 --> 00:07:17,370
+Semaphores are used to track the availability
+of both resources (i.e., characters and spaces),
+
+97
+00:07:17,370 --> 00:07:20,650
+synchronizing the execution of the producer
+and consumer.
+
+98
+00:07:20,650 --> 00:07:25,960
+This works great when there is a single producer
+process and a single consumer process.
+
+99
+00:07:25,960 --> 00:07:30,530
+Next we'll think about what will happen if
+we have multiple producers and multiple consumers.

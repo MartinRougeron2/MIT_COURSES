@@ -1,0 +1,203 @@
+1
+00:00:00,500 --> 00:00:05,790
+In this problem, we are given
+a function Z equal to ((A OR B)
+
+2
+00:00:05,790 --> 00:00:09,110
+AND C), the whole thing negated.
+
+3
+00:00:09,110 --> 00:00:12,060
+We are then asked to
+produce a CMOS circuit that
+
+4
+00:00:12,060 --> 00:00:14,440
+implements the function Z.
+
+5
+00:00:14,440 --> 00:00:16,740
+We know that our CMOS
+circuits consists
+
+6
+00:00:16,740 --> 00:00:20,080
+of a pull-down circuit
+made up purely of NFETs,
+
+7
+00:00:20,080 --> 00:00:23,290
+and it is called pull-down
+because if it is on,
+
+8
+00:00:23,290 --> 00:00:28,530
+it connects the output to ground
+to produce a low (or 0) output.
+
+9
+00:00:28,530 --> 00:00:32,830
+We also have a pull-up circuit
+made up purely of PFETs,
+
+10
+00:00:32,830 --> 00:00:36,040
+and it is called a pull-up
+because if it is on,
+
+11
+00:00:36,040 --> 00:00:41,810
+it connects the output to Vdd
+to produce a high (or 1) output.
+
+12
+00:00:41,810 --> 00:00:50,080
+If Z = NOT((A OR B) AND C),
+then NOT(Z) = ((A OR B) AND C).
+
+13
+00:00:50,080 --> 00:00:52,660
+To draw the pull-down
+portion of this circuit,
+
+14
+00:00:52,660 --> 00:00:57,100
+we take a look at when the
+function produces Z = 0.
+
+15
+00:00:57,100 --> 00:01:00,990
+This occurs when ((A
+or B) and C) equals 1,
+
+16
+00:01:00,990 --> 00:01:05,470
+so the pull-down circuitry
+should be on when ((A or B)
+
+17
+00:01:05,470 --> 00:01:07,930
+and C) equals 1.
+
+18
+00:01:07,930 --> 00:01:14,030
+So (A OR B) = 1 and C = 1.
+
+19
+00:01:14,030 --> 00:01:19,120
+This means that we want a
+parallel(A,B) in series with C
+
+20
+00:01:19,120 --> 00:01:21,870
+circuit for our pull-down.
+
+21
+00:01:21,870 --> 00:01:27,200
+The parallel(A,B) corresponds to
+(A OR B) = 1 because if either
+
+22
+00:01:27,200 --> 00:01:31,620
+A or B equals 1 then we have
+a path from Z to the bottom
+
+23
+00:01:31,620 --> 00:01:33,880
+of the parallel circuitry.
+
+24
+00:01:33,880 --> 00:01:39,010
+Then if C is also 1, we complete
+our path between Z and ground.
+
+25
+00:01:39,010 --> 00:01:45,660
+So, if either (A = 1 and C
+= 1) or (B = 1 and C = 1),
+
+26
+00:01:45,660 --> 00:01:50,320
+Z is pulled down to ground
+and produces a 0 output.
+
+27
+00:01:50,320 --> 00:01:52,760
+To generate our
+pull-up, we simply
+
+28
+00:01:52,760 --> 00:01:55,300
+replace parallel
+circuits with series,
+
+29
+00:01:55,300 --> 00:01:57,540
+and series with parallel.
+
+30
+00:01:57,540 --> 00:02:00,860
+This will ensure that whenever
+our pull-down circuit is off,
+
+31
+00:02:00,860 --> 00:02:03,210
+our pull-up circuit is on.
+
+32
+00:02:03,210 --> 00:02:09,870
+So our pull-up circuitry is
+series(A,B) in parallel with C.
+
+33
+00:02:09,870 --> 00:02:12,230
+To convince ourselves
+that this is in fact
+
+34
+00:02:12,230 --> 00:02:15,410
+the correct pull-up circuit,
+we know that the pull-up
+
+35
+00:02:15,410 --> 00:02:18,080
+must make Z equal to 1.
+
+36
+00:02:18,080 --> 00:02:24,490
+Z = 1 if ((A OR B) AND C) the
+whole thing negated equals 1,
+
+37
+00:02:24,490 --> 00:02:29,530
+or ((A OR B) AND C) = 0.
+
+38
+00:02:29,530 --> 00:02:35,150
+This is true when either
+(A OR B) = 0 or C = 0.
+
+39
+00:02:35,150 --> 00:02:42,590
+This means that either A =
+0 and B = 0 OR just C = 0.
+
+40
+00:02:42,590 --> 00:02:46,500
+Pull-up circuits use PFETs which
+are on when the input is low
+
+41
+00:02:46,500 --> 00:02:47,720
+(or 0).
+
+42
+00:02:47,720 --> 00:02:54,060
+So the equivalent circuit for
+this is series(A,B) ORed with C
+
+43
+00:02:54,060 --> 00:02:59,660
+which is equal to series(A,B)
+in parallel with C.

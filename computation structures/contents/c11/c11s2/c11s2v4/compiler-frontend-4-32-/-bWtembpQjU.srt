@@ -1,0 +1,274 @@
+1
+00:00:00,640 --> 00:00:05,890
+A modern compiler starts by analyzing the
+source program text to produce an equivalent
+
+2
+00:00:05,890 --> 00:00:11,460
+sequence of operations expressed in a language-
+and machine-independent intermediate representation
+
+3
+00:00:11,460 --> 00:00:12,720
+(IR).
+
+4
+00:00:12,720 --> 00:00:18,689
+The analysis, or frontend, phase checks that
+program is well-formed, i.e., that the syntax
+
+5
+00:00:18,689 --> 00:00:22,179
+of each high-level language statement is correct.
+
+6
+00:00:22,179 --> 00:00:26,409
+It understands the meaning (semantics) of
+each statement.
+
+7
+00:00:26,409 --> 00:00:31,499
+Many high-level languages include declarations
+of the type - e.g., integer, floating point,
+
+8
+00:00:31,499 --> 00:00:36,840
+string, etc. - of each variable,
+and the frontend verifies that all operations
+
+9
+00:00:36,840 --> 00:00:42,800
+are correctly applied, ensuring that numeric
+operations have numeric-type operands, string
+
+10
+00:00:42,800 --> 00:00:46,800
+operations have string-type operands, and
+so on.
+
+11
+00:00:46,800 --> 00:00:51,859
+Basically the analysis phase converts the
+text of the source program into an internal
+
+12
+00:00:51,859 --> 00:00:58,079
+data structure that specifies the sequence
+and type of operations to be performed.
+
+13
+00:00:58,079 --> 00:01:02,559
+Often there are families of frontend programs
+that translate a variety of high-level languages
+
+14
+00:01:02,559 --> 00:01:10,140
+(e.g, C, C++, Java) into a common IR.
+
+15
+00:01:10,140 --> 00:01:16,450
+The synthesis, or backend, phase then optimizes
+the IR to reduce the number of operations
+
+16
+00:01:16,450 --> 00:01:19,880
+that will be executed when the final code
+is run.
+
+17
+00:01:19,880 --> 00:01:24,740
+For example, it might find operations inside
+of a loop that are independent of the loop
+
+18
+00:01:24,740 --> 00:01:30,560
+index and can moved outside the loop, where
+they are performed once instead of repeatedly
+
+19
+00:01:30,560 --> 00:01:32,640
+inside the loop.
+
+20
+00:01:32,640 --> 00:01:38,880
+Once the IR is in its final optimized form,
+the backend generates code sequences for the
+
+21
+00:01:38,880 --> 00:01:45,380
+target ISA and looks for further optimizations
+that take advantage of particular features
+
+22
+00:01:45,380 --> 00:01:47,299
+of the ISA.
+
+23
+00:01:47,299 --> 00:01:53,280
+For example, for the Beta ISA we saw how a
+CMOVE followed by an arithmetic operation
+
+24
+00:01:53,280 --> 00:01:57,750
+can be shorted to a single operation with
+a constant operand.
+
+25
+00:01:57,750 --> 00:02:02,760
+The analysis phase starts by scanning the
+source text and generating a sequence of token
+
+26
+00:02:02,760 --> 00:02:07,330
+objects that identify the type of each piece
+of the source text.
+
+27
+00:02:07,330 --> 00:02:13,150
+While spaces, tabs, newlines, and so on were
+needed to separate tokens in the source text,
+
+28
+00:02:13,150 --> 00:02:16,510
+they've all been removed during the scanning
+process.
+
+29
+00:02:16,510 --> 00:02:21,930
+To enable useful error reporting, token objects
+also include information about where in the
+
+30
+00:02:21,930 --> 00:02:29,010
+source text each token was found, e.g., the
+file name, line number, and column number.
+
+31
+00:02:29,010 --> 00:02:34,989
+The scanning phase reports illegal tokens,
+e.g., the token "3x" would cause an error
+
+32
+00:02:34,989 --> 00:02:40,810
+since in C it would not be a legal number
+or a legal variable name.
+
+33
+00:02:40,810 --> 00:02:46,599
+The parsing phase processes the sequence of
+tokens to build the syntax tree, which captures
+
+34
+00:02:46,599 --> 00:02:51,470
+the structure of the original program in a
+convenient data structure.
+
+35
+00:02:51,470 --> 00:02:55,840
+The operands have been organized for each
+unary and binary operation.
+
+36
+00:02:55,840 --> 00:02:59,720
+The components of each statement have been
+found and labeled.
+
+37
+00:02:59,720 --> 00:03:05,220
+The role of each source token has been determined
+and the information captured in the syntax
+
+38
+00:03:05,220 --> 00:03:07,120
+tree.
+
+39
+00:03:07,120 --> 00:03:11,159
+Compare the labels of the nodes in the tree
+to the templates we discussed in the previous
+
+40
+00:03:11,159 --> 00:03:12,159
+segment.
+
+41
+00:03:12,159 --> 00:03:16,860
+We can see that it would be easy to write
+a program that did a depth-first tree walk,
+
+42
+00:03:16,860 --> 00:03:21,349
+using the label of each tree node to select
+the appropriate code generation template.
+
+43
+00:03:21,349 --> 00:03:26,069
+We won't do that quite yet since there's still
+some work to be done analyzing and transforming
+
+44
+00:03:26,069 --> 00:03:27,750
+the tree.
+
+45
+00:03:27,750 --> 00:03:32,890
+The syntax tree makes it easy to verify that
+the program is semantically correct, e.g.,
+
+46
+00:03:32,890 --> 00:03:38,260
+to check that the types of the operands are
+compatible with the requested operation.
+
+47
+00:03:38,260 --> 00:03:43,290
+For example, consider the statement x = "bananas".
+
+48
+00:03:43,290 --> 00:03:47,780
+The syntax of the assignment operation is
+correct: there's a variable on the left-hand
+
+49
+00:03:47,780 --> 00:03:50,680
+side and an expression on the right-hand side.
+
+50
+00:03:50,680 --> 00:03:54,930
+But the semantics is not correct, at least
+in the C language!
+
+51
+00:03:54,930 --> 00:04:01,110
+By looking in its symbol table to check the
+declared type for the variable x (int) and
+
+52
+00:04:01,110 --> 00:04:04,470
+comparing it to the type of the expression
+(string),
+
+53
+00:04:04,470 --> 00:04:10,890
+the semantic checker for the "op =" tree node
+will detect that the types are not compatible,
+
+54
+00:04:10,890 --> 00:04:17,000
+i.e., that we can't store a string value into
+an integer variable.
+
+55
+00:04:17,000 --> 00:04:22,410
+When the semantic analysis is complete, we
+know that the syntax tree represents a syntactically
+
+56
+00:04:22,410 --> 00:04:27,820
+correct program with valid semantics, and
+we've finished converting the source program
+
+57
+00:04:27,820 --> 00:04:31,510
+into an equivalent, language-independent sequence
+of operations.

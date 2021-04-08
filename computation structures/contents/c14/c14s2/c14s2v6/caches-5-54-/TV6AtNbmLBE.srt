@@ -1,0 +1,381 @@
+1
+00:00:00,960 --> 00:00:03,590
+Okay, let's review our plan.
+
+2
+00:00:03,590 --> 00:00:07,730
+The processor starts an access by sending
+an address to the cache.
+
+3
+00:00:07,730 --> 00:00:12,719
+If data for the requested address is held
+in the cache, it's quickly returned to the
+
+4
+00:00:12,719 --> 00:00:13,830
+CPU.
+
+5
+00:00:13,830 --> 00:00:18,930
+If the data we request is not in the cache,
+we have a cache miss, so the cache has to
+
+6
+00:00:18,930 --> 00:00:24,759
+make a request to main memory to get the data,
+which it then returns to processor.
+
+7
+00:00:24,759 --> 00:00:29,289
+Typically the cache will remember the newly
+fetched data, possibly replacing some older
+
+8
+00:00:29,289 --> 00:00:30,960
+data in the cache.
+
+9
+00:00:30,960 --> 00:00:36,429
+Suppose a cache access takes 4 ns and a main
+memory access takes 40 ns.
+
+10
+00:00:36,429 --> 00:00:42,429
+Then an access that hits in the cache has
+a latency of 4 ns, but an access that misses
+
+11
+00:00:42,429 --> 00:00:46,820
+in the cache has a latency of 44 ns.
+
+12
+00:00:46,820 --> 00:00:52,039
+The processor has to deal with the variable
+memory access time, perhaps by simply waiting
+
+13
+00:00:52,039 --> 00:00:57,010
+for the access to complete, or, in modern
+hyper-threaded processors, it might execute
+
+14
+00:00:57,010 --> 00:01:00,539
+an instruction or two from another programming
+thread.
+
+15
+00:01:00,539 --> 00:01:05,550
+The hit and miss ratios tell us the fraction
+of accesses which are cache hits and the fraction
+
+16
+00:01:05,550 --> 00:01:07,740
+of accesses which are cache misses.
+
+17
+00:01:07,740 --> 00:01:12,100
+Of course, the ratios will sum to 1.
+
+18
+00:01:12,100 --> 00:01:15,869
+Using these metrics we can compute the average
+memory access time (AMAT).
+
+19
+00:01:15,869 --> 00:01:20,140
+Since we always check in the cache first,
+every access includes the cache access time
+
+20
+00:01:20,140 --> 00:01:21,850
+(called the hit time).
+
+21
+00:01:21,850 --> 00:01:26,750
+If we miss in the cache, we have to take the
+additional time needed to access main memory
+
+22
+00:01:26,750 --> 00:01:29,200
+(called the miss penalty).
+
+23
+00:01:29,200 --> 00:01:34,049
+But the main memory access only happens on
+some fraction of the accesses: the miss ratio
+
+24
+00:01:34,049 --> 00:01:37,240
+tells us how often that occurs.
+
+25
+00:01:37,240 --> 00:01:42,770
+So the AMAT can be computed using the formula
+shown here.
+
+26
+00:01:42,770 --> 00:01:47,780
+The lower the miss ratio (or, equivalently,
+the higher the hit ratio), the smaller the
+
+27
+00:01:47,780 --> 00:01:49,908
+average access time.
+
+28
+00:01:49,908 --> 00:01:54,158
+Our design goal for the cache is to achieve
+a high hit ratio.
+
+29
+00:01:54,158 --> 00:01:58,420
+If we have multiple levels of cache, we can
+apply the formula recursively to calculate
+
+30
+00:01:58,420 --> 00:02:03,020
+the AMAT at each level of the memory.
+
+31
+00:02:03,020 --> 00:02:09,250
+Each successive level of the cache is slower,
+i.e., has a longer hit time, which is offset
+
+32
+00:02:09,250 --> 00:02:14,020
+by lower miss ratio because of its increased
+size.
+
+33
+00:02:14,020 --> 00:02:15,770
+Let's try out some numbers.
+
+34
+00:02:15,770 --> 00:02:22,079
+Suppose the cache takes 4 processor cycles
+to respond, and main memory takes 100 cycles.
+
+35
+00:02:22,079 --> 00:02:26,470
+Without the cache, each memory access would
+take 100 cycles.
+
+36
+00:02:26,470 --> 00:02:33,870
+With the cache, a cache hit takes 4 cycles,
+and a cache miss takes 104 cycles.
+
+37
+00:02:33,870 --> 00:02:40,940
+What hit ratio is needed to so that the AMAT
+with the cache is 100 cycles, the break-even
+
+38
+00:02:40,940 --> 00:02:43,050
+point?
+
+39
+00:02:43,050 --> 00:02:48,370
+Using the AMAT formula from the previously
+slide, we see that we only need a hit ratio
+
+40
+00:02:48,370 --> 00:02:54,810
+of 4% in order for memory system of the Cache
++ Main Memory to perform as well as Main Memory
+
+41
+00:02:54,810 --> 00:02:56,310
+alone.
+
+42
+00:02:56,310 --> 00:03:00,940
+The idea, of course, is that we'll be able
+to do much better than that.
+
+43
+00:03:00,940 --> 00:03:05,850
+Suppose we wanted an AMAT of 5 cycles.
+
+44
+00:03:05,850 --> 00:03:09,730
+Clearly most of the accesses would have to
+be cache hits.
+
+45
+00:03:09,730 --> 00:03:15,340
+We can use the AMAT formula to compute the
+necessary hit ratio.
+
+46
+00:03:15,340 --> 00:03:20,180
+Working through the arithmetic we see that
+99% of the accesses must be cache hits in
+
+47
+00:03:20,180 --> 00:03:25,030
+order to achieve an average access time of
+5 cycles.
+
+48
+00:03:25,030 --> 00:03:28,840
+Could we expect to do that well when running
+actual programs?
+
+49
+00:03:28,840 --> 00:03:31,420
+Happily, we can come close.
+
+50
+00:03:31,420 --> 00:03:38,060
+In a simulation of the Spec CPU2000 Benchmark,
+the hit ratio for a standard-size level 1
+
+51
+00:03:38,060 --> 00:03:43,470
+cache was measured to be 97.5% over some ~10
+trillion accesses.
+
+52
+00:03:43,470 --> 00:03:44,730
+[See the "All benchmarks" arithmetic-mean
+table at http://research.cs.wisc.edu/multifacet/misc/spec2000cache-data/]
+
+53
+00:03:44,730 --> 00:03:46,870
+Here's a start at building a cache.
+
+54
+00:03:46,870 --> 00:03:50,380
+The cache will hold many different blocks
+of data.
+
+55
+00:03:50,380 --> 00:03:54,700
+For now let's assume each block is an individual
+memory location.
+
+56
+00:03:54,700 --> 00:03:58,010
+Each data block is "tagged" with its address.
+
+57
+00:03:58,010 --> 00:04:04,530
+A combination of a data block and its associated
+address tag is called a cache line.
+
+58
+00:04:04,530 --> 00:04:09,480
+When an address is received from the CPU,
+we'll search the cache looking for a block
+
+59
+00:04:09,480 --> 00:04:12,230
+with a matching address tag.
+
+60
+00:04:12,230 --> 00:04:16,470
+If we find a matching address tag, we have
+a cache hit.
+
+61
+00:04:16,470 --> 00:04:20,519
+On a read access, we'll return the data from
+the matching cache line.
+
+62
+00:04:20,519 --> 00:04:25,791
+On a write access, we'll update the data stored
+in the cache line and, at some point, update
+
+63
+00:04:25,791 --> 00:04:29,879
+the corresponding location in main memory.
+
+64
+00:04:29,879 --> 00:04:34,150
+If no matching tag is found, we have a cache
+miss.
+
+65
+00:04:34,150 --> 00:04:38,630
+So we'll have to choose a cache line to use
+to hold the requested data, which means that
+
+66
+00:04:38,630 --> 00:04:44,569
+some previously cached location will no longer
+be found in the cache.
+
+67
+00:04:44,569 --> 00:04:49,629
+For a read operation, we'll fetch the requested
+data from main memory, add it to the cache
+
+68
+00:04:49,629 --> 00:04:55,130
+(updating the tag and data fields of the cache
+line) and, of course, return the data to the
+
+69
+00:04:55,130 --> 00:04:57,000
+CPU.
+
+70
+00:04:57,000 --> 00:05:02,379
+On a write, we'll update the tag and data
+in the selected cache line and, at some point,
+
+71
+00:05:02,379 --> 00:05:05,749
+update the corresponding location in main
+memory.
+
+72
+00:05:05,749 --> 00:05:11,280
+So the contents of the cache is determined
+by the memory requests made by the CPU.
+
+73
+00:05:11,280 --> 00:05:17,090
+If the CPU requests a recently-used address,
+chances are good the data will still be in
+
+74
+00:05:17,090 --> 00:05:21,759
+the cache from the previous access to the
+same location.
+
+75
+00:05:21,759 --> 00:05:27,539
+As the working set slowly changes, the cache
+contents will be updated as needed.
+
+76
+00:05:27,539 --> 00:05:32,999
+If the entire working set can fit into the
+cache, most of the requests will be hits and
+
+77
+00:05:32,999 --> 00:05:37,639
+the AMAT will be close to the cache access
+time.
+
+78
+00:05:37,639 --> 00:05:40,490
+So far, so good!
+
+79
+00:05:40,490 --> 00:05:46,189
+Of course, we'll need to figure how to quickly
+search the cache, i.e., we'll a need fast
+
+80
+00:05:46,189 --> 00:05:52,409
+way to answer the question of whether a particular
+address tag can be found in some cache line.
+
+81
+00:05:52,409 --> 00:05:53,490
+That's our next topic.

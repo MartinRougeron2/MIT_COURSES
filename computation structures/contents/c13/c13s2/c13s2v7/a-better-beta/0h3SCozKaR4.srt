@@ -1,0 +1,522 @@
+1
+00:00:00,729 --> 00:00:05,470
+In this problem, we are going to consider
+several instructions that we want to add to
+
+2
+00:00:05,470 --> 00:00:06,870
+our beta.
+
+3
+00:00:06,870 --> 00:00:11,949
+For each of these instructions, we will need
+to decide what the minimum requirement is
+
+4
+00:00:11,949 --> 00:00:14,539
+to add that instruction.
+
+5
+00:00:14,539 --> 00:00:19,859
+The simplest addition would be a macro that
+references a single already existing beta
+
+6
+00:00:19,859 --> 00:00:21,789
+instruction.
+
+7
+00:00:21,789 --> 00:00:27,589
+If our new instruction cannot be implemented
+by simply defining a macro, then we want to
+
+8
+00:00:27,589 --> 00:00:33,270
+consider whether adding a new opcode, and
+producing the appropriate control ROM signals
+
+9
+00:00:33,270 --> 00:00:39,969
+for it, will enable the new operation to be
+executed on our existing Beta datapaths.
+
+10
+00:00:39,969 --> 00:00:46,590
+Finally, if neither the macro or Control ROM
+solutions work, then we need to specify that
+
+11
+00:00:46,590 --> 00:00:56,949
+the instruction cannot be implemented without
+making actual hardware changes to the Beta.
+
+12
+00:00:56,949 --> 00:01:02,730
+The first instruction that we want to consider
+adding to our Beta is a SWAPR instruction
+
+13
+00:01:02,730 --> 00:01:09,190
+which swaps the contents of registers Rx and
+Ry in a single clock cycle.
+
+14
+00:01:09,190 --> 00:01:13,870
+The constraint that this must be done in a
+single clock cycle points us to the fact that
+
+15
+00:01:13,870 --> 00:01:19,000
+the Beta hardware does not have the ability
+to write to two different registers in the
+
+16
+00:01:19,000 --> 00:01:20,539
+same clock cycle.
+
+17
+00:01:20,539 --> 00:01:29,220
+Thus, in order to add this instruction to
+the Beta, new hardware would need to be added.
+
+18
+00:01:29,220 --> 00:01:34,880
+The next instruction that we want to consider
+adding to our beta is a NEG instruction.
+
+19
+00:01:34,880 --> 00:01:40,860
+This instruction should take the two's complement
+negation of register Rx and store it into
+
+20
+00:01:40,860 --> 00:01:42,789
+register Ry.
+
+21
+00:01:42,789 --> 00:01:47,770
+The first question we want to ask ourselves
+is whether or not we might be able to implement
+
+22
+00:01:47,770 --> 00:01:51,670
+this using a macro.
+
+23
+00:01:51,670 --> 00:01:56,289
+Since all we are trying to do is produce the
+negative of a given value, we can write a
+
+24
+00:01:56,289 --> 00:02:03,950
+macro for this instruction which subtracts
+Rx from R31 and stores that result into Ry.
+
+25
+00:02:03,950 --> 00:02:08,669
+Note that this macro will not work for the
+corner case which is the largest representable
+
+26
+00:02:08,669 --> 00:02:14,040
+negative number because the negation of that
+number cannot be represented using 32-bit
+
+27
+00:02:14,040 --> 00:02:16,569
+two's complement representation.
+
+28
+00:02:16,569 --> 00:02:23,680
+For all other cases, however, this macro works
+as expected.
+
+29
+00:02:23,680 --> 00:02:29,420
+The next instruction that we want to consider
+adding to our Beta is a PC-relative store
+
+30
+00:02:29,420 --> 00:02:30,420
+instruction.
+
+31
+00:02:30,420 --> 00:02:35,519
+The way this instruction works is that it
+writes the contents of register Rx to a location
+
+32
+00:02:35,519 --> 00:02:44,950
+in memory whose address is computed by adding
+PC + 4 + 4*SEXT(C).
+
+33
+00:02:44,950 --> 00:02:50,260
+The only existing store operation in the beta
+is a store that writes to the address that
+
+34
+00:02:50,260 --> 00:02:56,569
+is computed by adding the contents of register
+Ry and the sign extended literal C.
+
+35
+00:02:56,569 --> 00:03:01,420
+Since this is not equivalent to the store
+relative instruction's behavior that means
+
+36
+00:03:01,420 --> 00:03:05,310
+that we cannot implement this instruction
+as a macro.
+
+37
+00:03:05,310 --> 00:03:09,930
+So next we consider whether or not we can
+implement this instruction using our existing
+
+38
+00:03:09,930 --> 00:03:12,329
+Beta datapaths.
+
+39
+00:03:12,329 --> 00:03:19,480
+This beta diagram highlights in red the dataflow
+through the existing Beta datapaths that would
+
+40
+00:03:19,480 --> 00:03:23,459
+perform the desired PC relative store instruction.
+
+41
+00:03:23,459 --> 00:03:28,599
+The way this instruction works is that the
+extra adder under the instruction memory is
+
+42
+00:03:28,599 --> 00:03:36,120
+used to compute the value of the effective
+address which is PC + 4 + 4*SEXT(C).
+
+43
+00:03:36,120 --> 00:03:44,879
+The ASEL, or A select signal is then set to
+1 to pass that value to the ALU as the A operand.
+
+44
+00:03:44,879 --> 00:03:51,409
+The ALUFN is then set to A to continue passing
+that value through the ALU in order for it
+
+45
+00:03:51,409 --> 00:03:54,900
+to be used as the address for the data memory.
+
+46
+00:03:54,900 --> 00:04:00,019
+This address is labeled MA, or memory address
+in the beta diagram.
+
+47
+00:04:00,019 --> 00:04:04,939
+The value that is written to memory is the
+value of register Rx.
+
+48
+00:04:04,939 --> 00:04:10,730
+In store operations, the first operand corresponds
+to register Rc.
+
+49
+00:04:10,730 --> 00:04:18,790
+So we set RA2SEL = 1 in order to select Rc,
+which is Rx in this case, as the register
+
+50
+00:04:18,790 --> 00:04:22,190
+whose contents should be written to memory.
+
+51
+00:04:22,190 --> 00:04:28,060
+The value of this register is made available
+via the RD2 register file port which then
+
+52
+00:04:28,060 --> 00:04:33,640
+feeds the MWD, or memory write data signal
+for the memory.
+
+53
+00:04:33,640 --> 00:04:37,940
+There are a couple other memory related signals
+that we need to set appropriately.
+
+54
+00:04:37,940 --> 00:04:43,171
+They are MWR, which stands for memory write
+read, and controls the write enable of the
+
+55
+00:04:43,171 --> 00:04:44,530
+data memory.
+
+56
+00:04:44,530 --> 00:04:49,650
+In order to be able to write to the memory,
+the write enable must be set to 1.
+
+57
+00:04:49,650 --> 00:04:52,700
+MOE is the memory output enable.
+
+58
+00:04:52,700 --> 00:04:57,770
+We set this to 0 to specify that no output
+should be enabled from the memory.
+
+59
+00:04:57,770 --> 00:05:02,660
+Note that you may think that MOE should be
+a don't care since we are never making use
+
+60
+00:05:02,660 --> 00:05:06,540
+of the MRD, or memory read data, signal in
+our datapath.
+
+61
+00:05:06,540 --> 00:05:12,610
+However, by setting it to 0 we allow ourselves
+to potentially use the same databus for the
+
+62
+00:05:12,610 --> 00:05:15,260
+read and write data of the memory.
+
+63
+00:05:15,260 --> 00:05:20,780
+This is not explicitly shown in our beta diagram
+but is the reason that MOE is specified as
+
+64
+00:05:20,780 --> 00:05:23,140
+0 for us.
+
+65
+00:05:23,140 --> 00:05:27,790
+The other control signal that we must set
+to 0 is WERF, which stands for write enable
+
+66
+00:05:27,790 --> 00:05:29,760
+register file.
+
+67
+00:05:29,760 --> 00:05:35,290
+Setting this signal to 0 ensures that no value
+will be written back into our register file.
+
+68
+00:05:35,290 --> 00:05:41,200
+This allows us to then set WDSEL and WASEL
+to don't cares.
+
+69
+00:05:41,200 --> 00:05:47,580
+The last control signal is BSEL which is also
+a don't care because the B operand is ignored
+
+70
+00:05:47,580 --> 00:05:50,390
+by the ALU for this instruction.
+
+71
+00:05:50,390 --> 00:05:57,930
+Finally, the PCSEL = 0 in order to increment
+the PC by 4 so that the next instruction will
+
+72
+00:05:57,930 --> 00:06:01,860
+be fetched.
+
+73
+00:06:01,860 --> 00:06:07,640
+So our completed Control ROM for the STR operation
+is shown here.
+
+74
+00:06:07,640 --> 00:06:14,910
+The last instruction we want to add to our
+beta is the BITCLR(Rx, Ry, Rz) instruction.
+
+75
+00:06:14,910 --> 00:06:20,550
+This instruction performs a bitwise AND of
+the contents of register Ry with the complement
+
+76
+00:06:20,550 --> 00:06:22,880
+of the contents of register Rx.
+
+77
+00:06:22,880 --> 00:06:28,990
+There is no existing beta instruction that
+performs this functionality so using a macro
+
+78
+00:06:28,990 --> 00:06:30,530
+is not an option.
+
+79
+00:06:30,530 --> 00:06:35,310
+Next, we want to consider whether or not we
+could implement this instruction using our
+
+80
+00:06:35,310 --> 00:06:39,470
+existing datapaths with changes to our control
+ROM.
+
+81
+00:06:39,470 --> 00:06:44,500
+To answer this question, you need to realize
+that the operation that you are trying to
+
+82
+00:06:44,500 --> 00:06:49,560
+perform here is a boolean operation.
+
+83
+00:06:49,560 --> 00:06:55,440
+In module 1, when implementing the ALU lab,
+we learned that the way that the bool module
+
+84
+00:06:55,440 --> 00:07:04,640
+works is that if you set the ALUFN to 10abcd,
+then the ALU would produce the output defined
+
+85
+00:07:04,640 --> 00:07:11,080
+by this truth table for every pair of bits
+Bi and Ai.
+
+86
+00:07:11,080 --> 00:07:20,800
+So for example, to implement the AND function,
+we simply set a = 1, b = 0, c = 0, and d = 0
+
+87
+00:07:20,800 --> 00:07:26,120
+as shown in this truth table which is the
+truth table for an AND function.
+
+88
+00:07:26,120 --> 00:07:32,110
+The truth table for the BITCLR operation is
+shown here.
+
+89
+00:07:32,110 --> 00:07:38,420
+One additional column, NOT(Rx)[i] has been
+added to show the intermediate step of negating
+
+90
+00:07:38,420 --> 00:07:40,220
+Rx[i].
+
+91
+00:07:40,220 --> 00:07:47,270
+Then if you take the AND of the Ry[i] column
+and the Not(Rx)[i] columns you get the result
+
+92
+00:07:47,270 --> 00:07:49,550
+Rz[i].
+
+93
+00:07:49,550 --> 00:07:56,890
+This means that the ALUFN for the BITCLR operation
+is 10 followed by 0100.
+
+94
+00:07:56,890 --> 00:08:04,620
+The rest of the control signals can be determined
+by looking at this highlighted beta diagram
+
+95
+00:08:04,620 --> 00:08:09,290
+which shows in red the paths that must be
+followed in order to properly implement the
+
+96
+00:08:09,290 --> 00:08:10,720
+BITCLR operation.
+
+97
+00:08:10,720 --> 00:08:17,580
+The instruction memory specifies the registers
+Ra and Rb, in our case Rx and Ry, that are
+
+98
+00:08:17,580 --> 00:08:20,540
+to be used by this operation.
+
+99
+00:08:20,540 --> 00:08:28,810
+Setting RA2SEL to 0 tells the register file
+to read Rb, or Ry, as the second operand.
+
+100
+00:08:28,810 --> 00:08:35,249
+Then setting ASEL and BSEL to 0 passes the
+values of Rx and Ry to the ALU.
+
+101
+00:08:35,249 --> 00:08:42,649
+The ALUFN is used to specify the particular
+boolean operation that we are performing.
+
+102
+00:08:42,649 --> 00:08:49,920
+Then WDSEL = 1 in order to feed the results
+of the ALU back to the register file.
+
+103
+00:08:49,920 --> 00:08:55,779
+The Rc register is Rz and it is the register
+that the result should be written to.
+
+104
+00:08:55,779 --> 00:09:02,019
+To make that happen, we set WASEL = 0, and
+WERF = 1.
+
+105
+00:09:02,019 --> 00:09:07,730
+To avoid anything being written to the data
+memory, MWR is set to 0.
+
+106
+00:09:07,730 --> 00:09:13,240
+MOE can be a don't care because we are not
+using the memory for reading or writing and
+
+107
+00:09:13,240 --> 00:09:21,199
+setting WDSEL to 1 ignores anything that is
+on the MRD, or memory read data, line.
+
+108
+00:09:21,199 --> 00:09:28,420
+Finally, the PCSEL = 0 in order to increment
+the PC by 4 so that the next instruction will
+
+109
+00:09:28,420 --> 00:09:31,040
+be fetched.
+
+110
+00:09:31,040 --> 00:09:35,980
+So our completed Control ROM for the BITCLR
+operation is shown here.

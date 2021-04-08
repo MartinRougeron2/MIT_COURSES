@@ -1,0 +1,306 @@
+1
+00:00:00,940 --> 00:00:02,530
+PROFESSOR In this
+problem, we are
+
+2
+00:00:02,530 --> 00:00:05,950
+going to take a look at the
+timing constraints associated
+
+3
+00:00:05,950 --> 00:00:08,560
+with sequential logic circuits.
+
+4
+00:00:08,560 --> 00:00:11,260
+We are given a generic
+state machine diagram,
+
+5
+00:00:11,260 --> 00:00:13,390
+which has two state bits.
+
+6
+00:00:13,390 --> 00:00:15,700
+We are also given
+the timing parameters
+
+7
+00:00:15,700 --> 00:00:19,360
+for the combinational logic
+and the state register.
+
+8
+00:00:19,360 --> 00:00:22,300
+Using this data we want
+to determine the largest
+
+9
+00:00:22,300 --> 00:00:24,760
+value for the
+register's whole time
+
+10
+00:00:24,760 --> 00:00:29,280
+that allows the necessary
+timing specifications to be met.
+
+11
+00:00:29,280 --> 00:00:32,520
+In order to satisfy the
+whole time of the register,
+
+12
+00:00:32,520 --> 00:00:37,230
+the input to the register
+must remain stable until tHOLD
+
+13
+00:00:37,230 --> 00:00:39,510
+after the clock edge.
+
+14
+00:00:39,510 --> 00:00:41,970
+The fastest that a new
+change can propagate
+
+15
+00:00:41,970 --> 00:00:44,460
+to the input of the
+register is found
+
+16
+00:00:44,460 --> 00:00:46,650
+by taking the sum
+of the contamination
+
+17
+00:00:46,650 --> 00:00:50,490
+delays along the shortest
+path to that input.
+
+18
+00:00:50,490 --> 00:00:55,120
+That is [? tCD ?] of the
+register plus tCD of the logic.
+
+19
+00:00:55,120 --> 00:01:00,570
+So tHOLD must be less than or
+equal to tCD of the register
+
+20
+00:01:00,570 --> 00:01:03,000
+plus tCD of the logic.
+
+21
+00:01:03,000 --> 00:01:05,820
+Plugging in the given
+contamination delays,
+
+22
+00:01:05,820 --> 00:01:12,210
+we find that tHOLD must be less
+than or equal to 0.1 plus 0.2,
+
+23
+00:01:12,210 --> 00:01:16,890
+which equals 0.3 nanoseconds.
+
+24
+00:01:16,890 --> 00:01:19,020
+What is the smallest
+value for the period
+
+25
+00:01:19,020 --> 00:01:22,710
+of the clock that will meet
+the timing specifications?
+
+26
+00:01:22,710 --> 00:01:25,710
+The clock period must be
+long enough for the data
+
+27
+00:01:25,710 --> 00:01:27,960
+to pass through
+the entire circuit
+
+28
+00:01:27,960 --> 00:01:30,360
+and be ready and
+stable for tSETUP
+
+29
+00:01:30,360 --> 00:01:33,210
+before the next period begins.
+
+30
+00:01:33,210 --> 00:01:36,660
+The data in this circuit must
+propagate through the register
+
+31
+00:01:36,660 --> 00:01:39,040
+and the combinational logic.
+
+32
+00:01:39,040 --> 00:01:41,430
+So the constraint
+on the clock period
+
+33
+00:01:41,430 --> 00:01:45,930
+is that tCLOCK has to be
+greater than or equal to tPD
+
+34
+00:01:45,930 --> 00:01:49,890
+of the register plus
+tPD of the logic
+
+35
+00:01:49,890 --> 00:01:53,400
+plus tSETUP of the register.
+
+36
+00:01:53,400 --> 00:01:56,100
+Plugging in the given
+timing parameters,
+
+37
+00:01:56,100 --> 00:02:00,660
+we find that tCLOCK must be
+greater than or equal to 5
+
+38
+00:02:00,660 --> 00:02:06,180
+plus 3 plus 2, which
+equals 10 nanoseconds.
+
+39
+00:02:06,180 --> 00:02:09,060
+Next, we want to determine
+what are the smallest
+
+40
+00:02:09,060 --> 00:02:12,120
+setup and whole time
+specifications on the input
+
+41
+00:02:12,120 --> 00:02:16,170
+in with respect to the
+active edge of the clock
+
+42
+00:02:16,170 --> 00:02:18,840
+so that we can ensure
+that the necessary timing
+
+43
+00:02:18,840 --> 00:02:21,760
+specifications are met.
+
+44
+00:02:21,760 --> 00:02:24,930
+The IN input must be stable
+and valid long enough
+
+45
+00:02:24,930 --> 00:02:26,760
+before the rising
+clock edge for it
+
+46
+00:02:26,760 --> 00:02:29,640
+to propagate through
+the combinational logic
+
+47
+00:02:29,640 --> 00:02:33,360
+and arrive at the register
+in time for it to setup.
+
+48
+00:02:33,360 --> 00:02:36,840
+So tSETUP of IN is
+greater than or equal
+
+49
+00:02:36,840 --> 00:02:40,740
+to tPROPAGATION DELAY
+of the LOGIC plus
+
+50
+00:02:40,740 --> 00:02:42,900
+tSETUP of the register.
+
+51
+00:02:42,900 --> 00:02:48,600
+That equals 3 plus 2,
+which equals 5 nanoseconds.
+
+52
+00:02:48,600 --> 00:02:51,000
+Once the IN input
+becomes invalid,
+
+53
+00:02:51,000 --> 00:02:53,370
+the input to the register
+will become invalid
+
+54
+00:02:53,370 --> 00:02:56,610
+after the contamination
+delay of the logic.
+
+55
+00:02:56,610 --> 00:02:59,010
+IN must stay valid
+long enough to ensure
+
+56
+00:02:59,010 --> 00:03:01,920
+that the input to the register
+does not become invalid
+
+57
+00:03:01,920 --> 00:03:04,560
+before the registers hold time.
+
+58
+00:03:04,560 --> 00:03:09,110
+So tHOLD of IN plus
+tCD of the LOGIC
+
+59
+00:03:09,110 --> 00:03:13,170
+are greater than or equal
+to tHOLD of the register.
+
+60
+00:03:13,170 --> 00:03:16,620
+This can be rewritten
+as tHOLD of IN
+
+61
+00:03:16,620 --> 00:03:19,230
+must be greater than
+or equal to tHOLD
+
+62
+00:03:19,230 --> 00:03:22,980
+of the register minus
+tCD of the LOGIC,
+
+63
+00:03:22,980 --> 00:03:27,660
+which equals 0.3 minus 0.2.
+
+64
+00:03:27,660 --> 00:03:31,730
+And that equals 0.1 nanoseconds.

@@ -1,0 +1,213 @@
+1
+00:00:00,500 --> 00:00:04,670
+The goal of this problem is
+to design a reliable latch.
+
+2
+00:00:04,670 --> 00:00:08,540
+A latch can be designed using
+a multiplexor where the G
+
+3
+00:00:08,540 --> 00:00:11,150
+input is used to
+determine whether or not
+
+4
+00:00:11,150 --> 00:00:14,700
+a new data value should
+be loaded into the latch.
+
+5
+00:00:14,700 --> 00:00:19,990
+The way the latch works is that
+when G = 0, the old value of Q
+
+6
+00:00:19,990 --> 00:00:21,990
+is fed back through
+the multiplexor
+
+7
+00:00:21,990 --> 00:00:24,610
+so it retains its old value.
+
+8
+00:00:24,610 --> 00:00:28,920
+When G = 1, the multiplexor
+selects D as the input
+
+9
+00:00:28,920 --> 00:00:33,100
+so Q gets updated to
+be the value of D.
+
+10
+00:00:33,100 --> 00:00:34,850
+The logic function
+that describes
+
+11
+00:00:34,850 --> 00:00:43,050
+the operation of the latch is Q
+= (NOT(G) AND Q) OR (G AND D).
+
+12
+00:00:46,210 --> 00:00:49,320
+We want to build this
+latch using only AND, OR,
+
+13
+00:00:49,320 --> 00:00:51,130
+and inverter gates.
+
+14
+00:00:51,130 --> 00:00:54,390
+We are given three proposed
+designs for the latch.
+
+15
+00:00:54,390 --> 00:00:56,260
+For each proposed
+design, we want
+
+16
+00:00:56,260 --> 00:01:00,720
+to specify whether the design
+is BAD, GOOD, or OBESE.
+
+17
+00:01:00,720 --> 00:01:03,900
+BAD means that the latch
+does not work reliably.
+
+18
+00:01:03,900 --> 00:01:06,670
+GOOD means that the
+latch works reliably.
+
+19
+00:01:06,670 --> 00:01:10,000
+OBESE means that the latch
+works, but uses more gates
+
+20
+00:01:10,000 --> 00:01:12,260
+than necessary.
+
+21
+00:01:12,260 --> 00:01:15,000
+Latch proposal A is shown here.
+
+22
+00:01:15,000 --> 00:01:17,080
+Taking a closer look
+at this circuit,
+
+23
+00:01:17,080 --> 00:01:20,310
+we see that the logic
+function that it implements
+
+24
+00:01:20,310 --> 00:01:24,990
+is Q = (G AND Q) OR D.
+
+25
+00:01:24,990 --> 00:01:28,160
+This is not the correct
+logic equation for a latch,
+
+26
+00:01:28,160 --> 00:01:29,820
+so this design is BAD.
+
+27
+00:01:34,410 --> 00:01:38,180
+Next, we take a look
+at proposals B and C.
+
+28
+00:01:38,180 --> 00:01:43,780
+The logic equation for proposal
+B is Q = (NOT(G) AND Q)
+
+29
+00:01:43,780 --> 00:01:46,030
+OR (G AND D)).
+
+30
+00:01:46,030 --> 00:01:48,290
+This is exactly the
+same logic equation
+
+31
+00:01:48,290 --> 00:01:50,570
+that we specified for our latch.
+
+32
+00:01:50,570 --> 00:01:53,470
+However, this implementation
+is not lenient
+
+33
+00:01:53,470 --> 00:01:55,700
+because it does not
+guarantee that you will not
+
+34
+00:01:55,700 --> 00:02:00,150
+see glitches on your output
+signal when G changes value.
+
+35
+00:02:00,150 --> 00:02:04,190
+Proposal C, however, includes
+the same logic function
+
+36
+00:02:04,190 --> 00:02:10,160
+Q = (NOT(G) AND Q) OR (G
+AND D)) plus one more term
+
+37
+00:02:10,160 --> 00:02:13,690
+which is OR (Q AND D).
+
+38
+00:02:13,690 --> 00:02:17,250
+If you create a karnaugh map for
+both of these logic functions,
+
+39
+00:02:17,250 --> 00:02:20,120
+you see that the QD
+term is redundant
+
+40
+00:02:20,120 --> 00:02:22,420
+because it doesn't
+add any additional 1's
+
+41
+00:02:22,420 --> 00:02:24,010
+to the karnaugh map.
+
+42
+00:02:24,010 --> 00:02:27,330
+This means that logically the
+two functions are equivalent,
+
+43
+00:02:27,330 --> 00:02:30,000
+but the effect of the
+extra term is that it makes
+
+44
+00:02:30,000 --> 00:02:32,130
+the implementation lenient.
+
+45
+00:02:32,130 --> 00:02:36,876
+So Proposal C is the GOOD
+proposal and B is BAD.

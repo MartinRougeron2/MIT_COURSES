@@ -1,0 +1,444 @@
+1
+00:00:01,300 --> 00:00:07,200
+The simplest cache hardware consists of an
+SRAM with a few additional pieces of logic.
+
+2
+00:00:07,200 --> 00:00:12,130
+The cache hardware is designed so that each
+memory location in the CPU's address space
+
+3
+00:00:12,130 --> 00:00:18,249
+maps to a particular cache line, hence the
+name "direct-mapped (DM) cache".
+
+4
+00:00:18,249 --> 00:00:23,079
+There are, of course, many more memory locations
+then there are cache lines, so many addresses
+
+5
+00:00:23,079 --> 00:00:27,650
+are mapped to the same cache line and the
+cache will only be able to hold the data for
+
+6
+00:00:27,650 --> 00:00:31,169
+one of those addresses at a time.
+
+7
+00:00:31,169 --> 00:00:34,250
+The operation of a DM cache is straightforward.
+
+8
+00:00:34,250 --> 00:00:39,240
+We'll use part of the incoming address as
+an index to select a single cache line to
+
+9
+00:00:39,240 --> 00:00:40,899
+be searched.
+
+10
+00:00:40,899 --> 00:00:46,129
+The "search" consists of comparing the rest
+of the incoming address with the address tag
+
+11
+00:00:46,129 --> 00:00:48,600
+of the selected cache line.
+
+12
+00:00:48,600 --> 00:00:53,839
+If the tag matches the address, there's a
+cache hit and we can immediately use the data
+
+13
+00:00:53,839 --> 00:00:58,160
+in the cache to satisfy the request.
+
+14
+00:00:58,160 --> 00:01:03,570
+In this design, we've included an additional
+"valid bit" which is 1 when the tag and data
+
+15
+00:01:03,570 --> 00:01:06,590
+fields hold valid information.
+
+16
+00:01:06,590 --> 00:01:12,110
+The valid bit for each cache line is initialized
+to 0 when the cache is powered on, indicating
+
+17
+00:01:12,110 --> 00:01:15,830
+that all cache lines are empty.
+
+18
+00:01:15,830 --> 00:01:21,070
+As data is brought into the cache, the valid
+bit is set to 1 when the cache line's tag
+
+19
+00:01:21,070 --> 00:01:24,110
+and data fields are filled.
+
+20
+00:01:24,110 --> 00:01:28,460
+The CPU can request that the valid bit be
+cleared for a particular cache line - this
+
+21
+00:01:28,460 --> 00:01:30,550
+is called "flushing the cache".
+
+22
+00:01:30,550 --> 00:01:35,840
+If, for example, the CPU initiates a read
+from disk, the disk hardware will read its
+
+23
+00:01:35,840 --> 00:01:42,570
+data into a block of main memory, so any cached
+values for that block will out-of-date.
+
+24
+00:01:42,570 --> 00:01:48,750
+So the CPU will flush those locations from
+the cache by marking any matching cache lines
+
+25
+00:01:48,750 --> 00:01:50,610
+as invalid.
+
+26
+00:01:50,610 --> 00:01:56,580
+Let's see how this works using a small DM
+cache with 8 lines where each cache line contains
+
+27
+00:01:56,580 --> 00:02:00,200
+a single word (4 bytes) of data.
+
+28
+00:02:00,200 --> 00:02:05,390
+Here's a CPU request for the location at byte
+address 0xE8.
+
+29
+00:02:05,390 --> 00:02:10,228
+Since there 4 bytes of data in each cache
+line, the bottom 2 address bits indicate the
+
+30
+00:02:10,228 --> 00:02:14,390
+appropriate byte offset into the cached word.
+
+31
+00:02:14,390 --> 00:02:20,160
+Since the cache deals only with word accesses,
+the byte offset bits aren't used.
+
+32
+00:02:20,160 --> 00:02:27,060
+Next, we'll need to use 3 address bits to
+select which of the 8 cache lines to search.
+
+33
+00:02:27,060 --> 00:02:31,700
+We choose these cache index bits from the
+low-order bits of the address.
+
+34
+00:02:31,700 --> 00:02:32,750
+Why?
+
+35
+00:02:32,750 --> 00:02:36,100
+Well, it's because of locality.
+
+36
+00:02:36,100 --> 00:02:40,430
+The principle of locality tells us that it's
+likely that the CPU will be requesting nearby
+
+37
+00:02:40,430 --> 00:02:45,980
+addresses and for the cache to perform well,
+we'd like to arrange for nearby locations
+
+38
+00:02:45,980 --> 00:02:50,400
+to be able to be held in the cache at the
+same time.
+
+39
+00:02:50,400 --> 00:02:56,250
+This means that nearby locations will have
+to be mapped to different cache lines.
+
+40
+00:02:56,250 --> 00:03:01,280
+The addresses of nearby locations differ in
+their low-order address bits, so we'll use
+
+41
+00:03:01,280 --> 00:03:06,840
+those bits as the cache index bits - that
+way nearby locations will map to different
+
+42
+00:03:06,840 --> 00:03:09,370
+cache lines.
+
+43
+00:03:09,370 --> 00:03:15,630
+The data, tag and valid bits selected by the
+cache line index are read from the SRAM.
+
+44
+00:03:15,630 --> 00:03:20,490
+To complete the search, we check the remaining
+address against the tag field of the cache.
+
+45
+00:03:20,490 --> 00:03:25,940
+If they're equal and the valid bit is 1, we
+have a cache hit, and the data field can be
+
+46
+00:03:25,940 --> 00:03:29,740
+used to satisfy the request.
+
+47
+00:03:29,740 --> 00:03:35,260
+How come the tag field isn't 32 bits, since
+we have a 32-bit address?
+
+48
+00:03:35,260 --> 00:03:39,620
+We could have done that, but since all values
+stored in cache line 2 will have the same
+
+49
+00:03:39,620 --> 00:03:46,860
+index bits (0b010), we saved a few bits of
+SRAM and chose not save those bits in the
+
+50
+00:03:46,860 --> 00:03:47,860
+tag.
+
+51
+00:03:47,860 --> 00:03:52,620
+In other words, there's no point in using
+SRAM to save bits we can generate from the
+
+52
+00:03:52,620 --> 00:03:55,180
+incoming address.
+
+53
+00:03:55,180 --> 00:04:02,380
+So the cache hardware in this example is an
+8-location by 60 bit SRAM plus a 27-bit comparator
+
+54
+00:04:02,380 --> 00:04:04,730
+and a single AND gate.
+
+55
+00:04:04,730 --> 00:04:10,220
+The cache access time is the access time of
+the SRAM plus the propagation delays of the
+
+56
+00:04:10,220 --> 00:04:12,459
+comparator and AND gate.
+
+57
+00:04:12,459 --> 00:04:16,380
+About as simple and fast as we could hope
+for.
+
+58
+00:04:16,380 --> 00:04:22,120
+The downside of the simplicity is that for
+each CPU request, we're only looking in a
+
+59
+00:04:22,120 --> 00:04:27,599
+single cache location to see if the cache
+holds the desired data.
+
+60
+00:04:27,599 --> 00:04:29,819
+Not much of "search" is it?
+
+61
+00:04:29,819 --> 00:04:33,770
+But the mapping of addresses to cache lines
+helps us out here.
+
+62
+00:04:33,770 --> 00:04:38,180
+Using the low-order address bit as the cache
+index, we've arranged for nearby locations
+
+63
+00:04:38,180 --> 00:04:40,449
+to be mapped to different cache lines.
+
+64
+00:04:40,449 --> 00:04:45,240
+So, for example, if the CPU were executing
+an 8-instruction loop, all 8 instructions
+
+65
+00:04:45,240 --> 00:04:47,689
+can be held in the cache at the same time.
+
+66
+00:04:47,689 --> 00:04:52,308
+A more complicated search mechanism couldn't
+improve on that.
+
+67
+00:04:52,308 --> 00:04:57,479
+The bottom line: this extremely simple "search"
+is sufficient to get good cache hit ratios
+
+68
+00:04:57,479 --> 00:05:00,349
+for the cases we care about.
+
+69
+00:05:00,349 --> 00:05:06,310
+Let's try a few more examples, in this case
+using a DM cache with 64 lines.
+
+70
+00:05:06,310 --> 00:05:11,550
+Suppose the cache gets a read request for
+location 0x400C.
+
+71
+00:05:11,550 --> 00:05:16,740
+To see how the request is processed, we first
+write the address in binary so we can easily
+
+72
+00:05:16,740 --> 00:05:21,310
+divide it into the offset, index and tag fields.
+
+73
+00:05:21,310 --> 00:05:26,749
+For this address the offset bits have the
+value 0, the cache line index bits have the
+
+74
+00:05:26,749 --> 00:05:32,009
+value 3, and the tag bits have the value 0x40.
+
+75
+00:05:32,009 --> 00:05:37,520
+So the tag field of cache line 3 is compared
+with the tag field of the address.
+
+76
+00:05:37,520 --> 00:05:42,240
+Since there's a match, we have a cache hit
+and the value in the data field of cache line
+
+77
+00:05:42,240 --> 00:05:46,029
+can be used to satisfy the request.
+
+78
+00:05:46,029 --> 00:05:50,900
+Would an access to location 0x4008 be a cache
+hit?
+
+79
+00:05:50,900 --> 00:05:55,379
+This address is similar to that in our first
+example, except the cache line index is now
+
+80
+00:05:55,379 --> 00:05:58,449
+2 instead of 3.
+
+81
+00:05:58,449 --> 00:06:04,330
+Looking in cache line 2, we that its tag field
+(0x58) doesn't match the tag field in the
+
+82
+00:06:04,330 --> 00:06:08,159
+address (0x40), so this access would be a
+cache miss.
+
+83
+00:06:08,159 --> 00:06:14,930
+What are the addresses of the words held by
+cache lines 0, 1, and 2, all of which have
+
+84
+00:06:14,930 --> 00:06:16,850
+the same tag field?
+
+85
+00:06:16,850 --> 00:06:22,110
+Well, we can run the address matching process
+backwards!
+
+86
+00:06:22,110 --> 00:06:26,219
+For an address to match these three cache
+lines it would have look like the binary shown
+
+87
+00:06:26,219 --> 00:06:30,370
+here, where we've used the information in
+the cache tag field to fill in the high-order
+
+88
+00:06:30,370 --> 00:06:35,680
+address bits and low-order address bits will
+come from the index value.
+
+89
+00:06:35,680 --> 00:06:41,150
+If we fill in the indices 0, 1, and 2, then
+convert the resulting binary to hex we get
+
+90
+00:06:41,150 --> 00:06:48,650
+0x5800, 0x5804, and 0x5808 as the addresses
+for the data held in cache lines 0, 1, and
+
+91
+00:06:48,650 --> 00:06:51,150
+2.
+
+92
+00:06:51,150 --> 00:06:56,089
+Note that the complete address of the cached
+locations is formed by combining the tag field
+
+93
+00:06:56,089 --> 00:06:59,899
+of the cache line with the index of the cache
+line.
+
+94
+00:06:59,899 --> 00:07:04,050
+We of course need to be able to recover the
+complete address from the information held
+
+95
+00:07:04,050 --> 00:07:09,179
+in the cache so it can be correctly compared
+against address requests from the CPU.

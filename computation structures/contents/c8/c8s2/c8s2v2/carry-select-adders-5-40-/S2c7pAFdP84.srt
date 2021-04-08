@@ -1,0 +1,556 @@
+1
+00:00:00,500 --> 00:00:03,100
+The most straightforward
+way to improve performance
+
+2
+00:00:03,100 --> 00:00:06,070
+is to reduce the propagation
+delay of a circuit.
+
+3
+00:00:06,070 --> 00:00:08,500
+Let’s look at a perennial
+performance bottleneck:
+
+4
+00:00:08,500 --> 00:00:10,910
+the ripple-carry adder.
+
+5
+00:00:10,910 --> 00:00:14,040
+To fix it, we first have to
+figure out the path from inputs
+
+6
+00:00:14,040 --> 00:00:17,470
+to outputs that has the largest
+propagation delay, i.e.,
+
+7
+00:00:17,470 --> 00:00:21,880
+the path that’s determining
+the overall t_PD.
+
+8
+00:00:21,880 --> 00:00:24,770
+In this case that path
+is the long carry chain
+
+9
+00:00:24,770 --> 00:00:27,440
+following the carry-in
+to carry-out path
+
+10
+00:00:27,440 --> 00:00:30,310
+through each full adder module.
+
+11
+00:00:30,310 --> 00:00:35,940
+To trigger the path add -1 and
+1 by setting the A inputs to all
+
+12
+00:00:35,940 --> 00:00:39,260
+1’s and the B input to all 0’s
+except for the low-order bit
+
+13
+00:00:39,260 --> 00:00:41,660
+which is 1.
+
+14
+00:00:41,660 --> 00:00:45,370
+The final answer is 0, but
+notice that each full adder has
+
+15
+00:00:45,370 --> 00:00:47,960
+to wait for the carry-in
+from the previous stage
+
+16
+00:00:47,960 --> 00:00:50,740
+before it produces
+0 on its sum output
+
+17
+00:00:50,740 --> 00:00:54,150
+and generates a carry-out
+for the next full adder.
+
+18
+00:00:54,150 --> 00:00:57,100
+The carry really does
+ripple through the circuit
+
+19
+00:00:57,100 --> 00:01:01,330
+as each full adder in
+turn does its thing.
+
+20
+00:01:01,330 --> 00:01:03,690
+To total propagation
+delay along this path
+
+21
+00:01:03,690 --> 00:01:06,840
+is N-1 times the carry-in
+to carry-out delay
+
+22
+00:01:06,840 --> 00:01:09,180
+of each full adder,
+plus the delay
+
+23
+00:01:09,180 --> 00:01:12,560
+to produce the final
+bit of the sum.
+
+24
+00:01:12,560 --> 00:01:14,660
+How would the overall
+latency change
+
+25
+00:01:14,660 --> 00:01:17,970
+if we, say, doubled the
+size of the operands, i.e.,
+
+26
+00:01:17,970 --> 00:01:21,080
+made N twice as large?
+
+27
+00:01:21,080 --> 00:01:24,580
+It’s useful to summarize the
+dependency of the latency on N
+
+28
+00:01:24,580 --> 00:01:28,430
+using the “order-of” notation
+to give us the big picture.
+
+29
+00:01:28,430 --> 00:01:30,560
+Clearly as N gets
+larger the delay
+
+30
+00:01:30,560 --> 00:01:33,110
+of the XOR gate at the end
+becomes less significant,
+
+31
+00:01:33,110 --> 00:01:36,730
+so the order-of notation ignores
+terms that are relatively less
+
+32
+00:01:36,730 --> 00:01:39,160
+important as N grows.
+
+33
+00:01:39,160 --> 00:01:41,590
+In this example, the
+latency is order N,
+
+34
+00:01:41,590 --> 00:01:43,500
+which tells us that
+the latency would
+
+35
+00:01:43,500 --> 00:01:45,410
+be expected to
+essentially double
+
+36
+00:01:45,410 --> 00:01:48,320
+if we made N twice as large.
+
+37
+00:01:48,320 --> 00:01:50,770
+The order-of notation,
+which theoreticians
+
+38
+00:01:50,770 --> 00:01:53,320
+call asymptotic
+analysis, tells us
+
+39
+00:01:53,320 --> 00:01:57,060
+the term that would dominate
+the result as N grows.
+
+40
+00:01:57,060 --> 00:01:59,570
+The yellow box contains
+the official definition,
+
+41
+00:01:59,570 --> 00:02:02,570
+but an example might make it
+easier to understand what’s
+
+42
+00:02:02,570 --> 00:02:03,860
+happening.
+
+43
+00:02:03,860 --> 00:02:06,330
+Suppose we want to characterize
+the growth in the value
+
+44
+00:02:06,330 --> 00:02:11,170
+of the equation n^2 +
+2n + 3 as n gets larger.
+
+45
+00:02:11,170 --> 00:02:15,060
+The dominant term is clearly n^2
+and the value of our equation
+
+46
+00:02:15,060 --> 00:02:18,920
+is bounded above and below
+by simple multiples of n^2,
+
+47
+00:02:18,920 --> 00:02:23,250
+except for finitely
+many values of n.
+
+48
+00:02:23,250 --> 00:02:25,540
+The lower bound is
+always true for n greater
+
+49
+00:02:25,540 --> 00:02:27,530
+than or equal to 0.
+
+50
+00:02:27,530 --> 00:02:30,540
+And in this case, the upper
+bound doesn’t hold only for n
+
+51
+00:02:30,540 --> 00:02:32,510
+equal to 0, 1, 2, or 3.
+
+52
+00:02:32,510 --> 00:02:37,430
+For all other positive values of
+n the upper inequality is true.
+
+53
+00:02:37,430 --> 00:02:40,460
+So we’d say this
+equation was “order N^2”.
+
+54
+00:02:40,460 --> 00:02:45,500
+There are actually two variants
+for the order-of notation.
+
+55
+00:02:45,500 --> 00:02:47,840
+We use the Theta
+notation to indicate
+
+56
+00:02:47,840 --> 00:02:50,970
+that g(n) is bounded above AND
+below by multiples of f(n).
+
+57
+00:02:50,970 --> 00:02:55,550
+The “big O” notation is used
+when g(n) is only bounded above
+
+58
+00:02:55,550 --> 00:02:57,750
+by a multiple of f(n).
+
+59
+00:02:57,750 --> 00:03:00,140
+Here’s a first attempt
+at improving the latency
+
+60
+00:03:00,140 --> 00:03:02,070
+of our addition circuit.
+
+61
+00:03:02,070 --> 00:03:04,030
+The trouble with the
+ripple-carry adder
+
+62
+00:03:04,030 --> 00:03:06,190
+is that the high-order
+bits have to wait
+
+63
+00:03:06,190 --> 00:03:09,010
+for the carry-in from
+the low-order bits.
+
+64
+00:03:09,010 --> 00:03:12,460
+Is there a way in which we can
+get high half the adder working
+
+65
+00:03:12,460 --> 00:03:15,090
+in parallel with the low half?
+
+66
+00:03:15,090 --> 00:03:18,520
+Suppose we wanted to
+build a 32-bit adder.
+
+67
+00:03:18,520 --> 00:03:21,500
+Let’s make two copies of the
+high 16 bits of the adder,
+
+68
+00:03:21,500 --> 00:03:24,360
+one assuming the carry-in
+from the low bits is 0,
+
+69
+00:03:24,360 --> 00:03:27,530
+and the other assuming
+the carry-in is 1.
+
+70
+00:03:27,530 --> 00:03:30,420
+So now we have three
+16-bit adders, all of which
+
+71
+00:03:30,420 --> 00:03:35,550
+can operate in parallel on
+newly arriving A and B inputs.
+
+72
+00:03:35,550 --> 00:03:37,660
+Once the 16-bit
+additions are complete,
+
+73
+00:03:37,660 --> 00:03:40,320
+we can use the actual
+carry-out from the low-half
+
+74
+00:03:40,320 --> 00:03:43,670
+to select the answer from the
+particular high-half adder that
+
+75
+00:03:43,670 --> 00:03:45,890
+used the matching
+carry-in value.
+
+76
+00:03:45,890 --> 00:03:47,650
+This type of adder
+is appropriately
+
+77
+00:03:47,650 --> 00:03:50,410
+named the carry-select adder.
+
+78
+00:03:50,410 --> 00:03:52,180
+The latency of this
+carry-select adder
+
+79
+00:03:52,180 --> 00:03:53,900
+is just a little
+more than the latency
+
+80
+00:03:53,900 --> 00:03:56,670
+of a 16-bit
+ripple-carry addition.
+
+81
+00:03:56,670 --> 00:03:58,710
+This is approximately
+half the latency
+
+82
+00:03:58,710 --> 00:04:01,910
+of the original 32-bit
+ripple-carry adder.
+
+83
+00:04:01,910 --> 00:04:04,810
+So at a cost of about
+50% more circuitry,
+
+84
+00:04:04,810 --> 00:04:07,620
+we’ve halved the latency!
+
+85
+00:04:07,620 --> 00:04:09,980
+As a next step, we could
+apply the same strategy
+
+86
+00:04:09,980 --> 00:04:12,820
+to halve the latency
+of the 16-bit adders.
+
+87
+00:04:12,820 --> 00:04:15,500
+And then again to halve the
+latency of the 8-bit adders
+
+88
+00:04:15,500 --> 00:04:17,640
+used in the previous step.
+
+89
+00:04:17,640 --> 00:04:22,100
+At each step we halve the adder
+latency and add a MUX delay.
+
+90
+00:04:22,100 --> 00:04:28,190
+After log2(N) steps, N
+will be 1 and we’re done.
+
+91
+00:04:28,190 --> 00:04:30,860
+At this point the latency
+would be some constant cost
+
+92
+00:04:30,860 --> 00:04:35,200
+to do a 1-bit addition, plus
+log2(N) times the MUX latency
+
+93
+00:04:35,200 --> 00:04:37,500
+to select the right answers.
+
+94
+00:04:37,500 --> 00:04:40,070
+So the overall latency
+of the carry-select adder
+
+95
+00:04:40,070 --> 00:04:42,200
+is order log(N).
+
+96
+00:04:42,200 --> 00:04:44,320
+Note that log2(N)
+and log(N) only
+
+97
+00:04:44,320 --> 00:04:46,430
+differ by a constant
+factor, so we
+
+98
+00:04:46,430 --> 00:04:50,420
+ignore the base of the
+log in order-of notation.
+
+99
+00:04:50,420 --> 00:04:54,090
+The carry-select adder shows a
+clear performance-size tradeoff
+
+100
+00:04:54,090 --> 00:04:56,370
+available to the designer.
+
+101
+00:04:56,370 --> 00:04:59,550
+Since adders play a big role
+in many digital systems,
+
+102
+00:04:59,550 --> 00:05:02,440
+here’s a more carefully
+engineered version of a 32-bit
+
+103
+00:05:02,440 --> 00:05:03,810
+carry-select adder.
+
+104
+00:05:03,810 --> 00:05:07,190
+You could try this
+in your ALU design!
+
+105
+00:05:07,190 --> 00:05:08,960
+The size of the
+adder blocks has been
+
+106
+00:05:08,960 --> 00:05:11,950
+chosen so that the trial
+sums and the carry-in
+
+107
+00:05:11,950 --> 00:05:15,100
+from the previous stage
+arrive at the carry-select MUX
+
+108
+00:05:15,100 --> 00:05:17,680
+at approximately the same time.
+
+109
+00:05:17,680 --> 00:05:20,590
+Note that since the select
+signal for the MUXes is heavily
+
+110
+00:05:20,590 --> 00:05:23,920
+loaded we’ve included a buffer
+to make the select signal
+
+111
+00:05:23,920 --> 00:05:26,540
+transitions faster.
+
+112
+00:05:26,540 --> 00:05:29,690
+This carry-select adder is about
+two-and-a-half times faster
+
+113
+00:05:29,690 --> 00:05:33,530
+than a 32-bit ripple-carry
+adder at the cost of about twice
+
+114
+00:05:33,530 --> 00:05:35,770
+as much circuitry.
+
+115
+00:05:35,770 --> 00:05:38,150
+A great design to remember
+when you’re looking to double
+
+116
+00:05:38,150 --> 00:05:40,580
+the speed of your ALU!

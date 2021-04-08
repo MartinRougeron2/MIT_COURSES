@@ -1,0 +1,235 @@
+1
+00:00:00,840 --> 00:00:03,830
+Finally, our last instruction!
+
+2
+00:00:03,830 --> 00:00:08,050
+Branches conditionally transfer control to
+a specific target instruction.
+
+3
+00:00:08,050 --> 00:00:12,610
+But we'll also need the ability to compute
+the address of the target instruction - that
+
+4
+00:00:12,610 --> 00:00:17,180
+ability is provided by the JMP instruction
+which simply sets the program counter to value
+
+5
+00:00:17,180 --> 00:00:19,030
+from register "ra".
+
+6
+00:00:19,030 --> 00:00:26,230
+Like branches, JMP will write the PC+4 value
+into to the specified destination register.
+
+7
+00:00:26,230 --> 00:00:30,279
+This capability is very useful for implementing
+procedures in Beta code.
+
+8
+00:00:30,279 --> 00:00:35,140
+Suppose we have a procedure "sqrt" that computes
+the square root of its argument, which is
+
+9
+00:00:35,140 --> 00:00:37,850
+passed in, say, R0.
+
+10
+00:00:37,850 --> 00:00:41,730
+We don't show the code for sqrt on the right,
+except for the last instruction, which is
+
+11
+00:00:41,730 --> 00:00:43,390
+a JMP.
+
+12
+00:00:43,390 --> 00:00:47,750
+On the left we see that the programmer wants
+to call the sqrt procedure from two different
+
+13
+00:00:47,750 --> 00:00:49,630
+places in his program.
+
+14
+00:00:49,630 --> 00:00:51,899
+Let's watch what happens…
+
+15
+00:00:51,899 --> 00:00:57,940
+The first call to the sqrt procedure is implemented
+by the unconditional branch at location 0x100
+
+16
+00:00:57,940 --> 00:00:59,570
+in main memory.
+
+17
+00:00:59,570 --> 00:01:03,950
+The branch target is the first instruction
+of the sqrt procedure, so execution continues
+
+18
+00:01:03,950 --> 00:01:05,299
+there.
+
+19
+00:01:05,299 --> 00:01:13,729
+The BEQ also writes the address of the following
+instruction (0x104) into its destination register,
+
+20
+00:01:13,729 --> 00:01:14,810
+R28.
+
+21
+00:01:14,810 --> 00:01:20,070
+When we reach the end of first procedure call,
+the JMP instruction loads the value in R28,
+
+22
+00:01:20,070 --> 00:01:26,229
+which is 0x104, into the PC, so execution
+continues with the instruction following the
+
+23
+00:01:26,229 --> 00:01:28,170
+first BEQ.
+
+24
+00:01:28,170 --> 00:01:32,920
+So we've managed to return from the procedure
+and continue execution where we left off in
+
+25
+00:01:32,920 --> 00:01:35,219
+the main program.
+
+26
+00:01:35,219 --> 00:01:39,669
+When we get to the second call to the sqrt
+procedure, the sequence of events is the same
+
+27
+00:01:39,669 --> 00:01:47,439
+as before except that this time R28 contains
+0x67C, the address of the instruction following
+
+28
+00:01:47,439 --> 00:01:49,630
+the second BEQ.
+
+29
+00:01:49,630 --> 00:01:55,759
+So the second time we reach the end of the
+sqrt procedure, the JMP sets the PC to 0x67C
+
+30
+00:01:55,759 --> 00:02:01,079
+and execution resumes with the instruction
+following the second procedure call.
+
+31
+00:02:01,079 --> 00:02:02,299
+Neat!
+
+32
+00:02:02,299 --> 00:02:06,439
+The BEQs and JMP have worked together to implement
+procedure call and return.
+
+33
+00:02:06,439 --> 00:02:12,349
+We'll discuss the implementation of procedures
+in detail in an upcoming lecture.
+
+34
+00:02:12,349 --> 00:02:15,549
+That wraps up the design of the Beta instruction
+set architecture.
+
+35
+00:02:15,549 --> 00:02:21,000
+In summary, the Beta has 32 registers to hold
+values that can be used as operands for the
+
+36
+00:02:21,000 --> 00:02:22,390
+ALU.
+
+37
+00:02:22,390 --> 00:02:27,390
+All other values, along with the binary representation
+of the program itself, are stored in main
+
+38
+00:02:27,390 --> 00:02:28,960
+memory.
+
+39
+00:02:28,960 --> 00:02:35,769
+The Beta supports 32-bit memory addresses
+and can access values in 2^32 = 4 gigabytes
+
+40
+00:02:35,769 --> 00:02:37,890
+of main memory.
+
+41
+00:02:37,890 --> 00:02:43,489
+All Beta memory access refer to 32-bit words,
+so all addresses will be a multiple of 4 since
+
+42
+00:02:43,489 --> 00:02:44,540
+there are 4 bytes/word.
+
+43
+00:02:44,540 --> 00:02:48,890
+The are two instruction formats.
+
+44
+00:02:48,890 --> 00:02:53,920
+The first specifies an opcode, two source
+registers and a destination register.
+
+45
+00:02:53,920 --> 00:03:00,090
+The second replaces the second source register
+with a 32-bit constant, derived by sign-extending
+
+46
+00:03:00,090 --> 00:03:04,239
+a 16-bit constant stored in the instruction
+itself.
+
+47
+00:03:04,239 --> 00:03:09,120
+There are three classes of instructions:
+ALU operations, LD and ST for accessing main
+
+48
+00:03:09,120 --> 00:03:13,840
+memory, and branches and JMPs that change
+the order of execution.
+
+49
+00:03:13,840 --> 00:03:15,099
+And that's it!
+
+50
+00:03:15,099 --> 00:03:19,510
+As we'll see in the next lecture, we'll be
+able parlay this relatively simple repertoire
+
+51
+00:03:19,510 --> 00:03:24,209
+of operations into a system that can execute
+any computation we can specify.

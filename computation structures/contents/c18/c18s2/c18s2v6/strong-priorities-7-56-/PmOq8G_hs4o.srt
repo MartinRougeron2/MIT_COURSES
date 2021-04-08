@@ -1,0 +1,489 @@
+1
+00:00:00,969 --> 00:00:05,330
+In a weak priority system the currently-running
+task will always run to completion before
+
+2
+00:00:05,330 --> 00:00:07,970
+considering what to run next.
+
+3
+00:00:07,970 --> 00:00:12,541
+This means the worst-case latency for a device
+always includes the worst-case service time
+
+4
+00:00:12,541 --> 00:00:17,099
+across all the other devices,
+i.e., the maximum time we have to wait for
+
+5
+00:00:17,099 --> 00:00:20,749
+the currently-running task to complete.
+
+6
+00:00:20,749 --> 00:00:25,349
+If there's a long-running task that usually
+means it will be impossible to meet tight
+
+7
+00:00:25,349 --> 00:00:27,320
+deadlines for other tasks.
+
+8
+00:00:27,320 --> 00:00:32,299
+For example, suppose disk requests have a
+800 us deadline in order to guarantee the
+
+9
+00:00:32,299 --> 00:00:34,640
+best throughput from the disk subsystem.
+
+10
+00:00:34,640 --> 00:00:40,950
+Since the disk handler service time is 500
+us, the maximum allowable latency between
+
+11
+00:00:40,950 --> 00:00:47,040
+a disk request and starting to execute the
+disk service routine is 300 us.
+
+12
+00:00:47,040 --> 00:00:48,040
+Oops!
+
+13
+00:00:48,040 --> 00:00:53,700
+The weak priority scheme can only guarantee
+a maximum latency of 800 us, not nearly fast
+
+14
+00:00:53,700 --> 00:00:56,240
+enough to meet the disk deadline.
+
+15
+00:00:56,240 --> 00:01:00,670
+We can't meet the disk deadline using weak
+priorities.
+
+16
+00:01:00,670 --> 00:01:05,409
+We need to introduce a preemptive priority
+system that allows lower-priority handlers
+
+17
+00:01:05,409 --> 00:01:09,159
+to be interrupted by higher-priority requests.
+
+18
+00:01:09,159 --> 00:01:13,310
+We'll refer to this as a "strong" priority
+system.
+
+19
+00:01:13,310 --> 00:01:16,900
+Suppose we gave the disk the highest priority,
+the printer second priority, and keyboard
+
+20
+00:01:16,900 --> 00:01:20,340
+the lowest priority, just like we did before.
+
+21
+00:01:20,340 --> 00:01:25,360
+Now when a disk request arrives, it will start
+executing immediately without having to wait
+
+22
+00:01:25,360 --> 00:01:29,720
+for the completion of the lower-priority printer
+or keyboard handlers.
+
+23
+00:01:29,720 --> 00:01:33,549
+The worst-case latency for the disk has dropped
+to 0.
+
+24
+00:01:33,549 --> 00:01:40,590
+The printer can only be preempted by the disk,
+so it's worst-case latency is 500 us.
+
+25
+00:01:40,590 --> 00:01:46,180
+Since it has the lowest priority, the worst-case
+latency for the keyboard is unchanged at 900
+
+26
+00:01:46,180 --> 00:01:50,100
+us since it might still have to wait on the
+disk and printer.
+
+27
+00:01:50,100 --> 00:01:54,680
+The good news: with the proper assignment
+of priorities, the strong priority system
+
+28
+00:01:54,680 --> 00:02:00,900
+can guarantee that disk requests will be serviced
+by the 800 us deadline.
+
+29
+00:02:00,900 --> 00:02:05,869
+We'll need to make a small tweak to our Beta
+hardware to implement a strong priority system.
+
+30
+00:02:05,869 --> 00:02:13,230
+We'll replace the single supervisor mode bit
+in PC[31] with, say, a three-bit field (PRI)
+
+31
+00:02:13,230 --> 00:02:19,310
+in PC[31:29] that indicates which of the eight
+priority levels the processor is currently
+
+32
+00:02:19,310 --> 00:02:20,310
+running at.
+
+33
+00:02:20,310 --> 00:02:23,940
+Next, we'll modify the interrupt mechanism
+as follows.
+
+34
+00:02:23,940 --> 00:02:30,160
+In addition to requesting an interrupt, the
+requesting device also specifies the 3-bit
+
+35
+00:02:30,160 --> 00:02:32,560
+priority it was assigned by the system architect.
+
+36
+00:02:32,560 --> 00:02:37,210
+We'll add a priority encoder circuit to the
+interrupt hardware to select the highest-priority
+
+37
+00:02:37,210 --> 00:02:45,660
+request and compare the priority of that request
+(PDEV) to the 3-bit PRI value in the PC.
+
+38
+00:02:45,660 --> 00:02:51,950
+The system will take the interrupt request
+only if PDEV > PRI, i.e., if the priority
+
+39
+00:02:51,950 --> 00:02:56,380
+of the request is *higher* than the priority
+the system is running at.
+
+40
+00:02:56,380 --> 00:03:02,950
+When the interrupt is taken, the old PC and
+PRI information is saved in XP, and the new
+
+41
+00:03:02,950 --> 00:03:08,770
+PC is determined by the type of interrupt
+and the new PRI field is set to PDEV.
+
+42
+00:03:08,770 --> 00:03:14,640
+So the processor will now be running at the
+higher priority specified by the device.
+
+43
+00:03:14,640 --> 00:03:20,090
+A strong priority system allows low-priority
+handlers to be interrupted by higher-priority
+
+44
+00:03:20,090 --> 00:03:24,180
+requests,
+so the worst-case latency seen at high priorities
+
+45
+00:03:24,180 --> 00:03:29,540
+is unaffected by the service times of lower-priority
+handlers.
+
+46
+00:03:29,540 --> 00:03:34,000
+Using strong priorities allows us to assign
+a high priority to devices with tight deadlines
+
+47
+00:03:34,000 --> 00:03:37,629
+and thus guarantee their deadlines are met.
+
+48
+00:03:37,629 --> 00:03:42,930
+Now let's consider the impact of recurring
+interrupts, i.e., multiple interrupt requests
+
+49
+00:03:42,930 --> 00:03:44,860
+from each device.
+
+50
+00:03:44,860 --> 00:03:49,460
+We've added a "maximum frequency" column to
+our table, which gives the maximum rate at
+
+51
+00:03:49,460 --> 00:03:53,470
+which requests will be generated by each device.
+
+52
+00:03:53,470 --> 00:03:57,700
+The execution diagram for a strong priority
+system is shown below the table.
+
+53
+00:03:57,700 --> 00:04:03,540
+Here we see there are multiple requests from
+each device, in this case shown at their maximum
+
+54
+00:04:03,540 --> 00:04:06,349
+possible rate of request.
+
+55
+00:04:06,349 --> 00:04:11,040
+Each tick on the timeline represent 100 us
+of real time.
+
+56
+00:04:11,040 --> 00:04:19,709
+Printer requests occur every 1 ms (10 ticks),
+disk requests every 2 ms (20 ticks), and keyboard
+
+57
+00:04:19,709 --> 00:04:23,820
+requests every 10 ms (100 ticks).
+
+58
+00:04:23,820 --> 00:04:28,540
+In the diagram you can see that the high-priority
+disk requests are serviced as soon as they're
+
+59
+00:04:28,540 --> 00:04:30,290
+received.
+
+60
+00:04:30,290 --> 00:04:35,190
+And that medium-priority printer requests
+preempt lower-priority execution of the keyboard
+
+61
+00:04:35,190 --> 00:04:37,060
+handler.
+
+62
+00:04:37,060 --> 00:04:41,810
+Printer requests would be preempted by disk
+requests, but given their request patterns,
+
+63
+00:04:41,810 --> 00:04:46,960
+there's never a printer request in progress
+when a disk request arrives, so we don't see
+
+64
+00:04:46,960 --> 00:04:48,680
+that happening here.
+
+65
+00:04:48,680 --> 00:04:54,580
+The maximum latency before a keyboard requests
+starts is indeed 900 us.
+
+66
+00:04:54,580 --> 00:04:56,730
+But that doesn't tell the whole story!
+
+67
+00:04:56,730 --> 00:05:01,280
+As you can see, the poor keyboard handler
+is continually preempted by higher-priority
+
+68
+00:05:01,280 --> 00:05:07,300
+disk and printer requests and so the keyboard
+handler doesn't complete until 3 ms after
+
+69
+00:05:07,300 --> 00:05:09,160
+its request was received!
+
+70
+00:05:09,160 --> 00:05:14,470
+This illustrates why real-time constraints
+are best expressed in terms of deadlines and
+
+71
+00:05:14,470 --> 00:05:16,330
+not latencies.
+
+72
+00:05:16,330 --> 00:05:21,440
+If the keyboard deadline had been less that
+3 ms, even the strong priority system would
+
+73
+00:05:21,440 --> 00:05:24,460
+have failed to meet the hard real-time constraints.
+
+74
+00:05:24,460 --> 00:05:29,620
+The reason would be that there simply aren't
+enough CPU cycles to meet the recurring demands
+
+75
+00:05:29,620 --> 00:05:33,419
+of the devices in the face of tight deadlines.
+
+76
+00:05:33,419 --> 00:05:38,120
+Speaking of having enough CPU cycles, there
+are several calculations we need to do when
+
+77
+00:05:38,120 --> 00:05:40,830
+thinking about recurring interrupts.
+
+78
+00:05:40,830 --> 00:05:45,770
+The first is to consider how much load each
+periodic request places on the system.
+
+79
+00:05:45,770 --> 00:05:52,110
+There's one keyboard request every 10 ms and
+servicing each request takes 800 us, which
+
+80
+00:05:52,110 --> 00:05:58,080
+consumes 800us/10ms = 8% of the CPU.
+
+81
+00:05:58,080 --> 00:06:03,550
+A similar calculation shows that servicing
+the disk takes 25% of the CPU and servicing
+
+82
+00:06:03,550 --> 00:06:07,290
+the printer takes 40% of the CPU.
+
+83
+00:06:07,290 --> 00:06:14,050
+Collectively servicing all the devices takes
+73% of the CPU cycles, leaving 27% for running
+
+84
+00:06:14,050 --> 00:06:16,240
+user-mode programs.
+
+85
+00:06:16,240 --> 00:06:21,009
+Obviously we'd be in trouble if takes more
+than 100% of the available cycles to service
+
+86
+00:06:21,009 --> 00:06:22,889
+the devices.
+
+87
+00:06:22,889 --> 00:06:28,430
+Another way to get in trouble is to not have
+enough CPU cycles to meet each of the deadlines.
+
+88
+00:06:28,430 --> 00:06:35,080
+We need 500/800 = 67.5% of the cycles to service
+the disk in the time between the disk request
+
+89
+00:06:35,080 --> 00:06:37,979
+and disk deadline.
+
+90
+00:06:37,979 --> 00:06:42,670
+If we assume we want to finish serving one
+printer request before receiving the next,
+
+91
+00:06:42,670 --> 00:06:46,479
+the effective printer deadline is 1000 us.
+
+92
+00:06:46,479 --> 00:06:52,750
+In 1000 us we need to be able to service one
+higher-priority disk request (500 us) and,
+
+93
+00:06:52,750 --> 00:06:56,400
+obviously, the printer request (400 us).
+
+94
+00:06:56,400 --> 00:07:02,220
+So we'll need to use 900 us of the CPU in
+that 1000 us interval.
+
+95
+00:07:02,220 --> 00:07:05,000
+Whew, just barely made it!
+
+96
+00:07:05,000 --> 00:07:09,389
+Suppose we tried setting the keyboard deadline
+to 2000 us.
+
+97
+00:07:09,389 --> 00:07:14,990
+In that time interval we'd also need to service
+1 disk request and 2 printer requests.
+
+98
+00:07:14,990 --> 00:07:23,140
+So the total service time needed is 500 +
+2*400 + 800 = 2100 us.
+
+99
+00:07:23,140 --> 00:07:30,509
+Oops, that exceeds the 2000 us window we were
+given, so we can't meet the 2000 us deadline
+
+100
+00:07:30,509 --> 00:07:33,860
+with the available CPU resources.
+
+101
+00:07:33,860 --> 00:07:38,550
+But if the keyboard deadline is 3000 us, let's
+see what happens.
+
+102
+00:07:38,550 --> 00:07:44,600
+In a 3000 us interval we need to service 2
+disk requests, 3 printer requests, and, of
+
+103
+00:07:44,600 --> 00:07:54,210
+course, 1 keyboard request, for a total service
+time of 2*500 + 3*400 + 800 = 3000 us.
+
+104
+00:07:54,210 --> 00:07:55,210
+Whew!
+
+105
+00:07:55,210 --> 00:07:55,469
+Just made it!

@@ -1,0 +1,505 @@
+1
+00:00:00,399 --> 00:00:03,580
+Now let's look at the electrical view of the
+MOSFET.
+
+2
+00:00:03,580 --> 00:00:08,220
+Its operation is determined by the voltages
+of its four terminals.
+
+3
+00:00:08,220 --> 00:00:12,249
+First we'll label the two diffusion terminals
+on either side of the gate terminal.
+
+4
+00:00:12,249 --> 00:00:17,000
+Our convention is to call the diffusion terminal
+with the highest voltage potential the "drain"
+
+5
+00:00:17,000 --> 00:00:21,380
+and the other lower-potential terminal the
+"source".
+
+6
+00:00:21,380 --> 00:00:26,130
+With this labeling if any current is flowing
+through the MOSFET switch, it will flow from
+
+7
+00:00:26,130 --> 00:00:28,830
+drain to source.
+
+8
+00:00:28,830 --> 00:00:34,400
+When the MOSFET is manufactured, it's designed
+to have a particular threshold voltage, V_TH,
+
+9
+00:00:34,400 --> 00:00:42,510
+which tells us when the switch goes from non-conducting
+or "open" to conducting or "closed".
+
+10
+00:00:42,510 --> 00:00:50,370
+For the n-channel MOSFET shown here, we'd
+expect V_TH to be around
+
+11
+00:00:50,370 --> 00:00:55,740
+The P+ terminal on the left of the diagram
+is the connection to the p-type substrate.
+
+12
+00:00:55,740 --> 00:01:01,120
+For the MOSFET to operate correctly, the substrate
+must always have a voltage less than or equal
+
+13
+00:01:01,120 --> 00:01:03,760
+to the voltage of the source and drain.
+
+14
+00:01:03,760 --> 00:01:07,650
+We'll have specific rules about how to connect
+up this terminal.
+
+15
+00:01:07,650 --> 00:01:12,510
+The MOSFET is controlled by the difference
+between the voltage of the gate, V_G, and
+
+16
+00:01:12,510 --> 00:01:18,510
+the voltage of the source, V_S, which, following
+the usual terminology for voltages, we call
+
+17
+00:01:18,510 --> 00:01:22,870
+V_GS, a shortcut for saying V_G minus V_S.
+
+18
+00:01:22,870 --> 00:01:28,120
+The first picture shows the configuration
+of the MOSFET when V_GS is less than the MOSFET's
+
+19
+00:01:28,120 --> 00:01:29,789
+threshold voltage.
+
+20
+00:01:29,789 --> 00:01:35,360
+In this configuration, the switch is open
+or non-conducting, i.e., there is no electrical
+
+21
+00:01:35,360 --> 00:01:37,830
+connection between the source and drain.
+
+22
+00:01:37,830 --> 00:01:43,520
+When n-type and p-type materials come in physical
+contact, a depletion region (shown in dark
+
+23
+00:01:43,520 --> 00:01:46,830
+red in the diagram) forms at their junction.
+
+24
+00:01:46,830 --> 00:01:52,080
+This is a region of substrate where the current-carrying
+electrical particles have migrated away from
+
+25
+00:01:52,080 --> 00:01:53,908
+the junction.
+
+26
+00:01:53,908 --> 00:01:59,450
+The depletion zone serves as an insulating
+layer between the substrate and source/drain.
+
+27
+00:01:59,450 --> 00:02:04,490
+The width of this insulating layer grows as
+the voltage of source/drain gets larger relative
+
+28
+00:02:04,490 --> 00:02:06,280
+to the voltage of the substrate.
+
+29
+00:02:06,280 --> 00:02:11,989
+And, as you can see in the diagram, that insulating
+layer fills the region of the substrate between
+
+30
+00:02:11,989 --> 00:02:14,880
+the source and drain terminals, keeping them
+electrically isolated.
+
+31
+00:02:14,880 --> 00:02:22,280
+Now, as V_GS gets larger, positive charges
+accumulate on the gate conductor and generate
+
+32
+00:02:22,280 --> 00:02:27,829
+an electrical field which attracts the electrons
+in the atoms in the substrate.
+
+33
+00:02:27,829 --> 00:02:32,680
+For a while that attractive force gets larger
+without much happening, but when it reaches
+
+34
+00:02:32,680 --> 00:02:37,370
+the MOSFET's threshold voltage, the field
+is strong enough to pull the substrate electrons
+
+35
+00:02:37,370 --> 00:02:40,459
+from the valence band into the conduction
+band,
+
+36
+00:02:40,459 --> 00:02:45,239
+and the newly mobile electrons will move towards
+the gate conductor, collecting just under
+
+37
+00:02:45,239 --> 00:02:50,180
+the thin oxide that serves the gate capacitor's
+insulator.
+
+38
+00:02:50,180 --> 00:02:55,260
+When enough electrons accumulate, the type
+of the semiconductor changes from p-type to
+
+39
+00:02:55,260 --> 00:03:00,819
+n-type and there's now a channel of n-type
+material forming a conducting path between
+
+40
+00:03:00,819 --> 00:03:03,689
+the source and drain terminals.
+
+41
+00:03:03,689 --> 00:03:08,439
+This layer of n-type material is called an
+inversion layer, since its type has been inverted
+
+42
+00:03:08,439 --> 00:03:11,470
+from the original p-type material.
+
+43
+00:03:11,470 --> 00:03:15,459
+The MOSFET switch is now closed or conducting.
+
+44
+00:03:15,459 --> 00:03:20,010
+Current will flow from drain to source in
+proportion to V_DS, the difference in voltage
+
+45
+00:03:20,010 --> 00:03:23,720
+between the drain and source terminals.
+
+46
+00:03:23,720 --> 00:03:28,170
+At this point the conducting inversion layer
+is acting like a resistor governed by Ohm's
+
+47
+00:03:28,170 --> 00:03:37,079
+Law so I_DS = V_DS/R where R is the effective
+resistance of the channel.
+
+48
+00:03:37,079 --> 00:03:41,918
+This process is reversible: if V_GS falls
+below the threshold voltage, the substrate
+
+49
+00:03:41,918 --> 00:03:47,668
+electrons drop back into the valence band,
+the inversion layer disappears, and the switch
+
+50
+00:03:47,668 --> 00:03:50,329
+no longer conducts.
+
+51
+00:03:50,329 --> 00:03:55,019
+The story gets a bit more complicated when
+V_DS is larger than V_GS, as shown in the
+
+52
+00:03:55,019 --> 00:03:56,339
+bottom figures.
+
+53
+00:03:56,339 --> 00:04:02,359
+A large V_DS changes the geometry of the electrical
+fields in the channel and the inversion layer
+
+54
+00:04:02,359 --> 00:04:06,689
+pinches off at the end of the channel near
+the drain.
+
+55
+00:04:06,689 --> 00:04:11,269
+But with a large V_DS, the electrons will
+tunnel across the pinch-off point to reach
+
+56
+00:04:11,269 --> 00:04:16,019
+the conducting inversion layer still present
+next to the source terminal.
+
+57
+00:04:16,019 --> 00:04:20,478
+How does pinch-off affect I_DS, the current
+flowing from drain to source?
+
+58
+00:04:20,478 --> 00:04:24,909
+To see, let's look at some plots of I_DS on
+the next slide.
+
+59
+00:04:24,909 --> 00:04:30,669
+Okay, this plot has a lot of information,
+so let's see what we can learn.
+
+60
+00:04:30,669 --> 00:04:36,789
+Each curve is a plot of I_DS as a function
+of V_DS, for a particular value of V_GS.
+
+61
+00:04:36,789 --> 00:04:42,889
+First, notice that I_DS is 0 when V_GS is
+less than or equal to the threshold voltage.
+
+62
+00:04:42,889 --> 00:04:48,800
+The first six curves are all plotted on top
+of each other along the x-axis.
+
+63
+00:04:48,800 --> 00:04:56,680
+Once V_GS exceeds the threshold voltage I_DS
+becomes non-zero, and increases as V_GS increases.
+
+64
+00:04:56,680 --> 00:05:02,270
+This makes sense: the larger V_GS becomes,
+the more substrate electrons are attracted
+
+65
+00:05:02,270 --> 00:05:07,229
+to the bottom plate of the gate capacitor
+and the thicker the inversion layer becomes,
+
+66
+00:05:07,229 --> 00:05:10,780
+allowing it to conduct more current.
+
+67
+00:05:10,780 --> 00:05:16,360
+When V_DS is smaller than V_GS, we said the
+MOSFET behaves like a resistor obeying Ohm's
+
+68
+00:05:16,360 --> 00:05:17,639
+Law.
+
+69
+00:05:17,639 --> 00:05:22,960
+This is shown in the linear portions of the
+I_DS curves at the left side of the plots.
+
+70
+00:05:22,960 --> 00:05:26,960
+The slope of the linear part of the curve
+is essentially inversely proportional to the
+
+71
+00:05:26,960 --> 00:05:30,439
+resistance of the conducting MOSFET channel.
+
+72
+00:05:30,439 --> 00:05:35,330
+As the channel gets thicker with increasing
+V_GS, more current flows and the slope of
+
+73
+00:05:35,330 --> 00:05:40,840
+the line gets steeper, indicating a smaller
+channel resistance.
+
+74
+00:05:40,840 --> 00:05:47,020
+But when V_DS gets larger than V_GS, the channel
+pinches off at the drain end and, as we see
+
+75
+00:05:47,020 --> 00:05:52,540
+in on the right side of the I_DS plots, the
+current flow no longer increases with increasing
+
+76
+00:05:52,540 --> 00:05:54,139
+V_DS.
+
+77
+00:05:54,139 --> 00:06:01,300
+Instead I_DS is approximately constant and
+the curve becomes a horizontal line.
+
+78
+00:06:01,300 --> 00:06:07,800
+We say that the MOSFET has reached "saturation"
+where I_DS has reached some maximum value.
+
+79
+00:06:07,800 --> 00:06:12,889
+Notice that the saturated part of the I_DS
+curve isn't quite flat and I_DS continues
+
+80
+00:06:12,889 --> 00:06:16,580
+to increase slightly as V_DS gets larger.
+
+81
+00:06:16,580 --> 00:06:21,490
+This effect is called channel-length modulation
+and reflects the fact that the increase in
+
+82
+00:06:21,490 --> 00:06:26,570
+channel pinch-off isn't exactly matched by
+the increase current induced by the larger
+
+83
+00:06:26,570 --> 00:06:28,280
+V_DS.
+
+84
+00:06:28,280 --> 00:06:30,000
+Whew!
+
+85
+00:06:30,000 --> 00:06:31,639
+MOSFET operation is complicated!
+
+86
+00:06:31,639 --> 00:06:37,090
+Fortunately, as designers, we'll be able to
+use the much simpler mental model of a switch
+
+87
+00:06:37,090 --> 00:06:42,870
+if we obey some simple rules when designing
+our MOSFET circuits.
+
+88
+00:06:42,870 --> 00:06:48,710
+Up to now, we've been talking about MOSFETs
+built as shown in the diagram on the left:
+
+89
+00:06:48,710 --> 00:06:53,020
+with n-type source/drain diffusions in a p-type
+substrate.
+
+90
+00:06:53,020 --> 00:06:59,569
+These are called n-channel MOSFETs since the
+inversion layer, when formed, is an n-type
+
+91
+00:06:59,569 --> 00:07:00,569
+semiconductor.
+
+92
+00:07:00,569 --> 00:07:05,139
+The schematic symbol for an n-channel MOSFET
+is shown here, with the four terminals arranged
+
+93
+00:07:05,139 --> 00:07:07,169
+as shown.
+
+94
+00:07:07,169 --> 00:07:12,070
+In our MOSFET circuits, we'll connect the
+bulk terminal of the MOSFET to ground, which
+
+95
+00:07:12,070 --> 00:07:16,270
+will ensure that the voltage of the p-type
+substrate is always less than or equal to
+
+96
+00:07:16,270 --> 00:07:20,199
+the voltage of the source and drain diffusions.
+
+97
+00:07:20,199 --> 00:07:26,080
+We can also build a MOSFET by flipping all
+the material types, creating p-type source/drain
+
+98
+00:07:26,080 --> 00:07:27,830
+diffusions in a n-type substrate.
+
+99
+00:07:27,830 --> 00:07:33,659
+This is called a p-channel MOSFET, which also
+behaves as voltage-controlled switch, except
+
+100
+00:07:33,659 --> 00:07:36,689
+that all the voltage potentials are reversed!
+
+101
+00:07:36,689 --> 00:07:41,870
+As we'll see, control voltages that cause
+an n-channel switch to be "on" will cause
+
+102
+00:07:41,870 --> 00:07:46,479
+a p-channel switch to be "off" and vice-versa.
+
+103
+00:07:46,479 --> 00:07:52,569
+Using both types of MOSFETs will give us switches
+that behave in a complementary fashion.
+
+104
+00:07:52,569 --> 00:07:58,319
+Hence the name "complementary MOS", CMOS for
+short, for circuits that use both types of
+
+105
+00:07:58,319 --> 00:08:00,039
+MOSFETs.
+
+106
+00:08:00,039 --> 00:08:04,499
+Now that we have our two types of voltage-controlled
+switches, our next task is to figure out how
+
+107
+00:08:04,499 --> 00:08:09,610
+to use them to build circuits useful for manipulating
+information encoded as voltages.

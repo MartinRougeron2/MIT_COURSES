@@ -1,0 +1,6841 @@
+1
+00:00:00,070 --> 00:00:02,440
+The following content is
+provided under a Creative
+
+2
+00:00:02,440 --> 00:00:03,820
+Commons license.
+
+3
+00:00:03,820 --> 00:00:06,060
+Your support will help
+MIT OpenCourseWare
+
+4
+00:00:06,060 --> 00:00:10,150
+continue to offer high quality
+educational resources for free.
+
+5
+00:00:10,150 --> 00:00:12,690
+To make a donation or to
+view additional materials
+
+6
+00:00:12,690 --> 00:00:16,600
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:16,600 --> 00:00:17,263
+at ocw.mit.edu.
+
+8
+00:00:25,940 --> 00:00:27,440
+PROFESSOR: All
+right, so today we're
+
+9
+00:00:27,440 --> 00:00:30,810
+going to think about
+the-- well, also
+
+10
+00:00:30,810 --> 00:00:34,070
+the low end of the
+polynomial hierarchy.
+
+11
+00:00:34,070 --> 00:00:36,500
+So most of this class
+is about polynomial
+
+12
+00:00:36,500 --> 00:00:39,535
+versus not polynomial and
+various notions of hardness,
+
+13
+00:00:39,535 --> 00:00:41,610
+[? NP ?] hardness, and worse.
+
+14
+00:00:41,610 --> 00:00:44,080
+We look briefly at
+P-completeness, which
+
+15
+00:00:44,080 --> 00:00:46,090
+is about parallel computing.
+
+16
+00:00:46,090 --> 00:00:48,390
+Today we're going to be
+thinking about regular good old
+
+17
+00:00:48,390 --> 00:00:51,020
+sequential computing, but trying
+to distinguish linear time
+
+18
+00:00:51,020 --> 00:00:53,560
+versus non-linear time,
+and in particular,
+
+19
+00:00:53,560 --> 00:00:56,130
+trying to find problems
+that are quadratic
+
+20
+00:00:56,130 --> 00:01:00,090
+or cubic in n for
+sequential running times.
+
+21
+00:01:00,090 --> 00:01:03,440
+And probably the most
+popular attack on this
+
+22
+00:01:03,440 --> 00:01:09,330
+is called 3SUM, which is
+the following problem.
+
+23
+00:01:09,330 --> 00:01:11,485
+You're given n integers.
+
+24
+00:01:14,480 --> 00:01:19,020
+Let's say, and you want to know
+do any three of them sum to 0?
+
+25
+00:01:25,620 --> 00:01:29,250
+So of course, you can
+solve this in cubic time
+
+26
+00:01:29,250 --> 00:01:33,380
+by testing all triples,
+whether they sum to 0.
+
+27
+00:01:33,380 --> 00:01:37,240
+But you can also solve
+it in quadratic time.
+
+28
+00:01:37,240 --> 00:01:39,292
+So it's not an algorithms class.
+
+29
+00:01:39,292 --> 00:01:41,000
+I won't ask you to
+come up the algorithm.
+
+30
+00:01:41,000 --> 00:01:42,790
+But they're quite easy.
+
+31
+00:01:42,790 --> 00:01:48,040
+First order n squared
+randomized is really easy.
+
+32
+00:01:48,040 --> 00:01:50,620
+You take all pairwise sums.
+
+33
+00:01:50,620 --> 00:01:54,460
+So first of all you, build
+a dictionary, a hash table
+
+34
+00:01:54,460 --> 00:01:56,350
+of all the integers.
+
+35
+00:01:56,350 --> 00:02:00,450
+And then you look at
+all pairwise sums.
+
+36
+00:02:00,450 --> 00:02:02,640
+For each pairwise sum, you
+see whether the negation
+
+37
+00:02:02,640 --> 00:02:04,970
+is in the hash table
+in constant time.
+
+38
+00:02:04,970 --> 00:02:08,410
+So that gives you n
+squared randomized,
+
+39
+00:02:08,410 --> 00:02:13,820
+because if a plus
+b plus c equals 0
+
+40
+00:02:13,820 --> 00:02:18,100
+is the same thing as a
+plus b equal minus c.
+
+41
+00:02:18,100 --> 00:02:20,080
+So you look at
+all pairwise sums,
+
+42
+00:02:20,080 --> 00:02:23,980
+see whether the negation
+is in the list of integers.
+
+43
+00:02:23,980 --> 00:02:28,130
+OK, you can also do order
+n squared deterministic.
+
+44
+00:02:28,130 --> 00:02:33,000
+This a more fun puzzle.
+
+45
+00:02:33,000 --> 00:02:34,594
+But I'll spoil
+the answer for you
+
+46
+00:02:34,594 --> 00:02:37,135
+just to give you intuition for
+why this problem is n squared.
+
+47
+00:02:39,720 --> 00:02:43,070
+For every possible
+target sum minus c--
+
+48
+00:02:43,070 --> 00:02:44,850
+so that's going to
+happen n times--
+
+49
+00:02:44,850 --> 00:02:49,490
+I'm going to run the following
+linear time algorithm.
+
+50
+00:02:49,490 --> 00:02:52,540
+So this is just two copies of
+the integers in sorted order.
+
+51
+00:02:52,540 --> 00:02:54,030
+I have n log n time to sort.
+
+52
+00:02:54,030 --> 00:02:55,340
+So that's no problem.
+
+53
+00:02:55,340 --> 00:02:58,050
+I'm going to start from
+with my left finger
+
+54
+00:02:58,050 --> 00:03:00,950
+here and my right
+finger here and look
+
+55
+00:03:00,950 --> 00:03:02,990
+at the sum of those two numbers.
+
+56
+00:03:02,990 --> 00:03:06,500
+If it's too big-- I have a
+particular targets, negative c,
+
+57
+00:03:06,500 --> 00:03:09,020
+in mind-- if the sum
+of these two numbers
+
+58
+00:03:09,020 --> 00:03:13,760
+is smaller then negative c, then
+I'm going to advance this one,
+
+59
+00:03:13,760 --> 00:03:15,540
+because if this is
+in sorted order that
+
+60
+00:03:15,540 --> 00:03:17,190
+will make my sum larger.
+
+61
+00:03:17,190 --> 00:03:20,740
+If the sum is too big, I will
+advance this one backwards.
+
+62
+00:03:20,740 --> 00:03:24,260
+So in general, I have my
+right finger advancing
+
+63
+00:03:24,260 --> 00:03:26,590
+left or my left finger
+advancing right.
+
+64
+00:03:26,590 --> 00:03:29,220
+In each step, one
+of the two advances.
+
+65
+00:03:29,220 --> 00:03:31,700
+And this will not miss--
+and this will tell you
+
+66
+00:03:31,700 --> 00:03:34,520
+whether that target sum
+is among the pairwise sums
+
+67
+00:03:34,520 --> 00:03:35,450
+from this thing.
+
+68
+00:03:35,450 --> 00:03:38,040
+In linear time, we
+do that n times, once
+
+69
+00:03:38,040 --> 00:03:39,320
+for each target sum.
+
+70
+00:03:39,320 --> 00:03:42,420
+So that's the fancy
+quadratic algorithm.
+
+71
+00:03:42,420 --> 00:03:46,160
+No fancy data
+structures required.
+
+72
+00:03:46,160 --> 00:03:46,660
+Cool.
+
+73
+00:03:46,660 --> 00:03:48,150
+So 3SUM is quadratic.
+
+74
+00:03:48,150 --> 00:03:51,910
+And the big conjecture is that
+you can't solve it any faster.
+
+75
+00:03:51,910 --> 00:03:54,290
+Well, you can.
+
+76
+00:03:54,290 --> 00:03:57,310
+So it's not quite
+the conjecture.
+
+77
+00:03:57,310 --> 00:04:05,110
+The conjecture is that there
+is no n to the 2 minus epsilon
+
+78
+00:04:05,110 --> 00:04:11,500
+algorithm in general--
+in the worst case.
+
+79
+00:04:11,500 --> 00:04:13,880
+Let me tell you before
+we get to-- and this is
+
+80
+00:04:13,880 --> 00:04:16,640
+has led to a whole world of
+lower bounds of 3SUM hardness.
+
+81
+00:04:16,640 --> 00:04:19,279
+If your problem is
+3SUM hard, then you
+
+82
+00:04:19,279 --> 00:04:22,720
+expect it also has no n to
+the 2 minus epsilon algorithm,
+
+83
+00:04:22,720 --> 00:04:24,390
+because if it did, 3SUM would.
+
+84
+00:04:24,390 --> 00:04:30,920
+And people generally believe
+that's the case for 3SUM.
+
+85
+00:04:30,920 --> 00:04:32,230
+But there are some exceptions.
+
+86
+00:04:32,230 --> 00:04:38,380
+So one thing is that the
+numbers have to be fairly large.
+
+87
+00:04:38,380 --> 00:04:43,070
+If all of the integers are
+in the range, let's say,
+
+88
+00:04:43,070 --> 00:04:49,580
+minus u to u-- that's the
+universe size-- then via FFT,
+
+89
+00:04:49,580 --> 00:04:53,990
+you can solve the problem in
+u log u time plus linear time.
+
+90
+00:04:53,990 --> 00:04:58,110
+So your numbers better be at
+least larger than n squared.
+
+91
+00:04:58,110 --> 00:05:00,275
+And in fact, we'll
+see n cube suffices.
+
+92
+00:05:00,275 --> 00:05:01,900
+So they don't have
+to be huge, but they
+
+93
+00:05:01,900 --> 00:05:04,180
+do have to be bigger
+than linear or quadratic.
+
+94
+00:05:07,520 --> 00:05:10,380
+More generally,
+there are a bunch
+
+95
+00:05:10,380 --> 00:05:13,475
+of sub-quadratic, but only
+slightly sub-quadratic,
+
+96
+00:05:13,475 --> 00:05:13,975
+algorithms.
+
+97
+00:05:16,710 --> 00:05:22,800
+The first one achieves a
+roughly log squared savings.
+
+98
+00:05:22,800 --> 00:05:27,960
+So a little bit less is a log
+log squared in the denominator.
+
+99
+00:05:27,960 --> 00:05:32,910
+This is a randomized algorithm
+in a model of computation
+
+100
+00:05:32,910 --> 00:05:35,140
+called the word RAM.
+
+101
+00:05:35,140 --> 00:05:37,572
+So if you're interested
+in the word RAM,
+
+102
+00:05:37,572 --> 00:05:39,280
+you should take advanced
+data structures.
+
+103
+00:05:39,280 --> 00:05:41,720
+But basically you can
+manipulate, let's say,
+
+104
+00:05:41,720 --> 00:05:44,187
+log n bit words
+in constant time.
+
+105
+00:05:44,187 --> 00:05:45,895
+You can add them
+together, multiply them,
+
+106
+00:05:45,895 --> 00:05:48,397
+that sort of thing.
+
+107
+00:05:48,397 --> 00:05:49,980
+And you assume that
+the numbers you're
+
+108
+00:05:49,980 --> 00:05:51,234
+dealing with fit in a word.
+
+109
+00:05:51,234 --> 00:05:52,900
+Because if you're
+going to compare them,
+
+110
+00:05:52,900 --> 00:05:55,800
+you'd also need that assumption.
+
+111
+00:05:55,800 --> 00:05:58,070
+So that's a reasonable model.
+
+112
+00:05:58,070 --> 00:06:01,200
+And it essentially affords
+a kind of logarithmic amount
+
+113
+00:06:01,200 --> 00:06:02,040
+of parallelism.
+
+114
+00:06:02,040 --> 00:06:04,690
+And so because it's a quadratic
+problem, roughly speaking
+
+115
+00:06:04,690 --> 00:06:08,470
+you get a quadratic amount in
+the parallelism of the model.
+
+116
+00:06:08,470 --> 00:06:10,190
+So it's a bit improved.
+
+117
+00:06:10,190 --> 00:06:15,810
+This is by two former MIT
+students, [? Eli ?] Barron
+
+118
+00:06:15,810 --> 00:06:19,480
+and Mihai Petrescu and myself.
+
+119
+00:06:19,480 --> 00:06:24,020
+And very recently,
+this year, there's
+
+120
+00:06:24,020 --> 00:06:26,025
+been another nice improvement.
+
+121
+00:06:40,470 --> 00:06:45,550
+It's actually three algorithms,
+depending on your model.
+
+122
+00:06:45,550 --> 00:06:47,220
+But all based on a similar idea.
+
+123
+00:06:56,410 --> 00:06:57,940
+Did I get these backwards?
+
+124
+00:06:57,940 --> 00:06:59,170
+I think so.
+
+125
+00:07:17,380 --> 00:07:20,730
+So first, these two
+results-- so these
+
+126
+00:07:20,730 --> 00:07:23,070
+are results by
+[? Gourmand ?] and Petty.
+
+127
+00:07:23,070 --> 00:07:26,390
+So that's Petty, gave a
+talk here about it recently.
+
+128
+00:07:26,390 --> 00:07:28,440
+In a real RAM model
+of computation--
+
+129
+00:07:28,440 --> 00:07:30,470
+this is a weaker
+model of computation,
+
+130
+00:07:30,470 --> 00:07:32,950
+so the result is stronger.
+
+131
+00:07:32,950 --> 00:07:37,720
+In a real RAM, you still assume
+the numbers you're given,
+
+132
+00:07:37,720 --> 00:07:39,047
+you can add them.
+
+133
+00:07:39,047 --> 00:07:40,880
+I think actually all
+it needs is the ability
+
+134
+00:07:40,880 --> 00:07:44,400
+to add them and compare them,
+maybe subtract-- yeah, also
+
+135
+00:07:44,400 --> 00:07:45,440
+subtract.
+
+136
+00:07:45,440 --> 00:07:48,550
+But no multiplication
+is really useful
+
+137
+00:07:48,550 --> 00:07:49,970
+in that particular model.
+
+138
+00:07:49,970 --> 00:07:52,451
+Because you can't extract
+bits out of the thing,
+
+139
+00:07:52,451 --> 00:07:54,200
+so you don't assume
+that they're integers,
+
+140
+00:07:54,200 --> 00:07:55,699
+you just treat them
+as real numbers.
+
+141
+00:07:55,699 --> 00:07:58,000
+And all you know how to
+do is add a bunch of them
+
+142
+00:07:58,000 --> 00:08:01,050
+and compare those additions.
+
+143
+00:08:01,050 --> 00:08:02,760
+So that's a weaker
+model of computation.
+
+144
+00:08:02,760 --> 00:08:05,620
+And still they're able to
+get a roughly logarithmic
+
+145
+00:08:05,620 --> 00:08:10,600
+improvement, not quite as
+strong as the quadratic analog.
+
+146
+00:08:10,600 --> 00:08:13,110
+But one advance is that this
+is the first deterministic
+
+147
+00:08:13,110 --> 00:08:15,330
+algorithm to be n squared.
+
+148
+00:08:15,330 --> 00:08:18,880
+So randomization isn't
+necessary to achieve that.
+
+149
+00:08:18,880 --> 00:08:22,005
+Though this is 2/3 power.
+
+150
+00:08:22,005 --> 00:08:23,380
+But the other
+advance is that you
+
+151
+00:08:23,380 --> 00:08:25,800
+don't need to manipulate
+the individual bits.
+
+152
+00:08:25,800 --> 00:08:30,060
+So even in the randomized
+model that's nice.
+
+153
+00:08:30,060 --> 00:08:35,620
+And then the major thing,
+and sort of the first thing
+
+154
+00:08:35,620 --> 00:08:38,740
+to call into question the
+3SUM conjecture, which
+
+155
+00:08:38,740 --> 00:08:44,700
+is that conjecture,
+is I wouldn't really
+
+156
+00:08:44,700 --> 00:08:45,820
+call this an algorithm.
+
+157
+00:08:45,820 --> 00:08:50,765
+But it's a thing which runs
+n roughly n to the 1.5 time.
+
+158
+00:08:53,570 --> 00:08:57,120
+But here it's a more powerful
+model, a super powerful model,
+
+159
+00:08:57,120 --> 00:09:00,510
+called the decision
+tree model, where
+
+160
+00:09:00,510 --> 00:09:04,960
+the idea is that an algorithm
+is specified by an entire tree.
+
+161
+00:09:04,960 --> 00:09:07,410
+The depth of the
+tree is this big.
+
+162
+00:09:07,410 --> 00:09:11,120
+Each node of the tree says,
+add these five things,
+
+163
+00:09:11,120 --> 00:09:13,420
+compare them to
+these five things,
+
+164
+00:09:13,420 --> 00:09:16,450
+and see which is
+bigger, and then branch.
+
+165
+00:09:16,450 --> 00:09:18,260
+There's a left branch,
+and a right tree.
+
+166
+00:09:18,260 --> 00:09:20,343
+If you've ever seen a
+comparison tree, same thing.
+
+167
+00:09:20,343 --> 00:09:22,395
+But the comparisons
+are more interesting.
+
+168
+00:09:25,370 --> 00:09:27,600
+But this is not an
+algorithm, because we
+
+169
+00:09:27,600 --> 00:09:30,710
+don't know how to compute
+that tree efficiently.
+
+170
+00:09:30,710 --> 00:09:32,710
+We can compute it in
+probably polynomial time,
+
+171
+00:09:32,710 --> 00:09:36,690
+but we don't know how to
+compute it in sub-quadratic time
+
+172
+00:09:36,690 --> 00:09:38,360
+or sub-this time.
+
+173
+00:09:38,360 --> 00:09:40,610
+So it's kind of a
+frustrating situation,
+
+174
+00:09:40,610 --> 00:09:44,910
+because we know
+that this thing is
+
+175
+00:09:44,910 --> 00:09:47,850
+sort of out there, but
+actually finding it is hard.
+
+176
+00:09:47,850 --> 00:09:51,270
+And actually several problems
+in computers since the '80s,
+
+177
+00:09:51,270 --> 00:09:54,240
+I think, where we know
+better decision trees
+
+178
+00:09:54,240 --> 00:09:55,880
+than we know algorithms.
+
+179
+00:09:55,880 --> 00:10:00,800
+So my sense would be that
+decision tree model is strictly
+
+180
+00:10:00,800 --> 00:10:01,440
+more powerful.
+
+181
+00:10:01,440 --> 00:10:05,910
+The 3SUM conjecture is
+true for regular algorithms
+
+182
+00:10:05,910 --> 00:10:08,207
+if you define it
+this way or this way.
+
+183
+00:10:08,207 --> 00:10:10,040
+But in the decision to
+model, obviously, you
+
+184
+00:10:10,040 --> 00:10:10,921
+can do a lot better.
+
+185
+00:10:10,921 --> 00:10:11,420
+Question?
+
+186
+00:10:11,420 --> 00:10:14,590
+AUDIENCE: What's the reason
+to believe the decision tree
+
+187
+00:10:14,590 --> 00:10:18,250
+model is some bit that we
+run polynomial algorithm,
+
+188
+00:10:18,250 --> 00:10:20,887
+look at the bit and it
+tells us the incident?
+
+189
+00:10:20,887 --> 00:10:22,220
+PROFESSOR: You mean, why would--
+
+190
+00:10:22,220 --> 00:10:25,500
+AUDIENCE: Why would you believe
+this decision tree is there,
+
+191
+00:10:25,500 --> 00:10:29,740
+like a model of computation
+that we should care about?
+
+192
+00:10:29,740 --> 00:10:32,345
+PROFESSOR: Oh,
+no, you shouldn't.
+
+193
+00:10:32,345 --> 00:10:33,970
+Decision tree is not
+a model you should
+
+194
+00:10:33,970 --> 00:10:36,010
+consider a reasonable computer.
+
+195
+00:10:36,010 --> 00:10:39,110
+But it's interesting in that
+it suggests-- it gives you
+
+196
+00:10:39,110 --> 00:10:41,010
+this tantalizing
+feeling that maybe you
+
+197
+00:10:41,010 --> 00:10:42,749
+could turn this into
+a real algorithm,
+
+198
+00:10:42,749 --> 00:10:43,790
+you could run a computer.
+
+199
+00:10:43,790 --> 00:10:44,960
+But, definitely,
+yeah, you cannot--
+
+200
+00:10:44,960 --> 00:10:47,310
+if you don't know what decision
+tree is you can't run it
+
+201
+00:10:47,310 --> 00:10:48,470
+on a computer directly.
+
+202
+00:10:48,470 --> 00:10:50,737
+So it's not a model
+of computation
+
+203
+00:10:50,737 --> 00:10:51,570
+in the strict sense.
+
+204
+00:10:51,570 --> 00:10:53,110
+It's especially
+interesting-- I mean,
+
+205
+00:10:53,110 --> 00:10:55,060
+it's always important to see
+how the model of competition
+
+206
+00:10:55,060 --> 00:10:56,930
+relates to bounds,
+particularly if you're
+
+207
+00:10:56,930 --> 00:10:58,520
+going to try to prove
+the lower bound.
+
+208
+00:10:58,520 --> 00:11:01,430
+There are some lower bounds of
+n squared in restricted forms
+
+209
+00:11:01,430 --> 00:11:02,810
+of the decision tree model.
+
+210
+00:11:02,810 --> 00:11:04,850
+This says you can't
+extend those lower bounds
+
+211
+00:11:04,850 --> 00:11:06,390
+to arbitrary decision trees.
+
+212
+00:11:06,390 --> 00:11:09,360
+Decision trees are traditionally
+used as a lower bound model.
+
+213
+00:11:09,360 --> 00:11:10,910
+If you can prove a
+lower bound there,
+
+214
+00:11:10,910 --> 00:11:12,600
+because it's a very
+powerful model,
+
+215
+00:11:12,600 --> 00:11:15,560
+that implies lower bounds in
+something like the real RAM.
+
+216
+00:11:15,560 --> 00:11:17,644
+So that's why people
+care in some sense.
+
+217
+00:11:17,644 --> 00:11:19,310
+This says you can't
+prove a strong lower
+
+218
+00:11:19,310 --> 00:11:20,990
+bound in that model,
+which is annoying.
+
+219
+00:11:20,990 --> 00:11:22,576
+Another question?
+
+220
+00:11:22,576 --> 00:11:24,112
+AUDIENCE: What is
+the tree that they
+
+221
+00:11:24,112 --> 00:11:25,649
+found the structure and
+the constants of the nodes,
+
+222
+00:11:25,649 --> 00:11:27,760
+does it depend on the
+values of the integer?
+
+223
+00:11:27,760 --> 00:11:29,660
+Only the number?
+
+224
+00:11:29,660 --> 00:11:32,530
+PROFESSOR: I'm pretty
+sure in this model
+
+225
+00:11:32,530 --> 00:11:36,220
+you have a constant number
+of original integers.
+
+226
+00:11:36,220 --> 00:11:37,891
+You add them together
+and compare them
+
+227
+00:11:37,891 --> 00:11:39,640
+to a constant number
+of original integers.
+
+228
+00:11:39,640 --> 00:11:41,990
+AUDIENCE: But what
+was is-- I mean
+
+229
+00:11:41,990 --> 00:11:46,426
+I can compute the tree in sum,
+but what does it depend on?
+
+230
+00:11:46,426 --> 00:11:47,742
+Like if I change the value--
+
+231
+00:11:47,742 --> 00:11:49,950
+PROFESSOR: The tree, of
+course, has exponential size.
+
+232
+00:11:49,950 --> 00:11:52,366
+So you never would actually
+want to compute it explicitly.
+
+233
+00:11:52,366 --> 00:11:54,640
+What you want to
+compute is after I've
+
+234
+00:11:54,640 --> 00:11:57,760
+done some number of things,
+what's the next operation that
+
+235
+00:11:57,760 --> 00:11:58,260
+happens.
+
+236
+00:11:58,260 --> 00:11:59,884
+AUDIENCE: That's
+still not my question.
+
+237
+00:11:59,884 --> 00:12:02,131
+So my question is what
+changes the actual structure
+
+238
+00:12:02,131 --> 00:12:03,112
+of the tree?
+
+239
+00:12:03,112 --> 00:12:04,070
+Is it just the number--
+
+240
+00:12:04,070 --> 00:12:06,260
+PROFESSOR: Oh, yeah, n.
+
+241
+00:12:06,260 --> 00:12:10,210
+The decision tree
+only depends on n.
+
+242
+00:12:10,210 --> 00:12:12,730
+I mean in some sense the
+decision tree's encoding
+
+243
+00:12:12,730 --> 00:12:14,577
+an adaptive algorithm,
+that depending
+
+244
+00:12:14,577 --> 00:12:16,160
+on the results of
+previous comparisons
+
+245
+00:12:16,160 --> 00:12:18,050
+tells you what to do next about.
+
+246
+00:12:18,050 --> 00:12:19,660
+If you think of it
+as the entire tree
+
+247
+00:12:19,660 --> 00:12:20,784
+that's only depending on n.
+
+248
+00:12:23,690 --> 00:12:28,017
+But because it's so big, I
+mean, that doesn't help us if.
+
+249
+00:12:28,017 --> 00:12:29,600
+You could imagine
+pre-computing for n,
+
+250
+00:12:29,600 --> 00:12:31,270
+but there's no way to store it.
+
+251
+00:12:31,270 --> 00:12:34,790
+And you couldn't really
+afford that exponential time.
+
+252
+00:12:34,790 --> 00:12:39,260
+OK, so that's a short story
+about the known upper bounds
+
+253
+00:12:39,260 --> 00:12:41,620
+and also the known
+lower bounds on 3SUM.
+
+254
+00:12:41,620 --> 00:12:44,307
+There are some weak lower
+bounds in a particular version
+
+255
+00:12:44,307 --> 00:12:46,140
+of the decision tree
+model when you can only
+
+256
+00:12:46,140 --> 00:12:50,530
+compare I think
+sums of two items,
+
+257
+00:12:50,530 --> 00:12:52,300
+then you can get an n
+squared lower bound.
+
+258
+00:12:52,300 --> 00:12:53,841
+But that's not
+especially interesting
+
+259
+00:12:53,841 --> 00:12:59,120
+given this result anymore.
+
+260
+00:12:59,120 --> 00:13:05,380
+Let me tell you briefly
+about k sum, which
+
+261
+00:13:05,380 --> 00:13:16,430
+is the obvious generalization,
+instead of 3, do any k of them
+
+262
+00:13:16,430 --> 00:13:18,450
+sum to 0?
+
+263
+00:13:18,450 --> 00:13:21,120
+Here, they're actually
+stronger and lower bounds.
+
+264
+00:13:21,120 --> 00:13:24,692
+So if 3SUM is the most
+popular thing considered
+
+265
+00:13:24,692 --> 00:13:26,150
+for proving quadratic
+lower bounds,
+
+266
+00:13:26,150 --> 00:13:27,524
+because a lot of
+problems we care
+
+267
+00:13:27,524 --> 00:13:29,230
+about are linear or
+quadratic, so 3SUM
+
+268
+00:13:29,230 --> 00:13:31,020
+gets a lot of the attention.
+
+269
+00:13:31,020 --> 00:13:32,830
+K sum is a little
+easier to argue about.
+
+270
+00:13:32,830 --> 00:13:35,950
+In particular, it's NP
+hard in general, right.
+
+271
+00:13:35,950 --> 00:13:40,410
+This, in particular, encodes
+something like partition.
+
+272
+00:13:40,410 --> 00:13:44,640
+If you have n integers, and
+they're overall sum is 0,
+
+273
+00:13:44,640 --> 00:13:46,480
+and you want to know
+whether any n/2 of them
+
+274
+00:13:46,480 --> 00:13:48,025
+sum to 0 or something
+like that, that
+
+275
+00:13:48,025 --> 00:13:50,420
+would be roughly partition.
+
+276
+00:13:50,420 --> 00:13:52,500
+So this is NP hard.
+
+277
+00:13:52,500 --> 00:13:56,510
+So definitely it's got
+to get hard for some k.
+
+278
+00:13:56,510 --> 00:13:59,390
+In fact, you can show
+fixed parameter hardness,
+
+279
+00:13:59,390 --> 00:14:01,950
+W1 hardness, with respect to k.
+
+280
+00:14:05,000 --> 00:14:08,080
+So in particular, if you
+assume the exponential time
+
+281
+00:14:08,080 --> 00:14:11,930
+hypothesis, then you
+get some lower bounds.
+
+282
+00:14:11,930 --> 00:14:16,710
+And the best lower
+bound known so far
+
+283
+00:14:16,710 --> 00:14:24,270
+is that there's no n to
+the little of k algorithm,
+
+284
+00:14:24,270 --> 00:14:27,140
+assuming regular ETH.
+
+285
+00:14:27,140 --> 00:14:31,530
+For this, we need to assume k is
+less than or equal to-- is not
+
+286
+00:14:31,530 --> 00:14:38,340
+too giant, because, I guess,
+if k equals n, for example,
+
+287
+00:14:38,340 --> 00:14:39,960
+this problem is really easy.
+
+288
+00:14:39,960 --> 00:14:43,150
+So it can't go all the way.
+
+289
+00:14:43,150 --> 00:14:46,620
+So this says, well, maybe we
+don't get the constant right,
+
+290
+00:14:46,620 --> 00:14:51,680
+but there's some kind of n
+to the roughly k dependence.
+
+291
+00:14:51,680 --> 00:14:55,760
+So there's a reason that there's
+a number here larger than 1.
+
+292
+00:14:55,760 --> 00:14:59,295
+Although we don't know how
+to prove that, the feeling is
+
+293
+00:14:59,295 --> 00:15:02,670
+that 3SUM, k sum,
+they require roughly n
+
+294
+00:15:02,670 --> 00:15:04,150
+to some constant times k.
+
+295
+00:15:04,150 --> 00:15:05,900
+You can debate about
+what the constant is,
+
+296
+00:15:05,900 --> 00:15:08,580
+but we have this theorem.
+
+297
+00:15:08,580 --> 00:15:14,930
+And on the upper bound side--
+and what people believe
+
+298
+00:15:14,930 --> 00:15:21,790
+is the right answer-- is k/2
+ceiling-- at least randomized.
+
+299
+00:15:21,790 --> 00:15:26,120
+If you want deterministic,
+you might get a log factor.
+
+300
+00:15:26,120 --> 00:15:27,620
+But you can definitely
+achieve this
+
+301
+00:15:27,620 --> 00:15:34,230
+by the same kind of do all
+k/2y sums twice, and then
+
+302
+00:15:34,230 --> 00:15:36,860
+look for collisions
+in the hash table.
+
+303
+00:15:36,860 --> 00:15:40,960
+And so the ceiling
+is what's making 3SUM
+
+304
+00:15:40,960 --> 00:15:43,140
+into a quadratic thing.
+
+305
+00:15:43,140 --> 00:15:48,510
+But 4 sum is just
+as easy as 3SUM,
+
+306
+00:15:48,510 --> 00:15:51,590
+because you can still
+solve it in quadratic time.
+
+307
+00:15:51,590 --> 00:15:55,339
+But 5 sum, the conjecture is
+that requires n cube time.
+
+308
+00:15:55,339 --> 00:15:57,130
+AUDIENCE: Sorry, I
+didn't quite catch that.
+
+309
+00:15:57,130 --> 00:15:59,130
+Is that a known result?
+
+310
+00:15:59,130 --> 00:16:02,220
+PROFESSOR: This is an
+upper bound is known.
+
+311
+00:16:02,220 --> 00:16:10,380
+And then the conjecture
+is that that's tight.
+
+312
+00:16:10,380 --> 00:16:17,740
+There's no end to the ceiling
+k/2 minus epsilon algorithm.
+
+313
+00:16:17,740 --> 00:16:20,090
+That's what we don't know.
+
+314
+00:16:20,090 --> 00:16:23,580
+But algorithm is easy.
+
+315
+00:16:23,580 --> 00:16:24,560
+So that's k sum.
+
+316
+00:16:24,560 --> 00:16:26,790
+And this gives you
+some more intuition
+
+317
+00:16:26,790 --> 00:16:29,080
+for why you should expect
+these problems are hard.
+
+318
+00:16:29,080 --> 00:16:33,025
+In particular, if you could
+prove k sum requires-- I mean,
+
+319
+00:16:33,025 --> 00:16:34,400
+if you can prove
+this conjecture,
+
+320
+00:16:34,400 --> 00:16:38,190
+you prove the exponential
+time hypothesis.
+
+321
+00:16:38,190 --> 00:16:39,660
+So you prove p
+does not equal NP.
+
+322
+00:16:39,660 --> 00:16:42,118
+And you may make $1 million
+and lots of good things happen.
+
+323
+00:16:42,118 --> 00:16:46,200
+So we should try to do this.
+
+324
+00:16:46,200 --> 00:16:48,710
+Of course, as I
+mentioned, 3SUM is the one
+
+325
+00:16:48,710 --> 00:16:53,470
+we use the most in this world,
+because for NP hard problems,
+
+326
+00:16:53,470 --> 00:16:55,990
+usually we use NP hardness
+and all the stuff we did.
+
+327
+00:16:55,990 --> 00:16:58,220
+You could use k sum, but
+that's basically partition.
+
+328
+00:17:03,340 --> 00:17:05,241
+But this is sort of
+motivation for why
+
+329
+00:17:05,241 --> 00:17:06,490
+you should think 3SUM is hard.
+
+330
+00:17:06,490 --> 00:17:09,450
+I'll leave it at that.
+
+331
+00:17:09,450 --> 00:17:12,185
+So let me talk
+about 3SUM hardness.
+
+332
+00:17:21,530 --> 00:17:29,310
+So I'm going to call a problem
+3SUM hard if that algorithm has
+
+333
+00:17:29,310 --> 00:17:37,960
+an n to the two minus epsilon
+time algorithm, then so
+
+334
+00:17:37,960 --> 00:17:38,460
+does 3SUM.
+
+335
+00:17:42,080 --> 00:17:43,940
+OK, this is what we want.
+
+336
+00:17:43,940 --> 00:17:45,630
+If I say problem
+is 3SUM is hard,
+
+337
+00:17:45,630 --> 00:17:48,070
+it means it shouldn't
+be solvable in less
+
+338
+00:17:48,070 --> 00:17:52,280
+than quadratic time other
+than this poly log stuff.
+
+339
+00:17:52,280 --> 00:17:54,840
+So this is the formal meaning.
+
+340
+00:17:54,840 --> 00:17:58,000
+If you could solve it
+in sub-quadratic, truly
+
+341
+00:17:58,000 --> 00:18:01,140
+sub-quadratic time this is
+often called the minus epsilon,
+
+342
+00:18:01,140 --> 00:18:03,530
+then 3SUM can be solved in
+truly sub-quadratic time,
+
+343
+00:18:03,530 --> 00:18:05,237
+contradicting the
+3SUM conjecture.
+
+344
+00:18:05,237 --> 00:18:07,570
+So if you believe this is the
+3SUM conjecture that means
+
+345
+00:18:07,570 --> 00:18:09,920
+this is not possible
+for your problem.
+
+346
+00:18:09,920 --> 00:18:11,670
+And the way we're going
+to do that usually
+
+347
+00:18:11,670 --> 00:18:14,100
+is with a 3SUM reduction.
+
+348
+00:18:20,990 --> 00:18:22,360
+There are other ways to do it.
+
+349
+00:18:22,360 --> 00:18:24,890
+You don't have to follow this
+particular style reduction.
+
+350
+00:18:24,890 --> 00:18:28,750
+But most of them do.
+
+351
+00:18:28,750 --> 00:18:32,960
+So it's going to be a multi call
+reduction, but in this world,
+
+352
+00:18:32,960 --> 00:18:35,340
+we have to be careful
+about polynomial factors.
+
+353
+00:18:35,340 --> 00:18:37,240
+We don't want to call
+your thing n times
+
+354
+00:18:37,240 --> 00:18:39,550
+and say that was a
+legitimate reduction.
+
+355
+00:18:39,550 --> 00:18:42,990
+So let's say you can call--
+if you're reducing from a to
+
+356
+00:18:42,990 --> 00:18:47,400
+b, then that means you
+could solve b using a.
+
+357
+00:18:47,400 --> 00:18:52,430
+And you're going to make a
+constant number of calls to a.
+
+358
+00:18:52,430 --> 00:18:53,950
+Sorry, other way around.
+
+359
+00:18:53,950 --> 00:18:57,064
+That means I can
+solve a using b.
+
+360
+00:18:57,064 --> 00:18:58,480
+Usually, we take
+an instance here,
+
+361
+00:18:58,480 --> 00:18:59,730
+reduce it to an instance here.
+
+362
+00:18:59,730 --> 00:19:00,704
+That's OK.
+
+363
+00:19:00,704 --> 00:19:03,120
+But because we're going to
+want to solve not just decision
+
+364
+00:19:03,120 --> 00:19:05,390
+problems, we're
+going to say, OK,
+
+365
+00:19:05,390 --> 00:19:06,950
+you take your instance of a.
+
+366
+00:19:06,950 --> 00:19:08,767
+You can call an
+oracle for solving
+
+367
+00:19:08,767 --> 00:19:11,350
+b a constant number of times,
+as long as the thing you call it
+
+368
+00:19:11,350 --> 00:19:13,080
+with is also not much bigger.
+
+369
+00:19:16,000 --> 00:19:18,150
+So the n prime that you
+call this thing with
+
+370
+00:19:18,150 --> 00:19:21,690
+should be linear in n.
+
+371
+00:19:21,690 --> 00:19:27,930
+And the running time
+of the reduction
+
+372
+00:19:27,930 --> 00:19:28,930
+should be sub-quadratic.
+
+373
+00:19:32,940 --> 00:19:35,570
+OK, pretty much all
+reductions, it's like n,
+
+374
+00:19:35,570 --> 00:19:37,500
+n log n, maybe n log squared n.
+
+375
+00:19:37,500 --> 00:19:40,280
+But it should be strictly
+less than n squared,
+
+376
+00:19:40,280 --> 00:19:43,600
+otherwise the reduction doesn't
+tell you much about weather
+
+377
+00:19:43,600 --> 00:19:46,130
+the problem is quadratic or not.
+
+378
+00:19:46,130 --> 00:19:49,150
+So with this much
+running time, plausibly
+
+379
+00:19:49,150 --> 00:19:50,830
+you could construct
+a larger instance.
+
+380
+00:19:50,830 --> 00:19:53,650
+But this constraint
+says the instance
+
+381
+00:19:53,650 --> 00:19:56,440
+of b that you called
+should be linear in size,
+
+382
+00:19:56,440 --> 00:19:58,290
+so the quadratic over
+here is the same thing
+
+383
+00:19:58,290 --> 00:20:00,140
+as quadratic over here.
+
+384
+00:20:00,140 --> 00:20:01,830
+OK, so those are the
+rules of the game.
+
+385
+00:20:01,830 --> 00:20:03,250
+We're not going to have to
+worry about these constraints
+
+386
+00:20:03,250 --> 00:20:04,070
+too much.
+
+387
+00:20:04,070 --> 00:20:08,467
+Most of our reductions are
+constant factor blow up and run
+
+388
+00:20:08,467 --> 00:20:10,175
+in a reasonable amount
+of time, But we've
+
+389
+00:20:10,175 --> 00:20:12,180
+got to be a little
+careful here to make
+
+390
+00:20:12,180 --> 00:20:14,140
+sure the running
+time is not huge.
+
+391
+00:20:14,140 --> 00:20:17,280
+Usually we're allowed
+polynomial time.
+
+392
+00:20:17,280 --> 00:20:20,740
+OK, so if you have a 3SUM
+reduction from a to b,
+
+393
+00:20:20,740 --> 00:20:24,474
+and you know a is 3SUM
+hard, then b is 3SUM hard.
+
+394
+00:20:24,474 --> 00:20:25,349
+AUDIENCE: [INAUDIBLE]
+
+395
+00:20:30,280 --> 00:20:32,780
+PROFESSOR: N prime is the
+size of the thing that
+
+396
+00:20:32,780 --> 00:20:34,790
+you're-- the instance
+you're calling with.
+
+397
+00:20:34,790 --> 00:20:37,560
+So if you have an
+instance x over here,
+
+398
+00:20:37,560 --> 00:20:39,430
+you have some x prime over here.
+
+399
+00:20:39,430 --> 00:20:42,044
+N prime is the size of x prime.
+
+400
+00:20:42,044 --> 00:20:43,460
+There's a constant
+number of them.
+
+401
+00:20:43,460 --> 00:20:46,630
+But I want all of those
+instances to be linear size.
+
+402
+00:20:56,430 --> 00:20:59,500
+OK, so initially a
+is going to be 3SUM.
+
+403
+00:20:59,500 --> 00:21:02,290
+3SUM is 3SUM hard.
+
+404
+00:21:02,290 --> 00:21:05,870
+Because if it as a sub-quadratic
+algorithm, then so does itself.
+
+405
+00:21:05,870 --> 00:21:08,060
+And so that's actually easy.
+
+406
+00:21:08,060 --> 00:21:09,590
+NP harnessed,
+that's not so easy.
+
+407
+00:21:12,420 --> 00:21:15,590
+If we let b be
+some other problem,
+
+408
+00:21:15,590 --> 00:21:17,660
+then we'll prove hardness.
+
+409
+00:21:17,660 --> 00:21:21,350
+In this world, because we
+don't have any solid, lower
+
+410
+00:21:21,350 --> 00:21:23,350
+bounds to work from, it's
+also interesting to go
+
+411
+00:21:23,350 --> 00:21:24,821
+in both directions.
+
+412
+00:21:24,821 --> 00:21:26,820
+I'm not going to define
+a notion of completeness
+
+413
+00:21:26,820 --> 00:21:29,030
+here, just because
+it hasn't been done.
+
+414
+00:21:29,030 --> 00:21:30,710
+But you could define
+3SUM completeness
+
+415
+00:21:30,710 --> 00:21:35,890
+to mean you can reduce from
+3SUM and you can reduce to 3SUM.
+
+416
+00:21:35,890 --> 00:21:39,110
+We'll see a few problems
+in that-- usually people
+
+417
+00:21:39,110 --> 00:21:41,940
+call that equivalence,
+sub-quadratic equivalence.
+
+418
+00:21:44,700 --> 00:21:50,450
+OK, so let me start with
+some base 3SUM hard problems
+
+419
+00:21:50,450 --> 00:21:53,020
+to start from.
+
+420
+00:21:53,020 --> 00:21:57,280
+A lot of this comes
+from a paper--
+
+421
+00:21:57,280 --> 00:22:03,800
+this paper-- by Gajentaan
+and Overmars, 1995.
+
+422
+00:22:03,800 --> 00:22:06,560
+And they had been
+collecting over the years
+
+423
+00:22:06,560 --> 00:22:08,770
+a whole bunch of mostly
+computational geometry
+
+424
+00:22:08,770 --> 00:22:14,130
+problems, which are 3SUM hard
+in that you can reduce 3SUM
+
+425
+00:22:14,130 --> 00:22:16,010
+to all of them.
+
+426
+00:22:16,010 --> 00:22:19,330
+But in the center here is a
+bunch of core problems, 3SUM,
+
+427
+00:22:19,330 --> 00:22:23,460
+3SUM prime, which I would
+call ABC version of 3SUM--
+
+428
+00:22:23,460 --> 00:22:26,210
+we've seen a few ABC
+problems in the past--
+
+429
+00:22:26,210 --> 00:22:28,300
+and a geometric version of 3SUM.
+
+430
+00:22:28,300 --> 00:22:30,520
+So let me tell you about those.
+
+431
+00:22:30,520 --> 00:22:38,590
+First of all, 3SUM is 3SUM hard,
+even when u is order n cubed.
+
+432
+00:22:38,590 --> 00:22:39,590
+So that's nice to know.
+
+433
+00:22:39,590 --> 00:22:43,120
+The integers you're working
+with don't have to be giant.
+
+434
+00:22:43,120 --> 00:22:45,212
+This is based on a
+hashing argument,
+
+435
+00:22:45,212 --> 00:22:46,170
+which we won't go into.
+
+436
+00:22:48,840 --> 00:22:52,160
+OK, so what is 3SUM prime?
+
+437
+00:22:52,160 --> 00:23:01,440
+3SUM prime you're given three
+sets of integers, A, B, C--
+
+438
+00:23:01,440 --> 00:23:02,640
+yeah?
+
+439
+00:23:02,640 --> 00:23:04,140
+AUDIENCE: For these
+reductions we're
+
+440
+00:23:04,140 --> 00:23:06,100
+using only deterministic
+reductions?
+
+441
+00:23:09,540 --> 00:23:12,250
+PROFESSOR: Let's say we're only
+using deterministic reductions,
+
+442
+00:23:12,250 --> 00:23:14,720
+although randomized would
+also be interesting,
+
+443
+00:23:14,720 --> 00:23:16,450
+You just have to
+weaken this statement.
+
+444
+00:23:16,450 --> 00:23:19,480
+But here I'll say deterministic.
+
+445
+00:23:19,480 --> 00:23:22,844
+AUDIENCE: Is the hashing
+argument for why [INAUDIBLE]?
+
+446
+00:23:22,844 --> 00:23:25,010
+PROFESSOR: Yeah, I'm pretty
+sure you can derandomize
+
+447
+00:23:25,010 --> 00:23:25,940
+that hashing scheme.
+
+448
+00:23:28,690 --> 00:23:34,395
+I need to double check,
+but, yeah, that's the claim.
+
+449
+00:23:34,395 --> 00:23:35,670
+Yeah, that is good question.
+
+450
+00:23:54,740 --> 00:23:58,590
+So this is the ABC
+version of 3SUM.
+
+451
+00:23:58,590 --> 00:24:00,560
+We just want the
+three items to come
+
+452
+00:24:00,560 --> 00:24:03,117
+from three particular sets.
+
+453
+00:24:03,117 --> 00:24:04,700
+And traditionally,
+this one is phrased
+
+454
+00:24:04,700 --> 00:24:07,320
+as a plus b equals c,
+although you could also
+
+455
+00:24:07,320 --> 00:24:09,460
+say a plus b plus c equals 0.
+
+456
+00:24:09,460 --> 00:24:10,360
+It's the same thing.
+
+457
+00:24:10,360 --> 00:24:12,050
+You're just negating
+all the c's.
+
+458
+00:24:12,050 --> 00:24:16,490
+And in this world, because you
+have one item from each set,
+
+459
+00:24:16,490 --> 00:24:20,930
+actually it's really easy to
+just negate one subset of them.
+
+460
+00:24:20,930 --> 00:24:23,840
+So it doesn't matter whether you
+put a minus sign here or not.
+
+461
+00:24:23,840 --> 00:24:27,280
+But I will not, because that's
+how 3SUM prime is usually
+
+462
+00:24:27,280 --> 00:24:29,700
+defined.
+
+463
+00:24:29,700 --> 00:24:33,630
+So I claim 3SUM
+prime is 3SUM hard.
+
+464
+00:24:33,630 --> 00:24:34,850
+Why?
+
+465
+00:24:34,850 --> 00:24:40,010
+I let capital A-- if I'm
+given a 3SUM instance,
+
+466
+00:24:40,010 --> 00:24:43,430
+let's call it S. S is
+a set of n integers.
+
+467
+00:24:43,430 --> 00:24:45,080
+I'm going to let a
+equal S. I'm going
+
+468
+00:24:45,080 --> 00:24:48,730
+to let b equal S. I'm going
+to let c equal negative s.
+
+469
+00:24:48,730 --> 00:24:49,530
+Done.
+
+470
+00:24:49,530 --> 00:24:52,950
+OK, so that's a
+reduction from 3SUM.
+
+471
+00:24:52,950 --> 00:25:03,571
+AUDIENCE: [INAUDIBLE]
+like if 0 is in your list,
+
+472
+00:25:03,571 --> 00:25:06,430
+the way the instance
+you constructed,
+
+473
+00:25:06,430 --> 00:25:10,142
+you might use some element
+x of the list from a.
+
+474
+00:25:10,142 --> 00:25:14,590
+The same element x from
+b, and then y from c.
+
+475
+00:25:14,590 --> 00:25:21,058
+And x plus x might be, I
+guess, plus y would equal 0.
+
+476
+00:25:21,058 --> 00:25:26,180
+In the original list
+you didn't have x twice.
+
+477
+00:25:26,180 --> 00:25:28,930
+I'm just getting the
+example of choosing 0 three
+
+478
+00:25:28,930 --> 00:25:33,880
+times as sort of a
+convenient example of that.
+
+479
+00:25:33,880 --> 00:25:36,470
+PROFESSOR: So that you
+also detect a linear time.
+
+480
+00:25:36,470 --> 00:25:37,760
+AUDIENCE: What do you mean?
+
+481
+00:25:37,760 --> 00:25:39,050
+PROFESSOR: You can
+detect whether there
+
+482
+00:25:39,050 --> 00:25:40,000
+are any such triples.
+
+483
+00:25:40,000 --> 00:25:44,280
+If you allow repetition,
+then you answer the question.
+
+484
+00:25:44,280 --> 00:25:46,116
+Your goal is to solve 3SUM.
+
+485
+00:25:46,116 --> 00:25:48,440
+AUDIENCE: So you're
+solving 3SUM by making
+
+486
+00:25:48,440 --> 00:25:50,890
+oracle calls to 3SUM prime?
+
+487
+00:25:50,890 --> 00:25:53,750
+PROFESSOR: Right, so if
+you can 3SUM ahead of time,
+
+488
+00:25:53,750 --> 00:25:54,980
+you're done.
+
+489
+00:25:54,980 --> 00:25:56,995
+In linear time, you
+can check whether there
+
+490
+00:25:56,995 --> 00:26:00,160
+are any pairs that allow,
+with some duplication,
+
+491
+00:26:00,160 --> 00:26:04,330
+a solution to 3SUM instance.
+
+492
+00:26:04,330 --> 00:26:06,470
+This is not addressed
+in the paper, which
+
+493
+00:26:06,470 --> 00:26:11,810
+makes me think that in
+this definition of 3SUM,
+
+494
+00:26:11,810 --> 00:26:15,060
+we allow the items
+to-- basically,
+
+495
+00:26:15,060 --> 00:26:18,700
+every item could be used three
+times, up to three times.
+
+496
+00:26:18,700 --> 00:26:20,970
+There's no requirement that
+they're distinct items.
+
+497
+00:26:20,970 --> 00:26:22,627
+So then this reduction is fine.
+
+498
+00:26:22,627 --> 00:26:23,960
+I don't think that's a big deal.
+
+499
+00:26:23,960 --> 00:26:25,474
+And you can get rid of it.
+
+500
+00:26:25,474 --> 00:26:28,260
+But that must be how
+it's normally defined.
+
+501
+00:26:28,260 --> 00:26:32,740
+I didn't specify whether it
+was three distinct items.
+
+502
+00:26:32,740 --> 00:26:35,750
+But let's allow
+multiplicity there.
+
+503
+00:26:35,750 --> 00:26:43,250
+And then this reduction
+is fine, because that's
+
+504
+00:26:43,250 --> 00:26:46,030
+what the paper does.
+
+505
+00:26:46,030 --> 00:26:49,800
+OK, with more effort, like
+adding big integers and so on,
+
+506
+00:26:49,800 --> 00:26:51,800
+you can reduce-- in
+the other direction
+
+507
+00:26:51,800 --> 00:26:54,060
+reduce from 3SUM prime to 3SUM.
+
+508
+00:26:56,910 --> 00:26:58,436
+I won't cover that,
+because I just
+
+509
+00:26:58,436 --> 00:27:00,310
+want to prove the 3SUM
+hardness about things.
+
+510
+00:27:00,310 --> 00:27:02,830
+But in fact, all
+these three problems
+
+511
+00:27:02,830 --> 00:27:04,681
+are identical to each other.
+
+512
+00:27:04,681 --> 00:27:06,180
+If any one of them
+is sub-quadratic,
+
+513
+00:27:06,180 --> 00:27:08,040
+then they all are.
+
+514
+00:27:08,040 --> 00:27:10,622
+So that's nice, because
+3SUM prime is really
+
+515
+00:27:10,622 --> 00:27:11,580
+a special case of 3SUM.
+
+516
+00:27:18,200 --> 00:27:21,270
+So our next problem is
+the geometric problem.
+
+517
+00:27:32,230 --> 00:27:33,940
+They call it geometric
+base problem.
+
+518
+00:27:42,190 --> 00:27:44,480
+So here we're in 2D.
+
+519
+00:27:44,480 --> 00:27:50,430
+And we're given endpoints
+whose y-coordinates are all
+
+520
+00:27:50,430 --> 00:27:51,990
+0, 1, or 2.
+
+521
+00:27:51,990 --> 00:27:56,330
+You can imagine why--
+because there's three lists.
+
+522
+00:27:56,330 --> 00:28:02,840
+And so they all live on
+three horizontal lines.
+
+523
+00:28:02,840 --> 00:28:05,830
+Here are the points.
+
+524
+00:28:05,830 --> 00:28:20,140
+And we want to know is there a
+non-horizontal line that passes
+
+525
+00:28:20,140 --> 00:28:30,095
+through three points like this.
+
+526
+00:28:32,610 --> 00:28:37,500
+OK, so our claim,
+GeomBase is 3SUM hard.
+
+527
+00:28:37,500 --> 00:28:40,640
+And this is their proof.
+
+528
+00:28:40,640 --> 00:28:44,910
+On the first line, we put A.
+On the last line, we put B.
+
+529
+00:28:44,910 --> 00:28:48,630
+And in the middle line, we put
+every item in C divided by 2.
+
+530
+00:28:51,340 --> 00:28:57,860
+So if you look at-- sorry, this
+is a reduction from 3SUM prime.
+
+531
+00:28:57,860 --> 00:28:59,260
+So I have three integers.
+
+532
+00:28:59,260 --> 00:29:03,870
+We want to know whether you
+can every a plus b equals c.
+
+533
+00:29:03,870 --> 00:29:10,660
+So the idea is if I
+have two items, A and B,
+
+534
+00:29:10,660 --> 00:29:13,160
+then this point-- I mean,
+if I just draw the line
+
+535
+00:29:13,160 --> 00:29:15,930
+and intersect it with
+the y' equals 1 line,
+
+536
+00:29:15,930 --> 00:29:18,210
+that point will be the
+average of little a and little
+
+537
+00:29:18,210 --> 00:29:20,970
+b-- so a plus b over 2.
+
+538
+00:29:20,970 --> 00:29:25,240
+So if there's an item C
+that matches a plus b,
+
+539
+00:29:25,240 --> 00:29:28,655
+then the C/2 will equal
+the a plus b over 2.
+
+540
+00:29:28,655 --> 00:29:30,780
+So there's going to be a
+line through three points,
+
+541
+00:29:30,780 --> 00:29:34,960
+if and only if, 3SUM
+prime had a yes answer.
+
+542
+00:29:34,960 --> 00:29:40,940
+And you can reduce in the
+reverse direction-- in fact,
+
+543
+00:29:40,940 --> 00:29:42,160
+just like this.
+
+544
+00:29:42,160 --> 00:29:44,520
+You just multiply all
+these coordinates by 2.
+
+545
+00:29:44,520 --> 00:29:48,710
+That gives you C.
+
+546
+00:29:48,710 --> 00:29:50,250
+So those are our
+starting points.
+
+547
+00:29:50,250 --> 00:29:52,440
+And we're going to
+use all of them.
+
+548
+00:29:52,440 --> 00:29:55,520
+And I'm just going to run
+through a bunch of examples
+
+549
+00:29:55,520 --> 00:29:56,650
+of 3SUM hard problems.
+
+550
+00:29:56,650 --> 00:30:00,090
+So all of them shouldn't have
+sub-quadratic time algorithms
+
+551
+00:30:00,090 --> 00:30:03,160
+unless 3SUM does.
+
+552
+00:30:03,160 --> 00:30:09,180
+So the obvious
+starting point here
+
+553
+00:30:09,180 --> 00:30:11,510
+is what's called
+degeneracy testing
+
+554
+00:30:11,510 --> 00:30:14,220
+in computational geometry.
+
+555
+00:30:14,220 --> 00:30:15,894
+So usually, we like
+to assume that you
+
+556
+00:30:15,894 --> 00:30:17,060
+have endpoints in the plane.
+
+557
+00:30:17,060 --> 00:30:20,180
+They're in general position,
+meaning no three are co-linear.
+
+558
+00:30:20,180 --> 00:30:23,300
+So the problem is
+given endpoints,
+
+559
+00:30:23,300 --> 00:30:25,030
+are any three of them co-linear?
+
+560
+00:30:25,030 --> 00:30:25,530
+Question?
+
+561
+00:30:25,530 --> 00:30:27,790
+AUDIENCE: With 3SUM prime,
+because those are integers,
+
+562
+00:30:27,790 --> 00:30:29,248
+how do you deal
+with them that way?
+
+563
+00:30:29,248 --> 00:30:31,740
+PROFESSOR: Oh, integers
+and rational, same thing,
+
+564
+00:30:31,740 --> 00:30:34,850
+you just scale it, multiply.
+
+565
+00:30:34,850 --> 00:30:36,550
+So everything
+here-- because we're
+
+566
+00:30:36,550 --> 00:30:37,966
+going to go into
+geometry quite, I
+
+567
+00:30:37,966 --> 00:30:40,020
+will use rationals quite a bit.
+
+568
+00:30:40,020 --> 00:30:45,720
+So I can multiply everything
+by 2 to make it integers again.
+
+569
+00:30:45,720 --> 00:30:47,480
+But this problem does
+not say integers,
+
+570
+00:30:47,480 --> 00:30:49,280
+so that's why I'm
+allowed to do that.
+
+571
+00:30:49,280 --> 00:30:50,320
+I start with integers.
+
+572
+00:30:50,320 --> 00:30:52,390
+And then I do this.
+
+573
+00:30:52,390 --> 00:30:54,560
+But you can also
+add integers here.
+
+574
+00:30:54,560 --> 00:30:57,580
+It wouldn't make
+a big difference.
+
+575
+00:30:57,580 --> 00:31:12,310
+OK, so given endpoints in the
+plane, are any three co-linear?
+
+576
+00:31:12,310 --> 00:31:14,150
+I'm guessing this is
+the original motivation
+
+577
+00:31:14,150 --> 00:31:14,900
+for defining 3SUM.
+
+578
+00:31:18,980 --> 00:31:21,220
+This is really a harder
+version of the problem.
+
+579
+00:31:21,220 --> 00:31:22,640
+This is kind of a special case.
+
+580
+00:31:22,640 --> 00:31:26,360
+But in particular, it's
+not exactly the same,
+
+581
+00:31:26,360 --> 00:31:28,370
+because we forbid
+horizontal lines.
+
+582
+00:31:28,370 --> 00:31:30,680
+We had to construct a
+very degenerate instance
+
+583
+00:31:30,680 --> 00:31:33,580
+with lots of points on the
+horizontal lines in order
+
+584
+00:31:33,580 --> 00:31:34,922
+for this correspondence to work.
+
+585
+00:31:34,922 --> 00:31:36,630
+So the question is
+can you make something
+
+586
+00:31:36,630 --> 00:31:38,546
+that is only degenerate,
+only has three points
+
+587
+00:31:38,546 --> 00:31:44,130
+co-linear, when the 3SUM
+instance has a solution?
+
+588
+00:31:44,130 --> 00:31:47,205
+And this reduction is
+a little unsatisfying.
+
+589
+00:31:47,205 --> 00:31:49,700
+And I don't have a
+great intuition for it.
+
+590
+00:31:49,700 --> 00:31:51,110
+But it's very simple.
+
+591
+00:31:51,110 --> 00:31:54,480
+We're going to
+take-- this is going
+
+592
+00:31:54,480 --> 00:32:01,520
+to be a reduction from regular
+old 3SUM, not 3SUM prime.
+
+593
+00:32:01,520 --> 00:32:05,330
+So every number x, we're going
+to map to the point x comma
+
+594
+00:32:05,330 --> 00:32:08,425
+x cubed.
+
+595
+00:32:08,425 --> 00:32:12,420
+Cubed because it's odd
+and not 1 basically.
+
+596
+00:32:12,420 --> 00:32:19,690
+And so we take our x values--
+probably not a good idea
+
+597
+00:32:19,690 --> 00:32:22,010
+to put 0 in there, but whatever.
+
+598
+00:32:22,010 --> 00:32:28,200
+And we just project them onto
+this x cubed curve, x 3 is odd,
+
+599
+00:32:28,200 --> 00:32:31,020
+so it has this nice picture.
+
+600
+00:32:31,020 --> 00:32:35,320
+And the claim is if you take
+any two points here-- so
+
+601
+00:32:35,320 --> 00:32:38,997
+here's an x-coordinate 1/4
+and 3/4, and, of course,
+
+602
+00:32:38,997 --> 00:32:40,330
+they would actually be integers.
+
+603
+00:32:40,330 --> 00:32:41,790
+That's OK.
+
+604
+00:32:41,790 --> 00:32:43,630
+You can scale.
+
+605
+00:32:43,630 --> 00:32:49,280
+Then so the sum of those is 1.
+
+606
+00:32:49,280 --> 00:32:55,050
+And if you look at
+negative 1, that will--
+
+607
+00:32:55,050 --> 00:32:57,560
+the cube of negative
+1, which is 1,
+
+608
+00:32:57,560 --> 00:33:03,080
+is exactly equal to where
+these two cubed points would
+
+609
+00:33:03,080 --> 00:33:05,755
+hit if you extend the line.
+
+610
+00:33:05,755 --> 00:33:06,254
+Yes?
+
+611
+00:33:06,254 --> 00:33:07,628
+AUDIENCE: Now we
+have the problem
+
+612
+00:33:07,628 --> 00:33:10,210
+that if you want to use
+the version of 3SUM here,
+
+613
+00:33:10,210 --> 00:33:10,710
+[INAUDIBLE].
+
+614
+00:33:14,090 --> 00:33:15,670
+PROFESSOR: Yep, so
+we definitely need
+
+615
+00:33:15,670 --> 00:33:17,174
+that those guys are distinct.
+
+616
+00:33:17,174 --> 00:33:18,840
+I'm sure that those
+two versions of 3SUM
+
+617
+00:33:18,840 --> 00:33:20,870
+are equivalent up to
+sub-quadratic reductions.
+
+618
+00:33:20,870 --> 00:33:24,520
+But I don't see how to
+prove that off hand.
+
+619
+00:33:24,520 --> 00:33:29,390
+OK, cool, now why is this true?
+
+620
+00:33:29,390 --> 00:33:30,100
+I've checked it.
+
+621
+00:33:30,100 --> 00:33:31,860
+It's true.
+
+622
+00:33:31,860 --> 00:33:35,080
+Off the page of a
+algebra and prove it.
+
+623
+00:33:35,080 --> 00:33:37,310
+I don't have a great intuition
+for why this is true.
+
+624
+00:33:37,310 --> 00:33:40,710
+But there you go.
+
+625
+00:33:40,710 --> 00:33:43,120
+It's easy enough to check
+where this line should go.
+
+626
+00:33:43,120 --> 00:33:46,900
+And it happens to go exactly to
+the place where the sum goes.
+
+627
+00:33:46,900 --> 00:33:48,170
+So sorry.
+
+628
+00:33:50,746 --> 00:33:52,870
+I'm guessing it would also
+work for x to the fifth.
+
+629
+00:33:52,870 --> 00:33:54,220
+But I didn't check that.
+
+630
+00:33:58,240 --> 00:34:03,160
+OK so those three
+points on the line.
+
+631
+00:34:23,679 --> 00:34:29,310
+OK, so an important life
+lesson about geometry
+
+632
+00:34:29,310 --> 00:34:31,300
+is something called duality.
+
+633
+00:34:31,300 --> 00:34:33,920
+So here we're interested
+whether there was one line that
+
+634
+00:34:33,920 --> 00:34:35,010
+goes through three points.
+
+635
+00:34:35,010 --> 00:34:38,239
+A complimentary problem is
+I give you a bunch of lines,
+
+636
+00:34:38,239 --> 00:34:43,030
+do any three of them pass
+through a common point?
+
+637
+00:34:43,030 --> 00:34:47,070
+Is there one intersection
+between three or more lines?
+
+638
+00:34:47,070 --> 00:34:49,810
+Is there a point that
+is on three lines?
+
+639
+00:34:49,810 --> 00:34:52,580
+If you know projective geometry,
+this is totally obvious.
+
+640
+00:34:52,580 --> 00:34:54,949
+It's the same problem as this.
+
+641
+00:34:54,949 --> 00:34:57,600
+You just apply duality.
+
+642
+00:34:57,600 --> 00:34:59,470
+Now, there are many
+different dualities.
+
+643
+00:34:59,470 --> 00:35:02,750
+I'll give you two today.
+
+644
+00:35:02,750 --> 00:35:09,260
+First, my favorite
+is projected duality
+
+645
+00:35:09,260 --> 00:35:11,610
+and the sort of most
+standard, at least, in math.
+
+646
+00:35:11,610 --> 00:35:14,160
+If you have a point with
+x-coordinate a and y-coordinate
+
+647
+00:35:14,160 --> 00:35:22,670
+b, you map that to the line
+ax plus by plus 1 equals 0.
+
+648
+00:35:22,670 --> 00:35:24,420
+And vice versa.
+
+649
+00:35:24,420 --> 00:35:26,960
+So if I have a line--
+almost every line
+
+650
+00:35:26,960 --> 00:35:28,330
+can be written this way.
+
+651
+00:35:28,330 --> 00:35:30,480
+Everyone line that does
+not go through the origin
+
+652
+00:35:30,480 --> 00:35:32,060
+can be written like this.
+
+653
+00:35:32,060 --> 00:35:34,600
+And then you can convert it
+into the corresponding point.
+
+654
+00:35:34,600 --> 00:35:36,470
+So if you give me
+a bunch of lines,
+
+655
+00:35:36,470 --> 00:35:39,727
+just translate so that none
+of them go through the origin.
+
+656
+00:35:39,727 --> 00:35:41,810
+And then convert into
+corresponding set of points.
+
+657
+00:35:41,810 --> 00:35:43,600
+And the nice thing
+about this duality
+
+658
+00:35:43,600 --> 00:35:46,970
+is it preserves
+incidence, meaning
+
+659
+00:35:46,970 --> 00:35:52,130
+if before I apply duality, I
+have a point and a line that
+
+660
+00:35:52,130 --> 00:35:55,226
+are touching, then after apply
+duality, I will have a line
+
+661
+00:35:55,226 --> 00:35:56,350
+and appointed are touching.
+
+662
+00:36:02,690 --> 00:36:07,210
+So that's great,
+because in particular,
+
+663
+00:36:07,210 --> 00:36:09,570
+a three-way
+intersection or a point
+
+664
+00:36:09,570 --> 00:36:12,300
+is on three lines will
+convert into a line
+
+665
+00:36:12,300 --> 00:36:13,870
+that it goes through
+three points.
+
+666
+00:36:13,870 --> 00:36:18,507
+And so we get a reduction
+from here to here.
+
+667
+00:36:18,507 --> 00:36:19,590
+That's kind of like magic.
+
+668
+00:36:19,590 --> 00:36:24,220
+But it works, essentially
+because-- well,
+
+669
+00:36:24,220 --> 00:36:27,900
+if you think of a line over here
+as just a pair of coordinates,
+
+670
+00:36:27,900 --> 00:36:30,190
+usually written a,
+b, then we're just
+
+671
+00:36:30,190 --> 00:36:33,090
+taking essentially a dot product
+between those two things.
+
+672
+00:36:33,090 --> 00:36:33,840
+It's a plus 1.
+
+673
+00:36:33,840 --> 00:36:35,714
+But it doesn't matter
+which one was the point
+
+674
+00:36:35,714 --> 00:36:37,390
+and which one was the line.
+
+675
+00:36:37,390 --> 00:36:39,620
+So that's very convenient.
+
+676
+00:36:39,620 --> 00:36:42,017
+And you can use that to
+convert a lot of line problems
+
+677
+00:36:42,017 --> 00:36:42,850
+into point problems.
+
+678
+00:36:46,670 --> 00:36:49,650
+I won't mention k sum very much.
+
+679
+00:36:49,650 --> 00:36:56,120
+But obviously, the d dimensional
+versions here are d plus 1 sum
+
+680
+00:36:56,120 --> 00:36:56,900
+hard.
+
+681
+00:36:56,900 --> 00:37:01,560
+So that's these are sort of the
+more geometric versions of k
+
+682
+00:37:01,560 --> 00:37:02,060
+sum.
+
+683
+00:37:09,710 --> 00:37:12,780
+So let's do some more problems.
+
+684
+00:37:16,330 --> 00:37:17,670
+Next one's called a separator.
+
+685
+00:37:33,370 --> 00:37:40,780
+So let's say we're given n
+line segments in the plane,
+
+686
+00:37:40,780 --> 00:37:43,950
+is there a line
+that separates them
+
+687
+00:37:43,950 --> 00:37:46,310
+into any two non-empty groups?
+
+688
+00:38:01,860 --> 00:38:05,190
+And that line is not allowed to
+intersect any of the segments.
+
+689
+00:38:08,850 --> 00:38:13,350
+So you're not allowed to split
+a line segment into two parts.
+
+690
+00:38:13,350 --> 00:38:19,100
+You just want to partition the
+line segments into a left chunk
+
+691
+00:38:19,100 --> 00:38:22,150
+and a right chunk.
+
+692
+00:38:22,150 --> 00:38:25,790
+So there's actually two
+versions of this problem.
+
+693
+00:38:25,790 --> 00:38:30,280
+The first version allows half
+infinite rays as segments.
+
+694
+00:38:30,280 --> 00:38:34,000
+And then you can assume that
+all the segments are horizontal.
+
+695
+00:38:34,000 --> 00:38:37,210
+So I think that pretty
+clearly expresses it.
+
+696
+00:38:37,210 --> 00:38:40,020
+But we can in
+particular think that we
+
+697
+00:38:40,020 --> 00:38:42,720
+are reducing from GeomBase.
+
+698
+00:38:42,720 --> 00:38:44,460
+We had this setup.
+
+699
+00:38:44,460 --> 00:38:46,630
+We have points on three lines.
+
+700
+00:38:46,630 --> 00:38:48,677
+We want to know whether
+there's a line that
+
+701
+00:38:48,677 --> 00:38:49,510
+passes through them.
+
+702
+00:38:49,510 --> 00:38:52,000
+So I'm just going to take
+the complement essentially
+
+703
+00:38:52,000 --> 00:38:56,600
+of those lines, emit tiny
+intervals wherever I had points
+
+704
+00:38:56,600 --> 00:38:57,470
+before.
+
+705
+00:38:57,470 --> 00:38:59,660
+And now there will be a
+separating line, if and only
+
+706
+00:38:59,660 --> 00:39:02,444
+if, the original points
+have a line through them.
+
+707
+00:39:02,444 --> 00:39:03,860
+If you make these
+tiny enough, you
+
+708
+00:39:03,860 --> 00:39:07,415
+won't be able to do
+anything else-- oops, yeah--
+
+709
+00:39:07,415 --> 00:39:10,030
+or you could just split
+them into 1/3, 2/3, yeah.
+
+710
+00:39:10,030 --> 00:39:13,561
+I definitely need here that
+it's a non-horizontal line.
+
+711
+00:39:13,561 --> 00:39:14,060
+Thanks.
+
+712
+00:39:24,450 --> 00:39:27,220
+Now this requires having
+these half infinite rays.
+
+713
+00:39:27,220 --> 00:39:32,280
+Otherwise you could
+make a line like this.
+
+714
+00:39:32,280 --> 00:39:34,650
+So you're not allowed to
+do that if these goes off
+
+715
+00:39:34,650 --> 00:39:37,780
+to infinity, then you'd
+be cutting those rays.
+
+716
+00:39:37,780 --> 00:39:39,530
+OK, so maybe you
+consider that reasonable.
+
+717
+00:39:39,530 --> 00:39:40,030
+Maybe not.
+
+718
+00:39:40,030 --> 00:39:41,780
+Depends on the application.
+
+719
+00:39:41,780 --> 00:39:44,289
+If you don't consider half
+infinite things reasonable,
+
+720
+00:39:44,289 --> 00:39:46,330
+you can replace them with
+some vertical segments.
+
+721
+00:39:46,330 --> 00:39:49,380
+You build this little
+box, essentially
+
+722
+00:39:49,380 --> 00:39:52,150
+a box like a pinwheel pattern.
+
+723
+00:39:52,150 --> 00:39:53,760
+So there's no way
+to cut it up except
+
+724
+00:39:53,760 --> 00:39:56,870
+to go through the center.
+
+725
+00:39:56,870 --> 00:40:00,940
+So two versions-- version one,
+we allow half infinite things.
+
+726
+00:40:00,940 --> 00:40:02,630
+And every segment is horizontal.
+
+727
+00:40:02,630 --> 00:40:04,860
+Version two, horizontal
+and vertical segments
+
+728
+00:40:04,860 --> 00:40:06,680
+are all finite length.
+
+729
+00:40:06,680 --> 00:40:10,560
+We'll use this version to
+reduce from a bunch of times.
+
+730
+00:40:10,560 --> 00:40:15,450
+Or we will follow this kind
+of reduction essentially.
+
+731
+00:40:15,450 --> 00:40:16,740
+OK, next problem.
+
+732
+00:40:38,220 --> 00:40:41,520
+OK, next problem is
+called strips cover box.
+
+733
+00:40:47,169 --> 00:40:48,460
+I like these names of problems.
+
+734
+00:40:48,460 --> 00:40:49,420
+They're pretty clear.
+
+735
+00:40:52,920 --> 00:40:56,450
+In fact, they're so
+clear, here's a figure.
+
+736
+00:40:56,450 --> 00:41:00,470
+We have a box, which means
+axes align rectangle.
+
+737
+00:41:00,470 --> 00:41:01,780
+And I have strips.
+
+738
+00:41:01,780 --> 00:41:05,330
+Strips are-- I take
+two parallel lines
+
+739
+00:41:05,330 --> 00:41:07,400
+and take the lines
+in between them.
+
+740
+00:41:07,400 --> 00:41:11,100
+All these parallel lines between
+here and here-- that's a strip.
+
+741
+00:41:11,100 --> 00:41:12,180
+So I'm given n strips.
+
+742
+00:41:12,180 --> 00:41:13,030
+I'm given a box.
+
+743
+00:41:13,030 --> 00:41:15,010
+I want to know whether
+there's an empty part
+
+744
+00:41:15,010 --> 00:41:16,850
+or whether it covers.
+
+745
+00:41:16,850 --> 00:41:19,780
+AUDIENCE: Can you [? use ?]
+angle or just strips?
+
+746
+00:41:19,780 --> 00:41:23,350
+PROFESSOR: Oh, yeah, sorry,
+the strips are placed.
+
+747
+00:41:23,350 --> 00:41:25,050
+I give you two lines
+for each strip.
+
+748
+00:41:25,050 --> 00:41:27,700
+And I mean the region
+in between them.
+
+749
+00:41:27,700 --> 00:41:29,480
+They're on the plane.
+
+750
+00:41:29,480 --> 00:41:30,980
+You can't slide them around.
+
+751
+00:41:30,980 --> 00:41:33,540
+That would be a
+coverage problem.
+
+752
+00:41:33,540 --> 00:41:34,407
+It's pretty easy.
+
+753
+00:41:34,407 --> 00:41:35,990
+I just want to compute
+whether there's
+
+754
+00:41:35,990 --> 00:41:39,320
+any point in here is not hit
+by any of the given strips.
+
+755
+00:41:42,780 --> 00:41:45,935
+I should mention, all
+of these problems,
+
+756
+00:41:45,935 --> 00:41:47,310
+except where I
+say otherwise, can
+
+757
+00:41:47,310 --> 00:41:49,630
+be solved in quadratic time.
+
+758
+00:41:49,630 --> 00:41:51,970
+And so this is showing that
+that's essentially tight.
+
+759
+00:41:51,970 --> 00:41:54,490
+So you can solve this
+problem by computing
+
+760
+00:41:54,490 --> 00:41:56,490
+the arrangement of these
+lines in quadratic time
+
+761
+00:41:56,490 --> 00:41:58,990
+and checking all the
+cells, whether they're
+
+762
+00:41:58,990 --> 00:42:00,140
+in all the strips.
+
+763
+00:42:00,140 --> 00:42:01,244
+So that's not hard.
+
+764
+00:42:01,244 --> 00:42:02,910
+But the claim is you
+can't do any better
+
+765
+00:42:02,910 --> 00:42:05,050
+than n squared if you
+believe the 3SUM conjecture.
+
+766
+00:42:09,140 --> 00:42:11,880
+And the reduction
+is essentially this.
+
+767
+00:42:11,880 --> 00:42:14,600
+But I'm going to
+modify it a little bit.
+
+768
+00:42:22,080 --> 00:42:25,710
+So remember, I rotated this
+90 degrees for a reason,
+
+769
+00:42:25,710 --> 00:42:29,290
+because I wanted to use a
+particular kind of duality.
+
+770
+00:42:29,290 --> 00:42:32,410
+The construction is going
+to be the dual of this.
+
+771
+00:42:32,410 --> 00:42:36,520
+But remember, here, the goal is
+to find the line that does not
+
+772
+00:42:36,520 --> 00:42:40,115
+hit any of these segments.
+
+773
+00:42:40,115 --> 00:42:42,100
+And the segments are vertical.
+
+774
+00:42:42,100 --> 00:42:46,020
+Or they might be infinite,
+half infinite rays.
+
+775
+00:42:46,020 --> 00:42:49,100
+OK, so I'm going to
+start from there.
+
+776
+00:42:49,100 --> 00:42:53,170
+And then I'm going to dualize,
+using a different dualization.
+
+777
+00:42:53,170 --> 00:42:54,840
+This is probably
+the most popular one
+
+778
+00:42:54,840 --> 00:42:55,923
+in computational geometry.
+
+779
+00:43:02,700 --> 00:43:05,690
+I think because everyone
+remembers y equals mx plus b.
+
+780
+00:43:05,690 --> 00:43:07,520
+And so there's the
+obvious conversion
+
+781
+00:43:07,520 --> 00:43:11,990
+between a point, which has
+b and m, to a line, which
+
+782
+00:43:11,990 --> 00:43:15,169
+is mx plus b.
+
+783
+00:43:15,169 --> 00:43:16,710
+You could argue
+about which is which,
+
+784
+00:43:16,710 --> 00:43:18,860
+but I think this
+is the more common.
+
+785
+00:43:18,860 --> 00:43:23,830
+So what this means is
+I start with a point.
+
+786
+00:43:23,830 --> 00:43:27,110
+The y-coordinate determines
+the slope of my line.
+
+787
+00:43:27,110 --> 00:43:31,090
+And the x-coordinate determines
+the y-intercept of my line.
+
+788
+00:43:31,090 --> 00:43:33,420
+It's b.
+
+789
+00:43:33,420 --> 00:43:36,821
+And you can also convert
+in the other direction.
+
+790
+00:43:36,821 --> 00:43:38,320
+I don't think we'll
+need to be here.
+
+791
+00:43:38,320 --> 00:43:40,420
+And that will work for
+all non-vertical lines.
+
+792
+00:43:40,420 --> 00:43:42,580
+This will not represent
+vertical lines.
+
+793
+00:43:42,580 --> 00:43:44,880
+In case you're curious, if
+you want vertical lines here
+
+794
+00:43:44,880 --> 00:43:49,180
+or if you want lines going
+through the origin here,
+
+795
+00:43:49,180 --> 00:43:50,450
+you need points in infinity.
+
+796
+00:43:50,450 --> 00:43:52,000
+That's the projective
+thing here.
+
+797
+00:43:52,000 --> 00:43:55,000
+But we don't need that here.
+
+798
+00:43:55,000 --> 00:43:57,680
+Because we're just going
+to take these points
+
+799
+00:43:57,680 --> 00:44:00,330
+and convert each of them
+to corresponding lines.
+
+800
+00:44:00,330 --> 00:44:02,390
+So this is a segment,
+I'm going to get
+
+801
+00:44:02,390 --> 00:44:04,660
+an infinite number
+of points-- sorry,
+
+802
+00:44:04,660 --> 00:44:06,410
+there's an infinite
+number of points here.
+
+803
+00:44:06,410 --> 00:44:08,785
+So I'm going to convert into
+an infinite number of lines.
+
+804
+00:44:08,785 --> 00:44:10,590
+That's actually
+OK, because these
+
+805
+00:44:10,590 --> 00:44:18,050
+points all I have the
+same-- sorry-- opposite.
+
+806
+00:44:20,800 --> 00:44:23,750
+I really want the x-coordinate
+to m and the y-coordinate
+
+807
+00:44:23,750 --> 00:44:27,290
+to be b for this picture
+to be the right picture.
+
+808
+00:44:27,290 --> 00:44:30,500
+So all these points have
+the same x-coordinate.
+
+809
+00:44:30,500 --> 00:44:32,900
+So when I convert
+them into lines,
+
+810
+00:44:32,900 --> 00:44:34,130
+they all have the same slope.
+
+811
+00:44:34,130 --> 00:44:37,270
+And they'll also be
+right next to each other.
+
+812
+00:44:37,270 --> 00:44:39,810
+Namely, they will be a strip.
+
+813
+00:44:39,810 --> 00:44:41,850
+Isn't that cool?
+
+814
+00:44:41,850 --> 00:44:44,670
+So when you do this
+dualization, a vertical segment
+
+815
+00:44:44,670 --> 00:44:45,470
+becomes a strip.
+
+816
+00:44:53,530 --> 00:44:56,030
+I think the fancy
+word would be here
+
+817
+00:44:56,030 --> 00:44:58,390
+you have a pencil of points.
+
+818
+00:44:58,390 --> 00:45:01,040
+And you convert that into
+a pencil of parallel lines.
+
+819
+00:45:01,040 --> 00:45:04,960
+A pencil of parallel
+lines is strip.
+
+820
+00:45:04,960 --> 00:45:09,040
+Pencil just means like
+a continuous family.
+
+821
+00:45:09,040 --> 00:45:12,380
+Now here, these
+guys are infinite.
+
+822
+00:45:12,380 --> 00:45:14,530
+So it's going to be a
+strip that it goes off
+
+823
+00:45:14,530 --> 00:45:16,350
+to infinity on one end.
+
+824
+00:45:16,350 --> 00:45:18,650
+That's a half plane.
+
+825
+00:45:18,650 --> 00:45:22,170
+So if we have a
+ray, vertical ray,
+
+826
+00:45:22,170 --> 00:45:25,500
+that's going to convert
+into half plane.
+
+827
+00:45:25,500 --> 00:45:27,004
+Half planes aren't
+allowed, so we're
+
+828
+00:45:27,004 --> 00:45:28,670
+going to have to do
+something with them.
+
+829
+00:45:28,670 --> 00:45:29,878
+But there's only six of them.
+
+830
+00:45:29,878 --> 00:45:34,180
+There's three down
+here and three up here.
+
+831
+00:45:34,180 --> 00:45:38,660
+And we also haven't defined
+what our target rectangle is.
+
+832
+00:45:38,660 --> 00:45:40,750
+But at this point
+what we would like
+
+833
+00:45:40,750 --> 00:45:46,220
+to say-- so let's see, what
+would it correspond to a line
+
+834
+00:45:46,220 --> 00:45:46,960
+here?
+
+835
+00:45:46,960 --> 00:45:49,500
+Notice, the line will
+never be vertical.
+
+836
+00:45:49,500 --> 00:45:51,870
+What would be a
+line that happens
+
+837
+00:45:51,870 --> 00:45:53,430
+not to hit any of these things?
+
+838
+00:45:53,430 --> 00:45:55,714
+In the dual, that
+line maps to a point.
+
+839
+00:45:55,714 --> 00:45:57,130
+And so that's
+saying that there is
+
+840
+00:45:57,130 --> 00:46:00,410
+a point that is not covered
+by any of these strips or half
+
+841
+00:46:00,410 --> 00:46:02,460
+planes.
+
+842
+00:46:02,460 --> 00:46:04,870
+So we want to know whether
+the union of these things
+
+843
+00:46:04,870 --> 00:46:07,340
+is the entire plane.
+
+844
+00:46:07,340 --> 00:46:10,420
+So it's not quite the problem
+we wanted to reduce do.
+
+845
+00:46:10,420 --> 00:46:12,620
+But it's not hard to fix it.
+
+846
+00:46:12,620 --> 00:46:14,890
+We essentially just need to
+make a retake a really big
+
+847
+00:46:14,890 --> 00:46:15,795
+rectangle.
+
+848
+00:46:15,795 --> 00:46:17,670
+And then there'll be an
+empty point in there,
+
+849
+00:46:17,670 --> 00:46:22,017
+if and only if, there was
+a line in this problem.
+
+850
+00:46:22,017 --> 00:46:23,600
+How big does the
+rectangle have to be?
+
+851
+00:46:23,600 --> 00:46:27,970
+Well, conveniently, these
+half planes essentially
+
+852
+00:46:27,970 --> 00:46:30,740
+narrows down to a hexagon.
+
+853
+00:46:30,740 --> 00:46:34,800
+So you have six of them.
+
+854
+00:46:34,800 --> 00:46:36,442
+It might be less than a hexagon.
+
+855
+00:46:36,442 --> 00:46:37,660
+But I'll just draw six.
+
+856
+00:46:37,660 --> 00:46:41,220
+And we're saying all of
+this stuff is covered.
+
+857
+00:46:41,220 --> 00:46:43,070
+All the things
+outside the hexagon
+
+858
+00:46:43,070 --> 00:46:44,532
+are covered by
+those half planes.
+
+859
+00:46:44,532 --> 00:46:46,240
+So really it's just
+a matter whether this
+
+860
+00:46:46,240 --> 00:46:47,560
+has any empty points.
+
+861
+00:46:47,560 --> 00:46:51,460
+So take the bounding
+box of that hexagon.
+
+862
+00:46:51,460 --> 00:46:52,305
+That's my box.
+
+863
+00:46:55,670 --> 00:46:59,590
+And now I don't have to worry
+about half planes anymore.
+
+864
+00:47:06,170 --> 00:47:07,520
+I can restrict them.
+
+865
+00:47:10,770 --> 00:47:12,370
+I can just say,
+oh, well, now this
+
+866
+00:47:12,370 --> 00:47:15,510
+is a strip, which
+covers-- in particular,
+
+867
+00:47:15,510 --> 00:47:18,270
+I need to cover this
+part of the rectangle.
+
+868
+00:47:18,270 --> 00:47:20,560
+I no longer need to
+go off to infinity.
+
+869
+00:47:20,560 --> 00:47:24,781
+So now, I have a bunch of
+finite strips and a finite box.
+
+870
+00:47:24,781 --> 00:47:26,780
+And it's just a matter
+of whether that thing has
+
+871
+00:47:26,780 --> 00:47:27,940
+any empty parts.
+
+872
+00:47:27,940 --> 00:47:28,440
+Yes?
+
+873
+00:47:28,440 --> 00:47:31,000
+AUDIENCE: [INAUDIBLE]
+
+874
+00:47:31,000 --> 00:47:33,460
+PROFESSOR: Yes, there will be
+an empty point, if and only
+
+875
+00:47:33,460 --> 00:47:37,460
+if the original thing
+had a yes answer.
+
+876
+00:47:37,460 --> 00:47:40,770
+So they will cover, if and only
+if, if you have a no answer.
+
+877
+00:47:45,290 --> 00:47:45,960
+Any questions?
+
+878
+00:47:45,960 --> 00:47:48,803
+AUDIENCE: Just nomenclature--
+can have word [INAUDIBLE]
+
+879
+00:47:48,803 --> 00:47:50,490
+that thing you just
+put on the right,
+
+880
+00:47:50,490 --> 00:47:52,095
+because it's actually a
+special case of what you call
+
+881
+00:47:52,095 --> 00:47:52,595
+[INAUDIBLE].
+
+882
+00:47:52,595 --> 00:47:54,950
+PROFESSOR: Yeah,
+right, so what they say
+
+883
+00:47:54,950 --> 00:47:57,720
+is this a reduction
+from GeomBase, mimicking
+
+884
+00:47:57,720 --> 00:48:00,370
+the proof of separator 1.
+
+885
+00:48:00,370 --> 00:48:02,376
+Yeah, I don't have
+a name for it.
+
+886
+00:48:02,376 --> 00:48:02,875
+Sorry.
+
+887
+00:48:05,990 --> 00:48:06,822
+Yeah?
+
+888
+00:48:06,822 --> 00:48:07,697
+AUDIENCE: [INAUDIBLE]
+
+889
+00:48:14,550 --> 00:48:18,840
+PROFESSOR: Yes, this duality
+also preserves incidence.
+
+890
+00:48:18,840 --> 00:48:20,870
+I think it's a slightly
+perturbed version
+
+891
+00:48:20,870 --> 00:48:22,520
+of the regular
+projector duality.
+
+892
+00:48:22,520 --> 00:48:25,740
+It is also a projected
+duality in a sense,
+
+893
+00:48:25,740 --> 00:48:28,820
+but with an extra Mobius
+transformation thrown in
+
+894
+00:48:28,820 --> 00:48:30,069
+or something.
+
+895
+00:48:30,069 --> 00:48:31,485
+But those also
+preserve incidence.
+
+896
+00:48:35,380 --> 00:48:39,000
+Yeah, we obviously need that.
+
+897
+00:48:39,000 --> 00:48:44,640
+OK so to make this a little
+more usable-- I mean,
+
+898
+00:48:44,640 --> 00:48:45,787
+strips can be nice.
+
+899
+00:48:45,787 --> 00:48:47,120
+We'll use it in some situations.
+
+900
+00:48:47,120 --> 00:48:50,500
+But geometers tend to like
+to think about triangles.
+
+901
+00:48:50,500 --> 00:48:54,240
+So we can also convert this
+into whether bunch of triangles
+
+902
+00:48:54,240 --> 00:48:55,790
+cover a given triangle.
+
+903
+00:49:06,260 --> 00:49:09,100
+Basically, so here we
+are going to reduce
+
+904
+00:49:09,100 --> 00:49:11,130
+from strips covering a box.
+
+905
+00:49:11,130 --> 00:49:13,080
+We start with a box.
+
+906
+00:49:13,080 --> 00:49:18,210
+And we're going to convert
+that-- we'll draw on top of it
+
+907
+00:49:18,210 --> 00:49:19,760
+so it's a little
+clearer-- I'm going
+
+908
+00:49:19,760 --> 00:49:27,290
+to take a really big triangle,
+which contains that box.
+
+909
+00:49:27,290 --> 00:49:32,005
+But then we'll triangulate
+the exterior right here.
+
+910
+00:49:35,240 --> 00:49:37,530
+And add those triangles
+to my covering collection.
+
+911
+00:49:37,530 --> 00:49:40,320
+So all of this stuff
+is covered for free.
+
+912
+00:49:40,320 --> 00:49:43,390
+And so now what remains-- in
+order to cover this triangle,
+
+913
+00:49:43,390 --> 00:49:45,090
+I just need to cover this box.
+
+914
+00:49:45,090 --> 00:49:48,620
+OK so, that's one part of it.
+
+915
+00:49:48,620 --> 00:49:51,490
+And then the other thing
+is that we're given strips.
+
+916
+00:49:51,490 --> 00:49:54,490
+So if I have a strip-- actually,
+do I have a figure for this?
+
+917
+00:49:54,490 --> 00:49:58,520
+No-- if I have a strip in
+the original problem, which
+
+918
+00:49:58,520 --> 00:50:01,560
+looks something like
+this, I really only
+
+919
+00:50:01,560 --> 00:50:06,150
+care about the portion of a
+strip that hits the box here.
+
+920
+00:50:06,150 --> 00:50:11,000
+So I will just
+triangulate that part
+
+921
+00:50:11,000 --> 00:50:14,794
+and say those triangles
+are in my set.
+
+922
+00:50:14,794 --> 00:50:17,210
+And then those triangles are
+going to cover this triangle.
+
+923
+00:50:17,210 --> 00:50:19,300
+The red triangles will
+cover the red triangle,
+
+924
+00:50:19,300 --> 00:50:22,260
+the big red triangle, if and
+only if the white strips cover
+
+925
+00:50:22,260 --> 00:50:24,180
+the white rectangle.
+
+926
+00:50:24,180 --> 00:50:26,016
+Pretty easy-- all we
+need is that these
+
+927
+00:50:26,016 --> 00:50:27,890
+have constant complexity
+so we're not blowing
+
+928
+00:50:27,890 --> 00:50:29,230
+up more than a constant factor.
+
+929
+00:50:31,830 --> 00:50:34,140
+Note here all of these
+smaller triangles
+
+930
+00:50:34,140 --> 00:50:37,330
+are contained inside
+the big triangle.
+
+931
+00:50:37,330 --> 00:50:39,670
+So you can even
+assume that these guys
+
+932
+00:50:39,670 --> 00:50:41,310
+are contained in this guy.
+
+933
+00:50:41,310 --> 00:50:47,950
+We'll use that at some
+point-- possibly very soon.
+
+934
+00:50:53,270 --> 00:50:57,595
+So next problem.
+
+935
+00:51:21,620 --> 00:51:24,520
+Hole in union-- I give
+you a bunch of triangles.
+
+936
+00:51:24,520 --> 00:51:25,460
+I take their union.
+
+937
+00:51:25,460 --> 00:51:28,170
+I want to know whether that's
+a simply connected polygon
+
+938
+00:51:28,170 --> 00:51:30,100
+or whether it has a
+hole in the center.
+
+939
+00:51:30,100 --> 00:51:30,975
+AUDIENCE: [INAUDIBLE]
+
+940
+00:51:34,339 --> 00:51:36,130
+PROFESSOR: Almost the
+same as this problem.
+
+941
+00:51:36,130 --> 00:51:38,310
+I do is to do a
+little bit of work,
+
+942
+00:51:38,310 --> 00:51:42,420
+because maybe you'd-- actually,
+pretty much that reduction will
+
+943
+00:51:42,420 --> 00:51:45,870
+work fine, as long as the outer
+triangle is strictly bigger
+
+944
+00:51:45,870 --> 00:51:49,770
+than the strip, then I'll always
+have these outer red things,
+
+945
+00:51:49,770 --> 00:51:50,779
+which make a region.
+
+946
+00:51:50,779 --> 00:51:52,320
+And then there'll
+be a hole in there,
+
+947
+00:51:52,320 --> 00:51:54,940
+if and only if the rectangle
+is not fully covered.
+
+948
+00:51:54,940 --> 00:51:58,280
+So I just did to enlarge
+that outer triangle slightly.
+
+949
+00:51:58,280 --> 00:52:01,800
+Then I have proof that
+this is 3SUM hard.
+
+950
+00:52:01,800 --> 00:52:04,180
+Done.
+
+951
+00:52:04,180 --> 00:52:06,750
+Here, we're also using that
+the red triangles are contained
+
+952
+00:52:06,750 --> 00:52:09,050
+inside the big red triangle.
+
+953
+00:52:09,050 --> 00:52:13,140
+We don't go outside and possibly
+make a hole in some other way.
+
+954
+00:52:13,140 --> 00:52:16,520
+OK, another easy one--
+triangle measure.
+
+955
+00:52:21,527 --> 00:52:22,860
+I give you a bunch of triangles.
+
+956
+00:52:22,860 --> 00:52:25,960
+What is the area of their union?
+
+957
+00:52:25,960 --> 00:52:28,440
+Well, it's going to be the
+area of the big triangle,
+
+958
+00:52:28,440 --> 00:52:30,660
+if and only if the big
+triangle's covered.
+
+959
+00:52:30,660 --> 00:52:35,000
+So this is a reduction from
+triangle covers triangle.
+
+960
+00:52:35,000 --> 00:52:36,045
+OK, easy.
+
+961
+00:52:42,430 --> 00:52:45,665
+Here's a somewhat different
+problem-- point covering.
+
+962
+00:52:49,320 --> 00:52:57,890
+So here I'm given a bunch
+of half planes, n of them.
+
+963
+00:52:57,890 --> 00:53:02,536
+I want to know is there
+a k-way intersection?
+
+964
+00:53:09,834 --> 00:53:11,250
+You can think of
+this as a version
+
+965
+00:53:11,250 --> 00:53:13,790
+of two-dimensional
+linear programming.
+
+966
+00:53:13,790 --> 00:53:16,810
+So this is all in 2D.
+
+967
+00:53:16,810 --> 00:53:19,040
+You're given a bunch of
+linear inequalities, which
+
+968
+00:53:19,040 --> 00:53:20,320
+are half planes.
+
+969
+00:53:20,320 --> 00:53:22,570
+You want to know-- not
+can I satisfy all them,
+
+970
+00:53:22,570 --> 00:53:25,110
+maybe that's not possible,
+but can I satisfy at least k
+
+971
+00:53:25,110 --> 00:53:25,840
+of them?
+
+972
+00:53:25,840 --> 00:53:28,090
+So this is for approximating
+linear programming.
+
+973
+00:53:28,090 --> 00:53:29,934
+There a lot of algorithms
+for doing that.
+
+974
+00:53:29,934 --> 00:53:31,350
+You can do this
+in quadratic time.
+
+975
+00:53:31,350 --> 00:53:33,040
+But the claim is you
+can't do it better
+
+976
+00:53:33,040 --> 00:53:37,610
+unless if you believe
+the 3SUM conjecture.
+
+977
+00:53:37,610 --> 00:53:45,720
+OK, so this is-- I don't
+have a figure-- no.
+
+978
+00:53:56,750 --> 00:54:00,075
+So we're going to reduce
+from strips cover box.
+
+979
+00:54:05,910 --> 00:54:08,480
+So we're given a bunch--
+this figure again--
+
+980
+00:54:08,480 --> 00:54:09,730
+we're given a bunch of strips.
+
+981
+00:54:09,730 --> 00:54:11,250
+We're given a rectangle.
+
+982
+00:54:11,250 --> 00:54:15,440
+We want to convert that whether
+the whole thing intersects
+
+983
+00:54:15,440 --> 00:54:18,350
+to whether there's
+a k-way intersection
+
+984
+00:54:18,350 --> 00:54:21,720
+between infinite strips
+on one side, half planes.
+
+985
+00:54:25,839 --> 00:54:27,130
+So here's what I'm going to do.
+
+986
+00:54:27,130 --> 00:54:32,060
+If I have a strip--
+I should maybe really
+
+987
+00:54:32,060 --> 00:54:35,020
+draw it this way--
+bunch of parallel lines,
+
+988
+00:54:35,020 --> 00:54:37,470
+finite segment of them.
+
+989
+00:54:37,470 --> 00:54:39,260
+But the lines are
+infinite in this is
+
+990
+00:54:39,260 --> 00:54:42,340
+direction and this direction.
+
+991
+00:54:42,340 --> 00:54:47,260
+I'm going to convert that into
+the complement, a common trick
+
+992
+00:54:47,260 --> 00:54:48,040
+here.
+
+993
+00:54:48,040 --> 00:54:50,420
+So we have half plane over here.
+
+994
+00:54:50,420 --> 00:54:51,900
+And we have a half
+plane earlier.
+
+995
+00:54:54,450 --> 00:54:56,560
+Obviously, you cannot be
+in both of these at once,
+
+996
+00:54:56,560 --> 00:54:58,050
+because they're disjoint.
+
+997
+00:54:58,050 --> 00:55:01,970
+So the best you can hope for
+is to be in one of them, which
+
+998
+00:55:01,970 --> 00:55:03,829
+means you're not here.
+
+999
+00:55:03,829 --> 00:55:05,370
+And remember, the
+whole question here
+
+1000
+00:55:05,370 --> 00:55:08,600
+is whether there's a point that
+is not in any of the strips.
+
+1001
+00:55:08,600 --> 00:55:14,310
+So you're going
+to get one point--
+
+1002
+00:55:14,310 --> 00:55:17,310
+you're going to get a score
+of 1 if you're here or here.
+
+1003
+00:55:17,310 --> 00:55:20,570
+You're going to get a score
+of 0 locally if in the region
+
+1004
+00:55:20,570 --> 00:55:23,830
+that's already covered.
+
+1005
+00:55:23,830 --> 00:55:27,650
+Now we also need to represent
+the rectangle in some way.
+
+1006
+00:55:27,650 --> 00:55:32,400
+So if I'm given a box.
+
+1007
+00:55:32,400 --> 00:55:35,740
+Draw this line, this line,
+this line, and this line.
+
+1008
+00:55:35,740 --> 00:55:37,826
+And the half planes
+I want are the ones
+
+1009
+00:55:37,826 --> 00:55:38,950
+that contain the rectangle.
+
+1010
+00:55:47,020 --> 00:55:50,240
+So the idea is you're going to
+get four bonus points if you're
+
+1011
+00:55:50,240 --> 00:55:52,330
+in the rectangle.
+
+1012
+00:55:52,330 --> 00:55:58,337
+And now the question is-- I'm
+going to set k to be n plus 4.
+
+1013
+00:55:58,337 --> 00:56:00,170
+I want to know are there
+any points that are
+
+1014
+00:56:00,170 --> 00:56:03,680
+in n plus 4 of the half planes.
+
+1015
+00:56:03,680 --> 00:56:05,620
+To do that, you have
+to be in all four
+
+1016
+00:56:05,620 --> 00:56:07,900
+of these-- in other
+words, in the box--
+
+1017
+00:56:07,900 --> 00:56:10,780
+and in one of these
+for every strip,
+
+1018
+00:56:10,780 --> 00:56:13,100
+because you can't be in both.
+
+1019
+00:56:13,100 --> 00:56:15,220
+It's just to achieve
+that score of n plus 4.
+
+1020
+00:56:15,220 --> 00:56:17,220
+So that means you're
+exterior to all the strips,
+
+1021
+00:56:17,220 --> 00:56:18,660
+but inside the rectangle.
+
+1022
+00:56:18,660 --> 00:56:20,673
+So that's the same problem.
+
+1023
+00:56:20,673 --> 00:56:21,173
+Cool.
+
+1024
+00:56:29,850 --> 00:56:42,831
+Next problem is a
+visibility problem.
+
+1025
+00:56:42,831 --> 00:56:44,705
+So we've got a couple
+of visibility problems.
+
+1026
+00:56:54,020 --> 00:56:55,770
+Both of these problems
+are about something
+
+1027
+00:56:55,770 --> 00:56:57,310
+called weak visibility.
+
+1028
+00:57:00,850 --> 00:57:03,870
+If you have two geometric
+objects, a and b,
+
+1029
+00:57:03,870 --> 00:57:05,750
+they are strongly
+visible to each other,
+
+1030
+00:57:05,750 --> 00:57:09,320
+if every point over here can
+see every point over here,
+
+1031
+00:57:09,320 --> 00:57:17,022
+meaning the visibility line
+doesn't cross anything else.
+
+1032
+00:57:17,022 --> 00:57:18,480
+But what we're
+talking about here's
+
+1033
+00:57:18,480 --> 00:57:20,570
+weak visibility,
+which says there's
+
+1034
+00:57:20,570 --> 00:57:24,010
+some point over here which
+can see some point over here.
+
+1035
+00:57:24,010 --> 00:57:26,990
+So I want to know, say, given
+two segments, whether there's
+
+1036
+00:57:26,990 --> 00:57:29,230
+some point here, some
+point here, where
+
+1037
+00:57:29,230 --> 00:57:31,620
+if I draw the connecting
+visibility line,
+
+1038
+00:57:31,620 --> 00:57:34,200
+there's no other
+segment blocking it.
+
+1039
+00:57:34,200 --> 00:57:35,805
+So this is a.
+
+1040
+00:57:35,805 --> 00:57:37,040
+And this is b.
+
+1041
+00:57:37,040 --> 00:57:39,188
+This would be an example
+where a and b-- well, they
+
+1042
+00:57:39,188 --> 00:57:41,354
+do weakly see each other,
+because there's that pair.
+
+1043
+00:57:44,320 --> 00:57:46,476
+So given n segments,
+you can construct
+
+1044
+00:57:46,476 --> 00:57:48,100
+what's called a
+visibility graph, which
+
+1045
+00:57:48,100 --> 00:57:51,380
+is all of these things
+in quadratic time.
+
+1046
+00:57:51,380 --> 00:57:54,430
+If I want to know
+whether this segment can
+
+1047
+00:57:54,430 --> 00:57:59,082
+see another segment in this
+weak sense, that's 3SUM hard.
+
+1048
+00:57:59,082 --> 00:57:59,790
+Here's the proof.
+
+1049
+00:58:03,281 --> 00:58:07,320
+It's exactly the same thing,
+just add two segments.
+
+1050
+00:58:07,320 --> 00:58:09,330
+This segment can
+see that segment,
+
+1051
+00:58:09,330 --> 00:58:10,910
+if and only if there's a line.
+
+1052
+00:58:13,740 --> 00:58:15,719
+There are so many fun
+little things you can do.
+
+1053
+00:58:15,719 --> 00:58:17,510
+But these are problems
+that a lot of people
+
+1054
+00:58:17,510 --> 00:58:18,390
+have thought about.
+
+1055
+00:58:18,390 --> 00:58:19,620
+And they're always
+wondering, can we
+
+1056
+00:58:19,620 --> 00:58:20,790
+do better than quadratic?
+
+1057
+00:58:20,790 --> 00:58:25,610
+Now we know they're all sort
+of in the same bucket-- almost.
+
+1058
+00:58:25,610 --> 00:58:28,755
+OK, here's another problem.
+
+1059
+00:58:48,850 --> 00:58:55,440
+So the problem is I give you
+a bunch of triangles in 3D.
+
+1060
+00:58:55,440 --> 00:59:03,810
+And let's see, and maybe I
+give you a point up here.
+
+1061
+00:59:03,810 --> 00:59:06,380
+And I want to know whether
+that point can weakly
+
+1062
+00:59:06,380 --> 00:59:08,500
+see a given triangle.
+
+1063
+00:59:08,500 --> 00:59:10,461
+And here all the
+triangles are horizontal.
+
+1064
+00:59:10,461 --> 00:59:11,460
+Make it nice and simple.
+
+1065
+00:59:11,460 --> 00:59:13,330
+And it is possible to
+solve this, I think,
+
+1066
+00:59:13,330 --> 00:59:16,940
+in n squared log n time--
+maybe n squared time.
+
+1067
+00:59:16,940 --> 00:59:21,640
+You can construct the visibility
+graph here in n squared,
+
+1068
+00:59:21,640 --> 00:59:23,270
+because they're all horizontal.
+
+1069
+00:59:23,270 --> 00:59:27,250
+So I'm given this point.
+
+1070
+00:59:27,250 --> 00:59:28,910
+I want to know can
+it see any of t.
+
+1071
+00:59:28,910 --> 00:59:31,620
+Or is it completely
+blocked by these triangles?
+
+1072
+00:59:31,620 --> 00:59:33,510
+Sound familiar?
+
+1073
+00:59:33,510 --> 00:59:37,100
+If we put that point way
+up near or at infinity,
+
+1074
+00:59:37,100 --> 00:59:39,800
+depending on what you
+allow me-- near infinity
+
+1075
+00:59:39,800 --> 00:59:41,580
+will be enough--
+this will essentially
+
+1076
+00:59:41,580 --> 00:59:44,720
+be orthographic projection
+of these triangles
+
+1077
+00:59:44,720 --> 00:59:45,519
+onto this triangle.
+
+1078
+00:59:45,519 --> 00:59:47,310
+And it's a question
+whether these triangles
+
+1079
+00:59:47,310 --> 00:59:48,870
+cover this triangle.
+
+1080
+00:59:48,870 --> 00:59:51,680
+So this is a reduction from
+triangles cover triangle
+
+1081
+00:59:51,680 --> 00:59:54,179
+to visible triangle.
+
+1082
+00:59:54,179 --> 00:59:55,970
+Pretty easy, just put
+all these guys really
+
+1083
+00:59:55,970 --> 00:59:58,500
+close, slightly
+different z-coordinates
+
+1084
+00:59:58,500 --> 01:00:00,850
+so they're not overlapping,
+and put the point far away.
+
+1085
+01:00:04,350 --> 01:00:07,420
+So visible triangle
+is 3SUM hard.
+
+1086
+01:00:07,420 --> 01:00:10,330
+All right, let's do
+some motion planning,
+
+1087
+01:00:10,330 --> 01:00:24,250
+robot motion planning-- first in
+2D-- so planar motion planning.
+
+1088
+01:00:24,250 --> 01:00:26,070
+I give you a segment.
+
+1089
+01:00:26,070 --> 01:00:28,430
+That's the robot.
+
+1090
+01:00:28,430 --> 01:00:30,730
+And I have-- so this
+is the special arm,
+
+1091
+01:00:30,730 --> 01:00:35,240
+the robot-- then I have various
+obstacles, which the robot is
+
+1092
+01:00:35,240 --> 01:00:37,320
+not allowed to penetrate.
+
+1093
+01:00:37,320 --> 01:00:39,430
+I give you a starting
+position for the robot.
+
+1094
+01:00:39,430 --> 01:00:42,010
+And I give you a target
+position for the robot.
+
+1095
+01:00:42,010 --> 01:00:46,810
+And want to know can I go from
+here to here by some motion?
+
+1096
+01:00:46,810 --> 01:00:50,460
+And motion we'd allow
+rotations and translations.
+
+1097
+01:00:50,460 --> 01:00:52,790
+So can I slide
+this robot somehow
+
+1098
+01:00:52,790 --> 01:00:56,360
+through this obstacle
+course, in here, just
+
+1099
+01:00:56,360 --> 01:00:58,410
+some parallel parking, whatever.
+
+1100
+01:00:58,410 --> 01:01:00,680
+You can do lots of tricks
+to get from A to B.
+
+1101
+01:01:00,680 --> 01:01:02,830
+This problem can be
+solved in quadratic time.
+
+1102
+01:01:02,830 --> 01:01:06,070
+Most 2D motion planning
+problems with just rotation
+
+1103
+01:01:06,070 --> 01:01:09,270
+and translation can be
+sold in n squared time.
+
+1104
+01:01:12,040 --> 01:01:14,890
+And that's tight,
+because of this.
+
+1105
+01:01:19,422 --> 01:01:21,630
+We build these frames, which
+are large enough that it
+
+1106
+01:01:21,630 --> 01:01:22,747
+doesn't concern the robot.
+
+1107
+01:01:22,747 --> 01:01:24,330
+The robot's big
+enough that it's going
+
+1108
+01:01:24,330 --> 01:01:27,120
+to have to simultaneously
+pierce all three lines here.
+
+1109
+01:01:27,120 --> 01:01:29,106
+And we're done.
+
+1110
+01:01:29,106 --> 01:01:29,770
+OK, great.
+
+1111
+01:01:32,300 --> 01:01:37,140
+All this build up for
+very simple proofs.
+
+1112
+01:01:37,140 --> 01:01:39,064
+Cool, one more.
+
+1113
+01:01:39,064 --> 01:01:43,150
+AUDIENCE: Is that one
+actually quadratic time?
+
+1114
+01:01:43,150 --> 01:01:48,410
+PROFESSOR: Yeah, you can
+solve this in quadratic time.
+
+1115
+01:01:48,410 --> 01:01:49,242
+Cubic is obvious.
+
+1116
+01:01:49,242 --> 01:01:50,700
+There are three
+degrees of freedom.
+
+1117
+01:01:50,700 --> 01:01:53,750
+But I think, in
+fact, quadratic time.
+
+1118
+01:01:53,750 --> 01:01:54,980
+That's claim in the paper.
+
+1119
+01:01:54,980 --> 01:01:58,430
+I haven't studied motion
+planning algorithms
+
+1120
+01:01:58,430 --> 01:01:58,950
+for a while.
+
+1121
+01:01:58,950 --> 01:02:01,710
+So I don't know
+exactly how it goes.
+
+1122
+01:02:01,710 --> 01:02:04,600
+But in general, constant
+dimensional motion planning
+
+1123
+01:02:04,600 --> 01:02:07,510
+with constant numbers of objects
+can solved in polynomial time.
+
+1124
+01:02:07,510 --> 01:02:13,776
+But you can debate
+about the constants,
+
+1125
+01:02:13,776 --> 01:02:15,000
+which do matter here.
+
+1126
+01:02:15,000 --> 01:02:17,810
+I think the claim is
+tightness for that one.
+
+1127
+01:02:17,810 --> 01:02:20,800
+Here's another one which can be
+solved in-- their claim here,
+
+1128
+01:02:20,800 --> 01:02:24,930
+they say n squared
+log n they say.
+
+1129
+01:02:24,930 --> 01:02:29,060
+We can probably get n squared,
+but n squared log n is enough.
+
+1130
+01:02:29,060 --> 01:02:31,575
+It's a particular version
+of 3D motion planning.
+
+1131
+01:02:38,950 --> 01:02:43,020
+So we are given a
+vertical segment.
+
+1132
+01:02:43,020 --> 01:02:45,450
+That's our robot.
+
+1133
+01:02:45,450 --> 01:02:47,030
+We're going to have triangles.
+
+1134
+01:02:47,030 --> 01:02:48,840
+Those are our obstacles,
+because triangles
+
+1135
+01:02:48,840 --> 01:02:49,870
+we can make polyhedra.
+
+1136
+01:02:49,870 --> 01:02:54,860
+In this case, all the triangles
+will lie in horizontal planes.
+
+1137
+01:02:54,860 --> 01:02:58,000
+And the segment position
+will be vertical.
+
+1138
+01:02:58,000 --> 01:02:59,920
+And here you're only
+allowed translation.
+
+1139
+01:03:04,971 --> 01:03:07,220
+With translation and rotation,
+you could also do this.
+
+1140
+01:03:07,220 --> 01:03:09,380
+But they restrict
+to translation only,
+
+1141
+01:03:09,380 --> 01:03:11,611
+because there they can get
+a almost quadratic time
+
+1142
+01:03:11,611 --> 01:03:12,110
+algorithm.
+
+1143
+01:03:12,110 --> 01:03:14,980
+With rotation you have to
+add a couple of factors of n
+
+1144
+01:03:14,980 --> 01:03:16,000
+probably.
+
+1145
+01:03:16,000 --> 01:03:19,340
+But this version, they can
+solve in n squared log n.
+
+1146
+01:03:19,340 --> 01:03:24,520
+And it's 3SUM hard by
+similar kind of structure
+
+1147
+01:03:24,520 --> 01:03:28,670
+to the triangles
+covering triangle.
+
+1148
+01:03:28,670 --> 01:03:31,540
+Mainly, we build this cage--
+the triangles aren't shaded in.
+
+1149
+01:03:31,540 --> 01:03:34,750
+But there's basically a
+triangle of triangles here,
+
+1150
+01:03:34,750 --> 01:03:35,960
+and a bunch of them.
+
+1151
+01:03:35,960 --> 01:03:37,290
+The segment is a unit length.
+
+1152
+01:03:37,290 --> 01:03:41,350
+And so there's this many
+to subdivide the space.
+
+1153
+01:03:41,350 --> 01:03:43,190
+They call this a cage.
+
+1154
+01:03:43,190 --> 01:03:46,260
+All of these triangles
+live in horizontal planes.
+
+1155
+01:03:46,260 --> 01:03:48,760
+There's no way for this
+vertical robot with translation
+
+1156
+01:03:48,760 --> 01:03:51,060
+only to get out.
+
+1157
+01:03:51,060 --> 01:03:52,736
+It's too long.
+
+1158
+01:03:52,736 --> 01:03:54,110
+And so the starting
+configuration
+
+1159
+01:03:54,110 --> 01:03:55,270
+is going to be up here.
+
+1160
+01:03:55,270 --> 01:03:57,140
+The destination is
+going to be down here.
+
+1161
+01:03:57,140 --> 01:03:59,517
+And in the middle
+triangle here, we're
+
+1162
+01:03:59,517 --> 01:04:01,600
+going to put a whole bunch
+of triangles like this.
+
+1163
+01:04:01,600 --> 01:04:03,270
+So just squish this down.
+
+1164
+01:04:03,270 --> 01:04:04,304
+Put them all in here.
+
+1165
+01:04:04,304 --> 01:04:06,470
+And you're going to be able
+to penetrate if and only
+
+1166
+01:04:06,470 --> 01:04:07,469
+if there's a blank spot.
+
+1167
+01:04:13,540 --> 01:04:15,630
+End of this paper.
+
+1168
+01:04:15,630 --> 01:04:19,190
+I think we covered almost
+all of these proofs.
+
+1169
+01:04:19,190 --> 01:04:22,410
+We started with the base
+problems, 3SUM, 3SUM prime,
+
+1170
+01:04:22,410 --> 01:04:25,189
+GeomBase, two
+versions of separator,
+
+1171
+01:04:25,189 --> 01:04:27,480
+which we weren't directly
+reducing from but we mimicked
+
+1172
+01:04:27,480 --> 01:04:28,850
+a zillion times.
+
+1173
+01:04:28,850 --> 01:04:31,914
+We had the degeneracy
+over here, strips
+
+1174
+01:04:31,914 --> 01:04:33,330
+covering a box,
+triangles covering
+
+1175
+01:04:33,330 --> 01:04:34,980
+a triangle, hole in the
+union, visible triangle.
+
+1176
+01:04:34,980 --> 01:04:36,938
+Those are actually all
+identical to each other.
+
+1177
+01:04:36,938 --> 01:04:38,830
+You could reduce
+in all directions.
+
+1178
+01:04:38,830 --> 01:04:40,210
+We talked about point cup.
+
+1179
+01:04:40,210 --> 01:04:42,380
+This was the linear programming.
+
+1180
+01:04:42,380 --> 01:04:44,510
+Motion planning,
+3D motion planning
+
+1181
+01:04:44,510 --> 01:04:50,100
+happen to reduce here instead
+of there, and visibility.
+
+1182
+01:04:50,100 --> 01:04:51,570
+Cool.
+
+1183
+01:04:51,570 --> 01:04:53,700
+Lot of fun, little
+reductions, and it
+
+1184
+01:04:53,700 --> 01:04:56,380
+gives you a flavor for n
+squared hard-ish problems.
+
+1185
+01:04:56,380 --> 01:04:59,320
+AUDIENCE: Are there
+restrictions at all?
+
+1186
+01:04:59,320 --> 01:05:02,260
+PROFESSOR: I think all
+the restrictions are open.
+
+1187
+01:05:02,260 --> 01:05:05,150
+I mean, you'd have to check
+all the paper since 1995.
+
+1188
+01:05:05,150 --> 01:05:07,420
+But definitely in that
+paper, they're open.
+
+1189
+01:05:07,420 --> 01:05:10,417
+And I haven't heard of any--
+there isn't a ton of work
+
+1190
+01:05:10,417 --> 01:05:11,500
+going the other direction.
+
+1191
+01:05:11,500 --> 01:05:15,600
+But it would differently
+nice to, especially
+
+1192
+01:05:15,600 --> 01:05:19,930
+if 3SUM-- it builds more if
+3SUM is the right problem,
+
+1193
+01:05:19,930 --> 01:05:22,300
+if you can do reductions
+in both directions.
+
+1194
+01:05:26,910 --> 01:05:30,490
+I want to show you a
+couple more-- I'll show you
+
+1195
+01:05:30,490 --> 01:05:34,060
+one more reduction, which
+relates to a problem
+
+1196
+01:05:34,060 --> 01:05:38,690
+to be proved was strongly
+NP complete at some point
+
+1197
+01:05:38,690 --> 01:05:40,330
+way back when.
+
+1198
+01:05:40,330 --> 01:05:42,980
+This is about
+fixed angle chains.
+
+1199
+01:05:42,980 --> 01:05:44,750
+You have this kind
+of linkage structure.
+
+1200
+01:05:44,750 --> 01:05:46,680
+These are rigid bars.
+
+1201
+01:05:46,680 --> 01:05:48,500
+These are rigid angles.
+
+1202
+01:05:48,500 --> 01:05:53,740
+But you can still twist
+one segment around another.
+
+1203
+01:05:53,740 --> 01:05:56,440
+So it preserves the angles
+and the edge lengths.
+
+1204
+01:05:56,440 --> 01:05:58,340
+And so if I give you
+a structure like this,
+
+1205
+01:05:58,340 --> 01:06:02,160
+I want to know if I
+spin along this edge,
+
+1206
+01:06:02,160 --> 01:06:04,090
+if I take all this
+stuff and rotate it out
+
+1207
+01:06:04,090 --> 01:06:07,880
+of plane around this edge,
+does it hit anything?
+
+1208
+01:06:07,880 --> 01:06:09,320
+Or can it go all the way around?
+
+1209
+01:06:09,320 --> 01:06:10,050
+What about this edge?
+
+1210
+01:06:10,050 --> 01:06:10,760
+What about this edge?
+
+1211
+01:06:10,760 --> 01:06:11,730
+What about this edge?
+
+1212
+01:06:11,730 --> 01:06:15,360
+This is a polynomial time
+fixed angle chain problem.
+
+1213
+01:06:15,360 --> 01:06:18,750
+I want to know for every edge,
+which one's spinning causes
+
+1214
+01:06:18,750 --> 01:06:20,940
+a collision.
+
+1215
+01:06:20,940 --> 01:06:23,790
+In fact, if I just want to
+know whether these guys cause
+
+1216
+01:06:23,790 --> 01:06:28,630
+a collision, because if
+they do, a plus b equals c.
+
+1217
+01:06:28,630 --> 01:06:32,320
+I think that's maybe clear
+enough with your negative B/2
+
+1218
+01:06:32,320 --> 01:06:33,050
+in the middle.
+
+1219
+01:06:33,050 --> 01:06:35,735
+In this case, we've
+shifted-- the A,
+
+1220
+01:06:35,735 --> 01:06:38,184
+B, C is the x-coordinate
+in this structure.
+
+1221
+01:06:38,184 --> 01:06:40,350
+And these are candidate
+foldings here where we miss,
+
+1222
+01:06:40,350 --> 01:06:43,390
+here we collide.
+
+1223
+01:06:43,390 --> 01:06:46,010
+We separated things
+out by taking
+
+1224
+01:06:46,010 --> 01:06:48,870
+every item of a, subtracting a
+huge number from it to put it
+
+1225
+01:06:48,870 --> 01:06:52,700
+over here, and every item
+of c, adding a huge number.
+
+1226
+01:06:52,700 --> 01:06:54,596
+And because we're in
+the 3SUM prime problem,
+
+1227
+01:06:54,596 --> 01:06:55,970
+we know we get
+one item for each,
+
+1228
+01:06:55,970 --> 01:06:58,600
+so adding and subtracting
+and matching huge number
+
+1229
+01:06:58,600 --> 01:07:03,400
+will preserve all 3SUM
+pairs, 3SUM triples.
+
+1230
+01:07:03,400 --> 01:07:05,560
+So that let's us separate
+out this picture.
+
+1231
+01:07:05,560 --> 01:07:07,520
+And then you just have to check
+this reflection corresponds
+
+1232
+01:07:07,520 --> 01:07:09,603
+to adding in the right
+way, because of negation we
+
+1233
+01:07:09,603 --> 01:07:12,200
+divided by 2.
+
+1234
+01:07:12,200 --> 01:07:13,641
+That's it.
+
+1235
+01:07:13,641 --> 01:07:16,670
+So that's another.
+
+1236
+01:07:16,670 --> 01:07:18,440
+And there are a bunch
+of other problems,
+
+1237
+01:07:18,440 --> 01:07:19,979
+like if I give you
+two polygons, I
+
+1238
+01:07:19,979 --> 01:07:22,020
+want to know whether I
+can translate this polygon
+
+1239
+01:07:22,020 --> 01:07:23,144
+to fit inside that polygon.
+
+1240
+01:07:23,144 --> 01:07:24,510
+That's also 3SUM hard.
+
+1241
+01:07:24,510 --> 01:07:28,730
+Proof is a little bit messy,
+so I don't have it here.
+
+1242
+01:07:28,730 --> 01:07:37,390
+Let me mention me another more
+recent use of 3SUM conjecture
+
+1243
+01:07:37,390 --> 01:07:39,535
+is some non-quadratic
+lower bounds.
+
+1244
+01:07:44,970 --> 01:07:47,940
+So we're still going to
+assume the 3SUM conjecture,
+
+1245
+01:07:47,940 --> 01:07:50,040
+but we're going to prove
+that a problem requires
+
+1246
+01:07:50,040 --> 01:07:52,490
+some time other than n squared.
+
+1247
+01:07:52,490 --> 01:07:56,280
+So here are two problems
+where this has been done.
+
+1248
+01:08:01,540 --> 01:08:03,682
+These are graph
+problems, which is cool,
+
+1249
+01:08:03,682 --> 01:08:05,182
+because everything
+we've seen so far
+
+1250
+01:08:05,182 --> 01:08:06,390
+has been a geometric problem.
+
+1251
+01:08:18,060 --> 01:08:19,540
+So the weighted,
+undirected graph,
+
+1252
+01:08:19,540 --> 01:08:21,630
+I want to know whether
+there's a three cycle,
+
+1253
+01:08:21,630 --> 01:08:24,297
+also called a triangle,
+of given weight.
+
+1254
+01:08:24,297 --> 01:08:26,880
+So I want to know, for example,
+is there triangle weight of 0.
+
+1255
+01:08:30,420 --> 01:08:33,630
+This can be done in
+polynomial time, obviously.
+
+1256
+01:08:33,630 --> 01:08:44,189
+And the lower bound says is
+the number of edges to the 1.5,
+
+1257
+01:08:44,189 --> 01:08:49,100
+instead of 2 or however you
+want to think about this,
+
+1258
+01:08:49,100 --> 01:08:52,060
+minus epsilon.
+
+1259
+01:08:52,060 --> 01:08:53,479
+This is Mihai Petrescu.
+
+1260
+01:08:53,479 --> 01:08:57,620
+What he says is this problem,
+finding this in this much time,
+
+1261
+01:08:57,620 --> 01:09:00,779
+is 3SUM hard, meaning
+if this is possible,
+
+1262
+01:09:00,779 --> 01:09:03,660
+then 3SUM could be solved
+in sub-quadratic time.
+
+1263
+01:09:03,660 --> 01:09:07,334
+So there's a gap between
+this bound and 3SUM bound,
+
+1264
+01:09:07,334 --> 01:09:08,500
+introduced by the reduction.
+
+1265
+01:09:17,220 --> 01:09:18,370
+Here's another fun problem.
+
+1266
+01:09:26,620 --> 01:09:29,189
+Here we're given an unweighted
+graph, undirected graph.
+
+1267
+01:09:29,189 --> 01:09:32,649
+And we just want to
+find e triangles.
+
+1268
+01:09:32,649 --> 01:09:36,370
+Just list them form me please or
+tell me there aren't that many.
+
+1269
+01:09:38,990 --> 01:09:42,630
+You cannot do that in any better
+than e to the 4/3 minus epsilon
+
+1270
+01:09:42,630 --> 01:09:46,760
+times if you believe
+the 3SUM conjecture.
+
+1271
+01:09:46,760 --> 01:09:50,290
+So these are both 3SUM
+hard in a different sense
+
+1272
+01:09:50,290 --> 01:09:52,634
+from what we were using before.
+
+1273
+01:09:52,634 --> 01:09:54,380
+Before it was
+quadratic quadratic.
+
+1274
+01:09:54,380 --> 01:09:57,310
+With graphs, also
+there's v verses e.
+
+1275
+01:09:57,310 --> 01:09:58,850
+But neither of
+these are quadratic
+
+1276
+01:09:58,850 --> 01:10:00,070
+no matter how you slice them.
+
+1277
+01:10:00,070 --> 01:10:03,046
+So there are different.
+
+1278
+01:10:03,046 --> 01:10:05,170
+So there are a small number
+of pounds of that form.
+
+1279
+01:10:05,170 --> 01:10:10,550
+And that's kind of interesting
+and relatively hot area.
+
+1280
+01:10:10,550 --> 01:10:12,880
+So a few people are
+thinking about that.
+
+1281
+01:10:12,880 --> 01:10:18,880
+In particular, there's been
+a recent surge of interest
+
+1282
+01:10:18,880 --> 01:10:20,650
+in thinking about
+graph problems.
+
+1283
+01:10:20,650 --> 01:10:23,860
+Now for graph
+problems, there isn't
+
+1284
+01:10:23,860 --> 01:10:25,645
+a ton of work
+relating 3SUM, which
+
+1285
+01:10:25,645 --> 01:10:28,120
+is a very arithmetic
+problem to graph problems,
+
+1286
+01:10:28,120 --> 01:10:31,140
+but this is the
+beginning of that.
+
+1287
+01:10:31,140 --> 01:10:32,530
+But there are some
+other problems
+
+1288
+01:10:32,530 --> 01:10:35,280
+which people think are hard.
+
+1289
+01:10:35,280 --> 01:10:36,850
+So let me give you some of them.
+
+1290
+01:10:41,630 --> 01:10:48,490
+Diameter-- so here we're given
+a weighted, undirected graph.
+
+1291
+01:10:48,490 --> 01:10:54,250
+I want to know-- so delta v,
+w-- this is like CRLS notation.
+
+1292
+01:10:54,250 --> 01:10:57,330
+This is the weight
+of the minimum weight
+
+1293
+01:10:57,330 --> 01:11:00,010
+path from v to w.
+
+1294
+01:11:00,010 --> 01:11:01,860
+And I want to know the
+max overall v to w.
+
+1295
+01:11:01,860 --> 01:11:04,430
+What is the longest
+shortest path?
+
+1296
+01:11:04,430 --> 01:11:05,130
+That's diameter.
+
+1297
+01:11:07,840 --> 01:11:22,670
+Conjecture-- no V to
+the 3 minus epsilon.
+
+1298
+01:11:22,670 --> 01:11:27,730
+So here there's a lot of
+interest around cubic problems,
+
+1299
+01:11:27,730 --> 01:11:30,460
+because this
+problem seems cubic.
+
+1300
+01:11:30,460 --> 01:11:36,270
+Another closely related problem
+is all pair shortest paths.
+
+1301
+01:11:36,270 --> 01:11:41,770
+I want to know delta of
+v, w for all v and w.
+
+1302
+01:11:41,770 --> 01:11:44,210
+This is, of course, a harder
+problem than diameter.
+
+1303
+01:11:44,210 --> 01:11:48,727
+Also, this conjecture
+implies conjecture over here.
+
+1304
+01:11:48,727 --> 01:11:50,060
+This one's a little more famous.
+
+1305
+01:11:50,060 --> 01:11:53,130
+The all pairs shortest path
+conjecture is that you cannot
+
+1306
+01:11:53,130 --> 01:11:56,110
+solve this in truly
+sub-cubic time.
+
+1307
+01:11:56,110 --> 01:11:59,070
+There are, again,
+poly log improvements.
+
+1308
+01:11:59,070 --> 01:12:04,600
+But you cannot beat-- we
+don't know how to beat by a v
+
+1309
+01:12:04,600 --> 01:12:08,880
+to the epsilon factor, n
+to the epsilon factor over
+
+1310
+01:12:08,880 --> 01:12:14,330
+the standard algorithm, which
+should be Floyd Warshall,
+
+1311
+01:12:14,330 --> 01:12:15,340
+the triply nested loop.
+
+1312
+01:12:15,340 --> 01:12:20,947
+Relax every edge n times is
+the standard cubed algorithm.
+
+1313
+01:12:20,947 --> 01:12:22,530
+For sparse graphs
+you could do better.
+
+1314
+01:12:22,530 --> 01:12:26,874
+For dense graphs, the claim
+is that's the best you can do.
+
+1315
+01:12:26,874 --> 01:12:29,040
+And so there's a bunch of
+problems that are all pair
+
+1316
+01:12:29,040 --> 01:12:30,050
+shortest path hard.
+
+1317
+01:12:30,050 --> 01:12:34,320
+There are some problems
+that are diameter hard.
+
+1318
+01:12:34,320 --> 01:12:37,150
+Being diameter hard is
+a little bit stronger.
+
+1319
+01:12:37,150 --> 01:12:41,130
+Obviously, diameter
+can reduce to all pairs
+
+1320
+01:12:41,130 --> 01:12:45,190
+shortest paths via now we want
+a sub-cubic reduction, something
+
+1321
+01:12:45,190 --> 01:12:47,670
+n to the 3 minus epsilon
+time instead of n
+
+1322
+01:12:47,670 --> 01:12:49,000
+to the 2 minus epsilon.
+
+1323
+01:12:49,000 --> 01:12:51,270
+You can reduce diameter to
+all pairs shortest paths.
+
+1324
+01:12:51,270 --> 01:12:53,894
+Big open problem is whether you
+could reduce all pairs shortest
+
+1325
+01:12:53,894 --> 01:12:55,620
+paths to diameter.
+
+1326
+01:12:55,620 --> 01:12:57,360
+But you can reduce
+all pairs shortest
+
+1327
+01:12:57,360 --> 01:13:00,050
+paths to some cool problems.
+
+1328
+01:13:07,500 --> 01:13:12,190
+I have an image of
+some reductions.
+
+1329
+01:13:12,190 --> 01:13:18,380
+So negative triangle-- is there
+a triangle of negative weight?
+
+1330
+01:13:25,420 --> 01:13:27,910
+Over here we wanted a
+triangle of weight exactly 0.
+
+1331
+01:13:27,910 --> 01:13:30,162
+That helps you
+find things faster.
+
+1332
+01:13:30,162 --> 01:13:32,370
+Over here we just want a
+triangle of negative weight.
+
+1333
+01:13:32,370 --> 01:13:34,090
+There's more options for those.
+
+1334
+01:13:34,090 --> 01:13:37,090
+Finding that is all pairs
+shortest paths hard.
+
+1335
+01:13:37,090 --> 01:13:39,900
+You can reduce all
+pairs shortest path
+
+1336
+01:13:39,900 --> 01:13:42,540
+that problem-- kind of crazy.
+
+1337
+01:13:42,540 --> 01:13:45,080
+And here, the reduction
+is not a single--
+
+1338
+01:13:45,080 --> 01:13:47,150
+or a constant number
+of call reductions
+
+1339
+01:13:47,150 --> 01:13:48,630
+like we've been doing.
+
+1340
+01:13:48,630 --> 01:13:50,260
+This has a huge output.
+
+1341
+01:13:50,260 --> 01:13:53,040
+This only has a
+yes or no output.
+
+1342
+01:13:53,040 --> 01:13:54,830
+So this reduction's
+a little bit crazy.
+
+1343
+01:13:54,830 --> 01:14:00,720
+But basically you take
+the sum over all calls
+
+1344
+01:14:00,720 --> 01:14:03,060
+for this reduction.
+
+1345
+01:14:03,060 --> 01:14:07,334
+And it just has to work
+out that if you could solve
+
+1346
+01:14:07,334 --> 01:14:09,250
+negative triangle and
+sub-cubic time, then you
+
+1347
+01:14:09,250 --> 01:14:11,347
+could also solve all
+pairs shortest path
+
+1348
+01:14:11,347 --> 01:14:13,410
+in sub-cubic time.
+
+1349
+01:14:13,410 --> 01:14:19,090
+So if you take the
+sum of the n primes
+
+1350
+01:14:19,090 --> 01:14:22,420
+to the power 3
+minus epsilon, this
+
+1351
+01:14:22,420 --> 01:14:25,570
+should work out to
+n to the 3 minus
+
+1352
+01:14:25,570 --> 01:14:29,930
+epsilon over the different
+the different calls you
+
+1353
+01:14:29,930 --> 01:14:31,180
+make to the negative triangle.
+
+1354
+01:14:31,180 --> 01:14:33,834
+So it's a weaker notion
+of reduction, which
+
+1355
+01:14:33,834 --> 01:14:35,000
+lets you prove these things.
+
+1356
+01:14:35,000 --> 01:14:37,177
+Kind of a big innovation
+from just-- this one
+
+1357
+01:14:37,177 --> 01:14:38,260
+hasn't even published yet.
+
+1358
+01:14:38,260 --> 01:14:39,860
+It will be in [? Sodo ?] 2015.
+
+1359
+01:14:39,860 --> 01:14:42,220
+It's on the archive now.
+
+1360
+01:14:42,220 --> 01:14:45,080
+And there been a few papers
+over the last few years doing
+
+1361
+01:14:45,080 --> 01:14:46,204
+these kinds of reductions.
+
+1362
+01:14:46,204 --> 01:14:47,620
+Actually the
+negative triangle one
+
+1363
+01:14:47,620 --> 01:14:51,420
+is from an older paper
+by Vassilevska Williams
+
+1364
+01:14:51,420 --> 01:14:56,540
+and Williams.
+
+1365
+01:14:56,540 --> 01:15:00,440
+It's a husband and
+wife team, Stanford.
+
+1366
+01:15:00,440 --> 01:15:16,350
+OK, some more problems, radius--
+for vertex v, the radius
+
+1367
+01:15:16,350 --> 01:15:20,430
+around v is how big a ball
+do need to grow in order
+
+1368
+01:15:20,430 --> 01:15:21,760
+to cover all the vertices.
+
+1369
+01:15:21,760 --> 01:15:27,240
+I want to know what's the
+farthest vertex w from v.
+
+1370
+01:15:27,240 --> 01:15:29,520
+And then the radius
+of the graph is
+
+1371
+01:15:29,520 --> 01:15:32,580
+what is the best such vertex
+that minimizes the radius,
+
+1372
+01:15:32,580 --> 01:15:34,090
+the vertex.
+
+1373
+01:15:34,090 --> 01:15:35,270
+So closely related to this.
+
+1374
+01:15:35,270 --> 01:15:38,720
+But it is equivalent
+to negative triangle.
+
+1375
+01:15:38,720 --> 01:15:42,220
+Both of these are-- this
+is a-- well, OK, of course,
+
+1376
+01:15:42,220 --> 01:15:44,140
+you could reduce negative
+triangle to-- well,
+
+1377
+01:15:44,140 --> 01:15:44,973
+it's not so obvious.
+
+1378
+01:15:44,973 --> 01:15:47,750
+You can reduce radius to
+all pairs shortest paths,
+
+1379
+01:15:47,750 --> 01:15:49,770
+because you have all the deltas.
+
+1380
+01:15:49,770 --> 01:15:52,960
+You can compute that
+max-min in quadratic time.
+
+1381
+01:15:52,960 --> 01:15:55,900
+So that means all these problems
+are equivalent to each other
+
+1382
+01:15:55,900 --> 01:15:58,790
+up to sub-cubic reductions.
+
+1383
+01:15:58,790 --> 01:16:01,950
+OK, median is another
+problem-- very similar.
+
+1384
+01:16:01,950 --> 01:16:05,830
+I just replace this
+max with a sum.
+
+1385
+01:16:05,830 --> 01:16:10,130
+So that's some other kind
+of central located vertex.
+
+1386
+01:16:10,130 --> 01:16:11,890
+That's median.
+
+1387
+01:16:11,890 --> 01:16:16,350
+And that's also equivalent
+to all these problems.
+
+1388
+01:16:16,350 --> 01:16:19,770
+So there's a growing
+list of problems
+
+1389
+01:16:19,770 --> 01:16:23,586
+that are in this
+sort of cubic space.
+
+1390
+01:16:23,586 --> 01:16:25,460
+All the problems are
+conjectured to be cubic.
+
+1391
+01:16:25,460 --> 01:16:27,350
+And a lot of them are
+equivalent to each other,
+
+1392
+01:16:27,350 --> 01:16:29,165
+though there's this
+divide between diameter
+
+1393
+01:16:29,165 --> 01:16:31,030
+and all pairs shortest path.
+
+1394
+01:16:31,030 --> 01:16:36,750
+There are some bounds,
+assuming strong ETH.
+
+1395
+01:16:36,750 --> 01:16:45,560
+So if you have strong
+ETH, then there's
+
+1396
+01:16:45,560 --> 01:16:50,799
+no e to the 2 minus
+epsilon algorithm.
+
+1397
+01:16:50,799 --> 01:16:52,090
+This is not quite what we want.
+
+1398
+01:16:52,090 --> 01:16:54,300
+We want to v to the
+3 minus epsilon.
+
+1399
+01:16:54,300 --> 01:16:59,510
+This is a statement
+about sparse graphs.
+
+1400
+01:16:59,510 --> 01:17:01,580
+You can beat this
+for dense graphs.
+
+1401
+01:17:01,580 --> 01:17:03,830
+For sparse graphs
+this is interesting.
+
+1402
+01:17:03,830 --> 01:17:06,487
+This is for the worst case
+relationship between v and E.
+
+1403
+01:17:06,487 --> 01:17:07,820
+So you get somethings like this.
+
+1404
+01:17:07,820 --> 01:17:10,880
+You get this even if you
+allow some approximatability.
+
+1405
+01:17:10,880 --> 01:17:14,550
+But we still don't have a way to
+actually prove this conjecture.
+
+1406
+01:17:14,550 --> 01:17:15,195
+Yeah.
+
+1407
+01:17:15,195 --> 01:17:17,320
+AUDIENCE: Since you haven't
+said anything about it,
+
+1408
+01:17:17,320 --> 01:17:20,355
+I assume that 3SUM
+and this world, there
+
+1409
+01:17:20,355 --> 01:17:22,149
+is no bridge between them.
+
+1410
+01:17:22,149 --> 01:17:24,190
+PROFESSOR: I believe
+there's no bridge currently.
+
+1411
+01:17:24,190 --> 01:17:25,370
+This is the closest thing.
+
+1412
+01:17:25,370 --> 01:17:28,680
+And they do seem similar.
+
+1413
+01:17:28,680 --> 01:17:30,060
+And also here we have cubic.
+
+1414
+01:17:30,060 --> 01:17:31,840
+There we have quadratic.
+
+1415
+01:17:31,840 --> 01:17:32,900
+So maybe you can do it.
+
+1416
+01:17:32,900 --> 01:17:35,180
+Maybe with 5 SUM you
+could show some relation.
+
+1417
+01:17:35,180 --> 01:17:35,850
+I don't know.
+
+1418
+01:17:35,850 --> 01:17:39,700
+But there's no such theorem yet.
+
+1419
+01:17:39,700 --> 01:17:43,010
+These problems sound very
+similar to these problems,
+
+1420
+01:17:43,010 --> 01:17:45,510
+in particular listing a
+bunch of negative triangles
+
+1421
+01:17:45,510 --> 01:17:47,160
+is just as hard as finding one.
+
+1422
+01:17:47,160 --> 01:17:49,749
+And so there's some
+similarity to over here.
+
+1423
+01:17:49,749 --> 01:17:51,790
+But the constraint on the
+triangles is different.
+
+1424
+01:17:51,790 --> 01:17:53,320
+Here we want negative ones.
+
+1425
+01:17:53,320 --> 01:17:57,690
+Here any triangle or
+triangle of 0 weight.
+
+1426
+01:17:57,690 --> 01:18:00,200
+So it's an interesting space.
+
+1427
+01:18:00,200 --> 01:18:02,100
+It's still very ongoing.
+
+1428
+01:18:02,100 --> 01:18:04,770
+All of these things-- this
+stuff, and this stuff--
+
+1429
+01:18:04,770 --> 01:18:07,410
+is all within the
+last four years.
+
+1430
+01:18:07,410 --> 01:18:10,270
+So it'll be interesting
+to see how it develops.
+
+1431
+01:18:10,270 --> 01:18:12,520
+But these are the
+current approaches
+
+1432
+01:18:12,520 --> 01:18:14,710
+to understanding n
+squared, n cubed,
+
+1433
+01:18:14,710 --> 01:18:17,890
+and sort of the low end
+of the polynomial spectra.
+
+1434
+01:18:17,890 --> 01:18:20,117
+I think it's pretty
+interesting, but also where
+
+1435
+01:18:20,117 --> 01:18:22,450
+we know the least and have
+the fewest general techniques
+
+1436
+01:18:22,450 --> 01:18:23,670
+for proving things.
+
+1437
+01:18:23,670 --> 01:18:26,010
+3SUM is a little
+more established.
+
+1438
+01:18:26,010 --> 01:18:29,810
+And there's a bunch of proofs
+like the one you've seen-- not
+
+1439
+01:18:29,810 --> 01:18:32,470
+too many out there actually.
+
+1440
+01:18:32,470 --> 01:18:34,700
+But they're quite accessible.
+
+1441
+01:18:34,700 --> 01:18:37,870
+This stuff is still,
+I think, converging.
+
+1442
+01:18:37,870 --> 01:18:39,860
+But very exciting
+things, relating
+
+1443
+01:18:39,860 --> 01:18:42,510
+all these algorithmic problems
+to each other and kind
+
+1444
+01:18:42,510 --> 01:18:43,995
+of a nice way for us to end.
+
+1445
+01:18:43,995 --> 01:18:48,190
+This is my last
+lecture for 6890.
+
+1446
+01:18:48,190 --> 01:18:52,150
+And the next two classes are
+lectures by [? Acosis ?] about
+
+1447
+01:18:52,150 --> 01:18:54,980
+how [? arithmic ?] game theory
+in a class called PPAD and PPAD
+
+1448
+01:18:54,980 --> 01:18:57,350
+hardness, which is
+its own universe,
+
+1449
+01:18:57,350 --> 01:19:00,260
+but around economic game
+theory and very cool stuff.
+
+1450
+01:19:00,260 --> 01:19:02,890
+He is the expert on it
+and he's a professor here,
+
+1451
+01:19:02,890 --> 01:19:05,280
+so he graciously agreed
+to do two lectures on it.
+
+1452
+01:19:05,280 --> 01:19:05,910
+Should be fun.
+
+1453
+01:19:05,910 --> 01:19:07,460
+I'm looking forward to it.
+
+1454
+01:19:07,460 --> 01:19:09,010
+Thanks.

@@ -1,0 +1,274 @@
+1
+00:00:02,889 --> 00:00:08,600
+Two's complement representation is a way of
+representing both positive and negative numbers
+
+2
+00:00:08,600 --> 00:00:12,469
+in binary.
+
+3
+00:00:12,469 --> 00:00:17,730
+Let's take a look at an example of a positive
+number represented in two's complement in
+
+4
+00:00:17,730 --> 00:00:22,090
+order to begin understanding how this representation
+works.
+
+5
+00:00:22,090 --> 00:00:28,670
+If we look at the number, 001000, the way
+that we determine the value of this two's
+
+6
+00:00:28,670 --> 00:00:31,279
+complement number is as follows.
+
+7
+00:00:31,279 --> 00:00:37,940
+Each bit represents a power of 2, with the
+right most bit representing 20,
+
+8
+00:00:37,940 --> 00:00:45,079
+the next bit is 21, then 22,
+23, 24, and finally
+
+9
+00:00:45,079 --> 00:00:46,949
+-25.
+
+10
+00:00:46,949 --> 00:00:51,350
+Having the most significant bit represent
+a negative power of 2 rather than a positive
+
+11
+00:00:51,350 --> 00:00:57,769
+power allows us to express both positive and
+negative numbers with our notation.
+
+12
+00:00:57,769 --> 00:01:04,250
+If your number has a 0 in a certain position,
+then the power of 2 associated with that position
+
+13
+00:01:04,250 --> 00:01:06,640
+is not present in your number.
+
+14
+00:01:06,640 --> 00:01:11,780
+If the number has a 1, then that tells us
+that the corresponding power of 2 makes up
+
+15
+00:01:11,780 --> 00:01:13,960
+part of the number's value.
+
+16
+00:01:13,960 --> 00:01:21,539
+To figure out the value of the number 001000,
+we see that there is a single 1 which is in
+
+17
+00:01:21,539 --> 00:01:22,990
+the 23 position.
+
+18
+00:01:22,990 --> 00:01:27,490
+So this number is equal to 23 which
+equals 8.
+
+19
+00:01:27,490 --> 00:01:33,030
+Note that if I wanted to represent the same
+number 8 using a larger number of binary bits,
+
+20
+00:01:33,030 --> 00:01:36,670
+I would simply add some leading zeroes to
+my positive number.
+
+21
+00:01:36,670 --> 00:01:42,950
+For example, the number 8 represented in 8-bits
+two's complement is the same as the 6-bit
+
+22
+00:01:42,950 --> 00:01:49,460
+representation but with 2 additional leading
+zeroes.
+
+23
+00:01:49,460 --> 00:01:52,329
+Now let's try a negative number.
+
+24
+00:01:52,329 --> 00:01:57,200
+Negative numbers in 2's complement representation
+always have a 1 in their most significant
+
+25
+00:01:57,200 --> 00:01:58,509
+bit (MSB).
+
+26
+00:01:58,509 --> 00:02:00,880
+What is the value of 101100?
+
+27
+00:02:00,880 --> 00:02:10,000
+We apply the same logic as before, now we
+have a 1 in bit positions 2, 3, and 5.
+
+28
+00:02:10,000 --> 00:02:17,950
+That means that this number is equal to -25
++ 23 + 22 which equals
+
+29
+00:02:17,950 --> 00:02:24,150
+-32 + 8 + 4 = -20.
+
+30
+00:02:24,150 --> 00:02:30,610
+In the case of negative numbers, if we wanted
+to represent the same value, -20 using more
+
+31
+00:02:30,610 --> 00:02:35,879
+bits, one would simply need to append leading
+1's to the number to end up with the same
+
+32
+00:02:35,879 --> 00:02:37,340
+value.
+
+33
+00:02:37,340 --> 00:02:45,980
+For example, -20, using 8 bits is 11101100.
+
+34
+00:02:45,980 --> 00:02:48,250
+Let's check that this is correct.
+
+35
+00:02:48,250 --> 00:02:56,090
+This number is equal to -27 + 26
++ 25 + 23 + 22
+
+36
+00:02:56,090 --> 00:03:18,290
+which is equal to -128 + 64 + 32 + 8 + 4 which
+is -128 + 108 and that is equal to -20.
+
+37
+00:03:18,290 --> 00:03:24,130
+Let's take a look at the range of numbers
+that can be represented using N-bit 2's complement.
+
+38
+00:03:24,130 --> 00:03:26,850
+Let's begin with our example of 6-bits.
+
+39
+00:03:26,850 --> 00:03:35,269
+The largest positive number in that case is
+0 followed by five 1's (011111) which is equal
+
+40
+00:03:35,269 --> 00:03:41,190
+to 20 + 21 + 22
++ 23 + 24 which is equal
+
+41
+00:03:41,190 --> 00:03:52,010
+to 1 + 2 + 4 + 8 + 16 which equals 31 which
+is also equal to 25-1.
+
+42
+00:03:52,010 --> 00:03:59,099
+The most negative number using 6 bits is 1
+followed by five 0's (100000) which equals
+
+43
+00:03:59,099 --> 00:04:07,110
+-25 with no positive component
+added to the number and that is equal to -32.
+
+44
+00:04:07,110 --> 00:04:16,660
+So in general for N-bits, the 2's complement
+number can range from -2N-1 through
+
+45
+00:04:16,660 --> 00:04:26,670
+2N-1-1.
+
+46
+00:04:26,670 --> 00:04:31,560
+An easy way of converting between positive
+and negative 2's complement numbers is by
+
+47
+00:04:31,560 --> 00:04:34,310
+flipping all the bits and adding 1.
+
+48
+00:04:34,310 --> 00:04:41,610
+For example, earlier we calculated that 101100
+= -20.
+
+49
+00:04:41,610 --> 00:04:47,620
+If I take this number and flip all of the
+bits, I get 010011.
+
+50
+00:04:47,620 --> 00:04:52,980
+I then add 1 to that, which results in 010100.
+
+51
+00:04:52,980 --> 00:05:01,580
+This number is = 22 + 24
+= 4 + 16 = 20.
+
+52
+00:05:01,580 --> 00:05:09,070
+This tells us that our original number 101100
+was equal to -20.
+
+53
+00:05:09,070 --> 00:05:12,350
+The same methodology can be applied in reverse.
+
+54
+00:05:12,350 --> 00:05:21,410
+If you start with a positive number 20 = 010100,
+and you flip all the bits and add 1, you get
+
+55
+00:05:21,410 --> 00:05:27,040
+101011 + 1 = 101100.
+
+56
+00:05:27,040 --> 00:05:31,070
+This brings us back to our original number
+which is -20.
+
+57
+00:05:31,070 --> 00:05:36,870
+So to easily determine the value of a negative
+2's complement number, one flips all the bits
+
+58
+00:05:36,870 --> 00:05:42,810
+and adds 1 to find the corresponding positive
+number, say X, which in turn means that your
+
+59
+00:05:42,810 --> 00:05:46,430
+original negative number had a value of -X.

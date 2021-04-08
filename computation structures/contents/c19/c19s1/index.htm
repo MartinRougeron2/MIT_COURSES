@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en">
+      
+      
+        
+    
+    
+    
+    
+
+      
+      
+      <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">  
+        
+        <title>19.1 Annotated Slides | 19 Concurrency and Synchronization | Computation Structures | Electrical Engineering and Computer Science | MIT OpenCourseWare</title>
+    <!-- Begin Automatic Metadata Insertion -->
+    <meta content="6-004-computation-structures-spring-2017" name="WT.cg_n">
+    <meta content="19.1 Annotated Slides" name="WT.cg_s">
+    <meta content="" name="Description">
+    <meta content="Terman, Chris" name="Author">
+    <meta content="6.004,computation,computation structure,primitives, gates,instructions,procedures,processes,concurrency,instruction set design,software structure,digital system,MOS transistor,logic gate,combinational circuit,sequential circuit,finite-state machines,computer architecture,programming,RISC processor,Computer Design and Engineering,Digital Systems" name="keywords">
+    <meta content="6.004 Computation Structures | 19.1 Annotated Slides" name="Search_Display">
+    <meta content="Computer Design and Engineering" itemprop="about">
+    <meta content="Digital Systems" itemprop="about">
+    <!-- End Automatic Metadata Insertion -->
+
+	<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/grid.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/base.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/menu.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/jquery.bubblepopup.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/search.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses.css">
+<link title="default" rel="stylesheet" type="text/css" href="../../../common/styles/courses_new.css">
+	<link href="../../../common/xml/ocwcc.rdf" type="application/rdf+xml" rel="metadata">
+	<link rel="canonical" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-004-computation-structures-spring-2017/c19/c19s1/">
+	<link rel="apple-touch-icon" href="../../../common/images/apple-touch-icon.png">
+	
+	
+      <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			TeX: { equationNumbers: { autoNumber: "AMS" } },		
+	  		displayAlign: "left",
+	  		displayIndent: "2em",
+	  		menuSettings: {zoom: "Double-Click", mpContext: true, mpMouse: true},
+			errorSettings: { message: ["[Math Error]"] }  		
+			});
+	</script>
+	
+	<script type="text/javascript" src="../../../common/scripts/jquery.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-media-utils-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/ocw-offline.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/jquery.bubblepopup.min.js"></script>
+	<script type="text/javascript" src="../../../common/scripts/expandy.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=70ac07d7-b28f-4071-816f-d292aba4849f"></script>
+	<script type="text/javascript" src="../../../common/scripts/bubble-popup-offline.js"></script>
+	<script type="text/javascript" src="https://ocw.mit.edu//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+      
+       
+		 
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        
+	
+
+        <header id="top">
+			<div id="grid">
+				
+				
+					
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d686561646572">
+<div class="portletStaticText portlet-static-site-header">
+<!--googleoff: index-->
+<div class="grid_6 alpha" id="banner"><a href="https://ocw.mit.edu/"><img src="../../../common/images/ocw_mast.png" class="logo" alt="MIT OpenCourseWare, Massachusetts Institute of Technology"></a></div>
+<div class="grid_6 omega" id="subscribe">
+<aside class="module" aria-label="Connect with OCW">
+<table class="social">
+    <tbody>
+        <tr>
+            <td class="socialbutton"><a aria-label="Subscribe to the OCW Newsletter" href="https://ocw.mit.edu/subscribe/index.htm?utm_source=header"><img src="../../../common/images/trans.gif" alt="An icon depicting an envelope.">Subscribe to the OCW Newsletter</a></td>
+            <td>
+<a aria-label="Facebook" href="https://facebook.com/mitocw"><img src="../../../common/images/icon_fb.png" alt="Click to visit our Facebook page."></a>  <a aria-label="Instagram" href="https://www.instagram.com/mitocw/"><img src="https://ocw.mit.edu/images/icon_ig.png" alt="Click to visit our Instagram page."></a> <a aria-label="Twitter" href="https://twitter.com/mitocw"><img src="https://ocw.mit.edu/images/icon_twitter.png" alt="Click to visit our Twitter feed."></a><a aria-label="YouTube" href="https://www.youtube.com/mitocw" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_yt.png" alt="Click to visit our YouTube page."></a><span style="font-size: 12.208px;">   </span><a aria-label="Open Matters blog on WordPress" href="https://www.ocw-openmatters.org/" style="font-size: 12.208px;"><img src="https://ocw.mit.edu/images/icon_wp.png" alt="Click to visit our blog on WordPress."></a>
+</td>
+        </tr>
+    </tbody>
+</table>
+</aside><nav aria-label="Help Links" class="helplinks">     <a aria-label="OCW Site Help" href="https://ocw.mit.edu/help">Help</a><span aria-hidden="true">|</span>     <a href="../../../common/about/contactus.htm">Contact Us</a>   </nav>
+</div>
+<div class="clear"> </div>
+<!--googleon: index-->
+</div>
+
+</div>
+
+<div id="portletwrapper-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75" class="portletWrapper kssattr-portlethash-6f63772e746f70706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a6d6567612d6d656e75">
+<div class="portletStaticText portlet-static-mega-menu"><div><nav id="mega" class="grid_8 alpha" aria-label="Site">
+<ul id="menu" role="presentation">
+    <li id="menu_home">
+<a href="https://ocw.mit.edu/" aria-label="Homepage"><img src="../../../common/images/top-nav_home.png" class="home_icon" alt="Click for site home page."></a><!-- Begin Home Item -->
+</li>
+    <!-- End Home Item -->
+    <li id="drop_1" aria-label="Find Courses">
+<a href="#" aria-hidden="true">FIND COURSES</a><!-- Begin 5 columns Item -->
+    <div class="dropdown_5columns-a mega-courses">
+    <div class="col_1a">
+    <div class="row_1a">
+<nav aria-labelledby="mm-find-courses-by">     <span id="mm-find-courses-by" class="nav" aria-hidden="true">Find courses by:</span>
+    <ul class="find_by" role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Topic</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-number/">MIT Course Number</a></li>
+        <li><a href="https://ocw.mit.edu/courses/find-by-department/">Department</a></li>
+    </ul>
+    </nav>     <nav aria-labelledby="mm-collections">     <span id="mm-collections" class="nav" aria-hidden="true">Collections</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Lectures</a></li>
+        <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+        <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+        <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    </ul>
+    </nav>     <nav class="col_1b" aria-labelledby="mm-translated-courses">     <span id="mm-translated-courses" class="nav" aria-hidden="true" style="line-height: 1.3;">Cross-Disciplinary Topic Lists</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/energy-courses">Energy</a></li>
+        <li><a href="https://ocw.mit.edu/courses/entrepreneurship">Entrepreneurship</a></li>
+        <li><a href="https://ocw.mit.edu/courses/environment-courses">Environment</a></li>
+        <li><a href="https://ocw.mit.edu/courses/intro-programming">Introductory Programming</a></li>
+        <li><a href="https://ocw.mit.edu/courses/life-sciences">Life Sciences</a></li>
+        <li><a href="https://ocw.mit.edu/courses/transportation-courses">Transportation</a></li>
+    </ul>
+    </nav>
+</div>
+    <div class="row_1b"><nav aria-labelledby="mm-cross-disciplinary-topic-lists">     <span id="mm-cross-disciplinary-topic-lists" class="nav" aria-hidden="true">Translated Courses</span>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/traditional-chinese" aria-label="Traditional Chinese">繁體字 / Traditional Chinese</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/turkish" aria-label="Turkish">Türkçe / Turkish</a></li>
+        <li><a href="https://ocw.mit.edu/courses/translated-courses/korean" aria-label="Korean">(비디오)한국 / Korean</a></li>
+    </ul>
+    </nav></div>
+    </div>
+    </div>
+    </li>
+    <li id="drop_2">
+<a href="#" aria-label="For Educators">For Educators</a>
+    <div class="dropdown_1column-a" style="width: 270px;"><nav aria-labelledby="mm-find-courses-by">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/chalk-radio-podcast">Chalk Radio Podcast</a></li>
+        <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+        <li><a href="https://openlearning.mit.edu/campus/digital-innovations/">Residential Digital Innovations </a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    </ul>
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_3">
+<a href="#" aria-hidden="true">Give Now</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="Donate">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+        <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+        <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+        <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+        <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+    </ul>
+    </nav></div>
+    </li>
+    <li id="drop_4">
+<a href="#" aria-hidden="true">About</a>
+    <div class="dropdown_1column-a"><nav class="col_1" aria-label="About">
+    <ul role="presentation">
+        <li><a href="https://ocw.mit.edu/about/">About MIT OpenCourseWare</a></li>
+        <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+        <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+        <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+        <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+        <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+    </ul>
+    </nav></div>
+    </li>
+</ul>
+</nav></div></div>
+
+</div>
+
+
+
+
+
+<!--googleoff: index-->
+<script>
+  (function() {
+	var cx = '012626166551961672889:owjdpuboktq';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+  })();
+  window.onload = function(){
+	document.getElementById('gsc-i-id1').placeholder = 'Search';	
+  };
+
+$(document).ready(function(){
+
+$('.advanceSearch a').keydown(function(event){showSearchTips($(this),event);})
+$('#searchTipsModal').keydown(function(event){showSearchTips($(this),event);})
+
+function showSearchTips(obj,evt) {
+// if pressed enter key
+	if ( evt.which == 13 || evt.which == 32) {
+		showModal();
+		ga('send', 'pageview', "AdvanceSearch");
+		$(".advanceSearch a").attr('aria-expanded', 'true');
+		$('.searchTipsModal').focus();
+		evt.preventDefault();
+		}
+	if ( evt.which == 27 ) {
+		hideModal();
+		$(".advanceSearch a").attr('aria-expanded', 'false');
+		var modal = document.getElementById('searchTipsModal');
+		modal.style.display = "none";
+		$(".advanceSearch a").focus();
+		evt.preventDefault();
+		}
+}
+
+});
+function showModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "block";
+	ga('send', 'pageview', "AdvanceSearch");
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", true);
+	window.setTimeout(function () {
+    document.getElementById('searchTipsModal').focus(); }, 0);
+}
+
+function hideModal(){
+	var modal = document.getElementById('searchTipsModal');
+	modal.style.display = "none";
+	document.getElementById("searchTipsBtn").setAttribute("aria-expanded", false);
+}
+</script>
+<div id="search" role="search" class="grid_4 omega">
+    	<table class="search">
+				<tbody>
+					<tr>
+						<td><div class="searchboxheader"><searchbox-only resultsurl="/search/ocwsearch.htm"></searchbox-only></div></td>
+						<td>
+							<div class="advanceSearch">
+								<a id="searchTipsBtn" onclick="showModal();" href="#" role="button" aria-label="search tips" aria-expanded="false" aria-describedby="searchtips">Search Tips</a>
+
+								<!-- The Modal -->
+								<div id="searchTipsModal" class="modal" tabindex="-1">
+								  <!-- Modal content -->
+									<div class="modal-content">
+										<div class="modal-body">
+											<button class="close" onclick="hideModal();" aria-label="close">X</button>
+											<span>
+												<b>Exclude words from your search</b>
+												<br>Put - in front of a word you want to leave out. For example, jaguar speed -car
+												<br><br>
+												<b>Search for an exact match</b>
+												<br>Put a word or phrase inside quotes. For example, "tallest building".
+												<br><br>
+												<b>Search for wildcards or unknown words</b>
+												<br>Put a * in your word or phrase where you want to leave a placeholder. For example, "largest * in the world".
+												<br><br>
+												<b>Search within a range of numbers</b>
+												<br>Put .. between two numbers. For example, camera $50..$100.
+												<br><br>
+												<b>Combine searches</b>
+												<br>Put "OR" between each search query. For example,  marathon OR race.
+												<br><br>
+											</span>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+</div>
+<div class="clear"></div>
+<!--googleon: index-->
+<!-- *end header* -->
+
+				
+				
+			</div>
+<!-- top grid end -->
+		</header><!-- top end -->
+			
+		<div id="center">
+         <div id="grid">
+		         <div id="left-section">
+                 <nav aria-label="Breadcrumb" id="breadcrumb">
+                      <p>
+
+    <a href="https://ocw.mit.edu/">Home</a>
+    
+        »
+        
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses">Courses</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/index.htm">Computation Structures</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            <a href="../../../contents/c19/index.htm">19 Concurrency and Synchronization</a>
+            
+                »
+                
+            
+            
+         
+    
+    
+        
+            
+            
+            19.1 Annotated Slides
+         
+    
+</p>
+
+                 </nav>
+                 <div class="clear"></div>
+                   <div id="section_title">
+           			     <h1 class="title" itemprop="name" property="dct:title">
+        <span class="" id="parent-fieldname-title">
+            19.1 Annotated Slides
+        </span>
+    </h1>
+             	     </div>
+             	     <div class="clear"></div>
+             	     <div id="course_wrapper_section">
+           	     	 <nav id="course_nav" aria-label="Course">
+               			 
+
+
+
+<script language="javascript" type="text/javascript">
+function toggleMenu(objID) {
+  if (!document.getElementById) return;
+  var ob = document.getElementById(objID);
+  ob.className = (ob.className == 'selected')?'': 'selected';
+}
+function toggleClass(id)
+{
+  var divtoggleClass= document.getElementById(id);
+  divtoggleClass.className = (divtoggleClass.className == 'mO')?'mC': 'mO';
+  return false;
+}
+function changeAlt(id)
+{
+  id.alt = (id.alt == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+  id.title = (id.title == 'Expand Menu')?'Collapse Menu' : 'Expand Menu';
+}
+</script>
+<!--Left Nav Starts -->
+
+
+	<ul>			  
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/index.htm">
+		                  Course Home  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/syllabus/index.htm">
+		                  Syllabus  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+	    	    <li class="">
+			   			<a href="../../../contents/calendar/index.htm">
+		                  Calendar  			                
+	                    </a>
+		        </li>
+		    
+         	
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="instructor-insights" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuinstructor-insights'); toggleClass('instructor-insights'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/instructor-insights/index.htm" class="">
+		                  Instructor Insights  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuinstructor-insights" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/an-interview-with-christopher-terman-on-teaching-computation-structures/index.htm" class="">An Interview with Christopher Terman</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/meet-the-educator/index.htm" class="">Meet the Educator</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/when-students-come-with-different-backgrounds-offer-a-buffet-of-learning-materials/index.htm" class="">A Buffet of Learning Materials</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-the-mitx-platform-to-structure-learning-sequences/index.htm" class="">Using the MITx Platform</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/conceptualizing-online-courses-as-educational-labs/index.htm" class="">Online Courses as Educational Labs</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/teaching-large-lecture-classes-the-importance-of-stories-and-disfluency/index.htm" class="">The Importance of Stories and Disfluency</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-teaching-team-from-lab-assistants-to-faculty-members-the-range-of-experience-is-key/index.htm" class="">A Teaching Team with a Range of Experience</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/with-online-fora-being-stuck-is-just-a-10-minute-process/index.htm" class="">Being Stuck Is a 10-Minute Process</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/using-browser-based-programming-environments-to-engage-students-in-the-practice-of-engineering/index.htm" class="">Browser-Based Programming Environments</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/a-common-challenge-students-face-developing-confidence-in-systematically-solving-problems/index.htm" class="">Confidence in Problem-Solving</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/hallway-learning-the-value-of-common-learning-experiences-at-the-undergraduate-level/index.htm" class="">The Value of Common Experiences</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/the-fun-is-in-the-doing-of-the-puzzle-self-paced-mastery-learning-and-moving-beyond/index.htm" class="">Self-Paced Mastery Learning</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/instructor-insights/engineering-learning-materials-an-iterative-process/index.htm" class="">Engineering Learning Materials</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c1" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc1'); toggleClass('c1'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c1/index.htm" class="">
+		                  1 Basics of Information  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc1" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s1/index.htm" class="">1.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s2/index.htm" class="">1.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c1/c1s3/index.htm" class="">1.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c2" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc2'); toggleClass('c2'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c2/index.htm" class="">
+		                  2 The Digital Abstraction  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc2" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s1/index.htm" class="">2.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s2/index.htm" class="">2.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c2/c2s3/index.htm" class="">2.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c3" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc3'); toggleClass('c3'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c3/index.htm" class="">
+		                  3 CMOS  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc3" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s1/index.htm" class="">3.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s2/index.htm" class="">3.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c3/c3s3/index.htm" class="">3.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c4" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc4'); toggleClass('c4'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c4/index.htm" class="">
+		                  4 Combinational Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc4" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s1/index.htm" class="">4.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s2/index.htm" class="">4.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c4/c4s3/index.htm" class="">4.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c5" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc5'); toggleClass('c5'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c5/index.htm" class="">
+		                  5 Sequential Logic  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc5" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s1/index.htm" class="">5.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s2/index.htm" class="">5.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c5/c5s3/index.htm" class="">5.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c6" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc6'); toggleClass('c6'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c6/index.htm" class="">
+		                  6 Finite State Machines  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc6" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s1/index.htm" class="">6.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s2/index.htm" class="">6.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c6/c6s3/index.htm" class="">6.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c7" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc7'); toggleClass('c7'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c7/index.htm" class="">
+		                  7 Performance Measures  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc7" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s1/index.htm" class="">7.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s2/index.htm" class="">7.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c7/c7s3/index.htm" class="">7.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c8" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc8'); toggleClass('c8'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c8/index.htm" class="">
+		                  8 Design Tradeoffs  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc8" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s1/index.htm" class="">8.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c8/c8s2/index.htm" class="">8.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c9" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc9'); toggleClass('c9'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c9/index.htm" class="">
+		                  9 Designing an Instruction Set  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc9" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s1/index.htm" class="">9.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s2/index.htm" class="">9.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c9/c9s3/index.htm" class="">9.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c10" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc10'); toggleClass('c10'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c10/index.htm" class="">
+		                  10 Assembly Language, Models of Computation  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc10" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s1/index.htm" class="">10.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c10/c10s2/index.htm" class="">10.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c11" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc11'); toggleClass('c11'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c11/index.htm" class="">
+		                  11 Compilers  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc11" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s1/index.htm" class="">11.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s2/index.htm" class="">11.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c11/c11s3/index.htm" class="">11.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c12" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc12'); toggleClass('c12'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c12/index.htm" class="">
+		                  12 Procedures and Stacks  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc12" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s1/index.htm" class="">12.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s2/index.htm" class="">12.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c12/c12s3/index.htm" class="">12.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c13" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc13'); toggleClass('c13'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c13/index.htm" class="">
+		                  13 Building the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc13" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s1/index.htm" class="">13.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s2/index.htm" class="">13.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c13/c13s3/index.htm" class="">13.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c14" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc14'); toggleClass('c14'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c14/index.htm" class="">
+		                  14 Caches and the Memory Hierarchy  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc14" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s1/index.htm" class="">14.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s2/index.htm" class="">14.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c14/c14s3/index.htm" class="">14.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c15" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc15'); toggleClass('c15'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c15/index.htm" class="">
+		                  15 Pipelining the Beta  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc15" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s1/index.htm" class="">15.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s2/index.htm" class="">15.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c15/c15s3/index.htm" class="">15.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c16" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc16'); toggleClass('c16'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c16/index.htm" class="">
+		                  16 Virtual Memory  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc16" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s1/index.htm" class="">16.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s2/index.htm" class="">16.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c16/c16s3/index.htm" class="">16.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c17" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc17'); toggleClass('c17'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c17/index.htm" class="">
+		                  17 Virtualizing the Processor  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc17" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s1/index.htm" class="">17.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s2/index.htm" class="">17.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c17/c17s3/index.htm" class="">17.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c18" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc18'); toggleClass('c18'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c18/index.htm" class="">
+		                  18 Devices and Interrupts  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc18" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s1/index.htm" class="">18.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s2/index.htm" class="">18.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c18/c18s3/index.htm" class="">18.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c19" class="mC">
+						<a href="#" class="" onclick="toggleMenu('menuc19'); toggleClass('c19'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Collapse Menu" title="Collapse Menu">
+		                </a>
+		                <a href="../../../contents/c19/index.htm" class="">
+		                  19 Concurrency and Synchronization  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc19" class="selected">
+					               
+		            <li class="selected">
+				 		<a href="../../../contents/c19/c19s1/index.htm" class="selected">19.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s2/index.htm" class="">19.2 Topic Videos</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c19/c19s3/index.htm" class="">19.3 Worksheet</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c20" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc20'); toggleClass('c20'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c20/index.htm" class="">
+		                  20 System-level Communication  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc20" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s1/index.htm" class="">20.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c20/c20s2/index.htm" class="">20.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+         	<li class="">
+       		<div class="tlp_links">
+	        	<div id="c21" class="mO">
+						<a href="#" class="" onclick="toggleMenu('menuc21'); toggleClass('c21'); return false">
+		                  <img src="../../../common/images/trans.gif" class="expandCollapseTrans" border="0" width="10" height="12" onclick="changeAlt(this)" alt="Expand Menu" title="Expand Menu">
+		                </a>
+		                <a href="../../../contents/c21/index.htm" class="">
+		                  21 Parallel Processing  			                
+	                    </a>
+	                 			                
+	            </div>
+			    
+	        	<ul id="menuc21" class="">
+					               
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s1/index.htm" class="">21.1 Annotated Slides</a>
+		            </li>
+		            <li class="">
+				 		<a href="../../../contents/c21/c21s2/index.htm" class="">21.2 Topic Videos</a>
+		            </li>
+			    </ul>
+			    
+			</div>
+			</li>
+	
+	
+	    	
+	    	    
+		    
+         	
+	<!--second tal block close-->  
+	
+</ul>
+
+
+<!--Left Nav Ends -->
+
+
+
+
+
+
+
+
+
+           		     </nav>
+           		     <main id="course_inner_section" aria-labelledby="section_title">
+           		     	
+	       		     	<ul class="navigation pagination">     <li id="top_bck_btn"><a href="../../../contents/c19/index.htm">&lt;<span>Concurrency and Synchronization</span></a></li>     <li id="flp_btn_1" class="button_selected"><a href="../../../contents/c19/c19s1/index.htm">19.1.1<span>Annotated slides</span></a></li>     <li id="top_continue_btn"><a href="../../../contents/c19/c19s2/index.htm">&gt;<span>Topic Videos</span></a></li> </ul> <p><style type="text/css">
+.toc {
+  margin-left: 2em;
+}
+.lecslide {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-top: 0.5px solid #808080;
+  padding-top: 1em;
+  text-align: center;
+}
+.lecslideimg {
+  width: 5in;
+  border: 1px solid black;
+}
+</style></p> <h1>L19: Concurrency and Synchronization</h1> <div class="toc"><ol>     <li style="margin-bottom:0.1em;"><a href="#1">Interprocess Communication</a></li>     <li style="margin-bottom:0.1em;"><a href="#2">Synchronous Communication</a></li>     <li style="margin-bottom:0.1em;"><a href="#3">FIFO Buffering</a></li>     <li style="margin-bottom:0.1em;"><a href="#4">Example: Bounded Buffer Problem</a></li>     <li style="margin-bottom:0.1em;"><a href="#5">Semaphores (Dijkstra)</a></li>     <li style="margin-bottom:0.1em;"><a href="#6">Semaphores for Precedence</a></li>     <li style="margin-bottom:0.1em;"><a href="#7">Semaphores for Resource Allocation</a></li>     <li style="margin-bottom:0.1em;"><a href="#8">Bounded Buffer Problem with Semaphores</a></li>     <li style="margin-bottom:0.1em;"><a href="#9">Flow Control Problems</a></li>     <li style="margin-bottom:0.1em;"><a href="#10">Bounded Buffer Problem with More Semaphores</a></li>     <li style="margin-bottom:0.1em;"><a href="#11">Simultaneous Transactions</a></li>     <li style="margin-bottom:0.1em;"><a href="#12">But, What If...</a></li>     <li style="margin-bottom:0.1em;"><a href="#13">Semaphores for Mutual Exclusion</a></li>     <li style="margin-bottom:0.1em;"><a href="#14">Producer/Consumer Atomicity Problems</a></li>     <li style="margin-bottom:0.1em;"><a href="#15">Bounded Buffer Problem with Even More Semaphores</a></li>     <li style="margin-bottom:0.1em;"><a href="#16">The Power of Semaphores</a></li>     <li style="margin-bottom:0.1em;"><a href="#17">Semaphore Implementation</a></li>     <li style="margin-bottom:0.1em;"><a href="#18">Semaphores as a Supervisor Call</a></li>     <li style="margin-bottom:0.1em;"><a href="#19">Hardware Support for Semaphores</a></li>     <li style="margin-bottom:0.1em;"><a href="#20">Synchronization: The Dark Side</a></li>     <li style="margin-bottom:0.1em;"><a href="#21">Dining Philosophers</a></li>     <li style="margin-bottom:0.1em;"><a href="#22">Deadlock!</a></li>     <li style="margin-bottom:0.1em;"><a href="#23">One Solution</a></li>     <li style="margin-bottom:0.1em;"><a href="#24">Dealing With Deadlocks</a></li>     <li style="margin-bottom:0.1em;"><a href="#25">Summary</a></li> </ol></div> <p><strong>Content of the following slides is described in the surrounding text.</strong></p> <div class="lecslide"><a name="1"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide02.png" alt=""></a></div> <p>It’s not unusual to find that an application is organized   as multiple communicating processes.  What’s the advantage   of using multiple processes instead of just a single   process?</p> <p>Many applications exhibit concurrency, <i>i.e.</i>, some of the   required computations can be performed in parallel.  For   example, video compression algorithms represent each video frame   as an array of 8-pixel by 8-pixel macroblocks.  Each macroblock   is individually compressed by converting the 64 intensity and   color values from the spatial domain to the frequency domain and   then quantizing and Huffman encoding the frequency coefficients.   If you’re using a multi-core processor to do the   compression, you can perform the macroblock compressions   concurrently.</p> <p>Applications like video games are naturally divided into the   “front-end” user interface and   “back-end” simulation and rendering engines.  Inputs   from the user arrive asynchronously with respect to the   simulation and it’s easiest to organize the processing of   user events separately from the backend processing.</p> <p>Processes are an effective way to encapsulate the state and   computation for what are logically independent components of an   application, which communicate with one another when they need   to share information.</p> <p>These sorts of applications are often data- or   event-driven, <i>i.e.</i>, the processing required is determined   by the data to be processed or the arrival of external   events.</p> <p>How should the processes communicate with each other?</p> <p>If the processes are running out of the same physical memory,   it would be easy to arrange to share memory data by mapping the   same physical page into the contexts for both processes.  Any   data written to that page by one process will be able to be read   by the other process.</p> <p>To make it easier to coordinate the processes’   communicating via shared memory, we’ll see it’s   convenient to provide synchronization primitives.  Some ISAs   include instructions that make it easy to do the required   synchronization.</p> <p>Another approach is to add OS supervisor calls to pass messages   from one process to another.  Message passing involves more   overhead than shared memory, but makes the application   programming independent of whether the communicating processes   are running on the same physical processor.</p> <p>In this lecture, we’ll use the classic producer-consumer   problem as our example of concurrent processes that need to   communicate and synchronize.  There are two processes: a   producer and a consumer.  The producer is running in a loop,   which performs some computation  to generate information,   in this case, a single character C.  The consumer is also   running a loop, which waits for the next character to arrive   from the producer, then performs some computation .</p> <p>The information passing between the producer and consumer could   obviously be much more complicated than a single character.  For   example, a compiler might produce a sequence of assembly   language statements that are passed to the assembler to be   converted into the appropriate binary representation.  The user   interface front-end for a video game might pass a sequence of   player actions to the simulation and rendering back-end.  In   fact, the notion of hooking multiple processes together in a   processing pipeline is so useful that the Unix and Linux   operating systems provide a PIPE primitive in the operating   system that connects the output channel of the upstream process   to the input channel of the downstream process.</p> <div class="lecslide"><a name="2"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide03.png" alt=""></a></div> <p>Let’s look at a timing diagram for the actions of our   simple producer/consumer example.  We’ll use arrows to   indicate when one action happens before another.  Inside a   single process, <i>e.g.</i>, the producer, the order of   execution implies a particular ordering in time: the first   execution of  xxx is followed by the sending of the first   character.  Then there’s the second execution of xxx,   followed by the sending of the second character, and so on.  In   later examples, we’ll omit the timing arrows between   successive statements in the same program.</p> <p>We see a similar order of execution in the consumer: the first   character is received, then the computation  is performed   for the first time, etc.  Inside of each process, the   process’ program counter is determining the order in which   the computations are performed.</p> <p>So far, so good - each process is running as expected.   However, for the producer/consumer system to function correctly   as a whole, we’ll need to introduce some additional   constraints on the order of execution.  These are called   “precedence constraints” and we’ll use this   stylized less-than sign to indicate that computation A must   precede, <i>i.e.</i>, come before, computation B.</p> <p>In the producer/consumer system we can’t consume data   before it’s been produced, a constraint we can formalize   as requiring that the i<sup>th</sup> send operation has to precede the   i<sup>th</sup> receive operation.  This timing constraint is shown as the   solid red arrow in the timing diagram.</p> <p>Assuming we’re using, say, a shared memory location to   hold the character being transmitted from the producer to the   consumer, we need to ensure that the producer doesn’t   overwrite the previous character before it’s been read by   the consumer.  In other words, we require the i<sup>th</sup> receive to   precede the i+1<sup>st</sup> send.  These timing constraints are shown as   the dotted red arrows in the timing diagram.</p> <p>Together these precedence constraints mean that the producer   and consumer are tightly coupled in the sense that a character   has to be read by the consumer before the next character can be   sent by the producer, which might be less than optimal if   the  and  computations take a variable amount of time.   So let’s see how we can relax the constraints to allow for   more independence between the producer and consumer.</p> <div class="lecslide"><a name="3"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide04.png" alt=""></a></div> <p>We can relax the execution constraints on the producer and   consumer by having them communicate via N-character   first-in-first-out (FIFO) buffer.  As the producer produces   characters it inserts them into the buffer.  The consumer reads   characters from the buffer in the same order as they were   produced.  The buffer can hold between 0 and N characters.  If   the buffer holds 0 characters, it’s empty; if it holds N   characters, it’s full.  The producer should wait if the   buffer is full, the consumer should wait if the buffer is   empty.</p> <p>Using the N-character FIFO buffer relaxes our second overwrite   constraint to the requirement that the i<sup>th</sup> receive must happen   before i+N<sup>th</sup> send.  In other words, the producer can get up to   N characters ahead of the consumer.</p> <p>FIFO buffers are implemented as an N-element character array   with two indices: the read index indicates the next character to   be read, the write index indicates the next character to be   written.  We’ll also need a counter to keep track of the   number of characters held by the buffer, but that’s been   omitted from this diagram.  The indices are incremented modulo   N, <i>i.e.</i>, the next element to be accessed after the   N-1<sup>st</sup> element is the 0<sup>th</sup> element, hence the name   “circular buffer”.</p> <p>Here’s how it works.  The producer runs, using the write   index to add the first character to the buffer.  The producer   can produce additional characters, but must wait once the buffer   is full.</p> <p>The consumer can receive a character anytime the buffer is not   empty, using the read index to keep track of the next character   to be read.  Execution of the producer and consumer can proceed   in any order so long as the producer doesn’t write into a   full buffer and the consumer doesn’t read from any empty   buffer.</p> <div class="lecslide"><a name="4"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide05.png" alt=""></a></div> <p>Here’s what the code for the producer and consumer might   look like.  The array and indices for the circular buffer live   in shared memory where they can be accessed by both processes.   The SEND routine in the producer uses the write index IN to keep   track of where to write the next character.  Similarly the RCV   routine in the consumer uses the read index OUT to keep track of   the next character to be read.  After each use, each index is   incremented modulo N.</p> <p>The problem with this code is that, as currently written,   neither of the two precedence constraints is enforced.  The   consumer can read from an empty buffer and the producer can   overwrite entries when the buffer is full.</p> <p>We’ll need to modify this code to enforce the constraints   and for that we’ll introduce a new programming construct   that we’ll use to provide the appropriate inter-process   synchronization.</p> <div class="lecslide"><a name="5"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide06.png" alt=""></a></div> <p>What we’d like to do is to create a single abstraction   that can be used to address all our synchronization needs.  In   the early 1960’s, the Dutch computer scientist Edsger   Dijkstra proposed a new abstract data type called the semaphore,   which has an integer value greater than or equal to 0.  A   programmer can declare a semaphore as shown here, specifying its   initial value.  The semaphore lives in a memory location shared   by all the processes that need to synchronize their   operation.</p> <p>The semaphore is accessed with two operations: WAIT and SIGNAL.   The WAIT operation will wait until the specified semaphore has a   value greater than 0, then it will decrement the semaphore value   and return to the calling program.  If the semaphore value is 0   when WAIT is called, conceptually execution is suspended until   the semaphore value is non-zero.  In a simple (inefficient)   implementation, the WAIT routine loops, periodically testing the   value of the semaphore, proceeding when its value is   non-zero.</p> <p>The SIGNAL operation increments the value of the specified   semaphore.  If there any processes WAITing on that semaphore,   exactly one of them may now proceed.  We’ll have to be   careful with the implementation of SIGNAL and WAIT to ensure the   “exactly one” constraint is satisfied,   <i>i.e.</i>, that two processes both WAITing on the same   semaphore won’t both think they can decrement it and   proceed after a SIGNAL.</p> <p>A semaphore initialized with the value K guarantees that the   i<sup>th</sup> call to SIGNAL will precede (i+K)<sup>th</sup> call to WAIT.  In a   moment, we’ll see some concrete examples that will make   this clear.  Note that in 6.004, we’re ruling out   semaphores with negative values.</p> <p>In the literature, you may see P(s) used in place of WAIT(s)   and V(s) used in place of SIGNAL(s).  These operation names are   derived from the Dutch words for “test” and   “increase”.</p> <p>Let’s see how to use semaphores to implement precedence constraints.</p> <div class="lecslide"><a name="6"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide07.png" alt=""></a></div> <p>Here are two processes, each running a program with 5   statements.  Execution proceeds sequentially within each   process, so A1 executes before A2, and so on.  But there are no   constraints on the order of execution between the processes, so   statement B1 in Process B might be executed before or after any   of the statements in Process A.  Even if A and B are running in   a timeshared environment on a single physical processor,   execution may switch at any time between processes A and B.</p> <p>Suppose we wish to impose the constraint that the execution of   statement A2 completes before execution of statement B4 begins.   The red arrow shows the constraint we want.</p> <p>Here’s the recipe for implementing this sort of simple   precedence constraint using semaphores.</p> <p>First, declare a semaphore (called “s” in this   example) and initialize its value to 0.</p> <p>Place a call to signal(s) at the start of the arrow. In this   example, signal(s) is placed after the statement A2 in process   A.</p> <p>Then place a call to wait(s) at the end of the arrow. In this   example, wait(s) is placed before the statement B4 in process   B.</p> <p>With these modifications, process A executes as before, with   the signal to semaphore s happening after statement A2 is   executed.</p> <p>Statements B1 through B3 also execute as before, but when the   wait(s) is executed, execution of process B is suspended until   the signal(s) statement has finished execution.  This guarantees   that execution of B4 will start only after execution of A2 has   completed.</p> <p>By initializing the semaphore s to 0, we enforced the   constraint that the first call to signal(s) had to complete   before the first call to wait(s) would succeed.</p> <div class="lecslide"><a name="7"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide08.png" alt=""></a></div> <p>Another way to think about semaphores is as a management tool   for a shared pool of K resources, where K is the initial value   of the semaphore.  You use the SIGNAL operation to add or return   resources to the shared pool.  And you use the WAIT operation to   allocate a resource for your exclusive use.</p> <p>At any given time, the value of the semaphore gives the number   of unallocated resources still available in the shared pool.</p> <p>Note that the WAIT and SIGNAL operations can be in the same   process, or they may be in different processes, depending on   when the resource is allocated and returned.</p> <div class="lecslide"><a name="8"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide09.png" alt=""></a></div> <p>We can use semaphores to manage our N-character FIFO buffer.   Here we’ve defined a semaphore CHARS and initialized it to   0.  The value of CHARS will tell us how many characters are in   the buffer.</p> <p>So SEND does a signal(CHARS) after it has added a character to   the buffer, indicating the buffer now contains an additional   character.</p> <p>And RCV does a wait(CHARS) to ensure the buffer has at least   one character before reading from the buffer.</p> <p>Since CHARS was initialized to 0, we’ve enforced the   constraint that the i<sup>th</sup> call to signal(CHARS) precedes the   completion of the i<sup>th</sup> call to wait(CHARS).  In other words,   RCV can’t consume a character until it has been placed in   the buffer by SEND.</p> <p>Does this mean our producer and consumer are now properly   synchronized?  Almost!  Using the CHARS semaphore, we   implemented *one* of the two precedence constraints we   identified as being necessary for correct operation.  Next   we’ll see how to implement the other precedence   constraint.</p> <div class="lecslide"><a name="9"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide10.png" alt=""></a></div> <p>What keeps the producer from putting more than N characters   into the N-character buffer?  Nothing.  Oops, the producer can   start to overwrite characters placed in the buffer earlier even   though they haven’t yet been read by the consumer.  This   is called buffer overflow and the sequence of characters   transmitted from producer to consumer becomes hopelessly   corrupted.</p> <p>What we’ve guaranteed so far is that the consumer can   read a character only after the producer has placed it in the   buffer, <i>i.e.</i>, the consumer can’t read from an empty   buffer.</p> <p>What we still need to guarantee is that the producer   can’t get too far ahead of the consumer.  Since the buffer   holds at most N characters, the producer can’t send the   (i+N)<sup>th</sup> character until the consumer has read the i<sup>th</sup>   character.</p> <div class="lecslide"><a name="10"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide11.png" alt=""></a></div> <p>Here we’ve added a second semaphore, SPACES, to manage   the number of spaces in the buffer.  Initially the buffer is   empty, so it has N spaces.  The producer must WAIT for a space   to be available.  When SPACES in non-zero, the WAIT succeeds,   decrementing the number of available spaces by one and then the   producer fills that space with the next character.</p> <p>The consumer signals the availability of another space after it   reads a character from the buffer.</p> <p>There’s a nice symmetry here.  The producer consumes   spaces and produces characters.  The consumer consumes   characters and produces spaces.  Semaphores are used to track   the availability of both resources (<i>i.e.</i>, characters and   spaces), synchronizing the execution of the producer and   consumer.</p> <p>This works great when there is a single producer process and a   single consumer process.  Next we’ll think about what will   happen if we have multiple producers and multiple consumers.</p> <div class="lecslide"><a name="11"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide12.png" alt=""></a></div> <p>Let’s take a moment to look at a different example.   Automated teller machines allow bank customers to perform a   variety of transactions: deposits, withdrawals, transfers, etc.   Let’s consider what happens when two customers try to   withdraw \\(50 from the same account at the same time.</p> <p>A portion of the bank’s code for a withdrawal transaction   is shown in the upper right.  This code is responsible for   adjusting the account balance to reflect the amount of the   withdrawal.  Presumably the check to see if there is sufficient   funds has already happened.</p> <p>What’s supposed to happen?  Let’s assume that the   bank is using a separate process to handle each transaction, so   the two withdrawal transactions cause two different processes to   be created, each of which will run the Debit code.  If each of   the calls to Debit run to completion without interruption, we   get the desired outcome: the first transaction debits the   account by \\)50, then the second transaction does the same.  The   net result is that you and your friend have \\(100 and the   balance is \\)100 less.</p> <p>So far, so good.</p> <div class="lecslide"><a name="12"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide13.png" alt=""></a></div> <p>But what if the process for the first transaction is   interrupted just after it’s read the balance?  The second   process subtracts \\(50 from the balance, completing that   transaction.  Now the first process resumes, using the now   out-of-date balance it loaded just before being interrupted.   The net result is that you and your friend have \\)100, but the   balance has only been debited by \$50.</p> <p>The moral of the story is that we need to be careful when   writing code that reads and writes shared data since other   processes might modify the data in the middle of our execution.   When, say, updating a shared memory location, we’ll need   to LD the current value, modify it, then ST the updated value.   We would like to ensure that no other processes access the   shared location between the start of the LD and the completion   of the ST.  The LD/modify/ST code sequence is what we call a   “critical section.” We need to arrange that other   processes attempting to execute the same critical section are   delayed until our execution is complete.  This constraint is   called “mutual exclusion,” <i>i.e.</i>, only one   process at a time can be executing code in the same critical   section.</p> <p>Once we’ve identified critical sections, we’ll use   semaphores to guarantee they execute atomically, <i>i.e.</i>,   that once execution of the critical section begins, no other   process will be able to enter the critical section until the   execution is complete.  The combination of the semaphore to   enforce the mutual exclusion constraint and the critical section   of code implement what’s called a   “transaction”.  A transaction can perform multiple   reads and writes of shared data with the guarantee that none of   the data will be read or written by other processes while the   transaction is in progress.</p> <div class="lecslide"><a name="13"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide14.png" alt=""></a></div> <p>Here’s the original code to Debit, which we’ll   modify by adding a LOCK semaphore.  In this case, the resource   controlled by the semaphore is the right to run the code in the   critical section.  By initializing LOCK to 1, we’re saying   that at most one process can execute the critical section at a   time.</p> <p>A process running the Debit code WAITs on the LOCK semaphore.   If the value of LOCK is 1, the WAIT will decrement value of LOCK   to 0 and let the process enter the critical section.  This is   called acquiring the lock.  If the value of LOCK is 0, some   other process has acquired the lock and is executing the   critical section and our execution is suspended until the LOCK   value is non-zero.</p> <p>When the process completes execution of the critical section,   it releases the LOCK with a call to SIGNAL, which will allow   other processes to enter the critical section.  If there are   multiple WAITing processes, only one will be able to acquire the   lock, and the others will still have to wait their turn.</p> <p>Used in this manner, semaphores are implementing a mutual   exclusion constraint, <i>i.e.</i>, there’s a guarantee   that two executions of the critical section cannot overlap.   Note that if multiple processes need to execute the critical   section, they may run in any order and the only guarantee is   that their executions will not overlap.</p> <p>There are some interesting engineering issues to consider.   There’s the question of the granularity of the   lock, <i>i.e.</i>, what shared data is controlled by the lock?   In our bank example, should there be one lock controlling access   to the balance for all accounts?  That would mean that no one   could access any balance while a transaction was in progress.   That would mean that transactions accessing different accounts   would have to run one after the other even though they’re   accessing different data.  So one lock for all the balances   would introduce unnecessary precedence constraints, greatly   slowing the rate at which transactions could be processed.</p> <p>Since the guarantee we need is that we shouldn’t permit   multiple simultaneous transactions on the same account, it would   make more sense to have a separate lock for each account, and   change the Debit code to acquire the account’s lock before   proceeding.  That will only delay transactions that truly   overlap, an important efficiency consideration for a large   system processing many thousands of mostly non-overlapping   transactions each second.</p> <p>Of course, having per-account locks would mean a lot of locks!   If that’s a concern, we can adopt a compromise strategy of   having locks that protect groups of accounts, <i>e.g.</i>,   accounts with same last three digits in the account number.   That would mean we’d only need 1000 locks, which would   allow up to 1000 transactions to happen simultaneously.</p> <p>The notion of transactions on shared data is so useful that we   often use a separate system called a database that provides the   desired functionality.  Database systems are engineered to   provide low-latency access to shared data, providing the   appropriate transactional semantics.  The design and   implementation of databases and transactions is pretty   interesting - to follow up, I recommend reading about databases   on the web.</p> <div class="lecslide"><a name="14"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide15.png" alt=""></a></div> <p>Returning to our producer/consumer example, we see that if   multiple producers are trying to insert characters into the   buffer at the same time, it’s possible that their   execution may overlap in a way that causes characters to be   overwritten and/or the index to be improperly incremented.</p> <p>We just saw this bug in the bank example: the producer code   contains a critical section of code that accesses the FIFO   buffer and we need to ensure that the critical section is   executed atomically.</p> <div class="lecslide"><a name="15"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide16.png" alt=""></a></div> <p>Here we’ve added a third semaphore, called LOCK, to   implement the necessary mutual exclusion constraint for the   critical section of code that inserts characters into the FIFO   buffer.  With this modification, the system will now work   correctly when there are multiple producer processes.</p> <p>There’s a similar issue with multiple consumers, so   we’ve used the same LOCK to protect the critical section   for reading from the buffer in the RCV code.</p> <p>Using the same LOCK for producers and consumers will work, but   does introduce unnecessary precedence constraints since   producers and consumers use different indices, <i>i.e.</i>, IN   for producers and OUT for consumers.  To solve this problem we   could use two locks: one for producers and one for   consumers.</p> <div class="lecslide"><a name="16"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide17.png" alt=""></a></div> <p>Semaphores are a pretty handy Swiss army knife when it comes to   dealing with synchronization issues.  When WAIT and SIGNAL   appear in different processes, the semaphore ensures the correct   execution timing between processes.  In our example, we used two   semaphores to ensure that consumers can’t read from an   empty buffer and that producers can’t write into a full   buffer.</p> <p>We also used semaphores to ensure that execution of critical   sections - in our example, updates of the indices IN and OUT -   were guaranteed to be atomic. In other words, that the sequence   of reads and writes needed to increment a shared index would not   be interrupted by another process between the initial read of   the index and the final write.</p> <div class="lecslide"><a name="17"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide18.png" alt=""></a></div> <p>Now let’s figure out how to implement semaphores.  They   are themselves shared data and implementing the WAIT and SIGNAL   operations will require read/modify/write sequences that must be   executed as critical sections.  Normally we’d use a lock   semaphore to implement the mutual exclusion constraint for   critical sections. But obviously we can’t use semaphores   to implement semaphores!  We have what’s called a   bootstrapping problem: we need to implement the required   functionality from scratch.</p> <p>Happily, if we’re running on a timeshared processor with   an uninterruptible OS kernel, we can use the supervisor call   (SVC) mechanism to implement the required functionality.</p> <p>We can also extend the ISA to include a special test-and-set   instruction that will let us implement a simple lock semaphore,   which can then be used to protect critical sections that   implement more complex semaphore semantics.  Single instructions   are inherently atomic and, in a multi-core processor, will do   what we want if the shared main memory supports both reading the   old value and writing a new value to a specific memory location   as a single memory access.</p> <p>There are other, more complex, software-only solutions that   rely only on the atomicity of individual reads and writes to   implement a simple lock.  For example, see “Dekker’s   Algorithm” on Wikipedia.</p> <p>We’ll look in more detail at the first two approaches.</p> <div class="lecslide"><a name="18"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide19.png" alt=""></a></div> <p>Here are the OS handlers for the WAIT and SIGNAL supervisor   calls.  Since SVCs are run kernel mode, they can’t be   interrupted, so the handler code is naturally executed as a   critical section.</p> <p>Both handlers expect the address of the semaphore location to   be passed as an argument in the user’s R0.  The WAIT   handler checks the semaphore’s value and if it’s   non-zero, the value is decremented and the handler resumes   execution of the user’s program at the instruction   following the WAIT SVC.  If the semaphore is 0, the code   arranges to re-execute the WAIT SVC when the user program   resumes execution and then calls SLEEP to mark the process as   inactive until the corresponding WAKEUP call is made.</p> <p>The SIGNAL handler is simpler: it increments the semaphore   value and calls WAKEUP to mark as active any processes that were   WAITing for this particular semaphore.</p> <p>Eventually the round-robin scheduler will select a process that   was WAITing and it will be able to decrement the semaphore and   proceed.  Note that the code makes no provision for   fairness, <i>i.e.</i>, there’s no guarantee that a WAITing   process will eventually succeed in finding the semaphore   non-zero.  The scheduler has a specific order in which it runs   processes, so the next-in-sequence WAITing process will always   get the semaphore even if there are later-in-sequence processes   that have been WAITing longer.  If fairness is desired, WAIT   could maintain a queue of waiting processes and use the queue to   determine which process is next in line, independent of   scheduling order.</p> <div class="lecslide"><a name="19"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide20.png" alt=""></a></div> <p>Many ISAs support an instruction like the TEST-and-CLEAR   instruction shown here.  The TCLR instruction reads the current   value of a memory location and then sets it to zero, all as a   single operation.  It’s like a LD except that it zeros the   memory location after reading its value.</p> <p>To implement TCLR, the memory needs to support read-and-clear   operations, as well as normal reads and writes.</p> <p>The assembly code at the bottom of the slide shows how to use   TCLR to implement a simple lock.  The program uses TCLR to   access the value of the lock semaphore.  If the returned value   in RC is zero, then some other process has the lock and the   program loops to try TCLR again.  If the returned value is   non-zero, the lock has been acquired and execution of the   critical section can proceed.  In this case, TCLR has also set   the lock to zero, so that other processes will be prevented from   entering the critical section.</p> <p>When the critical section has finished executing, a ST   instruction is used to set the semaphore to a non-zero   value.</p> <div class="lecslide"><a name="20"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide21.png" alt=""></a></div> <p>If the necessary synchronization requires acquiring more than   one lock, there are some special considerations that need to be   taken into account.  For example, the code below implements the   transfer of funds from one bank account to another.  The code   assumes there is a separate semaphore lock for each account and   since it needs to adjust the balance of two accounts, it   acquires the lock for each account.</p> <p>Consider what happens if two customers try simultaneous   transfers between their two accounts.  The top customer will try   to acquire the locks for accounts 6005 and 6004.  The bottom   customer tries to acquire the same locks, but in the opposite   order.  Once a customer has acquired both locks, the transfer   code will complete, releasing the locks.</p> <p>But what happens if the top customer acquires his first lock   (for account 6005) and the bottom customer simultaneously   acquires his first lock (for account 6004).  So far, so good,   but now each customer will not be successful in acquiring   their second lock, since those locks are already held by the   other customer!</p> <p>This situation is called a “deadlock” or   “deadly embrace” because there is no way execution   for either process will resume - both will wait indefinitely to   acquire a lock that will never be available.</p> <p>Obviously, synchronization involving multiple resources   requires a bit more thought.</p> <div class="lecslide"><a name="21"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide22.png" alt=""></a></div> <p>The problem of deadlock is elegantly illustrated by the Dining   Philosophers problem.  Here there are, say, 5 philosophers   waiting to eat.  Each requires two chopsticks in order to   proceed, and there are 5 chopsticks on the table.</p> <p>The philosophers follow a simple algorithm.  First they pick up   the chopstick on their left, then the chopstick on their right.   When they have both chopsticks they eat until they’re   done, at which point they return both chopsticks to the table,   perhaps enabling one of their neighbors to pick them up and   begin eating.  Again, we see the basic setup of needing two (or   more) resources before the task can complete.</p> <div class="lecslide"><a name="22"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide23.png" alt=""></a></div> <p>Hopefully you can see the problem that may arise...</p> <p>If all philosophers pick up the chopstick on their left, then   all the chopsticks have been acquired, and none of the   philosophers will be able to acquire their second chopstick and   eat.  Another deadlock!</p> <p>Here are the conditions required for a deadlock:</p> <p>1. Mutual exclusion, where a particular resource can only be   acquired by one process at a time.</p> <p>2. Hold-and-wait, where a process holds allocated resources   while waiting to acquire the next resource.</p> <p>3. No preemption, where a resource cannot be removed from the   process which acquired it.  Resources are only released after   the process has completed its transaction.</p> <p>4. Circular wait, where resources needed by one process are   held by another, and vice versa.</p> <p>How can we solve the problem of deadlocks when acquiring   multiple resources?  Either we avoid the problem to begin with,   or we detect that deadlock has occurred and implement a recovery   strategy.  Both techniques are used in practice.</p> <div class="lecslide"><a name="23"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide24.png" alt=""></a></div> <p>In the Dining Philosophers problem, deadlock can be avoided   with a small modification to the algorithm.  We start by   assigning a unique number to each chopstick to establish a   global ordering of all the resources, then rewrite the code to   acquire resources using the global ordering to determine which   resource to acquire first, which second, and so on.</p> <p>With the chopsticks numbered, the philosophers pick up the   lowest-numbered chopstick from either their left or right.  Then   they pick up the other, higher-numbered chopstick, eat, and then   return the chopsticks to the table.</p> <p>How does this avoid deadlock?  Deadlock happens when all the   chopsticks have been picked up but no philosopher can eat.  If   all the chopsticks have been picked up, that means some   philosopher has picked up the highest-numbered chopstick and so   must have earlier picked up the lower-numbered chopstick on his   other side.  So that philosopher can eat then return both   chopsticks to the table, breaking the hold-and-wait cycle.</p> <p>So if all the processes in the system can agree upon a global   ordering for the resources they require, then acquire them in   order, there will be no possibility of a deadlock caused by a   hold-and-wait cycle.</p> <div class="lecslide"><a name="24"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide25.png" alt=""></a></div> <p>A global ordering is easy to arrange in our banking code for   the transfer transaction.  We’ll modify the code to first   acquire the lock for the lower-numbered account, then acquire   the lock for the higher-numbered account.  Now, both customers   will first try to acquire the lock for the 6004 account.  The   customer that succeeds then can acquire the lock for the 6005   account and complete the transaction.  The key to deadlock   avoidance was that customers contented for the lock for the   *first* resource they both needed - acquiring that lock ensured   they would be able to acquire the remainder of the shared   resources without fear that they would already be allocated to   another process in a way that could cause a hold-and-wait   cycle.</p> <p>Establishing and using a global order for shared resources is   possible when we can modify all processes to cooperate.   Avoiding deadlock without changing the processes is a harder   problem.  For example, at the operating system level, it would   be possible to modify the WAIT SVC to detect circular wait and   terminate one of the WAITing processes, releasing its resources   and breaking the deadlock.</p> <p>The other strategy we mentioned was detection and recovery.   Database systems detect when there’s been an external   access to the shared data used by a particular transaction,   which causes the database to abort the transaction.  When   issuing a transaction to a database, the programmer specifies   what should happen if the transaction is aborted,   <i>e.g.</i>, she can specify that the transaction be retried.   The database remembers all the changes to shared data that   happen during a transaction and only changes the master copy of   the shared data when it is sure that the transaction will not be   aborted, at which point the changes are committed to the   database.</p> <div class="lecslide"><a name="25"><img class="lecslideimg" src="../../../contents/c19/c19s1/Slide26.png" alt=""></a></div> <p>In summary, we saw that organizing an application as   communicating processes is often a convenient way to go.  We   used semaphores to synchronize the execution of the different   processes, providing guarantees that certain precedence   constraints would be met, even between statements in different   processes.</p> <p>We also introduced the notion of critical code sections and   mutual exclusion constraints that guaranteed that a code   sequence would be executed without interruption by another   process.  We saw that semaphores could also be used to implement   those mutual exclusion constraints.</p> <p>Finally we discussed the problem of deadlock that can occur   when multiple processes must acquire multiple shared resources,   and we proposed several solutions based on a global ordering of   resources or the ability to restart a transaction.</p> <p>Synchronization primitives play a key role in the world of   “big data” where there are vast amounts of shared   data, or when trying to coordinate the execution of thousands of   processes in the cloud.  Understanding synchronization issues   and their solutions is a key skill when writing most modern   applications.</p> <p><a href="../../../contents/c19/c19s1/MIT-6-004s17-Lec19-ImageCredits.pdf">Image Credits for this Lecture (PDF)</a></p> <ul class="navigation progress">     <li id="bck_btn"><a href="../../../contents/c19/index.htm">Back<span>Concurrency and Synchronization</span></a></li>     <li id="continue_btn"><a href="../../../contents/c19/c19s2/index.htm">Continue<span>Topic Videos</span></a></li> </ul>
+	                    
+    
+    
+    
+
+
+
+	        			
+	                    
+	                    
+	                    
+	                    
+
+            		 </main><!--Course_inner_section tag close -->
+           		     <div class="clear"></div>
+ 				 </div>
+<!--Course_wrapper tag close -->
+ 			 </div>
+<!--left tag close -->
+ 			
+         </div>
+<!--grid tag close -->
+      </div>
+		
+		<footer id="bottom">
+			<div id="grid">
+				
+<div id="portletwrapper-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572" class="portletWrapper kssattr-portlethash-6f63772e626f74746f6d706f72746c65746d616e616765720a636f6e746578740a2f506c6f6e650a736974652d666f6f746572">
+<div class="portletStaticText portlet-static-site-footer"><div id="footer">
+<nav aria-label="Footer">     <nav id="foot-c1" class="grid_2 alpha" aria-labelledby="f-find-courses">       <span class="footer" id="f-find-courses" aria-hidden="true">Find Courses</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/courses/find-by-topic/">Find by Topic</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-number/">Find by Course Number</a></li>
+    <li><a href="https://ocw.mit.edu/courses/find-by-department/">Find by Department</a></li>
+    <li><a href="https://ocw.mit.edu/courses/new-courses/">New Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/most-visited-courses/">Most Visited Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/ocw-scholar/">OCW Scholar Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/audio-video-courses/">Audio/Video Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/online-textbooks/">Online Textbooks</a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights</a></li>
+    <li><a href="https://ocw.mit.edu/resources/">Supplemental Resources</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mitx-related-courseware/">MITx &amp; Related OCW Courses</a></li>
+    <li><a href="https://ocw.mit.edu/courses/mit-open-learning-library/">MIT Open Learning Library</a></li>
+    <li><a href="https://ocw.mit.edu/courses/translated-courses/">Translated Courses</a></li>
+</ul>
+</nav>
+<div id="foot-c2" class="grid_2"><nav aria-labelledby="f-for-educators">         <span id="f-for-educators" class="footer" aria-hidden="true">For Educators</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://chalk-radio.simplecast.com/">Chalk Radio Podcast</a></li>
+    <li><a href="https://ocw.mit.edu/educator/">OCW Educator Portal </a></li>
+    <li><a href="https://ocw.mit.edu/courses/instructor-insights/">Instructor Insights by Department</a></li>
+    <li><a href="https://openlearning.mit.edu/campus/digital-innovations/" aria-label="External Link: Residential Digital Innovations">Residential Digital Innovations </a></li>
+    <li><a href="https://ocw.mit.edu/high-school/">OCW Highlights for High School</a></li>
+    <li><a href="https://ocw.mit.edu/educator/additional-resources/">Additional Resources</a></li>
+</ul>
+</nav></div>
+<nav class="grid_2" id="foot-c3" aria-labelledby="f-donate">       <span id="f-donate" class="footer" aria-hidden="true">Give Now</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/give/">Make a Donation</a></li>
+    <li><a href="https://ocw.mit.edu/give/why-give/">Why Give?</a></li>
+    <li><a href="https://ocw.mit.edu/give/our-supporters/">Our Supporters</a></li>
+    <li><a href="https://ocw.mit.edu/give/other-ways-to-contribute/">Other Ways to Contribute</a></li>
+    <li><a href="https://ocw.mit.edu/support/">Become a Corporate Sponsor</a></li>
+</ul>
+</nav>
+<div class="grid_2" id="foot-c4">
+<nav aria-labelledby="f-about">         <span id="f-about" class="footer" aria-hidden="true">About</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/about/">About OpenCourseWare</a></li>
+    <li><a href="https://ocw.mit.edu/about/site-statistics/">Site Statistics</a></li>
+    <li><a href="https://ocw.mit.edu/about/ocw-stories/">OCW Stories</a></li>
+    <li><a href="https://ocw.mit.edu/about/newsletter/">Newsletter</a></li>
+    <li><a href="https://www.ocw-openmatters.org/">Open Matters Blog</a></li>
+</ul>
+</nav><!--about-->       <nav aria-labelledby="f-tools">         <span id="f-tools" class="footer" aria-hidden="true">Tools</span>
+<ul class="foot-bullet" role="presentation">
+    <li><a href="https://ocw.mit.edu/help/">Help &amp; FAQs</a></li>
+    <li><a href="https://ocw.mit.edu/about/contactus">Contact Us</a></li>
+    <li><a href="https://accessibility.mit.edu/" target="_blank">Accessibility</a></li>
+    <li><a href="https://ocw.mit.edu/help/site-map/">Site Map</a></li>
+    <li><a href="../../../common/terms/index.htm">Privacy &amp; Terms of Use</a></li>
+    <li><a href="https://ocw.mit.edu/help/rss/">RSS Feeds</a></li>
+</ul>
+</nav><!--tools-->
+</div>
+</nav> <aside style="min-height: 289px;" aria-labelledby="f-our-corporate-supporters" class="grid_4 omega" id="foot-c5">           <span aria-hidden="true" class="footer" id="f-our-corporate-supporters">Our Corporate Supporters</span>           <!-- HOME_CORP_LOGO_1 -->
+<div id="div-gpt-ad-1388181177156-0" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-0'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_2 -->
+<div id="div-gpt-ad-1388181177156-1" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-1'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_3 -->
+<div id="div-gpt-ad-1388181177156-2" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-2'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_4 -->
+<div id="div-gpt-ad-1388181177156-3" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-3'); });
+            </script></div>
+<!-- HOME_CORP_LOGO_5 -->
+<div id="div-gpt-ad-1388181177156-4" class="sponsors_google_ads_even"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-4'); });
+              </script></div>
+<!-- HOME_CORP_LOGO_6 -->
+<div id="div-gpt-ad-1388181177156-5" class="sponsors_google_ads_odd"><script type="text/javascript">
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1388181177156-5'); });
+              </script></div>
+</aside>
+<div class="grid_12 alpha omega" itemprop="publisher" itemscope="" itemtype="http://schema.org/CollegeOrUniversity">
+<h4 class="footer" style="border-top: thin solid #d5c9ba; padding-top: 10px; margin-bottom: 10px;">About <span itemprop="name">MIT OpenCourseWare</span>
+</h4>
+<p style="color: #999; font-size: 1em; line-height: 1.5em; margin-top: 10px;" itemprop="description">MIT OpenCourseWare is an online publication of materials from over 2,500 MIT courses, freely sharing knowledge with learners and educators around the world. <a href="https://ocw.mit.edu/about/">Learn more »</a></p>
+</div>
+<div id="foot-copy" class="grid_12 alpha omega" style="border-top: none;">
+<a href="http://web.mit.edu"><img src="../../../common/images/logo_mit.png" alt="Massachusetts Institute of Technology logo and name." style="width: 195; height: 44;"></a><a href="https://openlearning.mit.edu/"><img src="https://ocw.mit.edu/images/mitol_logo.png" alt="MIT Open Learning logo and name." style="width: 265; height: 50; vertical-align: top; padding-left:30px;"></a><a href="https://www.oeglobal.org/"><img src="https://ocw.mit.edu/images/oeg_logo.gif" alt="Open Education Consortium logo." style="width: 219px; height: 59px; vertical-align: top; padding-left:20px;"></a><a rel="license" itemprop="useRightsUrl" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="../../../common/images/cc_by-nc-sa.png" alt="Creative Commons logo with terms BY-NC-SA." style="width: 126px; height: 44px; margin-right: 0; padding-left: 20px;"></a>
+<p class="copyright">© 2001–2018<br>
+Massachusetts Institute of Technology</p>
+<p style="font-size: 0.9em; margin-bottom: 15px;">Your use of the MIT OpenCourseWare site and materials is subject to our <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">Creative Commons License</a> and other <a href="../../../common/terms/index.htm" rel="cc:morePermissions">terms of use</a>.</p>
+</div>
+</div></div>
+
+</div>
+
+
+
+
+
+                
+			</div> <!-- bottom grid end -->
+		</footer><!-- footer bottom end -->
+
+
+   </body>
+ </html>
